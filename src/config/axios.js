@@ -9,9 +9,10 @@ const axiosConfig = axios.create({
   baseURL: API_URL,
 });
 
-axios.interceptors.request.use(
+axiosConfig.interceptors.request.use(
   async (config) => {
     const userToken = await retrieveAuthenticationToken();
+    console.log({userToken});
     const newConfig = config;
     if (userToken) {
       newConfig.headers.common.Authorization = `Bearer ${userToken}`;
@@ -23,7 +24,7 @@ axios.interceptors.request.use(
   },
 );
 
-axios.interceptors.response.use(
+axiosConfig.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (

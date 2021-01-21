@@ -1,4 +1,4 @@
-import {useMutation} from 'react-query';
+import {useMutation, useQuery} from 'react-query';
 import {axiosConfig} from '../config/axios';
 import {useState, useCallback, useEffect} from 'react';
 import {retrieveAuthenticationToken} from './securityService';
@@ -26,6 +26,9 @@ export const useUserConnected = () => {
   };
 };
 
+export const useAccount = (config) =>
+  useQuery('account', async () => axiosConfig.get('/account'), config);
+
 export const useLogin = (config) =>
   useMutation(
     async ({email, password}) =>
@@ -39,7 +42,7 @@ export const useLogin = (config) =>
 export const useRegister = (config) =>
   useMutation(
     async ({email, password}) =>
-      axiosConfig.post('/extended/register', {
+      axiosConfig.post('/register', {
         login: email,
         email,
         password,

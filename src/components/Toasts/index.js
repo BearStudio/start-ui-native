@@ -5,14 +5,7 @@ const DURATION = 4000;
 
 export const ToastSuccess = React.forwardRef(({message}, ref) => (
   <Snackbar
-    suffix={
-      <Icon
-        name="checkcircle"
-        color="white"
-        fontSize="subheader"
-        fontFamily="AntDesign"
-      />
-    }
+    suffix={<Icon name="checkcircle" color="white" fontFamily="AntDesign" />}
     onDismiss={() => {}}
     ref={ref}
     bg="green700"
@@ -24,14 +17,7 @@ export const ToastSuccess = React.forwardRef(({message}, ref) => (
 
 export const ToastError = React.forwardRef(({message}, ref) => (
   <Snackbar
-    suffix={
-      <Icon
-        name="times-circle"
-        color="white"
-        fontSize="subheader"
-        fontFamily="FontAwesome"
-      />
-    }
+    suffix={<Icon name="times-circle" color="white" fontFamily="FontAwesome" />}
     onDismiss={() => {}}
     ref={ref}
     bg="red700"
@@ -43,14 +29,7 @@ export const ToastError = React.forwardRef(({message}, ref) => (
 
 export const ToastWarning = React.forwardRef(({message}, ref) => (
   <Snackbar
-    suffix={
-      <Icon
-        name="warning"
-        color="white"
-        fontSize="subheader"
-        fontFamily="FontAwesome"
-      />
-    }
+    suffix={<Icon name="warning" color="white" fontFamily="FontAwesome" />}
     onDismiss={() => {}}
     ref={ref}
     bg="yellow700"
@@ -62,14 +41,7 @@ export const ToastWarning = React.forwardRef(({message}, ref) => (
 
 export const ToastInfo = React.forwardRef(({message}, ref) => (
   <Snackbar
-    suffix={
-      <Icon
-        name="info-circle"
-        color="white"
-        fontSize="subheader"
-        fontFamily="FontAwesome5"
-      />
-    }
+    suffix={<Icon name="info-circle" color="white" fontFamily="FontAwesome5" />}
     onDismiss={() => {}}
     ref={ref}
     bg="blue700"

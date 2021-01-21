@@ -7,6 +7,7 @@ import {useRegister} from '../../services/userService';
 import {useNavigation} from '@react-navigation/native';
 import {useToast} from '../../services/utils/toastService';
 import Button from '../../components/Button';
+import {BackButton} from '../../components/BackButton';
 
 const Register = () => {
   const registerForm = useForm();
@@ -38,7 +39,8 @@ const Register = () => {
 
   return (
     <Div bg="body" h="100%" p="xl">
-      <Div my="2xl">
+      <BackButton />
+      <Div my="xl">
         <Text fontSize="6xl" color="text">
           📦 Start UI Native
         </Text>
