@@ -1,29 +1,35 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Text, Div} from 'react-native-magnus';
 import {Formiz, useForm} from '@formiz/core';
 import {isEmail} from '@formiz/validations';
 import {FieldInput} from '../../components/Fields/FieldInput';
 import Button from '../../components/Button';
 import {useNavigation} from '@react-navigation/native';
-import {useLogin, useUserConnected} from '../../services/userService';
+import {useLogin} from '../../services/userService';
 import {storeAuthenticationToken} from '../../services/securityService';
 import {useToast} from '../../services/utils/toastService';
+import GlobalContext from '../../contexts/GlobalContext';
 
 const Login = () => {
   const loginForm = useForm();
   const navigation = useNavigation();
-  const {reloadUserInformations} = useUserConnected();
   const {showError} = useToast();
+
+  const {reloadUserInformations} = useContext(GlobalContext);
 
   const {mutate: loginUser, isLoading} = useLogin({
     onSuccess: async ({id_token}) => {
       await storeAuthenticationToken(id_token);
       reloadUserInformations();
     },
-    onError: () => {
-      showError(
-        'Une erreur est survenue lors de la conexion, veuillez réessayer',
-      );
+    onError: (error) => {
+      if (error?.response?.status && error?.response?.status === 401) {
+        showError('Identifiants incorrects, veuillez réessayer');
+      } else {
+        showError(
+          'Une erreur est survenue lors de la connexion, veuillez réessayer',
+        );
+      }
     },
   });
 
@@ -79,7 +85,11 @@ const Login = () => {
           Mot de passe oublié
         </Button>
 
-        <Button mt="xl" size="full" onPress={loginForm.submit}>
+        <Button
+          mt="xl"
+          size="full"
+          disabled={isLoading}
+          onPress={loginForm.submit}>
           Se connecter
         </Button>
       </Formiz>
