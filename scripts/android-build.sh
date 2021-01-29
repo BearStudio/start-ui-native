@@ -11,6 +11,9 @@ ORANGE='\033[0;33m'
 NC='\033[0m' # No Color
 
 function build {
+  # Change environment config
+  cp .env."${environment}" .env
+
   # Uninstall previous APK
   echo "Uninstalling ${PACKAGE_NAME}... apk from device"
   adb shell pm uninstall ${PACKAGE_NAME}
@@ -32,6 +35,9 @@ function build {
   adb install "${ANDROID_RELEASES_DIR}"/app-release.apk
 
   cd "${PROJECT_ROOT}" || exit
+
+  # Reset environment config to local
+  cp .env.local .env
 }
 
 
