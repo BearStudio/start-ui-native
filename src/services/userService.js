@@ -54,3 +54,12 @@ export const useRegister = (config) =>
       }),
     config,
   );
+
+export const useResetPasswordInit = (config) =>
+  useMutation(
+    (email) =>
+      axiosConfig.post('/account/reset-password/init', email, {
+        headers: {'Content-Type': 'text/plain'},
+      }),
+    config,
+  );

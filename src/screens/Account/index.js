@@ -31,15 +31,15 @@ const Account = () => {
     },
     onSuccess: () => {
       showSuccess('Le profil a bien été mis à jour');
+      reloadUserInformations();
     },
   });
 
-  const submitForm = async (values) => {
-    await updateAccount({
+  const submitForm = (values) => {
+    updateAccount({
       ...values,
       login: values.email,
     });
-    reloadUserInformations();
   };
 
   if (isLoading) {

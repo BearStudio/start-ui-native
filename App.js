@@ -20,6 +20,7 @@ import {useUserConnected} from './src/services/userService';
 import Home from './src/screens/Home';
 import {GlobalProvider} from './src/contexts/GlobalContext';
 import Account from './src/screens/Account';
+import ResetPassword from './src/screens/ResetPassword';
 
 const Stack = createStackNavigator();
 const queryClient = new QueryClient();
@@ -58,6 +59,10 @@ const App = () => {
                   }}>
                   <Stack.Screen name="Login" component={Login} />
                   <Stack.Screen name="Register" component={Register} />
+                  <Stack.Screen
+                    name="ResetPassword"
+                    component={ResetPassword}
+                  />
                 </Stack.Navigator>
               )}
 

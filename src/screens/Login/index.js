@@ -9,6 +9,8 @@ import {useLogin} from '../../services/userService';
 import {storeAuthenticationToken} from '../../services/securityService';
 import {useToast} from '../../services/utils/toastService';
 import GlobalContext from '../../contexts/GlobalContext';
+import {ActivityIndicator} from 'react-native';
+import {whiteColor} from '../../../constants/themes';
 
 const Login = () => {
   const loginForm = useForm();
@@ -39,6 +41,10 @@ const Login = () => {
 
   const handleOpenRegister = () => {
     navigation.navigate('Register');
+  };
+
+  const handleOpenResetPassword = () => {
+    navigation.navigate('ResetPassword');
   };
 
   return (
@@ -81,7 +87,12 @@ const Login = () => {
           required="Le mot de passe est requis"
         />
 
-        <Button variant="link" p="lg" mt="sm" alignSelf="flex-end">
+        <Button
+          variant="link"
+          p="lg"
+          mt="sm"
+          alignSelf="flex-end"
+          onPress={handleOpenResetPassword}>
           Mot de passe oublié
         </Button>
 
@@ -90,7 +101,11 @@ const Login = () => {
           size="full"
           disabled={isLoading}
           onPress={loginForm.submit}>
-          Se connecter
+          {isLoading ? (
+            <ActivityIndicator size="small" color={whiteColor} />
+          ) : (
+            'Se connecter'
+          )}
         </Button>
       </Formiz>
 
