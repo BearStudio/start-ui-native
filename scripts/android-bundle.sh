@@ -12,7 +12,7 @@ NC='\033[0m' # No Color
 
 function bundle {
   # Change environment config
-  sh "${SCRIPTS_DIR}"/set-config.sh "${environment}"
+  cp .env."${environment}" .env
 
   cd "${ANDROID_DIR}" || exit
 
@@ -28,8 +28,8 @@ function bundle {
 
   cd "${PROJECT_ROOT}" || exit
 
-  # Reset environment config to dev
-  sh "${SCRIPTS_DIR}"/set-config.sh dev
+  # Reset environment config to local
+  cp .env.local .env
 }
 
 
