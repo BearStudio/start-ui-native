@@ -1,5 +1,3 @@
-⚠️ Work in progress repository
-
 # Start UI Native
 
 Opinionated React Native UI starter with
@@ -52,6 +50,33 @@ And example of renaming :
 
 ```npx react-native-rename "Travel App"```
 
+## Change App Icons
+
+### For Android
+
+Please use this online tool to generate the icon files for Android :
+
+https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html
+
+Download the zip generated and extract it into `android/app/src/main/res/`.
+
+### For iOS
+
+For iOS, you have to generate images with different sizes. To do it, you can use this tool for MacOS : https://apps.apple.com/au/app/icon-set-creator/id939343785?mt=12
+
+Or this tool online : https://appicon.co/
+
+(Tools not tested)
+
+And then, import these images into a new image assets into xcode. Please follow this tutorial as an example : https://medium.com/@craiggrummitt/xcode-whats-up-with-app-icons-308b3f10e942
+
+## Generate keystore for release
+
+To generate a keystore, launch this command :
+
+```./generate-android-certificate.sh```
+
+And then, follow the instructions.
 
 ## Release
 
@@ -141,7 +166,7 @@ pod install
 ##### Open project on xcode
 
 ```
-open ios/YoomeApp.xcworkspace
+open ios/StartUINativeApp.xcworkspace
 ```
 
 ##### Apply config for target environment
@@ -164,13 +189,6 @@ For production environment :
 yarn set:config:prod
 ```
 
-##### Build
-
-Please follow this [instructions](https://www.notion.so/bearstudio/Build-D-ployer-une-application-sur-l-App-Store-dc130ecea1b344519a5e7e3cdd51486f).
-
-On Yoome you can skip instructions about Firebase, Google or Facebook config. These configs are defined when you apply config with the previous part.
-
 ##### Important note about Info.plist
 
 With the evolutions on the project, if you need to update Info.plist, please update all Info.plist in config folder.
-
