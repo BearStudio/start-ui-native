@@ -29,6 +29,11 @@ export const useUserConnected = () => {
 export const useAccount = (config) =>
   useQuery('account', async () => axiosConfig.get('/account'), config);
 
+export const useUpdateAccount = (config) =>
+  useMutation((account) => axiosConfig.post('/account', account), {
+    ...config,
+  });
+
 export const useLogin = (config) =>
   useMutation(
     async ({email, password}) =>
@@ -46,6 +51,15 @@ export const useRegister = (config) =>
         login: email,
         email,
         password,
+      }),
+    config,
+  );
+
+export const useResetPasswordInit = (config) =>
+  useMutation(
+    (email) =>
+      axiosConfig.post('/account/reset-password/init', email, {
+        headers: {'Content-Type': 'text/plain'},
       }),
     config,
   );

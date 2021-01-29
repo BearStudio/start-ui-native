@@ -1,5 +1,3 @@
-⚠️ Work in progress repository
-
 # Start UI Native
 
 Opinionated React Native UI starter with
@@ -38,3 +36,159 @@ You need to install Android Studio, one Android SDK and adb tools on your comput
  - First, install dependencies with `yarn`
  - Start the development server `yarn start`
  - Finally, launch application on your device with `yarn android` on android or `yarn ios` on iOS
+
+
+## Change App Name
+
+When you need to change app name and to remove "Start UI Native" references, please use this library :
+
+https://www.npmjs.com/package/react-native-rename
+
+```yarn global add react-native-rename```
+
+And example of renaming :
+
+```npx react-native-rename "Travel App"```
+
+## Change App Icons
+
+### For Android
+
+Please use this online tool to generate the icon files for Android :
+
+https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html
+
+Download the zip generated and extract it into `android/app/src/main/res/`.
+
+### For iOS
+
+For iOS, you have to generate images with different sizes. To do it, you can use this tool for MacOS : https://apps.apple.com/au/app/icon-set-creator/id939343785?mt=12
+
+Or this tool online : https://appicon.co/
+
+(Tools not tested)
+
+And then, import these images into a new image assets into xcode. Please follow this tutorial as an example : https://medium.com/@craiggrummitt/xcode-whats-up-with-app-icons-308b3f10e942
+
+## Generate keystore for release
+
+To generate a keystore, launch this command :
+
+```./generate-android-certificate.sh```
+
+And then, follow the instructions.
+
+## Release
+
+### Android
+
+<p align="center">
+  <a href="https://www.android.com/">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Android_logo_2019.svg" alt="Android" width="100" />
+  </a>
+</p>
+
+#### Generate Bundle file for releases on Play Store
+
+We are using [Android App Bundle](https://developer.android.com/platform/technology/app-bundle) on this project. This is a new and more efficient way to package an Android application.
+
+To create the release bundle file use this command :
+
+For development environment :
+
+```
+yarn android:bundle:dev
+```
+
+For staging environment :
+
+```
+yarn android:bundle:staging
+```
+
+For production environment :
+
+```
+yarn android:bundle:prod
+```
+
+Bundle file will be accessible at `android/app/build/outputs/bundle/release/app.aab`
+
+IMPORTANT : Please test the release application with the APK version (next section) on your device before uploading the bundle file on the Play Store.
+
+Then, to send the bundle file generated, please follow this [instructions](https://www.notion.so/bearstudio/D-ployer-une-application-sur-le-PlayStore-78449defdca946eb95be445fbb2b054b).
+
+#### Generate APK for testing release on device
+
+If you want to generate the release APK for testing the release configuration on your device before sending the bundle to the PlayStore, you can use this command :
+
+For development environment :
+
+```
+yarn android:build:dev
+```
+
+For staging environment :
+
+```
+yarn android:build:staging
+```
+
+For production environment :
+
+```
+yarn android:build:prod
+```
+
+The APK will be accessible at `android/app/build/outputs/apk/release/app-release.apk` and will be installed on your device connected.
+
+### iOS
+
+<p align="center">
+  <a href="https://www.apple.com/fr/ios">
+    <img src="https://png.icons8.com/color/1600/ios-logo" alt="iOS" width="100" />
+  </a>
+</p>
+
+#### Instructions
+
+##### Install dependencies
+
+```
+yarn
+```
+
+```
+cd ios/
+pod install
+```
+
+##### Open project on xcode
+
+```
+open ios/StartUINativeApp.xcworkspace
+```
+
+##### Apply config for target environment
+
+For development environment :
+
+```
+yarn set:config:dev
+```
+
+For staging environment :
+
+```
+yarn set:config:staging
+```
+
+For production environment :
+
+```
+yarn set:config:prod
+```
+
+##### Important note about Info.plist
+
+With the evolutions on the project, if you need to update Info.plist, please update all Info.plist in config folder.

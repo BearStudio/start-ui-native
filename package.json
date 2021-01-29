@@ -5,7 +5,13 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start",
+    "start": "cp .env.local .env && react-native start",
+    "android:build:dev": "yarn jetify && ./scripts/android-build.sh dev",
+    "android:build:staging": "yarn jetify && ./scripts/android-build.sh staging",
+    "android:build:prod": "yarn jetify && ./scripts/android-build.sh prod",
+    "android:bundle:dev": "yarn jetify && ./scripts/android-bundle.sh dev",
+    "android:bundle:staging": "yarn jetify && ./scripts/android-bundle.sh staging",
+    "android:bundle:prod": "yarn jetify && ./scripts/android-bundle.sh prod",
     "test": "jest",
     "lint": "eslint ."
   },
@@ -23,6 +29,7 @@
     "react-native-animatable": "1.3.3",
     "react-native-dotenv": "^2.5.0",
     "react-native-gesture-handler": "^1.9.0",
+    "react-native-hide-with-keyboard": "^1.2.1",
     "react-native-magnus": "1.0.59",
     "react-native-modal": "11.6.1",
     "react-native-reanimated": "^1.13.2",
