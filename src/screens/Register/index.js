@@ -8,6 +8,8 @@ import {useNavigation} from '@react-navigation/native';
 import {useToast} from '../../services/utils/toastService';
 import Button from '../../components/Button';
 import {BackButton} from '../../components/BackButton';
+import {ActivityIndicator} from 'react-native';
+import {whiteColor} from '../../../constants/themes';
 
 const Register = () => {
   const registerForm = useForm();
@@ -105,7 +107,11 @@ const Register = () => {
           size="full"
           disabled={isLoading}
           onPress={registerForm.submit}>
-          S'inscrire
+          {isLoading ? (
+            <ActivityIndicator size="small" color={whiteColor} />
+          ) : (
+            "S'inscrire"
+          )}
         </Button>
       </Formiz>
     </Div>
