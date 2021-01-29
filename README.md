@@ -146,7 +146,7 @@ The APK will be accessible at `android/app/build/outputs/apk/release/app-release
 
 <p align="center">
   <a href="https://www.apple.com/fr/ios">
-    <img src="https://png.icons8.com/color/1600/ios-logo" alt="iOS" width="100" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/IOS_logo.svg/1200px-IOS_logo.svg.png" alt="iOS" width="100" />
   </a>
 </p>
 
