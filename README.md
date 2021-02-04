@@ -9,6 +9,18 @@ Opinionated React Native UI starter with
 
 ℹ️ API calls are mapped on a [jHipster](https://www.jhipster.tech/) backend application.
 
+<a href="https://www.jhipster.tech/">
+  <img src="https://fr.ippon.tech/jhipster/img-jhipster.jpg?language_id=1591305318214" alt="jHipster logo" width="200" />
+</a>
+
+## Table of contents
+
+1. [Installation](#installation)
+2. [Development](#development)
+3. [Release](#release)
+4. [Change App Name](#change-app-name)
+4. [Change App Icons](#change-app-icons)
+
 ## Installation
 
 ```
@@ -37,46 +49,14 @@ You need to install Android Studio, one Android SDK and adb tools on your comput
  - Start the development server `yarn start`
  - Finally, launch application on your device with `yarn android` on android or `yarn ios` on iOS
 
+### Environments
 
-## Change App Name
+Environments variables are managed with [react-native-dotenv](https://github.com/zetachang/react-native-dotenv) : 
 
-When you need to change app name and to remove "Start UI Native" references, please use this library :
-
-https://www.npmjs.com/package/react-native-rename
-
-```yarn global add react-native-rename```
-
-And example of renaming :
-
-```npx react-native-rename "Travel App"```
-
-## Change App Icons
-
-### For Android
-
-Please use this online tool to generate the icon files for Android :
-
-https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html
-
-Download the zip generated and extract it into `android/app/src/main/res/`.
-
-### For iOS
-
-For iOS, you have to generate images with different sizes. To do it, you can use this tool for MacOS : https://apps.apple.com/au/app/icon-set-creator/id939343785?mt=12
-
-Or this tool online : https://appicon.co/
-
-(Tools not tested)
-
-And then, import these images into a new image assets into xcode. Please follow this tutorial as an example : https://medium.com/@craiggrummitt/xcode-whats-up-with-app-icons-308b3f10e942
-
-## Generate keystore for release
-
-To generate a keystore, launch this command :
-
-```./generate-android-certificate.sh```
-
-And then, follow the instructions.
+- Local : `.env.local`
+- Dev : `.env.dev`
+- Staging : `.env.staging`
+- Production : `.env.prod`
 
 ## Release
 
@@ -87,6 +67,21 @@ And then, follow the instructions.
     <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Android_logo_2019.svg" alt="Android" width="100" />
   </a>
 </p>
+
+#### Generate keystore for release (first time)
+
+To generate a keystore, launch this command :
+
+```./generate-android-certificate.sh```
+
+And then, follow the instructions.
+
+After, you need to update : `STARTUINATIVE_UPLOAD_STORE_FILE`,
+`STARTUINATIVE_UPLOAD_KEY_ALIAS`,
+`STARTUINATIVE_UPLOAD_STORE_PASSWORD` and
+`STARTUINATIVE_UPLOAD_KEY_PASSWORD` constants into `gradle.properties` file.
+
+You can also rename these constants to suits up your project's name.
 
 #### Generate Bundle file for releases on Play Store
 
@@ -192,3 +187,34 @@ yarn set:config:prod
 ##### Important note about Info.plist
 
 With the evolutions on the project, if you need to update Info.plist, please update all Info.plist in config folder.
+
+## Change App Name
+
+When you need to change app name and to remove "Start UI Native" references, please use this library :
+
+https://www.npmjs.com/package/react-native-rename
+
+Example of renaming :
+
+```npx react-native-rename "Travel App"```
+
+
+## Change App Icons
+
+### For Android
+
+Please use this online tool to generate the icon files for Android :
+
+https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html
+
+Download the zip generated and extract it into `android/app/src/main/res/`.
+
+### For iOS
+
+For iOS, you have to generate images with different sizes. To do it, you can use this tool for MacOS : https://apps.apple.com/au/app/icon-set-creator/id939343785?mt=12
+
+Or this tool online : https://appicon.co/
+
+(Tools not tested)
+
+And then, import these images into a new image assets into xcode. Please follow this tutorial as an example : https://medium.com/@craiggrummitt/xcode-whats-up-with-app-icons-308b3f10e942
