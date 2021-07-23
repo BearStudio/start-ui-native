@@ -1,11 +1,16 @@
-# Start UI Native
+<h1 align="center">📦 Start UI Native</h1>
 
-Opinionated React Native UI starter with
+Start UI Native is a opinionated [React Native](https://reactnative.dev/) starter repository created & maintained by the [BearStudio Team](https://www.bearstudio.fr/team) and other contributors.
+It represents our team's up-to-date stack that we use when creating React Native apps for our clients.
+
+## Technology
+
 - ⚛️ [React Native](https://reactnative.dev/)
 - ⚛️ [React Navigation](https://reactnavigation.org/)
 - 🔺 [Magnus UI](https://magnus-ui.com/)
 - ⚛️ [React Query](https://react-query.tanstack.com/)
 - 🐜 [Formiz](https://formiz-react.com/)
+- ↔ [Axios](https://github.com/axios/axios)
 
 ℹ️ API calls are mapped on a [jHipster](https://www.jhipster.tech/) backend application.
 
