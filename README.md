@@ -35,11 +35,11 @@ You need to install Android Studio, one Android SDK and adb tools on your comput
 
 <p align="center">
   <a href="https://developer.android.com/studio?authuser=1">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Android_Studio_icon.svg/1200px-Android_Studio_icon.svg.png" alt="Android Studio" width="80" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Android_Studio_Trademark.svg/1280px-Android_Studio_Trademark.svg.png" alt="Android Studio" width="200" />
   </a>
 
   <a href="https://developer.apple.com/xcode/">
-    <img src="https://www.swiftement.fr/wp-content/uploads/2018/04/xcode.png" alt="Xcode" width="80" />
+    <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Xcode_icon.png" alt="Xcode" width="80" />
   </a>
 </p>
 
@@ -69,7 +69,7 @@ that will be copied when you'll release, which is not possible with react-native
 
 <p align="center">
   <a href="https://www.android.com/">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Android_logo_2019.svg" alt="Android" width="100" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/2346px-Android_logo_2019_%28stacked%29.svg.png" alt="Android" width="100" />
   </a>
 </p>
 
