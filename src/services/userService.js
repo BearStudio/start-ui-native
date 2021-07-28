@@ -1,5 +1,5 @@
 import {useMutation, useQuery} from 'react-query';
-import axios from 'axios';
+import {axiosConfig} from '../config/axios';
 import {useState, useCallback, useEffect} from 'react';
 import {retrieveAuthenticationToken} from './securityService';
 
@@ -27,17 +27,17 @@ export const useUserConnected = () => {
 };
 
 export const useAccount = (config) =>
-  useQuery('account', async () => axios.get('/account'), config);
+  useQuery('account', async () => axiosConfig.get('/account'), config);
 
 export const useUpdateAccount = (config) =>
-  useMutation((account) => axios.post('/account', account), {
+  useMutation((account) => axiosConfig.post('/account', account), {
     ...config,
   });
 
 export const useLogin = (config) =>
   useMutation(
     async ({email, password}) =>
-      axios.post('/authenticate', {
+      axiosConfig.post('/authenticate', {
         username: email,
         password,
       }),
@@ -47,7 +47,7 @@ export const useLogin = (config) =>
 export const useRegister = (config) =>
   useMutation(
     async ({email, password}) =>
-      axios.post('/register', {
+      axiosConfig.post('/register', {
         login: email,
         email,
         password,
@@ -58,7 +58,7 @@ export const useRegister = (config) =>
 export const useResetPasswordInit = (config) =>
   useMutation(
     (email) =>
-      axios.post('/account/reset-password/init', email, {
+      axiosConfig.post('/account/reset-password/init', email, {
         headers: {'Content-Type': 'text/plain'},
       }),
     config,

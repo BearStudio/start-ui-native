@@ -1,17 +1,18 @@
-import {API_URL} from '@env';
 import axios from 'axios';
-
+import {API_URL} from '@env';
 import {
   retrieveAuthenticationToken,
   removeAuthenticationToken,
 } from '../services/securityService';
 
-axios.defaults.baseURL = API_URL;
+const axiosConfig = axios.create({
+  baseURL: API_URL,
+});
 
-axios.interceptors.request.use(
+axiosConfig.interceptors.request.use(
   async (config) => {
-    console.debug(`Calling ${config.baseURL}${config.url} in ${config.method}`);
     const userToken = await retrieveAuthenticationToken();
+    console.log({userToken});
     const newConfig = config;
     if (userToken) {
       newConfig.headers.common.Authorization = `Bearer ${userToken}`;
@@ -23,15 +24,9 @@ axios.interceptors.request.use(
   },
 );
 
-axios.interceptors.response.use(
-  (response) => {
-    console.debug(
-      `Call to ${response.config.baseURL}${response.config.url} in ${response.config.method} succeeded`,
-    );
-    return response;
-  },
+axiosConfig.interceptors.response.use(
+  (response) => response,
   async (error) => {
-    logAxiosError(error);
     if (
       error.response &&
       error.response.status === 401 &&
@@ -45,27 +40,6 @@ axios.interceptors.response.use(
   },
 );
 
-axios.interceptors.response.use((response) => response?.data);
+axiosConfig.interceptors.response.use((response) => response?.data);
 
-export const logAxiosError = (error) => {
-  console.error(
-    `An error occurred while calling ${error.config.baseURL}${error.config.url} in ${error.config.method}`,
-  );
-  if (error.response) {
-    // The request was made and the server responded with a status code
-    // that falls out of the range of 2xx
-    console.error(
-      'Error status and data',
-      error.response.status,
-      error.response.data,
-    );
-  } else if (error.request) {
-    // The request was made but no response was received
-    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-    // http.ClientRequest in node.js
-    console.error('Error request', error.request);
-  } else {
-    // Something happened in setting up the request that triggered an Error
-    console.error('Error message', error.message);
-  }
-};
+export {axiosConfig};
