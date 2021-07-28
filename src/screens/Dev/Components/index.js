@@ -28,14 +28,17 @@ const Components = () => {
           <Button colorScheme="secondary" mb="md" mr="md">
             Secondary
           </Button>
-          <Button colorScheme="accent" mb="md" mr="md">
-            Accent
-          </Button>
-          <Button colorScheme="gray" mb="md" mr="md">
-            Gray
+          <Button colorScheme="white" mb="md" mr="md">
+            White
           </Button>
           <Button colorScheme="dark" mb="md" mr="md">
             Dark
+          </Button>
+          <Button colorScheme="danger" mb="md" mr="md">
+            Danger
+          </Button>
+          <Button colorScheme="warning" mb="md" mr="md">
+            Warning
           </Button>
         </Div>
 

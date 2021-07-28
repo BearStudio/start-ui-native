@@ -10,7 +10,7 @@ const BasicButton = ({size, children, ...otherProps}) => (
     py="lg"
     px="xl"
     borderWidth={1}
-    fontWeight="600"
+    fontWeight="700"
     {...(size === 'full' ? {w: '100%'} : {})}
     {...otherProps}>
     {children}
@@ -19,28 +19,32 @@ const BasicButton = ({size, children, ...otherProps}) => (
 
 const colorSchemes = {
   default: {
-    primaryColor: 'white',
-    secondaryColor: 'gray600',
-  },
-  gray: {
     primaryColor: 'gray100',
     secondaryColor: 'gray600',
-  },
-  dark: {
-    primaryColor: 'gray600',
-    secondaryColor: 'white',
   },
   primary: {
     primaryColor: 'brandPrimary600',
     secondaryColor: 'white',
   },
   secondary: {
-    primaryColor: 'brandSecondary600',
+    primaryColor: 'brandPrimary50',
+    secondaryColor: 'brandPrimary700',
+  },
+  white: {
+    primaryColor: 'white',
+    secondaryColor: 'gray600',
+  },
+  dark: {
+    primaryColor: 'gray600',
     secondaryColor: 'white',
   },
-  accent: {
-    primaryColor: 'accent600',
-    secondaryColor: 'white',
+  danger: {
+    primaryColor: 'error100',
+    secondaryColor: 'error700',
+  },
+  warning: {
+    primaryColor: 'warning100',
+    secondaryColor: 'warning700',
   },
 };
 
@@ -101,9 +105,10 @@ Button.propTypes = {
     'default',
     'primary',
     'secondary',
-    'accent',
-    'gray',
+    'white',
     'dark',
+    'danger',
+    'warning',
   ]),
   children: PropTypes.node,
 };
