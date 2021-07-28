@@ -70,6 +70,7 @@ const ResetPassword = () => {
         />
 
         <Button
+          colorScheme="primary"
           mt="xl"
           size="full"
           disabled={resetPasswordLoading}

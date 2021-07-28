@@ -21,9 +21,16 @@ import Home from './src/screens/Home';
 import {GlobalProvider} from './src/contexts/GlobalContext';
 import Account from './src/screens/Account';
 import ResetPassword from './src/screens/ResetPassword';
+import Components from './src/screens/Dev/Components';
+import {navigationRef, navigate} from './src/services/rootNavigation';
 
 const Stack = createStackNavigator();
 const queryClient = new QueryClient();
+
+if (__DEV__) {
+  const DevMenu = require('react-native-dev-menu');
+  DevMenu.addItem('Show components', () => navigate('Components'));
+}
 
 const App = () => {
   const {
@@ -40,7 +47,7 @@ const App = () => {
             reloadUserInformations,
           }}>
           <QueryClientProvider client={queryClient}>
-            <NavigationContainer>
+            <NavigationContainer ref={navigationRef}>
               <StatusBar barStyle="dark-content" />
 
               {isLoading && (
@@ -63,6 +70,9 @@ const App = () => {
                     name="ResetPassword"
                     component={ResetPassword}
                   />
+                  {__DEV__ && (
+                    <Stack.Screen name="Components" component={Components} />
+                  )}
                 </Stack.Navigator>
               )}
 
@@ -74,6 +84,9 @@ const App = () => {
                   }}>
                   <Stack.Screen name="Home" component={Home} />
                   <Stack.Screen name="Account" component={Account} />
+                  {__DEV__ && (
+                    <Stack.Screen name="Components" component={Components} />
+                  )}
                 </Stack.Navigator>
               )}
             </NavigationContainer>

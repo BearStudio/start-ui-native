@@ -30,7 +30,7 @@
     "react-native-dotenv": "^2.5.0",
     "react-native-gesture-handler": "^1.9.0",
     "react-native-hide-with-keyboard": "^1.2.1",
-    "react-native-magnus": "1.0.59",
+    "react-native-magnus": "1.0.62",
     "react-native-modal": "11.6.1",
     "react-native-reanimated": "^1.13.2",
     "react-native-safe-area-context": "^3.1.9",
@@ -46,6 +46,7 @@
     "eslint": "^6.5.1",
     "jest": "^25.1.0",
     "metro-react-native-babel-preset": "^0.59.0",
+    "react-native-dev-menu": "4.0.2",
     "react-test-renderer": "16.13.1"
   },
   "jest": {

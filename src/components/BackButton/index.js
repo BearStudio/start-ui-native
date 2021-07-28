@@ -12,6 +12,7 @@ export const BackButton = () => {
 
   return (
     <Button
+      colorScheme="primary"
       variant="link"
       onPress={handleGoBack}
       prefix={
