@@ -103,6 +103,7 @@ const Register = () => {
         />
 
         <Button
+          colorScheme="primary"
           mt="xl"
           size="full"
           disabled={isLoading}

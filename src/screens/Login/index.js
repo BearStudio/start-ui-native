@@ -88,6 +88,7 @@ const Login = () => {
         />
 
         <Button
+          colorScheme="primary"
           variant="link"
           p="lg"
           mt="sm"
@@ -97,6 +98,7 @@ const Login = () => {
         </Button>
 
         <Button
+          colorScheme="primary"
           mt="xl"
           size="full"
           disabled={isLoading}
@@ -110,6 +112,7 @@ const Login = () => {
       </Formiz>
 
       <Button
+        colorScheme="primary"
         variant="outline"
         mt="lg"
         size="full"

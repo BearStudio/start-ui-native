@@ -1,5 +1,12 @@
-export const primaryColor = '#0049C2';
-export const primaryColorDark = '#010030';
+import {
+  brandPrimaryColors,
+  errorColors,
+  grayColors,
+  warningColors,
+} from './colors';
+
+export const primaryColor = brandPrimaryColors.brandPrimary600;
+export const gray600Color = grayColors.gray600;
 export const bodyColor = '#F2F3F4';
 export const whiteColor = '#FFFFFF';
 
@@ -8,11 +15,21 @@ const THEMES = {
     name: 'default',
     colors: {
       body: bodyColor,
-      text: primaryColor,
-      border: '#fff',
+      text: gray600Color,
+      border: whiteColor,
       spinner: primaryColor,
       button: primaryColor,
       buttonBody: primaryColor,
+
+      ...brandPrimaryColors,
+      ...errorColors,
+      ...warningColors,
+      ...grayColors,
+    },
+    components: {
+      Text: {
+        color: gray600Color,
+      },
     },
   },
 };

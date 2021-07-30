@@ -98,6 +98,7 @@ const Account = () => {
           />
 
           <Button
+            colorScheme="primary"
             mt="xl"
             size="full"
             disabled={updateLoading}
