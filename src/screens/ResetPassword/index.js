@@ -9,7 +9,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useToast} from '../../services/utils/toastService';
 import {useResetPasswordInit} from '../../services/userService';
 import {ActivityIndicator} from 'react-native';
-import {whiteColor} from '../../../constants/themes';
+import {whiteColor} from '../../theme/themes';
 
 const ResetPassword = () => {
   const resetPasswordForm = useForm();

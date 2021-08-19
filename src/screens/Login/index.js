@@ -10,7 +10,7 @@ import {storeAuthenticationToken} from '../../services/securityService';
 import {useToast} from '../../services/utils/toastService';
 import GlobalContext from '../../contexts/GlobalContext';
 import {ActivityIndicator} from 'react-native';
-import {whiteColor} from '../../../constants/themes';
+import {whiteColor} from '../../theme/themes';
 
 const Login = () => {
   const loginForm = useForm();

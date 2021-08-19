@@ -4,7 +4,7 @@ import React, {useContext} from 'react';
 import {ActivityIndicator} from 'react-native';
 import {Text, Div} from 'react-native-magnus';
 import HideWithKeyboard from 'react-native-hide-with-keyboard';
-import {primaryColor, whiteColor} from '../../../constants/themes';
+import {primaryColor, whiteColor} from '../../theme/themes';
 import {BackButton} from '../../components/BackButton';
 import Button from '../../components/Button';
 import {FieldInput} from '../../components/Fields/FieldInput';

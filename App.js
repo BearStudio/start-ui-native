@@ -12,7 +12,7 @@ import {ThemeProvider, Text, Div} from 'react-native-magnus';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {QueryClientProvider, QueryClient} from 'react-query';
-import THEMES from './constants/themes';
+import THEMES from './src/theme/themes';
 import Login from './src/screens/Login';
 import Register from './src/screens/Register';
 import {ToastProvider} from './src/contexts/ToastContext';

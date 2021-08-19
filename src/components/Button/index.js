@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import {Button as MagnusButton, Text} from 'react-native-magnus';
 
 import {fontStyles} from '../../styles/font.style';
+import {colorSchemes} from '../../theme/components/colorSchemes';
+import {buttonSizes} from '../../theme/components/buttonSizes';
 
 const BasicButton = ({size, children, ...otherProps}) => (
   <MagnusButton
@@ -11,44 +13,13 @@ const BasicButton = ({size, children, ...otherProps}) => (
     px="xl"
     borderWidth={1}
     fontWeight="700"
-    {...(size === 'full' ? {w: '100%'} : {})}
+    {...buttonSizes[size]}
     {...otherProps}>
     {children}
   </MagnusButton>
 );
 
-const colorSchemes = {
-  default: {
-    primaryColor: 'gray100',
-    secondaryColor: 'gray600',
-  },
-  primary: {
-    primaryColor: 'brandPrimary600',
-    secondaryColor: 'white',
-  },
-  secondary: {
-    primaryColor: 'brandPrimary50',
-    secondaryColor: 'brandPrimary700',
-  },
-  white: {
-    primaryColor: 'white',
-    secondaryColor: 'gray600',
-  },
-  dark: {
-    primaryColor: 'gray600',
-    secondaryColor: 'white',
-  },
-  danger: {
-    primaryColor: 'error100',
-    secondaryColor: 'error700',
-  },
-  warning: {
-    primaryColor: 'warning100',
-    secondaryColor: 'warning700',
-  },
-};
-
-const Button = ({variant, colorScheme, children, ...otherProps}) => {
+const Button = ({variant, colorScheme, size, children, ...otherProps}) => {
   switch (variant) {
     case 'outline':
       return (
@@ -113,11 +84,13 @@ Button.propTypes = {
     'danger',
     'warning',
   ]),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
   children: PropTypes.node,
 };
 
 Button.defaultProps = {
   variant: 'default',
   colorScheme: 'default',
+  size: 'md',
   children: null,
 };
