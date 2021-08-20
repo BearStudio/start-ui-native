@@ -19,7 +19,7 @@ const BasicButton = ({size, children, ...otherProps}) => (
   </MagnusButton>
 );
 
-const Button = ({variant, colorScheme, size, children, ...otherProps}) => {
+const Button = ({variant, colorScheme, children, ...otherProps}) => {
   switch (variant) {
     case 'outline':
       return (
@@ -33,26 +33,16 @@ const Button = ({variant, colorScheme, size, children, ...otherProps}) => {
         </BasicButton>
       );
     case 'link':
+      const {size} = otherProps;
       return (
         <BasicButton bg="transparent" borderWidth={0} {...otherProps}>
           <Text
-            fontWeight="600"
-            fontSize={18}
+            fontWeight="700"
             color={colorSchemes[colorScheme].primaryColor}
+            fontSize={buttonSizes[size].fontSize}
             style={fontStyles.textUnderline}>
             {children}
           </Text>
-        </BasicButton>
-      );
-    case 'block':
-      return (
-        <BasicButton
-          block
-          bg={colorSchemes[colorScheme].primaryColor}
-          borderColor={colorSchemes[colorScheme].primaryColor}
-          color={colorSchemes[colorScheme].secondaryColor}
-          {...otherProps}>
-          {children}
         </BasicButton>
       );
     case 'default':
@@ -85,6 +75,7 @@ Button.propTypes = {
     'warning',
   ]),
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
+  block: PropTypes.bool,
   children: PropTypes.node,
 };
 
@@ -92,5 +83,6 @@ Button.defaultProps = {
   variant: 'default',
   colorScheme: 'default',
   size: 'md',
+  block: false,
   children: null,
 };

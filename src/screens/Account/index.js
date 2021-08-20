@@ -100,7 +100,7 @@ const Account = () => {
           <Button
             colorScheme="primary"
             mt="xl"
-            size="full"
+            block
             disabled={updateLoading}
             onPress={accountForm.submit}>
             {updateLoading ? (
@@ -115,7 +115,7 @@ const Account = () => {
       <Div flex={1} justifyContent="flex-end">
         <HideWithKeyboard>
           <Button
-            size="full"
+            block
             variant="outline"
             color="red800"
             borderColor="red800"

@@ -105,7 +105,7 @@ const Register = () => {
         <Button
           colorScheme="primary"
           mt="xl"
-          size="full"
+          block
           disabled={isLoading}
           onPress={registerForm.submit}>
           {isLoading ? (

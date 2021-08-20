@@ -100,7 +100,7 @@ const Login = () => {
         <Button
           colorScheme="primary"
           mt="xl"
-          size="full"
+          block
           disabled={isLoading}
           onPress={loginForm.submit}>
           {isLoading ? (
@@ -115,7 +115,7 @@ const Login = () => {
         colorScheme="primary"
         variant="outline"
         mt="lg"
-        size="full"
+        block
         disabled={isLoading}
         onPress={handleOpenRegister}>
         Créer un compte

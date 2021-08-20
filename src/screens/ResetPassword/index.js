@@ -72,7 +72,7 @@ const ResetPassword = () => {
         <Button
           colorScheme="primary"
           mt="xl"
-          size="full"
+          block
           disabled={resetPasswordLoading}
           onPress={resetPasswordForm.submit}>
           {resetPasswordLoading ? (

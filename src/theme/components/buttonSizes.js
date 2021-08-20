@@ -1,8 +1,8 @@
 export const buttonSizes = {
   xs: {
-    py: 12,
+    py: 2,
     px: 'lg',
-    fontSize: 16,
+    fontSize: 14,
   },
   sm: {
     py: 'xs',
