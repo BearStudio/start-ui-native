@@ -1,5 +1,6 @@
 import React from 'react';
 import {Div, Text} from 'react-native-magnus';
+import PropTypes from 'prop-types';
 
 const StoryLayout = ({title, children, ...rest}) => {
   return (
@@ -15,3 +16,12 @@ const StoryLayout = ({title, children, ...rest}) => {
 };
 
 export default StoryLayout;
+
+StoryLayout.propTypes = {
+  title: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
+
+StoryLayout.defaultProps = {
+  title: null,
+};

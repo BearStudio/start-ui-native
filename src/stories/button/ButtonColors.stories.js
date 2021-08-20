@@ -6,40 +6,41 @@ import StorySpacer from '../../screens/Dev/Storybook/_partials/StorySpacer';
 
 const buttonStories = storiesOf('Buttons', module);
 const storyTitle = 'Button colors';
+const onPress = () => console.log('Pressed');
 
 buttonStories.add(storyTitle, () => (
   <StoryLayout title={storyTitle}>
-    <Button onPress={() => console.log('clicked')} colorScheme="default">
+    <Button onPress={onPress} colorScheme="default">
       Default
     </Button>
 
     <StorySpacer />
-    <Button onPress={() => console.log('clicked')} colorScheme="primary">
+    <Button onPress={onPress} colorScheme="primary">
       Primary
     </Button>
 
     <StorySpacer />
-    <Button onPress={() => console.log('clicked')} colorScheme="secondary">
+    <Button onPress={onPress} colorScheme="secondary">
       Secondary
     </Button>
 
     <StorySpacer />
-    <Button onPress={() => console.log('clicked')} colorScheme="dark">
+    <Button onPress={onPress} colorScheme="dark">
       Dark
     </Button>
 
     <StorySpacer />
-    <Button onPress={() => console.log('clicked')} colorScheme="warning">
+    <Button onPress={onPress} colorScheme="warning">
       Warning
     </Button>
 
     <StorySpacer />
-    <Button onPress={() => console.log('clicked')} colorScheme="danger">
+    <Button onPress={onPress} colorScheme="danger">
       Danger
     </Button>
 
     <StorySpacer />
-    <Button onPress={() => console.log('clicked')} colorScheme="white">
+    <Button onPress={onPress} colorScheme="white">
       White
     </Button>
   </StoryLayout>
