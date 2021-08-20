@@ -17,7 +17,7 @@ const BasicButton = ({size, children, ...otherProps}) => (
   </MagnusButton>
 );
 
-const colorSchemes = {
+export const colorSchemes = {
   default: {
     primaryColor: 'gray100',
     secondaryColor: 'gray600',
@@ -104,15 +104,7 @@ export default Button;
 
 Button.propTypes = {
   variant: PropTypes.string,
-  colorScheme: PropTypes.oneOf([
-    'default',
-    'primary',
-    'secondary',
-    'white',
-    'dark',
-    'danger',
-    'warning',
-  ]),
+  colorScheme: PropTypes.oneOf(Object.keys(colorSchemes)),
   children: PropTypes.node,
 };
 
