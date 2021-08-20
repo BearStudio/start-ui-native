@@ -84,7 +84,7 @@ const Button = ({variant, colorScheme, children, ...otherProps}) => {
           {children}
         </BasicButton>
       );
-    default:
+    case 'default':
       return (
         <BasicButton
           bg={colorSchemes[colorScheme].primaryColor}
@@ -94,6 +94,9 @@ const Button = ({variant, colorScheme, children, ...otherProps}) => {
           {children}
         </BasicButton>
       );
+    default:
+      console.warn('No variant named', {variant});
+      return null;
   }
 };
 
@@ -114,7 +117,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-  variant: null,
+  variant: 'default',
   colorScheme: 'default',
   children: null,
 };
