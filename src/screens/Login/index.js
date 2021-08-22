@@ -10,7 +10,7 @@ import {storeAuthenticationToken} from '../../services/securityService';
 import {useToast} from '../../services/utils/toastService';
 import GlobalContext from '../../contexts/GlobalContext';
 import {ActivityIndicator} from 'react-native';
-import {whiteColor} from '../../../constants/themes';
+import {whiteColor} from '../../theme/themes';
 
 const Login = () => {
   const loginForm = useForm();
@@ -100,7 +100,7 @@ const Login = () => {
         <Button
           colorScheme="primary"
           mt="xl"
-          size="full"
+          block
           disabled={isLoading}
           onPress={loginForm.submit}>
           {isLoading ? (
@@ -115,7 +115,7 @@ const Login = () => {
         colorScheme="primary"
         variant="outline"
         mt="lg"
-        size="full"
+        block
         disabled={isLoading}
         onPress={handleOpenRegister}>
         Créer un compte
