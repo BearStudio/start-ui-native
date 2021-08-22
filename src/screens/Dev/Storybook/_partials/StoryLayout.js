@@ -1,15 +1,12 @@
 import React from 'react';
-import {Div, Text} from 'react-native-magnus';
+import {Div} from 'react-native-magnus';
 import PropTypes from 'prop-types';
+import StoryTitle from './StoryTitle';
 
 const StoryLayout = ({title, children, ...rest}) => {
   return (
     <Div px="lg" py="xl" {...rest}>
-      {title && (
-        <Text fontSize="2xl" fontWeight="bold" mb="xl">
-          {title}
-        </Text>
-      )}
+      {title && <StoryTitle>{title}</StoryTitle>}
       {children}
     </Div>
   );

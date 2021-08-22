@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {ActivityIndicator, TouchableOpacity} from 'react-native';
 import {Text, Div, Avatar} from 'react-native-magnus';
-import {primaryColor} from '../../../constants/themes';
+import {primaryColor} from '../../theme/themes';
 import {useAccount} from '../../services/userService';
 
 const Home = () => {
