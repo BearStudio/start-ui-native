@@ -28,5 +28,10 @@ badgeStories.add(storyTitle, () => (
 
     <StorySpacer />
     <Badge colorScheme="white">White</Badge>
+
+    <StorySpacer />
+    <Badge colorScheme="primary" onPress={() => console.log('Pressed')}>
+      Clickable badge
+    </Badge>
   </StoryLayout>
 ));

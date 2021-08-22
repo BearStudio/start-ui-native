@@ -2,7 +2,7 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 import {Badge as MagnusBadge, Button} from 'react-native-magnus';
-import {colorSchemes} from '../Button';
+import {colorSchemes} from '../../theme/components/colorSchemes';
 
 const BasicBadge = ({colorScheme, ...rest}) => (
   <MagnusBadge
