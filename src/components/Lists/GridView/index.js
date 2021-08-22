@@ -17,6 +17,7 @@ const GridView = ({
   return (
     <FlatList
       listKey
+      // this is required for shadows to be able to be larger than the item width
       style={{...displayStyles.overflowVisibleTrick}}
       data={items}
       renderItem={({item, index}) => (
@@ -24,9 +25,7 @@ const GridView = ({
           flex={1 / numColumns}
           maxWidth={
             // this is a hotfix, because on Huawei P30, maxWidth: 50% totaly breaks the layout
-            items.length % numColumns !== 0
-              ? `${100 / numColumns}%`
-              : undefined
+            items.length % numColumns !== 0 ? `${100 / numColumns}%` : undefined
           }
           pl={columnSpacing}>
           {renderItem({item, index})}
