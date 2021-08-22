@@ -65,15 +65,7 @@ export default Button;
 
 Button.propTypes = {
   variant: PropTypes.string,
-  colorScheme: PropTypes.oneOf([
-    'default',
-    'primary',
-    'secondary',
-    'white',
-    'dark',
-    'danger',
-    'warning',
-  ]),
+  colorScheme: PropTypes.oneOf(Object.keys(colorSchemes)),
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
   block: PropTypes.bool,
   children: PropTypes.node,
