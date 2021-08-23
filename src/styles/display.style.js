@@ -2,6 +2,9 @@ import {StyleSheet} from 'react-native';
 
 const OVERFLOW_MARGIN = 50;
 
+// This aims at fixing the bug that make impossible for shadows or anything to be outside a container, like a list.
+// A simple "Overflow: visible" isn't working, this is why we extend the element with margins and add padding to keep
+// its size
 const overflowVisibleTrick = {
   marginLeft: -1 * OVERFLOW_MARGIN,
   paddingLeft: OVERFLOW_MARGIN,
@@ -13,6 +16,7 @@ const overflowVisibleTrick = {
   paddingBottom: OVERFLOW_MARGIN,
 };
 
+// same comment as above
 export const magnusOverflowVisibleTrick = {
   mt: -1 * OVERFLOW_MARGIN,
   mr: -1 * OVERFLOW_MARGIN,
