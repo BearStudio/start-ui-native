@@ -28,6 +28,12 @@ export const magnusOverflowVisibleTrick = {
   pl: OVERFLOW_MARGIN,
 };
 
+const safeArea = {
+  flex: 1,
+  backgroundColor: 'white',
+};
+
 export const displayStyles = StyleSheet.create({
   overflowVisibleTrick,
+  safeArea,
 });

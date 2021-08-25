@@ -1445,7 +1445,7 @@
   dependencies:
     lodash "^4.17.15"
 
-"@storybook/react-native@^5.3.25":
+"@storybook/react-native@5.3.25":
   version "5.3.25"
   resolved "https://registry.yarnpkg.com/@storybook/react-native/-/react-native-5.3.25.tgz#681c9cdcadba7eda88716f5d383ea47558367825"
   integrity sha512-KPctJdk1++k4byblqTwULmxKDADsRAMat9BgMTx3Gewk4PjMbsbKCvRK7+AlJeNjz/kEsf9L6Y25y8lrw3rPXA==
@@ -2896,11 +2896,6 @@ domexception@^1.0.1:
   integrity sha512-raigMkn7CJNNo6Ihro1fzG7wr3fHuYVytzquZKX5n0yizGsTcYgzdIUwj1X9pK0VvjeihV+XiclP+DjwbsSKug==
   dependencies:
     webidl-conversions "^4.0.2"
-
-dotenv@^8.0.0:
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
-  integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
 
 ecc-jsbn@~0.1.1:
   version "0.1.2"
@@ -6243,7 +6238,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@15.7.2, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -6331,13 +6326,6 @@ react-native-dev-menu@4.0.2:
   resolved "https://registry.yarnpkg.com/react-native-dev-menu/-/react-native-dev-menu-4.0.2.tgz#1e569b1fbb2740d1eab8cb3d5adfa4bf9fd89d71"
   integrity sha512-tjWAULoJgOr/WjcfhFsCYaZGtQNmApm7gD5d7G/kSAWVBdEbFFuN2MIq+CxAxBsjHSwscysD1C55TCcmXP/82w==
 
-react-native-dotenv@^2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/react-native-dotenv/-/react-native-dotenv-2.5.0.tgz#58a5131cb2f694418a7f1a2be3d228d3cc2b96bd"
-  integrity sha512-9VXy8rzj+phx/PHzLLbDAK/L2KNkMRia2CmUeQx23LjoGtYWqTaGhAuihFz9aPBrbdo4n4ykKeDOdhEiqzpqSg==
-  dependencies:
-    dotenv "^8.0.0"
-
 react-native-gesture-handler@^1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.9.0.tgz#e441b1c0277c3fd4ca3e5c58fdd681e2f0ceddf0"
@@ -6410,6 +6398,11 @@ react-native-vector-icons@8.0.0:
     lodash.template "^4.5.0"
     prop-types "^15.7.2"
     yargs "^16.1.1"
+
+react-native-version-number@^0.3.6:
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/react-native-version-number/-/react-native-version-number-0.3.6.tgz#dd8b1435fc217df0a166d7e4a61fdc993f3e7437"
+  integrity sha512-TdyXiK90NiwmSbmAUlUBOV6WI1QGoqtvZZzI5zQY4fKl67B3ZrZn/h+Wy/OYIKKFMfePSiyfeIs8LtHGOZ/NgA==
 
 react-native@0.63.4:
   version "0.63.4"

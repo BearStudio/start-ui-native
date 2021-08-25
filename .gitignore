@@ -57,3 +57,7 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+
+# Environment config
+environments/local
+!environments/local/.gitkeep

@@ -1,10 +1,10 @@
-import {API_URL} from '@env';
 import axios from 'axios';
 
 import {
   retrieveAuthenticationToken,
   removeAuthenticationToken,
 } from '../services/securityService';
+import {CONFIG} from '../../environments/current/config';
 
 export const logAxiosError = (error) => {
   console.error(
@@ -29,7 +29,7 @@ export const logAxiosError = (error) => {
   }
 };
 
-axios.defaults.baseURL = API_URL;
+axios.defaults.baseURL = CONFIG.API_URL;
 
 axios.interceptors.request.use(
   async (config) => {
