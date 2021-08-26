@@ -11,6 +11,7 @@ import Account from './screens/Account';
 import ResetPassword from './screens/ResetPassword';
 import Storybook from './screens/Dev/Storybook';
 import {navigate, navigationRef} from './services/rootNavigation';
+import AboutScreen from "./screens/Dev/About";
 
 const Stack = createStackNavigator();
 
@@ -43,6 +44,7 @@ const Routing = () => {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="ResetPassword" component={ResetPassword} />
+          <Stack.Screen name="About" component={AboutScreen} />
           {__DEV__ && <Stack.Screen name="Storybook" component={Storybook} />}
         </Stack.Navigator>
       )}

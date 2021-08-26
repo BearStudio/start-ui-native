@@ -61,3 +61,5 @@ buck-out/
 # Environment config
 environments/local
 !environments/local/.gitkeep
+#environments/current
+#!environments/current/.gitkeep
