@@ -12,7 +12,7 @@ NC='\033[0m' # No Color
 
 function build {
   # Change environment config
-  cp .env."${environment}" .env
+  ./scripts/set-env.sh "${environment}"
 
   # Uninstall previous APK
   echo "Uninstalling ${PACKAGE_NAME}... apk from device"
@@ -37,7 +37,7 @@ function build {
   cd "${PROJECT_ROOT}" || exit
 
   # Reset environment config to local
-  cp .env.local .env
+  ./scripts/set-env.sh local
 }
 
 

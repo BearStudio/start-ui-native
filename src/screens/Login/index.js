@@ -47,6 +47,10 @@ const Login = () => {
     navigation.navigate('ResetPassword');
   };
 
+  const handleOpenAbout = () => {
+    navigation.navigate('About');
+  };
+
   return (
     <Div bg="body" h="100%" p="xl">
       <Div my="2xl">
@@ -119,6 +123,15 @@ const Login = () => {
         disabled={isLoading}
         onPress={handleOpenRegister}>
         Créer un compte
+      </Button>
+
+      <Button
+        colorScheme="dark"
+        variant="link"
+        mt="lg"
+        block
+        onPress={handleOpenAbout}>
+        À propos
       </Button>
     </Div>
   );

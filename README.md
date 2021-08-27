@@ -51,12 +51,17 @@ You need to install Android Studio, one Android SDK and adb tools on your comput
 
 ### Environments
 
-Environments variables are managed with [react-native-dotenv](https://github.com/zetachang/react-native-dotenv) : 
+Environments variables are managed thanks to the subfolders in the `environments` folder :
 
-- Local : `.env.local`
-- Dev : `.env.dev`
-- Staging : `.env.staging`
-- Production : `.env.prod`
+- current : The environment which is effectively used. **Every config import should import from the current subfolder files.**
+- local : Your local environment, when developing on your machine
+- dev : The environment which can be used for internal testing
+- staging : The environment which can be used for alpha testing
+- production : The environment for your production app release on the stores
+
+The main advantage to handle environments with subfolders that are copied to a main folder (current), is that you
+can add environment dependent files, like Firebase configurations (google-services.json and GoogleService-Info.plist),
+that will be copied when you'll release, which is not possible with react-native-dotenv for instance.
 
 ## Release
 
