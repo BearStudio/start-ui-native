@@ -1,6 +1,6 @@
-<h1 align="center">📦 Start UI Native</h1>
+<h1 align="center"><img src="assets/start-ui-native.svg" alt="Start UI Native" width="300" /></h1>
 
-Start UI Native is a opinionated [React Native](https://reactnative.dev/) starter repository created & maintained by the [BearStudio Team](https://www.bearstudio.fr/team) and other contributors.
+🚀 Start UI [native] is a opinionated [React Native](https://reactnative.dev/) starter repository created & maintained by the [BearStudio Team](https://www.bearstudio.fr/team) and other contributors.
 It represents our team's up-to-date stack that we use when creating React Native apps for our clients.
 
 ## Technology
@@ -56,7 +56,7 @@ You need to install Android Studio, one Android SDK and adb tools on your comput
 
 ### Environments
 
-Environments variables are managed with [react-native-dotenv](https://github.com/zetachang/react-native-dotenv) : 
+Environments variables are managed with [react-native-dotenv](https://github.com/zetachang/react-native-dotenv) :
 
 - Local : `.env.local`
 - Dev : `.env.dev`
