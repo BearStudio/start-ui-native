@@ -1,30 +1,5 @@
 import {useMutation, useQuery} from 'react-query';
 import axios from 'axios';
-import {useState, useCallback, useEffect} from 'react';
-import {retrieveAuthenticationToken} from './securityService';
-
-export const useUserConnected = () => {
-  const [userIsConnected, setUserIsConnected] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const loadUserInformations = useCallback(async () => {
-    setIsLoading(true);
-    const userToken = await retrieveAuthenticationToken();
-
-    setUserIsConnected(!!userToken);
-    setIsLoading(false);
-  }, []);
-
-  useEffect(() => {
-    loadUserInformations();
-  }, [loadUserInformations]);
-
-  return {
-    isLoading,
-    userIsConnected,
-    reloadUserInformations: loadUserInformations,
-  };
-};
 
 export const useAccount = (config) =>
   useQuery('account', async () => axios.get('/account'), config);
