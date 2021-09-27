@@ -1,17 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StatusBar} from 'react-native';
 import {Div, Text} from 'react-native-magnus';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Login from './screens/Login';
 import Register from './screens/Register';
-import {useUserConnected} from './services/userService';
 import Home from './screens/Home';
 import Account from './screens/Account';
 import ResetPassword from './screens/ResetPassword';
 import Storybook from './screens/Dev/Storybook';
-import {navigate, navigationRef} from './services/rootNavigation';
-import AboutScreen from "./screens/Dev/About";
+import {
+  navigate,
+  navigationRef,
+  useScreenFocus,
+} from './services/rootNavigation';
+import AboutScreen from './screens/Dev/About';
+import {useAuthentication} from './contexts/AuthContext';
 
 const Stack = createStackNavigator();
 
@@ -21,10 +25,17 @@ if (__DEV__) {
 }
 
 const Routing = () => {
-  const {isLoading, userIsConnected} = useUserConnected();
+  const {isAuthenticated, checkAuthentication, isLoading} = useAuthentication();
+  useScreenFocus();
+
+  useEffect(() => {
+    checkAuthentication();
+  }, [checkAuthentication]);
 
   return (
-    <NavigationContainer ref={navigationRef}>
+    <NavigationContainer
+      ref={navigationRef}
+      onStateChange={checkAuthentication}>
       <StatusBar barStyle="dark-content" />
 
       {isLoading && (
@@ -35,7 +46,7 @@ const Routing = () => {
         </Div>
       )}
 
-      {!isLoading && !userIsConnected && (
+      {!isLoading && !isAuthenticated && (
         <Stack.Navigator
           initialRouteName="Login"
           screenOptions={{
@@ -49,7 +60,7 @@ const Routing = () => {
         </Stack.Navigator>
       )}
 
-      {!isLoading && userIsConnected && (
+      {!isLoading && isAuthenticated && (
         <Stack.Navigator
           initialRouteName="Home"
           screenOptions={{

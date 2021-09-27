@@ -1,4 +1,5 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef} from 'react';
+
 import {
   ToastError,
   ToastInfo,
@@ -9,8 +10,6 @@ import {
 export const ToastContext = React.createContext(null);
 
 export const ToastProvider = ({children}) => {
-  const [currentMessage, setCurrentMessage] = useState(null);
-
   const toastErrorRef = useRef(null);
   const toastSuccessRef = useRef(null);
   const toastWarningRef = useRef(null);
@@ -33,9 +32,8 @@ export const ToastProvider = ({children}) => {
   };
 
   const handleShowMessage = (ref, message) => {
-    setCurrentMessage(message);
     if (ref.current) {
-      ref.current.show();
+      ref.current.show(message);
     }
   };
 
@@ -48,10 +46,10 @@ export const ToastProvider = ({children}) => {
         showWarning: handleShowWarningMessage,
       }}>
       {children}
-      <ToastError ref={toastErrorRef} message={currentMessage} />
-      <ToastSuccess ref={toastSuccessRef} message={currentMessage} />
-      <ToastInfo ref={toastInfoRef} message={currentMessage} />
-      <ToastWarning ref={toastWarningRef} message={currentMessage} />
+      <ToastError ref={toastErrorRef} />
+      <ToastSuccess ref={toastSuccessRef} />
+      <ToastInfo ref={toastInfoRef} />
+      <ToastWarning ref={toastWarningRef} />
     </ToastContext.Provider>
   );
 };

@@ -1,42 +1,41 @@
-import React, {useContext} from 'react';
-import {Text, Div} from 'react-native-magnus';
+import React, {useCallback, useEffect} from 'react';
+import {Div, Text} from 'react-native-magnus';
 import {Formiz, useForm} from '@formiz/core';
 import {isEmail} from '@formiz/validations';
 import {FieldInput} from '../../components/Fields/FieldInput';
 import Button from '../../components/Button';
 import {useNavigation} from '@react-navigation/native';
-import {useLogin} from '../../services/userService';
-import {storeAuthenticationToken} from '../../services/securityService';
 import {useToast} from '../../services/utils/toastService';
-import GlobalContext from '../../contexts/GlobalContext';
 import {ActivityIndicator} from 'react-native';
 import {whiteColor} from '../../theme/themes';
+import {useAuthentication} from '../../contexts/AuthContext';
 
 const Login = () => {
   const loginForm = useForm();
   const navigation = useNavigation();
   const {showError} = useToast();
 
-  const {reloadUserInformations} = useContext(GlobalContext);
+  const {login, loginError, isLogining} = useAuthentication();
 
-  const {mutate: loginUser, isLoading} = useLogin({
-    onSuccess: async ({id_token}) => {
-      await storeAuthenticationToken(id_token);
-      reloadUserInformations();
-    },
-    onError: (error) => {
-      if (error?.response?.status && error?.response?.status === 401) {
-        showError('Identifiants incorrects, veuillez réessayer');
-      } else {
-        showError(
-          'Une erreur est survenue lors de la connexion, veuillez réessayer',
-        );
-      }
-    },
-  });
+  const handleLoginError = useCallback(() => {
+    if (!loginError) {
+      return;
+    }
+    if (loginError?.response?.status && loginError?.response?.status === 401) {
+      showError('Identifiants incorrects, veuillez réessayer');
+    } else {
+      showError(
+        'Une erreur est survenue lors de la connexion, veuillez réessayer',
+      );
+    }
+  }, [loginError, showError]);
+
+  useEffect(() => {
+    handleLoginError();
+  }, [handleLoginError]);
 
   const submitForm = async (values) => {
-    await loginUser(values);
+    await login(values);
   };
 
   const handleOpenRegister = () => {
@@ -105,9 +104,9 @@ const Login = () => {
           colorScheme="primary"
           mt="xl"
           block
-          disabled={isLoading}
+          disabled={isLogining}
           onPress={loginForm.submit}>
-          {isLoading ? (
+          {isLogining ? (
             <ActivityIndicator size="small" color={whiteColor} />
           ) : (
             'Se connecter'
@@ -120,7 +119,7 @@ const Login = () => {
         variant="outline"
         mt="lg"
         block
-        disabled={isLoading}
+        disabled={isLogining}
         onPress={handleOpenRegister}>
         Créer un compte
       </Button>

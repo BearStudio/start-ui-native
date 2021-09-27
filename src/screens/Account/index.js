@@ -1,6 +1,6 @@
 import {Formiz, useForm} from '@formiz/core';
 import {isEmail} from '@formiz/validations';
-import React, {useContext} from 'react';
+import React from 'react';
 import {ActivityIndicator} from 'react-native';
 import {Text, Div} from 'react-native-magnus';
 import HideWithKeyboard from 'react-native-hide-with-keyboard';
@@ -8,20 +8,22 @@ import {primaryColor, whiteColor} from '../../theme/themes';
 import {BackButton} from '../../components/BackButton';
 import Button from '../../components/Button';
 import {FieldInput} from '../../components/Fields/FieldInput';
-import GlobalContext from '../../contexts/GlobalContext';
-import {removeAuthenticationToken} from '../../services/securityService';
-import {useAccount, useUpdateAccount} from '../../services/userService';
+import {useUpdateAccount} from '../../services/userService';
 import {useToast} from '../../services/utils/toastService';
+import {useAuthentication} from '../../contexts/AuthContext';
 
 const Account = () => {
-  const {isLoading, data: account} = useAccount();
   const accountForm = useForm();
-  const {reloadUserInformations} = useContext(GlobalContext);
   const {showError, showSuccess} = useToast();
+  const {
+    logout,
+    fetchUserAccount,
+    account,
+    isRetrievingUserAccount,
+  } = useAuthentication();
 
   const handleLogout = () => {
-    removeAuthenticationToken();
-    reloadUserInformations();
+    logout();
   };
 
   const {mutate: updateAccount, isLoading: updateLoading} = useUpdateAccount({
@@ -31,7 +33,7 @@ const Account = () => {
     },
     onSuccess: () => {
       showSuccess('Le profil a bien été mis à jour');
-      reloadUserInformations();
+      fetchUserAccount();
     },
   });
 
@@ -42,7 +44,7 @@ const Account = () => {
     });
   };
 
-  if (isLoading) {
+  if (isRetrievingUserAccount) {
     return (
       <Div h="100%" justifyContent="center" alignItems="center">
         <Text fontSize="6xl" color="text" mt="lg">
