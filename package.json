@@ -2,6 +2,7 @@
   "name": "start-ui-native",
   "version": "0.0.1",
   "private": true,
+  "description": "Opinionated UI starter with ⚛️ React-Native, ⚡️ Magnus UI, ⚛️ React Query & 🐜 Formiz — From the 🐻 BearStudio Team",
   "scripts": {
     "prepare": "husky install",
     "android": "react-native run-android",
@@ -70,6 +71,15 @@
     "react-test-renderer": "17.0.2",
     "typescript": "4.4.3"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bearstudio/start-ui-native.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bearstudio/start-ui-native/issues"
+  },
+  "homepage": "https://github.com/bearstudio/start-ui-native#readme",
   "jest": {
     "preset": "react-native"
   }
