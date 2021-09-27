@@ -7,12 +7,16 @@
     "jsx": "react-native",
     "lib": ["es6"],
     "moduleResolution": "node",
+    "module": "esnext",
+    "resolveJsonModule": true,
     "noEmit": true,
-    "strict": true,
+    "strict": false,
     "target": "esnext",
-    "baseUrl": ".",
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "baseUrl": "./",
     "paths": {
-      "@/": ["src/*"]
+      "@/*": ["src/*"]
     }
   },
   "exclude": [

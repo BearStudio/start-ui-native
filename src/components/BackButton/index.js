@@ -1,6 +1,8 @@
 import React from 'react';
-import {Icon} from 'react-native-magnus';
-import {useNavigation} from '@react-navigation/native';
+
+import { useNavigation } from '@react-navigation/native';
+import { Icon } from 'react-native-magnus';
+
 import Button from '../Button';
 
 export const BackButton = () => {
@@ -24,7 +26,8 @@ export const BackButton = () => {
           color="button"
         />
       }
-      p={5}>
+      p={5}
+    >
       Retour
     </Button>
   );

@@ -1,20 +1,22 @@
 import React from 'react';
-import {Text, Div} from 'react-native-magnus';
-import {Formiz, useForm} from '@formiz/core';
-import {FieldInput} from '../../components/Fields/FieldInput';
-import {isEmail} from '@formiz/validations';
-import Button from '../../components/Button';
-import {BackButton} from '../../components/BackButton';
-import {useNavigation} from '@react-navigation/native';
-import {useToast} from '../../services/utils/toastService';
-import {useResetPasswordInit} from '../../services/userService';
-import {ActivityIndicator} from 'react-native';
-import {whiteColor} from '../../theme/themes';
+
+import { Formiz, useForm } from '@formiz/core';
+import { isEmail } from '@formiz/validations';
+import { useNavigation } from '@react-navigation/native';
+import { ActivityIndicator } from 'react-native';
+import { Text, Div } from 'react-native-magnus';
+
+import { BackButton } from '@/components/BackButton';
+import Button from '@/components/Button';
+import { FieldInput } from '@/components/Fields/FieldInput';
+import { useResetPasswordInit } from '@/services/userService';
+import { useToast } from '@/services/utils/toastService';
+import { whiteColor } from '@/theme/themes';
 
 const ResetPassword = () => {
   const resetPasswordForm = useForm();
   const navigation = useNavigation();
-  const {showSuccess, showError} = useToast();
+  const { showSuccess, showError } = useToast();
 
   const {
     mutate: resetPasswordInit,
@@ -23,12 +25,12 @@ const ResetPassword = () => {
     onSuccess: () => {
       navigation.navigate('Login');
       showSuccess(
-        'La demande de réinitialisation du mot de passe a bien été envoyée',
+        'La demande de réinitialisation du mot de passe a bien été envoyée'
       );
     },
     onError: () => {
       showError(
-        'Une erreur est survenue lors de la réinitialisation du mot de passe, veuillez réessayer',
+        'Une erreur est survenue lors de la réinitialisation du mot de passe, veuillez réessayer'
       );
     },
   });
@@ -74,7 +76,8 @@ const ResetPassword = () => {
           mt="xl"
           block
           disabled={resetPasswordLoading}
-          onPress={resetPasswordForm.submit}>
+          onPress={resetPasswordForm.submit}
+        >
           {resetPasswordLoading ? (
             <ActivityIndicator size="small" color={whiteColor} />
           ) : (

@@ -1,18 +1,20 @@
 import React from 'react';
-import {StatusBar} from 'react-native';
-import {ThemeProvider, Text, Div} from 'react-native-magnus';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {QueryClientProvider, QueryClient} from 'react-query';
-import THEMES from './constants/themes';
-import Login from './src/screens/Login';
-import Register from './src/screens/Register';
-import {ToastProvider} from './src/contexts/ToastContext';
-import {useUserConnected} from './src/services/userService';
-import Home from './src/screens/Home';
-import {GlobalProvider} from './src/contexts/GlobalContext';
-import Account from './src/screens/Account';
-import ResetPassword from './src/screens/ResetPassword';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { StatusBar } from 'react-native';
+import { ThemeProvider, Text, Div } from 'react-native-magnus';
+import { QueryClientProvider, QueryClient } from 'react-query';
+
+import THEMES from '@/constants/themes';
+import { GlobalProvider } from '@/contexts/GlobalContext';
+import { ToastProvider } from '@/contexts/ToastContext';
+import Account from '@/screens/Account';
+import Home from '@/screens/Home';
+import Login from '@/screens/Login';
+import Register from '@/screens/Register';
+import ResetPassword from '@/screens/ResetPassword';
+import { useUserConnected } from '@/services/userService';
 
 const Stack = createStackNavigator();
 const queryClient = new QueryClient();
@@ -30,7 +32,8 @@ const App: React.FC = () => {
         <GlobalProvider
           value={{
             reloadUserInformations,
-          }}>
+          }}
+        >
           <QueryClientProvider client={queryClient}>
             <NavigationContainer>
               <StatusBar barStyle="dark-content" />
@@ -48,7 +51,8 @@ const App: React.FC = () => {
                   initialRouteName="Login"
                   screenOptions={{
                     headerShown: false,
-                  }}>
+                  }}
+                >
                   <Stack.Screen name="Login" component={Login} />
                   <Stack.Screen name="Register" component={Register} />
                   <Stack.Screen
@@ -63,7 +67,8 @@ const App: React.FC = () => {
                   initialRouteName="Home"
                   screenOptions={{
                     headerShown: false,
-                  }}>
+                  }}
+                >
                   <Stack.Screen name="Home" component={Home} />
                   <Stack.Screen name="Account" component={Account} />
                 </Stack.Navigator>

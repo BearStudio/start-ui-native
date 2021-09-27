@@ -3,13 +3,12 @@ module.exports = {
   plugins: [
     'module:react-native-dotenv',
     [
-      'module-resolver',
+      require.resolve('babel-plugin-module-resolver'),
       {
-        root: ['./src'],
+        cwd: 'babelrc',
         extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
         alias: {
-          tests: ['./tests'],
-          '@/': './src',
+          '@': './src',
         },
       },
     ],

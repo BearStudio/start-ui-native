@@ -17,7 +17,7 @@ function bundle {
   cd "${ANDROID_DIR}" || exit
 
   echo -e "${BLUE}Bundling app...${NC}"
-  react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output app/src/main/assets/index.android.bundle --assets-dest app/src/main/res
+  react-native bundle --platform android --dev false --entry-file index.js --bundle-output app/src/main/assets/index.android.bundle --assets-dest app/src/main/res
 
   #  # This is to delete duplicates file that break the build
   #  rm -rf app/src/main/res/drawable-xxxhdpi app/src/main/res/drawable-xxhdpi app/src/main/res/drawable-xhdpi app/src/main/res/drawable-mdpi app/src/main/res/drawable-hdpi
