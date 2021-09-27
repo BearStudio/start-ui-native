@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { STORAGE_PREFIX, TOKEN_KEY } from './constants/storage';
+import { STORAGE_PREFIX, TOKEN_KEY } from '@/services/constants/storage';
 
 export const retrieveAuthenticationToken = async () =>
   AsyncStorage.getItem(`${STORAGE_PREFIX}/${TOKEN_KEY}`);

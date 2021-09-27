@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+environment=$1
 PACKAGE_NAME="com.startuinativeapp"
 PROJECT_ROOT=$(pwd)
 SCRIPTS_DIR="${PROJECT_ROOT}/scripts"

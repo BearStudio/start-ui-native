@@ -3,9 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button as MagnusButton, Text } from 'react-native-magnus';
 
-import { fontStyles } from '../../styles/font.style';
-import { buttonSizes } from '../../theme/components/buttonSizes';
-import { colorSchemes } from '../../theme/components/colorSchemes';
+import { fontStyles } from '@/styles/font.style';
+import { buttonSizes } from '@/theme/components/buttonSizes';
+import { colorSchemes } from '@/theme/components/colorSchemes';
 
 const BasicButton = ({ size, children, ...otherProps }) => (
   <MagnusButton

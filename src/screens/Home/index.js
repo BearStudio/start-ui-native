@@ -5,7 +5,7 @@ import { ActivityIndicator, TouchableOpacity } from 'react-native';
 import { Text, Div, Avatar } from 'react-native-magnus';
 
 import { useAuthentication } from '@/contexts/AuthContext';
-import { primaryColor } from '@/theme/themes';
+import { primaryColor } from '@/theme';
 
 const Home = () => {
   const navigation = useNavigation();

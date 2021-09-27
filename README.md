@@ -51,6 +51,7 @@ You need to install Android Studio, one Android SDK and adb tools on your comput
 ### Start the project
 
  - First, install dependencies with `yarn`
+ - Then, **setup the env you need to use**: `yarn set:env:dev`
  - Start the development server `yarn start`
  - Finally, launch application on your device with `yarn android` on android or `yarn ios` on iOS
 

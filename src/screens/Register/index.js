@@ -11,7 +11,7 @@ import Button from '@/components/Button';
 import { FieldInput } from '@/components/Fields/FieldInput';
 import { useRegister } from '@/services/userService';
 import { useToast } from '@/services/utils/toastService';
-import { whiteColor } from '@/theme/themes';
+import { whiteColor } from '@/theme';
 
 const Register = () => {
   const registerForm = useForm();

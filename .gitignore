@@ -61,7 +61,8 @@ buck-out/
 /ios/Pods/
 
 # Environment config
-environments/local
+environments/local/*
 !environments/local/.gitkeep
-environments/current
-!environments/current/.gitkeep
+
+src/environment/*
+!src/environment/.gitkeep

@@ -1,11 +1,10 @@
 import axios from 'axios';
 
+import { CONFIG } from '@/environments/current/config';
 import {
   retrieveAuthenticationToken,
   removeAuthenticationToken,
 } from '@/services/securityService';
-
-import { CONFIG } from '../../environments/current/config';
 
 export const logAxiosError = (error) => {
   console.error(

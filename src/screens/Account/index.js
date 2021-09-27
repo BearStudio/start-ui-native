@@ -12,7 +12,7 @@ import { FieldInput } from '@/components/Fields/FieldInput';
 import { useAuthentication } from '@/contexts/AuthContext';
 import { useUpdateAccount } from '@/services/userService';
 import { useToast } from '@/services/utils/toastService';
-import { primaryColor, whiteColor } from '@/theme/themes';
+import { primaryColor, whiteColor } from '@/theme';
 
 const Account = () => {
   const accountForm = useForm();
