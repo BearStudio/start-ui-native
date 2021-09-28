@@ -1,8 +1,10 @@
 import React from 'react';
-import {storiesOf} from '@storybook/react-native';
-import StoryLayout from '../../screens/Dev/Storybook/_partials/StoryLayout';
-import Button from '../../components/Button';
-import StorySpacer from '../../screens/Dev/Storybook/_partials/StorySpacer';
+
+import { storiesOf } from '@storybook/react-native';
+
+import Button from '@/components/Button';
+import StoryLayout from '@/screens/Dev/Storybook/_partials/StoryLayout';
+import StorySpacer from '@/screens/Dev/Storybook/_partials/StorySpacer';
 
 const buttonStories = storiesOf('Buttons', module);
 const storyTitle = 'Button colors';

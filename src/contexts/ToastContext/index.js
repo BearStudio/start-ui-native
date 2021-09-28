@@ -1,15 +1,15 @@
-import React, {useRef} from 'react';
+import React, { useRef } from 'react';
 
 import {
   ToastError,
   ToastInfo,
   ToastSuccess,
   ToastWarning,
-} from '../../components/Toasts';
+} from '@/components/Toasts';
 
 export const ToastContext = React.createContext(null);
 
-export const ToastProvider = ({children}) => {
+export const ToastProvider = ({ children }) => {
   const toastErrorRef = useRef(null);
   const toastSuccessRef = useRef(null);
   const toastWarningRef = useRef(null);
@@ -44,7 +44,8 @@ export const ToastProvider = ({children}) => {
         showInfo: handleShowInfoMessage,
         showSuccess: handleShowSuccessMessage,
         showWarning: handleShowWarningMessage,
-      }}>
+      }}
+    >
       {children}
       <ToastError ref={toastErrorRef} />
       <ToastSuccess ref={toastSuccessRef} />

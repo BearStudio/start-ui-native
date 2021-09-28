@@ -1,11 +1,16 @@
-# Start UI Native
+<h1 align="center"><img src="assets/start-ui-native.svg" alt="Start UI Native" width="300" /></h1>
 
-Opinionated React Native UI starter with
+🚀 Start UI [native] is a opinionated [React Native](https://reactnative.dev/) starter repository created & maintained by the [BearStudio Team](https://www.bearstudio.fr/team) and other contributors.
+It represents our team's up-to-date stack that we use when creating React Native apps for our clients.
+
+## Technology
+
 - ⚛️ [React Native](https://reactnative.dev/)
 - ⚛️ [React Navigation](https://reactnavigation.org/)
 - 🔺 [Magnus UI](https://magnus-ui.com/)
 - ⚛️ [React Query](https://react-query.tanstack.com/)
 - 🐜 [Formiz](https://formiz-react.com/)
+- ↔ [Axios](https://github.com/axios/axios)
 
 ℹ️ API calls are mapped on a [jHipster](https://www.jhipster.tech/) backend application.
 
@@ -35,17 +40,18 @@ You need to install Android Studio, one Android SDK and adb tools on your comput
 
 <p align="center">
   <a href="https://developer.android.com/studio?authuser=1">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Android_Studio_icon.svg/1200px-Android_Studio_icon.svg.png" alt="Android Studio" width="80" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Android_Studio_Trademark.svg/1280px-Android_Studio_Trademark.svg.png" alt="Android Studio" width="200" />
   </a>
 
   <a href="https://developer.apple.com/xcode/">
-    <img src="https://www.swiftement.fr/wp-content/uploads/2018/04/xcode.png" alt="Xcode" width="80" />
+    <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Xcode_icon.png" alt="Xcode" width="80" />
   </a>
 </p>
 
 ### Start the project
 
  - First, install dependencies with `yarn`
+ - Then, **setup the env you need to use**: `yarn set:env:dev`
  - Start the development server `yarn start`
  - Finally, launch application on your device with `yarn android` on android or `yarn ios` on iOS
 
@@ -69,7 +75,7 @@ that will be copied when you'll release, which is not possible with react-native
 
 <p align="center">
   <a href="https://www.android.com/">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Android_logo_2019.svg" alt="Android" width="100" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/2346px-Android_logo_2019_%28stacked%29.svg.png" alt="Android" width="100" />
   </a>
 </p>
 

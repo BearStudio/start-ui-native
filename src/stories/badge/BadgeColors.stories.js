@@ -1,8 +1,10 @@
 import React from 'react';
-import {storiesOf} from '@storybook/react-native';
-import StoryLayout from '../../screens/Dev/Storybook/_partials/StoryLayout';
-import StorySpacer from '../../screens/Dev/Storybook/_partials/StorySpacer';
-import Badge from '../../components/Badge';
+
+import { storiesOf } from '@storybook/react-native';
+
+import Badge from '@/components/Badge';
+import StoryLayout from '@/screens/Dev/Storybook/_partials/StoryLayout';
+import StorySpacer from '@/screens/Dev/Storybook/_partials/StorySpacer';
 
 const badgeStories = storiesOf('Badge', module);
 const storyTitle = 'Badge colors';

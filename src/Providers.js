@@ -1,17 +1,17 @@
 import React from 'react';
-import {QueryClient, QueryClientProvider} from 'react-query';
 
-import {ToastProvider} from './contexts/ToastContext';
+import { SafeAreaView } from 'react-native';
+import { ThemeProvider } from 'react-native-magnus';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
-import THEMES from './theme/themes';
-import {ThemeProvider} from 'react-native-magnus';
-import {SafeAreaView} from 'react-native';
-import {displayStyles} from './styles/display.style';
-import AuthProvider from './contexts/AuthContext';
+import AuthProvider from '@/contexts/AuthContext';
+import { ToastProvider } from '@/contexts/ToastContext';
+import { displayStyles } from '@/styles/display.style';
+import THEMES from '@/theme';
 
 const queryClient = new QueryClient();
 
-const Providers = ({children}) => {
+const Providers = ({ children }) => {
   return (
     <ThemeProvider theme={THEMES.default}>
       <ToastProvider>

@@ -1,8 +1,10 @@
 import React from 'react';
-import {storiesOf} from '@storybook/react-native';
-import StoryLayout from '../../screens/Dev/Storybook/_partials/StoryLayout';
-import GridView from '../../components/Lists/GridView';
-import {Div} from 'react-native-magnus';
+
+import { storiesOf } from '@storybook/react-native';
+import { Div } from 'react-native-magnus';
+
+import GridView from '@/components/Lists/GridView';
+import StoryLayout from '@/screens/Dev/Storybook/_partials/StoryLayout';
 
 const gridViewStories = storiesOf('GridView', module);
 const storyTitle = 'Default';
@@ -12,7 +14,7 @@ It's using a FlatList with a numColumns under the hood, and all props are passed
 gridViewStories.add(storyTitle, () => (
   <StoryLayout title={storyTitle} subtitle={storySubtitle}>
     <GridView
-      renderItem={({item}) => (
+      renderItem={({ item }) => (
         <Div height={100} bg={item} rounded="md" shadow="md" />
       )}
       items={[

@@ -1,20 +1,22 @@
-import {Formiz, useForm} from '@formiz/core';
-import {isEmail} from '@formiz/validations';
 import React from 'react';
-import {ActivityIndicator} from 'react-native';
-import {Text, Div} from 'react-native-magnus';
+
+import { Formiz, useForm } from '@formiz/core';
+import { isEmail } from '@formiz/validations';
+import { ActivityIndicator } from 'react-native';
 import HideWithKeyboard from 'react-native-hide-with-keyboard';
-import {primaryColor, whiteColor} from '../../theme/themes';
-import {BackButton} from '../../components/BackButton';
-import Button from '../../components/Button';
-import {FieldInput} from '../../components/Fields/FieldInput';
-import {useUpdateAccount} from '../../services/userService';
-import {useToast} from '../../services/utils/toastService';
-import {useAuthentication} from '../../contexts/AuthContext';
+import { Text, Div } from 'react-native-magnus';
+
+import { BackButton } from '@/components/BackButton';
+import Button from '@/components/Button';
+import { FieldInput } from '@/components/Fields/FieldInput';
+import { useAuthentication } from '@/contexts/AuthContext';
+import { useUpdateAccount } from '@/services/userService';
+import { useToast } from '@/services/utils/toastService';
+import { primaryColor, whiteColor } from '@/theme';
 
 const Account = () => {
   const accountForm = useForm();
-  const {showError, showSuccess} = useToast();
+  const { showError, showSuccess } = useToast();
   const {
     logout,
     fetchUserAccount,
@@ -26,9 +28,9 @@ const Account = () => {
     logout();
   };
 
-  const {mutate: updateAccount, isLoading: updateLoading} = useUpdateAccount({
+  const { mutate: updateAccount, isLoading: updateLoading } = useUpdateAccount({
     onError: (error) => {
-      console.log({error});
+      console.log({ error });
       showError('Erreur lors de la mise à jour du profil, veuillez réessayer');
     },
     onSuccess: () => {
@@ -104,7 +106,8 @@ const Account = () => {
             mt="xl"
             block
             disabled={updateLoading}
-            onPress={accountForm.submit}>
+            onPress={accountForm.submit}
+          >
             {updateLoading ? (
               <ActivityIndicator size="small" color={whiteColor} />
             ) : (
@@ -121,7 +124,8 @@ const Account = () => {
             variant="outline"
             color="red800"
             borderColor="red800"
-            onPress={handleLogout}>
+            onPress={handleLogout}
+          >
             Se déconnecter
           </Button>
         </HideWithKeyboard>

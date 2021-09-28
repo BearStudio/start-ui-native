@@ -1,8 +1,10 @@
-import * as React from 'react';
-import {useEffect, useRef, useState} from 'react';
-import {useFocusEffect} from '@react-navigation/native';
-import {useAuthentication} from '../contexts/AuthContext';
-import {useAppState} from '@react-native-community/hooks';
+import React from 'react';
+import { useEffect, useRef, useState } from 'react';
+
+import { useAppState } from '@react-native-community/hooks';
+import { useFocusEffect } from '@react-navigation/native';
+
+import { useAuthentication } from '@/contexts/AuthContext';
 
 export const navigationRef = React.createRef();
 
@@ -27,7 +29,7 @@ export const useRefetchOnFocus = (refetch = () => {}, canRefetch = true) => {
 };
 
 export const useScreenFocus = () => {
-  const {checkAuthentication} = useAuthentication();
+  const { checkAuthentication } = useAuthentication();
   const currentAppState = useAppState();
   const previousAppStateRef = useRef(currentAppState);
   useEffect(() => {

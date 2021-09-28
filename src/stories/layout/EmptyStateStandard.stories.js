@@ -1,9 +1,11 @@
 import React from 'react';
-import {storiesOf} from '@storybook/react-native';
-import StoryLayout from '../../screens/Dev/Storybook/_partials/StoryLayout';
-import EmptyState from '../../components/Layout/EmptyState';
 
-const wipImage = require('../../assets/images/wip-illustration.png'); // https://undraw.co/search => search for "mobile"
+import { storiesOf } from '@storybook/react-native';
+
+import EmptyState from '@/components/Layout/EmptyState';
+import StoryLayout from '@/screens/Dev/Storybook/_partials/StoryLayout';
+
+const wipImage = require('@/assets/images/wip-illustration.png'); // https://undraw.co/search => search for "mobile"
 
 const badgeStories = storiesOf('Layout', module);
 const storyTitle = 'Empty state standard';

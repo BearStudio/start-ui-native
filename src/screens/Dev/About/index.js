@@ -1,10 +1,11 @@
 import React from 'react';
 
-import {Div, Text} from 'react-native-magnus';
+import { Div, Text } from 'react-native-magnus';
 import VersionNumber from 'react-native-version-number';
-import ENVS from '../../../services/constants/envs';
-import {CONFIG} from '../../../../environments/current/config';
-import { BackButton } from "../../../components/BackButton";
+
+import { BackButton } from '@/components/BackButton';
+import { CONFIG } from '@/environment/config';
+import ENVS from '@/services/constants/envs';
 
 const ENVIRONMENTS_LABELS = {
   [ENVS.LOCAL]: 'Local',
@@ -12,6 +13,8 @@ const ENVIRONMENTS_LABELS = {
   [ENVS.STAGING]: 'Staging',
   [ENVS.PROD]: 'Production',
 };
+
+const isHermes = () => !!global.HermesInternal;
 
 const AboutScreen = () => {
   return (
@@ -31,6 +34,7 @@ const AboutScreen = () => {
         <Text>Numéro de Build: {VersionNumber.buildVersion}</Text>
         <Text>Environnement: {ENVIRONMENTS_LABELS[CONFIG.ENV]}</Text>
         <Text>Mode: {__DEV__ ? 'Dev' : 'Prod'}</Text>
+        {isHermes() && <Text>Using Hermes JS Engine</Text>}
       </Div>
     </Div>
   );

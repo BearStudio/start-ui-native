@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+environment=$1
 PACKAGE_NAME="com.startuinativeapp"
 PROJECT_ROOT=$(pwd)
 SCRIPTS_DIR="${PROJECT_ROOT}/scripts"
@@ -19,12 +20,6 @@ function build {
   adb shell pm uninstall ${PACKAGE_NAME}
 
   cd "${ANDROID_DIR}" || exit
-
-  echo -e "${BLUE}Bundling app...${NC}"
-  react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output app/src/main/assets/index.android.bundle --assets-dest app/src/main/res
-
-  #  # This is to delete duplicates file that break the build
-  #  rm -rf app/src/main/res/drawable-xxxhdpi app/src/main/res/drawable-xxhdpi app/src/main/res/drawable-xhdpi app/src/main/res/drawable-mdpi app/src/main/res/drawable-hdpi
 
   # Build the APK
   echo -e "${BLUE}Will start building release apk...${NC}"

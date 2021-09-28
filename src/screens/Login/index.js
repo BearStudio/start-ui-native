@@ -1,21 +1,23 @@
-import React, {useCallback, useEffect} from 'react';
-import {Div, Text} from 'react-native-magnus';
-import {Formiz, useForm} from '@formiz/core';
-import {isEmail} from '@formiz/validations';
-import {FieldInput} from '../../components/Fields/FieldInput';
-import Button from '../../components/Button';
-import {useNavigation} from '@react-navigation/native';
-import {useToast} from '../../services/utils/toastService';
-import {ActivityIndicator} from 'react-native';
-import {whiteColor} from '../../theme/themes';
-import {useAuthentication} from '../../contexts/AuthContext';
+import React, { useCallback, useEffect } from 'react';
+
+import { Formiz, useForm } from '@formiz/core';
+import { isEmail } from '@formiz/validations';
+import { useNavigation } from '@react-navigation/native';
+import { ActivityIndicator } from 'react-native';
+import { Div, Text } from 'react-native-magnus';
+
+import Button from '@/components/Button';
+import { FieldInput } from '@/components/Fields/FieldInput';
+import { useAuthentication } from '@/contexts/AuthContext';
+import { useToast } from '@/services/utils/toastService';
+import { whiteColor } from '@/theme';
 
 const Login = () => {
   const loginForm = useForm();
   const navigation = useNavigation();
-  const {showError} = useToast();
+  const { showError } = useToast();
 
-  const {login, loginError, isLogining} = useAuthentication();
+  const { login, loginError, isLogining } = useAuthentication();
 
   const handleLoginError = useCallback(() => {
     if (!loginError) {
@@ -25,7 +27,7 @@ const Login = () => {
       showError('Identifiants incorrects, veuillez réessayer');
     } else {
       showError(
-        'Une erreur est survenue lors de la connexion, veuillez réessayer',
+        'Une erreur est survenue lors de la connexion, veuillez réessayer'
       );
     }
   }, [loginError, showError]);
@@ -96,7 +98,8 @@ const Login = () => {
           p="lg"
           mt="sm"
           alignSelf="flex-end"
-          onPress={handleOpenResetPassword}>
+          onPress={handleOpenResetPassword}
+        >
           Mot de passe oublié
         </Button>
 
@@ -105,7 +108,8 @@ const Login = () => {
           mt="xl"
           block
           disabled={isLogining}
-          onPress={loginForm.submit}>
+          onPress={loginForm.submit}
+        >
           {isLogining ? (
             <ActivityIndicator size="small" color={whiteColor} />
           ) : (
@@ -120,7 +124,8 @@ const Login = () => {
         mt="lg"
         block
         disabled={isLogining}
-        onPress={handleOpenRegister}>
+        onPress={handleOpenRegister}
+      >
         Créer un compte
       </Button>
 
@@ -129,7 +134,8 @@ const Login = () => {
         variant="link"
         mt="lg"
         block
-        onPress={handleOpenAbout}>
+        onPress={handleOpenAbout}
+      >
         À propos
       </Button>
     </Div>

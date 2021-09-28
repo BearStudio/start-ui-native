@@ -1,12 +1,12 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-import {ImageBackground, Image} from 'react-native';
-import {Div, Text} from 'react-native-magnus';
+import { ImageBackground, Image } from 'react-native';
+import { Div, Text } from 'react-native-magnus';
 
-import {imageStyles} from '../../styles/image.style';
+import { imageStyles } from '@/styles/image.style';
 
-const EmptyState = ({children, image, text, ...rest}) => {
+const EmptyState = ({ children, image, text, ...rest }) => {
   return (
     <Div
       column
@@ -14,7 +14,8 @@ const EmptyState = ({children, image, text, ...rest}) => {
       justifyContent="center"
       alignItems="center"
       px="md"
-      {...rest}>
+      {...rest}
+    >
       <Div h="50%" w="80%">
         <ImageBackground
           style={imageStyles.responsiveImage}

@@ -1,9 +1,11 @@
-import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {ActivityIndicator, TouchableOpacity} from 'react-native';
-import {Text, Div, Avatar} from 'react-native-magnus';
-import {primaryColor} from '../../theme/themes';
-import {useAuthentication} from '../../contexts/AuthContext';
+
+import { useNavigation } from '@react-navigation/native';
+import { ActivityIndicator, TouchableOpacity } from 'react-native';
+import { Text, Div, Avatar } from 'react-native-magnus';
+
+import { useAuthentication } from '@/contexts/AuthContext';
+import { primaryColor } from '@/theme';
 
 const Home = () => {
   const navigation = useNavigation();

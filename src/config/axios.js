@@ -1,14 +1,14 @@
 import axios from 'axios';
 
+import { CONFIG } from '@/environments/current/config';
 import {
   retrieveAuthenticationToken,
   removeAuthenticationToken,
-} from '../services/securityService';
-import {CONFIG} from '../../environments/current/config';
+} from '@/services/securityService';
 
 export const logAxiosError = (error) => {
   console.error(
-    `An error occurred while calling ${error.config.baseURL}${error.config.url} in ${error.config.method}`,
+    `An error occurred while calling ${error.config.baseURL}${error.config.url} in ${error.config.method}`
   );
   if (error.response) {
     // The request was made and the server responded with a status code
@@ -16,7 +16,7 @@ export const logAxiosError = (error) => {
     console.error(
       'Error status and data',
       error.response.status,
-      error.response.data,
+      error.response.data
     );
   } else if (error.request) {
     // The request was made but no response was received
@@ -43,13 +43,13 @@ axios.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  },
+  }
 );
 
 axios.interceptors.response.use(
   (response) => {
     console.debug(
-      `Call to ${response.config.baseURL}${response.config.url} in ${response.config.method} succeeded`,
+      `Call to ${response.config.baseURL}${response.config.url} in ${response.config.method} succeeded`
     );
     return response;
   },
@@ -65,7 +65,7 @@ axios.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  },
+  }
 );
 
 axios.interceptors.response.use((response) => response?.data);
