@@ -1,22 +1,24 @@
 import React from 'react';
-import {Text, Div} from 'react-native-magnus';
-import {Formiz, useForm} from '@formiz/core';
-import {FieldInput} from '../../components/Fields/FieldInput';
-import {isEmail, isMinLength} from '@formiz/validations';
-import {useRegister} from '../../services/userService';
-import {useNavigation} from '@react-navigation/native';
-import {useToast} from '../../services/utils/toastService';
-import Button from '../../components/Button';
-import {BackButton} from '../../components/BackButton';
-import {ActivityIndicator} from 'react-native';
-import {whiteColor} from '../../../constants/themes';
+
+import { Formiz, useForm } from '@formiz/core';
+import { isEmail, isMinLength } from '@formiz/validations';
+import { useNavigation } from '@react-navigation/native';
+import { ActivityIndicator } from 'react-native';
+import { Text, Div } from 'react-native-magnus';
+
+import { BackButton } from '@/components/BackButton';
+import Button from '@/components/Button';
+import { FieldInput } from '@/components/Fields/FieldInput';
+import { useRegister } from '@/services/userService';
+import { useToast } from '@/services/utils/toastService';
+import { whiteColor } from '@/theme';
 
 const Register = () => {
   const registerForm = useForm();
   const navigation = useNavigation();
-  const {showError, showSuccess} = useToast();
+  const { showError, showSuccess } = useToast();
 
-  const {mutate: registerUser, isLoading} = useRegister({
+  const { mutate: registerUser, isLoading } = useRegister({
     onSuccess: () => {
       navigation.navigate('Login');
       showSuccess('Votre compte a bien été créé, vous pouvez vous connecter');
@@ -29,7 +31,7 @@ const Register = () => {
         showError('Un compte existe déjà pour cette adresse mail');
       } else {
         showError(
-          'Une erreur est survenue lors de la création de votre compte, veuillez réessayer',
+          'Une erreur est survenue lors de la création de votre compte, veuillez réessayer'
         );
       }
     },
@@ -103,10 +105,12 @@ const Register = () => {
         />
 
         <Button
+          colorScheme="primary"
           mt="xl"
-          size="full"
+          block
           disabled={isLoading}
-          onPress={registerForm.submit}>
+          onPress={registerForm.submit}
+        >
           {isLoading ? (
             <ActivityIndicator size="small" color={whiteColor} />
           ) : (

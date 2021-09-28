@@ -1,37 +1,41 @@
-import {Formiz, useForm} from '@formiz/core';
-import {isEmail} from '@formiz/validations';
-import React, {useContext} from 'react';
-import {ActivityIndicator} from 'react-native';
-import {Text, Div} from 'react-native-magnus';
+import React from 'react';
+
+import { Formiz, useForm } from '@formiz/core';
+import { isEmail } from '@formiz/validations';
+import { ActivityIndicator } from 'react-native';
 import HideWithKeyboard from 'react-native-hide-with-keyboard';
-import {primaryColor, whiteColor} from '../../../constants/themes';
-import {BackButton} from '../../components/BackButton';
-import Button from '../../components/Button';
-import {FieldInput} from '../../components/Fields/FieldInput';
-import GlobalContext from '../../contexts/GlobalContext';
-import {removeAuthenticationToken} from '../../services/securityService';
-import {useAccount, useUpdateAccount} from '../../services/userService';
-import {useToast} from '../../services/utils/toastService';
+import { Text, Div } from 'react-native-magnus';
+
+import { BackButton } from '@/components/BackButton';
+import Button from '@/components/Button';
+import { FieldInput } from '@/components/Fields/FieldInput';
+import { useAuthentication } from '@/contexts/AuthContext';
+import { useUpdateAccount } from '@/services/userService';
+import { useToast } from '@/services/utils/toastService';
+import { primaryColor, whiteColor } from '@/theme';
 
 const Account = () => {
-  const {isLoading, data: account} = useAccount();
   const accountForm = useForm();
-  const {reloadUserInformations} = useContext(GlobalContext);
-  const {showError, showSuccess} = useToast();
+  const { showError, showSuccess } = useToast();
+  const {
+    logout,
+    fetchUserAccount,
+    account,
+    isRetrievingUserAccount,
+  } = useAuthentication();
 
   const handleLogout = () => {
-    removeAuthenticationToken();
-    reloadUserInformations();
+    logout();
   };
 
-  const {mutate: updateAccount, isLoading: updateLoading} = useUpdateAccount({
+  const { mutate: updateAccount, isLoading: updateLoading } = useUpdateAccount({
     onError: (error) => {
-      console.log({error});
+      console.log({ error });
       showError('Erreur lors de la mise à jour du profil, veuillez réessayer');
     },
     onSuccess: () => {
       showSuccess('Le profil a bien été mis à jour');
-      reloadUserInformations();
+      fetchUserAccount();
     },
   });
 
@@ -42,7 +46,7 @@ const Account = () => {
     });
   };
 
-  if (isLoading) {
+  if (isRetrievingUserAccount) {
     return (
       <Div h="100%" justifyContent="center" alignItems="center">
         <Text fontSize="6xl" color="text" mt="lg">
@@ -98,10 +102,12 @@ const Account = () => {
           />
 
           <Button
+            colorScheme="primary"
             mt="xl"
-            size="full"
+            block
             disabled={updateLoading}
-            onPress={accountForm.submit}>
+            onPress={accountForm.submit}
+          >
             {updateLoading ? (
               <ActivityIndicator size="small" color={whiteColor} />
             ) : (
@@ -114,11 +120,12 @@ const Account = () => {
       <Div flex={1} justifyContent="flex-end">
         <HideWithKeyboard>
           <Button
-            size="full"
+            block
             variant="outline"
             color="red800"
             borderColor="red800"
-            onPress={handleLogout}>
+            onPress={handleLogout}
+          >
             Se déconnecter
           </Button>
         </HideWithKeyboard>

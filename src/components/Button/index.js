@@ -1,49 +1,84 @@
 import React from 'react';
-import {Button as MagnusButton} from 'react-native-magnus';
 
-const Button = ({variant, children, size, ...otherProps}) => {
-  const renderBlockButton = () => (
-    <MagnusButton
-      p="lg"
-      bg="buttonBody"
-      borderWidth={1}
-      borderColor="border"
-      {...(size === 'full' ? {w: '100%'} : {})}
-      {...otherProps}>
-      {children}
-    </MagnusButton>
-  );
+import PropTypes from 'prop-types';
+import { Button as MagnusButton, Text } from 'react-native-magnus';
 
+import { fontStyles } from '@/styles/font.style';
+import { buttonSizes } from '@/theme/components/buttonSizes';
+import { colorSchemes } from '@/theme/components/colorSchemes';
+
+const BasicButton = ({ size, children, ...otherProps }) => (
+  <MagnusButton
+    py="lg"
+    px="xl"
+    borderWidth={1}
+    fontWeight="700"
+    {...buttonSizes[size]}
+    {...otherProps}
+  >
+    {children}
+  </MagnusButton>
+);
+
+const Button = ({ variant, colorScheme, children, ...otherProps }) => {
   switch (variant) {
     case 'outline':
       return (
-        <MagnusButton
-          p="lg"
-          bg="body"
-          color="text"
+        <BasicButton
+          bg="transparent"
+          color={colorSchemes[colorScheme].primaryColor}
           borderWidth={1}
-          borderColor="text"
-          {...(size === 'full' ? {w: '100%'} : {})}
-          {...otherProps}>
+          borderColor={colorSchemes[colorScheme].primaryColor}
+          {...otherProps}
+        >
           {children}
-        </MagnusButton>
+        </BasicButton>
       );
     case 'link':
+      const { size } = otherProps;
       return (
-        <MagnusButton
-          p="lg"
-          bg="body"
-          color="text"
-          {...(size === 'full' ? {w: '100%'} : {})}
-          {...otherProps}>
-          {children}
-        </MagnusButton>
+        <BasicButton bg="transparent" borderWidth={0} {...otherProps}>
+          <Text
+            fontWeight="700"
+            color={colorSchemes[colorScheme].primaryColor}
+            fontSize={buttonSizes[size].fontSize}
+            style={fontStyles.textUnderline}
+          >
+            {children}
+          </Text>
+        </BasicButton>
       );
-    case 'block':
-      return renderBlockButton();
+    case 'default':
+      return (
+        <BasicButton
+          bg={colorSchemes[colorScheme].primaryColor}
+          borderColor={colorSchemes[colorScheme].primaryColor}
+          color={colorSchemes[colorScheme].secondaryColor}
+          {...otherProps}
+        >
+          {children}
+        </BasicButton>
+      );
     default:
-      return renderBlockButton();
+      console.warn('No variant named', { variant });
+      return null;
   }
 };
 
 export default Button;
+
+Button.propTypes = {
+  variant: PropTypes.string,
+  colorScheme: PropTypes.oneOf(Object.keys(colorSchemes)),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
+  block: PropTypes.bool,
+  children: PropTypes.node,
+};
+
+Button.defaultProps = {
+  variant: 'default',
+  colorScheme: 'default',
+  size: 'md',
+  block: false,
+  children: null,
+};

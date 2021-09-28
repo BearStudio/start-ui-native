@@ -12,15 +12,9 @@ NC='\033[0m' # No Color
 
 function bundle {
   # Change environment config
-  cp .env."${environment}" .env
+  ./scripts/set-env.sh "${environment}"
 
   cd "${ANDROID_DIR}" || exit
-
-  echo -e "${BLUE}Bundling app...${NC}"
-  react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output app/src/main/assets/index.android.bundle --assets-dest app/src/main/res
-
-  #  # This is to delete duplicates file that break the build
-  #  rm -rf app/src/main/res/drawable-xxxhdpi app/src/main/res/drawable-xxhdpi app/src/main/res/drawable-xhdpi app/src/main/res/drawable-mdpi app/src/main/res/drawable-hdpi
 
   # Build the APK
   echo -e "${BLUE}Will start building release bundle...${NC}"
@@ -29,7 +23,7 @@ function bundle {
   cd "${PROJECT_ROOT}" || exit
 
   # Reset environment config to local
-  cp .env.local .env
+  ./scripts/set-env.sh local
 }
 
 

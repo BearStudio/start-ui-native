@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import {useField} from '@formiz/core';
+import React, { useEffect, useState } from 'react';
+
+import { useField } from '@formiz/core';
+import { Div, Text } from 'react-native-magnus';
+
 import Input from '../../Input';
-import {Div, Text} from 'react-native-magnus';
 
 export const FieldInput = (props) => {
   const {
@@ -44,9 +46,10 @@ export const FieldInput = (props) => {
   return (
     <Div>
       <Text
-        {...(showError ? {fontWeight: 'bold'} : {})}
+        {...(showError ? { fontWeight: 'bold' } : {})}
         mt={10}
-        color={showError ? 'red700' : 'text'}>
+        color={showError ? 'red700' : 'text'}
+      >
         {label}
       </Text>
       <Input
@@ -56,11 +59,11 @@ export const FieldInput = (props) => {
         onChangeText={setValue}
         onBlur={handleBlur}
         placeholder={placeholder}
-        {...(showError ? {borderColor: 'red700', borderWidth: 1} : {})}
+        {...(showError ? { borderColor: 'red700', borderWidth: 1 } : {})}
         {...otherProps}
       />
       {showError && (
-        <Text {...(showError ? {color: 'red700'} : {})}>{errorMessage}</Text>
+        <Text {...(showError ? { color: 'red700' } : {})}>{errorMessage}</Text>
       )}
     </Div>
   );

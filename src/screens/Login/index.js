@@ -1,42 +1,43 @@
-import React, {useContext} from 'react';
-import {Text, Div} from 'react-native-magnus';
-import {Formiz, useForm} from '@formiz/core';
-import {isEmail} from '@formiz/validations';
-import {FieldInput} from '../../components/Fields/FieldInput';
-import Button from '../../components/Button';
-import {useNavigation} from '@react-navigation/native';
-import {useLogin} from '../../services/userService';
-import {storeAuthenticationToken} from '../../services/securityService';
-import {useToast} from '../../services/utils/toastService';
-import GlobalContext from '../../contexts/GlobalContext';
-import {ActivityIndicator} from 'react-native';
-import {whiteColor} from '../../../constants/themes';
+import React, { useCallback, useEffect } from 'react';
+
+import { Formiz, useForm } from '@formiz/core';
+import { isEmail } from '@formiz/validations';
+import { useNavigation } from '@react-navigation/native';
+import { ActivityIndicator } from 'react-native';
+import { Div, Text } from 'react-native-magnus';
+
+import Button from '@/components/Button';
+import { FieldInput } from '@/components/Fields/FieldInput';
+import { useAuthentication } from '@/contexts/AuthContext';
+import { useToast } from '@/services/utils/toastService';
+import { whiteColor } from '@/theme';
 
 const Login = () => {
   const loginForm = useForm();
   const navigation = useNavigation();
-  const {showError} = useToast();
+  const { showError } = useToast();
 
-  const {reloadUserInformations} = useContext(GlobalContext);
+  const { login, loginError, isLogining } = useAuthentication();
 
-  const {mutate: loginUser, isLoading} = useLogin({
-    onSuccess: async ({id_token}) => {
-      await storeAuthenticationToken(id_token);
-      reloadUserInformations();
-    },
-    onError: (error) => {
-      if (error?.response?.status && error?.response?.status === 401) {
-        showError('Identifiants incorrects, veuillez réessayer');
-      } else {
-        showError(
-          'Une erreur est survenue lors de la connexion, veuillez réessayer',
-        );
-      }
-    },
-  });
+  const handleLoginError = useCallback(() => {
+    if (!loginError) {
+      return;
+    }
+    if (loginError?.response?.status && loginError?.response?.status === 401) {
+      showError('Identifiants incorrects, veuillez réessayer');
+    } else {
+      showError(
+        'Une erreur est survenue lors de la connexion, veuillez réessayer'
+      );
+    }
+  }, [loginError, showError]);
+
+  useEffect(() => {
+    handleLoginError();
+  }, [handleLoginError]);
 
   const submitForm = async (values) => {
-    await loginUser(values);
+    await login(values);
   };
 
   const handleOpenRegister = () => {
@@ -45,6 +46,10 @@ const Login = () => {
 
   const handleOpenResetPassword = () => {
     navigation.navigate('ResetPassword');
+  };
+
+  const handleOpenAbout = () => {
+    navigation.navigate('About');
   };
 
   return (
@@ -88,20 +93,24 @@ const Login = () => {
         />
 
         <Button
+          colorScheme="primary"
           variant="link"
           p="lg"
           mt="sm"
           alignSelf="flex-end"
-          onPress={handleOpenResetPassword}>
+          onPress={handleOpenResetPassword}
+        >
           Mot de passe oublié
         </Button>
 
         <Button
+          colorScheme="primary"
           mt="xl"
-          size="full"
-          disabled={isLoading}
-          onPress={loginForm.submit}>
-          {isLoading ? (
+          block
+          disabled={isLogining}
+          onPress={loginForm.submit}
+        >
+          {isLogining ? (
             <ActivityIndicator size="small" color={whiteColor} />
           ) : (
             'Se connecter'
@@ -110,12 +119,24 @@ const Login = () => {
       </Formiz>
 
       <Button
+        colorScheme="primary"
         variant="outline"
         mt="lg"
-        size="full"
-        disabled={isLoading}
-        onPress={handleOpenRegister}>
+        block
+        disabled={isLogining}
+        onPress={handleOpenRegister}
+      >
         Créer un compte
+      </Button>
+
+      <Button
+        colorScheme="dark"
+        variant="link"
+        mt="lg"
+        block
+        onPress={handleOpenAbout}
+      >
+        À propos
       </Button>
     </Div>
   );
