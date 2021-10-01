@@ -5,7 +5,7 @@ import { Div, Text } from 'react-native-magnus';
 
 import Input from '../../Input';
 
-export const FieldInput = (props) => {
+export const FieldInput = React.forwardRef((props, ref) => {
   const {
     id,
     isValid,
@@ -53,6 +53,7 @@ export const FieldInput = (props) => {
         {label}
       </Text>
       <Input
+        ref={ref}
         id={id}
         type={type || 'text'}
         value={value ?? ''}
@@ -67,4 +68,4 @@ export const FieldInput = (props) => {
       )}
     </Div>
   );
-};
+});
