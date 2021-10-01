@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 
 import { Formiz, useForm } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
@@ -9,6 +9,7 @@ import { Div, Text } from 'react-native-magnus';
 import Button from '@/components/Button';
 import { FieldInput } from '@/components/Fields/FieldInput';
 import { useAuthentication } from '@/contexts/AuthContext';
+import { focus } from '@/services/utils/formUtil';
 import { useToast } from '@/services/utils/toastService';
 import { whiteColor } from '@/theme';
 
@@ -16,6 +17,8 @@ const Login = () => {
   const loginForm = useForm();
   const navigation = useNavigation();
   const { showError } = useToast();
+
+  const passwordRef = useRef();
 
   const { login, loginError, isLogining } = useAuthentication();
 
@@ -81,15 +84,19 @@ const Login = () => {
               message: "L'adresse mail n'est pas valide",
             },
           ]}
+          onSubmitEditing={focus(passwordRef)}
+          returnKeyType="next"
         />
 
         <FieldInput
+          ref={passwordRef}
           name="password"
           label="Mot de passe"
           placeholder="Votre mot de passe"
           mt="md"
           secureTextEntry
           required="Le mot de passe est requis"
+          onSubmitEditing={loginForm.submit}
         />
 
         <Button

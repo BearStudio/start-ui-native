@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { Formiz, useForm } from '@formiz/core';
 import { isEmail, isMinLength } from '@formiz/validations';
@@ -10,6 +10,7 @@ import { BackButton } from '@/components/BackButton';
 import Button from '@/components/Button';
 import { FieldInput } from '@/components/Fields/FieldInput';
 import { useRegister } from '@/services/userService';
+import { focus } from '@/services/utils/formUtil';
 import { useToast } from '@/services/utils/toastService';
 import { whiteColor } from '@/theme';
 
@@ -17,6 +18,9 @@ const Register = () => {
   const registerForm = useForm();
   const navigation = useNavigation();
   const { showError, showSuccess } = useToast();
+
+  const passwordRef = useRef();
+  const confirmPasswordRef = useRef();
 
   const { mutate: registerUser, isLoading } = useRegister({
     onSuccess: () => {
@@ -71,9 +75,12 @@ const Register = () => {
               message: "L'adresse mail n'est pas valide",
             },
           ]}
+          onSubmitEditing={focus(passwordRef)}
+          returnKeyType="next"
         />
 
         <FieldInput
+          ref={passwordRef}
           name="password"
           label="Mot de passe"
           placeholder="Votre mot de passe"
@@ -86,9 +93,12 @@ const Register = () => {
               message: 'Le mot de passe doit comporter au moins 6 caractères',
             },
           ]}
+          onSubmitEditing={focus(confirmPasswordRef)}
+          returnKeyType="next"
         />
 
         <FieldInput
+          ref={confirmPasswordRef}
           name="confirmPassword"
           label="Confirmation du mot de passe"
           placeholder="La confirmation de votre mot de passe"
@@ -102,6 +112,7 @@ const Register = () => {
               message: 'La confirmation du mot de passe ne correspond pas',
             },
           ]}
+          onSubmitEditing={registerForm.submit}
         />
 
         <Button
