@@ -57,10 +57,6 @@ const Login = () => {
     navigation.navigate('About');
   };
 
-  useEffect(() => {
-    console.log(CONFIG.API_URL);
-  }, []);
-
   return (
     <Div bg="body" h="100%" p="xl">
       <Div my="2xl">
