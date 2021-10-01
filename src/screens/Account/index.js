@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { Formiz, useForm } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
@@ -11,6 +11,7 @@ import Button from '@/components/Button';
 import { FieldInput } from '@/components/Fields/FieldInput';
 import { useAuthentication } from '@/contexts/AuthContext';
 import { useUpdateAccount } from '@/services/userService';
+import { focus } from '@/services/utils/formUtil';
 import { useToast } from '@/services/utils/toastService';
 import { primaryColor, whiteColor } from '@/theme';
 
@@ -23,6 +24,9 @@ const Account = () => {
     account,
     isRetrievingUserAccount,
   } = useAuthentication();
+
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
 
   const handleLogout = () => {
     logout();
@@ -83,21 +87,28 @@ const Account = () => {
                 message: "L'adresse mail n'est pas valide",
               },
             ]}
+            onSubmitEditing={focus(firstNameRef)}
+            returnKeyType="next"
           />
           <FieldInput
+            ref={firstNameRef}
             name="firstName"
             defaultValue={account?.firstName}
             label="Prénom"
             placeholder="Votre prénom"
             autoCapitalize="none"
             mt="md"
+            onSubmitEditing={focus(lastNameRef)}
+            returnKeyType="next"
           />
           <FieldInput
+            ref={lastNameRef}
             name="lastName"
             defaultValue={account?.lastName}
             label="Nom"
             placeholder="Votre nom"
             autoCapitalize="none"
+            onSubmitEditing={accountForm.submit}
             mt="md"
           />
 

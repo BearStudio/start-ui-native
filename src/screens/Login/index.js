@@ -13,6 +13,8 @@ import { focus } from '@/services/utils/formUtil';
 import { useToast } from '@/services/utils/toastService';
 import { whiteColor } from '@/theme';
 
+import { CONFIG } from '../../../environments/local/config';
+
 const Login = () => {
   const loginForm = useForm();
   const navigation = useNavigation();
@@ -54,6 +56,10 @@ const Login = () => {
   const handleOpenAbout = () => {
     navigation.navigate('About');
   };
+
+  useEffect(() => {
+    console.log(CONFIG.API_URL);
+  }, []);
 
   return (
     <Div bg="body" h="100%" p="xl">
