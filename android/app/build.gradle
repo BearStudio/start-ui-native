@@ -148,11 +148,11 @@ android {
             keyPassword 'android'
         }
         release {
-            if (project.hasProperty('STARTUINATIVE_UPLOAD_STORE_FILE')) {
-                storeFile file(STARTUINATIVE_UPLOAD_STORE_FILE)
-                storePassword STARTUINATIVE_UPLOAD_STORE_PASSWORD
-                keyAlias STARTUINATIVE_UPLOAD_KEY_ALIAS
-                keyPassword STARTUINATIVE_UPLOAD_KEY_PASSWORD
+            if (project.hasProperty('RELEASE_KEY_STORE_FILE')) {
+                storeFile file(RELEASE_KEY_STORE_FILE)
+                storePassword RELEASE_KEY_STORE_PASSWORD
+                keyAlias RELEASE_KEY_ALIAS
+                keyPassword RELEASE_KEY_PASSWORD
             }
         }
     }

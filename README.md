@@ -3,6 +3,17 @@
 🚀 Start UI [native] is a opinionated [React Native](https://reactnative.dev/) starter repository created & maintained by the [BearStudio Team](https://www.bearstudio.fr/team) and other contributors.
 It represents our team's up-to-date stack that we use when creating React Native apps for our clients.
 
+## Getting Started
+
+```bash
+npx create-start-ui --native myApp
+```
+That will scaffold a new folder with the latest version of 🚀 Start UI <small>[native]</small> 🎉
+
+Then just go to the created folder `cd myApp` and follow the [Installation Guide](#installation).
+
+---
+
 ## Technology
 
 - ⚛️ [React Native](https://reactnative.dev/)
@@ -14,218 +25,200 @@ It represents our team's up-to-date stack that we use when creating React Native
 
 ℹ️ API calls are mapped on a [jHipster](https://www.jhipster.tech/) backend application.
 
-<a href="https://www.jhipster.tech/">
-  <img src="https://fr.ippon.tech/jhipster/img-jhipster.jpg?language_id=1591305318214" alt="jHipster logo" width="200" />
-</a>
-
-## Table of contents
-
-1. [Installation](#installation)
-2. [Development](#development)
-3. [Release](#release)
-4. [Change App Name](#change-app-name)
-4. [Change App Icons](#change-app-icons)
+---
 
 ## Installation
 
-```
+1. Install project dependencies
+```bash
 yarn install
 ```
+2. Set up your local environment config
+   1. Copy the `environments/dev/config.js` in the `environments/local` folder
+   2. Replace the `ENV: ENVS.DEV,` line with `ENV: ENVS.LOCAL,` within the `environments/local/config.js` file.
+   3. Run the `yarn set:env:local` command.
 
-## Development
+3. Then follow the [Android Installation Guide](#android-installation) or [iOS Installation Guide](#ios-installation).
 
-### Configuration
+---
 
-You need to install Android Studio, one Android SDK and adb tools on your computer to develop on the project for Android devices. And you need a Mac and Xcode installed on it to develop on the project for iOS devices.
+## Android
 
-<p align="center">
-  <a href="https://developer.android.com/studio?authuser=1">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Android_Studio_Trademark.svg/1280px-Android_Studio_Trademark.svg.png" alt="Android Studio" width="200" />
-  </a>
+<img src="https://emojis.slackmojis.com/emojis/images/1493026598/2124/android.png" width="60" align="right" />
 
-  <a href="https://developer.apple.com/xcode/">
-    <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Xcode_icon.png" alt="Xcode" width="80" />
-  </a>
-</p>
+### Android Installation
 
-### Start the project
+1. Follow the "Installing dependencies" of [React Native CLI Quickstart](https://reactnative.dev/docs/environment-setup) for Android
 
- - First, install dependencies with `yarn`
- - Then, **setup the env you need to use**: `yarn set:env:dev`
- - Start the development server `yarn start`
- - Finally, launch application on your device with `yarn android` on android or `yarn ios` on iOS
+### Android Development
 
-### Environments
+1. Run the development server
+```bash
+yarn dev
+```
 
-Environments variables are managed thanks to the subfolders in the `environments` folder :
+2. In another terminal
 
-- current : The environment which is effectively used. **Every config import should import from the current subfolder files.**
-- local : Your local environment, when developing on your machine
-- dev : The environment which can be used for internal testing
-- staging : The environment which can be used for alpha testing
-- production : The environment for your production app release on the stores
+```bash
+yarn android
+```
 
-The main advantage to handle environments with subfolders that are copied to a main folder (current), is that you
-can add environment dependent files, like Firebase configurations (google-services.json and GoogleService-Info.plist),
-that will be copied when you'll release, which is not possible with react-native-dotenv for instance.
+### Android Release
 
-## Release
+#### Generate keystore
 
-### Android
-
-<p align="center">
-  <a href="https://www.android.com/">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/2346px-Android_logo_2019_%28stacked%29.svg.png" alt="Android" width="100" />
-  </a>
-</p>
-
-#### Generate keystore for release (first time)
-
-To generate a keystore, launch this command :
-
-```./generate-android-certificate.sh```
-
+The first time you will release your app, you will need to generate a keystore
+```bash
+./scripts/generate-android-certificate.sh
+```
 And then, follow the instructions.
 
-After, you need to update : `STARTUINATIVE_UPLOAD_STORE_FILE`,
-`STARTUINATIVE_UPLOAD_KEY_ALIAS`,
-`STARTUINATIVE_UPLOAD_STORE_PASSWORD` and
-`STARTUINATIVE_UPLOAD_KEY_PASSWORD` constants into `gradle.properties` file.
+Then, you need to update the `RELEASE_KEY_STORE_PASSWORD` and `RELEASE_KEY_PASSWORD` into the `android/gradle.properties` file.
 
-You can also rename these constants to suits up your project's name.
+> You should not keep this in the git history. Use a password manager or other secured solution to keep this file.
+> ⚠️ DO NOT LOOSE IT. YOU WILL NOT BE ABLE TO RELEASE YOUR APP.
 
 #### Generate Bundle file for releases on Play Store
 
 We are using [Android App Bundle](https://developer.android.com/platform/technology/app-bundle) on this project. This is a new and more efficient way to package an Android application.
 
-To create the release bundle file use this command :
-
-For development environment :
-
-```
+Based on the environment that you need to target run one of the following command:
+```bash
 yarn android:bundle:dev
-```
-
-For staging environment :
-
-```
+# or
 yarn android:bundle:staging
-```
-
-For production environment :
-
-```
+# or
 yarn android:bundle:prod
 ```
 
-Bundle file will be accessible at `android/app/build/outputs/bundle/release/app.aab`
+The Bundle file will be available at `android/app/build/outputs/bundle/release/app.aab`
 
-IMPORTANT : Please test the release application with the APK version (next section) on your device before uploading the bundle file on the Play Store.
-
-Then, to send the bundle file generated, please follow this [instructions](https://www.notion.so/bearstudio/D-ployer-une-application-sur-le-PlayStore-78449defdca946eb95be445fbb2b054b).
+> ⚠️ You can test the release application with the APK version (next section) on your device before uploading the bundle file on the Play Store (Especially for production release).
 
 #### Generate APK for testing release on device
 
-If you want to generate the release APK for testing the release configuration on your device before sending the bundle to the PlayStore, you can use this command :
+If you want to generate the release APK for testing the release configuration on your device before sending the bundle to the PlayStore, you can use one of the following commands based on the target environment:
 
-For development environment :
-
-```
+```bash
 yarn android:build:dev
-```
-
-For staging environment :
-
-```
+# or
 yarn android:build:staging
-```
-
-For production environment :
-
-```
+# or
 yarn android:build:prod
 ```
 
-The APK will be accessible at `android/app/build/outputs/apk/release/app-release.apk` and will be installed on your device connected.
+The APK will be available at `android/app/build/outputs/apk/release/app-release.apk` and will be installed on your connected device.
 
-### iOS
+---
 
-<p align="center">
-  <a href="https://www.apple.com/fr/ios">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/IOS_logo.svg/1200px-IOS_logo.svg.png" alt="iOS" width="100" />
-  </a>
-</p>
+## iOS
 
-#### Instructions
+<img src="https://emojis.slackmojis.com/emojis/images/1623622435/44818/ios.png" width="60" align="right" />
 
-##### Install dependencies
+For iOS development you need to be on a Apple computer with macOS.
 
-```
-yarn
-```
+### iOS Installation
 
-```
-cd ios/
-pod install
+1. Follow the "Installing dependencies" of [React Native CLI Quickstart](https://reactnative.dev/docs/environment-setup) for iOS
+
+For Apple chips (M1) also run the following command
+```bash
+sudo arch -x86_64 gem install ffi
 ```
 
-##### Open project on xcode
+1. Install pods
 
-```
-open ios/StartUINativeApp.xcworkspace
-```
+| Processor type           | Command line             |
+|--------------------------|--------------------------|
+| Intel chip               | `yarn ios:install:intel` |
+| Apple chip (M1)          | `yarn ios:install:arm`   |
 
-##### Apply config for target environment
+### iOS Development
 
-For development environment :
-
-```
-yarn set:config:dev
-```
-
-For staging environment :
-
-```
-yarn set:config:staging
+1. Run the development server
+```bash
+yarn dev
 ```
 
-For production environment :
+2. In another terminal
 
+```bash
+yarn ios:open
 ```
-yarn set:config:prod
+This will open the project in Xcode.
+
+3. Click on the "Play" button on Xcode.
+
+### iOS Release
+
+1. Setup your targeted environment
+```bash
+yarn set:env:dev
+# or
+yarn set:env:staging
+# or
+yarn set:env:prod
 ```
 
-##### Important note about Info.plist
+2. Open Xcode
+```bash
+yarn ios:open
+```
 
-With the evolutions on the project, if you need to update Info.plist, please update all Info.plist in config folder.
+3. Follow the [Publishing to Apple App Store](https://reactnative.dev/docs/publishing-to-app-store) documentation.
 
-## Change App Name
+### Important note about Info.plist
 
-When you need to change app name and to remove "Start UI Native" references, please use this library :
-
-https://www.npmjs.com/package/react-native-rename
-
-Example of renaming :
-
-```npx react-native-rename "Travel App"```
+With the evolutions on the project, if you need to update `Info.plist`, please update all `Info.plist` in all `ios` subfolders.
 
 
-## Change App Icons
+---
+## Environments
 
-### For Android
+Environments variables are managed thanks to the subfolders in the `environments` folder:
 
-Please use this online tool to generate the icon files for Android :
+- **local:** Your local environment, when developing on your computer
+- **dev:** For your app internal testing
+- **staging:** For your app alpha/beta/testflight testing
+- **production:** For your production app release on the stores
 
-https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html
+> This approche allows us to have dependent environment files, like Firebase configurations (google-services.json and GoogleService-Info.plist), that will be copied when you'll release, which is not possible with react-native-dotenv for instance.
 
-Download the zip generated and extract it into `android/app/src/main/res/`.
+You can switch environment with one of the following commands:
+```bash
+yarn set:env:local
+# or
+yarn set:env:dev
+# or
+yarn set:env:staging
+# or
+yarn set:env:prod
+```
 
-### For iOS
+---
 
-For iOS, you have to generate images with different sizes. To do it, you can use this tool for MacOS : https://apps.apple.com/au/app/icon-set-creator/id939343785?mt=12
+## Updating the Application Name
 
-Or this tool online : https://appicon.co/
+When you need to update the application name and to remove "Start UI Native" references, please use this library:
 
-(Tools not tested)
+[react-native-rename](https://www.npmjs.com/package/react-native-rename)
 
-And then, import these images into a new image assets into xcode. Please follow this tutorial as an example : https://medium.com/@craiggrummitt/xcode-whats-up-with-app-icons-308b3f10e942
+```bash
+npx react-native-rename "My Amazing App"
+```
+
+## Updating the Application Icons
+
+### Application Icons for Android
+
+You can use [Launcher icon generator](nurik.github.io/AndroidAssetStudio/icons-launcher.html) online tool to generate the icon files for Android:
+
+Download and extract the .zip file it into `android/app/src/main/res/` folder.
+
+### Application Icons for iOS
+
+For iOS, you can use [Icon Set Creator](https://apps.apple.com/au/app/icon-set-creator/id939343785) for MacOS.
+
+[https://appicon.co/](https://appicon.co/) online tool.
+
+And then, import these images into a new image assets into xcode. You can follow [this tutorial for example](https://medium.com/@craiggrummitt/xcode-whats-up-with-app-icons-308b3f10e942).
