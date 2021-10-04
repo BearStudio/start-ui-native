@@ -8,6 +8,7 @@ import { Div, Text } from 'react-native-magnus';
 import { useAuthentication } from '@/contexts/AuthContext';
 import Account from '@/screens/Account';
 import AboutScreen from '@/screens/Dev/About';
+import NetworkHelperScreen from '@/screens/Dev/NetworkHelper';
 import Storybook from '@/screens/Dev/Storybook';
 import Home from '@/screens/Home';
 import Login from '@/screens/Login';
@@ -24,6 +25,7 @@ const Stack = createStackNavigator();
 if (__DEV__) {
   const DevMenu = require('react-native-dev-menu');
   DevMenu.addItem('Storybook', () => navigate('Storybook'));
+  DevMenu.addItem('Network helper', () => navigate('NetworkHelper'));
 }
 
 const Routing = () => {
@@ -65,6 +67,12 @@ const Routing = () => {
           <Stack.Screen name="ResetPassword" component={ResetPassword} />
           <Stack.Screen name="About" component={AboutScreen} />
           {__DEV__ && <Stack.Screen name="Storybook" component={Storybook} />}
+          {__DEV__ && (
+            <Stack.Screen
+              name="NetworkHelper"
+              component={NetworkHelperScreen}
+            />
+          )}
         </Stack.Navigator>
       )}
 
@@ -78,6 +86,12 @@ const Routing = () => {
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Account" component={Account} />
           {__DEV__ && <Stack.Screen name="Storybook" component={Storybook} />}
+          {__DEV__ && (
+            <Stack.Screen
+              name="NetworkHelper"
+              component={NetworkHelperScreen}
+            />
+          )}
         </Stack.Navigator>
       )}
     </NavigationContainer>
