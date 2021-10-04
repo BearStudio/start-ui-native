@@ -11,9 +11,23 @@ import { logAxiosErrorAndGet } from '@/config/axios';
 import { CONFIG } from '@/environment/config';
 
 const NetworkHelperScreen = () => {
-  const { data: ipAddress, isLoading, isError } = useQuery('ipAddress', () =>
-    NetworkInfo.getIPAddress()
-  );
+  const {
+    data: ipV6Address,
+    isLoading: isLoadingIpv6Address,
+    isError: hasErrorGettingIpV6Address,
+  } = useQuery('ipv6Address', () => NetworkInfo.getIPAddress());
+
+  const {
+    data: ipV4Address,
+    isLoading: isLoadingIpv4Address,
+    isError: hasErrorGettingIpV4Address,
+  } = useQuery('ipv4Address', () => NetworkInfo.getIPV4Address());
+
+  const {
+    data: ssid,
+    isLoading: isLoadingSSID,
+    isError: hasErrorGettingSSID,
+  } = useQuery('ssid', () => NetworkInfo.getSSID());
 
   const {
     isError: hasErrorTestingApi,
@@ -35,10 +49,26 @@ const NetworkHelperScreen = () => {
       </Text>
       <Div mt="md">
         <Text>
-          Adresse IP:
-          {isLoading && <ActivityIndicator />}
-          {isError && <Text>Une erreur est survenue</Text>}
-          {!isError && !isLoading && <Text>{ipAddress}</Text>}
+          Adresse IPV6:
+          {isLoadingIpv6Address && <ActivityIndicator />}
+          {hasErrorGettingIpV6Address && <Text>Une erreur est survenue</Text>}
+          {!hasErrorGettingIpV6Address && !isLoadingIpv6Address && (
+            <Text>{ipV6Address}</Text>
+          )}
+        </Text>
+        <Text>
+          Adresse IPV4:
+          {isLoadingIpv4Address && <ActivityIndicator />}
+          {hasErrorGettingIpV4Address && <Text>Une erreur est survenue</Text>}
+          {!hasErrorGettingIpV4Address && !isLoadingIpv4Address && (
+            <Text>{ipV4Address}</Text>
+          )}
+        </Text>
+        <Text>
+          SSID:
+          {isLoadingSSID && <ActivityIndicator />}
+          {hasErrorGettingSSID && <Text>Une erreur est survenue</Text>}
+          {!hasErrorGettingSSID && !isLoadingSSID && <Text>{ssid}</Text>}
         </Text>
         <Text>Api URL: {CONFIG.API_URL}</Text>
         <Text>

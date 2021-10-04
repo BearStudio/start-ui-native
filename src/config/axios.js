@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { CONFIG } from '@/environments/current/config';
+import { CONFIG } from '@/environment/config';
 import {
   retrieveAuthenticationToken,
   removeAuthenticationToken,
