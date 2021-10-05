@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { useField } from '@formiz/core';
-import { Div, Text } from 'react-native-magnus';
-
-import Input from '../../Input';
+import { FormControl, Stack, Input } from 'native-base';
 
 export const FieldInput = React.forwardRef((props, ref) => {
   const {
@@ -44,28 +42,27 @@ export const FieldInput = React.forwardRef((props, ref) => {
   };
 
   return (
-    <Div>
-      <Text
-        {...(showError ? { fontWeight: 'bold' } : {})}
-        mt={10}
-        color={showError ? 'red700' : 'text'}
-      >
-        {label}
-      </Text>
-      <Input
-        ref={ref}
-        id={id}
-        type={type || 'text'}
-        value={value ?? ''}
-        onChangeText={setValue}
-        onBlur={handleBlur}
-        placeholder={placeholder}
-        {...(showError ? { borderColor: 'red700', borderWidth: 1 } : {})}
-        {...otherProps}
-      />
-      {showError && (
-        <Text {...(showError ? { color: 'red700' } : {})}>{errorMessage}</Text>
-      )}
-    </Div>
+    <FormControl
+      isRequired={!!required}
+      isInvalid={showError}
+      isDisabled={isDisabled}
+    >
+      <Stack>
+        {!!label && <FormControl.Label>{label}</FormControl.Label>}
+        <Input
+          ref={ref}
+          id={id}
+          type={type || 'text'}
+          value={value ?? ''}
+          onChangeText={setValue}
+          onBlur={handleBlur}
+          placeholder={placeholder}
+          {...otherProps}
+        />
+        {showError && (
+          <FormControl.ErrorMessage>{errorMessage}</FormControl.ErrorMessage>
+        )}
+      </Stack>
+    </FormControl>
   );
 });

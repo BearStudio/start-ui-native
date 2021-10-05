@@ -9,12 +9,13 @@ import { AuthProvider } from '@/auth/AuthContext';
 import { ToastProvider } from '@/contexts/ToastContext';
 import { displayStyles } from '@/styles/display.style';
 import THEMES from '@/theme';
+import { theme } from '@/theme-nb';
 
 const queryClient = new QueryClient();
 
 const Providers = ({ children }) => {
   return (
-    <NativeBaseProvider>
+    <NativeBaseProvider theme={theme}>
       <ThemeProvider theme={THEMES.default}>
         <ToastProvider>
           <QueryClientProvider client={queryClient}>
