@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { NativeBaseProvider } from 'native-base';
 import { SafeAreaView } from 'react-native';
 import { ThemeProvider } from 'react-native-magnus';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -13,17 +14,19 @@ const queryClient = new QueryClient();
 
 const Providers = ({ children }) => {
   return (
-    <ThemeProvider theme={THEMES.default}>
-      <ToastProvider>
-        <QueryClientProvider client={queryClient}>
-          <AuthProvider>
-            <SafeAreaView style={displayStyles.safeArea}>
-              {children}
-            </SafeAreaView>
-          </AuthProvider>
-        </QueryClientProvider>
-      </ToastProvider>
-    </ThemeProvider>
+    <NativeBaseProvider>
+      <ThemeProvider theme={THEMES.default}>
+        <ToastProvider>
+          <QueryClientProvider client={queryClient}>
+            <AuthProvider>
+              <SafeAreaView style={displayStyles.safeArea}>
+                {children}
+              </SafeAreaView>
+            </AuthProvider>
+          </QueryClientProvider>
+        </ToastProvider>
+      </ThemeProvider>
+    </NativeBaseProvider>
   );
 };
 
