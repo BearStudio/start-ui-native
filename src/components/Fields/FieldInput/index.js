@@ -59,6 +59,7 @@ export const FieldInput = React.forwardRef((props, ref) => {
           placeholder={placeholder}
           {...otherProps}
         />
+        {!!helper && <FormControl.HelperText>{helper}</FormControl.HelperText>}
         {showError && (
           <FormControl.ErrorMessage>{errorMessage}</FormControl.ErrorMessage>
         )}
