@@ -1,8 +1,8 @@
 import React from 'react';
 
+import { Box, useTheme } from 'native-base';
 import PropTypes from 'prop-types';
 import { FlatList } from 'react-native';
-import { Div } from 'react-native-magnus';
 
 import { displayStyles } from '@/styles/display.style';
 
@@ -15,6 +15,8 @@ const GridView = ({
   rowSpacing,
   ...rest
 }) => {
+  const theme = useTheme();
+
   return (
     <FlatList
       listKey
@@ -22,7 +24,7 @@ const GridView = ({
       style={{ ...displayStyles.overflowVisibleTrick }}
       data={items}
       renderItem={({ item, index }) => (
-        <Div
+        <Box
           flex={1 / numColumns}
           maxWidth={
             // this is a hotfix, because on Huawei P30, maxWidth: 50% totaly breaks the layout
@@ -31,7 +33,7 @@ const GridView = ({
           pl={columnSpacing}
         >
           {renderItem({ item, index })}
-        </Div>
+        </Box>
       )}
       contentContainerStyle={{
         ...displayStyles.overflowVisibleTrick,
@@ -39,7 +41,9 @@ const GridView = ({
       columnWrapperStyle={{ marginLeft: -1 * columnSpacing }}
       numColumns={numColumns}
       keyExtractor={keyExtractor}
-      ItemSeparatorComponent={() => <Div style={{ height: rowSpacing }} />}
+      ItemSeparatorComponent={() => (
+        <Box style={{ height: theme.sizes[rowSpacing] }} />
+      )}
       {...rest}
     />
   );

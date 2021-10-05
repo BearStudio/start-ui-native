@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { storiesOf } from '@storybook/react-native';
+import { Button } from 'native-base';
 
-import Button from '@/components/Button';
 import StoryLayout from '@/screens/Dev/Storybook/_partials/StoryLayout';
 import StorySpacer from '@/screens/Dev/Storybook/_partials/StorySpacer';
 
@@ -12,11 +12,6 @@ const onPress = () => console.log('Pressed');
 
 buttonStories.add(storyTitle, () => (
   <StoryLayout title={storyTitle}>
-    <Button onPress={onPress} colorScheme="default">
-      Default
-    </Button>
-
-    <StorySpacer />
     <Button onPress={onPress} colorScheme="primary">
       Primary
     </Button>
@@ -27,13 +22,8 @@ buttonStories.add(storyTitle, () => (
     </Button>
 
     <StorySpacer />
-    <Button onPress={onPress} colorScheme="dark">
-      Dark
-    </Button>
-
-    <StorySpacer />
-    <Button onPress={onPress} colorScheme="warning">
-      Warning
+    <Button onPress={onPress} colorScheme="success">
+      Success
     </Button>
 
     <StorySpacer />
@@ -42,8 +32,13 @@ buttonStories.add(storyTitle, () => (
     </Button>
 
     <StorySpacer />
-    <Button onPress={onPress} colorScheme="white">
-      White
+    <Button onPress={onPress} colorScheme="warning">
+      Warning
+    </Button>
+
+    <StorySpacer />
+    <Button onPress={onPress} colorScheme="gray">
+      Gray
     </Button>
   </StoryLayout>
 ));

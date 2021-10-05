@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { storiesOf } from '@storybook/react-native';
-import { Div } from 'react-native-magnus';
+import { Box } from 'native-base';
 
 import GridView from '@/components/Lists/GridView';
 import StoryLayout from '@/screens/Dev/Storybook/_partials/StoryLayout';
@@ -15,23 +15,23 @@ gridViewStories.add(storyTitle, () => (
   <StoryLayout title={storyTitle} subtitle={storySubtitle}>
     <GridView
       renderItem={({ item }) => (
-        <Div height={100} bg={item} rounded="md" shadow="md" />
+        <Box height={100} bg={item} borderRadius="md" shadow="1" />
       )}
       items={[
-        'brandPrimary100',
-        'brandPrimary200',
-        'brandPrimary300',
-        'brandPrimary400',
-        'brandPrimary500',
-        'brandPrimary600',
-        'brandPrimary700',
-        'brandPrimary800',
-        'brandPrimary900',
+        'primary.100',
+        'primary.200',
+        'primary.300',
+        'primary.400',
+        'primary.500',
+        'primary.600',
+        'primary.700',
+        'primary.800',
+        'primary.900',
       ]}
       numColumns={2}
       keyExtractor={(item) => item}
-      columnSpacing={10}
-      rowSpacing={15}
+      columnSpacing={3}
+      rowSpacing={3}
     />
   </StoryLayout>
 ));

@@ -1,17 +1,17 @@
 import React from 'react';
 
+import { Box, Text } from 'native-base';
 import PropTypes from 'prop-types';
-import { Div, Text } from 'react-native-magnus';
 
 import StoryTitle from './StoryTitle';
 
 const StoryLayout = ({ title, subtitle, children, ...rest }) => {
   return (
-    <Div px="lg" py="xl" {...rest}>
+    <Box px={3} py={5} {...rest}>
       {title && <StoryTitle>{title}</StoryTitle>}
-      {subtitle && <Text mb="2xl">{subtitle}</Text>}
+      {subtitle && <Text mb={8}>{subtitle}</Text>}
       {children}
-    </Div>
+    </Box>
   );
 };
 
