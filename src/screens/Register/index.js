@@ -50,7 +50,7 @@ const Register = () => {
   };
 
   return (
-    <Box bg="gray.50" h="full" p="8">
+    <Box bg="white" h="full" p="6">
       <Formiz onValidSubmit={submitForm} connect={registerForm}>
         <Stack space="lg">
           <Stack space="md">

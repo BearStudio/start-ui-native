@@ -33,7 +33,7 @@ const Login = () => {
   };
 
   return (
-    <Box bg="gray.50" h="full" p="8">
+    <Box bg="white" h="full" p="6">
       <Formiz onValidSubmit={submitForm} connect={loginForm}>
         <Stack space="lg">
           <Stack space="md">
@@ -92,7 +92,7 @@ const Login = () => {
             px={0}
             leftIcon={<InfoOutlineIcon size="3" />}
           >
-            Learn about this app
+            About this app
           </Button>
         </Stack>
       </Formiz>
