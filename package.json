@@ -5,15 +5,12 @@
   "description": "Opinionated UI starter with ⚛️ React-Native, ⚡️ Magnus UI, ⚛️ React Query & 🐜 Formiz — From the 🐻 BearStudio Team",
   "scripts": {
     "prepare": "husky install",
-
     "set:env:local": "./scripts/set-env.sh local",
     "set:env:dev": "./scripts/set-env.sh dev",
     "set:env:staging": "./scripts/set-env.sh staging",
     "set:env:prod": "./scripts/set-env.sh prod",
-
     "start": "react-native start",
     "dev": "react-native start",
-
     "android": "react-native run-android",
     "android:build:dev": "yarn jetify && ./scripts/android-build.sh dev",
     "android:build:staging": "yarn jetify && ./scripts/android-build.sh staging",
@@ -21,16 +18,13 @@
     "android:bundle:dev": "yarn jetify && ./scripts/android-bundle.sh dev",
     "android:bundle:staging": "yarn jetify && ./scripts/android-bundle.sh staging",
     "android:bundle:prod": "yarn jetify && ./scripts/android-bundle.sh prod",
-
     "ios": "react-native run-ios",
     "ios:open": "open ios/StartUINativeApp.xcworkspace",
     "ios:install:intel": "cd ios/ && pod install",
     "ios:install:arm": "cd ios/ && arch -x86_64 pod install",
-
     "test": "jest",
     "lint": "eslint . --fix",
     "pretty": "prettier -w .",
-
     "storybook": "start-storybook -p 7007",
     "build-storybook": "build-storybook"
   },
@@ -90,6 +84,7 @@
     "react-dom": "17.0.2",
     "react-native-codegen": "0.0.8",
     "react-native-dev-menu": "4.0.2",
+    "react-native-network-info": "5.2.1",
     "react-test-renderer": "17.0.2",
     "typescript": "4.4.3"
   },
