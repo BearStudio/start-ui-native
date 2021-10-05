@@ -76,10 +76,10 @@ const NetworkHelperScreen = () => {
           {isLoadingApiTest && <ActivityIndicator />}
           {hasErrorTestingApi && (
             <Text>
-              Non connecté: ${logAxiosErrorAndGet(apiConnectionError)}
+              ❌ Non connecté: ${logAxiosErrorAndGet(apiConnectionError)}
             </Text>
           )}
-          {!hasErrorTestingApi && !isLoadingApiTest && <Text>Connecté</Text>}
+          {!hasErrorTestingApi && !isLoadingApiTest && <Text>✅ Connecté</Text>}
         </Text>
       </Div>
     </ScrollDiv>
