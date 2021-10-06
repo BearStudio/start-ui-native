@@ -6,11 +6,11 @@ import { ActivityIndicator } from 'react-native';
 import HideWithKeyboard from 'react-native-hide-with-keyboard';
 import { Text, Div } from 'react-native-magnus';
 
+import { useAccount, useUpdateAccount } from '@/account/account.service';
+import { useAuthContext } from '@/auth/AuthContext';
 import { BackButton } from '@/components/BackButton';
 import Button from '@/components/Button';
 import { FieldInput } from '@/components/Fields/FieldInput';
-import { useAuthentication } from '@/contexts/AuthContext';
-import { useUpdateAccount } from '@/services/userService';
 import { focus } from '@/services/utils/formUtil';
 import { useToast } from '@/services/utils/toastService';
 import { primaryColor, whiteColor } from '@/theme';
@@ -18,12 +18,9 @@ import { primaryColor, whiteColor } from '@/theme';
 const Account = () => {
   const accountForm = useForm();
   const { showError, showSuccess } = useToast();
-  const {
-    logout,
-    fetchUserAccount,
-    account,
-    isRetrievingUserAccount,
-  } = useAuthentication();
+  const { logout } = useAuthContext();
+
+  const { account, isFetching: isRetrievingUserAccount } = useAccount();
 
   const firstNameRef = useRef();
   const lastNameRef = useRef();
@@ -39,7 +36,6 @@ const Account = () => {
     },
     onSuccess: () => {
       showSuccess('Le profil a bien été mis à jour');
-      fetchUserAccount();
     },
   });
 

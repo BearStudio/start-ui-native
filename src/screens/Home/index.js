@@ -4,16 +4,16 @@ import { useNavigation } from '@react-navigation/native';
 import { ActivityIndicator, TouchableOpacity } from 'react-native';
 import { Text, Div, Avatar } from 'react-native-magnus';
 
-import { useAuthentication } from '@/contexts/AuthContext';
+import { useAccount } from '@/account/account.service';
 import { primaryColor } from '@/theme';
 
 const Home = () => {
   const navigation = useNavigation();
   const {
     account,
-    isRetrievingUserAccount,
-    hasErrorRetrievingUserAccount,
-  } = useAuthentication();
+    isLoading: isRetrievingUserAccount,
+    isError: hasErrorRetrievingUserAccount,
+  } = useAccount();
 
   if (isRetrievingUserAccount) {
     return (
