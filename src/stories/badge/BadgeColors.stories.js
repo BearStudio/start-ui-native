@@ -10,7 +10,7 @@ const badgeStories = storiesOf('Badge', module);
 const storyTitle = 'Badge colors';
 
 badgeStories.add(storyTitle, () => (
-  <StoryLayout title={storyTitle}>
+  <StoryLayout title={storyTitle} alignItems="flex-start">
     <Badge colorScheme="primary">Primary</Badge>
 
     <StorySpacer />
@@ -27,10 +27,5 @@ badgeStories.add(storyTitle, () => (
 
     <StorySpacer />
     <Badge colorScheme="gray">Gray</Badge>
-
-    {/*<StorySpacer />*/}
-    {/*<Badge colorScheme="primary" onPress={() => console.log('Pressed')}>*/}
-    {/*  Clickable badge*/}
-    {/*</Badge>*/}
   </StoryLayout>
 ));

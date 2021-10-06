@@ -11,7 +11,7 @@ const storyTitle = 'Button sizes';
 const onPress = () => console.log('Pressed');
 
 buttonStories.add(storyTitle, () => (
-  <StoryLayout title={storyTitle}>
+  <StoryLayout title={storyTitle} alignItems="flex-start">
     <Button size="xs" onPress={onPress} colorScheme="primary">
       Size: xs
     </Button>
@@ -31,19 +31,9 @@ buttonStories.add(storyTitle, () => (
       Size: lg
     </Button>
 
-    {/*<StoryTitle mt="2xl">Block sized and variants</StoryTitle>*/}
-    {/*<Button size="xs" variant="outline" onPress={onPress} colorScheme="primary">*/}
-    {/*  xs - outline*/}
-    {/*</Button>*/}
-
-    {/*<StorySpacer />*/}
-    {/*<Button size="xs" variant="link" onPress={onPress} colorScheme="primary">*/}
-    {/*  xs - link*/}
-    {/*</Button>*/}
-
-    {/*<StorySpacer />*/}
-    {/*<Button size="xs" block onPress={onPress} colorScheme="primary">*/}
-    {/*  xs - block*/}
-    {/*</Button>*/}
+    <StorySpacer />
+    <Button w="100%" onPress={onPress} colorScheme="primary">
+      Full width
+    </Button>
   </StoryLayout>
 ));

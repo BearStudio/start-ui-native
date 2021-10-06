@@ -11,7 +11,7 @@ const storyTitle = 'Button colors';
 const onPress = () => console.log('Pressed');
 
 buttonStories.add(storyTitle, () => (
-  <StoryLayout title={storyTitle}>
+  <StoryLayout title={storyTitle} alignItems="flex-start">
     <Button onPress={onPress} colorScheme="primary">
       Primary
     </Button>

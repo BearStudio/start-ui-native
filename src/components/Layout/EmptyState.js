@@ -1,37 +1,37 @@
 import React from 'react';
 
+import { Box, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { ImageBackground, Image } from 'react-native';
-import { Div, Text } from 'react-native-magnus';
 
 import { imageStyles } from '@/styles/image.style';
 
 const EmptyState = ({ children, image, text, ...rest }) => {
   return (
-    <Div
+    <Box
       column
       flex={1}
       justifyContent="center"
       alignItems="center"
-      px="md"
+      px={3}
       {...rest}
     >
-      <Div h="50%" w="80%">
+      <Box h="1/2" w="4/5">
         <ImageBackground
           style={imageStyles.responsiveImage}
           source={image}
           resizeMode="contain"
         />
-      </Div>
-      <Text textAlign="center" fontSize="lg" fontWeight="bold" mt="lg">
+      </Box>
+      <Text textAlign="center" fontSize="lg" fontWeight="bold" mt={4}>
         {text}
       </Text>
       {children && (
-        <Div justifyContent="center" mt="xl">
+        <Box justifyContent="center" mt={4}>
           {children}
-        </Div>
+        </Box>
       )}
-    </Div>
+    </Box>
   );
 };
 

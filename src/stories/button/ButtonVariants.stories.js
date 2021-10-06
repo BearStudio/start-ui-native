@@ -11,7 +11,7 @@ const storyTitle = 'Button variants';
 const onPress = () => console.log('Pressed');
 
 buttonStories.add(storyTitle, () => (
-  <StoryLayout title={storyTitle}>
+  <StoryLayout title={storyTitle} alignItems="flex-start">
     <Button variant="solid" onPress={onPress} colorScheme="primary">
       Solid
     </Button>

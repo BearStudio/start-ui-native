@@ -10,7 +10,7 @@ const badgeStories = storiesOf('Badge', module);
 const storyTitle = 'Badge variants';
 
 badgeStories.add(storyTitle, () => (
-  <StoryLayout title={storyTitle}>
+  <StoryLayout title={storyTitle} alignItems="flex-start">
     <HStack space="2">
       <Badge variant="solid" colorScheme="primary">
         Solid
