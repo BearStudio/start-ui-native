@@ -74,7 +74,7 @@ const Account = () => {
             name="email"
             defaultValue={account?.email}
             label="Email address"
-            placeholder="test@email.com"
+            placeholder="email@example.com"
             textContentType="emailAddress"
             autoCapitalize="none"
             autoCompleteType="email"
