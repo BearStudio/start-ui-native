@@ -10,7 +10,7 @@ export const logAxiosErrorAndGet = (error: AxiosError) => {
   }
 
   console.error(
-    `An error occurred while calling ${error.config.baseURL}${error.config.url} in ${error.config.method}`
+    `An error occurred while calling ${error.config?.baseURL}${error.config?.url} in ${error.config?.method}`
   );
 
   if (error.response) {
