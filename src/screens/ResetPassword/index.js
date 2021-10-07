@@ -19,8 +19,8 @@ const ResetPassword = () => {
   const { showSuccess, showError } = useToast();
 
   const {
-    mutate: resetPasswordInit,
-    isLoading: resetPasswordLoading,
+    resetPasswordInit,
+    isLoading: isLoadingResetPasswordInit,
   } = useResetPasswordInit({
     onSuccess: () => {
       navigation.navigate('Login');
@@ -75,10 +75,10 @@ const ResetPassword = () => {
           colorScheme="primary"
           mt="xl"
           block
-          disabled={resetPasswordLoading}
+          disabled={isLoadingResetPasswordInit}
           onPress={resetPasswordForm.submit}
         >
-          {resetPasswordLoading ? (
+          {isLoadingResetPasswordInit ? (
             <ActivityIndicator size="small" color={whiteColor} />
           ) : (
             'Réinitialiser'

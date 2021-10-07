@@ -22,16 +22,13 @@ const Register = () => {
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
 
-  const { mutate: createAccount, isLoading } = useCreateAccount({
+  const { createAccount, isLoading } = useCreateAccount({
     onSuccess: () => {
       navigation.navigate('Login');
       showSuccess('Votre compte a bien été créé, vous pouvez vous connecter');
     },
     onError: (error) => {
-      if (
-        error?.response?.data?.errorKey &&
-        error?.response?.data?.errorKey === 'emailexists'
-      ) {
+      if (error?.response?.data?.errorKey === 'emailexists') {
         showError('Un compte existe déjà pour cette adresse mail');
       } else {
         showError(

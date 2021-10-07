@@ -31,20 +31,21 @@ export const useCreateAccount = (
     Pick<Account, 'login' | 'email' | 'langKey'> & { password: string }
   > = {}
 ) => {
-  return useMutation(
+  const mutation = useMutation(
     ({ login, email, password, langKey = 'en' }): Promise<Account> =>
       axios.post('/register', { login, email, password, langKey }),
     {
       ...config,
     }
   );
+  return { ...mutation, createAccount: mutation.mutate };
 };
 
 export const useUpdateAccount = (
   config: UseMutationOptions<Account, AxiosError<any>, Account> = {}
 ) => {
   const queryClient = useQueryClient();
-  return useMutation(
+  const mutation = useMutation(
     (account): Promise<Account> => axios.post('/account', account),
     {
       ...config,
@@ -54,12 +55,13 @@ export const useUpdateAccount = (
       },
     }
   );
+  return { ...mutation, updateAccount: mutation.mutate };
 };
 
 export const useResetPasswordInit = (
   config: UseMutationOptions<void, AxiosError<any>, string> = {}
 ) => {
-  return useMutation(
+  const mutation = useMutation(
     (email): Promise<void> =>
       axios.post('/account/reset-password/init', email, {
         headers: { 'Content-Type': 'text/plain' },
@@ -68,6 +70,7 @@ export const useResetPasswordInit = (
       ...config,
     }
   );
+  return { ...mutation, resetPasswordInit: mutation.mutate };
 };
 
 export const useResetPasswordFinish = (
@@ -77,13 +80,14 @@ export const useResetPasswordFinish = (
     { key: string; newPassword: string }
   > = {}
 ) => {
-  return useMutation(
+  const mutation = useMutation(
     (payload): Promise<void> =>
       axios.post('/account/reset-password/finish', payload),
     {
       ...config,
     }
   );
+  return { ...mutation, resetPasswordFinish: mutation.mutate };
 };
 
 export const useUpdatePassword = (
@@ -93,10 +97,11 @@ export const useUpdatePassword = (
     { currentPassword: string; newPassword: string }
   > = {}
 ) => {
-  return useMutation(
+  const mutation = useMutation(
     (payload): Promise<void> => axios.post('/account/change-password', payload),
     {
       ...config,
     }
   );
+  return { ...mutation, updatePassword: mutation.mutate };
 };

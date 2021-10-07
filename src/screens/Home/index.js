@@ -9,13 +9,9 @@ import { primaryColor } from '@/theme';
 
 const Home = () => {
   const navigation = useNavigation();
-  const {
-    account,
-    isLoading: isRetrievingUserAccount,
-    isError: hasErrorRetrievingUserAccount,
-  } = useAccount();
+  const { account, isLoading, isError } = useAccount();
 
-  if (isRetrievingUserAccount) {
+  if (isLoading) {
     return (
       <Div h="100%" justifyContent="center" alignItems="center">
         <Text fontSize="6xl" color="text" mt="lg">
@@ -26,7 +22,7 @@ const Home = () => {
     );
   }
 
-  if (hasErrorRetrievingUserAccount || !account) {
+  if (isError || !account) {
     return <Text>Erreur</Text>;
   }
 
