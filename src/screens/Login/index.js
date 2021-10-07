@@ -10,44 +10,17 @@ import { useLogin } from '@/auth/auth.service';
 import Button from '@/components/Button';
 import { FieldInput } from '@/components/Fields/FieldInput';
 import { focus } from '@/services/utils/formUtil';
-// import { useToast } from '@/services/utils/toastService';
 import { whiteColor } from '@/theme';
 
 const Login = () => {
   const loginForm = useForm();
   const navigation = useNavigation();
-  // const { showError } = useToast();
 
   const passwordRef = useRef();
 
-  const { mutate: login, isLoading } = useLogin({
-    onSuccess: () => {
-      // TODO
-    },
-    onError: () => {
-      // TODO
-    },
-  });
-
-  // const handleLoginError = useCallback(() => {
-  //   if (!loginError) {
-  //     return;
-  //   }
-  //   if (loginError?.response?.status && loginError?.response?.status === 401) {
-  //     showError('Identifiants incorrects, veuillez réessayer');
-  //   } else {
-  //     showError(
-  //       'Une erreur est survenue lors de la connexion, veuillez réessayer'
-  //     );
-  //   }
-  // }, [loginError, showError]);
-
-  // useEffect(() => {
-  //   handleLoginError();
-  // }, [handleLoginError]);
+  const { login, isLoading } = useLogin();
 
   const submitForm = (values) => {
-    console.log(values);
     login(values);
   };
 
