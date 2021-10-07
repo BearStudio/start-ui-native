@@ -1,13 +1,18 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import { AUTH_TOKEN_KEY } from '@/auth/auth.constants';
 import { CONFIG } from '@/environment/config';
 
-export const logAxiosErrorAndGet = (error) => {
+export const logAxiosErrorAndGet = (error: AxiosError) => {
+  if (error.response.status === 401) {
+    return;
+  }
+
   console.error(
     `An error occurred while calling ${error.config.baseURL}${error.config.url} in ${error.config.method}`
   );
+
   if (error.response) {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx
