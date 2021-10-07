@@ -6,10 +6,10 @@ import { useNavigation } from '@react-navigation/native';
 import { ActivityIndicator } from 'react-native';
 import { Text, Div } from 'react-native-magnus';
 
+import { useCreateAccount } from '@/account/account.service';
 import { BackButton } from '@/components/BackButton';
 import Button from '@/components/Button';
 import { FieldInput } from '@/components/Fields/FieldInput';
-import { useRegister } from '@/services/userService';
 import { focus } from '@/services/utils/formUtil';
 import { useToast } from '@/services/utils/toastService';
 import { whiteColor } from '@/theme';
@@ -22,16 +22,13 @@ const Register = () => {
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
 
-  const { mutate: registerUser, isLoading } = useRegister({
+  const { createAccount, isLoading } = useCreateAccount({
     onSuccess: () => {
       navigation.navigate('Login');
       showSuccess('Votre compte a bien été créé, vous pouvez vous connecter');
     },
     onError: (error) => {
-      if (
-        error?.response?.data?.errorKey &&
-        error?.response?.data?.errorKey === 'emailexists'
-      ) {
+      if (error?.response?.data?.errorKey === 'emailexists') {
         showError('Un compte existe déjà pour cette adresse mail');
       } else {
         showError(
@@ -41,8 +38,11 @@ const Register = () => {
     },
   });
 
-  const submitForm = async (values) => {
-    await registerUser(values);
+  const submitForm = (values) => {
+    createAccount({
+      ...values,
+      login: values.email,
+    });
   };
 
   return (

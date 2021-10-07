@@ -6,10 +6,10 @@ import { useNavigation } from '@react-navigation/native';
 import { ActivityIndicator } from 'react-native';
 import { Text, Div } from 'react-native-magnus';
 
+import { useResetPasswordInit } from '@/account/account.service';
 import { BackButton } from '@/components/BackButton';
 import Button from '@/components/Button';
 import { FieldInput } from '@/components/Fields/FieldInput';
-import { useResetPasswordInit } from '@/services/userService';
 import { useToast } from '@/services/utils/toastService';
 import { whiteColor } from '@/theme';
 
@@ -19,8 +19,8 @@ const ResetPassword = () => {
   const { showSuccess, showError } = useToast();
 
   const {
-    mutate: resetPasswordInit,
-    isLoading: resetPasswordLoading,
+    resetPasswordInit,
+    isLoading: isLoadingResetPasswordInit,
   } = useResetPasswordInit({
     onSuccess: () => {
       navigation.navigate('Login');
@@ -36,7 +36,7 @@ const ResetPassword = () => {
   });
 
   const submitForm = async (values) => {
-    resetPasswordInit(values);
+    resetPasswordInit(values.email);
   };
 
   return (
@@ -75,10 +75,10 @@ const ResetPassword = () => {
           colorScheme="primary"
           mt="xl"
           block
-          disabled={resetPasswordLoading}
+          disabled={isLoadingResetPasswordInit}
           onPress={resetPasswordForm.submit}
         >
-          {resetPasswordLoading ? (
+          {isLoadingResetPasswordInit ? (
             <ActivityIndicator size="small" color={whiteColor} />
           ) : (
             'Réinitialiser'

@@ -4,18 +4,14 @@ import { useNavigation } from '@react-navigation/native';
 import { ActivityIndicator, TouchableOpacity } from 'react-native';
 import { Text, Div, Avatar } from 'react-native-magnus';
 
-import { useAuthentication } from '@/contexts/AuthContext';
+import { useAccount } from '@/account/account.service';
 import { primaryColor } from '@/theme';
 
 const Home = () => {
   const navigation = useNavigation();
-  const {
-    account,
-    isRetrievingUserAccount,
-    hasErrorRetrievingUserAccount,
-  } = useAuthentication();
+  const { account, isLoading, isError } = useAccount();
 
-  if (isRetrievingUserAccount) {
+  if (isLoading) {
     return (
       <Div h="100%" justifyContent="center" alignItems="center">
         <Text fontSize="6xl" color="text" mt="lg">
@@ -26,7 +22,7 @@ const Home = () => {
     );
   }
 
-  if (hasErrorRetrievingUserAccount || !account) {
+  if (isError || !account) {
     return <Text>Erreur</Text>;
   }
 

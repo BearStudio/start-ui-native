@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useAppState } from '@react-native-community/hooks';
 import { useFocusEffect } from '@react-navigation/native';
 
-import { useAuthentication } from '@/contexts/AuthContext';
+import { useAccount } from '@/account/account.service';
 
 export const navigationRef = React.createRef();
 
@@ -29,7 +29,7 @@ export const useRefetchOnFocus = (refetch = () => {}, canRefetch = true) => {
 };
 
 export const useScreenFocus = () => {
-  const { checkAuthentication } = useAuthentication();
+  const { refetch: refetchAccount } = useAccount();
   const currentAppState = useAppState();
   const previousAppStateRef = useRef(currentAppState);
   useEffect(() => {
@@ -37,8 +37,8 @@ export const useScreenFocus = () => {
       previousAppStateRef.current !== 'active' &&
       currentAppState === 'active'
     ) {
-      checkAuthentication();
+      refetchAccount();
     }
     previousAppStateRef.current = currentAppState;
-  }, [checkAuthentication, currentAppState]);
+  }, [refetchAccount, currentAppState]);
 };

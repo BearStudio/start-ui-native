@@ -6,11 +6,11 @@ import { ActivityIndicator } from 'react-native';
 import HideWithKeyboard from 'react-native-hide-with-keyboard';
 import { Text, Div } from 'react-native-magnus';
 
+import { useAccount, useUpdateAccount } from '@/account/account.service';
+import { useAuthContext } from '@/auth/AuthContext';
 import { BackButton } from '@/components/BackButton';
 import Button from '@/components/Button';
 import { FieldInput } from '@/components/Fields/FieldInput';
-import { useAuthentication } from '@/contexts/AuthContext';
-import { useUpdateAccount } from '@/services/userService';
 import { focus } from '@/services/utils/formUtil';
 import { useToast } from '@/services/utils/toastService';
 import { primaryColor, whiteColor } from '@/theme';
@@ -18,30 +18,25 @@ import { primaryColor, whiteColor } from '@/theme';
 const Account = () => {
   const accountForm = useForm();
   const { showError, showSuccess } = useToast();
-  const {
-    logout,
-    fetchUserAccount,
-    account,
-    isRetrievingUserAccount,
-  } = useAuthentication();
+  const { logout } = useAuthContext();
+
+  const { account, isFetching: isFetchingAccount } = useAccount();
 
   const firstNameRef = useRef();
   const lastNameRef = useRef();
 
-  const handleLogout = () => {
-    logout();
-  };
-
-  const { mutate: updateAccount, isLoading: updateLoading } = useUpdateAccount({
-    onError: (error) => {
-      console.log({ error });
-      showError('Erreur lors de la mise à jour du profil, veuillez réessayer');
-    },
-    onSuccess: () => {
-      showSuccess('Le profil a bien été mis à jour');
-      fetchUserAccount();
-    },
-  });
+  const { updateAccount, isLoading: isLoadingUpdateAccount } = useUpdateAccount(
+    {
+      onError: () => {
+        showError(
+          'Erreur lors de la mise à jour du profil, veuillez réessayer'
+        );
+      },
+      onSuccess: () => {
+        showSuccess('Le profil a bien été mis à jour');
+      },
+    }
+  );
 
   const submitForm = (values) => {
     updateAccount({
@@ -50,7 +45,7 @@ const Account = () => {
     });
   };
 
-  if (isRetrievingUserAccount) {
+  if (isFetchingAccount) {
     return (
       <Div h="100%" justifyContent="center" alignItems="center">
         <Text fontSize="6xl" color="text" mt="lg">
@@ -116,10 +111,10 @@ const Account = () => {
             colorScheme="primary"
             mt="xl"
             block
-            disabled={updateLoading}
+            disabled={isLoadingUpdateAccount}
             onPress={accountForm.submit}
           >
-            {updateLoading ? (
+            {isLoadingUpdateAccount ? (
               <ActivityIndicator size="small" color={whiteColor} />
             ) : (
               'Sauvegarder'
@@ -135,7 +130,7 @@ const Account = () => {
             variant="outline"
             color="red800"
             borderColor="red800"
-            onPress={handleLogout}
+            onPress={logout}
           >
             Se déconnecter
           </Button>

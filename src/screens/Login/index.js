@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 
 import { Formiz, useForm } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
@@ -6,43 +6,22 @@ import { useNavigation } from '@react-navigation/native';
 import { ActivityIndicator } from 'react-native';
 import { Div, Text } from 'react-native-magnus';
 
+import { useLogin } from '@/auth/auth.service';
 import Button from '@/components/Button';
 import { FieldInput } from '@/components/Fields/FieldInput';
-import { useAuthentication } from '@/contexts/AuthContext';
 import { focus } from '@/services/utils/formUtil';
-import { useToast } from '@/services/utils/toastService';
 import { whiteColor } from '@/theme';
-
-import { CONFIG } from '../../../environments/local/config';
 
 const Login = () => {
   const loginForm = useForm();
   const navigation = useNavigation();
-  const { showError } = useToast();
 
   const passwordRef = useRef();
 
-  const { login, loginError, isLogining } = useAuthentication();
+  const { login, isLoading } = useLogin();
 
-  const handleLoginError = useCallback(() => {
-    if (!loginError) {
-      return;
-    }
-    if (loginError?.response?.status && loginError?.response?.status === 401) {
-      showError('Identifiants incorrects, veuillez réessayer');
-    } else {
-      showError(
-        'Une erreur est survenue lors de la connexion, veuillez réessayer'
-      );
-    }
-  }, [loginError, showError]);
-
-  useEffect(() => {
-    handleLoginError();
-  }, [handleLoginError]);
-
-  const submitForm = async (values) => {
-    await login(values);
+  const submitForm = (values) => {
+    login(values);
   };
 
   const handleOpenRegister = () => {
@@ -71,7 +50,7 @@ const Login = () => {
 
       <Formiz onValidSubmit={submitForm} connect={loginForm}>
         <FieldInput
-          name="email"
+          name="username"
           label="Adresse mail"
           placeholder="Votre adresse mail"
           textContentType="emailAddress"
@@ -116,10 +95,10 @@ const Login = () => {
           colorScheme="primary"
           mt="xl"
           block
-          disabled={isLogining}
+          disabled={isLoading}
           onPress={loginForm.submit}
         >
-          {isLogining ? (
+          {isLoading ? (
             <ActivityIndicator size="small" color={whiteColor} />
           ) : (
             'Se connecter'
@@ -132,7 +111,7 @@ const Login = () => {
         variant="outline"
         mt="lg"
         block
-        disabled={isLogining}
+        disabled={isLoading}
         onPress={handleOpenRegister}
       >
         Créer un compte

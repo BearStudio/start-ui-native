@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'react-native';
 import { Div, Text } from 'react-native-magnus';
 
-import { useAuthentication } from '@/contexts/AuthContext';
+import { useAuthContext } from '@/auth/AuthContext';
 import Account from '@/screens/Account';
 import AboutScreen from '@/screens/Dev/About';
 import NetworkHelperScreen from '@/screens/Dev/NetworkHelper';
@@ -29,25 +29,14 @@ if (__DEV__) {
 }
 
 const Routing = () => {
-  const {
-    isAuthenticated,
-    checkAuthentication,
-    isLoading,
-  } = useAuthentication();
+  const { isAuthenticated, isAuthenticating } = useAuthContext();
   useScreenFocus();
 
-  useEffect(() => {
-    checkAuthentication();
-  }, [checkAuthentication]);
-
   return (
-    <NavigationContainer
-      ref={navigationRef}
-      onStateChange={checkAuthentication}
-    >
+    <NavigationContainer ref={navigationRef}>
       <StatusBar barStyle="dark-content" />
 
-      {isLoading && (
+      {isAuthenticating && (
         <Div h="100%" justifyContent="center" alignItems="center">
           <Text fontSize="6xl" color="text">
             📦
@@ -55,7 +44,7 @@ const Routing = () => {
         </Div>
       )}
 
-      {!isLoading && !isAuthenticated && (
+      {!isAuthenticating && !isAuthenticated && (
         <Stack.Navigator
           initialRouteName="Login"
           screenOptions={{
@@ -76,7 +65,7 @@ const Routing = () => {
         </Stack.Navigator>
       )}
 
-      {!isLoading && isAuthenticated && (
+      {!isAuthenticating && isAuthenticated && (
         <Stack.Navigator
           initialRouteName="Home"
           screenOptions={{
