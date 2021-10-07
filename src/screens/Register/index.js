@@ -29,14 +29,16 @@ const Register = () => {
   const { createAccount, isLoading } = useCreateAccount({
     onSuccess: () => {
       navigation.navigate('Login');
-      showSuccess('Votre compte a bien été créé, vous pouvez vous connecter');
+      showSuccess(
+        'Your account has been created successfully. You can now log in'
+      );
     },
     onError: (error) => {
       if (error?.response?.data?.errorKey === 'emailexists') {
-        showError('Un compte existe déjà pour cette adresse mail');
+        showError('This email is already used by another account');
       } else {
         showError(
-          'Une erreur est survenue lors de la création de votre compte, veuillez réessayer'
+          'An error occurred while trying to create your account, please retry'
         );
       }
     },

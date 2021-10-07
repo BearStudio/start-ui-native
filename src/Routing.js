@@ -4,8 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'react-native';
 
-import SplashScreen from '@/components/Layout/SplashScreen';
 import { useAuthContext } from '@/auth/AuthContext';
+import SplashScreen from '@/components/Layout/SplashScreen';
 import Account from '@/screens/Account';
 import AboutScreen from '@/screens/Dev/About';
 import NetworkHelperScreen from '@/screens/Dev/NetworkHelper';

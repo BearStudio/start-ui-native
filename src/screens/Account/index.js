@@ -18,7 +18,6 @@ import { useAccount, useUpdateAccount } from '@/account/account.service';
 import { useAuthContext } from '@/auth/AuthContext';
 import { FieldInput } from '@/components/Fields/FieldInput';
 import SplashScreen from '@/components/Layout/SplashScreen';
-import { useAuthentication } from '@/contexts/AuthContext';
 import { focus } from '@/services/utils/formUtil';
 import { useToast } from '@/services/utils/toastService';
 
