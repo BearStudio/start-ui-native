@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import {
   useMutation,
   UseMutationOptions,
@@ -27,7 +27,7 @@ export const useAccount = (config: UseQueryOptions<Account> = {}) => {
 export const useCreateAccount = (
   config: UseMutationOptions<
     Account,
-    unknown,
+    AxiosError<any>,
     Pick<Account, 'login' | 'email' | 'langKey'> & { password: string }
   > = {}
 ) => {
@@ -41,7 +41,7 @@ export const useCreateAccount = (
 };
 
 export const useUpdateAccount = (
-  config: UseMutationOptions<Account, unknown, Account> = {}
+  config: UseMutationOptions<Account, AxiosError<any>, Account> = {}
 ) => {
   const queryClient = useQueryClient();
   return useMutation(
@@ -57,7 +57,7 @@ export const useUpdateAccount = (
 };
 
 export const useResetPasswordInit = (
-  config: UseMutationOptions<void, unknown, string> = {}
+  config: UseMutationOptions<void, AxiosError<any>, string> = {}
 ) => {
   return useMutation(
     (email): Promise<void> =>
@@ -73,7 +73,7 @@ export const useResetPasswordInit = (
 export const useResetPasswordFinish = (
   config: UseMutationOptions<
     void,
-    unknown,
+    AxiosError<any>,
     { key: string; newPassword: string }
   > = {}
 ) => {
@@ -89,7 +89,7 @@ export const useResetPasswordFinish = (
 export const useUpdatePassword = (
   config: UseMutationOptions<
     void,
-    unknown,
+    AxiosError<any>,
     { currentPassword: string; newPassword: string }
   > = {}
 ) => {
