@@ -18,6 +18,10 @@ export const useLogin = (
       axios.post('/authenticate', { username, password }),
     {
       ...config,
+      onSuccess: (data, ...rest) => {
+        updateToken(data.id_token);
+        config?.onSuccess?.(data, ...rest);
+      },
       onError: (error, ...rest) => {
         if (error.response.status === 401) {
           showError('Wrong email or password. Please try again.');
@@ -25,10 +29,6 @@ export const useLogin = (
           showError('Failed to log in. Please try again');
         }
         config?.onError?.(error, ...rest);
-      },
-      onSuccess: (data, ...rest) => {
-        updateToken(data.id_token);
-        config?.onSuccess?.(data, ...rest);
       },
     }
   );
