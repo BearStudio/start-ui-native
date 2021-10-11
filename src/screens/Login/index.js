@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 
 import { Formiz, useForm } from '@formiz/core';
+import { isEmail } from '@formiz/validations';
 import { useNavigation } from '@react-navigation/native';
 import { Box, Heading, Stack, Button, InfoOutlineIcon } from 'native-base';
 
@@ -40,9 +41,10 @@ const Login = () => {
             <Heading>Log In</Heading>
             <FieldInput
               name="username"
-              label="Username"
+              label="Email"
               autoCapitalize="none"
-              required="Username is required"
+              required="Email is required"
+              validations={[{ rule: isEmail(), message: 'Email is not valid' }]}
               onSubmitEditing={focus(passwordRef)}
               returnKeyType="next"
             />
