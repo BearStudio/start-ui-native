@@ -43,6 +43,7 @@ const Login = () => {
               name="username"
               label="Email"
               autoCapitalize="none"
+              keyboardType="email-address"
               required="Email is required"
               validations={[{ rule: isEmail(), message: 'Email is not valid' }]}
               onSubmitEditing={focus(passwordRef)}

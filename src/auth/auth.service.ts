@@ -23,7 +23,7 @@ export const useLogin = (
         config?.onSuccess?.(data, ...rest);
       },
       onError: (error, ...rest) => {
-        if (error.response.status === 401) {
+        if (error?.response?.status === 401) {
           showError('Wrong email or password. Please try again.');
         } else {
           showError('Failed to log in. Please try again');

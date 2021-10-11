@@ -5,7 +5,7 @@ import { AUTH_TOKEN_KEY } from '@/auth/auth.constants';
 import { CONFIG } from '@/environment/config';
 
 export const logAxiosErrorAndGet = (error: AxiosError) => {
-  if (error.response.status === 401) {
+  if (error?.response?.status === 401) {
     return;
   }
 
