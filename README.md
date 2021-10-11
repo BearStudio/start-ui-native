@@ -18,7 +18,7 @@ Then just go to the created folder `cd myApp` and follow the [Installation Guide
 
 - ⚛️ [React Native](https://reactnative.dev/)
 - ⚛️ [React Navigation](https://reactnavigation.org/)
-- 🔺 [Native Base 3](https://nativebase.io/)
+- ⬢ [Native Base 3](https://nativebase.io/)
 - ⚛️ [React Query](https://react-query.tanstack.com/)
 - 🐜 [Formiz](https://formiz-react.com/)
 - ↔ [Axios](https://github.com/axios/axios)

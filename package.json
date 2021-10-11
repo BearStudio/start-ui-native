@@ -2,7 +2,7 @@
   "name": "start-ui-native",
   "version": "0.0.1",
   "private": true,
-  "description": "Opinionated UI starter with ⚛️ React-Native, ⚡️ Native Base 3, ⚛️ React Query & 🐜 Formiz — From the 🐻 BearStudio Team",
+  "description": "Opinionated UI starter with ⚛️ React-Native, ⬢ Native Base 3, ⚛️ React Query & 🐜 Formiz — From the 🐻 BearStudio Team",
   "scripts": {
     "prepare": "husky install",
     "set:env:local": "./scripts/set-env.sh local",
