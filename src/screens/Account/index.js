@@ -18,8 +18,8 @@ import { useAccount, useUpdateAccount } from '@/account/account.service';
 import { useAuthContext } from '@/auth/AuthContext';
 import { FieldInput } from '@/components/Fields/FieldInput';
 import SplashScreen from '@/components/Layout/SplashScreen';
+import { useToast } from '@/components/Toast';
 import { focus } from '@/services/utils/formUtil';
-import { useToast } from '@/services/utils/toastService';
 
 const Account = () => {
   const accountForm = useForm();

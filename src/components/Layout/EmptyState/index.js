@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Box, Text } from 'native-base';
+import { Box, Factory, Text } from 'native-base';
 import PropTypes from 'prop-types';
-import { ImageBackground, Image } from 'react-native';
+import { ImageBackground as ImageBackgroundNative, Image } from 'react-native';
 
-import { imageStyles } from '@/styles/image.style';
+const ImageBackground = Factory(ImageBackgroundNative);
 
 const EmptyState = ({ children, image, text, ...rest }) => {
   return (
@@ -18,7 +18,8 @@ const EmptyState = ({ children, image, text, ...rest }) => {
     >
       <Box h="1/2" w="4/5">
         <ImageBackground
-          style={imageStyles.responsiveImage}
+          flex="1"
+          alignSelf="stretch"
           source={image}
           resizeMode="contain"
         />

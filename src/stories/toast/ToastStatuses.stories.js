@@ -3,9 +3,9 @@ import React from 'react';
 import { storiesOf } from '@storybook/react-native';
 import { Button } from 'native-base';
 
+import { useToast } from '@/components/Toast';
 import StoryLayout from '@/screens/Dev/Storybook/_partials/StoryLayout';
 import StorySpacer from '@/screens/Dev/Storybook/_partials/StorySpacer';
-import { useToast } from '@/services/utils/toastService';
 
 const toastStory = storiesOf('Toast', module);
 const storyTitle = 'Toast statuses';

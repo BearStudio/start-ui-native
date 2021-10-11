@@ -15,8 +15,8 @@ import {
 
 import { useCreateAccount } from '@/account/account.service';
 import { FieldInput } from '@/components/Fields/FieldInput';
+import { useToast } from '@/components/Toast';
 import { focus } from '@/services/utils/formUtil';
-import { useToast } from '@/services/utils/toastService';
 
 const Register = () => {
   const registerForm = useForm();

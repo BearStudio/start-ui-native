@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios';
 import { useMutation, UseMutationOptions } from 'react-query';
 
 import { useAuthContext } from '@/auth/AuthContext';
-import { useToast } from '@/services/utils/toastService';
+import { useToast } from '@/components/Toast';
 
 export const useLogin = (
   config: UseMutationOptions<

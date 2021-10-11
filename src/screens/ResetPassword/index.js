@@ -15,7 +15,7 @@ import {
 
 import { useResetPasswordInit } from '@/account/account.service';
 import { FieldInput } from '@/components/Fields/FieldInput';
-import { useToast } from '@/services/utils/toastService';
+import { useToast } from '@/components/Toast';
 
 const ResetPassword = () => {
   const resetPasswordForm = useForm();

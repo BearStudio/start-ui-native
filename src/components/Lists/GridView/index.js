@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Box, useTheme } from 'native-base';
+import { Box, useToken } from 'native-base';
 import PropTypes from 'prop-types';
 import { FlatList } from 'react-native';
 
-import { displayStyles } from '@/styles/display.style';
+import { useOverflowStyles } from '@/hooks/useOverflowStyles';
 
 const GridView = ({
   items,
@@ -13,15 +13,20 @@ const GridView = ({
   keyExtractor,
   columnSpacing,
   rowSpacing,
+  overflowSpacing,
   ...rest
 }) => {
-  const theme = useTheme();
+  const overflowStyles = useOverflowStyles(overflowSpacing);
+  const [columnSpacingValue, rowSpacingValue] = useToken('sizes', [
+    columnSpacing,
+    rowSpacing,
+  ]);
 
   return (
     <FlatList
       listKey
       // this is required for shadows to be able to be larger than the item width
-      style={{ ...displayStyles.overflowVisibleTrick }}
+      style={overflowStyles}
       data={items}
       renderItem={({ item, index }) => (
         <Box
@@ -35,15 +40,13 @@ const GridView = ({
           {renderItem({ item, index })}
         </Box>
       )}
-      contentContainerStyle={{
-        ...displayStyles.overflowVisibleTrick,
+      contentContainerStyle={overflowStyles}
+      columnWrapperStyle={{
+        marginLeft: -1 * columnSpacingValue,
       }}
-      columnWrapperStyle={{ marginLeft: -1 * columnSpacing }}
       numColumns={numColumns}
       keyExtractor={keyExtractor}
-      ItemSeparatorComponent={() => (
-        <Box style={{ height: theme.sizes[rowSpacing] }} />
-      )}
+      ItemSeparatorComponent={() => <Box style={{ height: rowSpacingValue }} />}
       {...rest}
     />
   );
@@ -57,6 +60,7 @@ GridView.propTypes = {
   numColumns: PropTypes.number,
   columnSpacing: PropTypes.number,
   rowSpacing: PropTypes.number,
+  overflowSpacing: PropTypes.number,
   listKey: PropTypes.string,
 };
 
@@ -64,4 +68,5 @@ GridView.defaultProps = {
   numColumns: 2,
   columnSpacing: 0,
   rowSpacing: 0,
+  overflowSpacing: undefined,
 };
