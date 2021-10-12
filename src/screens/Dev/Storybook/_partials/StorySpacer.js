@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Div } from 'react-native-magnus';
+import { Box } from 'native-base';
 
 const StorySpacer = ({ ...rest }) => {
-  return <Div mb="md" {...rest} />;
+  return <Box mb={2} {...rest} />;
 };
 
 export default StorySpacer;

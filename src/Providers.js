@@ -1,29 +1,27 @@
 import React from 'react';
 
-import { SafeAreaView } from 'react-native';
-import { ThemeProvider } from 'react-native-magnus';
+import { Factory, NativeBaseProvider } from 'native-base';
+import { SafeAreaView as SafeAreaViewNative } from 'react-native';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import AuthProvider from '@/contexts/AuthContext';
-import { ToastProvider } from '@/contexts/ToastContext';
-import { displayStyles } from '@/styles/display.style';
-import THEMES from '@/theme';
+import { AuthProvider } from '@/auth/AuthContext';
+import { theme } from '@/theme';
 
 const queryClient = new QueryClient();
 
+const SafeAreaView = Factory(SafeAreaViewNative);
+
 const Providers = ({ children }) => {
   return (
-    <ThemeProvider theme={THEMES.default}>
-      <ToastProvider>
-        <QueryClientProvider client={queryClient}>
-          <AuthProvider>
-            <SafeAreaView style={displayStyles.safeArea}>
-              {children}
-            </SafeAreaView>
-          </AuthProvider>
-        </QueryClientProvider>
-      </ToastProvider>
-    </ThemeProvider>
+    <NativeBaseProvider theme={theme}>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <SafeAreaView bg="white" flex="1">
+            {children}
+          </SafeAreaView>
+        </AuthProvider>
+      </QueryClientProvider>
+    </NativeBaseProvider>
   );
 };
 

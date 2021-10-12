@@ -1,9 +1,17 @@
 import React from 'react';
 
-import { Div, Text } from 'react-native-magnus';
+import { useNavigation } from '@react-navigation/core';
+import {
+  ArrowBackIcon,
+  Divider,
+  Heading,
+  HStack,
+  IconButton,
+  Stack,
+  Text,
+} from 'native-base';
 import VersionNumber from 'react-native-version-number';
 
-import { BackButton } from '@/components/BackButton';
 import { CONFIG } from '@/environment/config';
 import ENVS from '@/services/constants/envs';
 
@@ -16,27 +24,42 @@ const ENVIRONMENTS_LABELS = {
 
 const isHermes = () => !!global.HermesInternal;
 
-const AboutScreen = () => {
-  return (
-    <Div p="xl" bg="body">
-      <BackButton />
-      <Div my="xl">
-        <Text fontSize="6xl" color="text">
-          📦 Start UI Native
-        </Text>
-      </Div>
+const Info = ({ label = '', children, ...rest }) => (
+  <HStack space="xs" px="2" {...rest}>
+    <Text flex="1" color="gray.600">
+      {label}
+    </Text>
+    <Text fontWeight="bold">{children}</Text>
+  </HStack>
+);
 
-      <Text fontSize="lg" fontWeight="bold">
-        Informations de l'application
-      </Text>
-      <Div mt="md">
-        <Text>Version de l'application: {VersionNumber.appVersion}</Text>
-        <Text>Numéro de Build: {VersionNumber.buildVersion}</Text>
-        <Text>Environnement: {ENVIRONMENTS_LABELS[CONFIG.ENV]}</Text>
-        <Text>Mode: {__DEV__ ? 'Dev' : 'Prod'}</Text>
-        {isHermes() && <Text>Using Hermes JS Engine</Text>}
-      </Div>
-    </Div>
+const AboutScreen = () => {
+  const navigation = useNavigation();
+  return (
+    <Stack space="4" bg="white" h="full" p="6">
+      <HStack alignItems="center" space="xs">
+        <IconButton
+          ml={-3}
+          onPress={() => navigation.goBack()}
+          icon={<ArrowBackIcon color="gray.600" size="6" />}
+        />
+        <Heading>About this app</Heading>
+      </HStack>
+      <Stack
+        space="2"
+        divider={<Divider w="full" />}
+        borderColor="gray.200"
+        borderTopWidth="1px"
+        borderBottomWidth="1px"
+        py="2"
+      >
+        <Info label="App version">{VersionNumber.appVersion}</Info>
+        <Info label="Build number">{VersionNumber.buildVersion}</Info>
+        <Info label="Environnement">{ENVIRONMENTS_LABELS[CONFIG.ENV]}</Info>
+        <Info label="Mode">{__DEV__ ? 'Dev' : 'Prod'}</Info>
+        <Info label="Using Hermes JS Engine?">{isHermes() ? 'Yes' : 'No'}</Info>
+      </Stack>
+    </Stack>
   );
 };
 

@@ -1,48 +1,24 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 
 import { Formiz, useForm } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
 import { useNavigation } from '@react-navigation/native';
-import { ActivityIndicator } from 'react-native';
-import { Div, Text } from 'react-native-magnus';
+import { Box, Heading, Stack, Button, InfoOutlineIcon } from 'native-base';
 
-import Button from '@/components/Button';
+import { useLogin } from '@/auth/auth.service';
 import { FieldInput } from '@/components/Fields/FieldInput';
-import { useAuthentication } from '@/contexts/AuthContext';
 import { focus } from '@/services/utils/formUtil';
-import { useToast } from '@/services/utils/toastService';
-import { whiteColor } from '@/theme';
-
-import { CONFIG } from '../../../environments/local/config';
 
 const Login = () => {
   const loginForm = useForm();
   const navigation = useNavigation();
-  const { showError } = useToast();
 
   const passwordRef = useRef();
 
-  const { login, loginError, isLogining } = useAuthentication();
+  const { login, isLoading } = useLogin();
 
-  const handleLoginError = useCallback(() => {
-    if (!loginError) {
-      return;
-    }
-    if (loginError?.response?.status && loginError?.response?.status === 401) {
-      showError('Identifiants incorrects, veuillez réessayer');
-    } else {
-      showError(
-        'Une erreur est survenue lors de la connexion, veuillez réessayer'
-      );
-    }
-  }, [loginError, showError]);
-
-  useEffect(() => {
-    handleLoginError();
-  }, [handleLoginError]);
-
-  const submitForm = async (values) => {
-    await login(values);
+  const submitForm = (values) => {
+    login(values);
   };
 
   const handleOpenRegister = () => {
@@ -58,96 +34,72 @@ const Login = () => {
   };
 
   return (
-    <Div bg="body" h="100%" p="xl">
-      <Div my="2xl">
-        <Text fontSize="6xl" color="text">
-          📦 Start UI Native
-        </Text>
-      </Div>
-
-      <Text fontWeight="bold" fontSize="2xl" color="text" mb={5}>
-        Connexion
-      </Text>
-
+    <Box bg="white" h="full" p="6">
       <Formiz onValidSubmit={submitForm} connect={loginForm}>
-        <FieldInput
-          name="email"
-          label="Adresse mail"
-          placeholder="Votre adresse mail"
-          textContentType="emailAddress"
-          autoCapitalize="none"
-          autoCompleteType="email"
-          keyboardType="email-address"
-          mt="md"
-          required="L'adresse mail est requise"
-          validations={[
-            {
-              rule: isEmail(),
-              message: "L'adresse mail n'est pas valide",
-            },
-          ]}
-          onSubmitEditing={focus(passwordRef)}
-          returnKeyType="next"
-        />
+        <Stack space="lg">
+          <Stack space="md">
+            <Heading>Log In</Heading>
+            <FieldInput
+              name="username"
+              label="Email"
+              autoCapitalize="none"
+              keyboardType="email-address"
+              required="Email is required"
+              validations={[{ rule: isEmail(), message: 'Email is not valid' }]}
+              onSubmitEditing={focus(passwordRef)}
+              returnKeyType="next"
+            />
 
-        <FieldInput
-          ref={passwordRef}
-          name="password"
-          label="Mot de passe"
-          placeholder="Votre mot de passe"
-          mt="md"
-          secureTextEntry
-          required="Le mot de passe est requis"
-          onSubmitEditing={loginForm.submit}
-        />
+            <Stack space="2xs">
+              <FieldInput
+                ref={passwordRef}
+                name="password"
+                label="Password"
+                secureTextEntry
+                required="Password is required"
+                onSubmitEditing={loginForm.submit}
+              />
 
-        <Button
-          colorScheme="primary"
-          variant="link"
-          p="lg"
-          mt="sm"
-          alignSelf="flex-end"
-          onPress={handleOpenResetPassword}
-        >
-          Mot de passe oublié
-        </Button>
+              <Button
+                variant="link"
+                colorScheme="gray"
+                onPress={handleOpenResetPassword}
+              >
+                Forgot Password?
+              </Button>
+            </Stack>
 
-        <Button
-          colorScheme="primary"
-          mt="xl"
-          block
-          disabled={isLogining}
-          onPress={loginForm.submit}
-        >
-          {isLogining ? (
-            <ActivityIndicator size="small" color={whiteColor} />
-          ) : (
-            'Se connecter'
-          )}
-        </Button>
+            <Button size="lg" isLoading={isLoading} onPress={loginForm.submit}>
+              Log In
+            </Button>
+          </Stack>
+
+          <Button.Group
+            size="lg"
+            variant="link"
+            colorScheme="gray"
+            justifyContent="center"
+          >
+            <Button onPress={handleOpenRegister} px={0}>
+              Need an Account?
+            </Button>
+            <Button colorScheme="primary" onPress={handleOpenRegister} px={0}>
+              Register Now!
+            </Button>
+          </Button.Group>
+          <Button
+            size="sm"
+            variant="link"
+            colorScheme="gray"
+            onPress={handleOpenAbout}
+            px={0}
+            leftIcon={<InfoOutlineIcon size="3" />}
+          >
+            About this app
+          </Button>
+        </Stack>
       </Formiz>
-
-      <Button
-        colorScheme="primary"
-        variant="outline"
-        mt="lg"
-        block
-        disabled={isLogining}
-        onPress={handleOpenRegister}
-      >
-        Créer un compte
-      </Button>
-
-      <Button
-        colorScheme="dark"
-        variant="link"
-        mt="lg"
-        block
-        onPress={handleOpenAbout}
-      >
-        À propos
-      </Button>
-    </Div>
+    </Box>
   );
 };
 
