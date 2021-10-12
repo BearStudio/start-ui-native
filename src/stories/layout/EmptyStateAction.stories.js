@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { storiesOf } from '@storybook/react-native';
+import { Button } from 'native-base';
 
-import Button from '@/components/Button';
 import EmptyState from '@/components/Layout/EmptyState';
 import StoryLayout from '@/screens/Dev/Storybook/_partials/StoryLayout';
 

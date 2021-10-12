@@ -5,12 +5,12 @@ import { AUTH_TOKEN_KEY } from '@/auth/auth.constants';
 import { CONFIG } from '@/environment/config';
 
 export const logAxiosErrorAndGet = (error: AxiosError) => {
-  if (error.response.status === 401) {
+  if (error?.response?.status === 401) {
     return;
   }
 
   console.error(
-    `An error occurred while calling ${error.config.baseURL}${error.config.url} in ${error.config.method}`
+    `An error occurred while calling ${error.config?.baseURL}${error.config?.url} in ${error.config?.method}`
   );
 
   if (error.response) {

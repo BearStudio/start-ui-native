@@ -3,9 +3,9 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'react-native';
-import { Div, Text } from 'react-native-magnus';
 
 import { useAuthContext } from '@/auth/AuthContext';
+import SplashScreen from '@/components/Layout/SplashScreen';
 import Account from '@/screens/Account';
 import AboutScreen from '@/screens/Dev/About';
 import NetworkHelperScreen from '@/screens/Dev/NetworkHelper';
@@ -36,13 +36,7 @@ const Routing = () => {
     <NavigationContainer ref={navigationRef}>
       <StatusBar barStyle="dark-content" />
 
-      {isAuthenticating && (
-        <Div h="100%" justifyContent="center" alignItems="center">
-          <Text fontSize="6xl" color="text">
-            📦
-          </Text>
-        </Div>
-      )}
+      {isAuthenticating && <SplashScreen />}
 
       {!isAuthenticating && !isAuthenticated && (
         <Stack.Navigator

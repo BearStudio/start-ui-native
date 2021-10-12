@@ -1,10 +1,10 @@
 import React from 'react';
 
+import { Box, useToken } from 'native-base';
 import PropTypes from 'prop-types';
 import { FlatList } from 'react-native';
-import { Div } from 'react-native-magnus';
 
-import { displayStyles } from '@/styles/display.style';
+import { useOverflowStyles } from '@/hooks/useOverflowStyles';
 
 const GridView = ({
   items,
@@ -13,16 +13,23 @@ const GridView = ({
   keyExtractor,
   columnSpacing,
   rowSpacing,
+  overflowSpacing,
   ...rest
 }) => {
+  const overflowStyles = useOverflowStyles(overflowSpacing);
+  const [columnSpacingValue, rowSpacingValue] = useToken('sizes', [
+    columnSpacing,
+    rowSpacing,
+  ]);
+
   return (
     <FlatList
       listKey
       // this is required for shadows to be able to be larger than the item width
-      style={{ ...displayStyles.overflowVisibleTrick }}
+      style={overflowStyles}
       data={items}
       renderItem={({ item, index }) => (
-        <Div
+        <Box
           flex={1 / numColumns}
           maxWidth={
             // this is a hotfix, because on Huawei P30, maxWidth: 50% totaly breaks the layout
@@ -31,15 +38,15 @@ const GridView = ({
           pl={columnSpacing}
         >
           {renderItem({ item, index })}
-        </Div>
+        </Box>
       )}
-      contentContainerStyle={{
-        ...displayStyles.overflowVisibleTrick,
+      contentContainerStyle={overflowStyles}
+      columnWrapperStyle={{
+        marginLeft: -1 * columnSpacingValue,
       }}
-      columnWrapperStyle={{ marginLeft: -1 * columnSpacing }}
       numColumns={numColumns}
       keyExtractor={keyExtractor}
-      ItemSeparatorComponent={() => <Div style={{ height: rowSpacing }} />}
+      ItemSeparatorComponent={() => <Box style={{ height: rowSpacingValue }} />}
       {...rest}
     />
   );
@@ -53,6 +60,7 @@ GridView.propTypes = {
   numColumns: PropTypes.number,
   columnSpacing: PropTypes.number,
   rowSpacing: PropTypes.number,
+  overflowSpacing: PropTypes.number,
   listKey: PropTypes.string,
 };
 
@@ -60,4 +68,5 @@ GridView.defaultProps = {
   numColumns: 2,
   columnSpacing: 0,
   rowSpacing: 0,
+  overflowSpacing: undefined,
 };

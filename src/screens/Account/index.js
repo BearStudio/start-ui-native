@@ -2,21 +2,28 @@ import React, { useRef } from 'react';
 
 import { Formiz, useForm } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
-import { ActivityIndicator } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
+import {
+  ArrowBackIcon,
+  Box,
+  Button,
+  Heading,
+  HStack,
+  IconButton,
+  Stack,
+} from 'native-base';
 import HideWithKeyboard from 'react-native-hide-with-keyboard';
-import { Text, Div } from 'react-native-magnus';
 
 import { useAccount, useUpdateAccount } from '@/account/account.service';
 import { useAuthContext } from '@/auth/AuthContext';
-import { BackButton } from '@/components/BackButton';
-import Button from '@/components/Button';
 import { FieldInput } from '@/components/Fields/FieldInput';
+import SplashScreen from '@/components/Layout/SplashScreen';
+import { useToast } from '@/components/Toast';
 import { focus } from '@/services/utils/formUtil';
-import { useToast } from '@/services/utils/toastService';
-import { primaryColor, whiteColor } from '@/theme';
 
 const Account = () => {
   const accountForm = useForm();
+  const navigation = useNavigation();
   const { showError, showSuccess } = useToast();
   const { logout } = useAuthContext();
 
@@ -29,11 +36,11 @@ const Account = () => {
     {
       onError: () => {
         showError(
-          'Erreur lors de la mise à jour du profil, veuillez réessayer'
+          'An error occurred while updating your profile, please retry'
         );
       },
       onSuccess: () => {
-        showSuccess('Le profil a bien été mis à jour');
+        showSuccess('Your profile has been updated');
       },
     }
   );
@@ -46,97 +53,81 @@ const Account = () => {
   };
 
   if (isFetchingAccount) {
-    return (
-      <Div h="100%" justifyContent="center" alignItems="center">
-        <Text fontSize="6xl" color="text" mt="lg">
-          📦
-        </Text>
-        <ActivityIndicator size="large" color={primaryColor} />
-      </Div>
-    );
+    return <SplashScreen />;
   }
 
   return (
-    <Div bg="body" h="100%" p="xl">
-      <BackButton />
-      <Text fontSize="6xl" color="text" mt="lg">
-        Mon compte
-      </Text>
+    <Box bg="white" h="full" p="6">
+      <Formiz onValidSubmit={submitForm} connect={accountForm}>
+        <Stack space="md">
+          <HStack alignItems="center" space="xs">
+            <IconButton
+              ml={-3}
+              onPress={() => navigation.goBack()}
+              icon={<ArrowBackIcon color="gray.600" size="6" />}
+            />
+            <Heading>My account</Heading>
+          </HStack>
 
-      <Div>
-        <Formiz onValidSubmit={submitForm} connect={accountForm}>
           <FieldInput
             name="email"
             defaultValue={account?.email}
-            label="Adresse mail"
-            placeholder="Votre adresse mail"
+            label="Email address"
+            placeholder="email@example.com"
             textContentType="emailAddress"
             autoCapitalize="none"
             autoCompleteType="email"
             keyboardType="email-address"
-            mt="md"
-            required="L'adresse mail est requise"
+            required="Email address is required"
             validations={[
               {
                 rule: isEmail(),
-                message: "L'adresse mail n'est pas valide",
+                message: 'Email is invalid',
               },
             ]}
             onSubmitEditing={focus(firstNameRef)}
             returnKeyType="next"
           />
+
           <FieldInput
             ref={firstNameRef}
             name="firstName"
             defaultValue={account?.firstName}
-            label="Prénom"
-            placeholder="Votre prénom"
+            label="First Name"
+            placeholder="John"
             autoCapitalize="none"
-            mt="md"
             onSubmitEditing={focus(lastNameRef)}
             returnKeyType="next"
           />
+
           <FieldInput
             ref={lastNameRef}
             name="lastName"
             defaultValue={account?.lastName}
-            label="Nom"
-            placeholder="Votre nom"
+            label="Last Name"
+            placeholder="Doe"
             autoCapitalize="none"
             onSubmitEditing={accountForm.submit}
-            mt="md"
           />
 
           <Button
-            colorScheme="primary"
-            mt="xl"
-            block
-            disabled={isLoadingUpdateAccount}
+            size="lg"
+            isLoading={isLoadingUpdateAccount}
             onPress={accountForm.submit}
           >
-            {isLoadingUpdateAccount ? (
-              <ActivityIndicator size="small" color={whiteColor} />
-            ) : (
-              'Sauvegarder'
-            )}
+            Update
           </Button>
-        </Formiz>
-      </Div>
+        </Stack>
+      </Formiz>
 
-      <Div flex={1} justifyContent="flex-end">
+      <Box flex={1} justifyContent="flex-end">
         <HideWithKeyboard>
-          <Button
-            block
-            variant="outline"
-            color="red800"
-            borderColor="red800"
-            onPress={logout}
-          >
-            Se déconnecter
+          <Button colorScheme="danger" variant="outline" onPress={logout}>
+            Logout
           </Button>
         </HideWithKeyboard>
-      </Div>
-    </Div>
+      </Box>
+    </Box>
   );
 };
 
