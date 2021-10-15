@@ -12,6 +12,8 @@ target 'StartUINativeApp' do
     :hermes_enabled => true
   )
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-async-storage/async-storage'
+
   target 'StartUINativeAppTests' do
     inherit! :complete
     # Pods for testing

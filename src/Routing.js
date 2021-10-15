@@ -22,7 +22,7 @@ import {
 
 const Stack = createStackNavigator();
 
-if (__DEV__) {
+if (__DEV__ && process.env.NODE_ENV !== 'test') {
   const DevMenu = require('react-native-dev-menu');
   DevMenu.addItem('Storybook', () => navigate('Storybook'));
   DevMenu.addItem('Network helper', () => navigate('NetworkHelper'));
