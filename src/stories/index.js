@@ -6,4 +6,5 @@ import './button/ButtonVariants.stories';
 import './gridview/GridViewStandard.stories';
 import './layout/EmptyStateAction.stories';
 import './layout/EmptyStateStandard.stories';
+import './phonenumberinput/PhoneNumberInput.stories';
 import './toast/ToastStatuses.stories';
