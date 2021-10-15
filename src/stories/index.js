@@ -4,6 +4,7 @@ import './button/ButtonColors.stories';
 import './button/ButtonSizes.stories';
 import './button/ButtonVariants.stories';
 import './gridview/GridViewStandard.stories';
+import './image/Image.stories';
 import './layout/EmptyStateAction.stories';
 import './layout/EmptyStateStandard.stories';
 import './toast/ToastStatuses.stories';
