@@ -197,6 +197,15 @@ yarn set:env:prod
 
 ---
 
+## Devtools
+
+We provide some devtools that can be accessed from the dev menu.
+You can open it by typing <key>d</key> on the `yarn dev` console.
+
+You will find the following tools:
+- Storybook
+- Network helper
+
 ## Updating the Application Name
 
 When you need to update the application name and to remove "Start UI Native" references, please use this library:

@@ -24,9 +24,7 @@
     "ios:install:arm": "cd ios/ && arch -x86_64 pod install",
     "test": "jest --roots ./src",
     "lint": "eslint . --fix",
-    "pretty": "prettier -w .",
-    "storybook": "start-storybook -p 7007",
-    "build-storybook": "build-storybook"
+    "pretty": "prettier -w ."
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json}": "prettier --write",
