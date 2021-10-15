@@ -3,8 +3,8 @@ import React from 'react';
 import { storiesOf } from '@storybook/react-native';
 import { Badge, HStack } from 'native-base';
 
-import StoryLayout from '@/screens/Dev/Storybook/_partials/StoryLayout';
-import StorySpacer from '@/screens/Dev/Storybook/_partials/StorySpacer';
+import StoryLayout from '@/devtools/storybook/_partials/StoryLayout';
+import StorySpacer from '@/devtools/storybook/_partials/StorySpacer';
 
 const badgeStories = storiesOf('Badge', module);
 const storyTitle = 'Badge variants';
