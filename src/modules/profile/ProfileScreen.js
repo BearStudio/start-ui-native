@@ -1,20 +1,15 @@
 import React from 'react';
 
-import {
-  Box,
-  Button,
-  Stack,
-  Text,
-  Heading,
-  Center,
-  Divider,
-} from 'native-base';
+import { useNavigation } from '@react-navigation/native';
+import { Box, Button, Stack, Text, Heading, Center } from 'native-base';
+import { TouchableOpacity } from 'react-native';
 
 import { EmptyState, bugIllustration } from '@/components/EmptyState';
 import { SplashScreen } from '@/layout/SplashScreen';
 import { useAccount } from '@/modules/account/account.service';
 
-export const HomeScreen = () => {
+export const ProfileScreen = () => {
+  const navigation = useNavigation();
   const { account, isLoading, isError, refetch: refetchAccount } = useAccount();
 
   if (isLoading) {
@@ -29,27 +24,22 @@ export const HomeScreen = () => {
     );
   }
 
+  const handleOpenAccount = () => navigation.navigate('Account');
+
   return (
     <Box>
       <Stack bg="white" p={5} shadow={9}>
         <Center>
-          <Heading>Home</Heading>
+          <Heading>Profile</Heading>
         </Center>
       </Stack>
       <Stack space="md" p={6}>
-        <Heading>Welcome to 🚀 Start UI [native]</Heading>
-        <Text fontSize="lg">
-          An optionated UI starter with React Native, Native Base, React Query &
-          Formiz
-        </Text>
-        <Text fontSize="lg">
-          - From the{' '}
-          <Text bold fontSize="lg">
-            BearStudio Team
-          </Text>
-        </Text>
-
-        <Divider />
+        <TouchableOpacity onPress={handleOpenAccount}>
+          <Stack bg="white" p={5} borderRadius={10} shadow={1}>
+            <Heading>{`${account.firstName} ${account.lastName}`}</Heading>
+            <Text>{account.email}</Text>
+          </Stack>
+        </TouchableOpacity>
       </Stack>
     </Box>
   );
