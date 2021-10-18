@@ -62,7 +62,7 @@ colorStories.add(storyTitle, () => (
     <Text>Warning</Text>
     <Colors colorScheme="warning" />
     <StorySpacer />
-    <Text>Coolgray</Text>
+    <Text>Gray</Text>
     <Colors colorScheme="coolGray" />
   </StoryLayout>
 ));
