@@ -3,7 +3,15 @@ import React, { useRef } from 'react';
 import { Formiz, useForm } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
 import { useNavigation } from '@react-navigation/native';
-import { Box, Heading, Stack, Button, InfoOutlineIcon } from 'native-base';
+import {
+  Box,
+  Heading,
+  Stack,
+  Button,
+  HStack,
+  IconButton,
+  ArrowBackIcon,
+} from 'native-base';
 
 import { FieldInput } from '@/components/Fields/FieldInput';
 import { useLogin } from '@/modules/auth/auth.service';
@@ -21,16 +29,8 @@ export const LoginScreen = () => {
     login(values);
   };
 
-  const handleOpenRegister = () => {
-    navigation.navigate('Register');
-  };
-
   const handleOpenResetPassword = () => {
     navigation.navigate('ResetPassword');
-  };
-
-  const handleOpenAbout = () => {
-    navigation.navigate('About');
   };
 
   return (
@@ -38,7 +38,14 @@ export const LoginScreen = () => {
       <Formiz onValidSubmit={submitForm} connect={loginForm}>
         <Stack space="lg">
           <Stack space="md">
-            <Heading>Log In</Heading>
+            <HStack alignItems="center" space="xs">
+              <IconButton
+                ml={-3}
+                onPress={() => navigation.goBack()}
+                icon={<ArrowBackIcon color="gray.600" size="6" />}
+              />
+              <Heading>Login</Heading>
+            </HStack>
             <FieldInput
               name="username"
               label="Email"
@@ -73,30 +80,6 @@ export const LoginScreen = () => {
               Log In
             </Button>
           </Stack>
-
-          <Button.Group
-            size="lg"
-            variant="link"
-            colorScheme="gray"
-            justifyContent="center"
-          >
-            <Button onPress={handleOpenRegister} px={0}>
-              Need an Account?
-            </Button>
-            <Button colorScheme="primary" onPress={handleOpenRegister} px={0}>
-              Register Now!
-            </Button>
-          </Button.Group>
-          <Button
-            size="sm"
-            variant="link"
-            colorScheme="gray"
-            onPress={handleOpenAbout}
-            px={0}
-            leftIcon={<InfoOutlineIcon size="3" />}
-          >
-            About this app
-          </Button>
         </Stack>
       </Formiz>
     </Box>

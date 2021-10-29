@@ -20,6 +20,8 @@ import {
   useScreenFocus,
 } from '@/utils/rootNavigation';
 
+import { OnboardingScreen } from './modules/auth/OnboardingScreen';
+
 const Stack = createStackNavigator();
 
 if (__DEV__ && process.env.NODE_ENV !== 'test') {
@@ -40,11 +42,12 @@ const Routing = () => {
 
       {!isAuthenticating && !isAuthenticated && (
         <Stack.Navigator
-          initialRouteName="Login"
+          initialRouteName="Onboarding"
           screenOptions={{
             headerShown: false,
           }}
         >
+          <Stack.Screen name="Onboarding" component={OnboardingScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} />
           <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
