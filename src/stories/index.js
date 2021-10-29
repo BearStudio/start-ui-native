@@ -6,4 +6,5 @@ import './button/ButtonVariants.stories';
 import './empty-state/EmptyStateAction.stories';
 import './empty-state/EmptyStateStandard.stories';
 import './grid-view/GridViewStandard.stories';
+import './styleguide/Colors.stories';
 import './toast/ToastStatuses.stories';

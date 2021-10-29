@@ -16,7 +16,7 @@ import HideWithKeyboard from 'react-native-hide-with-keyboard';
 
 import { FieldInput } from '@/components/Fields/FieldInput';
 import { useToast } from '@/components/Toast';
-import SplashScreen from '@/layout/SplashScreen';
+import { SplashScreen } from '@/layout/SplashScreen';
 import {
   useAccount,
   useUpdateAccount,
