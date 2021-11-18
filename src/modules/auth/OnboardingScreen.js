@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
-import { Text, Box, Button, InfoOutlineIcon } from 'native-base';
+import { Text, Image, Box, Button, InfoOutlineIcon, Flex } from 'native-base';
 
 export const OnboardingScreen = () => {
   const navigation = useNavigation();
@@ -18,29 +18,45 @@ export const OnboardingScreen = () => {
     navigation.navigate('About');
   };
 
-  return (
-    <Box bg="white" h="full" p="6">
-      <Text my={5} textAlign="center">
-        An optionated UI starter with React, Native Base, React Query & Formiz
-      </Text>
+  const logoImage = require('../../../assets/logo.png');
 
-      <Button size="lg" onPress={handleOpenRegister}>
-        Sign up with email
-      </Button>
-      <Button.Group
-        mt={10}
-        size="lg"
-        variant="link"
-        colorScheme="gray"
-        justifyContent="center"
-      >
-        <Button onPress={handleOpenLogin} px={0}>
-          Already an account?
+  return (
+    <Flex
+      direction="column"
+      bg="white"
+      p="6"
+      h="full"
+      justifyContent="space-between"
+    >
+      <Box />
+      <Box>
+        <Box p={5}>
+          <Image source={logoImage} resizeMode="contain" />
+        </Box>
+
+        <Text fontSize="md" my={5} textAlign="center">
+          An optionated UI starter with React, Native Base, React Query & Formiz
+        </Text>
+
+        <Button size="lg" onPress={handleOpenRegister}>
+          Sign up with email
         </Button>
-        <Button colorScheme="primary" onPress={handleOpenLogin} px={0}>
-          Log in
-        </Button>
-      </Button.Group>
+        <Button.Group
+          mt={10}
+          size="lg"
+          variant="link"
+          colorScheme="gray"
+          justifyContent="center"
+        >
+          <Button onPress={handleOpenLogin} px={0}>
+            Already an account?
+          </Button>
+          <Button colorScheme="primary" onPress={handleOpenLogin} px={0}>
+            Log in
+          </Button>
+        </Button.Group>
+      </Box>
+
       <Button
         size="sm"
         variant="link"
@@ -51,6 +67,6 @@ export const OnboardingScreen = () => {
       >
         About this app
       </Button>
-    </Box>
+    </Flex>
   );
 };
