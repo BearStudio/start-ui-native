@@ -4,6 +4,7 @@ import { Formiz, useForm } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
 import { useNavigation } from '@react-navigation/native';
 import {
+  Flex,
   Box,
   Heading,
   Stack,
@@ -45,38 +46,44 @@ export const ResetPasswordScreen = () => {
     <Box bg="white" h="full" p="6">
       <Formiz onValidSubmit={submitForm} connect={resetPasswordForm}>
         <Stack space="md">
-          <HStack alignItems="center" space="xs">
-            <IconButton
-              ml={-3}
-              onPress={() => navigation.goBack()}
-              icon={<ArrowBackIcon color="gray.600" size="6" />}
-            />
-            <Heading>Reset Password</Heading>
-          </HStack>
-          <FieldInput
-            name="email"
-            label="Email"
-            textContentType="emailAddress"
-            autoCapitalize="none"
-            autoCompleteType="email"
-            keyboardType="email-address"
-            helper="Enter the email address you used to register"
-            required="Email is required"
-            validations={[
-              {
-                rule: isEmail(),
-                message: 'Email is invalid',
-              },
-            ]}
-          />
+          <Flex direction="column" h="full" justifyContent="space-between">
+            <Stack>
+              <HStack alignItems="center" space="xs">
+                <IconButton
+                  ml={-3}
+                  onPress={() => navigation.goBack()}
+                  icon={<ArrowBackIcon color="gray.600" size="6" />}
+                />
+                <Heading>Reset Password</Heading>
+              </HStack>
+              <FieldInput
+                name="email"
+                label="Email"
+                textContentType="emailAddress"
+                autoCapitalize="none"
+                autoCompleteType="email"
+                keyboardType="email-address"
+                helper="Enter the email address you used to register"
+                required="Email is required"
+                validations={[
+                  {
+                    rule: isEmail(),
+                    message: 'Email is invalid',
+                  },
+                ]}
+              />
+            </Stack>
 
-          <Button
-            size="lg"
-            isLoading={isLoadingResetPasswordInit}
-            onPress={resetPasswordForm.submit}
-          >
-            Send Email
-          </Button>
+            <Stack>
+              <Button
+                size="lg"
+                isLoading={isLoadingResetPasswordInit}
+                onPress={resetPasswordForm.submit}
+              >
+                Send Email
+              </Button>
+            </Stack>
+          </Flex>
         </Stack>
       </Formiz>
     </Box>
