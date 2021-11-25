@@ -65,7 +65,7 @@ export const RegisterScreen = () => {
                   onPress={() => navigation.goBack()}
                   icon={<ArrowBackIcon color="gray.600" size="6" />}
                 />
-                <Heading>Create account</Heading>
+                <Heading textAlign="center">Create account</Heading>
               </HStack>
               <FieldInput
                 name="firstName"

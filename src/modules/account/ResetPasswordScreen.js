@@ -54,7 +54,7 @@ export const ResetPasswordScreen = () => {
                   onPress={() => navigation.goBack()}
                   icon={<ArrowBackIcon color="gray.600" size="6" />}
                 />
-                <Heading>Reset Password</Heading>
+                <Heading textAlign="center">Reset Password</Heading>
               </HStack>
               <FieldInput
                 name="email"

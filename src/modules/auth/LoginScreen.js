@@ -46,7 +46,7 @@ export const LoginScreen = () => {
                   onPress={() => navigation.goBack()}
                   icon={<ArrowBackIcon color="gray.600" size="6" />}
                 />
-                <Heading>Login</Heading>
+                <Heading textAlign="center">Login</Heading>
               </HStack>
               <FieldInput
                 name="username"

@@ -8,7 +8,12 @@ import {
   Heading,
   Center,
   Divider,
+  Icon,
+  HStack,
+  InfoOutlineIcon,
 } from 'native-base';
+import { TouchableOpacity } from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import { EmptyState, bugIllustration } from '@/components/EmptyState';
 import { SplashScreen } from '@/layout/SplashScreen';
@@ -31,25 +36,49 @@ export const HomeScreen = () => {
 
   return (
     <Box>
-      <Stack bg="white" p={5} shadow={9}>
+      <Stack bg="white" p={5} shadow={1}>
         <Center>
           <Heading>Home</Heading>
         </Center>
       </Stack>
-      <Stack space="md" p={6}>
-        <Heading>Welcome to 🚀 Start UI [native]</Heading>
-        <Text fontSize="lg">
-          An optionated UI starter with React Native, Native Base, React Query &
-          Formiz
-        </Text>
-        <Text fontSize="lg">
-          - From the{' '}
-          <Text bold fontSize="lg">
-            BearStudio Team
+      <Stack space="md">
+        <Stack p={6}>
+          <Heading>Welcome to 🚀 Start UI [native]</Heading>
+          <Text fontSize="lg" mt={5}>
+            An optionated UI starter with React Native, Native Base, React Query
+            & Formiz
           </Text>
-        </Text>
+          <Text fontSize="lg" mt={3}>
+            - From the{' '}
+            <Text bold fontSize="lg">
+              BearStudio Team
+            </Text>
+          </Text>
+        </Stack>
 
-        <Divider />
+        <Divider w="100%" />
+
+        <TouchableOpacity>
+          <HStack alignItems="center" px={6} py={3}>
+            <Icon as={AntDesign} name="github" color="coolGray.600" size="sm" />
+            <Text fontSize="lg" ml={3}>
+              Github Repository
+            </Text>
+          </HStack>
+        </TouchableOpacity>
+
+        <Divider w="100%" />
+
+        <TouchableOpacity>
+          <HStack alignItems="center" px={6} py={3}>
+            <InfoOutlineIcon color="coolGray.600" size="sm" />
+            <Text fontSize="lg" ml={3}>
+              Open Issue
+            </Text>
+          </HStack>
+        </TouchableOpacity>
+
+        <Divider w="100%" />
       </Stack>
     </Box>
   );
