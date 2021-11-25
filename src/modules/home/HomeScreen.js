@@ -12,7 +12,7 @@ import {
   HStack,
   InfoOutlineIcon,
 } from 'native-base';
-import { TouchableOpacity } from 'react-native';
+import { Linking, TouchableOpacity } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import { EmptyState, bugIllustration } from '@/components/EmptyState';
@@ -33,6 +33,16 @@ export const HomeScreen = () => {
       </EmptyState>
     );
   }
+
+  const handleOpenGithub = () => {
+    Linking.openURL('https://github.com/BearStudio/start-ui-native');
+  };
+
+  const handleOpenIssueGithub = () => {
+    Linking.openURL(
+      'https://github.com/BearStudio/start-ui-native/issues/new/choose'
+    );
+  };
 
   return (
     <Box>
@@ -58,7 +68,7 @@ export const HomeScreen = () => {
 
         <Divider w="100%" />
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleOpenGithub}>
           <HStack alignItems="center" px={6} py={3}>
             <Icon as={AntDesign} name="github" color="coolGray.600" size="sm" />
             <Text fontSize="lg" ml={3}>
@@ -69,7 +79,7 @@ export const HomeScreen = () => {
 
         <Divider w="100%" />
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleOpenIssueGithub}>
           <HStack alignItems="center" px={6} py={3}>
             <InfoOutlineIcon color="coolGray.600" size="sm" />
             <Text fontSize="lg" ml={3}>
