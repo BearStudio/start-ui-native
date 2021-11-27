@@ -1,8 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios, { AxiosError } from 'axios';
 
-import { AUTH_TOKEN_KEY } from '@/auth/auth.constants';
 import { CONFIG } from '@/environment/config';
+import { AUTH_TOKEN_KEY } from '@/modules/auth/auth.constants';
 
 export const logAxiosErrorAndGet = (error: AxiosError) => {
   if (error?.response?.status === 401) {

@@ -4,7 +4,7 @@ import { Factory, NativeBaseProvider } from 'native-base';
 import { SafeAreaView as SafeAreaViewNative } from 'react-native';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import { AuthProvider } from '@/auth/AuthContext';
+import { AuthProvider } from '@/modules/auth/AuthContext';
 import { theme } from '@/theme';
 
 const queryClient = new QueryClient();
