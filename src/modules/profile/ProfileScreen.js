@@ -12,7 +12,6 @@ import {
   HStack,
   Icon,
   Flex,
-  VStack,
 } from 'native-base';
 import { Modal, TouchableOpacity } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
