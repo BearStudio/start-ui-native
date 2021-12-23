@@ -24,6 +24,7 @@ import {
 
 import { AccountScreen } from './modules/account/AccountScreen';
 import { OnboardingScreen } from './modules/auth/OnboardingScreen';
+import { ChangePasswordScreen } from './modules/profile/ChangePasswordScreen';
 import { ProfileScreen } from './modules/profile/ProfileScreen';
 
 const Stack = createStackNavigator();
@@ -44,6 +45,7 @@ const AccountStack = () => (
     }}
   >
     <Stack.Screen name="Profile" component={ProfileScreen} />
+    <Stack.Screen name="ChangePassword" component={ChangePasswordScreen} />
     <Stack.Screen name="Account" component={AccountScreen} />
   </Stack.Navigator>
 );

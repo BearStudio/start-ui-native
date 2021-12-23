@@ -45,6 +45,8 @@ export const ProfileScreen = () => {
 
   const handleLogoutModal = () => setModalVisible((current) => !current);
 
+  const handleOpenChangePassword = () => navigation.navigate('ChangePassword');
+
   return (
     <Box>
       <Stack bg="white" p={5} shadow={1}>
@@ -73,6 +75,17 @@ export const ProfileScreen = () => {
           </Flex>
         </TouchableOpacity>
       </Stack>
+
+      <Divider w="100%" />
+
+      <TouchableOpacity onPress={handleOpenChangePassword}>
+        <HStack alignItems="center" px={6} py={6}>
+          <Icon as={Feather} name="unlock" color="coolGray.600" size="sm" />
+          <Text fontSize="lg" ml={3}>
+            Change Password
+          </Text>
+        </HStack>
+      </TouchableOpacity>
 
       <Divider w="100%" />
 
