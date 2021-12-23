@@ -24,6 +24,7 @@ export const FieldInput = React.forwardRef((props, ref) => {
     formatValue,
     keepValue,
     asyncValidations,
+    defaultValue,
     ...otherProps
   } = props;
 
