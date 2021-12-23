@@ -11,6 +11,8 @@ import {
   Divider,
   HStack,
   Icon,
+  Flex,
+  VStack,
 } from 'native-base';
 import { Modal, TouchableOpacity } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
@@ -53,12 +55,23 @@ export const ProfileScreen = () => {
       </Stack>
       <Stack space="md" p={6}>
         <TouchableOpacity onPress={handleOpenAccount}>
-          <Stack bg="white" p={5} borderRadius={10} shadow={1}>
-            {account.firstName && account.lastName && (
-              <Heading>{`${account.firstName} ${account.lastName}`}</Heading>
-            )}
-            <Text>{account.email}</Text>
-          </Stack>
+          <Flex
+            direction="row"
+            bg="white"
+            p={5}
+            borderRadius={10}
+            shadow={1}
+            justifyContent="flex-start"
+          >
+            <Icon as={Feather} name="edit" color="blue.600" size="sm" mr={3} />
+
+            <Stack>
+              {account.firstName && account.lastName && (
+                <Heading>{`${account.firstName} ${account.lastName}`}</Heading>
+              )}
+              <Text>{account.email}</Text>
+            </Stack>
+          </Flex>
         </TouchableOpacity>
       </Stack>
 

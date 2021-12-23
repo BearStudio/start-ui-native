@@ -22,6 +22,7 @@ import {
   useScreenFocus,
 } from '@/utils/rootNavigation';
 
+import { AccountScreen } from './modules/account/AccountScreen';
 import { OnboardingScreen } from './modules/auth/OnboardingScreen';
 import { ProfileScreen } from './modules/profile/ProfileScreen';
 
@@ -34,6 +35,18 @@ if (__DEV__ && process.env.NODE_ENV !== 'test') {
 }
 
 const Tab = createBottomTabNavigator();
+
+const AccountStack = () => (
+  <Stack.Navigator
+    initialRouteName="Profile"
+    screenOptions={{
+      headerShown: false,
+    }}
+  >
+    <Stack.Screen name="Profile" component={ProfileScreen} />
+    <Stack.Screen name="Account" component={AccountScreen} />
+  </Stack.Navigator>
+);
 
 const Routing = () => {
   const { isAuthenticated, isAuthenticating } = useAuthContext();
@@ -93,11 +106,11 @@ const Routing = () => {
             },
             tabBarLabel: ({ color }) => <Text color={color}>{route.name}</Text>,
             tabBarActiveTintColor: 'blue.600',
-            tabBarInactiveTintColor: 'gray',
+            tabBarInactiveTintColor: 'gray.500',
           })}
         >
           <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="Profile" component={ProfileScreen} />
+          <Tab.Screen name="Profile" component={AccountStack} />
         </Tab.Navigator>
       )}
     </NavigationContainer>
