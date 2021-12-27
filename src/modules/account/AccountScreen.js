@@ -16,7 +16,7 @@ import {
 
 import { FieldInput } from '@/components/Fields/FieldInput';
 import { useToast } from '@/components/Toast';
-import { SplashScreen } from '@/layout/SplashScreen';
+import { LoadingScreen } from '@/layout/LoadingScreen';
 import {
   useAccount,
   useUpdateAccount,
@@ -50,7 +50,7 @@ export const AccountScreen = () => {
   };
 
   if (isFetchingAccount) {
-    return <SplashScreen />;
+    return <LoadingScreen />;
   }
 
   return (

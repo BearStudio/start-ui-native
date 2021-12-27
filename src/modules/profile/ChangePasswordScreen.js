@@ -15,16 +15,31 @@ import {
 } from 'native-base';
 
 import { FieldInput } from '@/components/Fields/FieldInput';
+import { useToast } from '@/components/Toast';
 import { focus } from '@/utils/formUtils';
+
+import { useUpdatePassword } from '../account/account.service';
 
 export const ChangePasswordScreen = () => {
   const changePasswordForm = useForm();
   const navigation = useNavigation();
+  const { showError, showSuccess } = useToast();
 
   const newPasswordRef = useRef();
   const confirmPasswordRef = useRef();
 
-  const submitForm = () => {};
+  const { updatePassword, isLoading } = useUpdatePassword({
+    onError: () => {
+      showError('An error occurred while updating your password, please retry');
+    },
+    onSuccess: () => {
+      showSuccess('Your password has been updated');
+    },
+  });
+
+  const submitForm = (values) => {
+    updatePassword(values);
+  };
 
   return (
     <Box bg="white" h="full" p="6">
@@ -41,7 +56,7 @@ export const ChangePasswordScreen = () => {
                 <Heading textAlign="center">Change Password</Heading>
               </HStack>
               <FieldInput
-                name="current-password"
+                name="currentPassword"
                 label="Current Password"
                 secureTextEntry
                 required="Current Password is required"
@@ -58,7 +73,7 @@ export const ChangePasswordScreen = () => {
 
               <FieldInput
                 ref={newPasswordRef}
-                name="new-password"
+                name="newPassword"
                 label="New Password"
                 secureTextEntry
                 required="New Password is required"
@@ -74,7 +89,7 @@ export const ChangePasswordScreen = () => {
 
               <FieldInput
                 ref={confirmPasswordRef}
-                name="confirm-password"
+                name="confirmPassword"
                 label="Confirm Password"
                 secureTextEntry
                 required="Password is required"
@@ -92,7 +107,7 @@ export const ChangePasswordScreen = () => {
             <Stack>
               <Button
                 size="lg"
-                // isLoading={isLoading}
+                isLoading={isLoading}
                 onPress={changePasswordForm.submit}
               >
                 Update Password
