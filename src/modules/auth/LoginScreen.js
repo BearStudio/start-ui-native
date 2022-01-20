@@ -38,7 +38,7 @@ export const LoginScreen = () => {
     <Box bg="white" h="full" p="6">
       <Formiz onValidSubmit={submitForm} connect={loginForm}>
         <Stack space="lg">
-          <Flex direction="column" h="full" justifyContent="space-between">
+          <Flex dir="column" h="full" justifyContent="space-between">
             <Stack space="md">
               <HStack alignItems="center" space="xs">
                 <IconButton

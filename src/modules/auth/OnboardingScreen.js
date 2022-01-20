@@ -21,13 +21,7 @@ export const OnboardingScreen = () => {
   const logoImage = require('../../../assets/logo.png');
 
   return (
-    <Flex
-      direction="column"
-      bg="white"
-      p="6"
-      h="full"
-      justifyContent="space-between"
-    >
+    <Flex dir="column" bg="white" p="6" h="full" justifyContent="space-between">
       <Box />
       <Box>
         <Box p={5}>

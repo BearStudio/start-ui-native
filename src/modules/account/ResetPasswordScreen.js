@@ -46,7 +46,7 @@ export const ResetPasswordScreen = () => {
     <Box bg="white" h="full" p="6">
       <Formiz onValidSubmit={submitForm} connect={resetPasswordForm}>
         <Stack space="md">
-          <Flex direction="column" h="full" justifyContent="space-between">
+          <Flex dir="column" h="full" justifyContent="space-between">
             <Stack>
               <HStack alignItems="center" space="xs">
                 <IconButton
