@@ -10,6 +10,3 @@ indent_size = 2
 
 [*.md]
 trim_trailing_whitespace = false
-
-[*.bat]
-end_of_line = crlf
