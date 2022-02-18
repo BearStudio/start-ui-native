@@ -4,6 +4,7 @@ import { Formiz, useForm } from '@formiz/core';
 import { isEmail, isMinLength } from '@formiz/validations';
 import { useNavigation } from '@react-navigation/native';
 import {
+  Flex,
   Box,
   Stack,
   Button,
@@ -24,7 +25,8 @@ export const RegisterScreen = () => {
   const { showError, showSuccess } = useToast();
 
   const passwordRef = useRef();
-  const confirmPasswordRef = useRef();
+  const lastNameRef = useRef();
+  const emailAddressRef = useRef();
 
   const { createAccount, isLoading } = useCreateAccount({
     onSuccess: () => {
@@ -55,69 +57,79 @@ export const RegisterScreen = () => {
     <Box bg="white" h="full" p="6">
       <Formiz onValidSubmit={submitForm} connect={registerForm}>
         <Stack space="lg">
-          <Stack space="md">
-            <HStack alignItems="center" space="xs">
-              <IconButton
-                ml={-3}
-                onPress={() => navigation.goBack()}
-                icon={<ArrowBackIcon color="gray.600" size="6" />}
+          <Flex dir="column" h="full" justifyContent="space-between">
+            <Stack space="md">
+              <HStack alignItems="center" space="xs">
+                <IconButton
+                  ml={-3}
+                  onPress={() => navigation.goBack()}
+                  icon={<ArrowBackIcon color="gray.600" size="6" />}
+                />
+                <Heading textAlign="center">Create account</Heading>
+              </HStack>
+              <FieldInput
+                name="firstName"
+                label="First Name"
+                required="First Name is required"
+                onSubmitEditing={focus(lastNameRef)}
+                returnKeyType="next"
               />
-              <Heading>Register</Heading>
-            </HStack>
-            <FieldInput
-              name="email"
-              label="Email"
-              textContentType="emailAddress"
-              autoCapitalize="none"
-              autoCompleteType="email"
-              keyboardType="email-address"
-              required="Email is required"
-              validations={[
-                {
-                  rule: isEmail(),
-                  message: 'Email is invalid',
-                },
-              ]}
-              onSubmitEditing={focus(passwordRef)}
-              returnKeyType="next"
-            />
 
-            <FieldInput
-              ref={passwordRef}
-              name="password"
-              label="Password"
-              secureTextEntry
-              required="Password is required"
-              validations={[
-                {
-                  rule: isMinLength(6),
-                  message: 'Password should have at least 6 characters',
-                },
-              ]}
-              onSubmitEditing={focus(confirmPasswordRef)}
-              returnKeyType="next"
-            />
+              <FieldInput
+                ref={lastNameRef}
+                name="lastName"
+                label="Last Name"
+                required="Last Name is required"
+                onSubmitEditing={focus(emailAddressRef)}
+                returnKeyType="next"
+              />
 
-            <FieldInput
-              ref={confirmPasswordRef}
-              name="confirmPassword"
-              label="Confirm Password"
-              secureTextEntry
-              required="Password confirmation is required"
-              validations={[
-                {
-                  rule: (value) => value === registerForm.values?.password,
-                  deps: [registerForm.values?.password],
-                  message: 'Passwords do not match',
-                },
-              ]}
-              onSubmitEditing={registerForm.submit}
-            />
-          </Stack>
+              <FieldInput
+                ref={emailAddressRef}
+                name="email"
+                label="Email"
+                textContentType="emailAddress"
+                autoCapitalize="none"
+                autoCompleteType="email"
+                keyboardType="email-address"
+                required="Email is required"
+                validations={[
+                  {
+                    rule: isEmail(),
+                    message: 'Email is invalid',
+                  },
+                ]}
+                onSubmitEditing={focus(passwordRef)}
+                returnKeyType="next"
+              />
 
-          <Button size="lg" isLoading={isLoading} onPress={registerForm.submit}>
-            Register
-          </Button>
+              <FieldInput
+                ref={passwordRef}
+                name="password"
+                label="Password"
+                secureTextEntry
+                required="Password is required"
+                validations={[
+                  {
+                    rule: isMinLength(6),
+                    message: 'Password should have at least 6 characters',
+                  },
+                ]}
+                onSubmitEditing={registerForm.submit}
+                returnKeyType="next"
+              />
+            </Stack>
+
+            <Stack>
+              <Button
+                size="lg"
+                isLoading={isLoading}
+                onPress={registerForm.submit}
+              >
+                Register
+              </Button>
+            </Stack>
+          </Flex>
         </Stack>
       </Formiz>
     </Box>
