@@ -31,7 +31,7 @@
     "*.{ts,tsx,js,jsx}": "eslint --cache --fix"
   },
   "dependencies": {
-    "@formiz/core": "1.4.0",
+    "@formiz/core": "1.8.0",
     "@formiz/validations": "1.0.0",
     "@react-native-async-storage/async-storage": "1.15.8",
     "@react-native-community/hooks": "2.6.0",
@@ -41,7 +41,7 @@
     "@react-navigation/stack": "6.0.7",
     "axios": "0.21.4",
     "husky": "7.0.2",
-    "native-base": "3.2.0",
+    "native-base": "3.3.7",
     "react": "17.0.2",
     "react-native": "0.67.2",
     "react-native-dotenv": "3.2.0",
