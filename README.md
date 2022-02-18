@@ -4,9 +4,10 @@
 It represents our team's up-to-date stack that we use when creating React Native apps for our clients.
 
 <div style="display: flex;">
-  <img src="https://user-images.githubusercontent.com/53612278/154727830-94dd74d5-0854-402d-9cf8-2095a3321dd9.png" alt="start_ui_native_login" width="300"/>
-  <img src="https://user-images.githubusercontent.com/53612278/154727365-8adfbada-720b-4855-8e5b-b1836cab96a0.png" alt="start_ui_native_home" width="300"/>
-  <img src="https://user-images.githubusercontent.com/53612278/154728594-9692abce-19a6-45e5-ad5e-1842f52ca5b3.png" alt="start_ui_native_home" width="300"/>
+  <img src="https://user-images.githubusercontent.com/53612278/154727830-94dd74d5-0854-402d-9cf8-2095a3321dd9.png" alt="start_ui_native_login" width="230"/>
+  <img src="https://user-images.githubusercontent.com/53612278/154727365-8adfbada-720b-4855-8e5b-b1836cab96a0.png" alt="start_ui_native_home" width="230"/>
+  <img src="https://user-images.githubusercontent.com/53612278/154728594-9692abce-19a6-45e5-ad5e-1842f52ca5b3.png" alt="start_ui_native_profile" width="230"/>
+  <img src="https://user-images.githubusercontent.com/53612278/154729186-1f911f1d-e4ad-424a-b256-d48404c7a685.png" alt="start_ui_native_profile_edit" width="230"/>
 </div>
 
 ## Getting Started
