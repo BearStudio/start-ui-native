@@ -25,7 +25,7 @@ export const OnboardingScreen = () => {
       <Box />
       <Box>
         <Box p={5}>
-          <Image source={logoImage} resizeMode="contain" />
+          <Image source={logoImage} resizeMode="contain" alt="logo" />
         </Box>
 
         <Text fontSize="md" my={5} textAlign="center">
