@@ -7,6 +7,7 @@ import { Icon, Text } from 'native-base';
 import { StatusBar } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 
+import { BluetoothHelperScreen } from '@/devtools/bluetooth-helper/BluetoothHelperScreen';
 import { NetworkHelperScreen } from '@/devtools/network-helper/NetworkHelperScreen';
 import { StorybookScreen } from '@/devtools/storybook/StorybookScreen';
 import { SplashScreen } from '@/layout/SplashScreen';
@@ -33,6 +34,7 @@ if (__DEV__ && process.env.NODE_ENV !== 'test') {
   const DevMenu = require('react-native-dev-menu');
   DevMenu.addItem('Storybook', () => navigate('Storybook'));
   DevMenu.addItem('Network helper', () => navigate('NetworkHelper'));
+  DevMenu.addItem('Bluetooth helper', () => navigate('BluetoothHelper'));
 }
 
 const Tab = createBottomTabNavigator();
@@ -76,10 +78,16 @@ const Routing = () => {
             <Stack.Screen name="Storybook" component={StorybookScreen} />
           )}
           {__DEV__ && (
-            <Stack.Screen
-              name="NetworkHelper"
-              component={NetworkHelperScreen}
-            />
+            <>
+              <Stack.Screen
+                name="NetworkHelper"
+                component={NetworkHelperScreen}
+              />
+              <Stack.Screen
+                name="BluetoothHelper"
+                component={BluetoothHelperScreen}
+              />
+            </>
           )}
         </Stack.Navigator>
       )}
