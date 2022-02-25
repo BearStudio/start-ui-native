@@ -29,6 +29,7 @@ Then just go to the created folder `cd myApp` and follow the [Installation Guide
 - ⚛️ [React Query](https://react-query.tanstack.com/)
 - 🐜 [Formiz](https://formiz-react.com/)
 - ↔ [Axios](https://github.com/axios/axios)
+- 📶 [React Native Ble Plx](https://github.com/dotintent/react-native-ble-plx)
 
 ℹ️ API calls are mapped on a [jHipster](https://www.jhipster.tech/) backend application.
 
@@ -238,3 +239,22 @@ For iOS, you can use [Icon Set Creator](https://apps.apple.com/au/app/icon-set-c
 [https://appicon.co/](https://appicon.co/) online tool.
 
 And then, import these images into a new image assets into xcode. You can follow [this tutorial for example](https://medium.com/@craiggrummitt/xcode-whats-up-with-app-icons-308b3f10e942).
+
+## Bluetooth Low Energy (BLE)
+
+Start UI Native is using by default the [react-native-ble-plx](https://github.com/dotintent/react-native-ble-plx) library to allow the application to communicate with an other device using BLE.
+
+A documentation is available here if you want more information : [Bluetooth Documentation](documentations/bluetooth.md)
+
+### Deleting BLE integration
+
+If you are not interested by the BLE for your application, you can remote it by following these steps :
+
+1. Remove the Bluetooth module by deleting the folder `src/modules/bluetooth`
+2. Remove the Bluetooth helper by deleting the folder `src/devtools/bluetooth-helper`
+3. Remove the BluetoothProvider in `src/Providers.js`
+3. Remove the BluetoothHelperScreen in `src/Routing.js`
+4. Remove the `react-native-ble-plx` library:
+```
+yarn remove react-native-ble-plx
+```
