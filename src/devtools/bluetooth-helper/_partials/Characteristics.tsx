@@ -1,27 +1,29 @@
 import React from 'react';
 
-import { Box, Text } from 'native-base';
-import PropTypes from 'prop-types';
+import { Box, IBoxProps, Text } from 'native-base';
 import { ActivityIndicator } from 'react-native';
-import { useQuery } from 'react-query';
+import { Device, Service } from 'react-native-ble-plx';
 
-import { getCharacteristics } from '@/modules/bluetooth/bluetooth.service';
+import { useCharacteristics } from '@/modules/bluetooth/bluetooth.service';
 
-const Characteristics = ({ device, service }) => {
+type CharacteristicProps = IBoxProps & {
+  device: Device;
+  service: Service;
+};
+
+const Characteristics: React.FC<CharacteristicProps> = ({
+  device,
+  service,
+  ...rest
+}) => {
   const {
     data: characteristics,
     isLoading: isLoadingCharacteristics,
     isError: hasErrorCharacteristics,
-  } = useQuery(
-    `getCharacteristics${service.id}`,
-    () => getCharacteristics(device, service),
-    {
-      initialData: [],
-    }
-  );
+  } = useCharacteristics(service, device);
 
   return (
-    <Box>
+    <Box {...rest}>
       {isLoadingCharacteristics && <ActivityIndicator />}
       {!isLoadingCharacteristics &&
         characteristics?.map((characteristic, index) => (
@@ -40,10 +42,3 @@ const Characteristics = ({ device, service }) => {
 };
 
 export default Characteristics;
-
-Characteristics.propTypes = {
-  device: PropTypes.object,
-  service: PropTypes.object,
-};
-
-Characteristics.defaultProps = {};

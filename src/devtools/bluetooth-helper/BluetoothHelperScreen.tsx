@@ -34,16 +34,20 @@ export const BluetoothHelperScreen = () => {
     data: isPermissionChecked,
     isLoading: isLoadingPermissionChecked,
     isError: hasErrorPermissionChecked,
-  } = useQuery('permissionChecked', () => checkPermissionsAndroid(), {
-    retry: true,
-    refetchInterval: 100,
-  });
+  } = useQuery(
+    ['bluetooth', 'permissionChecked'],
+    () => checkPermissionsAndroid(),
+    {
+      retry: true,
+      refetchInterval: 100,
+    }
+  );
 
   const {
     data: isBluetoothOn,
     isLoading: isLoadingBluetoothOn,
     isError: hasErrorBluetoothOn,
-  } = useQuery('bluetoothStatus', () => BluetoothStatus.state(), {
+  } = useQuery(['bluetooth', 'status'], () => BluetoothStatus.state(), {
     retry: true,
     refetchInterval: 100,
   });
@@ -53,7 +57,7 @@ export const BluetoothHelperScreen = () => {
     isLoading: isLoadingDevice,
     isError: hasErrorDevice,
   } = useQuery(
-    'deviceScanned',
+    ['bluetooth', 'deviceScanned'],
     () => scanDevices(bleManager, PERIPHERAL_IDENTIFIER),
     {
       retry: true,
@@ -65,10 +69,14 @@ export const BluetoothHelperScreen = () => {
     isLoading: isLoadingDeviceConnected,
     isError: hasErrorDeviceConnected,
     refetch: refetchConnectToDevice,
-  } = useQuery('deviceConnected', () => connectToDevice(bleManager, device), {
-    enabled: false,
-    retry: true,
-  });
+  } = useQuery(
+    ['bluetooth', 'deviceConnected'],
+    () => connectToDevice(bleManager, device),
+    {
+      enabled: false,
+      retry: true,
+    }
+  );
 
   const {
     data: isDeviceDisconnected,
@@ -76,7 +84,7 @@ export const BluetoothHelperScreen = () => {
     isError: hasErrorDeviceDisconnected,
     refetch: refetchDisconnectDevice,
   } = useQuery(
-    'deviceDisconnected',
+    ['bluetooth', 'deviceDisconnected'],
     () => disconnectDevice(bleManager, device),
     {
       enabled: false,

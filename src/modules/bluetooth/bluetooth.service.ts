@@ -6,6 +6,7 @@ import {
   Device,
   Service,
 } from 'react-native-ble-plx';
+import { useQuery, UseQueryOptions } from 'react-query';
 
 /**
  * Check permissions related to location
@@ -13,25 +14,27 @@ import {
  * @returns A promise resolving to a boolean or a string meaning if the user has the permissions or not
  */
 export const checkPermissionsAndroid = (): Promise<boolean | String> => {
-  return new Promise((resolv, reject) => {
+  return new Promise((resolve, reject) => {
     if (Platform.OS === 'android' && Platform.Version >= 23) {
       PermissionsAndroid.check(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
       ).then((result) => {
         if (result) {
-          resolv(result);
+          resolve(result);
         } else {
           PermissionsAndroid.request(
             PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
           )
             .then((result) => {
-              resolv(result);
+              resolve(result);
             })
             .catch((error) => {
               reject(error);
             });
         }
       });
+    } else {
+      console.info('No permission needed for bluetooth to work');
     }
   });
 };
@@ -47,7 +50,7 @@ export const scanDevices = async (
   bleManager: BleManager,
   deviceName: string
 ): Promise<Device | null> => {
-  return new Promise((resolv, reject) => {
+  return new Promise((resolve, reject) => {
     bleManager.startDeviceScan(
       null,
       null,
@@ -58,7 +61,7 @@ export const scanDevices = async (
         }
         if (device && device.name && device.name.startsWith(deviceName)) {
           bleManager.stopDeviceScan();
-          resolv(device);
+          resolve(device);
         }
       }
     );
@@ -75,11 +78,11 @@ export const connectToDevice = (
   bleManager: BleManager,
   device: Device
 ): Promise<boolean | null> => {
-  return new Promise((resolv, reject) => {
+  return new Promise((resolve, reject) => {
     bleManager
       .connectToDevice(device.id, {})
       .then(() => {
-        resolv(true);
+        resolve(true);
       })
       .catch((error) => {
         reject(error);
@@ -131,14 +134,14 @@ export const getServices = async (device: Device): Promise<Service[]> => {
  * Allow you to retrieve every accessible services of the given device.
  * You need to be connected to this device to get data.
  * @params device The targeted device
- * @params device The targeted service
+ * @params service The targeted service
  * @returns A promise with a list of Service object
  */
 export const getCharacteristics = async (
   device: Device,
   service: Service
 ): Promise<Characteristic[]> => {
-  const isConnected = await isConnectedDevice(device);
+  const isConnected = await getIsDeviceConnected(device);
   if (!isConnected) {
     return;
   }
@@ -155,15 +158,46 @@ export const getCharacteristics = async (
  * @params device The targeted device
  * @returns A promise which contains a boolean to know if the given device is connected.
  */
-export const isConnectedDevice = async (device: Device): Promise<boolean> => {
+export const getIsDeviceConnected = async (
+  device: Device
+): Promise<boolean> => {
   try {
-    const isConnected = await device.isConnected();
-    if (!isConnected) {
-      return false;
-    }
-
-    return true;
+    return await device.isConnected();
   } catch (error) {
+    console.warn('Device isnt connected');
     return false;
   }
 };
+
+export const useCharacteristics = (
+  service: Service,
+  device: Device,
+  config: UseQueryOptions<Characteristic[]> = {}
+) =>
+  useQuery(
+    [
+      'bluetooth',
+      'devices',
+      device.id,
+      'services',
+      service.id,
+      'characteristics',
+    ],
+    () => getCharacteristics(device, service),
+    {
+      initialData: [],
+      ...config,
+    }
+  );
+export const useServices = (
+  device: Device,
+  config: UseQueryOptions<Service[]> = {}
+) =>
+  useQuery(
+    ['bluetooth', 'devices', device.id, 'services'],
+    () => getServices(device),
+    {
+      initialData: [],
+      ...config,
+    }
+  );

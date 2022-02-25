@@ -1,22 +1,19 @@
 import React from 'react';
 
 import { ScrollView, Text, View } from 'native-base';
-import PropTypes from 'prop-types';
-import { Service } from 'react-native-ble-plx';
-import { useQuery } from 'react-query';
+import { IViewProps } from 'native-base/lib/typescript/components/primitives/View';
+import { Device, Service } from 'react-native-ble-plx';
 
-import { getServices } from '@/modules/bluetooth/bluetooth.service';
+import { useServices } from '@/modules/bluetooth/bluetooth.service';
 
 import Characteristics from './Characteristics';
 
-const Services = ({ device }) => {
-  const { data: services, isLoading: isLoadingServices } = useQuery(
-    'getServices',
-    () => getServices(device),
-    {
-      initialData: [],
-    }
-  );
+type ServiceProps = IViewProps & {
+  device: Device;
+};
+
+const Services: React.FC<ServiceProps> = ({ device }) => {
+  const { data: services, isLoading: isLoadingServices } = useServices(device);
 
   return (
     <View style={{ flex: 1, margin: 10 }}>
@@ -40,11 +37,3 @@ const Services = ({ device }) => {
 };
 
 export default Services;
-
-Services.propTypes = {
-  device: PropTypes.object,
-};
-
-Services.defaultProps = {
-  device: null,
-};
