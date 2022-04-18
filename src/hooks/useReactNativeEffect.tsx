@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import { useNavigation } from '@react-navigation/core';
+import { useFocusEffect } from '@react-navigation/native';
 
 interface UseReactNativeEffectParams {
   onMount?: () => void;
@@ -10,32 +10,24 @@ interface UseReactNativeEffectParams {
 export const useReactNativeEffect = ({
   onMount,
   onUnmount,
-}: UseReactNativeEffectParams = {}) => {
-  const navigation = useNavigation();
+}: UseReactNativeEffectParams = {}): { isScreenFocused?: boolean } => {
   const [isScreenFocused, setIsScreenFocused] = useState(true);
+  const onMountRef = useRef(onMount);
+  const onUnmountRef = useRef(onUnmount);
 
-  // on mount
-  useEffect(() => {
-    onMount?.();
-    setIsScreenFocused(true);
-    return () => onUnmount?.();
-  }, [onMount, onUnmount]);
+  useFocusEffect(() => {
+    setIsScreenFocused(true); // when i focus the screen
+    return () => setIsScreenFocused(false); // when i blur the screen
+  });
 
-  // When screen focuses
   useEffect(() => {
-    return navigation.addListener('focus', () => {
-      onMount?.();
-      setIsScreenFocused(true);
-    });
-  }, [navigation, onMount]);
-
-  // When screen blurs
-  useEffect(() => {
-    return navigation.addListener('blur', () => {
-      onUnmount?.();
-      setIsScreenFocused(false);
-    });
-  }, [navigation, onUnmount]);
+    if (isScreenFocused && onMountRef.current) {
+      onMountRef.current();
+    }
+    if (!isScreenFocused && onUnmountRef.current) {
+      onUnmountRef.current();
+    }
+  }, [isScreenFocused]);
 
   return { isScreenFocused };
 };
