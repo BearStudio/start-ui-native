@@ -6,7 +6,8 @@ interface UseReactNativeEffectParams {
   onMount?: () => void;
   onUnmount?: () => void;
 }
-
+// this custom hook is used to handle event on the focus and blur events
+// when the the page of react navigation is mounted and unmounted.
 export const useReactNativeEffect = ({
   onMount,
   onUnmount,
