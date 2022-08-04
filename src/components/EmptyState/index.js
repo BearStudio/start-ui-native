@@ -41,7 +41,7 @@ export const EmptyState = ({ children, image, text, ...rest }) => {
 
 EmptyState.propTypes = {
   children: PropTypes.node,
-  image: Image.propTypes.source.isRequired,
+  image: PropTypes.any,
   text: PropTypes.string.isRequired,
 };
 
