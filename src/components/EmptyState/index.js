@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Box, Factory, Text } from 'native-base';
 import PropTypes from 'prop-types';
-import { ImageBackground as ImageBackgroundNative, Image } from 'react-native';
+import { ImageBackground as ImageBackgroundNative } from 'react-native';
 
 export { default as wipIllustration } from './assets/wip-illustration.png';
 export { default as bugIllustration } from './assets/bug-illustration.png';
@@ -41,7 +41,7 @@ export const EmptyState = ({ children, image, text, ...rest }) => {
 
 EmptyState.propTypes = {
   children: PropTypes.node,
-  image: Image.propTypes.source.isRequired,
+  image: PropTypes.any,
   text: PropTypes.string.isRequired,
 };
 
