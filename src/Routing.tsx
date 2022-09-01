@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon, Text } from 'native-base';
-import { StatusBar } from 'react-native';
+import { Platform, StatusBar } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 
 import { NetworkHelperScreen } from '@/devtools/network-helper/NetworkHelperScreen';
@@ -89,9 +89,9 @@ const Routing = () => {
           initialRouteName="Home"
           screenOptions={({ route }) => ({
             headerShown: false,
-            tabBarStyle: { height: 70 },
+            tabBarStyle: { height: Platform.OS === 'ios' ? 100 : 70 },
             tabBarItemStyle: { margin: 10 },
-            tabBarIconStyle: { margin: 5 },
+            tabBarIconStyle: { margin: 10 },
             tabBarIcon: ({ color }) => {
               let iconName;
 

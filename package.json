@@ -89,6 +89,7 @@
     "jest-transform-stub": "2.0.0",
     "lint-staged": "11.2.0",
     "metro-react-native-babel-preset": "0.70.3",
+    "miragejs": "^0.1.45",
     "patch-package": "^6.4.7",
     "postinstall-postinstall": "^2.1.0",
     "react-dom": "17.0.2",
@@ -105,5 +106,10 @@
   "bugs": {
     "url": "https://github.com/bearstudio/start-ui-native/issues"
   },
-  "homepage": "https://github.com/bearstudio/start-ui-native#readme"
+  "homepage": "https://github.com/bearstudio/start-ui-native#readme",
+  "eslintConfig": {
+    "globals": {
+      "window": true
+    }
+  }
 }
