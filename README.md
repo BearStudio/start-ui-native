@@ -29,8 +29,11 @@ Then just go to the created folder `cd myApp` and follow the [Installation Guide
 - ⚛️ [React Query](https://react-query.tanstack.com/)
 - 🐜 [Formiz](https://formiz-react.com/)
 - ↔ [Axios](https://github.com/axios/axios)
+- 🔺 [Mirage JS](https://github.com/miragejs/miragejs)
 
 ℹ️ API calls are mapped on a [jHipster](https://www.jhipster.tech/) backend application.
+
+ℹ️ The project is started with a Mirage JS server API, that allows to mock the calls in local. Like this, you don't need your API to be ready to start development on your mobile application.
 
 ---
 
