@@ -4,7 +4,7 @@ import Providers from '@/Providers';
 import Routing from '@/Routing';
 
 // Remove this import once your API is ready ;)
-import '../miraje/mockApiServer';
+import '../mirage/mockApiServer';
 
 const App = () => {
   return (
