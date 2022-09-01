@@ -11,29 +11,29 @@ window.server = createServer({
       return {
         id_token: 'token',
       };
-    }),
-      this.get('/account', () => {
-        return {
-          firstName: 'Tom',
-          lastName: 'Cruise',
-          email: 'tom@email.com',
-          authorities: ['ROLE_USER'],
-        };
-      }),
-      this.post('/register', () => {
-        return {};
-      }),
-      this.post('/account', () => {
-        return {};
-      }),
-      this.post('/account/reset-password/init', () => {
-        return {};
-      }),
-      this.post('/account/reset-password/finish', () => {
-        return {};
-      }),
-      this.post('/account/change-password', () => {
-        return {};
-      });
+    });
+    this.get('/account', () => {
+      return {
+        firstName: 'Tom',
+        lastName: 'Cruise',
+        email: 'tom@email.com',
+        authorities: ['ROLE_USER'],
+      };
+    });
+    this.post('/register', () => {
+      return {};
+    });
+    this.post('/account', () => {
+      return {};
+    });
+    this.post('/account/reset-password/init', () => {
+      return {};
+    });
+    this.post('/account/reset-password/finish', () => {
+      return {};
+    });
+    this.post('/account/change-password', () => {
+      return {};
+    });
   },
 });
