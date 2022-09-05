@@ -21,6 +21,7 @@ target 'StartUINativeApp' do
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-async-storage/async-storage'
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+  pod 'RNI18n', :path => '../node_modules/react-native-i18n'
 
   target 'StartUINativeAppTests' do
     inherit! :complete
