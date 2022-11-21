@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 environment=$1
-PACKAGE_NAME="com.startuinativeapp"
+PACKAGE_NAME="com.startuinative.app"
 PROJECT_ROOT=$(pwd)
 SCRIPTS_DIR="${PROJECT_ROOT}/scripts"
 ANDROID_DIR="${PROJECT_ROOT}/android"

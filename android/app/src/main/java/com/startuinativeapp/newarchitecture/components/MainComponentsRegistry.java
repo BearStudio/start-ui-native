@@ -1,4 +1,4 @@
-package com.startuinativeapp.newarchitecture.components;
+package com.startuinative.app.newarchitecture.components;
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
 import com.facebook.react.fabric.ComponentFactory;

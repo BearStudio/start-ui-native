@@ -1,4 +1,4 @@
-package com.startuinativeapp.newarchitecture.modules;
+package com.startuinative.app.newarchitecture.modules;
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.ReactPackageTurboModuleManagerDelegate;

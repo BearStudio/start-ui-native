@@ -1,0 +1,56 @@
+name: 🚀 Start UI [native] Android
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-android:
+    name: Build and deploy for Android
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up ruby env
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.2
+          bundler-cache: true
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+
+      - name: Decode Service Account Key JSON File
+        uses: timheuer/base64-to-file@v1
+        id: service_account_json_file
+        with:
+          fileName: "serviceAccount.json"
+          encodedString: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
+
+      - name: Decode Keystore File
+        uses: timheuer/base64-to-file@v1
+        id: android_keystore
+        with:
+          fileName: "android_keystore.keystore"
+          encodedString: ${{ secrets.KEYSTORE_FILE }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Set environment
+        run: npm run set:env:prod
+
+      - name: Run tests
+        run: cd android && bundle exec fastlane android test
+
+      - name: Build & deploy Android release
+        run: cd android && bundle exec fastlane android deploy
+        env:
+          KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
+          STORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS}}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          ANDROID_JSON_KEY_FILE: ${{ steps.service_account_json_file.outputs.filePath }}

@@ -1,0 +1,61 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    # Increase versionCode to 1
+    path = '../app/build.gradle'
+    re = /versionCode\s+(\d+)/
+
+    versionCode = google_play_track_version_codes(
+      package_name: "com.startuinative.app",
+      track: "internal",
+      json_key: ENV['ANDROID_JSON_KEY_FILE']
+    )
+
+    s = File.read(path)
+    s[re, 1] = (versionCode[0] + 1).to_s
+
+    f = File.new(path, 'w')
+    f.write(s)
+    f.close
+
+    # Build new bundle with new versionCode
+    gradle(
+      task: "clean bundleRelease",
+      properties: {
+        "android.injected.signing.store.file" => ENV["KEYSTORE_FILE"],
+        "android.injected.signing.store.password" => ENV["STORE_PASSWORD"],
+        "android.injected.signing.key.alias" => ENV["KEY_ALIAS"],
+        "android.injected.signing.key.password" => ENV["KEY_PASSWORD"],
+      },
+    )
+
+    # Upload new bundle to play store
+    upload_to_play_store(
+      track: "internal",
+      release_status: 'draft',
+      json_key: ENV["ANDROID_JSON_KEY_FILE"]
+    )
+  end
+end

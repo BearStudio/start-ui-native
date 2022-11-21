@@ -1,4 +1,4 @@
-package com.startuinativeapp;
+package com.startuinative.app;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -37,7 +37,7 @@ public class MainActivity extends ReactActivity {
       reactRootView.setIsFabric(BuildConfig.IS_NEW_ARCHITECTURE_ENABLED);
       return reactRootView;
     }
-    
+
     @Override
     protected boolean isConcurrentRootEnabled() {
       // If you opted-in for the New Architecture, we enable Concurrent Root (i.e. React 18).
