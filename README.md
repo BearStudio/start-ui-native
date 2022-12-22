@@ -1,4 +1,4 @@
-<h1 align="center"><img src="assets/start-ui-native.svg" alt="Start UI Native" width="300" /></h1>
+<h1 align="center"><img src="assets/thumbnail.png" alt="Start UI Native" /></h1>
 
 🚀 Start UI [native] is a opinionated [React Native](https://reactnative.dev/) starter repository created & maintained by the [BearStudio Team](https://www.bearstudio.fr/team) and other contributors.
 It represents our team's up-to-date stack that we use when creating React Native apps for our clients.
@@ -26,7 +26,7 @@ Then just go to the created folder `cd myApp` and follow the [Installation Guide
 - ⚛️ [React Native](https://reactnative.dev/)
 - ⚛️ [React Navigation](https://reactnavigation.org/)
 - ⬢ [Native Base 3](https://nativebase.io/)
-- ⚛️ [React Query](https://react-query.tanstack.com/)
+- ⚛️ [TanStack Query](https://react-query.tanstack.com/)
 - 🐜 [Formiz](https://formiz-react.com/)
 - ↔ [Axios](https://github.com/axios/axios)
 - 🔺 [Mirage JS](https://github.com/miragejs/miragejs)
