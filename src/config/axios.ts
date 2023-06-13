@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios, { AxiosError } from 'axios';
 
-import { CONFIG } from '@/environment/config';
 import { AUTH_TOKEN_KEY } from '@/modules/auth/auth.constants';
 
 export const logAxiosErrorAndGet = (error: AxiosError) => {
@@ -35,7 +34,7 @@ export const logAxiosErrorAndGet = (error: AxiosError) => {
   }
 };
 
-axios.defaults.baseURL = CONFIG.API_URL;
+axios.defaults.baseURL = process.env.API_URL;
 
 axios.interceptors.request.use(
   async (config) => {
@@ -43,7 +42,7 @@ axios.interceptors.request.use(
     const userToken = await AsyncStorage.getItem(AUTH_TOKEN_KEY);
     const newConfig = config;
     if (userToken) {
-      newConfig.headers.common.Authorization = `Bearer ${userToken}`;
+      newConfig.headers.Authorization = `Bearer ${userToken}`;
     }
     return newConfig;
   },

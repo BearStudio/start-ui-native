@@ -1,17 +1,5 @@
-/**
- * Metro configuration for React Native
- * https://github.com/facebook/react-native
- *
- * @format
- */
+// Learn more https://docs.expo.io/guides/customizing-metro
+// eslint-disable-next-line
+const { getDefaultConfig } = require('expo/metro-config');
 
-module.exports = {
-  transformer: {
-    getTransformOptions: async () => ({
-      transform: {
-        experimentalImportSupport: false,
-        inlineRequires: false, // false because of hermes issue https://github.com/storybookjs/react-native/issues/152
-      },
-    }),
-  },
-};
+module.exports = getDefaultConfig(__dirname);
