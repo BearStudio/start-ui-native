@@ -1,107 +1,157 @@
-import axios, { AxiosError } from 'axios';
 import {
-  useMutation,
+  createQueryKeys,
+  inferQueryKeys,
+} from '@lukemorales/query-key-factory';
+import {
   UseMutationOptions,
-  useQuery,
-  useQueryClient,
   UseQueryOptions,
-} from 'react-query';
+  useMutation,
+  useQuery,
+} from '@tanstack/react-query';
+import Axios, { AxiosError } from 'axios';
 
 import { Account } from '@/modules/account/account.types';
-import { useAuthContext } from '@/modules/auth/AuthContext';
 
-export const useAccount = (config: UseQueryOptions<Account> = {}) => {
-  const { isAuthenticated, isAuthenticating } = useAuthContext();
+export const accountKeys = createQueryKeys('accountService', {
+  account: null,
+});
+type AccountKeys = inferQueryKeys<typeof accountKeys>;
+
+export const useAccount = (
+  config: UseQueryOptions<
+    Account,
+    AxiosError,
+    Account,
+    AccountKeys['account']['queryKey']
+  > = {}
+) => {
   const { data: account, ...rest } = useQuery(
-    ['account'],
-    (): Promise<Account> => axios.get('/account'),
+    accountKeys.account.queryKey,
+    (): Promise<Account> => Axios.get('/account'),
     {
+      onSuccess: (data) => {
+        if (config?.onSuccess) {
+          config?.onSuccess(data);
+        }
+      },
       ...config,
-      enabled: config?.enabled || (isAuthenticated && !isAuthenticating),
     }
   );
   const isAdmin = !!account?.authorities?.includes('ROLE_ADMIN');
   return { account, isAdmin, ...rest };
 };
 
+type AccountError = {
+  title: string;
+  errorKey: 'userexists' | 'emailexists';
+};
+
 export const useCreateAccount = (
   config: UseMutationOptions<
     Account,
-    AxiosError<any>,
+    AxiosError<AccountError>,
     Pick<Account, 'login' | 'email' | 'langKey'> & { password: string }
   > = {}
 ) => {
-  const mutation = useMutation(
-    ({ login, email, password, langKey = 'en' }): Promise<Account> =>
-      axios.post('/register', { login, email, password, langKey }),
+  return useMutation(
+    ({ login, email, password }): Promise<Account> =>
+      Axios.post('/register', { login, email, password }),
     {
       ...config,
     }
   );
-  return { ...mutation, createAccount: mutation.mutate };
+};
+
+type UseActiveAccountVariables = {
+  key: string;
+};
+
+export const useActivateAccount = (
+  config: UseMutationOptions<
+    void,
+    AxiosError<TODO>,
+    UseActiveAccountVariables
+  > = {}
+) => {
+  return useMutation(
+    ({ key }): Promise<void> => Axios.get(`/activate?key=${key}`),
+    {
+      ...config,
+    }
+  );
 };
 
 export const useUpdateAccount = (
-  config: UseMutationOptions<Account, AxiosError<any>, Account> = {}
+  config: UseMutationOptions<Account, AxiosError<TODO>, Account> = {}
 ) => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation(
-    (account): Promise<Account> => axios.post('/account', account),
+  return useMutation(
+    (account): Promise<Account> => Axios.post('/account', account),
     {
-      ...config,
-      onSuccess: (...args) => {
-        queryClient.invalidateQueries('account');
-        config?.onSuccess?.(...args);
+      onMutate: (data) => {
+        if (config?.onMutate) {
+          config.onMutate(data);
+        }
       },
+      ...config,
     }
   );
-  return { ...mutation, updateAccount: mutation.mutate };
 };
 
 export const useResetPasswordInit = (
-  config: UseMutationOptions<void, AxiosError<any>, string> = {}
+  config: UseMutationOptions<void, AxiosError<TODO>, string> = {}
 ) => {
-  const mutation = useMutation(
+  return useMutation(
     (email): Promise<void> =>
-      axios.post('/account/reset-password/init', email, {
+      Axios.post('/account/reset-password/init', email, {
         headers: { 'Content-Type': 'text/plain' },
       }),
     {
       ...config,
     }
   );
-  return { ...mutation, resetPasswordInit: mutation.mutate };
+};
+
+type UseResetPasswordFinishVariables = {
+  key: string;
+  newPassword: string;
 };
 
 export const useResetPasswordFinish = (
   config: UseMutationOptions<
     void,
-    AxiosError<any>,
-    { key: string; newPassword: string }
+    AxiosError<TODO>,
+    UseResetPasswordFinishVariables
   > = {}
 ) => {
-  const mutation = useMutation(
+  return useMutation(
     (payload): Promise<void> =>
-      axios.post('/account/reset-password/finish', payload),
+      Axios.post('/account/reset-password/finish', payload),
     {
       ...config,
     }
   );
-  return { ...mutation, resetPasswordFinish: mutation.mutate };
 };
 
 export const useUpdatePassword = (
   config: UseMutationOptions<
     void,
-    AxiosError<any>,
+    AxiosError<TODO>,
     { currentPassword: string; newPassword: string }
   > = {}
 ) => {
-  const mutation = useMutation(
-    (payload): Promise<void> => axios.post('/account/change-password', payload),
+  return useMutation(
+    (payload): Promise<void> => Axios.post('/account/change-password', payload),
     {
       ...config,
     }
   );
-  return { ...mutation, updatePassword: mutation.mutate };
+};
+
+export const useDeleteAccount = (
+  config: UseMutationOptions<void, AxiosError, object> = {}
+) => {
+  return useMutation(
+    (): Promise<void> => Axios.delete('/extended/account'),
+    config
+  );
 };

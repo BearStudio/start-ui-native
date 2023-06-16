@@ -1,21 +1,29 @@
-import React, { useCallback, useContext, useState, useEffect } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { AUTH_TOKEN_KEY } from './auth.constants';
 
 interface AuthContextValue {
   isAuthenticated: boolean;
   isAuthenticating: boolean;
-  updateToken(string): Promise<void>;
-  logout(string): Promise<void>;
+  updateToken(token: string | null): Promise<void>;
+  logout(): Promise<void>;
 }
 
-const AuthContext = React.createContext<AuthContextValue>(null);
+const AuthContext = React.createContext<AuthContextValue>(
+  {} as AuthContextValue
+);
 
-const updateToken = async (newToken) => {
+const updateToken = async (newToken: string | null) => {
   if (!newToken) {
     await AsyncStorage.removeItem(AUTH_TOKEN_KEY);
   } else {
@@ -25,12 +33,15 @@ const updateToken = async (newToken) => {
 
 export const useAuthContext = () => useContext(AuthContext);
 
-export const AuthProvider = ({ children }) => {
+type AuthProviderProps = {
+  children: ReactNode;
+};
+export const AuthProvider = ({ children }: AuthProviderProps) => {
   const queryCache = useQueryClient();
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState<string | null>(null);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
-  const handleUpdateToken = useCallback(async (newToken) => {
+  const handleUpdateToken = useCallback(async (newToken: string) => {
     setToken(newToken);
     await updateToken(newToken);
   }, []);
@@ -45,7 +56,8 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     (async () => {
       setIsAuthenticating(true);
-      await AsyncStorage.getItem(AUTH_TOKEN_KEY).then(setToken);
+      const tokenFromStorage = await AsyncStorage.getItem(AUTH_TOKEN_KEY);
+      setToken(tokenFromStorage);
       setIsAuthenticating(false);
     })();
 

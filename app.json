@@ -1,4 +1,61 @@
 {
-  "name": "StartUINativeApp",
-  "displayName": "StartUINativeApp"
+  "expo": {
+    "name": "Start UI Native Expo",
+    "slug": "start-ui-native-expo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.bearstudio.startuinativeexpo"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": [
+        "android.permission.BLUETOOTH",
+        "android.permission.BLUETOOTH_ADMIN",
+        "android.permission.BLUETOOTH_CONNECT"
+      ],
+      "package": "com.bearstudio.startuinativeexpo"
+    },
+    "scheme": "start-ui-native-expo",
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "flipper": true
+          }
+        }
+      ],
+      [
+        "@config-plugins/react-native-ble-plx",
+        {
+          "isBackgroundEnabled": true,
+          "modes": ["peripheral", "central"],
+          "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "f4c1a5ae-bdc5-49c7-aebc-5787b03f21cc"
+      }
+    },
+    "owner": "bearstudio",
+    "runtimeVersion": "0.0.1",
+    "updates": {
+      "url": "https://u.expo.dev/f4c1a5ae-bdc5-49c7-aebc-5787b03f21cc"
+    }
+  }
 }

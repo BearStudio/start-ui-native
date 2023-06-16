@@ -66,6 +66,7 @@
 
 # Resolve links: $0 may be a link
 app_path=$0
+
 # Need this for daisy-chained symlinks.
 while
     APP_HOME=${app_path%"${app_path##*/}"}  # leaves a trailing /; empty if no leading path
@@ -80,6 +81,7 @@ do
 done
 
 APP_HOME=$( cd "${APP_HOME:-./}" && pwd -P ) || exit
+
 APP_NAME="Gradle"
 APP_BASE_NAME=${0##*/}
 
@@ -196,11 +198,19 @@ fi
 #     shell script including quotes and variable substitutions, so put them in
 #     double quotes to make sure that they get re-expanded; and
 #   * put everything else in single quotes, so that it's not re-expanded.
+
 set -- \
         "-Dorg.gradle.appname=$APP_BASE_NAME" \
         -classpath "$CLASSPATH" \
         org.gradle.wrapper.GradleWrapperMain \
         "$@"
+
+# Stop when "xargs" is not available.
+if ! command -v xargs >/dev/null 2>&1
+then
+    die "xargs is not available"
+fi
+
 # Use "xargs" to parse quoted args.
 #
 # With -n1 it outputs one arg per line, with the quotes and backslashes removed.

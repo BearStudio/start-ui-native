@@ -1,13 +1,13 @@
 import axios, { AxiosError } from 'axios';
-import { useMutation, UseMutationOptions } from 'react-query';
+import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 
-import { useToast } from '@/components/Toast';
-import { useAuthContext } from '@/modules/auth/AuthContext';
+import { useAuthContext } from './AuthContext';
+import { useToast } from '@/modules/toast/useToast';
 
 export const useLogin = (
   config: UseMutationOptions<
     { id_token: string },
-    AxiosError<any>,
+    AxiosError,
     { username: string; password: string }
   > = {}
 ) => {

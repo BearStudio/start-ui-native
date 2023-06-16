@@ -1,11 +1,26 @@
 {
-  "extends": ["react-app"],
-  "plugins": ["eslint-plugin-react-native"],
-  "env": {
-    "node": true,
-    "jest": true
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:sonarjs/recommended"
+  ],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { "argsIgnorePattern": "^_" }
+    ],
+    "sonarjs/no-duplicate-string": "off",
+    "sonarjs/cognitive-complexity": ["warn", 50]
   },
-  "globals": {
-    "__DEV__": true
-  }
+  "overrides": [
+    {
+      "files": [
+        "*.stories.tsx",
+        "./src/locales/**/*",
+        "./src/theme/components/**/*.ts"
+      ],
+      "rules": {
+        "import/no-anonymous-default-export": "off"
+      }
+    }
+  ]
 }

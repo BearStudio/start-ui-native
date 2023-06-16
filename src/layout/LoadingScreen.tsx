@@ -1,16 +1,14 @@
 import React from 'react';
 
-import { Box, useTheme, VStack } from 'native-base';
 import { ActivityIndicator } from 'react-native';
+import { Div, useTheme } from 'react-native-magnus';
 
 export const LoadingScreen = () => {
-  const theme = useTheme();
+  const { theme } = useTheme();
 
   return (
-    <Box h="100%" p={5} justifyContent="center" alignItems="center">
-      <VStack justifyContent="center" space="xl">
-        <ActivityIndicator color={theme.colors.primary['500']} size="large" />
-      </VStack>
-    </Box>
+    <Div bg="body" h="100%" p={5} justifyContent="center" alignItems="center">
+      <ActivityIndicator color={theme.colors?.['primary500']} size="large" />
+    </Div>
   );
 };
