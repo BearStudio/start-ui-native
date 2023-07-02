@@ -1,4 +1,4 @@
-# 🚀 Start-UI [native-expo]
+<h1 align="center"><img src="assets/thumbnail.png" alt="Start UI Native" /></h1>
 
 🚀 Start UI [native] is a opinionated [Expo](https://expo.dev/) starter repository created & maintained by the [BearStudio Team](https://www.bearstudio.fr/team) and other contributors.
 It represents our team's up-to-date stack that we use when creating React Native apps for our clients.
