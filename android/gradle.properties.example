@@ -51,3 +51,8 @@ expo.webp.enabled=true
 # Enable animated webp support (~3.4 MB increase)
 # Disabled by default because iOS doesn't support animated webp
 expo.webp.animated=false
+
+RELEASE_STORE_FILE=*****
+RELEASE_STORE_PASSWORD=*****
+RELEASE_KEY_ALIAS=*****
+RELEASE_KEY_PASSWORD=*****
