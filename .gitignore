@@ -18,6 +18,3 @@ web-build/
 
 .env
 .env.production
-
-android/app/release-key.keystore
-android/keystore.properties
