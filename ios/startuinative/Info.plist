@@ -5,7 +5,7 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>$(DEVELOPMENT_LANGUAGE)</string>
     <key>CFBundleDisplayName</key>
-    <string>Start UI Native Expo</string>
+    <string>Start UI Native</string>
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
@@ -25,14 +25,14 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>start-ui-native-expo</string>
-          <string>com.bearstudio.startuinativeexpo</string>
+          <string>start-ui-native</string>
+          <string>com.bearstudio.startuinative</string>
         </array>
       </dict>
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>exp+start-ui-native-expo</string>
+          <string>exp+start-ui-native</string>
         </array>
       </dict>
     </array>

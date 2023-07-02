@@ -21,7 +21,7 @@ const Home = () => {
           prefix={<Feather name="github" size={24} color="white" />}
           bg="primary500"
           onPress={() =>
-            router.replace('https://github.com/BearStudio/start-ui-native-expo')
+            router.replace('https://github.com/BearStudio/start-ui-native')
           }
         >
           <Text ml={10} fontSize="lg" color="white">
@@ -35,7 +35,7 @@ const Home = () => {
           bg="primary500"
           onPress={() =>
             router.replace(
-              'https://github.com/BearStudio/start-ui-native-expo/issues/new'
+              'https://github.com/BearStudio/start-ui-native/issues/new'
             )
           }
         >

@@ -113,9 +113,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.bearstudio.startuinativeexpo'
+    namespace 'com.bearstudio.startuinative'
     defaultConfig {
-        applicationId 'com.bearstudio.startuinativeexpo'
+        applicationId 'com.bearstudio.startuinative'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Start UI Native Expo",
-    "slug": "start-ui-native-expo",
+    "name": "Start UI Native",
+    "slug": "start-ui-native",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,7 +14,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.bearstudio.startuinativeexpo"
+      "bundleIdentifier": "com.bearstudio.startuinative"
     },
     "android": {
       "adaptiveIcon": {
@@ -26,9 +26,9 @@
         "android.permission.BLUETOOTH_ADMIN",
         "android.permission.BLUETOOTH_CONNECT"
       ],
-      "package": "com.bearstudio.startuinativeexpo"
+      "package": "com.bearstudio.startuinative"
     },
-    "scheme": "start-ui-native-expo",
+    "scheme": "start-ui-native",
     "plugins": [
       [
         "expo-build-properties",

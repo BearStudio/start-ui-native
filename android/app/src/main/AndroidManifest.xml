@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.bearstudio.startuinativeexpo" xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.bearstudio.startuinative" xmlns:tools="http://schemas.android.com/tools">
   <uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION"/>
   <uses-permission-sdk-23 android:name="android.permission.ACCESS_FINE_LOCATION"/>
   <uses-permission android:name="android.permission.BLUETOOTH"/>
@@ -33,9 +33,9 @@
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
-        <data android:scheme="start-ui-native-expo"/>
-        <data android:scheme="com.bearstudio.startuinativeexpo"/>
-        <data android:scheme="exp+start-ui-native-expo"/>
+        <data android:scheme="start-ui-native"/>
+        <data android:scheme="com.bearstudio.startuinative"/>
+        <data android:scheme="exp+start-ui-native"/>
       </intent-filter>
     </activity>
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false"/>

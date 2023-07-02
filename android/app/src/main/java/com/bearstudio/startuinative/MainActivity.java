@@ -1,4 +1,4 @@
-package com.bearstudio.startuinativeexpo;
+package com.bearstudio.startuinative;
 
 import android.os.Build;
 import android.os.Bundle;
