@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.bearstudio.startuinative"
@@ -42,14 +44,17 @@
         "@config-plugins/react-native-ble-plx",
         {
           "isBackgroundEnabled": true,
-          "modes": ["peripheral", "central"],
+          "modes": [
+            "peripheral",
+            "central"
+          ],
           "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices"
         }
       ]
     ],
     "extra": {
       "eas": {
-        "projectId": "f4c1a5ae-bdc5-49c7-aebc-5787b03f21cc"
+        "projectId": "b5bbd925-db32-4e2b-8f31-cf07e22fa4ef"
       }
     },
     "owner": "bearstudio",
