@@ -21,6 +21,15 @@ This starter is oriented to use Expo with Expo EAS features to have fully access
 
 ## Installation
 
+Rename `android/gradle.properties.example` into `android/gradle.properties` and fill those variables with your Android release key information :
+
+```
+RELEASE_STORE_FILE=*****
+RELEASE_STORE_PASSWORD=*****
+RELEASE_KEY_ALIAS=*****
+RELEASE_KEY_PASSWORD=*****
+```
+
 ```bash
 # Install dependences
 yarn
