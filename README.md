@@ -21,15 +21,6 @@ This starter is oriented to use Expo with Expo EAS features to have fully access
 
 ## Installation
 
-Update `android/keystore.properties` and fill those variables with your Android release key information :
-
-```
-storePassword=*****
-keyPassword=*****
-keyAlias=*****
-storeFile=*****
-```
-
 ```bash
 # Install dependences
 yarn
