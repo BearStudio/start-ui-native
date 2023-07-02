@@ -20,4 +20,3 @@ web-build/
 .env.production
 
 android/app/release-key.keystore
-android/gradle.properties
