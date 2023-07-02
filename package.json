@@ -10,7 +10,8 @@
     "ios": "expo run:ios",
     "lint": "eslint . --fix && tsc --noEmit",
     "lint:staged": "tsc --noEmit && eslint --cache --fix",
-    "pretty": "prettier -w ."
+    "pretty": "prettier -w .",
+    "eas-build-pre-install": "echo $KEYSTORE_PROPERTIES_BASE64 | base64 --decode > ./android/keystore.properties"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json}": "prettier --write",
