@@ -19,5 +19,5 @@ web-build/
 .env
 .env.production
 
-./android/gradle.properties
-./android/app/release-key.keystore
+android/app/release-key.keystore
+android/gradle.properties
