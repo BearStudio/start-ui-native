@@ -19,18 +19,22 @@ This starter is oriented to use Expo with Expo EAS features to have fully access
 
 ---
 
-## Installation 
+## Installation
 
 ```bash
+# Install dependences
 yarn
+
+# Start Metro Bundler Expo
 yarn start
-# Platform choice
-# Accept to pull development build
+
+# Sign in Expo account
+npx expo login
 ```
 
 ---
 
-## Update .env values 
+## Update .env values
 
 Put your env values on .env file. Environment variables inserted on your local machine or on Expo EAS platform will overwrite the variables of .env file.
 
@@ -87,7 +91,7 @@ The application will start on your device or on an iOS simulator.
 
 ## Create a EAS production build
 
-For publishing 
+For publishing
 
 ```bash
 # ios
