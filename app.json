@@ -53,7 +53,9 @@
       }
     },
     "owner": "bearstudio",
-    "runtimeVersion": "0.0.1",
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
     "updates": {
       "url": "https://u.expo.dev/f4c1a5ae-bdc5-49c7-aebc-5787b03f21cc"
     }
