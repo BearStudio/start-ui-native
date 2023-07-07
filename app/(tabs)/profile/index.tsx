@@ -22,7 +22,6 @@ const Profile = () => {
   const [deleteAccountModalVisible, setDeleteAccountModalVisible] =
     useState(false);
 
-  const confirmationForm = useForm();
   const { showError, showSuccess } = useToast();
 
   const { mutate: deleteAccount, isLoading: isDeletingAccount } =
@@ -37,6 +36,8 @@ const Profile = () => {
         );
       },
     });
+
+  const confirmationForm = useForm();
 
   if (isLoading) {
     return <LoadingScreen />;
@@ -217,7 +218,7 @@ const Profile = () => {
                 required="Confirmation required"
                 validations={[
                   {
-                    rule: (value) => value === 'DELETION',
+                    handler: (value) => value === 'DELETION',
                     message: 'Please enter "DELETION" to validate',
                   },
                 ]}

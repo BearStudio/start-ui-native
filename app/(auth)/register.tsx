@@ -1,4 +1,4 @@
-import { Formiz, useForm } from '@formiz/core';
+import { Formiz, useForm, useFormFields } from '@formiz/core';
 import { FieldInput } from '@/components/FieldInput';
 import { focus } from '@/utils/formUtils';
 import { useRef } from 'react';
@@ -11,7 +11,6 @@ import { useToast } from '@/modules/toast/useToast';
 
 const Register = () => {
   const router = useRouter();
-  const registerForm = useForm();
   const { showError, showSuccess } = useToast();
 
   const passwordRef = useRef<TextInput>(null);
@@ -40,9 +39,16 @@ const Register = () => {
     });
   };
 
+  const registerForm = useForm({ onValidSubmit: submitForm });
+  const values = useFormFields({
+    connect: registerForm,
+    selector: 'value',
+    fields: ['password'] as const,
+  });
+
   return (
     <Div bg="body" h="100%">
-      <Formiz onValidSubmit={submitForm} connect={registerForm}>
+      <Formiz connect={registerForm}>
         <Div flex={1} flexDir="column" p={20} justifyContent="space-between">
           <Div>
             <FieldInput
@@ -57,7 +63,7 @@ const Register = () => {
               required="Mail is required"
               validations={[
                 {
-                  rule: isEmail(),
+                  handler: isEmail(),
                   message: 'Mail is invalid',
                 },
               ]}
@@ -75,7 +81,7 @@ const Register = () => {
               required="Password is required"
               validations={[
                 {
-                  rule: isMinLength(6),
+                  handler: isMinLength(6),
                   message: 'Password must contains at least 6 characters',
                 },
               ]}
@@ -93,8 +99,8 @@ const Register = () => {
               required="Password confirmation is required"
               validations={[
                 {
-                  rule: (value) => value === registerForm.values.password,
-                  deps: [registerForm.values.password],
+                  handler: (value) => value === values.password,
+                  deps: [values.password],
                   message: 'Confirmation does not match the password',
                 },
               ]}

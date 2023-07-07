@@ -1,4 +1,4 @@
-import { Formiz, useForm } from '@formiz/core';
+import { Formiz, useForm, useFormFields } from '@formiz/core';
 import { FieldInput } from '@/components/FieldInput';
 import { Button, Div } from 'react-native-magnus';
 import { isMinLength } from '@formiz/validations';
@@ -13,7 +13,6 @@ type FormValues = TODO;
 
 const Update = () => {
   const router = useRouter();
-  const changePasswordForm = useForm();
   const { showError, showSuccess } = useToast();
 
   const newPasswordRef = useRef<TextInput>(null);
@@ -33,9 +32,16 @@ const Update = () => {
     updatePassword(values);
   };
 
+  const changePasswordForm = useForm({ onValidSubmit: submitForm });
+  const values = useFormFields({
+    connect: changePasswordForm,
+    selector: 'value',
+    fields: ['password'] as const,
+  });
+
   return (
     <Div bg="body" h="100%">
-      <Formiz onValidSubmit={submitForm} connect={changePasswordForm}>
+      <Formiz connect={changePasswordForm}>
         <Div flex={1} flexDir="column" p={20} justifyContent="space-between">
           <Div>
             <FieldInput
@@ -55,7 +61,7 @@ const Update = () => {
               required="New password is required"
               validations={[
                 {
-                  rule: isMinLength(6),
+                  handler: isMinLength(6),
                   message: 'Password must contains at least 6 characters',
                 },
               ]}
@@ -71,8 +77,8 @@ const Update = () => {
               required="Password confirmation is required"
               validations={[
                 {
-                  rule: (value) => value === changePasswordForm.values.password,
-                  deps: [changePasswordForm.values.password],
+                  handler: (value) => value === values.password,
+                  deps: [values.password],
                   message: 'Confirmation does not match the password',
                 },
               ]}

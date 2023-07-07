@@ -10,7 +10,6 @@ import { useLogin } from '@/modules/auth/auth.service';
 
 const Login = () => {
   const router = useRouter();
-  const loginForm = useForm();
 
   const passwordRef = useRef<TextInput>(null);
 
@@ -20,13 +19,15 @@ const Login = () => {
     login({ username: values.email, password: values.password });
   };
 
+  const loginForm = useForm({ onValidSubmit: submitForm });
+
   const handleOpenResetPassword = () => {
     router.push('/reset-password');
   };
 
   return (
     <Div bg="body" h="100%">
-      <Formiz onValidSubmit={submitForm} connect={loginForm}>
+      <Formiz connect={loginForm}>
         <Div flex={1} flexDir="column" p={20} justifyContent="space-between">
           <Div>
             <FieldInput
@@ -35,7 +36,7 @@ const Login = () => {
               autoCapitalize="none"
               keyboardType="email-address"
               required="Mail is required"
-              validations={[{ rule: isEmail(), message: 'Mail is invalid' }]}
+              validations={[{ handler: isEmail(), message: 'Mail is invalid' }]}
               onSubmitEditing={focus(passwordRef)}
               returnKeyType="next"
             />
