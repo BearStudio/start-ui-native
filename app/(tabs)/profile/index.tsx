@@ -27,7 +27,6 @@ const Profile = () => {
 
   const { account, isLoading, isError, refetch: refetchAccount } = useAccount();
 
-  const confirmationForm = useForm();
   const { showError, showSuccess } = useToast();
 
   const { mutate: deleteAccount, isLoading: isDeletingAccount } =
@@ -45,6 +44,8 @@ const Profile = () => {
 
   const logoutModal = useDisclosure();
   const deleteAccountModal = useDisclosure();
+
+  const confirmationForm = useForm({ onValidSubmit: deleteAccount });
 
   if (isLoading) {
     return <LoadingScreen />;
@@ -163,7 +164,7 @@ const Profile = () => {
             </Text>
           </Stack>
 
-          <Formiz connect={confirmationForm} onValidSubmit={deleteAccount}>
+          <Formiz connect={confirmationForm}>
             <Stack spacing="lg">
               <Text
                 fontSize="lg"
@@ -182,7 +183,7 @@ const Profile = () => {
                 required="Confirmation required"
                 validations={[
                   {
-                    rule: (value) => value === 'DELETION',
+                    handler: (value) => value === 'DELETION',
                     message: 'Please enter "DELETION" to validate',
                   },
                 ]}

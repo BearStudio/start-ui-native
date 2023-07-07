@@ -2258,19 +2258,15 @@
     find-up "^5.0.0"
     js-yaml "^4.1.0"
 
-"@formiz/core@1.8.1":
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/@formiz/core/-/core-1.8.1.tgz#861d562885ccec6cf188a79de6a64459fc02d229"
-  integrity sha512-1+hzKqJYqMO1cjnWPo5D85A7oRVdrbPxUzDKFgQZpZcE58z//64lbtkS9yrkrmI3Eor126bt1XM5bq+BieoGug==
-  dependencies:
-    lodash "4.17.21"
-    lodash-es "4.17.21"
-    rxjs "6.6.3"
+"@formiz/core@2.0.0-beta.11":
+  version "2.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@formiz/core/-/core-2.0.0-beta.11.tgz#f8a35248498ac4a4a94e100634de8cfa9fc6c19b"
+  integrity sha512-4RoDoUI8s+T5Gd6kaw1sPhsnCqF2tUS8tuiwHPs4e42hwrLOmfFqd4z9KvtV0vg9lY0bnkoj8Pmy0XtCWl4LAA==
 
-"@formiz/validations@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@formiz/validations/-/validations-1.0.0.tgz#d61041076b8423d6f439a6b7acb0581caca37d9d"
-  integrity sha512-pGTf0IQmSDhK7+4oTYjwtkn5TXqts33URSFXcUBMidDJgd1bSUzTQMNftg7YCeRPY8ROSsaJNWP7bFwtwHQeSA==
+"@formiz/validations@2.0.0-beta.2":
+  version "2.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@formiz/validations/-/validations-2.0.0-beta.2.tgz#9190f005abf1ea7f1b5dab4fb104b204674cc105"
+  integrity sha512-sng5791q7v78mz+4uzjKHsWC6Ob7nAQXk1qc8nn6odvXlAwWLsIZLKc82pTn+G3k/4nWrhRkvSAgp9xS+RaK1g==
 
 "@gar/promisify@^1.0.1":
   version "1.1.3"
@@ -6635,7 +6631,7 @@ lodash.throttle@^4.1.1:
   resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
   integrity sha512-wIkUCfVKpVsWo3JSZlc+8MB5it+2AN5W8J7YVMST30UrvcQNZ1Okbj+rbVniijTWE6FGYy4XJq/rHkas8qJMLQ==
 
-lodash@4.17.21, lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.4:
+lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.4:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -8634,13 +8630,6 @@ run-parallel@^1.1.9:
   integrity sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==
   dependencies:
     queue-microtask "^1.2.2"
-
-rxjs@6.6.3:
-  version "6.6.3"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.3.tgz#8ca84635c4daa900c0d3967a6ee7ac60271ee552"
-  integrity sha512-trsQc+xYYXZ3urjOiJOuCOa5N3jAZ3eiSpQB5hIT8zGlL2QfnHLJ2r7GMkBGuIausdJN1OneaI6gQlsqNHHmZQ==
-  dependencies:
-    tslib "^1.9.0"
 
 safe-buffer@5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"

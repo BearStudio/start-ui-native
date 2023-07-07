@@ -1,4 +1,4 @@
-import { Formiz, useForm } from '@formiz/core';
+import { Formiz, useForm, useFormFields } from '@formiz/core';
 import { FieldInput } from '@/components/FieldInput';
 import { Button, Box } from 'react-native-ficus-ui';
 import { isMinLength } from '@formiz/validations';
@@ -13,7 +13,6 @@ type FormValues = TODO;
 
 const Update = () => {
   const router = useRouter();
-  const changePasswordForm = useForm();
   const { showError, showSuccess } = useToast();
 
   const newPasswordRef = useRef<TextInput>(null);
@@ -33,9 +32,16 @@ const Update = () => {
     updatePassword(values);
   };
 
+  const changePasswordForm = useForm({ onValidSubmit: submitForm });
+  const values = useFormFields({
+    connect: changePasswordForm,
+    selector: 'value',
+    fields: ['password'] as const,
+  });
+
   return (
     <Box h="100%">
-      <Formiz onValidSubmit={submitForm} connect={changePasswordForm}>
+      <Formiz connect={changePasswordForm}>
         <Box
           flex={1}
           flexDirection="column"
@@ -61,7 +67,7 @@ const Update = () => {
               required="New password is required"
               validations={[
                 {
-                  rule: isMinLength(6),
+                  handler: isMinLength(6),
                   message: 'Password must contains at least 6 characters',
                 },
               ]}
