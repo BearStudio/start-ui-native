@@ -1,7 +1,7 @@
 import { FeatherIcons, TabBarIcon } from '@/components/TabBarIcon';
+import { useDarkMode } from '@/theme/useDarkMode';
 import { Stack as RouterStack } from 'expo-router';
 import { FC } from 'react';
-import { useTheme } from 'react-native-magnus';
 
 type StackProps = {
   initialRouteName?: string;
@@ -17,16 +17,22 @@ export const Stack: FC<StackProps> = ({
   initialRouteName = 'index',
   screens = [],
 }) => {
-  const { theme } = useTheme();
+  const { colorModeValue, getThemeColor } = useDarkMode();
 
   return (
     <RouterStack
       initialRouteName={initialRouteName}
       screenOptions={{
         headerStyle: {
-          backgroundColor: theme.colors?.body,
+          backgroundColor: colorModeValue(
+            getThemeColor('gray.100'),
+            getThemeColor('gray.800')
+          ),
         },
-        headerTintColor: theme.colors?.text,
+        headerTintColor: colorModeValue(
+          getThemeColor('gray.800'),
+          getThemeColor('gray.100')
+        ),
         headerTitleStyle: {
           fontWeight: 'bold',
         },
@@ -39,6 +45,12 @@ export const Stack: FC<StackProps> = ({
           options={{
             title: screen.title,
             tabBarIcon: screen.icon ? TabBarIcon(screen.icon) : undefined,
+            contentStyle: {
+              backgroundColor: colorModeValue(
+                getThemeColor('gray.50'),
+                getThemeColor('gray.800')
+              ),
+            },
             ...screen.options,
           }}
         />

@@ -1,6 +1,6 @@
 import { Formiz, useForm } from '@formiz/core';
 import { FieldInput } from '@/components/FieldInput';
-import { Button, Div } from 'react-native-magnus';
+import { Button, Box } from 'react-native-ficus-ui';
 import { isEmail } from '@formiz/validations';
 import { useResetPasswordInit } from '@/modules/account/account.service';
 import { useRouter } from 'expo-router';
@@ -29,17 +29,18 @@ const ResetPassword = () => {
   };
 
   return (
-    <Div bg="body" h="100%">
+    <Box h="100%">
       <Formiz onValidSubmit={submitForm} connect={resetPasswordForm}>
-        <Div flex={1} flexDir="column" p={20} justifyContent="space-between">
+        <Box
+          flex={1}
+          flexDirection="column"
+          p={20}
+          justifyContent="space-between"
+        >
           <FieldInput
             name="email"
             label="Mail address"
-            textContentType="emailAddress"
-            autoCapitalize="none"
-            autoComplete="email"
-            keyboardType="email-address"
-            // helper="Please enter the mail address that you use for your registration" TODO: fix TS
+            helper="Please enter the mail address that you use for your registration"
             required="Mail address is required"
             validations={[
               {
@@ -47,19 +48,25 @@ const ResetPassword = () => {
                 message: 'Mail address is invalid',
               },
             ]}
+            componentProps={{
+              textContentType: 'emailAddress',
+              autoCapitalize: 'none',
+              autoComplete: 'email',
+              keyboardType: 'email-address',
+            }}
           />
 
           <Button
-            bg="primary500"
-            block
-            loading={isLoadingResetPasswordInit}
+            bg="brand.500"
+            full
+            isLoading={isLoadingResetPasswordInit}
             onPress={() => resetPasswordForm.submit()}
           >
             Send mail
           </Button>
-        </Div>
+        </Box>
       </Formiz>
-    </Div>
+    </Box>
   );
 };
 

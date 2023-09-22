@@ -2775,6 +2775,14 @@
     component-type "^1.2.1"
     join-component "^1.1.0"
 
+"@shopify/flash-list@1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@shopify/flash-list/-/flash-list-1.5.0.tgz#f1cf3c4f9bb706a58c3d1f794ddfaedb5872f431"
+  integrity sha512-XeocevDIXastr6jh3TPo1MzV5XkdqTyWtw/j8kUhz9EOBc2SzNWbpJWyzrAsYKlqYNrnxxs0P9C0amlX2jaQnw==
+  dependencies:
+    recyclerlistview "4.2.0"
+    tslib "2.4.0"
+
 "@sideway/address@^4.1.3":
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/@sideway/address/-/address-4.1.4.tgz#03dccebc6ea47fdc226f7d3d1ad512955d4783f0"
@@ -4268,15 +4276,15 @@ deep-is@^0.1.3:
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.4.tgz#a6f2dce612fadd2ef1f519b73551f17e85199831"
   integrity sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==
 
+deepmerge@4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-4.2.2.tgz#44d2ea3679b8f4d4ffba33f03d865fc1e7bf4955"
+  integrity sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg==
+
 deepmerge@^3.2.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-3.3.0.tgz#d3c47fd6f3a93d517b14426b0628a17b0125f5f7"
   integrity sha512-GRQOafGHwMHpjPx9iCvTgpu9NojZ49q794EEL94JVEw6VaeA8XTUyBKvAkOOjBX9oJNiV6G3P+T+tihFjo2TqA==
-
-deepmerge@^4.2.2:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-4.3.1.tgz#44b5f2147cd3b00d4b56137685966f26fd25dd4a"
-  integrity sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==
 
 default-gateway@^4.2.0:
   version "4.2.0"
@@ -6607,7 +6615,7 @@ lodash-es@4.17.21:
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
   integrity sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==
 
-lodash.debounce@^4.0.8:
+lodash.debounce@4.0.8, lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==
@@ -8053,7 +8061,7 @@ prompts@^2.3.2, prompts@^2.4.0:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@*, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@*, prop-types@15.8.1, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -8227,19 +8235,21 @@ react-native-dotenv@3.4.8:
   dependencies:
     dotenv "^16.0.3"
 
+react-native-ficus-ui@1.0.0-alpha7:
+  version "1.0.0-alpha7"
+  resolved "https://registry.yarnpkg.com/react-native-ficus-ui/-/react-native-ficus-ui-1.0.0-alpha7.tgz#412e2240771b1ed6f100e26be8e9dbfb7d9d5de8"
+  integrity sha512-+AQ3Pev2LDLoeEo5DaYOkKwSwouRUviAJESGZ336ivkcoOm09G5OkfRZYq3mExXKdWHaE6a3t9o3FEC+yfLXQw==
+  dependencies:
+    "@shopify/flash-list" "1.5.0"
+    color "4.2.3"
+    deepmerge "4.2.2"
+    react-native-toast-message "2.1.6"
+    validate-color "2.2.1"
+
 react-native-gradle-plugin@^0.71.18:
   version "0.71.19"
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.71.19.tgz#3379e28341fcd189bc1f4691cefc84c1a4d7d232"
   integrity sha512-1dVk9NwhoyKHCSxcrM6vY6cxmojeATsBobDicX0ZKr7DgUF2cBQRTKsimQFvzH8XhOVXyH8p4HyDSZNIFI8OlQ==
-
-react-native-magnus@1.0.63:
-  version "1.0.63"
-  resolved "https://registry.yarnpkg.com/react-native-magnus/-/react-native-magnus-1.0.63.tgz#c156c6a7a0144c8a31f8a2429b9ad462aef5bc0f"
-  integrity sha512-fdL6xgRahVkfVII4ZpzwfyGGlkY7jPdC44Tw/6DBXf+ZiotAq7B7vG0ZC5hFhk5gGPyXra+Nd3ch37kQe6OEig==
-  dependencies:
-    color "^4.2.3"
-    deepmerge "^4.2.2"
-    validate-color "^2.2.1"
 
 react-native-modal@13.0.1:
   version "13.0.1"
@@ -8283,10 +8293,15 @@ react-native-svg@13.4.0:
     css-select "^5.1.0"
     css-tree "^1.1.3"
 
-react-native-vector-icons@9.2.0:
-  version "9.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-9.2.0.tgz#3c0c82e95defd274d56363cbe8fead8d53167ebd"
-  integrity sha512-wKYLaFuQST/chH3AJRjmOLoLy3JEs1JR6zMNgTaemFpNoXs0ztRnTxcxFD9xhX7cJe1/zoN5BpQYe7kL0m5yyA==
+react-native-toast-message@2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/react-native-toast-message/-/react-native-toast-message-2.1.6.tgz#322827c66901fa22cb3db614c7383cc717f5bbe2"
+  integrity sha512-VctXuq20vmRa9AE13acaNZhrLcS3FaBS2zEevS3+vhBsnVZYG0FIlWIis9tVnpnNxUb3ART+BWtwQjzSttXTng==
+
+react-native-vector-icons@10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-10.0.0.tgz#0f031f7717f76f0a397f725de9b5a47ec87862e9"
+  integrity sha512-efMOVbZIebY8RszZPzPBoXi9pvD/NFYmjIDYxRoc9LYSzV8rMJtT8FfcO2hPu85Rn2x9xktha0+qn0B7EqMAcQ==
   dependencies:
     prop-types "^15.7.2"
     yargs "^16.1.1"
@@ -8387,6 +8402,15 @@ recast@^0.20.4:
     esprima "~4.0.0"
     source-map "~0.6.1"
     tslib "^2.0.1"
+
+recyclerlistview@4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/recyclerlistview/-/recyclerlistview-4.2.0.tgz#a140149aaa470c9787a1426452651934240d69ef"
+  integrity sha512-uuBCi0c+ggqHKwrzPX4Z/mJOzsBbjZEAwGGmlwpD/sD7raXixdAbdJ6BTcAmuWG50Cg4ru9p12M94Njwhr/27A==
+  dependencies:
+    lodash.debounce "4.0.8"
+    prop-types "15.8.1"
+    ts-object-utils "0.0.5"
 
 regenerate-unicode-properties@^10.1.0:
   version "10.1.0"
@@ -9391,6 +9415,11 @@ ts-interface-checker@^0.1.9:
   resolved "https://registry.yarnpkg.com/ts-interface-checker/-/ts-interface-checker-0.1.13.tgz#784fd3d679722bc103b1b4b8030bcddb5db2a699"
   integrity sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==
 
+ts-object-utils@0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/ts-object-utils/-/ts-object-utils-0.0.5.tgz#95361cdecd7e52167cfc5e634c76345e90a26077"
+  integrity sha512-iV0GvHqOmilbIKJsfyfJY9/dNHCs969z3so90dQWsO1eMMozvTpnB1MEaUbb3FYtZTGjv5sIy/xmslEz0Rg2TA==
+
 tsconfig-paths@^3.14.1:
   version "3.14.2"
   resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-3.14.2.tgz#6e32f1f79412decd261f92d633a9dc1cfa99f088"
@@ -9400,6 +9429,11 @@ tsconfig-paths@^3.14.1:
     json5 "^1.0.2"
     minimist "^1.2.6"
     strip-bom "^3.0.0"
+
+tslib@2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
+  integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==
 
 tslib@^1.8.1, tslib@^1.9.0:
   version "1.14.1"
@@ -9680,10 +9714,10 @@ valid-url@~1.0.9:
   resolved "https://registry.yarnpkg.com/valid-url/-/valid-url-1.0.9.tgz#1c14479b40f1397a75782f115e4086447433a200"
   integrity sha512-QQDsV8OnSf5Uc30CKSwG9lnhMPe6exHtTXLRYX8uMwKENy640pU+2BgBL0LRbDh/eYRahNCS7aewCx0wf3NYVA==
 
-validate-color@^2.2.1:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/validate-color/-/validate-color-2.2.4.tgz#77acf863458cd637ee944f604932512f6cbe6103"
-  integrity sha512-Znolz+b6CwW6eBXYld7MFM3O7funcdyRfjKC/X9hqYV/0VcC5LB/L45mff7m3dIn9wdGdNOAQ/fybNuD5P/HDw==
+validate-color@2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/validate-color/-/validate-color-2.2.1.tgz#f97214883304f87eaa9dc1eb8e9d8cd8b606a5d1"
+  integrity sha512-1eDb1zqP6W6bbfKKl6dRXObelNoQpW7aF3BUTh2AivWuhcD0pa3ejwURWqrVsyKJMLBMlHLFcM3sj5J+dSFhbg==
 
 validate-npm-package-name@^3.0.0:
   version "3.0.0"

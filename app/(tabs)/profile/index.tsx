@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import { useAuthContext } from '@/modules/auth/AuthContext';
-import { Button, Div, Icon, Modal, Text, useTheme } from 'react-native-magnus';
+import { Button, Box, Icon, Modal, Text } from 'react-native-ficus-ui';
 import { Formiz, useForm } from '@formiz/core';
 import { FieldInput } from '@/components/FieldInput';
 import {
@@ -15,7 +15,6 @@ import ThemeSwitcher from '@/theme/ThemeSwitcher';
 const Profile = () => {
   const router = useRouter();
   const { logout } = useAuthContext();
-  const { theme } = useTheme();
 
   const { account, isLoading, isError, refetch: refetchAccount } = useAccount();
   const [modalVisible, setModalVisible] = useState(false);
@@ -44,9 +43,9 @@ const Profile = () => {
 
   if (isError || !account) {
     return (
-      <Div bg="body" flex={1} p={20}>
+      <Box flex={1} p={20}>
         <Button onPress={() => refetchAccount()}>Retry</Button>
-      </Div>
+      </Box>
     );
   }
 
@@ -60,90 +59,59 @@ const Profile = () => {
 
   return (
     <>
-      <Div bg="body" flex={1} p={20}>
-        <Div>
-          <Button
-            onPress={handleOpenChangePassword}
-            bg={theme.colors?.cancelButtonBg}
-            color={theme.colors?.cancelButtonColor}
-            block
-          >
+      <Box flex={1} p={20}>
+        <Box>
+          <Button onPress={handleOpenChangePassword} full>
             <Icon
               name="unlock"
-              color={theme.colors?.cancelButtonColor}
               fontSize="lg"
               fontFamily="Feather"
+              color="gray.50"
             />
-            <Text ml={10} fontSize="lg" color={theme.colors?.cancelButtonColor}>
+            <Text ml={10} fontSize="lg" color="gray.50">
               Update password
             </Text>
           </Button>
-        </Div>
+        </Box>
         <ThemeSwitcher />
-        <Div position="absolute" left={20} bottom={20}>
-          <Div mt={10}>
-            <Button
-              bg={theme.colors?.dangerButtonBg}
-              onPress={handleLogoutModal}
-              block
-            >
+        <Box position="absolute" left={20} bottom={20}>
+          <Box mt={10}>
+            <Button onPress={handleLogoutModal} full>
               <Icon
                 name="logout"
-                color={theme.colors?.dangerButtonColor}
                 fontSize="lg"
                 fontFamily="AntDesign"
+                color="gray.50"
               />
-              <Text
-                ml={10}
-                fontSize="lg"
-                color={theme.colors?.dangerButtonColor}
-              >
+              <Text ml={10} fontSize="lg" color="gray.50">
                 Logout
               </Text>
             </Button>
-          </Div>
-          <Div mt={10}>
-            <Button
-              bg={theme.colors?.dangerButtonBg}
-              onPress={handleDeleteAccountModal}
-              block
-            >
+          </Box>
+          <Box mt={10}>
+            <Button onPress={handleDeleteAccountModal} full>
               <Icon
                 name="deleteuser"
-                color={theme.colors?.dangerButtonColor}
                 fontSize="lg"
                 fontFamily="AntDesign"
+                color="gray.50"
               />
-              <Text
-                ml={10}
-                fontSize="lg"
-                color={theme.colors?.dangerButtonColor}
-              >
+              <Text ml={10} fontSize="lg" color="gray.50">
                 Delete account
               </Text>
             </Button>
-          </Div>
-        </Div>
-      </Div>
+          </Box>
+        </Box>
+      </Box>
       <Modal
         animationIn="slideInUp"
-        // transparent
         isVisible={modalVisible}
         h={200}
         onBackdropPress={() => {
           setModalVisible(!modalVisible);
         }}
       >
-        <Div
-          // borderRadius={15}
-          shadow={9}
-          w="100%"
-          bg="body"
-          position="absolute"
-          bottom={0}
-          p={10}
-          pt={20}
-        >
+        <Box w="100%" position="absolute">
           <Text fontWeight="bold" textAlign="center" fontSize="3xl">
             Logout
           </Text>
@@ -151,34 +119,18 @@ const Profile = () => {
             Do you really want to logout from the application?
           </Text>
 
-          <Div mt="xl" m="lg">
-            <Button bg={theme.colors?.dangerButtonBg} onPress={logout} block>
-              <Icon
-                name="logout"
-                color={theme.colors?.dangerButtonColor}
-                fontSize="lg"
-                fontFamily="AntDesign"
-              />
-              <Text
-                ml={10}
-                fontSize="lg"
-                color={theme.colors?.dangerButtonColor}
-              >
+          <Box mt="xl" m="lg">
+            <Button onPress={logout} full>
+              <Icon name="logout" fontSize="lg" fontFamily="AntDesign" />
+              <Text ml={10} fontSize="lg">
                 Logout
               </Text>
             </Button>
-            <Button
-              onPress={handleLogoutModal}
-              mt={10}
-              mb={20}
-              bg={theme.colors?.cancelButtonBg}
-              color={theme.colors?.cancelButtonColor}
-              block
-            >
+            <Button onPress={handleLogoutModal} mt={10} mb={20} full>
               Cancel
             </Button>
-          </Div>
-        </Div>
+          </Box>
+        </Box>
       </Modal>
 
       <Modal
@@ -187,11 +139,10 @@ const Profile = () => {
         h={200}
         onBackdropPress={handleDeleteAccountModal}
       >
-        <Div
-          // borderRadius={15}
-          shadow={9}
+        <Box
+          borderRadius={15}
+          shadow="md"
           w="100%"
-          bg="body"
           position="absolute"
           bottom={0}
           p={10}
@@ -205,7 +156,7 @@ const Profile = () => {
             Do you really want to delete your account?
           </Text>
 
-          <Div mt="xl" m="lg">
+          <Box mt="xl" m="lg">
             <Text fontSize="lg" mt={10} mb={20}>
               This action is irreversible and immediate. All your data will be
               will be deleted immediately. You will have to recreate an account.
@@ -224,35 +175,23 @@ const Profile = () => {
               />
 
               <Button
-                bg={theme.colors?.dangerButtonBg}
                 onPress={deleteAccount}
-                loading={isDeletingAccount}
-                block
+                isLoading={isDeletingAccount}
+                full
                 mt={10}
                 disabled={!confirmationForm.isValid}
               >
-                <Text
-                  ml={10}
-                  fontSize="lg"
-                  color={theme.colors?.dangerButtonColor}
-                >
+                <Text ml={10} fontSize="lg">
                   Confirm the deletion of account
                 </Text>
               </Button>
             </Formiz>
 
-            <Button
-              onPress={handleDeleteAccountModal}
-              mt={10}
-              mb={20}
-              bg={theme.colors?.cancelButtonBg}
-              color={theme.colors?.cancelButtonColor}
-              block
-            >
+            <Button onPress={handleDeleteAccountModal} mt={10} mb={20} full>
               Cancel
             </Button>
-          </Div>
-        </Div>
+          </Box>
+        </Box>
       </Modal>
     </>
   );

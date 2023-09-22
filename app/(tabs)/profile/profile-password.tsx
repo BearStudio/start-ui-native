@@ -1,6 +1,6 @@
 import { Formiz, useForm } from '@formiz/core';
 import { FieldInput } from '@/components/FieldInput';
-import { Button, Div } from 'react-native-magnus';
+import { Button, Box } from 'react-native-ficus-ui';
 import { isMinLength } from '@formiz/validations';
 import { useRef } from 'react';
 import { useUpdatePassword } from '@/modules/account/account.service';
@@ -34,24 +34,30 @@ const Update = () => {
   };
 
   return (
-    <Div bg="body" h="100%">
+    <Box h="100%">
       <Formiz onValidSubmit={submitForm} connect={changePasswordForm}>
-        <Div flex={1} flexDir="column" p={20} justifyContent="space-between">
-          <Div>
+        <Box
+          flex={1}
+          flexDirection="column"
+          p={20}
+          justifyContent="space-between"
+        >
+          <Box>
             <FieldInput
               name="currentPassword"
               label="Current password"
-              secureTextEntry
               required="The current password is required"
-              onSubmitEditing={focus(newPasswordRef)}
-              returnKeyType="next"
+              componentProps={{
+                secureTextEntry: true,
+                onSubmitEditing: focus(newPasswordRef),
+                returnKeyType: 'next',
+              }}
             />
 
             <FieldInput
               ref={newPasswordRef}
               name="newPassword"
               label="New password"
-              secureTextEntry
               required="New password is required"
               validations={[
                 {
@@ -59,15 +65,17 @@ const Update = () => {
                   message: 'Password must contains at least 6 characters',
                 },
               ]}
-              onSubmitEditing={focus(confirmPasswordRef)}
-              returnKeyType="next"
+              componentProps={{
+                secureTextEntry: true,
+                onSubmitEditing: focus(confirmPasswordRef),
+                returnKeyType: 'next',
+              }}
             />
 
             <FieldInput
               ref={confirmPasswordRef}
               name="confirmPassword"
               label="Confirm password"
-              secureTextEntry
               required="Password confirmation is required"
               validations={[
                 {
@@ -76,21 +84,23 @@ const Update = () => {
                   message: 'Confirmation does not match the password',
                 },
               ]}
-              onSubmitEditing={() => changePasswordForm.submit()}
-              returnKeyType="next"
+              componentProps={{
+                secureTextEntry: true,
+                onSubmitEditing: () => changePasswordForm.submit(),
+                returnKeyType: 'done',
+              }}
             />
-          </Div>
+          </Box>
           <Button
-            block
-            bg="primary500"
-            loading={isLoading}
+            full
+            isLoading={isLoading}
             onPress={() => changePasswordForm.submit()}
           >
             Update
           </Button>
-        </Div>
+        </Box>
       </Formiz>
-    </Div>
+    </Box>
   );
 };
 

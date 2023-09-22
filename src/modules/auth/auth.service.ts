@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios';
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 
 import { useAuthContext } from './AuthContext';
-import { useToast } from '@/modules/toast/useToast';
+import { useToast } from 'react-native-ficus-ui';
 
 export const useLogin = (
   config: UseMutationOptions<
@@ -12,7 +12,7 @@ export const useLogin = (
   > = {}
 ) => {
   const { updateToken } = useAuthContext();
-  const { showError } = useToast();
+  const { show } = useToast();
   const mutation = useMutation(
     ({ username, password }) =>
       axios.post('/authenticate', { username, password }),
@@ -24,9 +24,15 @@ export const useLogin = (
       },
       onError: (error, ...rest) => {
         if (error?.response?.status === 401) {
-          showError('Wrong email or password. Please try again.');
+          show({
+            text1: 'Wrong email or password. Please try again.',
+            type: 'error',
+          });
         } else {
-          showError('Failed to log in. Please try again');
+          show({
+            text1: 'Failed to log in. Please try again.',
+            type: 'error',
+          });
         }
         config?.onError?.(error, ...rest);
       },

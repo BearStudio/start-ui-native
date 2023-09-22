@@ -3,7 +3,7 @@ import { FieldInput } from '@/components/FieldInput';
 import { focus } from '@/utils/formUtils';
 import { useRef } from 'react';
 import { TextInput } from 'react-native';
-import { Button, Div } from 'react-native-magnus';
+import { Button, Box } from 'react-native-ficus-ui';
 import { isEmail, isMinLength } from '@formiz/validations';
 import { useCreateAccount } from '@/modules/account/account.service';
 import { useRouter } from 'expo-router';
@@ -41,19 +41,18 @@ const Register = () => {
   };
 
   return (
-    <Div bg="body" h="100%">
+    <Box h="100%">
       <Formiz onValidSubmit={submitForm} connect={registerForm}>
-        <Div flex={1} flexDir="column" p={20} justifyContent="space-between">
-          <Div>
+        <Box
+          flex={1}
+          flexDirection="column"
+          p={20}
+          justifyContent="space-between"
+        >
+          <Box>
             <FieldInput
               name="email"
               label="Mail address"
-              textContentType="emailAddress"
-              autoCapitalize="none"
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              autoCompleteType="email"
-              keyboardType="email-address"
               required="Mail is required"
               validations={[
                 {
@@ -61,8 +60,14 @@ const Register = () => {
                   message: 'Mail is invalid',
                 },
               ]}
-              onSubmitEditing={focus(passwordRef)}
-              returnKeyType="next"
+              componentProps={{
+                textContentType: 'emailAddress',
+                autoCapitalize: 'none',
+                autoComplete: 'email',
+                keyboardType: 'email-address',
+                onSubmitEditing: focus(passwordRef),
+                returnKeyType: 'next',
+              }}
             />
 
             <FieldInput
@@ -71,7 +76,6 @@ const Register = () => {
               ref={passwordRef}
               name="password"
               label="Password"
-              secureTextEntry
               required="Password is required"
               validations={[
                 {
@@ -79,8 +83,11 @@ const Register = () => {
                   message: 'Password must contains at least 6 characters',
                 },
               ]}
-              onSubmitEditing={focus(confirmPasswordRef)}
-              returnKeyType="next"
+              componentProps={{
+                secureTextEntry: true,
+                onSubmitEditing: focus(confirmPasswordRef),
+                returnKeyType: 'next',
+              }}
             />
 
             <FieldInput
@@ -89,7 +96,6 @@ const Register = () => {
               ref={confirmPasswordRef}
               name="confirmPassword"
               label="Confirm password"
-              secureTextEntry
               required="Password confirmation is required"
               validations={[
                 {
@@ -98,22 +104,25 @@ const Register = () => {
                   message: 'Confirmation does not match the password',
                 },
               ]}
-              onSubmitEditing={() => registerForm.submit()}
-              returnKeyType="done"
+              componentProps={{
+                secureTextEntry: true,
+                onSubmitEditing: () => registerForm.submit(),
+                returnKeyType: 'done',
+              }}
             />
-          </Div>
+          </Box>
 
           <Button
-            bg="primary500"
-            block
-            loading={isLoading}
+            bg="brand.500"
+            full
+            isLoading={isLoading}
             onPress={() => registerForm.submit()}
           >
             Sign up
           </Button>
-        </Div>
+        </Box>
       </Formiz>
-    </Div>
+    </Box>
   );
 };
 

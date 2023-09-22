@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import { Image } from 'react-native';
-import { Button, Div, Text } from 'react-native-magnus';
+import { Button, Box, Text } from 'react-native-ficus-ui';
 
 const Onboarding = () => {
   const router = useRouter();
@@ -16,8 +16,8 @@ const Onboarding = () => {
   };
 
   return (
-    <Div bg="body" p={20} h="100%" justifyContent="center">
-      <Div>
+    <Box p={20} h="100%" justifyContent="center">
+      <Box>
         <Image
           source={logoImage}
           style={{
@@ -30,13 +30,12 @@ const Onboarding = () => {
         <Text fontSize="lg" textAlign="center">
           An opinionated UI starter with Expo, Magnus UI, React Query & Formiz
         </Text>
-        <Button mt="xl" bg="primary500" block onPress={handleOpenRegister}>
-          {'Sign up with mail'}
+        <Button mt="xl" bg="brand.500" onPress={handleOpenRegister}>
+          Sign up with mail
         </Button>
-        <Div flexDir="row" justifyContent="center" p={10}>
+        <Box flexDirection="row" justifyContent="center" p={10}>
           <Button
             bg="transparent"
-            color="pText"
             fontSize={16}
             onPress={handleOpenLogin}
             px={0}
@@ -45,7 +44,7 @@ const Onboarding = () => {
           </Button>
           <Button
             bg="transparent"
-            color="primary600"
+            color="brand.600"
             fontSize={16}
             onPress={handleOpenLogin}
             px={0}
@@ -53,9 +52,9 @@ const Onboarding = () => {
           >
             Sign in
           </Button>
-        </Div>
-      </Div>
-    </Div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 
