@@ -57,10 +57,12 @@ const ResetPassword = () => {
           />
 
           <Button
-            bg="brand.500"
-            full
-            isLoading={isLoadingResetPasswordInit}
             onPress={() => resetPasswordForm.submit()}
+            isLoading={isLoadingResetPasswordInit}
+            isDisabled={
+              resetPasswordForm.isSubmitted && !resetPasswordForm.isValid
+            }
+            full
           >
             Send mail
           </Button>

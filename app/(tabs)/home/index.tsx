@@ -15,7 +15,7 @@ const Home = () => {
         Welcome to 🚀 Start UI [native]
       </Text>
       <Text fontSize="lg" mt="md" color={colorModeValue('black', 'gray.50')}>
-        An opinionated UI starter with Expo, Magnus UI, React Query & Formiz
+        An opinionated UI starter with Expo, Ficus UI, React Query & Formiz
       </Text>
       <Text
         fontSize="lg"

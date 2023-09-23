@@ -20,17 +20,17 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = ({
 }) => {
   const { colorModeValue } = useDarkMode();
   return (
-    <Box mt={5} {...rest}>
+    <Box {...rest}>
       {!!label && (
         <Text color={colorModeValue('black', 'gray.100')}>{label}</Text>
       )}
       {children}
-      {showError && errorMessage && <Text color="red.500">{errorMessage}</Text>}
       {helper && (
-        <Text fontSize="sm" color={colorModeValue('gray.500', 'gray.600')}>
+        <Text fontSize="sm" color={colorModeValue('gray.700', 'gray.300')}>
           {helper}
         </Text>
       )}
+      {showError && errorMessage && <Text color="red.500">{errorMessage}</Text>}
     </Box>
   );
 };

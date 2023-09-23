@@ -52,11 +52,14 @@ export const FieldInput = React.forwardRef<TextInput, FieldInputProps>(
           value={value ?? ''}
           onChangeText={setValue}
           onBlur={handleBlur}
-          focusBorderColor="brand.500"
-          borderColor={showError ? 'red500' : 'gray300'}
-          borderWidth={2}
+          focusBorderColor="blue.500"
+          borderColor={
+            showError ? 'red.500' : colorModeValue('gray.300', 'gray.500')
+          }
+          borderWidth={1}
           color={colorModeValue('black', 'gray.100')}
-          bg={colorModeValue('gray.50', 'gray.600')}
+          bg={colorModeValue('gray.100', 'gray.600')}
+          placeholderTextColor={colorModeValue('gray.900', 'gray.50')}
           my={5}
           {...componentProps}
         />

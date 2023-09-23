@@ -1,6 +1,14 @@
 import { useRouter } from 'expo-router';
 import { useAuthContext } from '@/modules/auth/AuthContext';
-import { Button, Box, Icon, Modal, Text } from 'react-native-ficus-ui';
+import {
+  Button,
+  Box,
+  Icon,
+  Modal,
+  Text,
+  Stack,
+  useDisclosure,
+} from 'react-native-ficus-ui';
 import { Formiz, useForm } from '@formiz/core';
 import { FieldInput } from '@/components/FieldInput';
 import {
@@ -8,18 +16,16 @@ import {
   useDeleteAccount,
 } from '@/modules/account/account.service';
 import { useToast } from '@/modules/toast/useToast';
-import { useState } from 'react';
 import { LoadingScreen } from '@/layout/LoadingScreen';
 import ThemeSwitcher from '@/theme/ThemeSwitcher';
+import { useDarkMode } from '@/theme/useDarkMode';
 
 const Profile = () => {
   const router = useRouter();
   const { logout } = useAuthContext();
+  const { colorModeValue } = useDarkMode();
 
   const { account, isLoading, isError, refetch: refetchAccount } = useAccount();
-  const [modalVisible, setModalVisible] = useState(false);
-  const [deleteAccountModalVisible, setDeleteAccountModalVisible] =
-    useState(false);
 
   const confirmationForm = useForm();
   const { showError, showSuccess } = useToast();
@@ -37,6 +43,9 @@ const Profile = () => {
       },
     });
 
+  const logoutModal = useDisclosure();
+  const deleteAccountModal = useDisclosure();
+
   if (isLoading) {
     return <LoadingScreen />;
   }
@@ -49,19 +58,11 @@ const Profile = () => {
     );
   }
 
-  const handleLogoutModal = () => setModalVisible((current) => !current);
-
-  const handleDeleteAccountModal = () =>
-    setDeleteAccountModalVisible((current) => !current);
-
-  const handleOpenChangePassword = () =>
-    router.push('/profile/profile-password');
-
   return (
     <>
       <Box flex={1} p={20}>
         <Box>
-          <Button onPress={handleOpenChangePassword} full>
+          <Button onPress={() => router.push('/profile/profile-password')} full>
             <Icon
               name="unlock"
               fontSize="lg"
@@ -76,7 +77,7 @@ const Profile = () => {
         <ThemeSwitcher />
         <Box position="absolute" left={20} bottom={20}>
           <Box mt={10}>
-            <Button onPress={handleLogoutModal} full>
+            <Button onPress={logoutModal.onOpen} full>
               <Icon
                 name="logout"
                 fontSize="lg"
@@ -89,7 +90,7 @@ const Profile = () => {
             </Button>
           </Box>
           <Box mt={10}>
-            <Button onPress={handleDeleteAccountModal} full>
+            <Button onPress={deleteAccountModal.onOpen} full>
               <Icon
                 name="deleteuser"
                 fontSize="lg"
@@ -105,66 +106,79 @@ const Profile = () => {
       </Box>
       <Modal
         animationIn="slideInUp"
-        isVisible={modalVisible}
-        h={200}
-        onBackdropPress={() => {
-          setModalVisible(!modalVisible);
-        }}
+        isVisible={logoutModal.isOpen}
+        h={220}
+        onBackdropPress={logoutModal.onClose}
       >
-        <Box w="100%" position="absolute">
-          <Text fontWeight="bold" textAlign="center" fontSize="3xl">
-            Logout
-          </Text>
-          <Text textAlign="center" fontSize="lg" my={10}>
-            Do you really want to logout from the application?
-          </Text>
+        <Stack p="xl" spacing="lg">
+          <Stack>
+            <Text
+              fontWeight="bold"
+              fontSize="3xl"
+              color={colorModeValue('gray.900', 'gray.50')}
+            >
+              Logout
+            </Text>
+            <Text fontSize="lg" color={colorModeValue('gray.900', 'gray.50')}>
+              Do you really want to logout from the application?
+            </Text>
+          </Stack>
 
-          <Box mt="xl" m="lg">
-            <Button onPress={logout} full>
-              <Icon name="logout" fontSize="lg" fontFamily="AntDesign" />
-              <Text ml={10} fontSize="lg">
+          <Stack spacing="md">
+            <Button onPress={logout} colorScheme="red" full>
+              <Icon
+                name="logout"
+                fontSize="lg"
+                fontFamily="AntDesign"
+                color="gray.50"
+              />
+              <Text ml={10} fontSize="lg" color="gray.50">
                 Logout
               </Text>
             </Button>
-            <Button onPress={handleLogoutModal} mt={10} mb={20} full>
+            <Button onPress={logoutModal.onClose} colorScheme="gray" full>
               Cancel
             </Button>
-          </Box>
-        </Box>
+          </Stack>
+        </Stack>
       </Modal>
 
       <Modal
         animationIn="slideInUp"
-        isVisible={deleteAccountModalVisible}
-        h={200}
-        onBackdropPress={handleDeleteAccountModal}
+        isVisible={deleteAccountModal.isOpen}
+        h={380}
+        onBackdropPress={deleteAccountModal.onClose}
       >
-        <Box
-          borderRadius={15}
-          shadow="md"
-          w="100%"
-          position="absolute"
-          bottom={0}
-          p={10}
-          pt={20}
-        >
-          <Text fontWeight="bold" textAlign="center" fontSize="3xl">
-            Account deletion
-          </Text>
-
-          <Text textAlign="center" fontSize="lg" my={10}>
-            Do you really want to delete your account?
-          </Text>
-
-          <Box mt="xl" m="lg">
-            <Text fontSize="lg" mt={10} mb={20}>
-              This action is irreversible and immediate. All your data will be
-              will be deleted immediately. You will have to recreate an account.
+        <Stack p="xl" spacing="lg">
+          <Stack>
+            <Text
+              fontWeight="bold"
+              fontSize="3xl"
+              color={colorModeValue('gray.900', 'gray.50')}
+            >
+              Account deletion
             </Text>
-            <Formiz connect={confirmationForm}>
+            <Text fontSize="lg" color={colorModeValue('gray.900', 'gray.50')}>
+              Do you really want to delete your account?
+            </Text>
+          </Stack>
+
+          <Formiz connect={confirmationForm} onValidSubmit={deleteAccount}>
+            <Stack spacing="lg">
+              <Text
+                fontSize="lg"
+                p="lg"
+                borderRadius="lg"
+                bg={colorModeValue('red.500', 'red.600')}
+                color={colorModeValue('white', 'gray.50')}
+              >
+                This action is irreversible and immediate. All your data will be
+                will be deleted immediately. You will have to recreate an
+                account.
+              </Text>
               <FieldInput
                 name="confirmation"
-                label={'Enter "DELETION"'}
+                label='Enter "DELETION"'
                 required="Confirmation required"
                 validations={[
                   {
@@ -174,24 +188,27 @@ const Profile = () => {
                 ]}
               />
 
-              <Button
-                onPress={deleteAccount}
-                isLoading={isDeletingAccount}
-                full
-                mt={10}
-                disabled={!confirmationForm.isValid}
-              >
-                <Text ml={10} fontSize="lg">
+              <Stack spacing="md">
+                <Button
+                  onPress={() => confirmationForm.submit()}
+                  isLoading={isDeletingAccount}
+                  disabled={!confirmationForm.isValid}
+                  colorScheme="red"
+                  full
+                >
                   Confirm the deletion of account
-                </Text>
-              </Button>
-            </Formiz>
-
-            <Button onPress={handleDeleteAccountModal} mt={10} mb={20} full>
-              Cancel
-            </Button>
-          </Box>
-        </Box>
+                </Button>
+                <Button
+                  onPress={deleteAccountModal.onClose}
+                  colorScheme="gray"
+                  full
+                >
+                  Cancel
+                </Button>
+              </Stack>
+            </Stack>
+          </Formiz>
+        </Stack>
       </Modal>
     </>
   );
