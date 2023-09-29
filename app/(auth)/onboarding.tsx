@@ -37,7 +37,7 @@ const Onboarding = () => {
         </Text>
       </Stack>
       <Stack spacing="md" alignItems="center">
-        <Button onPress={() => router.push('/register')}>
+        <Button onPress={() => router.push('/register')} colorScheme="blue">
           Sign up with mail
         </Button>
         <Stack direction="row" alignItems="center">

@@ -68,6 +68,7 @@ const Login = () => {
           onPress={() => loginForm.submit()}
           isLoading={isLoading}
           isDisabled={loginForm.isSubmitted && !loginForm.isValid}
+          colorScheme="blue"
           full
         >
           Sign in

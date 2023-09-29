@@ -79,8 +79,9 @@ const Update = () => {
               required="Password confirmation is required"
               validations={[
                 {
-                  rule: (value) => value === changePasswordForm.values.password,
-                  deps: [changePasswordForm.values.password],
+                  rule: (value) =>
+                    value === changePasswordForm.values.newPassword,
+                  deps: [changePasswordForm.values.newPassword],
                   message: 'Confirmation does not match the password',
                 },
               ]}
@@ -92,9 +93,13 @@ const Update = () => {
             />
           </Box>
           <Button
-            full
-            isLoading={isLoading}
             onPress={() => changePasswordForm.submit()}
+            isLoading={isLoading}
+            isDisabled={
+              changePasswordForm.isSubmitted && !changePasswordForm.isValid
+            }
+            colorScheme="blue"
+            full
           >
             Update
           </Button>

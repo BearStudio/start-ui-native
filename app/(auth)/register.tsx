@@ -110,6 +110,7 @@ const Register = () => {
           onPress={() => registerForm.submit()}
           isLoading={isLoading}
           isDisabled={registerForm.isSubmitted && !registerForm.isValid}
+          colorScheme="blue"
           full
         >
           Sign up

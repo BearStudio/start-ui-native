@@ -36,6 +36,7 @@ const Home = () => {
               color="gray.50"
             />
           }
+          colorScheme="blue"
           onPress={() =>
             router.replace('https://github.com/BearStudio/start-ui-native')
           }
@@ -55,7 +56,7 @@ const Home = () => {
               color="gray.50"
             />
           }
-          bg="brand.500"
+          colorScheme="blue"
           onPress={() =>
             router.replace(
               'https://github.com/BearStudio/start-ui-native/issues/new'

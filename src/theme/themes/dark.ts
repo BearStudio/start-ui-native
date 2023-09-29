@@ -1,5 +1,3 @@
-import { ThemeType } from 'react-native-ficus-ui';
-
 export default {
   name: 'dark',
   components: {
@@ -7,4 +5,4 @@ export default {
       bg: 'gray.900',
     },
   },
-} satisfies ThemeType;
+};

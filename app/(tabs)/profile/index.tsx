@@ -90,7 +90,7 @@ const Profile = () => {
             </Button>
           </Box>
           <Box mt={10}>
-            <Button onPress={deleteAccountModal.onOpen} full>
+            <Button onPress={deleteAccountModal.onOpen} colorScheme="red" full>
               <Icon
                 name="deleteuser"
                 fontSize="lg"
@@ -192,7 +192,9 @@ const Profile = () => {
                 <Button
                   onPress={() => confirmationForm.submit()}
                   isLoading={isDeletingAccount}
-                  disabled={!confirmationForm.isValid}
+                  isDisabled={
+                    confirmationForm.isSubmitted && !confirmationForm.isValid
+                  }
                   colorScheme="red"
                   full
                 >
