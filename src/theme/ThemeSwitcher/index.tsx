@@ -1,48 +1,24 @@
-import React, { useContext } from 'react';
-import { StatusBar } from 'react-native';
-import { Button, Text, Div, Icon, ThemeContext } from 'react-native-magnus';
+import React from 'react';
+import { Button, Text, Box, Icon } from 'react-native-ficus-ui';
 
-import { THEME_KEY, theme as magnusTheme } from '@/theme';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDarkMode } from '@/theme/useDarkMode';
 
 export default function ThemeSwitcher() {
-  const { theme, setTheme } = useContext(ThemeContext);
-
-  /**
-   * changes the theme on toggle press
-   * if the theme is dark, set theme to light
-   * else to dark
-   */
-  const onToggle = async () => {
-    if (theme.name === 'dark') {
-      setTheme(magnusTheme.light);
-      StatusBar.setBarStyle('dark-content');
-      await AsyncStorage.setItem(THEME_KEY, 'light');
-    } else {
-      setTheme(magnusTheme.dark);
-      StatusBar.setBarStyle('light-content');
-      await AsyncStorage.setItem(THEME_KEY, 'dark');
-    }
-  };
+  const { colorMode, toggleColorMode } = useDarkMode();
 
   return (
-    <Div mt="lg">
-      <Button
-        onPress={onToggle}
-        bg={theme.colors?.cancelButtonBg}
-        color={theme.colors?.cancelButtonColor}
-        block
-      >
+    <Box mt="lg">
+      <Button onPress={toggleColorMode} full>
         <Icon
-          name={theme.name === 'light' ? 'moon' : 'sun'}
-          color={theme.colors?.cancelButtonColor}
+          name={colorMode === 'light' ? 'moon' : 'sun'}
           fontSize="lg"
           fontFamily="Feather"
+          color="gray.50"
         />
-        <Text ml={10} fontSize="lg" color={theme.colors?.cancelButtonColor}>
-          {theme.name === 'light' ? 'Dark mode' : 'Light mode'}
+        <Text ml={10} fontSize="lg" color="gray.50">
+          {colorMode === 'light' ? 'Dark mode' : 'Light mode'}
         </Text>
       </Button>
-    </Div>
+    </Box>
   );
 }

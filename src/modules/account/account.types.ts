@@ -6,7 +6,6 @@ export type Account = {
   lastName?: string;
   email: string;
   activated: boolean;
-  langKey: string;
   authorities: AccountRole[];
   createdBy?: string;
   createdDate?: string;

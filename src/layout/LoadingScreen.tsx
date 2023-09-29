@@ -1,14 +1,23 @@
+import { useDarkMode } from '@/theme/useDarkMode';
 import React from 'react';
 
 import { ActivityIndicator } from 'react-native';
-import { Div, useTheme } from 'react-native-magnus';
+import { Box, useTheme } from 'react-native-ficus-ui';
 
 export const LoadingScreen = () => {
   const { theme } = useTheme();
 
+  const { colorModeValue } = useDarkMode();
+
   return (
-    <Div bg="body" h="100%" p={5} justifyContent="center" alignItems="center">
-      <ActivityIndicator color={theme.colors?.['primary500']} size="large" />
-    </Div>
+    <Box h="100%" p={5} justifyContent="center" alignItems="center">
+      <ActivityIndicator
+        color={colorModeValue(
+          theme.colors?.brand?.[600],
+          theme.colors?.brand?.[400]
+        )}
+        size="large"
+      />
+    </Box>
   );
 };

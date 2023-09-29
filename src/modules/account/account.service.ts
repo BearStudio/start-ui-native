@@ -50,7 +50,7 @@ export const useCreateAccount = (
   config: UseMutationOptions<
     Account,
     AxiosError<AccountError>,
-    Pick<Account, 'login' | 'email' | 'langKey'> & { password: string }
+    Pick<Account, 'login' | 'email'> & { password: string }
   > = {}
 ) => {
   return useMutation(

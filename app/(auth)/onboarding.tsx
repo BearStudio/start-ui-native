@@ -1,61 +1,77 @@
+import { useDarkMode } from '@/theme/useDarkMode';
 import { useRouter } from 'expo-router';
 import { Image } from 'react-native';
-import { Button, Div, Text } from 'react-native-magnus';
+import { Button, Icon, Stack, Text } from 'react-native-ficus-ui';
 
 const Onboarding = () => {
   const router = useRouter();
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const logoImage = require('../../assets/logo.png');
+  const { colorModeValue, toggleColorMode, colorMode } = useDarkMode();
 
-  const handleOpenRegister = () => {
-    router.push('/register');
-  };
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const logoWhite = require('../../assets/logo-white.png');
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const logoBlack = require('../../assets/logo-black.png');
 
   const handleOpenLogin = () => {
     router.push('/login');
   };
 
   return (
-    <Div bg="body" p={20} h="100%" justifyContent="center">
-      <Div>
+    <Stack p={20} spacing="2xl" h="100%" justifyContent="center">
+      <Stack>
         <Image
-          source={logoImage}
+          source={colorModeValue(logoBlack, logoWhite)}
           style={{
             resizeMode: 'contain',
             width: '100%',
-            height: 100,
+            height: 80,
           }}
           accessibilityLabel="Start UI Native Logo"
         />
-        <Text fontSize="lg" textAlign="center">
-          An opinionated UI starter with Expo, Magnus UI, React Query & Formiz
+        <Text
+          fontSize="lg"
+          textAlign="center"
+          color={colorModeValue('gray.900', 'gray.50')}
+        >
+          An opinionated UI starter with Expo, Ficus UI, React Query & Formiz
         </Text>
-        <Button mt="xl" bg="primary500" block onPress={handleOpenRegister}>
-          {'Sign up with mail'}
+      </Stack>
+      <Stack spacing="md" alignItems="center">
+        <Button onPress={() => router.push('/register')} colorScheme="blue">
+          Sign up with mail
         </Button>
-        <Div flexDir="row" justifyContent="center" p={10}>
-          <Button
-            bg="transparent"
-            color="pText"
-            fontSize={16}
+        <Stack direction="row" alignItems="center">
+          <Text
             onPress={handleOpenLogin}
-            px={0}
+            fontSize="xs"
+            color={colorModeValue('gray.900', 'gray.50')}
           >
             Already an account?
-          </Button>
+          </Text>
           <Button
-            bg="transparent"
-            color="primary600"
-            fontSize={16}
             onPress={handleOpenLogin}
-            px={0}
-            ml={20}
+            fontSize="xs"
+            colorScheme="transparent"
           >
-            Sign in
+            <Text
+              fontWeight="500"
+              textDecorLine="underline"
+              color={colorModeValue('gray.900', 'gray.50')}
+            >
+              Sign in
+            </Text>
           </Button>
-        </Div>
-      </Div>
-    </Div>
+        </Stack>
+        <Button onPress={toggleColorMode} mt="xl">
+          <Icon
+            name={colorMode === 'light' ? 'moon' : 'sun'}
+            fontSize="lg"
+            fontFamily="Feather"
+            color="gray.50"
+          />
+        </Button>
+      </Stack>
+    </Stack>
   );
 };
 

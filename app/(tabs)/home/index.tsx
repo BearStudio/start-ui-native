@@ -1,50 +1,74 @@
-import { Feather } from '@expo/vector-icons';
+import { useDarkMode } from '@/theme/useDarkMode';
 import { useRouter } from 'expo-router';
-import { Button, Div, Text } from 'react-native-magnus';
+import { Button, Box, Text, Icon } from 'react-native-ficus-ui';
 
 const Home = () => {
   const router = useRouter();
+  const { colorModeValue } = useDarkMode();
   return (
-    <Div bg="body" p={20} h="100%">
-      <Text color="pText" fontSize="2xl" fontWeight="bold">
+    <Box p={20} h="100%">
+      <Text
+        fontSize="2xl"
+        fontWeight="bold"
+        color={colorModeValue('black', 'gray.50')}
+      >
         Welcome to 🚀 Start UI [native]
       </Text>
-      <Text color="pText" fontSize="lg" mt="md">
-        An opinionated UI starter with Expo, Magnus UI, React Query & Formiz
+      <Text fontSize="lg" mt="md" color={colorModeValue('black', 'gray.50')}>
+        An opinionated UI starter with Expo, Ficus UI, React Query & Formiz
       </Text>
-      <Text color="pText" fontSize="lg" fontWeight="bold" mt="md">
+      <Text
+        fontSize="lg"
+        fontWeight="bold"
+        mt="md"
+        color={colorModeValue('black', 'gray.50')}
+      >
         - From the BearStudio Team
       </Text>
-      <Div mt={20}>
+      <Box mt={20}>
         <Button
-          block
-          prefix={<Feather name="github" size={24} color="white" />}
-          bg="primary500"
+          full
+          prefix={
+            <Icon
+              name="github"
+              fontSize="lg"
+              fontFamily="Feather"
+              color="gray.50"
+            />
+          }
+          colorScheme="blue"
           onPress={() =>
             router.replace('https://github.com/BearStudio/start-ui-native')
           }
         >
-          <Text ml={10} fontSize="lg" color="white">
+          <Text ml={10} fontSize="lg" color="gray.50">
             Github Repository
           </Text>
         </Button>
         <Button
           mt={10}
-          block
-          prefix={<Feather name="alert-circle" size={24} color="white" />}
-          bg="primary500"
+          full
+          prefix={
+            <Icon
+              name="alert-circle"
+              fontSize="lg"
+              fontFamily="Feather"
+              color="gray.50"
+            />
+          }
+          colorScheme="blue"
           onPress={() =>
             router.replace(
               'https://github.com/BearStudio/start-ui-native/issues/new'
             )
           }
         >
-          <Text ml={10} fontSize="lg" color="white">
+          <Text ml={10} fontSize="lg" color="gray.50">
             Open issue
           </Text>
         </Button>
-      </Div>
-    </Div>
+      </Box>
+    </Box>
   );
 };
 

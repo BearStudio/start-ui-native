@@ -12,7 +12,7 @@ This starter is oriented to use Expo with Expo EAS features to have fully access
 - 🚀 [Expo](https://expo.dev/)
 - 📱 [Expo EAS](https://expo.dev/eas)
 - ⚛️ [Expo Router](https://expo.github.io/router/docs/)
-- 🔺 [Magnus UI](https://magnus-ui.com/)
+- 🔺 [Ficus UI](https://ficus-ui.com/)
 - ⚛️ [TanStack Query](https://react-query.tanstack.com/)
 - 🐜 [Formiz](https://formiz-react.com/)
 - ↔ [Axios](https://github.com/axios/axios)
