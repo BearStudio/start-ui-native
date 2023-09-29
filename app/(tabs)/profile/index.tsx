@@ -45,7 +45,7 @@ const Profile = () => {
   const logoutModal = useDisclosure();
   const deleteAccountModal = useDisclosure();
 
-  const confirmationForm = useForm({ onValidSubmit: deleteAccount });
+  const confirmationForm = useForm({ onValidSubmit: () => deleteAccount() });
 
   if (isLoading) {
     return <LoadingScreen />;

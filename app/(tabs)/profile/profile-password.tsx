@@ -36,7 +36,7 @@ const Update = () => {
   const values = useFormFields({
     connect: changePasswordForm,
     selector: 'value',
-    fields: ['password'] as const,
+    fields: ['newPassword'] as const,
   });
 
   return (
@@ -85,9 +85,8 @@ const Update = () => {
               required="Password confirmation is required"
               validations={[
                 {
-                  rule: (value) =>
-                    value === changePasswordForm.values.newPassword,
-                  deps: [changePasswordForm.values.newPassword],
+                  handler: (value) => value === values.newPassword,
+                  deps: [values.newPassword],
                   message: 'Confirmation does not match the password',
                 },
               ]}

@@ -34,7 +34,7 @@ const Login = () => {
             name="email"
             label="Mail address"
             required="Mail is required"
-            validations={[{ rule: isEmail(), message: 'Mail is invalid' }]}
+            validations={[{ handler: isEmail(), message: 'Mail is invalid' }]}
             componentProps={{
               autoCapitalize: 'none',
               keyboardType: 'email-address',

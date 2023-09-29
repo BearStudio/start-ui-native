@@ -9,15 +9,13 @@ type FieldInputProps<FormattedValue = string> = FieldProps<
   string,
   FormattedValue
 > &
-  Omit<FormGroupProps, 'id'> &
-  TextInputProps;
+  Omit<FormGroupProps, 'id'> & { componentProps?: TextInputProps };
 
 export const FieldInput = React.forwardRef(
   <FormattedValue = string,>(
     props: FieldInputProps<FormattedValue>,
     ref: ForwardedRef<TextInput>
   ) => {
-    const { label, placeholder } = props;
     const {
       id,
       value,

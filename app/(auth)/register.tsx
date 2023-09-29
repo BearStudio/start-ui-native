@@ -60,7 +60,7 @@ const Register = () => {
             required="Mail is required"
             validations={[
               {
-                rule: isEmail(),
+                handler: isEmail(),
                 message: 'Mail is invalid',
               },
             ]}
@@ -81,7 +81,7 @@ const Register = () => {
             required="Password is required"
             validations={[
               {
-                rule: isMinLength(6),
+                handler: isMinLength(6),
                 message: 'Password must contains at least 6 characters',
               },
             ]}
@@ -99,8 +99,8 @@ const Register = () => {
             required="Password confirmation is required"
             validations={[
               {
-                rule: (value) => value === registerForm.values.password,
-                deps: [registerForm.values.password],
+                handler: (value) => value === values.password,
+                deps: [values.password],
                 message: 'Confirmation does not match the password',
               },
             ]}
