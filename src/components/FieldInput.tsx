@@ -1,15 +1,21 @@
 import { FieldProps, useField } from '@formiz/core';
-import React, { useEffect, useState } from 'react';
+import React, { ForwardedRef, useEffect, useState } from 'react';
 import { FormGroup, FormGroupProps } from './FormGroup';
 import { TextInput, TextInputProps } from 'react-native';
 import { Input } from 'react-native-ficus-ui';
 import { useDarkMode } from '@/theme/useDarkMode';
 
-type FieldInputProps = FieldProps &
+type FieldInputProps<FormattedValue = string> = FieldProps<
+  string,
+  FormattedValue
+> &
   Omit<FormGroupProps, 'id'> & { componentProps?: TextInputProps };
 
-export const FieldInput = React.forwardRef<TextInput, FieldInputProps>(
-  (props, ref) => {
+export const FieldInput = React.forwardRef(
+  <FormattedValue = string,>(
+    props: FieldInputProps<FormattedValue>,
+    ref: ForwardedRef<TextInput>
+  ) => {
     const {
       id,
       value,

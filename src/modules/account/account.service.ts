@@ -148,7 +148,7 @@ export const useUpdatePassword = (
 };
 
 export const useDeleteAccount = (
-  config: UseMutationOptions<void, AxiosError, object> = {}
+  config: UseMutationOptions<void, AxiosError, void> = {}
 ) => {
   return useMutation(
     (): Promise<void> => Axios.delete('/extended/account'),

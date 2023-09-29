@@ -10,7 +10,6 @@ import { useLogin } from '@/modules/auth/auth.service';
 
 const Login = () => {
   const router = useRouter();
-  const loginForm = useForm();
 
   const passwordRef = useRef<TextInput>(null);
 
@@ -20,8 +19,10 @@ const Login = () => {
     login({ username: values.email, password: values.password });
   };
 
+  const loginForm = useForm({ onValidSubmit: submitForm });
+
   return (
-    <Formiz onValidSubmit={submitForm} connect={loginForm}>
+    <Formiz connect={loginForm}>
       <Stack
         h="100%"
         flexDirection="column"
@@ -33,7 +34,7 @@ const Login = () => {
             name="email"
             label="Mail address"
             required="Mail is required"
-            validations={[{ rule: isEmail(), message: 'Mail is invalid' }]}
+            validations={[{ handler: isEmail(), message: 'Mail is invalid' }]}
             componentProps={{
               autoCapitalize: 'none',
               keyboardType: 'email-address',

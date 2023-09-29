@@ -38,7 +38,9 @@ axios.defaults.baseURL = process.env.API_URL;
 
 axios.interceptors.request.use(
   async (config) => {
-    console.debug(`Calling ${config.baseURL}${config.url} in ${config.method}`);
+    console.debug(
+      `Calling ${config?.baseURL}${config.url} in ${config.method}`
+    );
     const userToken = await AsyncStorage.getItem(AUTH_TOKEN_KEY);
     const newConfig = config;
     if (userToken) {
@@ -54,7 +56,7 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   (response) => {
     console.debug(
-      `Call to ${response.config.baseURL}${response.config.url} in ${response.config.method} succeeded`
+      `Call to ${response.config?.baseURL}${response.config.url} in ${response.config.method} succeeded`
     );
     return response;
   },

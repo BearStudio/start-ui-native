@@ -10,7 +10,6 @@ type FormValues = TODO;
 
 const ResetPassword = () => {
   const router = useRouter();
-  const resetPasswordForm = useForm();
   const { showSuccess, showError } = useToast();
 
   const { mutate: resetPasswordInit, isLoading: isLoadingResetPasswordInit } =
@@ -28,9 +27,11 @@ const ResetPassword = () => {
     resetPasswordInit(values.email);
   };
 
+  const resetPasswordForm = useForm({ onValidSubmit: submitForm });
+
   return (
     <Box h="100%">
-      <Formiz onValidSubmit={submitForm} connect={resetPasswordForm}>
+      <Formiz connect={resetPasswordForm}>
         <Box
           flex={1}
           flexDirection="column"
@@ -44,7 +45,7 @@ const ResetPassword = () => {
             required="Mail address is required"
             validations={[
               {
-                rule: isEmail(),
+                handler: isEmail(),
                 message: 'Mail address is invalid',
               },
             ]}
