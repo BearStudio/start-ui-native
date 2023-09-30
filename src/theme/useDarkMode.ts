@@ -28,7 +28,9 @@ export const useDarkMode = () => {
 
   const getThemeColor = (color: `${string}.${ColorShade}`) => {
     const [mainColor, shade] = color.split('.');
-    return ficusThemes['colors']?.[mainColor]?.[shade as ColorShade];
+    return ficusThemes?.[theme.name as 'dark' | 'light']?.['colors']?.[
+      mainColor
+    ]?.[shade as ColorShade];
   };
 
   return {

@@ -103,7 +103,7 @@ const Update = () => {
             isDisabled={
               changePasswordForm.isSubmitted && !changePasswordForm.isValid
             }
-            colorScheme="blue"
+            colorScheme="brand"
             full
           >
             Update

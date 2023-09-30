@@ -91,7 +91,11 @@ const Profile = () => {
             </Button>
           </Box>
           <Box mt={10}>
-            <Button onPress={deleteAccountModal.onOpen} colorScheme="red" full>
+            <Button
+              onPress={deleteAccountModal.onOpen}
+              colorScheme="error"
+              full
+            >
               <Icon
                 name="deleteuser"
                 fontSize="lg"
@@ -126,7 +130,7 @@ const Profile = () => {
           </Stack>
 
           <Stack spacing="md">
-            <Button onPress={logout} colorScheme="red" full>
+            <Button onPress={logout} colorScheme="error" full>
               <Icon
                 name="logout"
                 fontSize="lg"
@@ -170,7 +174,7 @@ const Profile = () => {
                 fontSize="lg"
                 p="lg"
                 borderRadius="lg"
-                bg={colorModeValue('red.500', 'red.600')}
+                bg={colorModeValue('error.500', 'error.600')}
                 color={colorModeValue('white', 'gray.50')}
               >
                 This action is irreversible and immediate. All your data will be
@@ -196,7 +200,7 @@ const Profile = () => {
                   isDisabled={
                     confirmationForm.isSubmitted && !confirmationForm.isValid
                   }
-                  colorScheme="red"
+                  colorScheme="error"
                   full
                 >
                   Confirm the deletion of account

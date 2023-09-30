@@ -58,9 +58,9 @@ export const FieldInput = React.forwardRef(
           value={value ?? ''}
           onChangeText={setValue}
           onBlur={handleBlur}
-          focusBorderColor="blue.500"
+          focusBorderColor="brand.500"
           borderColor={
-            showError ? 'red.500' : colorModeValue('gray.300', 'gray.500')
+            showError ? 'error.500' : colorModeValue('gray.300', 'gray.500')
           }
           borderWidth={1}
           color={colorModeValue('black', 'gray.100')}

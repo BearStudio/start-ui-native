@@ -8,7 +8,7 @@ export const colors = {
   success: tailwindColors.green,
   green: tailwindColors.green,
 
-  error: tailwindColors.rose,
+  error: tailwindColors.red,
   red: tailwindColors.rose,
 
   warning: tailwindColors.amber,
