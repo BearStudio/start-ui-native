@@ -1,35 +1,116 @@
-import { Formiz, useForm } from '@formiz/core';
-import { FieldInput } from '@/components/FieldInput';
-import { TextInput } from 'react-native';
-import { useRouter } from 'expo-router';
-import { useRef } from 'react';
-import { Button, Stack } from 'react-native-ficus-ui';
-import { focus } from '@/utils/formUtils';
+import { FC, useState } from 'react';
+import {
+  Box,
+  Button,
+  Stack,
+  Text,
+  TouchableOpacity,
+} from 'react-native-ficus-ui';
+import {
+  Formiz,
+  useForm,
+  FormizStep,
+  useFormFields,
+  useFormContext,
+} from '@formiz/core';
 import { isEmail } from '@formiz/validations';
-import { useLogin } from '@/modules/auth/auth.service';
+import { FieldInput } from '@/components/FieldInput';
+import { useAuthLogin, useLoginValide } from '@/modules/auth/auth.service';
+import { CardInfo } from '@/components/CardInfo';
+import { useDarkMode } from '@/theme/useDarkMode';
 
-const Login = () => {
-  const router = useRouter();
+const CardInfoAuthStep = () => {
+  const myForm = useFormContext();
+  const { colorModeValue } = useDarkMode();
+  return (
+    <CardInfo title="Demo mode" mt="md">
+      <Box flexDirection="row" flexWrap="wrap">
+        <Text fontSize="lg" color={colorModeValue('gray.800', 'gray.50')}>
+          Enjoy the features! You can sign in with
+        </Text>
+        <TouchableOpacity
+          onPress={() => myForm.setValues({ email: 'admin@admin.com' })}
+        >
+          <Text
+            fontSize="lg"
+            fontWeight="700"
+            color={colorModeValue('gray.800', 'gray.50')}
+            textDecorationLine="underline"
+          >
+            admin@admin.com
+          </Text>
+        </TouchableOpacity>
+      </Box>
+    </CardInfo>
+  );
+};
 
-  const passwordRef = useRef<TextInput>(null);
-
-  const { login, isLoading } = useLogin();
-
-  const submitForm = (values: { email: string; password: string }) => {
-    login({ username: values.email, password: values.password });
-  };
-
-  const loginForm = useForm({ onValidSubmit: submitForm });
+const CardInfoValidateStep = () => {
+  const myForm = useFormContext();
+  const { colorModeValue } = useDarkMode();
 
   return (
-    <Formiz connect={loginForm}>
+    <CardInfo title="Demo mode" mt="md">
+      <Box flexDirection="row" flexWrap="wrap">
+        <Text fontSize="lg" color={colorModeValue('gray.800', 'gray.50')}>
+          To quickly connect, use the code
+        </Text>
+        <TouchableOpacity onPress={() => myForm.setValues({ code: '000000' })}>
+          <Text
+            fontSize="lg"
+            fontWeight="700"
+            color={colorModeValue('gray.800', 'gray.50')}
+            textDecorationLine="underline"
+          >
+            000000
+          </Text>
+        </TouchableOpacity>
+      </Box>
+    </CardInfo>
+  );
+};
+
+const Login = () => {
+  const [firstToken, setFirstToken] = useState('');
+
+  const myForm = useForm<{
+    email: string;
+    code: string;
+  }>({
+    onValidSubmit: (values) => {
+      loginValidate({ token: firstToken, code: values.code });
+    },
+  });
+
+  const { email } = useFormFields({
+    connect: myForm,
+    selector: (field) => field.value,
+  });
+
+  const { login: loginValidate, isLoading: isLoadingValidate } = useLoginValide(
+    {
+      onSuccess: () => myForm.goToNextStep(),
+      onError: (err) => console.error('Login validation error:', err),
+    }
+  );
+
+  const { login: authLogin, isLoading: isLoadingAuth } = useAuthLogin({
+    onSuccess: (data) => {
+      setFirstToken(data.token);
+      myForm.submitStep();
+    },
+    onError: (err) => console.error('Authentication error:', err),
+  });
+
+  return (
+    <Formiz connect={myForm}>
       <Stack
         h="100%"
         flexDirection="column"
         p={20}
         justifyContent="space-between"
       >
-        <Stack spacing="md">
+        <FormizStep name="step1" as={Box}>
           <FieldInput
             name="email"
             label="Mail address"
@@ -38,41 +119,35 @@ const Login = () => {
             componentProps={{
               autoCapitalize: 'none',
               keyboardType: 'email-address',
-              onSubmitEditing: focus(passwordRef),
               returnKeyType: 'next',
             }}
           />
-
+          <CardInfoAuthStep />
+        </FormizStep>
+        <FormizStep name="step2" as={Box}>
           <FieldInput
-            ref={passwordRef}
-            name="password"
-            label="Password"
-            required="Password is required"
+            name="code"
+            label="Code"
+            required="Code is required"
             componentProps={{
-              secureTextEntry: true,
-              onSubmitEditing: () => loginForm.submit(),
+              keyboardType: 'number-pad',
               returnKeyType: 'done',
             }}
           />
-
-          <Button
-            onPress={() => router.push('/reset-password')}
-            colorScheme="transparent"
-            textDecorLine="underline"
-            fontWeight="500"
-            p={0}
-          >
-            Forgot password?
-          </Button>
-        </Stack>
+          <CardInfoValidateStep />
+        </FormizStep>
         <Button
-          onPress={() => loginForm.submit()}
-          isLoading={isLoading}
-          isDisabled={loginForm.isSubmitted && !loginForm.isValid}
+          onPress={() =>
+            myForm.isLastStep
+              ? myForm.submitStep()
+              : authLogin({ email, language: 'en' })
+          }
+          isLoading={myForm.isLastStep ? isLoadingAuth : isLoadingValidate}
+          isDisabled={isLoadingAuth || isLoadingValidate}
           colorScheme="brand"
           full
         >
-          Sign in
+          {myForm.isLastStep ? 'Sign in' : 'Validate Email'}
         </Button>
       </Stack>
     </Formiz>

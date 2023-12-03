@@ -4,22 +4,21 @@ import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { useAuthContext } from './AuthContext';
 import { useToast } from 'react-native-ficus-ui';
 
-export const useLogin = (
+export const useLoginValide = (
   config: UseMutationOptions<
-    { id_token: string },
+    { token: string },
     AxiosError,
-    { username: string; password: string }
+    { code: string; token: string }
   > = {}
 ) => {
   const { updateToken } = useAuthContext();
   const { show } = useToast();
   const mutation = useMutation(
-    ({ username, password }) =>
-      axios.post('/authenticate', { username, password }),
+    ({ code, token }) => axios.post(`/auth/login/validate/${token}`, { code }),
     {
       ...config,
       onSuccess: (data, ...rest) => {
-        updateToken(data.id_token);
+        updateToken(data.token);
         config?.onSuccess?.(data, ...rest);
       },
       onError: (error, ...rest) => {
@@ -29,6 +28,35 @@ export const useLogin = (
             type: 'error',
           });
         } else {
+          show({
+            text1: 'Failed to log in. Please try again.',
+            type: 'error',
+          });
+        }
+        config?.onError?.(error, ...rest);
+      },
+    }
+  );
+  return { ...mutation, login: mutation.mutate };
+};
+
+export const useAuthLogin = (
+  config: UseMutationOptions<
+    { token: string },
+    AxiosError,
+    { email: string; language: string }
+  > = {}
+) => {
+  const { show } = useToast();
+  const mutation = useMutation(
+    ({ email, language }) => axios.post('/auth/login/', { email, language }),
+    {
+      ...config,
+      onSuccess: (data, ...rest) => {
+        config?.onSuccess?.(data, ...rest);
+      },
+      onError: (error, ...rest) => {
+        if (error) {
           show({
             text1: 'Failed to log in. Please try again.',
             type: 'error',
