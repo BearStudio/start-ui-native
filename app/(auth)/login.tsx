@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -16,14 +16,17 @@ import {
 import { isEmail } from '@formiz/validations';
 import { FieldInput } from '@/components/FieldInput';
 import { useAuthLogin, useLoginValide } from '@/modules/auth/auth.service';
-import { CardInfo } from '@/components/CardInfo';
 import { useDarkMode } from '@/theme/useDarkMode';
+import { useNavigation } from 'expo-router';
+import { ButtonGoBack } from '@/components/ButtonGoBack';
+import { BackHandler } from 'react-native';
+import { CardStatus } from '@/components/CardStatus';
 
 const CardInfoAuthStep = () => {
   const myForm = useFormContext();
   const { colorModeValue } = useDarkMode();
   return (
-    <CardInfo title="Demo mode" mt="md">
+    <CardStatus type="info" title="Demo mode" mt="md">
       <Box flexDirection="row" flexWrap="wrap">
         <Text fontSize="lg" color={colorModeValue('gray.800', 'gray.50')}>
           Enjoy the features! You can sign in with
@@ -37,11 +40,12 @@ const CardInfoAuthStep = () => {
             color={colorModeValue('gray.800', 'gray.50')}
             textDecorationLine="underline"
           >
+            {' '}
             admin@admin.com
           </Text>
         </TouchableOpacity>
       </Box>
-    </CardInfo>
+    </CardStatus>
   );
 };
 
@@ -50,7 +54,7 @@ const CardInfoValidateStep = () => {
   const { colorModeValue } = useDarkMode();
 
   return (
-    <CardInfo title="Demo mode" mt="md">
+    <CardStatus type="info" title="Demo mode" mt="md">
       <Box flexDirection="row" flexWrap="wrap">
         <Text fontSize="lg" color={colorModeValue('gray.800', 'gray.50')}>
           To quickly connect, use the code
@@ -62,11 +66,12 @@ const CardInfoValidateStep = () => {
             color={colorModeValue('gray.800', 'gray.50')}
             textDecorationLine="underline"
           >
+            {' '}
             000000
           </Text>
         </TouchableOpacity>
       </Box>
-    </CardInfo>
+    </CardStatus>
   );
 };
 
@@ -85,7 +90,30 @@ const Login = () => {
   const { email } = useFormFields({
     connect: myForm,
     selector: (field) => field.value,
+    fields: ['email'] as const,
   });
+
+  const navigation = useNavigation();
+  const goBack = useCallback(() => {
+    if (myForm.isLastStep) {
+      myForm.goToPreviousStep();
+      return true;
+    }
+    navigation.goBack();
+    return false;
+  }, [myForm, navigation]);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => <ButtonGoBack onPress={goBack} />,
+      headerTitle: myForm?.isLastStep ? 'Validate Email' : 'Login',
+    });
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      goBack
+    );
+    return () => backHandler.remove();
+  }, [navigation, myForm]);
 
   const { login: loginValidate, isLoading: isLoadingValidate } = useLoginValide(
     {
@@ -110,32 +138,44 @@ const Login = () => {
         p={20}
         justifyContent="space-between"
       >
-        <FormizStep name="step1" as={Box}>
-          <FieldInput
-            name="email"
-            label="Mail address"
-            required="Mail is required"
-            validations={[{ handler: isEmail(), message: 'Mail is invalid' }]}
-            componentProps={{
-              autoCapitalize: 'none',
-              keyboardType: 'email-address',
-              returnKeyType: 'next',
-            }}
-          />
-          <CardInfoAuthStep />
-        </FormizStep>
-        <FormizStep name="step2" as={Box}>
-          <FieldInput
-            name="code"
-            label="Code"
-            required="Code is required"
-            componentProps={{
-              keyboardType: 'number-pad',
-              returnKeyType: 'done',
-            }}
-          />
-          <CardInfoValidateStep />
-        </FormizStep>
+        <Box>
+          <FormizStep name="step1" as={Box}>
+            <FieldInput
+              name="email"
+              label="Mail address"
+              required="Mail is required"
+              validations={[{ handler: isEmail(), message: 'Mail is invalid' }]}
+              componentProps={{
+                autoCapitalize: 'none',
+                keyboardType: 'email-address',
+                returnKeyType: 'next',
+              }}
+            />
+            <CardInfoAuthStep />
+          </FormizStep>
+          <FormizStep name="step2" as={Box}>
+            <Text fontSize="2xl" fontWeight="bold">
+              Check your inbox for the code
+            </Text>
+            <Text mt="md">
+              We've sent a 6-character code to{' '}
+              <Text fontWeight="bold">{email}</Text> The code expires shortly (5
+              minutes).
+            </Text>
+            <FieldInput
+              name="code"
+              label="Verification code"
+              mt="lg"
+              required="Code is required"
+              componentProps={{
+                keyboardType: 'number-pad',
+                returnKeyType: 'done',
+              }}
+              isRequired
+            />
+            <CardInfoValidateStep />
+          </FormizStep>
+        </Box>
         <Button
           onPress={() =>
             myForm.isLastStep

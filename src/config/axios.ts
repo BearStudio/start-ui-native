@@ -43,6 +43,7 @@ axios.interceptors.request.use(
     );
     const userToken = await AsyncStorage.getItem(AUTH_TOKEN_KEY);
     const newConfig = config;
+    newConfig.headers['content-type'] = 'application/json';
     if (userToken) {
       newConfig.headers.Authorization = `Bearer ${userToken}`;
     }
@@ -67,3 +68,5 @@ axios.interceptors.response.use(
 );
 
 axios.interceptors.response.use((response) => response?.data);
+
+export default axios;

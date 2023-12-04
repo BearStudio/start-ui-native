@@ -50,12 +50,12 @@ export const useCreateAccount = (
   config: UseMutationOptions<
     Account,
     AxiosError<AccountError>,
-    Pick<Account, 'login' | 'email'> & { password: string }
+    Pick<Account, 'email' | 'name'>
   > = {}
 ) => {
   return useMutation(
-    ({ login, email, password }): Promise<Account> =>
-      Axios.post('/register', { login, email, password }),
+    ({ email, name }): Promise<Account> =>
+      Axios.post('/auth/register', { email, name, language: 'en' }),
     {
       ...config,
     }
