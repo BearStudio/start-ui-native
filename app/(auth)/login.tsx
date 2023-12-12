@@ -29,7 +29,7 @@ const CardInfoAuthStep = () => {
     <CardStatus type="info" title="Demo mode" mt="md">
       <Box flexDirection="row" flexWrap="wrap">
         <Text fontSize="lg" color={colorModeValue('gray.800', 'gray.50')}>
-          Enjoy the features! You can sign in with
+          Enjoy the features! You can sign in with{' '}
         </Text>
         <TouchableOpacity
           onPress={() => myForm.setValues({ email: 'admin@admin.com' })}
@@ -38,9 +38,8 @@ const CardInfoAuthStep = () => {
             fontSize="lg"
             fontWeight="700"
             color={colorModeValue('gray.800', 'gray.50')}
-            textDecorationLine="underline"
+            style={{ textDecorationLine: 'underline' }}
           >
-            {' '}
             admin@admin.com
           </Text>
         </TouchableOpacity>
@@ -57,7 +56,7 @@ const CardInfoValidateStep = () => {
     <CardStatus type="info" title="Demo mode" mt="md">
       <Box flexDirection="row" flexWrap="wrap">
         <Text fontSize="lg" color={colorModeValue('gray.800', 'gray.50')}>
-          To quickly connect, use the code
+          To quickly connect, use the code{' '}
         </Text>
         <TouchableOpacity onPress={() => myForm.setValues({ code: '000000' })}>
           <Text
@@ -65,8 +64,8 @@ const CardInfoValidateStep = () => {
             fontWeight="700"
             color={colorModeValue('gray.800', 'gray.50')}
             textDecorationLine="underline"
+            style={{ textDecorationLine: 'underline' }}
           >
-            {' '}
             000000
           </Text>
         </TouchableOpacity>
@@ -115,6 +114,8 @@ const Login = () => {
     return () => backHandler.remove();
   }, [navigation, myForm]);
 
+  const { colorModeValue } = useDarkMode();
+
   const { login: loginValidate, isLoading: isLoadingValidate } = useLoginValide(
     {
       onSuccess: () => myForm.goToNextStep(),
@@ -154,13 +155,22 @@ const Login = () => {
             <CardInfoAuthStep />
           </FormizStep>
           <FormizStep name="step2" as={Box}>
-            <Text fontSize="2xl" fontWeight="bold">
+            <Text
+              fontSize="2xl"
+              fontWeight="bold"
+              color={colorModeValue('gray.700', 'gray.50')}
+            >
               Check your inbox for the code
             </Text>
-            <Text mt="md">
+            <Text mt="md" color={colorModeValue('gray.700', 'gray.50')}>
               We've sent a 6-character code to{' '}
-              <Text fontWeight="bold">{email}</Text> The code expires shortly (5
-              minutes).
+              <Text
+                fontWeight="bold"
+                color={colorModeValue('gray.700', 'gray.50')}
+              >
+                {email}
+              </Text>{' '}
+              The code expires shortly (5 minutes).
             </Text>
             <FieldInput
               name="code"
