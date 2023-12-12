@@ -27,7 +27,7 @@ export const useAccount = (
 ) => {
   const { data: account, ...rest } = useQuery(
     accountKeys.account.queryKey,
-    (): Promise<Account> => Axios.get('/account'),
+    (): Promise<Account> => Axios.get('/accounts/me'),
     {
       onSuccess: (data) => {
         if (config?.onSuccess) {
@@ -37,7 +37,7 @@ export const useAccount = (
       ...config,
     }
   );
-  const isAdmin = !!account?.authorities?.includes('ROLE_ADMIN');
+  const isAdmin = !!account?.authorizations?.includes('ADMIN');
   return { account, isAdmin, ...rest };
 };
 
@@ -62,76 +62,6 @@ export const useCreateAccount = (
   );
 };
 
-type UseActiveAccountVariables = {
-  key: string;
-};
-
-export const useActivateAccount = (
-  config: UseMutationOptions<
-    void,
-    AxiosError<TODO>,
-    UseActiveAccountVariables
-  > = {}
-) => {
-  return useMutation(
-    ({ key }): Promise<void> => Axios.get(`/activate?key=${key}`),
-    {
-      ...config,
-    }
-  );
-};
-
-export const useUpdateAccount = (
-  config: UseMutationOptions<Account, AxiosError<TODO>, Account> = {}
-) => {
-  return useMutation(
-    (account): Promise<Account> => Axios.post('/account', account),
-    {
-      onMutate: (data) => {
-        if (config?.onMutate) {
-          config.onMutate(data);
-        }
-      },
-      ...config,
-    }
-  );
-};
-
-export const useResetPasswordInit = (
-  config: UseMutationOptions<void, AxiosError<TODO>, string> = {}
-) => {
-  return useMutation(
-    (email): Promise<void> =>
-      Axios.post('/account/reset-password/init', email, {
-        headers: { 'Content-Type': 'text/plain' },
-      }),
-    {
-      ...config,
-    }
-  );
-};
-
-type UseResetPasswordFinishVariables = {
-  key: string;
-  newPassword: string;
-};
-
-export const useResetPasswordFinish = (
-  config: UseMutationOptions<
-    void,
-    AxiosError<TODO>,
-    UseResetPasswordFinishVariables
-  > = {}
-) => {
-  return useMutation(
-    (payload): Promise<void> =>
-      Axios.post('/account/reset-password/finish', payload),
-    {
-      ...config,
-    }
-  );
-};
-
 export const useUpdatePassword = (
   config: UseMutationOptions<
     void,
@@ -144,14 +74,5 @@ export const useUpdatePassword = (
     {
       ...config,
     }
-  );
-};
-
-export const useDeleteAccount = (
-  config: UseMutationOptions<void, AxiosError, void> = {}
-) => {
-  return useMutation(
-    (): Promise<void> => Axios.delete('/extended/account'),
-    config
   );
 };

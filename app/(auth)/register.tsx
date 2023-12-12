@@ -1,4 +1,4 @@
-import { Formiz, useForm, useFormContext, useFormFields } from '@formiz/core';
+import { Formiz, useForm } from '@formiz/core';
 import { FieldInput } from '@/components/FieldInput';
 import { focus } from '@/utils/formUtils';
 import { useRef, useState } from 'react';
@@ -12,7 +12,7 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native-ficus-ui';
-import { isEmail, isMinLength } from '@formiz/validations';
+import { isEmail } from '@formiz/validations';
 import { useCreateAccount } from '@/modules/account/account.service';
 import { useRouter } from 'expo-router';
 import { useToast } from '@/modules/toast/useToast';
@@ -55,7 +55,7 @@ const Register = () => {
       router.replace('/login');
       showSuccess('You account has been created with success, you can login');
     },
-    onError: (error) => {
+    onError: () => {
       showError('An error occured during your registration, please try again');
       setIsModalVisible(true);
     },
@@ -66,6 +66,8 @@ const Register = () => {
       ...values,
     });
   };
+
+  const { colorModeValue } = useDarkMode();
 
   const registerForm = useForm({ onValidSubmit: submitForm });
 
@@ -118,7 +120,16 @@ const Register = () => {
         </Button>
       </Stack>
 
-      <Modal isOpen={isModalVisible} h={200} mb={200} m="xl" borderRadius="xl">
+      <Modal
+        isOpen={isModalVisible}
+        h={200}
+        style={{
+          bottom: '20%',
+        }}
+        m="xl"
+        borderRadius="xl"
+        bg={colorModeValue('gray.50', 'gray.900')}
+      >
         <Box>
           <Button
             position="absolute"
@@ -127,18 +138,33 @@ const Register = () => {
             bg="transparent"
             px="xs"
             py="xs"
+            zIndex={1}
             onPress={() => setIsModalVisible(false)}
+            underlayColor="transparent"
           >
             <Icon name="closecircle" fontFamily="AntDesign" fontSize="3xl" />
           </Button>
           <Stack p="xl" spacing="lg" position="relative" pt="2xl">
-            <Text fontWeight="bold" fontSize="xl" color="gray.900">
+            <Text
+              fontWeight="bold"
+              fontSize="xl"
+              color={colorModeValue('gray.900', 'gray.50')}
+            >
               This is a read-only demo, this action is disabled.
             </Text>
-            <CardStatus type="info" title="Need help?">
-              <Text>
+            <CardStatus
+              type="info"
+              title="Need help?"
+              bg={colorModeValue('gray.200', 'gray.700')}
+            >
+              <Text color={colorModeValue('gray.900', 'gray.50')}>
                 If you need help, please contact us at{' '}
-                <Text fontWeight="bold">start-ui@bearstudio.fr</Text>
+                <Text
+                  fontWeight="bold"
+                  color={colorModeValue('gray.900', 'gray.50')}
+                >
+                  start-ui@bearstudio.fr
+                </Text>
               </Text>
             </CardStatus>
           </Stack>

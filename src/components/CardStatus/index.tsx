@@ -35,14 +35,13 @@ export const CardStatus: FC<CardStatusProps> = ({
   const { colorModeValue } = useDarkMode();
   const { iconName, iconColor, iconColorDark } =
     statusStyles[type] || statusStyles.info;
-  console.log({ iconName });
   return (
     <Box
       bg={colorModeValue('gray.200', 'gray.900')}
       p="md"
       px="lg"
       borderRadius="md"
-      shadow="md"
+      overflow="hidden"
       justify="center"
       {...rest}
     >

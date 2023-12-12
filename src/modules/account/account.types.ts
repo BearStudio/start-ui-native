@@ -3,6 +3,6 @@ export type Account = {
   id: string;
   name?: string;
   email: string;
-  authorities: AccountRole[];
+  authorizations: AccountRole[];
   language: string;
 };
