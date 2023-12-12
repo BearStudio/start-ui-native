@@ -1,12 +1,14 @@
+import { useDarkMode } from '@/theme/useDarkMode';
 import { useNavigation } from 'expo-router';
 import { FC } from 'react';
 import { Button, ButtonProps, Icon } from 'react-native-ficus-ui';
 
 export const ButtonGoBack: FC<ButtonProps> = (props) => {
   const navigation = useNavigation();
+  const { colorModeValue } = useDarkMode();
   return (
     <Button
-      underlayColor="gray.900"
+      underlayColor={colorModeValue('gray.200', 'gray.700')}
       borderRadius="full"
       bg="transparent"
       px="xs"
@@ -19,7 +21,7 @@ export const ButtonGoBack: FC<ButtonProps> = (props) => {
       <Icon
         name="arrow-left"
         fontFamily="Feather"
-        color="white"
+        color={colorModeValue('gray.700', 'gray.50')}
         fontSize={23}
       />
     </Button>
