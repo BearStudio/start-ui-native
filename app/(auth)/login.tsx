@@ -23,7 +23,7 @@ import { BackHandler } from 'react-native';
 import { CardStatus } from '@/components/CardStatus';
 
 const CardInfoAuthStep = () => {
-  const myForm = useFormContext();
+  const loginForm = useFormContext();
   const { colorModeValue } = useDarkMode();
   return (
     <CardStatus type="info" title="Demo mode" mt="md">
@@ -32,7 +32,7 @@ const CardInfoAuthStep = () => {
           Enjoy the features! You can sign in with{' '}
         </Text>
         <TouchableOpacity
-          onPress={() => myForm.setValues({ email: 'admin@admin.com' })}
+          onPress={() => loginForm.setValues({ email: 'admin@admin.com' })}
         >
           <Text
             fontSize="lg"
@@ -49,7 +49,7 @@ const CardInfoAuthStep = () => {
 };
 
 const CardInfoValidateStep = () => {
-  const myForm = useFormContext();
+  const loginForm = useFormContext();
   const { colorModeValue } = useDarkMode();
 
   return (
@@ -58,7 +58,9 @@ const CardInfoValidateStep = () => {
         <Text fontSize="lg" color={colorModeValue('gray.800', 'gray.50')}>
           To quickly connect, use the code{' '}
         </Text>
-        <TouchableOpacity onPress={() => myForm.setValues({ code: '000000' })}>
+        <TouchableOpacity
+          onPress={() => loginForm.setValues({ code: '000000' })}
+        >
           <Text
             fontSize="lg"
             fontWeight="700"
@@ -77,7 +79,7 @@ const CardInfoValidateStep = () => {
 const Login = () => {
   const [firstToken, setFirstToken] = useState('');
 
-  const myForm = useForm<{
+  const loginForm = useForm<{
     email: string;
     code: string;
   }>({
@@ -87,38 +89,38 @@ const Login = () => {
   });
 
   const { email } = useFormFields({
-    connect: myForm,
+    connect: loginForm,
     selector: (field) => field.value,
     fields: ['email'] as const,
   });
 
   const navigation = useNavigation();
   const goBack = useCallback(() => {
-    if (myForm.isLastStep) {
-      myForm.goToPreviousStep();
+    if (loginForm.isLastStep) {
+      loginForm.goToPreviousStep();
       return true;
     }
     navigation.goBack();
     return false;
-  }, [myForm, navigation]);
+  }, [loginForm, navigation]);
 
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => <ButtonGoBack onPress={goBack} />,
-      headerTitle: myForm?.isLastStep ? 'Validate Email' : 'Login',
+      headerTitle: loginForm?.isLastStep ? 'Validate Email' : 'Login',
     });
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       goBack
     );
     return () => backHandler.remove();
-  }, [navigation, myForm]);
+  }, [navigation, loginForm]);
 
   const { colorModeValue } = useDarkMode();
 
   const { login: loginValidate, isLoading: isLoadingValidate } = useLoginValide(
     {
-      onSuccess: () => myForm.goToNextStep(),
+      onSuccess: () => loginForm.goToNextStep(),
       onError: (err) => console.error('Login validation error:', err),
     }
   );
@@ -126,13 +128,21 @@ const Login = () => {
   const { login: authLogin, isLoading: isLoadingAuth } = useAuthLogin({
     onSuccess: (data) => {
       setFirstToken(data.token);
-      myForm.submitStep();
+      loginForm.submitStep();
     },
     onError: (err) => console.error('Authentication error:', err),
   });
 
+  const handleSubmitButton = () => {
+    if (loginForm.isStepValid && loginForm.isFirstStep) {
+      authLogin({ email, language: 'en' });
+      return;
+    }
+    loginForm.submitStep();
+  };
+
   return (
-    <Formiz connect={myForm}>
+    <Formiz connect={loginForm}>
       <Stack
         h="100%"
         flexDirection="column"
@@ -187,17 +197,13 @@ const Login = () => {
           </FormizStep>
         </Box>
         <Button
-          onPress={() =>
-            myForm.isLastStep
-              ? myForm.submitStep()
-              : authLogin({ email, language: 'en' })
-          }
-          isLoading={myForm.isLastStep ? isLoadingAuth : isLoadingValidate}
+          onPress={handleSubmitButton}
+          isLoading={isLoadingAuth || isLoadingValidate}
           isDisabled={isLoadingAuth || isLoadingValidate}
           colorScheme="brand"
           full
         >
-          {myForm.isLastStep ? 'Sign in' : 'Validate Email'}
+          {loginForm.isLastStep ? 'Sign in' : 'Validate Email'}
         </Button>
       </Stack>
     </Formiz>
