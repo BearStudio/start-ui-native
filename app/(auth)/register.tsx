@@ -49,9 +49,6 @@ const CardDemoModeHint: FC<{
   onClose: (value: boolean) => void;
 }> = ({ isOpen, onClose }) => {
   const { colorModeValue } = useDarkMode();
-  if (process.env.IS_DEMO) {
-    return null;
-  }
   return (
     <Modal
       isOpen={isOpen}
@@ -117,9 +114,11 @@ const Register = () => {
       router.replace('/login');
       showSuccess('You account has been created with success, you can login');
     },
-    onError: () => {
+    onError: (err: any) => {
+      if (err.response?.data?.message?.startsWith('[DEMO]')) {
+        setIsModalVisible(true);
+      }
       showError('An error occured during your registration, please try again');
-      setIsModalVisible(true);
     },
   });
 
