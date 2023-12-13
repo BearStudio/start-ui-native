@@ -15,7 +15,7 @@ import {
 } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
 import { FieldInput } from '@/components/FieldInput';
-import { useAuthLogin, useLoginValide } from '@/modules/auth/auth.service';
+import { useAuthLogin, useLoginValid } from '@/modules/auth/auth.service';
 import { useDarkMode } from '@/theme/useDarkMode';
 import { useNavigation } from 'expo-router';
 import { ButtonGoBack } from '@/components/ButtonGoBack';
@@ -118,7 +118,7 @@ const Login = () => {
 
   const { colorModeValue } = useDarkMode();
 
-  const { login: loginValidate, isLoading: isLoadingValidate } = useLoginValide(
+  const { login: loginValidate, isLoading: isLoadingValidate } = useLoginValid(
     {
       onSuccess: () => loginForm.goToNextStep(),
       onError: (err) => console.error('Login validation error:', err),

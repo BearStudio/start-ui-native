@@ -4,7 +4,7 @@ import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { useAuthContext } from './AuthContext';
 import { useToast } from 'react-native-ficus-ui';
 
-export const useLoginValide = (
+export const useLoginValid = (
   config: UseMutationOptions<
     { token: string },
     AxiosError,

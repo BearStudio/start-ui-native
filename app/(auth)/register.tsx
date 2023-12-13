@@ -1,7 +1,7 @@
 import { Formiz, useForm } from '@formiz/core';
 import { FieldInput } from '@/components/FieldInput';
 import { focus } from '@/utils/formUtils';
-import { useRef, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 import { TextInput } from 'react-native';
 import {
   Box,
@@ -44,6 +44,68 @@ const CardWarningRegister = () => {
   );
 };
 
+const CardDemoModeHint: FC<{
+  isOpen: boolean;
+  onClose: (value: boolean) => void;
+}> = ({ isOpen, onClose }) => {
+  const { colorModeValue } = useDarkMode();
+  if (process.env.IS_DEMO) {
+    return null;
+  }
+  return (
+    <Modal
+      isOpen={isOpen}
+      h={200}
+      style={{
+        bottom: '20%',
+      }}
+      m="xl"
+      borderRadius="xl"
+      bg={colorModeValue('gray.50', 'gray.900')}
+    >
+      <Box>
+        <Button
+          position="absolute"
+          top={4}
+          right={4}
+          bg="transparent"
+          px="xs"
+          py="xs"
+          zIndex={1}
+          onPress={() => onClose(false)}
+          underlayColor="transparent"
+        >
+          <Icon name="closecircle" fontFamily="AntDesign" fontSize="3xl" />
+        </Button>
+        <Stack p="xl" spacing="lg" position="relative" pt="2xl">
+          <Text
+            fontWeight="bold"
+            fontSize="xl"
+            color={colorModeValue('gray.900', 'gray.50')}
+          >
+            This is a read-only demo, this action is disabled.
+          </Text>
+          <CardStatus
+            type="info"
+            title="Need help?"
+            bg={colorModeValue('gray.200', 'gray.700')}
+          >
+            <Text color={colorModeValue('gray.900', 'gray.50')}>
+              If you need help, please contact us at{' '}
+              <Text
+                fontWeight="bold"
+                color={colorModeValue('gray.900', 'gray.50')}
+              >
+                start-ui@bearstudio.fr
+              </Text>
+            </Text>
+          </CardStatus>
+        </Stack>
+      </Box>
+    </Modal>
+  );
+};
+
 const Register = () => {
   const router = useRouter();
   const { showError, showSuccess } = useToast();
@@ -66,8 +128,6 @@ const Register = () => {
       ...values,
     });
   };
-
-  const { colorModeValue } = useDarkMode();
 
   const registerForm = useForm({ onValidSubmit: submitForm });
 
@@ -119,57 +179,10 @@ const Register = () => {
           Sign up
         </Button>
       </Stack>
-
-      <Modal
+      <CardDemoModeHint
         isOpen={isModalVisible}
-        h={200}
-        style={{
-          bottom: '20%',
-        }}
-        m="xl"
-        borderRadius="xl"
-        bg={colorModeValue('gray.50', 'gray.900')}
-      >
-        <Box>
-          <Button
-            position="absolute"
-            top={4}
-            right={4}
-            bg="transparent"
-            px="xs"
-            py="xs"
-            zIndex={1}
-            onPress={() => setIsModalVisible(false)}
-            underlayColor="transparent"
-          >
-            <Icon name="closecircle" fontFamily="AntDesign" fontSize="3xl" />
-          </Button>
-          <Stack p="xl" spacing="lg" position="relative" pt="2xl">
-            <Text
-              fontWeight="bold"
-              fontSize="xl"
-              color={colorModeValue('gray.900', 'gray.50')}
-            >
-              This is a read-only demo, this action is disabled.
-            </Text>
-            <CardStatus
-              type="info"
-              title="Need help?"
-              bg={colorModeValue('gray.200', 'gray.700')}
-            >
-              <Text color={colorModeValue('gray.900', 'gray.50')}>
-                If you need help, please contact us at{' '}
-                <Text
-                  fontWeight="bold"
-                  color={colorModeValue('gray.900', 'gray.50')}
-                >
-                  start-ui@bearstudio.fr
-                </Text>
-              </Text>
-            </CardStatus>
-          </Stack>
-        </Box>
-      </Modal>
+        onClose={(value) => setIsModalVisible(value)}
+      />
     </Formiz>
   );
 };
