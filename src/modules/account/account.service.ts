@@ -2,15 +2,11 @@ import {
   createQueryKeys,
   inferQueryKeys,
 } from '@lukemorales/query-key-factory';
-import {
-  UseMutationOptions,
-  UseQueryOptions,
-  useMutation,
-  useQuery,
-} from '@tanstack/react-query';
-import Axios, { AxiosError } from 'axios';
+import { UseQueryOptions } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 
 import { Account } from '@/modules/account/account.types';
+import { apiHooks } from '@/api/api-hooks';
 
 export const accountKeys = createQueryKeys('accountService', {
   account: null,
@@ -25,54 +21,15 @@ export const useAccount = (
     AccountKeys['account']['queryKey']
   > = {}
 ) => {
-  const { data: account, ...rest } = useQuery(
-    accountKeys.account.queryKey,
-    (): Promise<Account> => Axios.get('/accounts/me'),
-    {
-      onSuccess: (data) => {
-        if (config?.onSuccess) {
-          config?.onSuccess(data);
-        }
-      },
-      ...config,
-    }
-  );
+  const { data: account, ...rest } = apiHooks.useAccountGet(null, {
+    ...config,
+    onSuccess: (data) => {
+      if (config?.onSuccess) {
+        config?.onSuccess(data);
+      }
+    },
+  });
+
   const isAdmin = !!account?.authorizations?.includes('ADMIN');
   return { account, isAdmin, ...rest };
-};
-
-type AccountError = {
-  title: string;
-  errorKey: 'userexists' | 'emailexists';
-};
-
-export const useCreateAccount = (
-  config: UseMutationOptions<
-    Account,
-    AxiosError<AccountError>,
-    Pick<Account, 'email' | 'name'>
-  > = {}
-) => {
-  return useMutation(
-    ({ email, name }): Promise<Account> =>
-      Axios.post('/auth/register', { email, name, language: 'en' }),
-    {
-      ...config,
-    }
-  );
-};
-
-export const useUpdatePassword = (
-  config: UseMutationOptions<
-    void,
-    AxiosError<TODO>,
-    { currentPassword: string; newPassword: string }
-  > = {}
-) => {
-  return useMutation(
-    (payload): Promise<void> => Axios.post('/account/change-password', payload),
-    {
-      ...config,
-    }
-  );
 };

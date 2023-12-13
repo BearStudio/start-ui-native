@@ -13,11 +13,11 @@ import {
   TouchableOpacity,
 } from 'react-native-ficus-ui';
 import { isEmail } from '@formiz/validations';
-import { useCreateAccount } from '@/modules/account/account.service';
 import { useRouter } from 'expo-router';
 import { useToast } from '@/modules/toast/useToast';
 import { useDarkMode } from '@/theme/useDarkMode';
 import { CardStatus } from '@/components/CardStatus';
+import { apiHooks } from '@/api/api-hooks';
 
 const CardWarningRegister = () => {
   const router = useRouter();
@@ -109,18 +109,23 @@ const Register = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const nameRef = useRef<TextInput>(null);
 
-  const { mutate: createAccount, isLoading } = useCreateAccount({
-    onSuccess: () => {
-      router.replace('/login');
-      showSuccess('You account has been created with success, you can login');
-    },
-    onError: (err: any) => {
-      if (err.response?.data?.message?.startsWith('[DEMO]')) {
-        setIsModalVisible(true);
-      }
-      showError('An error occured during your registration, please try again');
-    },
-  });
+  const { mutate: createAccount, isLoading } = apiHooks.useAuthRegister(
+    {},
+    {
+      onSuccess: () => {
+        router.replace('/login');
+        showSuccess('You account has been created with success, you can login');
+      },
+      onError: (err: any) => {
+        if (err.response?.data?.message?.startsWith('[DEMO]')) {
+          setIsModalVisible(true);
+        }
+        showError(
+          'An error occured during your registration, please try again'
+        );
+      },
+    }
+  );
 
   const submitForm = (values: { email: string; name: string }) => {
     createAccount({

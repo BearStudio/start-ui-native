@@ -5,6 +5,7 @@ import {
   Stack,
   Text,
   TouchableOpacity,
+  useToast,
 } from 'react-native-ficus-ui';
 import {
   Formiz,
@@ -15,12 +16,13 @@ import {
 } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
 import { FieldInput } from '@/components/FieldInput';
-import { useAuthLogin, useLoginValid } from '@/modules/auth/auth.service';
+import { useAuthLoginValidate } from '@/modules/auth/auth.service';
 import { useDarkMode } from '@/theme/useDarkMode';
 import { useNavigation } from 'expo-router';
 import { ButtonGoBack } from '@/components/ButtonGoBack';
 import { BackHandler } from 'react-native';
 import { CardStatus } from '@/components/CardStatus';
+import { apiHooks } from '@/api/api-hooks';
 
 const CardInfoAuthStep = () => {
   const loginForm = useFormContext();
@@ -84,7 +86,7 @@ const Login = () => {
     code: string;
   }>({
     onValidSubmit: (values) => {
-      loginValidate({ token: firstToken, code: values.code });
+      loginValidate({ code: values.code });
     },
   });
 
@@ -115,23 +117,32 @@ const Login = () => {
     );
     return () => backHandler.remove();
   }, [navigation, loginForm]);
+  const { show } = useToast();
 
   const { colorModeValue } = useDarkMode();
 
-  const { login: loginValidate, isLoading: isLoadingValidate } = useLoginValid(
-    {
+  const { login: loginValidate, isLoading: isLoadingValidate } =
+    useAuthLoginValidate(firstToken, {
       onSuccess: () => loginForm.goToNextStep(),
       onError: (err) => console.error('Login validation error:', err),
+    });
+
+  const { mutate: authLogin, isLoading: isLoadingAuth } = apiHooks.useAuthLogin(
+    {},
+    {
+      onSuccess: (data) => {
+        setFirstToken(data.token);
+        loginForm.submitStep();
+      },
+      onError: (err) => {
+        show({
+          text1: 'Failed to log in. Please try again.',
+          type: 'error',
+        });
+        console.error('Authentication error:', err);
+      },
     }
   );
-
-  const { login: authLogin, isLoading: isLoadingAuth } = useAuthLogin({
-    onSuccess: (data) => {
-      setFirstToken(data.token);
-      loginForm.submitStep();
-    },
-    onError: (err) => console.error('Authentication error:', err),
-  });
 
   const handleSubmitButton = () => {
     if (loginForm.isStepValid && loginForm.isFirstStep) {
