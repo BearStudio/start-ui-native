@@ -1,14 +1,14 @@
 import { UseMutationOptions } from '@tanstack/react-query';
 
-import { useAuthContext } from './AuthContext';
 import { useToast } from 'react-native-ficus-ui';
 import { apiHooks } from '@/api/api-hooks';
+import useAuthStore from '@/modules/auth/auth.store';
 
 export const useAuthLoginValidate = (
   token: string,
   config: UseMutationOptions<{ token: string }, unknown, { code: string }> = {}
 ) => {
-  const { updateToken } = useAuthContext();
+  const updateToken = useAuthStore((state) => state.setToken);
   const { show } = useToast();
   const mutation = apiHooks.useAuthLoginValidate(
     {

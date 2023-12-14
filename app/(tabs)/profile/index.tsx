@@ -1,4 +1,4 @@
-import { useAuthContext } from '@/modules/auth/AuthContext';
+import useAuthStore from '@/modules/auth/auth.store';
 import {
   Button,
   Box,
@@ -15,7 +15,7 @@ import ThemeSwitcher from '@/theme/ThemeSwitcher';
 import { useDarkMode } from '@/theme/useDarkMode';
 
 const Profile = () => {
-  const { logout } = useAuthContext();
+  const { logout } = useAuthStore();
   const { colorModeValue } = useDarkMode();
 
   const { account, isLoading, isError, refetch: refetchAccount } = useAccount();
