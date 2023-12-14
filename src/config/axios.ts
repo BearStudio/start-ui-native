@@ -7,7 +7,7 @@ export const logAxiosErrorAndGet = (error: AxiosError) => {
     error?.response?.status === 401 &&
     (error?.response?.data as any)?.path !== '/api/authenticate'
   ) {
-    useAuthStore.getState().logout;
+    useAuthStore.getState().logout();
     return;
   }
 
