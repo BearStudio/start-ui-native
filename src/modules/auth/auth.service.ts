@@ -1,27 +1,38 @@
-import axios, { AxiosError } from 'axios';
-import { useMutation, UseMutationOptions } from '@tanstack/react-query';
+import { UseMutationOptions } from '@tanstack/react-query';
 
 import { useAuthContext } from './AuthContext';
 import { useToast } from 'react-native-ficus-ui';
+import { ApiHooks, apiHooks } from '@/api/api-hooks';
+import { ZodiosBodyByAlias, ZodiosResponseByAlias } from '@zodios/core';
 
-export const useLoginValid = (
+// Define the types for your request and response
+type ValidateLoginRequest = ZodiosBodyByAlias<ApiHooks, 'authLoginValidate'>;
+type ValidateLoginResponse = ZodiosResponseByAlias<
+  ApiHooks,
+  'authLoginValidate'
+>;
+
+export const useAuthLoginValidate = (
+  token: string,
   config: UseMutationOptions<
-    { token: string },
-    AxiosError,
-    { code: string; token: string }
+    ValidateLoginResponse,
+    unknown,
+    ValidateLoginRequest
   > = {}
 ) => {
   const { updateToken } = useAuthContext();
   const { show } = useToast();
-  const mutation = useMutation(
-    ({ code, token }) => axios.post(`/auth/login/validate/${token}`, { code }),
+  const mutation = apiHooks.useAuthLoginValidate(
+    {
+      params: { token },
+    },
     {
       ...config,
       onSuccess: (data, ...rest) => {
         updateToken(data.token);
         config?.onSuccess?.(data, ...rest);
       },
-      onError: (error, ...rest) => {
+      onError: (error: ExplicitAny, ...rest) => {
         if (error?.response?.status === 401) {
           show({
             text1: 'Wrong email or password. Please try again.',
@@ -37,34 +48,20 @@ export const useLoginValid = (
       },
     }
   );
+
   return { ...mutation, login: mutation.mutate };
 };
 
+type AuthLoginRequest = ZodiosBodyByAlias<ApiHooks, 'authLogin'>;
+type AuthLoginResponse = ZodiosResponseByAlias<ApiHooks, 'authLogin'>;
+
 export const useAuthLogin = (
-  config: UseMutationOptions<
-    { token: string },
-    AxiosError,
-    { email: string; language: string }
-  > = {}
+  options: UseMutationOptions<AuthLoginResponse, unknown, AuthLoginRequest> = {}
 ) => {
-  const { show } = useToast();
-  const mutation = useMutation(
-    ({ email, language }) => axios.post('/auth/login/', { email, language }),
-    {
-      ...config,
-      onSuccess: (data, ...rest) => {
-        config?.onSuccess?.(data, ...rest);
-      },
-      onError: (error, ...rest) => {
-        if (error) {
-          show({
-            text1: 'Failed to log in. Please try again.',
-            type: 'error',
-          });
-        }
-        config?.onError?.(error, ...rest);
-      },
-    }
+  const { mutate: authLogin, isLoading: isLoadingAuth } = apiHooks.useAuthLogin(
+    {},
+    options
   );
-  return { ...mutation, login: mutation.mutate };
+
+  return { authLogin, isLoadingAuth };
 };
