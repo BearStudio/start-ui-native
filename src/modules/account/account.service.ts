@@ -1,35 +1,34 @@
-import {
-  createQueryKeys,
-  inferQueryKeys,
-} from '@lukemorales/query-key-factory';
-import { UseQueryOptions } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
+import { UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
 
-import { Account } from '@/modules/account/account.types';
-import { apiHooks } from '@/api/api-hooks';
+import { ApiHooks, apiHooks } from '@/api/api-hooks';
+import { ZodiosBodyByAlias, ZodiosResponseByAlias } from '@zodios/core';
 
-export const accountKeys = createQueryKeys('accountService', {
-  account: null,
-});
-type AccountKeys = inferQueryKeys<typeof accountKeys>;
+type Account = ZodiosBodyByAlias<ApiHooks, 'accountGet'>;
+type AccountResponse = ZodiosResponseByAlias<ApiHooks, 'accountGet'>;
 
 export const useAccount = (
-  config: UseQueryOptions<
-    Account,
-    AxiosError,
-    Account,
-    AccountKeys['account']['queryKey']
-  > = {}
+  config: UseQueryOptions<Account, ExplicitAny, AccountResponse> = {}
 ) => {
-  const { data: account, ...rest } = apiHooks.useAccountGet(null, {
-    ...config,
-    onSuccess: (data) => {
-      if (config?.onSuccess) {
-        config?.onSuccess(data);
-      }
-    },
-  });
+  const { data: account, ...rest } = apiHooks.useAccountGet({}, config);
 
   const isAdmin = !!account?.authorizations?.includes('ADMIN');
   return { account, isAdmin, ...rest };
+};
+
+type RegisterRequest = ZodiosBodyByAlias<ApiHooks, 'authRegister'>;
+type RegisterResponse = ZodiosResponseByAlias<ApiHooks, 'authRegister'>;
+
+export const useAuthRegister = (
+  config: UseMutationOptions<
+    RegisterResponse,
+    ExplicitAny,
+    RegisterRequest
+  > = {}
+) => {
+  const { mutate: createAccount, isLoading } = apiHooks.useAuthRegister(
+    {},
+    config
+  );
+
+  return { createAccount, isLoading };
 };

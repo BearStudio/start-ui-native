@@ -16,7 +16,10 @@ import {
 } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
 import { FieldInput } from '@/components/FieldInput';
-import { useAuthLoginValidate } from '@/modules/auth/auth.service';
+import {
+  useAuthLogin,
+  useAuthLoginValidate,
+} from '@/modules/auth/auth.service';
 import { useDarkMode } from '@/theme/useDarkMode';
 import { useNavigation } from 'expo-router';
 import { ButtonGoBack } from '@/components/ButtonGoBack';
@@ -127,22 +130,19 @@ const Login = () => {
       onError: (err) => console.error('Login validation error:', err),
     });
 
-  const { mutate: authLogin, isLoading: isLoadingAuth } = apiHooks.useAuthLogin(
-    {},
-    {
-      onSuccess: (data) => {
-        setFirstToken(data.token);
-        loginForm.submitStep();
-      },
-      onError: (err) => {
-        show({
-          text1: 'Failed to log in. Please try again.',
-          type: 'error',
-        });
-        console.error('Authentication error:', err);
-      },
-    }
-  );
+  const { authLogin, isLoadingAuth } = useAuthLogin({
+    onSuccess: (data) => {
+      setFirstToken(data.token);
+      loginForm.submitStep();
+    },
+    onError: (err) => {
+      show({
+        text1: 'Failed to log in. Please try again.',
+        type: 'error',
+      });
+      console.error('Authentication error:', err);
+    },
+  });
 
   const handleSubmitButton = () => {
     if (loginForm.isStepValid && loginForm.isFirstStep) {
