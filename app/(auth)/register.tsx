@@ -1,54 +1,134 @@
-import { Formiz, useForm, useFormFields } from '@formiz/core';
+import { Formiz, useForm } from '@formiz/core';
 import { FieldInput } from '@/components/FieldInput';
 import { focus } from '@/utils/formUtils';
-import { useRef } from 'react';
+import { FC, useRef, useState } from 'react';
 import { TextInput } from 'react-native';
-import { Button, Stack } from 'react-native-ficus-ui';
-import { isEmail, isMinLength } from '@formiz/validations';
-import { useCreateAccount } from '@/modules/account/account.service';
+import {
+  Box,
+  Button,
+  Icon,
+  Modal,
+  Stack,
+  Text,
+  TouchableOpacity,
+} from 'react-native-ficus-ui';
+import { isEmail } from '@formiz/validations';
 import { useRouter } from 'expo-router';
 import { useToast } from '@/modules/toast/useToast';
+import { useDarkMode } from '@/theme/useDarkMode';
+import { CardStatus } from '@/components/CardStatus';
+import { useAuthRegister } from '@/modules/account/account.service';
+
+const CardWarningRegister = () => {
+  const router = useRouter();
+  const { colorModeValue } = useDarkMode();
+  return (
+    <CardStatus type="warning" title="Demo mode" mt="md">
+      <Box flexDirection="row" flexWrap="wrap">
+        <Text fontSize="lg" color={colorModeValue('gray.800', 'gray.50')}>
+          This is a read-only demo, but you can Sign in to test some of the
+          features. Just remember, no changes can be made. Enjoy the features!
+        </Text>
+        <TouchableOpacity onPress={() => router.push('/login')}>
+          <Text
+            fontSize="lg"
+            fontWeight="700"
+            color={colorModeValue('gray.800', 'gray.50')}
+            textDecorationLine="underline"
+          >
+            Sign in
+          </Text>
+        </TouchableOpacity>
+      </Box>
+    </CardStatus>
+  );
+};
+
+const CardDemoModeHint: FC<{
+  isOpen: boolean;
+  onClose: (value: boolean) => void;
+}> = ({ isOpen, onClose }) => {
+  const { colorModeValue } = useDarkMode();
+  return (
+    <Modal
+      isOpen={isOpen}
+      h={200}
+      style={{
+        bottom: '20%',
+      }}
+      m="xl"
+      borderRadius="xl"
+      bg={colorModeValue('gray.50', 'gray.900')}
+    >
+      <Box>
+        <Button
+          position="absolute"
+          top={4}
+          right={4}
+          bg="transparent"
+          px="xs"
+          py="xs"
+          zIndex={1}
+          onPress={() => onClose(false)}
+          underlayColor="transparent"
+        >
+          <Icon name="closecircle" fontFamily="AntDesign" fontSize="3xl" />
+        </Button>
+        <Stack p="xl" spacing="lg" position="relative" pt="2xl">
+          <Text
+            fontWeight="bold"
+            fontSize="xl"
+            color={colorModeValue('gray.900', 'gray.50')}
+          >
+            This is a read-only demo, this action is disabled.
+          </Text>
+          <CardStatus
+            type="info"
+            title="Need help?"
+            bg={colorModeValue('gray.200', 'gray.700')}
+          >
+            <Text color={colorModeValue('gray.900', 'gray.50')}>
+              If you need help, please contact us at{' '}
+              <Text
+                fontWeight="bold"
+                color={colorModeValue('gray.900', 'gray.50')}
+              >
+                start-ui@bearstudio.fr
+              </Text>
+            </Text>
+          </CardStatus>
+        </Stack>
+      </Box>
+    </Modal>
+  );
+};
 
 const Register = () => {
   const router = useRouter();
   const { showError, showSuccess } = useToast();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const nameRef = useRef<TextInput>(null);
 
-  const passwordRef = useRef<TextInput>(null);
-  const confirmPasswordRef = useRef<TextInput>(null);
-
-  const { mutate: createAccount, isLoading } = useCreateAccount({
+  const { createAccount, isLoading } = useAuthRegister({
     onSuccess: () => {
       router.replace('/login');
       showSuccess('You account has been created with success, you can login');
     },
-    onError: (error) => {
-      if (error?.response?.data?.errorKey === 'emailexists') {
-        showError('This mail address is already used by another user');
-      } else {
-        showError(
-          'An error occured during your registration, please try again'
-        );
+    onError: (err) => {
+      if (err.response?.data?.message?.startsWith('[DEMO]')) {
+        setIsModalVisible(true);
       }
+      showError('An error occured during your registration, please try again');
     },
   });
 
-  const submitForm = (values: {
-    email: string;
-    password: string;
-    confirmPassword: string;
-  }) => {
+  const submitForm = (values: { email: string; name: string }) => {
     createAccount({
       ...values,
-      login: values.email,
     });
   };
 
   const registerForm = useForm({ onValidSubmit: submitForm });
-  const values = useFormFields({
-    connect: registerForm,
-    selector: 'value',
-    fields: ['password'] as const,
-  });
 
   return (
     <Formiz connect={registerForm}>
@@ -69,47 +149,23 @@ const Register = () => {
               autoCapitalize: 'none',
               autoComplete: 'email',
               keyboardType: 'email-address',
-              onSubmitEditing: focus(passwordRef),
+              onSubmitEditing: focus(nameRef),
               returnKeyType: 'next',
             }}
           />
 
           <FieldInput
-            ref={passwordRef}
-            name="password"
-            label="Password"
-            required="Password is required"
-            validations={[
-              {
-                handler: isMinLength(6),
-                message: 'Password must contains at least 6 characters',
-              },
-            ]}
+            ref={nameRef}
+            name="name"
+            label="Name"
+            required="name is required"
             componentProps={{
-              secureTextEntry: true,
-              onSubmitEditing: focus(confirmPasswordRef),
+              autoCapitalize: 'none',
               returnKeyType: 'next',
             }}
           />
 
-          <FieldInput
-            ref={confirmPasswordRef}
-            name="confirmPassword"
-            label="Confirm password"
-            required="Password confirmation is required"
-            validations={[
-              {
-                handler: (value) => value === values.password,
-                deps: [values.password],
-                message: 'Confirmation does not match the password',
-              },
-            ]}
-            componentProps={{
-              secureTextEntry: true,
-              onSubmitEditing: () => registerForm.submit(),
-              returnKeyType: 'done',
-            }}
-          />
+          <CardWarningRegister />
         </Stack>
 
         <Button
@@ -122,6 +178,10 @@ const Register = () => {
           Sign up
         </Button>
       </Stack>
+      <CardDemoModeHint
+        isOpen={isModalVisible}
+        onClose={(value) => setIsModalVisible(value)}
+      />
     </Formiz>
   );
 };

@@ -1,5 +1,4 @@
-import { useRouter } from 'expo-router';
-import { useAuthContext } from '@/modules/auth/AuthContext';
+import useAuthStore from '@/modules/auth/auth.store';
 import {
   Button,
   Box,
@@ -9,43 +8,20 @@ import {
   Stack,
   useDisclosure,
 } from 'react-native-ficus-ui';
-import { Formiz, useForm } from '@formiz/core';
-import { FieldInput } from '@/components/FieldInput';
-import {
-  useAccount,
-  useDeleteAccount,
-} from '@/modules/account/account.service';
-import { useToast } from '@/modules/toast/useToast';
+
+import { useAccount } from '@/modules/account/account.service';
 import { LoadingScreen } from '@/layout/LoadingScreen';
 import ThemeSwitcher from '@/theme/ThemeSwitcher';
 import { useDarkMode } from '@/theme/useDarkMode';
 
 const Profile = () => {
-  const router = useRouter();
-  const { logout } = useAuthContext();
+  const logout = useAuthStore(state => state.logout);
   const { colorModeValue } = useDarkMode();
 
   const { account, isLoading, isError, refetch: refetchAccount } = useAccount();
 
-  const { showError, showSuccess } = useToast();
-
-  const { mutate: deleteAccount, isLoading: isDeletingAccount } =
-    useDeleteAccount({
-      onSuccess: async () => {
-        showSuccess('Account deleted with success');
-        logout();
-      },
-      onError: () => {
-        showError(
-          'An error occured while deleting your acount, please try again'
-        );
-      },
-    });
-
   const logoutModal = useDisclosure();
   const deleteAccountModal = useDisclosure();
-
-  const confirmationForm = useForm({ onValidSubmit: () => deleteAccount() });
 
   if (isLoading) {
     return <LoadingScreen />;
@@ -62,20 +38,64 @@ const Profile = () => {
   return (
     <>
       <Box flex={1} p={20}>
-        <Box>
-          <Button onPress={() => router.push('/profile/profile-password')} full>
-            <Icon
-              name="unlock"
-              fontSize="lg"
-              fontFamily="Feather"
-              color="gray.50"
-            />
-            <Text ml={10} fontSize="lg" color="gray.50">
-              Update password
-            </Text>
-          </Button>
-        </Box>
         <ThemeSwitcher />
+        {!!account && (
+          <Box
+            bg={colorModeValue('gray.50', 'gray.700')}
+            p={4}
+            mt="lg"
+            borderRadius="lg"
+            shadow="md"
+          >
+            <Text
+              fontSize="xl"
+              fontWeight="bold"
+              color={colorModeValue('gray.700', 'gray.50')}
+            >
+              Name
+            </Text>
+            <Text
+              fontSize="md"
+              fontWeight="500"
+              mb={4}
+              color={colorModeValue('gray.700', 'gray.50')}
+            >
+              {account.name}
+            </Text>
+
+            <Text
+              fontSize="xl"
+              fontWeight="bold"
+              color={colorModeValue('gray.700', 'gray.50')}
+            >
+              Email
+            </Text>
+            <Text
+              fontSize="md"
+              fontWeight="500"
+              mb={4}
+              color={colorModeValue('gray.700', 'gray.50')}
+            >
+              {account.email}
+            </Text>
+
+            <Text
+              fontSize="xl"
+              fontWeight="bold"
+              color={colorModeValue('gray.700', 'gray.50')}
+            >
+              Authorities
+            </Text>
+            <Text
+              fontSize="md"
+              fontWeight="500"
+              mb={4}
+              color={colorModeValue('gray.700', 'gray.50')}
+            >
+              {account?.authorizations?.join(', ')}
+            </Text>
+          </Box>
+        )}
         <Box position="absolute" left={20} bottom={20}>
           <Box mt={10}>
             <Button onPress={logoutModal.onOpen} full>
@@ -87,23 +107,6 @@ const Profile = () => {
               />
               <Text ml={10} fontSize="lg" color="gray.50">
                 Logout
-              </Text>
-            </Button>
-          </Box>
-          <Box mt={10}>
-            <Button
-              onPress={deleteAccountModal.onOpen}
-              colorScheme="error"
-              full
-            >
-              <Icon
-                name="deleteuser"
-                fontSize="lg"
-                fontFamily="AntDesign"
-                color="gray.50"
-              />
-              <Text ml={10} fontSize="lg" color="gray.50">
-                Delete account
               </Text>
             </Button>
           </Box>
@@ -167,54 +170,6 @@ const Profile = () => {
               Do you really want to delete your account?
             </Text>
           </Stack>
-
-          <Formiz connect={confirmationForm}>
-            <Stack spacing="lg">
-              <Text
-                fontSize="lg"
-                p="lg"
-                borderRadius="lg"
-                bg={colorModeValue('error.500', 'error.600')}
-                color={colorModeValue('white', 'gray.50')}
-              >
-                This action is irreversible and immediate. All your data will be
-                will be deleted immediately. You will have to recreate an
-                account.
-              </Text>
-              <FieldInput
-                name="confirmation"
-                label='Enter "DELETION"'
-                required="Confirmation required"
-                validations={[
-                  {
-                    handler: (value) => value === 'DELETION',
-                    message: 'Please enter "DELETION" to validate',
-                  },
-                ]}
-              />
-
-              <Stack spacing="md">
-                <Button
-                  onPress={() => confirmationForm.submit()}
-                  isLoading={isDeletingAccount}
-                  isDisabled={
-                    confirmationForm.isSubmitted && !confirmationForm.isValid
-                  }
-                  colorScheme="error"
-                  full
-                >
-                  Confirm the deletion of account
-                </Button>
-                <Button
-                  onPress={deleteAccountModal.onClose}
-                  colorScheme="gray"
-                  full
-                >
-                  Cancel
-                </Button>
-              </Stack>
-            </Stack>
-          </Formiz>
         </Stack>
       </Modal>
     </>

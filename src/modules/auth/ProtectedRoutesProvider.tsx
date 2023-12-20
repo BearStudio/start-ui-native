@@ -1,4 +1,4 @@
-import { useAuthContext } from '@/modules/auth/AuthContext';
+import useAuthStore from '@/modules/auth/auth.store';
 import { useRouter, useRootNavigationState, useSegments } from 'expo-router';
 import React, { ReactNode, useEffect } from 'react';
 
@@ -12,10 +12,10 @@ const ProtectedRoutesProvider = ({
   const navigationState = useRootNavigationState();
   const segments = useSegments();
   const router = useRouter();
-  const { isAuthenticating, isAuthenticated } = useAuthContext();
+  const isAuthenticated = useAuthStore((state) => !!state.token);
 
   useEffect(() => {
-    if (isAuthenticating || !navigationState?.key) return;
+    if (!navigationState?.key) return;
 
     const inAuthGroup = segments?.[0] === '(auth)';
 
@@ -31,7 +31,7 @@ const ProtectedRoutesProvider = ({
       // go to tabs root (authenticated).
       router.replace('/(tabs)/home');
     }
-  }, [isAuthenticating, isAuthenticated, segments, navigationState?.key]);
+  }, [isAuthenticated, segments, navigationState?.key]);
 
   return <>{children}</>;
 };

@@ -1,28 +1,38 @@
-import axios, { AxiosError } from 'axios';
-import { useMutation, UseMutationOptions } from '@tanstack/react-query';
+import { UseMutationOptions } from '@tanstack/react-query';
 
-import { useAuthContext } from './AuthContext';
 import { useToast } from 'react-native-ficus-ui';
+import { ApiHooks, apiHooks } from '@/api/api-hooks';
+import { ZodiosBodyByAlias, ZodiosResponseByAlias } from '@zodios/core';
+import useAuthStore from '@/modules/auth/auth.store';
 
-export const useLogin = (
+// Define the types for your request and response
+type ValidateLoginRequest = ZodiosBodyByAlias<ApiHooks, 'authLoginValidate'>;
+type ValidateLoginResponse = ZodiosResponseByAlias<
+  ApiHooks,
+  'authLoginValidate'
+>;
+
+export const useAuthLoginValidate = (
+  token: string,
   config: UseMutationOptions<
-    { id_token: string },
-    AxiosError,
-    { username: string; password: string }
+    ValidateLoginResponse,
+    unknown,
+    ValidateLoginRequest
   > = {}
 ) => {
-  const { updateToken } = useAuthContext();
+  const updateToken = useAuthStore((state) => state.setToken);
   const { show } = useToast();
-  const mutation = useMutation(
-    ({ username, password }) =>
-      axios.post('/authenticate', { username, password }),
+  const mutation = apiHooks.useAuthLoginValidate(
+    {
+      params: { token },
+    },
     {
       ...config,
       onSuccess: (data, ...rest) => {
-        updateToken(data.id_token);
+        updateToken(data.token);
         config?.onSuccess?.(data, ...rest);
       },
-      onError: (error, ...rest) => {
+      onError: (error: ExplicitAny, ...rest) => {
         if (error?.response?.status === 401) {
           show({
             text1: 'Wrong email or password. Please try again.',
@@ -38,5 +48,20 @@ export const useLogin = (
       },
     }
   );
+
   return { ...mutation, login: mutation.mutate };
+};
+
+type AuthLoginRequest = ZodiosBodyByAlias<ApiHooks, 'authLogin'>;
+type AuthLoginResponse = ZodiosResponseByAlias<ApiHooks, 'authLogin'>;
+
+export const useAuthLogin = (
+  options: UseMutationOptions<AuthLoginResponse, unknown, AuthLoginRequest> = {}
+) => {
+  const { mutate: authLogin, isLoading: isLoadingAuth } = apiHooks.useAuthLogin(
+    {},
+    options
+  );
+
+  return { authLogin, isLoadingAuth };
 };

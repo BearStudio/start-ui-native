@@ -11,7 +11,6 @@ const AuthStack = () => {
         },
         { route: 'login', title: 'Login' },
         { route: 'register', title: 'Create Account' },
-        { route: 'reset-password', title: 'Reset Password' },
       ]}
     />
   );

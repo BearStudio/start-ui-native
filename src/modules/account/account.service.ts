@@ -1,157 +1,34 @@
-import {
-  createQueryKeys,
-  inferQueryKeys,
-} from '@lukemorales/query-key-factory';
-import {
-  UseMutationOptions,
-  UseQueryOptions,
-  useMutation,
-  useQuery,
-} from '@tanstack/react-query';
-import Axios, { AxiosError } from 'axios';
+import { UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
 
-import { Account } from '@/modules/account/account.types';
+import { ApiHooks, apiHooks } from '@/api/api-hooks';
+import { ZodiosBodyByAlias, ZodiosResponseByAlias } from '@zodios/core';
 
-export const accountKeys = createQueryKeys('accountService', {
-  account: null,
-});
-type AccountKeys = inferQueryKeys<typeof accountKeys>;
+type Account = ZodiosBodyByAlias<ApiHooks, 'accountGet'>;
+type AccountResponse = ZodiosResponseByAlias<ApiHooks, 'accountGet'>;
 
 export const useAccount = (
-  config: UseQueryOptions<
-    Account,
-    AxiosError,
-    Account,
-    AccountKeys['account']['queryKey']
-  > = {}
+  config: UseQueryOptions<Account, ExplicitAny, AccountResponse> = {}
 ) => {
-  const { data: account, ...rest } = useQuery(
-    accountKeys.account.queryKey,
-    (): Promise<Account> => Axios.get('/account'),
-    {
-      onSuccess: (data) => {
-        if (config?.onSuccess) {
-          config?.onSuccess(data);
-        }
-      },
-      ...config,
-    }
-  );
-  const isAdmin = !!account?.authorities?.includes('ROLE_ADMIN');
+  const { data: account, ...rest } = apiHooks.useAccountGet({}, config);
+
+  const isAdmin = !!account?.authorizations?.includes('ADMIN');
   return { account, isAdmin, ...rest };
 };
 
-type AccountError = {
-  title: string;
-  errorKey: 'userexists' | 'emailexists';
-};
+type RegisterRequest = ZodiosBodyByAlias<ApiHooks, 'authRegister'>;
+type RegisterResponse = ZodiosResponseByAlias<ApiHooks, 'authRegister'>;
 
-export const useCreateAccount = (
+export const useAuthRegister = (
   config: UseMutationOptions<
-    Account,
-    AxiosError<AccountError>,
-    Pick<Account, 'login' | 'email'> & { password: string }
+    RegisterResponse,
+    ExplicitAny,
+    RegisterRequest
   > = {}
 ) => {
-  return useMutation(
-    ({ login, email, password }): Promise<Account> =>
-      Axios.post('/register', { login, email, password }),
-    {
-      ...config,
-    }
-  );
-};
-
-type UseActiveAccountVariables = {
-  key: string;
-};
-
-export const useActivateAccount = (
-  config: UseMutationOptions<
-    void,
-    AxiosError<TODO>,
-    UseActiveAccountVariables
-  > = {}
-) => {
-  return useMutation(
-    ({ key }): Promise<void> => Axios.get(`/activate?key=${key}`),
-    {
-      ...config,
-    }
-  );
-};
-
-export const useUpdateAccount = (
-  config: UseMutationOptions<Account, AxiosError<TODO>, Account> = {}
-) => {
-  return useMutation(
-    (account): Promise<Account> => Axios.post('/account', account),
-    {
-      onMutate: (data) => {
-        if (config?.onMutate) {
-          config.onMutate(data);
-        }
-      },
-      ...config,
-    }
-  );
-};
-
-export const useResetPasswordInit = (
-  config: UseMutationOptions<void, AxiosError<TODO>, string> = {}
-) => {
-  return useMutation(
-    (email): Promise<void> =>
-      Axios.post('/account/reset-password/init', email, {
-        headers: { 'Content-Type': 'text/plain' },
-      }),
-    {
-      ...config,
-    }
-  );
-};
-
-type UseResetPasswordFinishVariables = {
-  key: string;
-  newPassword: string;
-};
-
-export const useResetPasswordFinish = (
-  config: UseMutationOptions<
-    void,
-    AxiosError<TODO>,
-    UseResetPasswordFinishVariables
-  > = {}
-) => {
-  return useMutation(
-    (payload): Promise<void> =>
-      Axios.post('/account/reset-password/finish', payload),
-    {
-      ...config,
-    }
-  );
-};
-
-export const useUpdatePassword = (
-  config: UseMutationOptions<
-    void,
-    AxiosError<TODO>,
-    { currentPassword: string; newPassword: string }
-  > = {}
-) => {
-  return useMutation(
-    (payload): Promise<void> => Axios.post('/account/change-password', payload),
-    {
-      ...config,
-    }
-  );
-};
-
-export const useDeleteAccount = (
-  config: UseMutationOptions<void, AxiosError, void> = {}
-) => {
-  return useMutation(
-    (): Promise<void> => Axios.delete('/extended/account'),
+  const { mutate: createAccount, isLoading } = apiHooks.useAuthRegister(
+    {},
     config
   );
+
+  return { createAccount, isLoading };
 };

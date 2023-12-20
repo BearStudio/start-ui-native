@@ -1,10 +1,13 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios, { AxiosError } from 'axios';
 
-import { AUTH_TOKEN_KEY } from '@/modules/auth/auth.constants';
+import useAuthStore from '@/modules/auth/auth.store';
 
 export const logAxiosErrorAndGet = (error: AxiosError) => {
-  if (error?.response?.status === 401) {
+  if (
+    error?.response?.status === 401 &&
+    (error?.response?.data as any)?.path !== '/api/authenticate'
+  ) {
+    useAuthStore.getState().logout();
     return;
   }
 
@@ -37,12 +40,13 @@ export const logAxiosErrorAndGet = (error: AxiosError) => {
 axios.defaults.baseURL = process.env.API_URL;
 
 axios.interceptors.request.use(
-  async (config) => {
+  (config) => {
     console.debug(
       `Calling ${config?.baseURL}${config.url} in ${config.method}`
     );
-    const userToken = await AsyncStorage.getItem(AUTH_TOKEN_KEY);
+    const userToken = useAuthStore.getState().token;
     const newConfig = config;
+    newConfig.headers['content-type'] = 'application/json';
     if (userToken) {
       newConfig.headers.Authorization = `Bearer ${userToken}`;
     }
@@ -67,3 +71,5 @@ axios.interceptors.response.use(
 );
 
 axios.interceptors.response.use((response) => response?.data);
+
+export default axios;
