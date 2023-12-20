@@ -3,10 +3,10 @@ import {
   generateZodClientFromOpenAPI,
   getHandlebars,
 } from 'openapi-zod-client';
-import _ from 'lodash';
+import camelCase from 'lodash/camelCase';
 
 const handlebars = getHandlebars();
-handlebars.registerHelper('camelCase', _.camelCase);
+handlebars.registerHelper('camelCase', camelCase);
 
 async function generateClient(openApiDocUrl: string) {
   try {
