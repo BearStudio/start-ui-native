@@ -15,26 +15,38 @@ This starter is oriented to use Expo with Expo EAS features to have fully access
 - 🔺 [Ficus UI](https://ficus-ui.com/)
 - ⚛️ [TanStack Query](https://react-query.tanstack.com/)
 - 🐜 [Formiz](https://formiz-react.com/)
-- ↔ [Axios](https://github.com/axios/axios)
+- ↔ [Zodios](https://www.zodios.org/)
 
 ---
 
-## Installation
+## Getting Started
+
+### Prerequisites
+
+This app is using Expo Go with [Expo development builds](https://docs.expo.dev/workflow/overview/#development-builds). In order to launch the app, you will need to install android and ios tooling:
+
+#### Android
+
+See https://reactnative.dev/docs/environment-setup?guide=native&platform=android
+
+#### iOS
+
+See https://reactnative.dev/docs/environment-setup?guide=native&platform=ios
+
+### Installation
 
 ```bash
-# Install dependences
+# Install dependencies and generate api client
 yarn
 
-# Start Metro Bundler Expo
-yarn start
-
-# Sign in Expo account
-npx expo login
+# Then, choose based on the platform you want to dev on:
+yarn android # Launch on your android device if detected, or an Android emulator
+yarn ios # Launch on your iOS device if detected, or an iOS emulator
 ```
 
 ---
 
-## Update .env values
+### Update .env values
 
 Put your env values on .env file. Environment variables inserted on your local machine or on Expo EAS platform will overwrite the variables of .env file.
 

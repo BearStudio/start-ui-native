@@ -20,7 +20,6 @@ async function generateClient(openApiDocUrl: string) {
       templatePath: 'scripts/client-template.hbs',
       handlebars,
       options: {
-        baseUrl: process.env.API_URL ?? 'http://localhost:3000/api/rest',
         withAlias: true,
         defaultStatusBehavior: 'auto-correct',
         shouldExportAllTypes: true,
