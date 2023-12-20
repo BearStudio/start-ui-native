@@ -25,6 +25,7 @@ import { useNavigation } from 'expo-router';
 import { ButtonGoBack } from '@/components/ButtonGoBack';
 import { BackHandler } from 'react-native';
 import { CardStatus } from '@/components/CardStatus';
+import { apiHooks } from '@/api/api-hooks';
 
 const CardInfoAuthStep = () => {
   const loginForm = useFormContext();

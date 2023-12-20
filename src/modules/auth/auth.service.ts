@@ -1,9 +1,9 @@
 import { UseMutationOptions } from '@tanstack/react-query';
 
-import { useAuthContext } from './AuthContext';
 import { useToast } from 'react-native-ficus-ui';
 import { ApiHooks, apiHooks } from '@/api/api-hooks';
 import { ZodiosBodyByAlias, ZodiosResponseByAlias } from '@zodios/core';
+import useAuthStore from '@/modules/auth/auth.store';
 
 // Define the types for your request and response
 type ValidateLoginRequest = ZodiosBodyByAlias<ApiHooks, 'authLoginValidate'>;
@@ -20,7 +20,7 @@ export const useAuthLoginValidate = (
     ValidateLoginRequest
   > = {}
 ) => {
-  const { updateToken } = useAuthContext();
+  const updateToken = useAuthStore((state) => state.setToken);
   const { show } = useToast();
   const mutation = apiHooks.useAuthLoginValidate(
     {
