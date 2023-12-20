@@ -43,16 +43,12 @@ const Onboarding = () => {
         <Stack direction="row" alignItems="center">
           <Text
             onPress={handleOpenLogin}
-            fontSize="xs"
+            fontSize="md"
             color={colorModeValue('gray.900', 'gray.50')}
           >
             Already an account?
           </Text>
-          <Button
-            onPress={handleOpenLogin}
-            fontSize="xs"
-            colorScheme="transparent"
-          >
+          <Button onPress={handleOpenLogin} colorScheme="transparent">
             <Text
               fontWeight="500"
               textDecorLine="underline"

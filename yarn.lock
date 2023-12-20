@@ -3406,6 +3406,13 @@
   resolved "https://registry.npmjs.org/@zodios/core/-/core-10.9.6.tgz"
   integrity sha512-aH4rOdb3AcezN7ws8vDgBfGboZMk2JGGzEq/DtW65MhnRxyTGRuLJRWVQ/2KxDgWvV2F5oTkAS+5pnjKbl0n+A==
 
+"@zodios/plugins@^10.6.0":
+  version "10.6.0"
+  resolved "https://registry.yarnpkg.com/@zodios/plugins/-/plugins-10.6.0.tgz#6c0d5115017c078f990d2337bf59460c35c06620"
+  integrity sha512-0cQZcFfc2AVyIqOQCUYB3k3c4RNMM0gZW1did83QarbfJsnNQAY0W/GtWyzmLIyF0/RI41E1xg1VZ7Xndc4KlA==
+  dependencies:
+    qs "^6.11.0"
+
 "@zodios/react@^10.4.5":
   version "10.4.5"
   resolved "https://registry.yarnpkg.com/@zodios/react/-/react-10.4.5.tgz#e796152ee034f24facc5c8a156d98c81c43eaec5"
@@ -8714,10 +8721,10 @@ react-native-dotenv@3.4.8:
   dependencies:
     dotenv "^16.0.3"
 
-react-native-ficus-ui@1.0.0-beta1:
-  version "1.0.0-beta1"
-  resolved "https://registry.yarnpkg.com/react-native-ficus-ui/-/react-native-ficus-ui-1.0.0-beta1.tgz#398a6e24e535cb4ec03040c8b7bc44942cb559c9"
-  integrity sha512-mFwv0FQapLiuOH7eOJPu9oWs7YeS48t2xMR0FUil8LLhPC07Ei+ED7It95eta7tBQbsrJmXgXthX0kRXmdc9EQ==
+react-native-ficus-ui@1.0.0-beta4:
+  version "1.0.0-beta4"
+  resolved "https://registry.yarnpkg.com/react-native-ficus-ui/-/react-native-ficus-ui-1.0.0-beta4.tgz#18cd0e9e9f26ab7a47a6deac8b04a755f01627bd"
+  integrity sha512-Yb9gRY4FbejJLRetgm5GXAb96YMl8QUVG/Z8+FMkOmjYR2JjboJQpzyliAZgHu5b979rBXk3bWn75Yb8c35OLg==
   dependencies:
     "@shopify/flash-list" "1.5.0"
     color "4.2.3"

@@ -15,7 +15,7 @@ import ThemeSwitcher from '@/theme/ThemeSwitcher';
 import { useDarkMode } from '@/theme/useDarkMode';
 
 const Profile = () => {
-  const logout = useAuthStore(state => state.logout);
+  const logout = useAuthStore((state) => state.logout);
   const { colorModeValue } = useDarkMode();
 
   const { account, isLoading, isError, refetch: refetchAccount } = useAccount();

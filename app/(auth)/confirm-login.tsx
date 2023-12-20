@@ -1,10 +1,4 @@
-import {
-  Box,
-  Button,
-  Stack,
-  Text,
-  TouchableOpacity,
-} from 'react-native-ficus-ui';
+import { Box, Button, Text, TouchableOpacity } from 'react-native-ficus-ui';
 import { Formiz, useForm, useFormContext, useFormFields } from '@formiz/core';
 import { FieldInput } from '@/components/FieldInput';
 import { useAuthLoginValidate } from '@/modules/auth/auth.service';
