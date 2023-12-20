@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { devtools, persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AUTH_STORAGE_KEY } from '@/modules/auth/auth.constants';
-import { queryClient } from '../../../app/_layout';
+import { queryClient } from '@/api/query-client';
 
 type AuthState = {
   token: string | null;

@@ -1,12 +1,13 @@
+import 'dotenv/config'
 import axios from 'axios';
 import {
   generateZodClientFromOpenAPI,
   getHandlebars,
 } from 'openapi-zod-client';
-import _ from 'lodash';
+import camelCase from 'lodash/camelCase';
 
 const handlebars = getHandlebars();
-handlebars.registerHelper('camelCase', _.camelCase);
+handlebars.registerHelper('camelCase', camelCase);
 
 async function generateClient(openApiDocUrl: string) {
   try {
@@ -19,6 +20,7 @@ async function generateClient(openApiDocUrl: string) {
       templatePath: 'scripts/client-template.hbs',
       handlebars,
       options: {
+        baseUrl: process.env.API_URL ?? 'http://localhost:3000/api/rest',
         withAlias: true,
         defaultStatusBehavior: 'auto-correct',
         shouldExportAllTypes: true,
