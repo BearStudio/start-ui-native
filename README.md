@@ -1,6 +1,8 @@
 <h1 align="center"><img src="assets/thumbnail.png" alt="Start UI Native" /></h1>
 
 > [!CAUTION]  
+> This project is in WIP status, use it carrefully, it's not ready for production.  
+> We are currently updating a lot of things on the starter (screens, api, ...) in order to make it stable and usefull.  
 > StartUI [native] needs StartUI [web] v2 in order to work correctly.  
 > Make sure to have a local/deployed installation of StartUI [web] v2 before using
 > StartUI [native].

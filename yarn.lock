@@ -8714,10 +8714,10 @@ react-native-dotenv@3.4.8:
   dependencies:
     dotenv "^16.0.3"
 
-react-native-ficus-ui@1.0.0-alpha11:
-  version "1.0.0-alpha11"
-  resolved "https://registry.npmjs.org/react-native-ficus-ui/-/react-native-ficus-ui-1.0.0-alpha11.tgz"
-  integrity sha512-8329GVfV1Aho7f3YHv71C6s6cRbdewBT0JiUS15DueqCK6CycGCxB1Rw0DxdZGHJej4mUIljyfhk1LTFsgrgBQ==
+react-native-ficus-ui@1.0.0-beta1:
+  version "1.0.0-beta1"
+  resolved "https://registry.yarnpkg.com/react-native-ficus-ui/-/react-native-ficus-ui-1.0.0-beta1.tgz#398a6e24e535cb4ec03040c8b7bc44942cb559c9"
+  integrity sha512-mFwv0FQapLiuOH7eOJPu9oWs7YeS48t2xMR0FUil8LLhPC07Ei+ED7It95eta7tBQbsrJmXgXthX0kRXmdc9EQ==
   dependencies:
     "@shopify/flash-list" "1.5.0"
     color "4.2.3"

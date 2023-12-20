@@ -18,6 +18,9 @@ import { useToast } from '@/modules/toast/useToast';
 import { useDarkMode } from '@/theme/useDarkMode';
 import { CardStatus } from '@/components/CardStatus';
 import { useAuthRegister } from '@/modules/account/account.service';
+import { Container } from '@/layout/Container';
+import { Content } from '@/layout/Content';
+import { Footer } from '@/layout/Footer';
 
 const CardWarningRegister = () => {
   const router = useRouter();
@@ -25,7 +28,11 @@ const CardWarningRegister = () => {
   return (
     <CardStatus type="warning" title="Demo mode" mt="md">
       <Box flexDirection="row" flexWrap="wrap">
-        <Text fontSize="lg" color={colorModeValue('gray.800', 'gray.50')}>
+        <Text
+          fontSize="lg"
+          color={colorModeValue('gray.800', 'gray.50')}
+          my="sm"
+        >
           This is a read-only demo, but you can Sign in to test some of the
           features. Just remember, no changes can be made. Enjoy the features!
         </Text>
@@ -131,58 +138,63 @@ const Register = () => {
   const registerForm = useForm({ onValidSubmit: submitForm });
 
   return (
-    <Formiz connect={registerForm}>
-      <Stack h="100%" p={20} justifyContent="space-between">
-        <Stack spacing="md">
-          <FieldInput
-            name="email"
-            label="Mail address"
-            required="Mail is required"
-            validations={[
-              {
-                handler: isEmail(),
-                message: 'Mail is invalid',
-              },
-            ]}
-            componentProps={{
-              textContentType: 'emailAddress',
-              autoCapitalize: 'none',
-              autoComplete: 'email',
-              keyboardType: 'email-address',
-              onSubmitEditing: focus(nameRef),
-              returnKeyType: 'next',
-            }}
-          />
+    <Container>
+      <Formiz connect={registerForm}>
+        <Content>
+          <Stack spacing="md">
+            <FieldInput
+              name="email"
+              label="Mail address"
+              required="Mail is required"
+              validations={[
+                {
+                  handler: isEmail(),
+                  message: 'Mail is invalid',
+                },
+              ]}
+              componentProps={{
+                textContentType: 'emailAddress',
+                autoCapitalize: 'none',
+                autoComplete: 'email',
+                keyboardType: 'email-address',
+                onSubmitEditing: focus(nameRef),
+                returnKeyType: 'next',
+              }}
+            />
 
-          <FieldInput
-            ref={nameRef}
-            name="name"
-            label="Name"
-            required="name is required"
-            componentProps={{
-              autoCapitalize: 'none',
-              returnKeyType: 'next',
-            }}
-          />
+            <FieldInput
+              ref={nameRef}
+              name="name"
+              label="Name"
+              required="Name is required"
+              componentProps={{
+                autoCapitalize: 'none',
+                returnKeyType: 'next',
+              }}
+            />
 
-          <CardWarningRegister />
-        </Stack>
+            <CardWarningRegister />
+          </Stack>
+        </Content>
 
-        <Button
-          onPress={() => registerForm.submit()}
-          isLoading={isLoading}
-          isDisabled={registerForm.isSubmitted && !registerForm.isValid}
-          colorScheme="brand"
-          full
-        >
-          Sign up
-        </Button>
-      </Stack>
+        <Footer>
+          <Button
+            onPress={() => registerForm.submit()}
+            isLoading={isLoading}
+            isDisabled={registerForm.isSubmitted && !registerForm.isValid}
+            colorScheme="brand"
+            full
+          >
+            Sign up
+          </Button>
+        </Footer>
+      </Formiz>
+
       <CardDemoModeHint
         isOpen={isModalVisible}
         onClose={(value) => setIsModalVisible(value)}
       />
-    </Formiz>
+    </Container>
   );
 };
 

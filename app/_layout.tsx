@@ -9,8 +9,6 @@ import React from 'react';
 import ProtectedRoutesProvider from '@/modules/auth/ProtectedRoutesProvider';
 import { queryClient } from '@/api/query-client';
 
-
-
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
