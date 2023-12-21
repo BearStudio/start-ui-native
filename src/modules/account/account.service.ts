@@ -1,7 +1,7 @@
 import { UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
+import { ZodiosBodyByAlias, ZodiosResponseByAlias } from '@zodios/core';
 
 import { ApiHooks, apiHooks } from '@/api/api-hooks';
-import { ZodiosBodyByAlias, ZodiosResponseByAlias } from '@zodios/core';
 
 type Account = ZodiosBodyByAlias<ApiHooks, 'accountGet'>;
 type AccountResponse = ZodiosResponseByAlias<ApiHooks, 'accountGet'>;

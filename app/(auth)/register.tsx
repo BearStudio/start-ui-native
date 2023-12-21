@@ -1,7 +1,8 @@
-import { Formiz, useForm } from '@formiz/core';
-import { FieldInput } from '@/components/FieldInput';
-import { focus } from '@/utils/formUtils';
 import { FC, useRef, useState } from 'react';
+
+import { Formiz, useForm } from '@formiz/core';
+import { isEmail } from '@formiz/validations';
+import { useRouter } from 'expo-router';
 import { TextInput } from 'react-native';
 import {
   Box,
@@ -12,15 +13,16 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native-ficus-ui';
-import { isEmail } from '@formiz/validations';
-import { useRouter } from 'expo-router';
-import { useToast } from '@/modules/toast/useToast';
-import { useDarkMode } from '@/theme/useDarkMode';
+
 import { CardStatus } from '@/components/CardStatus';
-import { useAuthRegister } from '@/modules/account/account.service';
+import { FieldInput } from '@/components/FieldInput';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
 import { Footer } from '@/layout/Footer';
+import { useAuthRegister } from '@/modules/account/account.service';
+import { useToast } from '@/modules/toast/useToast';
+import { useDarkMode } from '@/theme/useDarkMode';
+import { focus } from '@/utils/formUtils';
 
 const CardWarningRegister = () => {
   const router = useRouter();

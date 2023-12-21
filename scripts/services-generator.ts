@@ -1,10 +1,10 @@
-import 'dotenv/config'
 import axios from 'axios';
+import 'dotenv/config';
+import camelCase from 'lodash/camelCase';
 import {
   generateZodClientFromOpenAPI,
   getHandlebars,
 } from 'openapi-zod-client';
-import camelCase from 'lodash/camelCase';
 
 const handlebars = getHandlebars();
 handlebars.registerHelper('camelCase', camelCase);
@@ -33,5 +33,6 @@ async function generateClient(openApiDocUrl: string) {
 }
 
 // Retrieving the URL from the command line arguments
-const openApiDocUrl = process.env.OPEN_API_URL ?? 'http://localhost:3000/api/openapi.json';
+const openApiDocUrl =
+  process.env.OPEN_API_URL ?? 'http://localhost:3000/api/openapi.json';
 generateClient(openApiDocUrl);

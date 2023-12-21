@@ -1,13 +1,15 @@
-import { Formiz, useForm, useFormFields } from '@formiz/core';
-import { FieldInput } from '@/components/FieldInput';
-import { Button, Box } from 'react-native-ficus-ui';
-import { isMinLength } from '@formiz/validations';
 import { useRef } from 'react';
+
+import { Formiz, useForm, useFormFields } from '@formiz/core';
+import { isMinLength } from '@formiz/validations';
+import { useRouter } from 'expo-router';
+import { TextInput } from 'react-native';
+import { Box, Button } from 'react-native-ficus-ui';
+
+import { FieldInput } from '@/components/FieldInput';
 import { useUpdatePassword } from '@/modules/account/account.service';
 import { useToast } from '@/modules/toast/useToast';
-import { useRouter } from 'expo-router';
 import { focus } from '@/utils/formUtils';
-import { TextInput } from 'react-native';
 
 type FormValues = TODO;
 

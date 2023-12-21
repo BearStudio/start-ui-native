@@ -1,8 +1,10 @@
 import { useCallback } from 'react';
-import { useTheme } from 'react-native-ficus-ui';
-import ficusThemes, { THEME_KEY } from '@/theme';
-import { StatusBar } from 'react-native';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StatusBar } from 'react-native';
+import { useTheme } from 'react-native-ficus-ui';
+
+import ficusThemes, { THEME_KEY } from '@/theme';
 
 export const useDarkMode = () => {
   const { theme, setTheme } = useTheme();

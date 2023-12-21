@@ -1,6 +1,8 @@
-import { useDarkMode } from '@/theme/useDarkMode';
 import { FC, PropsWithChildren } from 'react';
+
 import { Box, BoxProps, Text } from 'react-native-ficus-ui';
+
+import { useDarkMode } from '@/theme/useDarkMode';
 
 export type FormGroupProps = BoxProps & {
   label?: string;

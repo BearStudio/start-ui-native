@@ -1,6 +1,7 @@
-import { useDarkMode } from '@/theme/useDarkMode';
 import { useRouter } from 'expo-router';
-import { Button, Box, Text, Icon } from 'react-native-ficus-ui';
+import { Box, Button, Icon, Text } from 'react-native-ficus-ui';
+
+import { useDarkMode } from '@/theme/useDarkMode';
 
 const Home = () => {
   const router = useRouter();

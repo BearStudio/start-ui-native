@@ -1,16 +1,16 @@
-import useAuthStore from '@/modules/auth/auth.store';
 import {
-  Button,
   Box,
+  Button,
   Icon,
   Modal,
-  Text,
   Stack,
+  Text,
   useDisclosure,
 } from 'react-native-ficus-ui';
 
-import { useAccount } from '@/modules/account/account.service';
 import { LoadingScreen } from '@/layout/LoadingScreen';
+import { useAccount } from '@/modules/account/account.service';
+import useAuthStore from '@/modules/auth/auth.store';
 import ThemeSwitcher from '@/theme/ThemeSwitcher';
 import { useDarkMode } from '@/theme/useDarkMode';
 

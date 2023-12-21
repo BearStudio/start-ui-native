@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Text, Box, Icon } from 'react-native-ficus-ui';
+
+import { Box, Button, Icon, Text } from 'react-native-ficus-ui';
 
 import { useDarkMode } from '@/theme/useDarkMode';
 

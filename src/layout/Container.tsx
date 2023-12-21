@@ -1,5 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
-import { FlexProps, Flex, SafeAreaBox } from 'react-native-ficus-ui';
+
+import { Flex, FlexProps, SafeAreaBox } from 'react-native-ficus-ui';
 
 export const Container: FC<PropsWithChildren<FlexProps>> = ({
   children,

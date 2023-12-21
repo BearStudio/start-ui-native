@@ -1,15 +1,16 @@
-import { Box, Button, Text, TouchableOpacity } from 'react-native-ficus-ui';
 import { Formiz, useForm, useFormContext } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
-import { FieldInput } from '@/components/FieldInput';
-import { useAuthLogin } from '@/modules/auth/auth.service';
-import { useDarkMode } from '@/theme/useDarkMode';
 import { useRouter } from 'expo-router';
+import { Box, Button, Text, TouchableOpacity } from 'react-native-ficus-ui';
+
 import { CardStatus } from '@/components/CardStatus';
-import { useToast } from '@/modules/toast/useToast';
+import { FieldInput } from '@/components/FieldInput';
 import { Container } from '@/layout/Container';
-import { Footer } from '@/layout/Footer';
 import { Content } from '@/layout/Content';
+import { Footer } from '@/layout/Footer';
+import { useAuthLogin } from '@/modules/auth/auth.service';
+import { useToast } from '@/modules/toast/useToast';
+import { useDarkMode } from '@/theme/useDarkMode';
 
 const CardInfoAuthStep = () => {
   const loginForm = useFormContext();

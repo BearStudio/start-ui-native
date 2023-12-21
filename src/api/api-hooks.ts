@@ -1,9 +1,10 @@
-import { api } from '@/api/generated-api';
 import { ApiOf, ZodiosPlugin } from '@zodios/core';
-import { ZodiosHooks } from '@zodios/react';
 import { pluginToken } from '@zodios/plugins';
-import useAuthStore from '@/modules/auth/auth.store';
+import { ZodiosHooks } from '@zodios/react';
 import axios from 'axios';
+
+import { api } from '@/api/generated-api';
+import useAuthStore from '@/modules/auth/auth.store';
 
 const logoutUserPlugin: ZodiosPlugin = {
   error: async (_, __, error) => {

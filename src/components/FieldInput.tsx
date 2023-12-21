@@ -1,9 +1,12 @@
-import { FieldProps, useField } from '@formiz/core';
 import React, { ForwardedRef, useEffect, useState } from 'react';
-import { FormGroup, FormGroupProps } from './FormGroup';
+
+import { FieldProps, useField } from '@formiz/core';
 import { TextInput, TextInputProps } from 'react-native';
 import { Input } from 'react-native-ficus-ui';
+
 import { useDarkMode } from '@/theme/useDarkMode';
+
+import { FormGroup, FormGroupProps } from './FormGroup';
 
 type FieldInputProps<FormattedValue = string> = FieldProps<
   string,

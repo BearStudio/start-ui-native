@@ -1,7 +1,9 @@
+import { FC } from 'react';
+
+import { Tabs as RouterTabs } from 'expo-router';
+
 import { FeatherIcons, TabBarIcon } from '@/components/TabBarIcon';
 import { useDarkMode } from '@/theme/useDarkMode';
-import { Tabs as RouterTabs } from 'expo-router';
-import { FC } from 'react';
 
 type TabsProps = {
   initialRouteName?: string;
