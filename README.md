@@ -70,3 +70,10 @@ yarn ios     # Launch on your iOS device if detected, or an iOS emulator
 > EAS Build is a hosted service for building app binaries for your Expo and React Native projects.
 
 [Follow the steps here to setup and install the eas cli](https://docs.expo.dev/build/setup/#prerequisites).
+
+## Customize personal details in app.json
+
+You can create a `app.json` file with personal details about your app (like `extra.eas.projectId` or `owner` fields needed to link your expo eas profile)
+
+This file will be ignored (you can update the gitignore file to be able to add it in your version control) or just add details in the `app.config.ts`.
+
