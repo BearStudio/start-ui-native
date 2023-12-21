@@ -9,6 +9,7 @@
     "generate-api": "mkdir -p ./src/api/ && tsx ./scripts/services-generator.ts",
     "android": "expo run:android",
     "ios": "expo run:ios",
+    "": "",
     "lint": "eslint . --fix && tsc --noEmit",
     "lint:staged": "tsc --noEmit && eslint --cache --fix",
     "pretty": "prettier -w ."

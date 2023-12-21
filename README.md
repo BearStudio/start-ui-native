@@ -1,8 +1,9 @@
 <h1 align="center"><img src="assets/thumbnail.png" alt="Start UI Native" /></h1>
 
 > [!CAUTION]  
-> This project is in WIP status, use it carrefully, it's not ready for production.  
-> We are currently updating a lot of things on the starter (screens, api, ...) in order to make it stable and usefull.  
+> This project is in WIP status 🚧, use it carefully! It's not ready for production.  
+> We are currently updating a lot of things on the starter (screens, api, ...) in order to make it stable and usefull 👌.  
+> 
 > StartUI [native] needs StartUI [web] v2 in order to work correctly.  
 > Make sure to have a local/deployed installation of StartUI [web] v2 before using
 > StartUI [native].
@@ -20,7 +21,6 @@ This starter is oriented to use Expo with Expo EAS features to have full access 
 - 📱 [Expo EAS](https://expo.dev/eas)
 - ⚛️ [Expo Router](https://expo.github.io/router/docs/)
 - 🌿 [Ficus UI](https://ficus-ui.com/)
-- ⚛️ [TanStack Query](https://react-query.tanstack.com/)
 - 🐜 [Formiz](https://formiz-react.com/)
 - ↔ [Zodios](https://www.zodios.org/)
 
@@ -65,26 +65,8 @@ yarn ios     # Launch on your iOS device if detected, or an iOS emulator
 
 ---
 
-## Create a EAS development build
+## [Expo EAS builds](https://docs.expo.dev/build/introduction/)
 
-⚠️ To do only if no development build on date with native code is available
+> EAS Build is a hosted service for building app binaries for your Expo and React Native projects.
 
-```bash
-# ios
-eas build --profile development --platform ios
-# android
-eas build --profile development --platform android
-```
-
----
-
-## Create a EAS production build
-
-For publishing
-
-```bash
-# ios
-eas build --profile production --platform ios
-# android
-eas build --profile production --platform android
-```
+[Follow the steps here to setup and install the eas cli](https://docs.expo.dev/build/setup/#prerequisites).
