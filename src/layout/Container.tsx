@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from 'react';
-import { FlexProps, Flex, SafeAreaBox } from 'react-native-ficus-ui';
+import { FlexProps, Flex, SafeAreaBox, ScrollBox } from 'react-native-ficus-ui';
 
 export const Container: FC<PropsWithChildren<FlexProps>> = ({
   children,
@@ -7,7 +7,9 @@ export const Container: FC<PropsWithChildren<FlexProps>> = ({
 }) => {
   return (
     <SafeAreaBox flex={1}>
-      <Flex {...rest}>{children}</Flex>
+      <ScrollBox flex={1}>
+        <Flex {...rest}>{children}</Flex>
+      </ScrollBox>
     </SafeAreaBox>
   );
 };

@@ -1,6 +1,7 @@
+import { ButtonIcon } from '@/components/ButtonIcon';
 import { useDarkMode } from '@/theme/useDarkMode';
 import { useRouter } from 'expo-router';
-import { Button, Box, Text, Icon } from 'react-native-ficus-ui';
+import { Box, Text } from 'react-native-ficus-ui';
 
 const Home = () => {
   const router = useRouter();
@@ -25,48 +26,33 @@ const Home = () => {
       >
         - From the BearStudio Team
       </Text>
-      <Box mt={20}>
-        <Button
-          full
-          prefix={
-            <Icon
-              name="github"
-              fontSize="lg"
-              fontFamily="Feather"
-              color="gray.50"
-            />
-          }
+      <Box mt="xl">
+        <ButtonIcon
+          icon="github"
+          iconFamily="Feather"
           colorScheme="brand"
           onPress={() =>
             router.replace('https://github.com/BearStudio/start-ui-native')
           }
-        >
-          <Text ml={10} fontSize="lg" color="gray.50">
-            Github Repository
-          </Text>
-        </Button>
-        <Button
-          mt={10}
           full
-          prefix={
-            <Icon
-              name="alert-circle"
-              fontSize="lg"
-              fontFamily="Feather"
-              color="gray.50"
-            />
-          }
+        >
+          Github Repository
+        </ButtonIcon>
+
+        <ButtonIcon
+          mt="md"
+          icon="alert-circle"
+          iconFamily="Feather"
           colorScheme="brand"
           onPress={() =>
             router.replace(
               'https://github.com/BearStudio/start-ui-native/issues/new'
             )
           }
+          full
         >
-          <Text ml={10} fontSize="lg" color="gray.50">
-            Open issue
-          </Text>
-        </Button>
+          Open issue
+        </ButtonIcon>
       </Box>
     </Box>
   );

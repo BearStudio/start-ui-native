@@ -11,8 +11,8 @@ const HomeTabs = () => {
           options: { headerShown: false },
         },
         {
-          route: 'profile',
-          title: 'Profile',
+          route: 'account',
+          title: 'Account',
           icon: 'user',
           options: { headerShown: false },
         },
