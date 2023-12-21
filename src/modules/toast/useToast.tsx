@@ -8,28 +8,28 @@ export const useToast = () => {
         type: 'error',
         text1: 'Error',
         text2: message,
-        position: 'bottom',
+        position: 'top',
       }),
     showInfo: (message: string) =>
       toast.show({
         type: 'info',
         text1: 'Info',
         text2: message,
-        position: 'bottom',
+        position: 'top',
       }),
     showSuccess: (message: string) =>
       toast.show({
         type: 'success',
         text1: 'Success',
         text2: message,
-        position: 'bottom',
+        position: 'top',
       }),
     showWarning: (message: string) =>
       toast.show({
         type: 'warning',
         text1: 'Warning',
         text2: message,
-        position: 'bottom',
+        position: 'top',
       }),
   };
 };

@@ -17,7 +17,7 @@ export const Footer: FC<PropsWithChildren<BoxProps>> = ({
       py="lg"
       px="xl"
       w="100%"
-      bg={colorModeValue('gray.50', 'blue.800')}
+      bg={colorModeValue('gray.50', 'gray.800')}
       {...rest}
     >
       {children}

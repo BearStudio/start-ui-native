@@ -50,3 +50,47 @@ export const useAccountUpdate = (
 
   return { updateAccount, isLoading };
 };
+
+type AccountUpdateEmailRequest = ZodiosBodyByAlias<
+  ApiHooks,
+  'accountUpdateEmail'
+>;
+type AccountUpdateEmailResponse = ZodiosResponseByAlias<
+  ApiHooks,
+  'accountUpdateEmail'
+>;
+
+export const useAccountUpdateEmail = (
+  config: UseMutationOptions<
+    AccountUpdateEmailResponse,
+    ExplicitAny,
+    AccountUpdateEmailRequest
+  > = {}
+) => {
+  const { mutate: updateAccountEmail, isLoading } =
+    apiHooks.useAccountUpdateEmail({}, config);
+
+  return { updateAccountEmail, isLoading };
+};
+
+type AccountUpdateEmailValidateRequest = ZodiosBodyByAlias<
+  ApiHooks,
+  'accountUpdateEmailValidate'
+>;
+type AccountUpdateEmailValidateResponse = ZodiosResponseByAlias<
+  ApiHooks,
+  'accountUpdateEmailValidate'
+>;
+
+export const useAccountUpdateEmailValidate = (
+  config: UseMutationOptions<
+    AccountUpdateEmailValidateResponse,
+    ExplicitAny,
+    AccountUpdateEmailValidateRequest
+  > = {}
+) => {
+  const { mutate: updateAccountEmailValidate, isLoading } =
+    apiHooks.useAccountUpdateEmailValidate({}, config);
+
+  return { updateAccountEmailValidate, isLoading };
+};
