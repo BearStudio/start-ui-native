@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
+
+import { Box, BoxProps, Icon, Text } from 'react-native-ficus-ui';
+
 import { useDarkMode } from '@/theme/useDarkMode';
-import { Box, Text, Icon, BoxProps } from 'react-native-ficus-ui';
 
 type CardStatusProps = {
   title: string;

@@ -10,4 +10,8 @@ yarn.lock
 public
 *.md
 *.mdx
+*.hbs
 .env*
+android
+ios
+.expo

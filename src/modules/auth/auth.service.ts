@@ -1,8 +1,8 @@
 import { UseMutationOptions } from '@tanstack/react-query';
-
-import { useToast } from 'react-native-ficus-ui';
-import { ApiHooks, apiHooks } from '@/api/api-hooks';
 import { ZodiosBodyByAlias, ZodiosResponseByAlias } from '@zodios/core';
+import { useToast } from 'react-native-ficus-ui';
+
+import { ApiHooks, apiHooks } from '@/api/api-hooks';
 import useAuthStore from '@/modules/auth/auth.store';
 
 // Define the types for your request and response

@@ -1,6 +1,8 @@
-import useAuthStore from '@/modules/auth/auth.store';
-import { useRouter, useRootNavigationState, useSegments } from 'expo-router';
 import React, { ReactNode, useEffect } from 'react';
+
+import { useRootNavigationState, useRouter, useSegments } from 'expo-router';
+
+import useAuthStore from '@/modules/auth/auth.store';
 
 type ProtectedRoutesProviderProps = {
   children: ReactNode;

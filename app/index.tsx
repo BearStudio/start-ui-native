@@ -1,8 +1,9 @@
-import { StatusBar, View } from 'react-native';
-
 import { useCallback, useContext, useEffect } from 'react';
-import { ThemeContext } from 'react-native-ficus-ui';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StatusBar, View } from 'react-native';
+import { ThemeContext } from 'react-native-ficus-ui';
+
 import theme, { THEME_KEY } from '@/theme';
 
 const Index = () => {
