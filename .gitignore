@@ -19,3 +19,5 @@ src/api/generated-api.*
 
 .env
 .env.production
+
+devices.json

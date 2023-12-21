@@ -6,7 +6,7 @@
     "start": "expo start",
     "start-dev-client": "yarn start --dev-client",
     "postinstall": "yarn generate-api",
-    "generate-api": "mkdir -p ./src/api/ && tsx ./scripts/services-generator.ts https://start-ui-v2.vercel.app/api/openapi.json",
+    "generate-api": "mkdir -p ./src/api/ && tsx ./scripts/services-generator.ts",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "lint": "eslint . --fix && tsc --noEmit",

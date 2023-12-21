@@ -40,6 +40,18 @@ See https://reactnative.dev/docs/environment-setup?guide=native&platform=android
 
 See https://reactnative.dev/docs/environment-setup?guide=native&platform=ios
 
+### Update .env values
+
+Put your env values on .env file. Environment variables inserted on your local machine or on Expo EAS platform will overwrite the variables of .env file.
+
+```bash
+# Env var used to call api endpoints — generally it will be your start-ui-web api url
+API_URL='your api url here'
+
+# Env var used to get the open api file, used to generate zodios client
+OPEN_API_URL='your open api api url here'
+```
+
 ### Installation
 
 ```bash
@@ -48,17 +60,7 @@ yarn
 
 # Then, choose based on the platform you want to dev on:
 yarn android # Launch on your android device if detected, or an Android emulator
-yarn ios # Launch on your iOS device if detected, or an iOS emulator
-```
-
----
-
-### Update .env values
-
-Put your env values on .env file. Environment variables inserted on your local machine or on Expo EAS platform will overwrite the variables of .env file.
-
-```bash
-API_URL='your api url here'
+yarn ios     # Launch on your iOS device if detected, or an iOS emulator
 ```
 
 ---
@@ -73,38 +75,6 @@ eas build --profile development --platform ios
 # android
 eas build --profile development --platform android
 ```
-
----
-
-## Build native locally
-
-If you want to build locally the application (with native layer) follow those steps :
-
-### Android
-
-<img src="https://emojis.slackmojis.com/emojis/images/1493026598/2124/android.png" width="60" />
-
-You need to install Android Studio and Android SDK on your computer to be able to build locally the application
-without using EAS build.
-
-```bash
-npx expo run:android
-```
-
-The application will start on your device or on an android simulator.
-
-### iOS
-
-<img src="https://emojis.slackmojis.com/emojis/images/1623622435/44818/ios.png" width="60" />
-
-You need to install XCode on your Mac to be able to build locally the application
-without using EAS build.
-
-```bash
-npx expo run:ios
-```
-
-The application will start on your device or on an iOS simulator.
 
 ---
 
