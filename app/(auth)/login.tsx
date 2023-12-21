@@ -99,6 +99,9 @@ const Login = () => {
         showSuccess('Successfully logged in');
       },
       onError: () => {
+        emailValidationCodeForm.setValues({
+          code: null,
+        });
         emailValidationCodeForm.setErrors({
           code: 'Code is incorrect, please try again',
         });

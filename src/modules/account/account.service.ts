@@ -3,6 +3,8 @@ import { ZodiosBodyByAlias, ZodiosResponseByAlias } from '@zodios/core';
 
 import { ApiHooks, apiHooks } from '@/api/api-hooks';
 
+import useAuthStore from '../auth/auth.store';
+
 type Account = ZodiosBodyByAlias<ApiHooks, 'accountGet'>;
 type AccountResponse = ZodiosResponseByAlias<ApiHooks, 'accountGet'>;
 
@@ -31,6 +33,43 @@ export const useAuthRegister = (
   );
 
   return { createAccount, isLoading };
+};
+
+type RegisterValidateRequest = ZodiosBodyByAlias<
+  ApiHooks,
+  'authRegisterValidate'
+>;
+type RegisterValidateResponse = ZodiosResponseByAlias<
+  ApiHooks,
+  'authRegisterValidate'
+>;
+
+export const useAuthRegisterValidate = (
+  token: string,
+  config: UseMutationOptions<
+    RegisterValidateResponse,
+    ExplicitAny,
+    RegisterValidateRequest
+  > = {}
+) => {
+  const updateToken = useAuthStore((state) => state.setToken);
+  const mutation = apiHooks.useAuthRegisterValidate(
+    {
+      params: { token },
+    },
+    {
+      ...config,
+      onSuccess: (data, ...rest) => {
+        updateToken(data.token);
+        config?.onSuccess?.(data, ...rest);
+      },
+      onError: (error: ExplicitAny, ...rest) => {
+        config?.onError?.(error, ...rest);
+      },
+    }
+  );
+
+  return { ...mutation, accountValidate: mutation.mutate };
 };
 
 type AccountUpdateRequest = ZodiosBodyByAlias<ApiHooks, 'accountUpdate'>;
