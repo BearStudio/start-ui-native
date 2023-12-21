@@ -1,14 +1,14 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { Flex, FlexProps } from 'react-native-ficus-ui';
+import { FlexProps, ScrollBox } from 'react-native-ficus-ui';
 
 export const Content: FC<PropsWithChildren<FlexProps>> = ({
   children,
   ...rest
 }) => {
   return (
-    <Flex p="xl" {...rest}>
+    <ScrollBox flex={1} p="xl" {...rest}>
       {children}
-    </Flex>
+    </ScrollBox>
   );
 };

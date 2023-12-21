@@ -4,12 +4,32 @@ export const useToast = () => {
   const toast = useFicusToast();
   return {
     showError: (message: string) =>
-      toast.show({ type: 'error', text1: message, position: 'bottom' }),
+      toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: message,
+        position: 'bottom',
+      }),
     showInfo: (message: string) =>
-      toast.show({ type: 'info', text1: message, position: 'bottom' }),
+      toast.show({
+        type: 'info',
+        text1: 'Info',
+        text2: message,
+        position: 'bottom',
+      }),
     showSuccess: (message: string) =>
-      toast.show({ type: 'success', text1: message, position: 'bottom' }),
+      toast.show({
+        type: 'success',
+        text1: 'Success',
+        text2: message,
+        position: 'bottom',
+      }),
     showWarning: (message: string) =>
-      toast.show({ type: 'warning', text1: message, position: 'bottom' }),
+      toast.show({
+        type: 'warning',
+        text1: 'Warning',
+        text2: message,
+        position: 'bottom',
+      }),
   };
 };

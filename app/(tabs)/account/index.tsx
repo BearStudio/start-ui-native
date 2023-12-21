@@ -1,28 +1,31 @@
-import useAuthStore from '@/modules/auth/auth.store';
+import { Formiz, useForm, useFormFields } from '@formiz/core';
+import { isEmail } from '@formiz/validations';
 import {
-  Button,
   Box,
-  Modal,
-  Text,
-  Stack,
-  useDisclosure,
-  VStack,
-  Flex,
+  Button,
   Divider,
+  Flex,
+  Modal,
+  Stack,
+  Text,
+  VStack,
+  useDisclosure,
 } from 'react-native-ficus-ui';
 
-import { useAccount } from '@/modules/account/account.service';
-import { LoadingScreen } from '@/layout/LoadingScreen';
-import ThemeSwitcher from '@/theme/ThemeSwitcher';
-import { useDarkMode } from '@/theme/useDarkMode';
+import { ButtonIcon } from '@/components/ButtonIcon';
+import { FieldInput } from '@/components/FieldInput';
+import { SectionTitle } from '@/components/SectionTitle';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
-import { Footer } from '@/layout/Footer';
-import { ButtonIcon } from '@/components/ButtonIcon';
-import { SectionTitle } from '@/components/SectionTitle';
-import { Formiz, useForm } from '@formiz/core';
-import { FieldInput } from '@/components/FieldInput';
-import { isEmail } from '@formiz/validations';
+import { LoadingScreen } from '@/layout/LoadingScreen';
+import {
+  useAccount,
+  useAccountUpdate,
+} from '@/modules/account/account.service';
+import useAuthStore from '@/modules/auth/auth.store';
+import { useToast } from '@/modules/toast/useToast';
+import ThemeSwitcher from '@/theme/ThemeSwitcher';
+import { useDarkMode } from '@/theme/useDarkMode';
 
 const Profile = () => {
   const logout = useAuthStore((state) => state.logout);
@@ -30,18 +33,46 @@ const Profile = () => {
 
   const { account, isLoading, isError, refetch: refetchAccount } = useAccount();
 
+  const { showError, showSuccess } = useToast();
+
   const logoutModal = useDisclosure();
   const deleteAccountModal = useDisclosure();
 
+  const { updateAccount, isLoading: isUpdatingAccount } = useAccountUpdate({
+    onSuccess: () => {
+      showSuccess('Account updated');
+    },
+    onError: (err) => {
+      showError(
+        err.response?.data?.message?.startsWith('[DEMO]')
+          ? 'This is a read-only demo, this action is disabled.'
+          : 'An error occured during account update, please try again'
+      );
+    },
+  });
+
   const submitProfile = (values: { name: string }) => {
-    return null;
+    updateAccount({ ...values });
   };
+
   const submitEmail = (values: { email: string }) => {
     return null;
   };
 
   const profileForm = useForm({ onValidSubmit: submitProfile });
   const emailForm = useForm({ onValidSubmit: submitEmail });
+
+  const { name } = useFormFields({
+    connect: profileForm,
+    selector: (field) => field.value,
+    fields: ['name'] as const,
+  });
+
+  const { email } = useFormFields({
+    connect: emailForm,
+    selector: (field) => field.value,
+    fields: ['email'] as const,
+  });
 
   if (isLoading) {
     return <LoadingScreen />;
@@ -59,7 +90,7 @@ const Profile = () => {
     <>
       <Container>
         <Content>
-          <VStack mt="lg" spacing="2xl">
+          <VStack spacing="xl">
             <Box>
               <SectionTitle>Profile informations</SectionTitle>
               <Box mt="lg">
@@ -75,9 +106,11 @@ const Profile = () => {
                     }}
                   />
                   <Button
+                    mt="md"
                     onPress={() => profileForm.submit()}
-                    mt="lg"
                     colorScheme="brand"
+                    isDisabled={name === account.name}
+                    isLoading={isUpdatingAccount}
                     full
                   >
                     Update
@@ -110,9 +143,10 @@ const Profile = () => {
                     }}
                   />
                   <Button
+                    mt="md"
                     onPress={() => emailForm.submit()}
-                    mt="lg"
                     colorScheme="brand"
+                    isDisabled={email === account.email}
                     full
                   >
                     Update
@@ -123,12 +157,12 @@ const Profile = () => {
             </Box>
             <Box>
               <SectionTitle>Preferences</SectionTitle>
-              <ThemeSwitcher />
-            </Box>
-            <Box>
-              <ButtonIcon icon="logout" onPress={logoutModal.onOpen} full>
-                Logout
-              </ButtonIcon>
+              <VStack spacing="lg">
+                <ThemeSwitcher />
+                <ButtonIcon icon="logout" onPress={logoutModal.onOpen} full>
+                  Logout
+                </ButtonIcon>
+              </VStack>
             </Box>
           </VStack>
         </Content>

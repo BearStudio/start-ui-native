@@ -5,7 +5,7 @@ export default {
   ...foundations,
   components: {
     Modal: {
-      bg: 'gray.200',
+      bg: 'gray.100',
     },
   },
 };

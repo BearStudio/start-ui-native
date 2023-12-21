@@ -32,3 +32,21 @@ export const useAuthRegister = (
 
   return { createAccount, isLoading };
 };
+
+type AccountUpdateRequest = ZodiosBodyByAlias<ApiHooks, 'accountUpdate'>;
+type AccountUpdateResponse = ZodiosResponseByAlias<ApiHooks, 'accountUpdate'>;
+
+export const useAccountUpdate = (
+  config: UseMutationOptions<
+    AccountUpdateResponse,
+    ExplicitAny,
+    AccountUpdateRequest
+  > = {}
+) => {
+  const { mutate: updateAccount, isLoading } = apiHooks.useAccountUpdate(
+    {},
+    config
+  );
+
+  return { updateAccount, isLoading };
+};
