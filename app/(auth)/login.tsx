@@ -1,14 +1,25 @@
-import { Formiz, useForm, useFormContext } from '@formiz/core';
+import { useState } from 'react';
+
+import { Formiz, useForm, useFormContext, useFormFields } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
-import { useRouter } from 'expo-router';
-import { Box, Button, Text, TouchableOpacity } from 'react-native-ficus-ui';
+import {
+  Box,
+  Button,
+  Text,
+  TouchableOpacity,
+  useDisclosure,
+} from 'react-native-ficus-ui';
 
 import { CardStatus } from '@/components/CardStatus';
+import { ConfirmationCodeModal } from '@/components/ConfirmationCodeModal';
 import { FieldInput } from '@/components/FieldInput';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
 import { Footer } from '@/layout/Footer';
-import { useAuthLogin } from '@/modules/auth/auth.service';
+import {
+  useAuthLogin,
+  useAuthLoginValidate,
+} from '@/modules/auth/auth.service';
 import { useToast } from '@/modules/toast/useToast';
 import { useDarkMode } from '@/theme/useDarkMode';
 
@@ -51,23 +62,48 @@ const Login = () => {
       authLogin({ email, language: 'en' });
     },
   });
+  const [emailToken, setEmailToken] = useState<string | null>(null);
 
-  const { showError } = useToast();
+  const { showError, showSuccess } = useToast();
+  const validateEmailCodeModal = useDisclosure();
 
-  const router = useRouter();
+  const submitValidationCodeEmail = (values: { code: string }) => {
+    loginValidate({ ...values });
+  };
+
+  const emailValidationCodeForm = useForm({
+    onValidSubmit: submitValidationCodeEmail,
+  });
+
+  const { email } = useFormFields({
+    connect: loginForm,
+    selector: (field) => field.value,
+    fields: ['email'] as const,
+  });
 
   const { authLogin, isLoadingAuth } = useAuthLogin({
     onSuccess: (data) => {
-      router.push({
-        pathname: '/confirm-login',
-        params: { token: data.token },
-      });
+      setEmailToken(data.token);
+      validateEmailCodeModal.onOpen();
     },
     onError: (err) => {
       showError('Failed to log in. Please try again');
       console.error('Authentication error:', err);
     },
   });
+
+  const { login: loginValidate, isLoading: isLoadingValidate } =
+    useAuthLoginValidate(emailToken as string, {
+      onSuccess: () => {
+        validateEmailCodeModal.onClose();
+        showSuccess('Successfully logged in');
+      },
+      onError: () => {
+        emailValidationCodeForm.setErrors({
+          code: 'Code is incorrect, please try again',
+        });
+      },
+    });
 
   return (
     <Container>
@@ -98,6 +134,14 @@ const Login = () => {
           </Button>
         </Footer>
       </Formiz>
+
+      <ConfirmationCodeModal
+        isOpen={validateEmailCodeModal.isOpen}
+        onClose={validateEmailCodeModal.onClose}
+        form={emailValidationCodeForm}
+        email={email}
+        isLoadingConfirm={isLoadingValidate}
+      />
     </Container>
   );
 };

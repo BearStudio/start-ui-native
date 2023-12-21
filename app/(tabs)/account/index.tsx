@@ -1,8 +1,7 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 import { Formiz, useForm, useFormFields } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
-import { TextInput } from 'react-native';
 import {
   Box,
   Button,
@@ -15,8 +14,8 @@ import {
 } from 'react-native-ficus-ui';
 
 import { ButtonIcon } from '@/components/ButtonIcon';
+import { ConfirmationCodeModal } from '@/components/ConfirmationCodeModal';
 import { ConfirmationModal } from '@/components/ConfirmationModal';
-import { FieldCodeInput } from '@/components/FieldCodeInput';
 import { FieldInput } from '@/components/FieldInput';
 import { SectionTitle } from '@/components/SectionTitle';
 import { Container } from '@/layout/Container';
@@ -38,13 +37,20 @@ const Account = () => {
   const { colorModeValue } = useDarkMode();
   const { account, isLoading, isError, refetch: refetchAccount } = useAccount();
   const { showError, showSuccess } = useToast();
-  const codeInputRef = useRef<TextInput>(null);
 
   const logoutModal = useDisclosure();
   const deleteAccountModal = useDisclosure();
   const updateEmailCodeModal = useDisclosure();
 
   const [emailToken, setEmailToken] = useState<string | null>(null);
+
+  const submitValidationCodeEmail = (values: { code: string }) => {
+    updateAccountEmailValidate({ ...values, token: emailToken ?? '' });
+  };
+
+  const emailValidationCodeForm = useForm({
+    onValidSubmit: submitValidationCodeEmail,
+  });
 
   const { updateAccount, isLoading: isUpdatingAccount } = useAccountUpdate({
     onSuccess: () => {
@@ -65,7 +71,6 @@ const Account = () => {
       onSuccess: (data) => {
         setEmailToken(data.token);
         updateEmailCodeModal.onOpen();
-        codeInputRef.current?.focus();
       },
       onError: (err) => {
         showError(
@@ -98,15 +103,8 @@ const Account = () => {
     updateAccountEmail({ ...values });
   };
 
-  const submitValidationCodeEmail = (values: { code: string }) => {
-    updateAccountEmailValidate({ ...values, token: emailToken ?? '' });
-  };
-
   const profileForm = useForm({ onValidSubmit: submitProfile });
   const emailForm = useForm({ onValidSubmit: submitEmail });
-  const emailValidationCodeForm = useForm({
-    onValidSubmit: submitValidationCodeEmail,
-  });
 
   const { name } = useFormFields({
     connect: profileForm,
@@ -215,33 +213,13 @@ const Account = () => {
         </Content>
       </Container>
 
-      <ConfirmationModal
-        title="Check your inbox for the code"
-        description={`We've sent a 6-character code to ${account.email}. The code expires shortly (5 minutes).`}
-        confirmLabel="Confirm"
+      <ConfirmationCodeModal
+        isOpen={updateEmailCodeModal.isOpen}
+        onClose={updateEmailCodeModal.onClose}
+        form={emailValidationCodeForm}
+        email={account.email}
         isLoadingConfirm={isValidatingAccountEmail}
-        onConfirm={() => emailValidationCodeForm.submit()}
-        onCancel={updateEmailCodeModal.onClose}
-        h={350}
-        isVisible={updateEmailCodeModal.isOpen}
-        avoidKeyboard
-      >
-        <Box my="lg">
-          <Formiz connect={emailValidationCodeForm}>
-            <FieldCodeInput
-              ref={codeInputRef}
-              name="code"
-              required="Validation code is required"
-              codeLength={6}
-              onValueChange={(code) => {
-                if (code?.length === 6) {
-                  emailValidationCodeForm.submit();
-                }
-              }}
-            />
-          </Formiz>
-        </Box>
-      </ConfirmationModal>
+      />
 
       <ConfirmationModal
         title="Logout"
@@ -253,6 +231,7 @@ const Account = () => {
         onCancel={logoutModal.onClose}
         isVisible={logoutModal.isOpen}
       />
+
       <Modal
         animationIn="slideInUp"
         isVisible={deleteAccountModal.isOpen}

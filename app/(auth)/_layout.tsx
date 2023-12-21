@@ -10,7 +10,6 @@ const AuthStack = () => {
           options: { headerShown: false },
         },
         { route: 'login', title: 'Login' },
-        { route: 'confirm-login', title: 'Validate Email' },
         { route: 'register', title: 'Create Account' },
       ]}
     />
