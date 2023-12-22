@@ -1,7 +1,8 @@
-import { ButtonIcon } from '@/components/ButtonIcon';
-import { useDarkMode } from '@/theme/useDarkMode';
 import { useRouter } from 'expo-router';
 import { Box, Text } from 'react-native-ficus-ui';
+
+import { ButtonIcon } from '@/components/ButtonIcon';
+import { useDarkMode } from '@/theme/useDarkMode';
 
 const Home = () => {
   const router = useRouter();
@@ -16,7 +17,7 @@ const Home = () => {
         Welcome to 🚀 Start UI [native]
       </Text>
       <Text fontSize="lg" mt="md" color={colorModeValue('black', 'gray.50')}>
-        An opinionated UI starter with Expo, Ficus UI, React Query & Formiz
+        An opinionated UI starter with Expo, Ficus UI, Zodios & Formiz
       </Text>
       <Text
         fontSize="lg"
