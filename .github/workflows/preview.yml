@@ -41,4 +41,4 @@ jobs:
       - name: Create preview
         uses: expo/expo-github-action/preview@v8
         with:
-          command: eas update --auto
+          command: eas build --profile preview --platform android
