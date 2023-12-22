@@ -41,7 +41,7 @@ const Account = () => {
   const deleteAccountModal = useDisclosure();
   const updateEmailCodeModal = useDisclosure();
 
-  const { colorModeValue } = useDarkMode();
+  const { colorModeValue, getThemeColor } = useDarkMode();
 
   const [emailToken, setEmailToken] = useState<string | null>(null);
 
@@ -116,12 +116,6 @@ const Account = () => {
     },
   });
 
-  const { name } = useFormFields({
-    connect: profileForm,
-    selector: (field) => field.value,
-    fields: ['name'] as const,
-  });
-
   const { email } = useFormFields({
     connect: emailForm,
     selector: (field) => field.value,
@@ -155,34 +149,36 @@ const Account = () => {
               <SectionTitle>Profile informations</SectionTitle>
               <Box mt="lg">
                 <Formiz connect={profileForm}>
-                  <FieldInput
-                    name="name"
-                    label="Name"
-                    required="Name is required"
-                    defaultValue={account.name}
-                    componentProps={{
-                      autoCapitalize: 'none',
-                      returnKeyType: 'next',
-                    }}
-                  />
-                  <Button
-                    mt="md"
-                    onPress={() => profileForm.submit()}
-                    colorScheme="brand"
-                    isDisabled={name === account.name}
-                    isLoading={isUpdatingAccount}
-                    full
-                  >
-                    Update
-                  </Button>
+                  <Stack spacing="md">
+                    <FieldInput
+                      name="name"
+                      label="Name"
+                      required="Name is required"
+                      defaultValue={account.name}
+                      componentProps={{
+                        autoCapitalize: 'none',
+                        returnKeyType: 'next',
+                      }}
+                    />
+                    <Button
+                      onPress={() => profileForm.submit()}
+                      colorScheme="brand"
+                      isLoading={isUpdatingAccount}
+                    >
+                      Update
+                    </Button>
+                  </Stack>
                 </Formiz>
               </Box>
-              <Divider mt="xl" borderColor="gray.300" />
+              <Divider
+                mt="xl"
+                borderColor={colorModeValue('gray.200', 'gray.700')}
+              />
             </Box>
-            <Box>
+            <Stack spacing="md">
               <SectionTitle>Update your email</SectionTitle>
-              <Box mt="lg">
-                <Formiz connect={emailForm}>
+              <Formiz connect={emailForm}>
+                <Stack spacing="md">
                   <FieldInput
                     name="email"
                     label="Mail address"
@@ -202,25 +198,67 @@ const Account = () => {
                       returnKeyType: 'done',
                     }}
                   />
-                  <Button
-                    mt="md"
-                    onPress={() => emailForm.submit()}
-                    colorScheme="brand"
-                    isLoading={isUpdatingAccountEmail}
-                    isDisabled={email === account.email}
-                    full
-                  >
-                    Update
-                  </Button>
-                </Formiz>
-              </Box>
-              <Divider mt="xl" borderColor="gray.300" />
-            </Box>
+                  <Stack direction="row" spacing={10} alignItems="center">
+                    <Button
+                      onPress={() => emailForm.submit()}
+                      colorScheme="brand"
+                      isLoading={isUpdatingAccountEmail}
+                      isDisabled={email === account.email}
+                    >
+                      Update
+                    </Button>
+                    {email === account.email ? (
+                      <Text
+                        fontSize="lg"
+                        color={colorModeValue('gray.500', 'gray.300')}
+                      >
+                        This is your current email
+                      </Text>
+                    ) : (
+                      <Button
+                        onPress={() => emailForm.submit()}
+                        isLoading={isUpdatingAccountEmail}
+                        isDisabled={email === account.email}
+                        color={colorModeValue(
+                          getThemeColor('gray.500'),
+                          getThemeColor('gray.200')
+                        )}
+                        bg={colorModeValue('white', 'gray.700')}
+                        borderWidth={1}
+                        borderColor={colorModeValue('gray.200', 'gray.600')}
+                      >
+                        Cancel
+                      </Button>
+                    )}
+                  </Stack>
+                </Stack>
+              </Formiz>
+              <Divider
+                mt="xl"
+                borderColor={colorModeValue('gray.200', 'gray.700')}
+              />
+            </Stack>
             <Box>
               <SectionTitle>Preferences</SectionTitle>
               <VStack spacing="lg">
                 <ThemeSwitcher />
-                <ButtonIcon icon="logout" onPress={logoutModal.onOpen} full>
+                <Divider
+                  my="lg"
+                  borderColor={colorModeValue('gray.200', 'gray.700')}
+                />
+                <ButtonIcon
+                  icon="logout"
+                  onPress={logoutModal.onOpen}
+                  full
+                  iconColor={colorModeValue('red.500', 'red.400')}
+                  color={colorModeValue(
+                    getThemeColor('red.500'),
+                    getThemeColor('red.400')
+                  )}
+                  bg={colorModeValue('white', 'gray.700')}
+                  borderWidth={1}
+                  borderColor={colorModeValue('gray.200', 'gray.600')}
+                >
                   Logout
                 </ButtonIcon>
                 <ButtonIcon

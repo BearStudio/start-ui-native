@@ -1,6 +1,8 @@
-import { useDarkMode } from '@/theme/useDarkMode';
 import { FC, PropsWithChildren } from 'react';
+
 import { Text, TextProps } from 'react-native-ficus-ui';
+
+import { useDarkMode } from '@/theme/useDarkMode';
 
 export const SectionTitle: FC<PropsWithChildren<TextProps>> = ({
   children,

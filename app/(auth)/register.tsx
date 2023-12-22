@@ -4,14 +4,7 @@ import { Formiz, useForm, useFormFields } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
 import { useRouter } from 'expo-router';
 import { TextInput } from 'react-native';
-import {
-  Box,
-  Button,
-  Stack,
-  Text,
-  TouchableOpacity,
-  useDisclosure,
-} from 'react-native-ficus-ui';
+import { Box, Button, Stack, Text, useDisclosure } from 'react-native-ficus-ui';
 
 import { CardStatus } from '@/components/CardStatus';
 import { ConfirmationCodeModal } from '@/components/ConfirmationCodeModal';
