@@ -8,5 +8,4 @@ export const TabBarIcon: (
   name: FeatherIcons
 ) => FC<{ color: string; size: number; focused: boolean }> =
   (name) =>
-  ({ color, size }) =>
-    <Feather name={name} size={size} color={color} />;
+  ({ color, size }) => <Feather name={name} size={size} color={color} />;

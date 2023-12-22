@@ -51,7 +51,7 @@ export const ConfirmationModal: FC<
   children,
   ...rest
 }) => {
-  const { colorModeValue } = useDarkMode();
+  const { colorModeValue, getThemeColor } = useDarkMode();
 
   return (
     <Modal animationIn="slideInUp" h={260} onBackdropPress={onCancel} {...rest}>
@@ -86,7 +86,18 @@ export const ConfirmationModal: FC<
           >
             {confirmLabel}
           </ButtonIcon>
-          <Button colorScheme="gray" onPress={onCancel} full>
+          <Button
+            colorScheme="gray"
+            onPress={onCancel}
+            full
+            color={colorModeValue(
+              getThemeColor('red.500'),
+              getThemeColor('red.400')
+            )}
+            bg={colorModeValue('white', 'gray.700')}
+            borderWidth={1}
+            borderColor={colorModeValue('gray.200', 'gray.600')}
+          >
             Cancel
           </Button>
         </VStack>

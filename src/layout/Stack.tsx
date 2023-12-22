@@ -49,7 +49,7 @@ export const Stack: FC<StackProps> = ({
             tabBarIcon: screen.icon ? TabBarIcon(screen.icon) : undefined,
             contentStyle: {
               backgroundColor: colorModeValue(
-                getThemeColor('gray.50'),
+                getThemeColor('gray.100'),
                 getThemeColor('gray.800')
               ),
             },
