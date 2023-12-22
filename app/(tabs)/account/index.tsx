@@ -235,6 +235,8 @@ const Account = () => {
               </VStack>
             </Box>
           </VStack>
+
+          <Box h={50} />
         </Content>
       </Container>
 
