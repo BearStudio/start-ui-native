@@ -1,32 +1,33 @@
 import React from 'react';
 
-import { Box } from 'react-native-ficus-ui';
+import { Stack, Switch, Text } from 'react-native-ficus-ui';
 
-import { ButtonIcon } from '@/components/ButtonIcon';
 import { useDarkMode } from '@/theme/useDarkMode';
 
 export default function ThemeSwitcher() {
-  const { colorMode, toggleColorMode, colorModeValue, getThemeColor } =
-    useDarkMode();
+  const { colorMode, toggleColorMode, colorModeValue } = useDarkMode();
 
   return (
-    <Box mt="lg">
-      <ButtonIcon
-        icon={colorMode === 'light' ? 'moon' : 'sun'}
-        iconFamily="Feather"
-        onPress={toggleColorMode}
-        full
-        iconColor={colorModeValue('gray.500', 'gray.300')}
-        color={colorModeValue(
-          getThemeColor('gray.500'),
-          getThemeColor('gray.200')
-        )}
-        bg={colorModeValue('white', 'gray.700')}
-        borderWidth={1}
-        borderColor={colorModeValue('gray.200', 'gray.600')}
+    <Stack mt="lg" direction="row" alignItems="center" spacing={8}>
+      <Text
+        fontSize="lg"
+        fontWeight="500"
+        color={colorModeValue('gray.900', 'gray.400')}
       >
-        {colorMode === 'light' ? 'Dark mode' : 'Light mode'}
-      </ButtonIcon>
-    </Box>
+        Light mode
+      </Text>
+      <Switch
+        on={colorMode === 'dark'}
+        onPress={toggleColorMode}
+        colorScheme="brand"
+      />
+      <Text
+        fontSize="lg"
+        fontWeight="500"
+        color={colorModeValue('gray.500', 'gray.100')}
+      >
+        Dark mode
+      </Text>
+    </Stack>
   );
 }
