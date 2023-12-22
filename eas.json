@@ -9,20 +9,32 @@
       "ios": {
         "resourceClass": "m-medium"
       },
-      "channel": "development"
+      "channel": "development",
+      "env": {
+        "API_URL": "https://start-ui-v2.vercel.app/api/rest",
+        "OPEN_API_URL": "https://start-ui-v2.vercel.app/api/openapi.json"
+      }
     },
     "preview": {
       "distribution": "internal",
       "ios": {
         "resourceClass": "m-medium"
       },
-      "channel": "preview"
+      "channel": "preview",
+      "env": {
+        "API_URL": "https://start-ui-v2.vercel.app/api/rest",
+        "OPEN_API_URL": "https://start-ui-v2.vercel.app/api/openapi.json"
+      }
     },
     "production": {
       "ios": {
         "resourceClass": "m-medium"
       },
-      "channel": "production"
+      "channel": "production",
+      "env": {
+        "API_URL": "https://start-ui-v2.vercel.app/api/rest",
+        "OPEN_API_URL": "https://start-ui-v2.vercel.app/api/openapi.json"
+      }
     }
   },
   "submit": {
