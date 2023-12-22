@@ -6,7 +6,6 @@ import {
   Box,
   Button,
   Divider,
-  Modal,
   Stack,
   Text,
   VStack,
@@ -14,6 +13,7 @@ import {
 } from 'react-native-ficus-ui';
 
 import { ButtonIcon } from '@/components/ButtonIcon';
+import { CardStatus } from '@/components/CardStatus';
 import { ConfirmationCodeModal } from '@/components/ConfirmationCodeModal';
 import { ConfirmationModal } from '@/components/ConfirmationModal';
 import { FieldInput } from '@/components/FieldInput';
@@ -34,13 +34,14 @@ import { useDarkMode } from '@/theme/useDarkMode';
 
 const Account = () => {
   const logout = useAuthStore((state) => state.logout);
-  const { colorModeValue } = useDarkMode();
   const { account, isLoading, isError, refetch: refetchAccount } = useAccount();
-  const { showError, showSuccess } = useToast();
+  const { showError, showSuccess, showInfo } = useToast();
 
   const logoutModal = useDisclosure();
   const deleteAccountModal = useDisclosure();
   const updateEmailCodeModal = useDisclosure();
+
+  const { colorModeValue } = useDarkMode();
 
   const [emailToken, setEmailToken] = useState<string | null>(null);
 
@@ -108,6 +109,12 @@ const Account = () => {
 
   const profileForm = useForm({ onValidSubmit: submitProfile });
   const emailForm = useForm({ onValidSubmit: submitEmail });
+  const deleteAccountForm = useForm({
+    onValidSubmit: () => {
+      deleteAccountModal.onClose();
+      showInfo('No delete account api yet on Start UI V2');
+    },
+  });
 
   const { name } = useFormFields({
     connect: profileForm,
@@ -119,6 +126,12 @@ const Account = () => {
     connect: emailForm,
     selector: (field) => field.value,
     fields: ['email'] as const,
+  });
+
+  const { confirmation } = useFormFields({
+    connect: deleteAccountForm,
+    selector: (field) => field.isValid,
+    fields: ['confirmation'] as const,
   });
 
   if (isLoading) {
@@ -210,6 +223,15 @@ const Account = () => {
                 <ButtonIcon icon="logout" onPress={logoutModal.onOpen} full>
                   Logout
                 </ButtonIcon>
+                <ButtonIcon
+                  icon="trash"
+                  iconFamily="Feather"
+                  onPress={deleteAccountModal.onOpen}
+                  colorScheme="error"
+                  full
+                >
+                  Delete account
+                </ButtonIcon>
               </VStack>
             </Box>
           </VStack>
@@ -235,27 +257,45 @@ const Account = () => {
         isVisible={logoutModal.isOpen}
       />
 
-      <Modal
-        animationIn="slideInUp"
+      <ConfirmationModal
+        title="Delete account"
+        description="Do you really want to delete your account?"
+        confirmColorScheme="error"
+        confirmLabel="Confirm the deletion of account"
+        isDisabledConfirm={!confirmation}
+        onConfirm={() => deleteAccountForm.submit()}
+        onCancel={deleteAccountModal.onClose}
         isVisible={deleteAccountModal.isOpen}
-        h={380}
-        onBackdropPress={deleteAccountModal.onClose}
+        h={420}
       >
-        <Stack p="xl" spacing="lg">
-          <Stack>
-            <Text
-              fontWeight="bold"
-              fontSize="3xl"
-              color={colorModeValue('gray.900', 'gray.50')}
-            >
-              Account deletion
-            </Text>
-            <Text fontSize="lg" color={colorModeValue('gray.900', 'gray.50')}>
-              Do you really want to delete your account?
-            </Text>
+        <Formiz connect={deleteAccountForm}>
+          <Stack spacing="lg">
+            <CardStatus type="warning" title="Warning">
+              <Text
+                color={colorModeValue('gray.800', 'gray.100')}
+                fontWeight="bold"
+                mt="lg"
+              >
+                This action is irreversible and immediate. All your data will be
+                will be deleted immediately. You will have to recreate an
+                account.
+              </Text>
+            </CardStatus>
+
+            <FieldInput
+              name="confirmation"
+              label='Enter "DELETION"'
+              required="Confirmation required"
+              validations={[
+                {
+                  handler: (value) => value === 'DELETION',
+                  message: 'Please enter "DELETION" to validate',
+                },
+              ]}
+            />
           </Stack>
-        </Stack>
-      </Modal>
+        </Formiz>
+      </ConfirmationModal>
     </>
   );
 };

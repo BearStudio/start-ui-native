@@ -31,6 +31,7 @@ export type ConfirmationModalProps = Partial<RNModalProps> &
     confirmLabel: string;
     confirmIcon?: string;
     isLoadingConfirm?: boolean;
+    isDisabledConfirm?: boolean;
     onConfirm: (event?: GestureResponderEvent) => void;
     onCancel: (event?: GestureResponderEvent) => void;
   };
@@ -41,6 +42,7 @@ export const ConfirmationModal: FC<
   title,
   description,
   isLoadingConfirm,
+  isDisabledConfirm,
   confirmColorScheme = 'brand',
   confirmLabel,
   confirmIcon,
@@ -79,6 +81,7 @@ export const ConfirmationModal: FC<
             colorScheme={confirmColorScheme}
             onPress={onConfirm}
             isLoading={isLoadingConfirm}
+            isDisabled={isDisabledConfirm}
             full
           >
             {confirmLabel}
