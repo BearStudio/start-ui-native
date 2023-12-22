@@ -1,25 +1,28 @@
-import { FC, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
-import { Formiz, useForm } from '@formiz/core';
+import { Formiz, useForm, useFormFields } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
 import { useRouter } from 'expo-router';
 import { TextInput } from 'react-native';
 import {
   Box,
   Button,
-  Icon,
-  Modal,
   Stack,
   Text,
   TouchableOpacity,
+  useDisclosure,
 } from 'react-native-ficus-ui';
 
 import { CardStatus } from '@/components/CardStatus';
+import { ConfirmationCodeModal } from '@/components/ConfirmationCodeModal';
 import { FieldInput } from '@/components/FieldInput';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
 import { Footer } from '@/layout/Footer';
-import { useAuthRegister } from '@/modules/account/account.service';
+import {
+  useAuthRegister,
+  useAuthRegisterValidate,
+} from '@/modules/account/account.service';
 import { useToast } from '@/modules/toast/useToast';
 import { useDarkMode } from '@/theme/useDarkMode';
 import { focus } from '@/utils/formUtils';
@@ -53,83 +56,11 @@ const CardWarningRegister = () => {
   );
 };
 
-const CardDemoModeHint: FC<{
-  isOpen: boolean;
-  onClose: (value: boolean) => void;
-}> = ({ isOpen, onClose }) => {
-  const { colorModeValue } = useDarkMode();
-  return (
-    <Modal
-      isOpen={isOpen}
-      h={200}
-      style={{
-        bottom: '20%',
-      }}
-      m="xl"
-      borderRadius="xl"
-      bg={colorModeValue('gray.50', 'gray.900')}
-    >
-      <Box>
-        <Button
-          position="absolute"
-          top={4}
-          right={4}
-          bg="transparent"
-          px="xs"
-          py="xs"
-          zIndex={1}
-          onPress={() => onClose(false)}
-          underlayColor="transparent"
-        >
-          <Icon name="closecircle" fontFamily="AntDesign" fontSize="3xl" />
-        </Button>
-        <Stack p="xl" spacing="lg" position="relative" pt="2xl">
-          <Text
-            fontWeight="bold"
-            fontSize="xl"
-            color={colorModeValue('gray.900', 'gray.50')}
-          >
-            This is a read-only demo, this action is disabled.
-          </Text>
-          <CardStatus
-            type="info"
-            title="Need help?"
-            bg={colorModeValue('gray.200', 'gray.700')}
-          >
-            <Text color={colorModeValue('gray.900', 'gray.50')}>
-              If you need help, please contact us at{' '}
-              <Text
-                fontWeight="bold"
-                color={colorModeValue('gray.900', 'gray.50')}
-              >
-                start-ui@bearstudio.fr
-              </Text>
-            </Text>
-          </CardStatus>
-        </Stack>
-      </Box>
-    </Modal>
-  );
-};
-
 const Register = () => {
-  const router = useRouter();
   const { showError, showSuccess } = useToast();
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const nameRef = useRef<TextInput>(null);
-
-  const { createAccount, isLoading } = useAuthRegister({
-    onSuccess: () => {
-      router.replace('/login');
-      showSuccess('You account has been created with success, you can login');
-    },
-    onError: (err) => {
-      if (err.response?.data?.message?.startsWith('[DEMO]')) {
-        setIsModalVisible(true);
-      }
-      showError('An error occured during your registration, please try again');
-    },
-  });
+  const validateEmailCodeModal = useDisclosure();
+  const [emailToken, setEmailToken] = useState<string | null>(null);
 
   const submitForm = (values: { email: string; name: string }) => {
     createAccount({
@@ -138,6 +69,50 @@ const Register = () => {
   };
 
   const registerForm = useForm({ onValidSubmit: submitForm });
+
+  const { email } = useFormFields({
+    connect: registerForm,
+    selector: (field) => field.value,
+    fields: ['email'] as const,
+  });
+
+  const submitValidationCodeEmail = (values: { code: string }) => {
+    accountValidate({ ...values });
+  };
+
+  const emailValidationCodeForm = useForm({
+    onValidSubmit: submitValidationCodeEmail,
+  });
+
+  const { createAccount, isLoading } = useAuthRegister({
+    onSuccess: (data) => {
+      setEmailToken(data.token);
+      validateEmailCodeModal.onOpen();
+    },
+    onError: (err) => {
+      showError(
+        err.response?.data?.message?.startsWith('[DEMO]')
+          ? 'This is a read-only demo, this action is disabled.'
+          : 'An error occured during your registration, please try again'
+      );
+    },
+  });
+
+  const { accountValidate, isLoading: isLoadingValidate } =
+    useAuthRegisterValidate(emailToken as string, {
+      onSuccess: () => {
+        validateEmailCodeModal.onClose();
+        showSuccess('Successfully logged in');
+      },
+      onError: () => {
+        emailValidationCodeForm.setValues({
+          code: null,
+        });
+        emailValidationCodeForm.setErrors({
+          code: 'Code is incorrect, please try again',
+        });
+      },
+    });
 
   return (
     <Container>
@@ -192,9 +167,12 @@ const Register = () => {
         </Footer>
       </Formiz>
 
-      <CardDemoModeHint
-        isOpen={isModalVisible}
-        onClose={(value) => setIsModalVisible(value)}
+      <ConfirmationCodeModal
+        isOpen={validateEmailCodeModal.isOpen}
+        onClose={validateEmailCodeModal.onClose}
+        form={emailValidationCodeForm}
+        email={email}
+        isLoadingConfirm={isLoadingValidate}
       />
     </Container>
   );

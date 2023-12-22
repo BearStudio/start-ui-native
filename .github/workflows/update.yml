@@ -2,6 +2,10 @@ name: Update JS runtime
 on:
   workflow_dispatch:
 
+env:
+  API_URL: https://start-ui-v2.vercel.app/api/rest
+  OPEN_API_URL: https://start-ui-v2.vercel.app/api/openapi.json
+
 jobs:
   update:
     name: EAS Update
@@ -30,7 +34,13 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
 
       - name: Install dependencies
-        run: yarn install
+        run: |
+          echo "API_URL: $API_URL"
+          echo "OPEN_API_URL: $OPEN_API_URL"
+          echo 'API_URL="https://start-ui-v2.vercel.app/api/rest"' >> .env
+          echo 'OPEN_API_URL="https://start-ui-v2.vercel.app/api/openapi.json"' >> .env
+          cat .env
+          yarn install
 
       - name: Publish update
         run: eas update --auto

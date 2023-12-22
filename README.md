@@ -26,6 +26,8 @@ This starter is oriented to use Expo with Expo EAS features to have full access 
 
 ---
 
+![Test the app](https://qr.expo.dev/development-client)
+
 ## Getting Started
 
 ### Prerequisites

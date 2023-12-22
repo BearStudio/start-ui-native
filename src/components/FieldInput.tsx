@@ -65,7 +65,7 @@ export const FieldInput = React.forwardRef(
           borderColor={
             showError ? 'error.500' : colorModeValue('gray.300', 'gray.500')
           }
-          borderWidth={1}
+          borderWidth={2}
           color={colorModeValue('black', 'gray.100')}
           bg={colorModeValue('gray.100', 'gray.600')}
           placeholderTextColor={colorModeValue('gray.900', 'gray.50')}

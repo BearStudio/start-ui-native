@@ -7,8 +7,12 @@ import { api } from '@/api/generated-api';
 import useAuthStore from '@/modules/auth/auth.store';
 
 const logoutUserPlugin: ZodiosPlugin = {
-  error: async (_, __, error) => {
-    if (axios.isAxiosError(error) && error.response?.status === 401) {
+  error: async (_, { method, url }, error) => {
+    if (
+      axios.isAxiosError(error) &&
+      error.response?.status === 401 &&
+      !(method === 'post' && url === '/accounts/update-email')
+    ) {
       useAuthStore.getState().logout();
     }
     throw error;

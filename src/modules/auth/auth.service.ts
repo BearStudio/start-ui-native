@@ -1,6 +1,5 @@
 import { UseMutationOptions } from '@tanstack/react-query';
 import { ZodiosBodyByAlias, ZodiosResponseByAlias } from '@zodios/core';
-import { useToast } from 'react-native-ficus-ui';
 
 import { ApiHooks, apiHooks } from '@/api/api-hooks';
 import useAuthStore from '@/modules/auth/auth.store';
@@ -21,7 +20,6 @@ export const useAuthLoginValidate = (
   > = {}
 ) => {
   const updateToken = useAuthStore((state) => state.setToken);
-  const { show } = useToast();
   const mutation = apiHooks.useAuthLoginValidate(
     {
       params: { token },
@@ -33,17 +31,6 @@ export const useAuthLoginValidate = (
         config?.onSuccess?.(data, ...rest);
       },
       onError: (error: ExplicitAny, ...rest) => {
-        if (error?.response?.status === 401) {
-          show({
-            text1: 'Wrong email or password. Please try again.',
-            type: 'error',
-          });
-        } else {
-          show({
-            text1: 'Failed to log in. Please try again.',
-            type: 'error',
-          });
-        }
         config?.onError?.(error, ...rest);
       },
     }
