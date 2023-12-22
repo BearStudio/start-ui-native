@@ -1,6 +1,10 @@
 name: App preview
 on: pull_request
 
+env:
+  API_URL: https://start-ui-v2.vercel.app/api/rest
+  OPEN_API_URL: https://start-ui-v2.vercel.app/api/openapi.json
+
 jobs:
   update:
     name: EAS Update
