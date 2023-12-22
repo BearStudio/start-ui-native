@@ -28,7 +28,7 @@ const CardInfoAuthStep = () => {
   const { colorModeValue } = useDarkMode();
   return (
     <CardStatus type="info" title="Demo mode" mt="md">
-      <Box flexDirection="row" flexWrap="wrap">
+      <Box flexDirection="row" alignItems="center" flexWrap="wrap">
         <Text
           fontSize="lg"
           color={colorModeValue('gray.800', 'gray.50')}

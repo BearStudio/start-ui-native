@@ -7,7 +7,7 @@ export const Content: FC<PropsWithChildren<FlexProps>> = ({
   ...rest
 }) => {
   return (
-    <ScrollBox flex={1} p="xl" {...rest}>
+    <ScrollBox flex={1} p="xl" minH="100%" {...rest}>
       {children}
     </ScrollBox>
   );
