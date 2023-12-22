@@ -41,16 +41,19 @@ const CardWarningRegister = () => {
           This is a read-only demo, but you can Sign in to test some of the
           features. Just remember, no changes can be made. Enjoy the features!
         </Text>
-        <TouchableOpacity onPress={() => router.push('/login')}>
-          <Text
-            fontSize="lg"
-            fontWeight="700"
-            color={colorModeValue('gray.800', 'gray.50')}
-            textDecorationLine="underline"
-          >
-            Sign in
-          </Text>
-        </TouchableOpacity>
+        <Button
+          onPress={() => router.push('/login')}
+          full
+          bg="transparent"
+          borderColor={colorModeValue('gray.800', 'gray.200')}
+          borderWidth={1}
+          borderRadius="md"
+          py={6}
+          mt={6}
+          mb={4}
+        >
+          Sign in
+        </Button>
       </Box>
     </CardStatus>
   );

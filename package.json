@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "expo start",
-    "start-dev-client": "yarn start --dev-client",
+    "dev": "yarn start --dev-client",
     "postinstall": "yarn generate-api",
     "generate-api": "mkdir -p ./src/api/ && tsx ./scripts/services-generator.ts",
     "android": "expo run:android",

@@ -39,7 +39,7 @@ export const CardStatus: FC<CardStatusProps> = ({
     statusStyles[type] || statusStyles.info;
   return (
     <Box
-      bg={colorModeValue('gray.200', 'gray.800')}
+      bg={colorModeValue('gray.200', 'gray.600')}
       p="md"
       px="lg"
       borderRadius="md"

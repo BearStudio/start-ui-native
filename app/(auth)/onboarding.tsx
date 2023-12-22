@@ -38,13 +38,17 @@ const Onboarding = () => {
         </Text>
       </Stack>
       <Stack spacing="md" alignItems="center">
-        <Button onPress={() => router.push('/register')} colorScheme="brand">
+        <Button
+          borderRadius="md"
+          full
+          onPress={() => router.push('/register')}
+          colorScheme="brand"
+        >
           Sign up with mail
         </Button>
         <Stack direction="row" alignItems="center">
           <Text
             onPress={handleOpenLogin}
-            fontSize="md"
             color={colorModeValue('gray.900', 'gray.50')}
           >
             Already an account?
@@ -59,7 +63,13 @@ const Onboarding = () => {
             </Text>
           </Button>
         </Stack>
-        <Button onPress={toggleColorMode} mt="xl">
+        <Button
+          onPress={toggleColorMode}
+          mt="xl"
+          px={12}
+          py={12}
+          borderRadius={9999}
+        >
           <Icon
             name={colorMode === 'light' ? 'moon' : 'sun'}
             fontSize="lg"
