@@ -2,7 +2,7 @@
   "name": "start-ui-native",
   "version": "1.0.0",
   "private": true,
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
     "start-dev-client": "yarn start --dev-client",
