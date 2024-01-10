@@ -1,8 +1,9 @@
-import { useDarkMode } from '@/theme/useDarkMode';
 import React from 'react';
 
 import { ActivityIndicator } from 'react-native';
 import { Box, useTheme } from 'react-native-ficus-ui';
+
+import { useDarkMode } from '@/theme/useDarkMode';
 
 export const LoadingScreen = () => {
   const { theme } = useTheme();

@@ -1,24 +1,33 @@
 import React from 'react';
-import { Button, Text, Box, Icon } from 'react-native-ficus-ui';
+
+import { Stack, Switch, Text } from 'react-native-ficus-ui';
 
 import { useDarkMode } from '@/theme/useDarkMode';
 
 export default function ThemeSwitcher() {
-  const { colorMode, toggleColorMode } = useDarkMode();
+  const { colorMode, toggleColorMode, colorModeValue } = useDarkMode();
 
   return (
-    <Box mt="lg">
-      <Button onPress={toggleColorMode} full>
-        <Icon
-          name={colorMode === 'light' ? 'moon' : 'sun'}
-          fontSize="lg"
-          fontFamily="Feather"
-          color="gray.50"
-        />
-        <Text ml={10} fontSize="lg" color="gray.50">
-          {colorMode === 'light' ? 'Dark mode' : 'Light mode'}
-        </Text>
-      </Button>
-    </Box>
+    <Stack mt="lg" direction="row" alignItems="center" spacing={8}>
+      <Text
+        fontSize="lg"
+        fontWeight="500"
+        color={colorModeValue('gray.900', 'gray.400')}
+      >
+        Light mode
+      </Text>
+      <Switch
+        on={colorMode === 'dark'}
+        onPress={toggleColorMode}
+        colorScheme="brand"
+      />
+      <Text
+        fontSize="lg"
+        fontWeight="500"
+        color={colorModeValue('gray.500', 'gray.100')}
+      >
+        Dark mode
+      </Text>
+    </Stack>
   );
 }

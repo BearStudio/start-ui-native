@@ -1,7 +1,9 @@
+import { FC } from 'react';
+
+import { Stack as RouterStack } from 'expo-router';
+
 import { FeatherIcons, TabBarIcon } from '@/components/TabBarIcon';
 import { useDarkMode } from '@/theme/useDarkMode';
-import { Stack as RouterStack } from 'expo-router';
-import { FC } from 'react';
 
 type StackProps = {
   initialRouteName?: string;
@@ -47,7 +49,7 @@ export const Stack: FC<StackProps> = ({
             tabBarIcon: screen.icon ? TabBarIcon(screen.icon) : undefined,
             contentStyle: {
               backgroundColor: colorModeValue(
-                getThemeColor('gray.50'),
+                getThemeColor('gray.100'),
                 getThemeColor('gray.800')
               ),
             },
