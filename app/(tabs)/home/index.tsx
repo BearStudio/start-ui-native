@@ -1,12 +1,14 @@
-import { useDarkMode } from '@/theme/useDarkMode';
 import { useRouter } from 'expo-router';
-import { Button, Box, Text, Icon } from 'react-native-ficus-ui';
+import { Box, Stack, Text } from 'react-native-ficus-ui';
+
+import { ButtonIcon } from '@/components/ButtonIcon';
+import { useDarkMode } from '@/theme/useDarkMode';
 
 const Home = () => {
   const router = useRouter();
-  const { colorModeValue } = useDarkMode();
+  const { colorModeValue, getThemeColor } = useDarkMode();
   return (
-    <Box p={20} h="100%">
+    <Stack p={20} h="100%" spacing={12}>
       <Text
         fontSize="2xl"
         fontWeight="bold"
@@ -14,61 +16,57 @@ const Home = () => {
       >
         Welcome to 🚀 Start UI [native]
       </Text>
-      <Text fontSize="lg" mt="md" color={colorModeValue('black', 'gray.50')}>
-        An opinionated UI starter with Expo, Ficus UI, React Query & Formiz
-      </Text>
-      <Text
-        fontSize="lg"
-        fontWeight="bold"
-        mt="md"
-        color={colorModeValue('black', 'gray.50')}
-      >
-        - From the BearStudio Team
-      </Text>
-      <Box mt={20}>
-        <Button
-          full
-          prefix={
-            <Icon
-              name="github"
-              fontSize="lg"
-              fontFamily="Feather"
-              color="gray.50"
-            />
-          }
-          colorScheme="brand"
+      <Box>
+        <Text fontSize="lg" color={colorModeValue('black', 'gray.50')}>
+          An opinionated UI starter with Expo, Ficus UI, Zodios & Formiz
+        </Text>
+        <Text fontSize="lg" mt="md" color={colorModeValue('black', 'gray.50')}>
+          - From the{' '}
+          <Text fontWeight="bold" color={colorModeValue('black', 'gray.50')}>
+            BearStudio Team
+          </Text>
+        </Text>
+      </Box>
+      <Stack direction="row" spacing={4}>
+        <ButtonIcon
+          icon="github"
+          iconFamily="Feather"
           onPress={() =>
             router.replace('https://github.com/BearStudio/start-ui-native')
           }
+          iconColor={colorModeValue('gray.500', 'gray.300')}
+          color={colorModeValue(
+            getThemeColor('gray.500'),
+            getThemeColor('gray.200')
+          )}
+          bg={colorModeValue('white', 'gray.700')}
+          borderWidth={1}
+          borderColor={colorModeValue('gray.200', 'gray.600')}
         >
-          <Text ml={10} fontSize="lg" color="gray.50">
-            Github Repository
-          </Text>
-        </Button>
-        <Button
-          mt={10}
-          full
-          prefix={
-            <Icon
-              name="alert-circle"
-              fontSize="lg"
-              fontFamily="Feather"
-              color="gray.50"
-            />
-          }
-          colorScheme="brand"
+          Github Repository
+        </ButtonIcon>
+
+        <ButtonIcon
+          icon="alert-circle"
+          iconFamily="Feather"
           onPress={() =>
             router.replace(
               'https://github.com/BearStudio/start-ui-native/issues/new'
             )
           }
+          iconColor={colorModeValue('gray.500', 'gray.300')}
+          color={colorModeValue(
+            getThemeColor('gray.500'),
+            getThemeColor('gray.200')
+          )}
+          bg={colorModeValue('white', 'gray.700')}
+          borderWidth={1}
+          borderColor={colorModeValue('gray.200', 'gray.600')}
         >
-          <Text ml={10} fontSize="lg" color="gray.50">
-            Open issue
-          </Text>
-        </Button>
-      </Box>
-    </Box>
+          Open issue
+        </ButtonIcon>
+      </Stack>
+    </Stack>
   );
 };
 

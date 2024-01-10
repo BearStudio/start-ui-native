@@ -1,7 +1,8 @@
-import { useDarkMode } from '@/theme/useDarkMode';
 import { useRouter } from 'expo-router';
 import { Image } from 'react-native';
 import { Button, Icon, Stack, Text } from 'react-native-ficus-ui';
+
+import { useDarkMode } from '@/theme/useDarkMode';
 
 const Onboarding = () => {
   const router = useRouter();
@@ -37,22 +38,22 @@ const Onboarding = () => {
         </Text>
       </Stack>
       <Stack spacing="md" alignItems="center">
-        <Button onPress={() => router.push('/register')} colorScheme="brand">
+        <Button
+          borderRadius="md"
+          full
+          onPress={() => router.push('/register')}
+          colorScheme="brand"
+        >
           Sign up with mail
         </Button>
         <Stack direction="row" alignItems="center">
           <Text
             onPress={handleOpenLogin}
-            fontSize="xs"
             color={colorModeValue('gray.900', 'gray.50')}
           >
             Already an account?
           </Text>
-          <Button
-            onPress={handleOpenLogin}
-            fontSize="xs"
-            colorScheme="transparent"
-          >
+          <Button onPress={handleOpenLogin} colorScheme="transparent">
             <Text
               fontWeight="500"
               textDecorLine="underline"
@@ -62,7 +63,13 @@ const Onboarding = () => {
             </Text>
           </Button>
         </Stack>
-        <Button onPress={toggleColorMode} mt="xl">
+        <Button
+          onPress={toggleColorMode}
+          mt="xl"
+          px={12}
+          py={12}
+          borderRadius={9999}
+        >
           <Icon
             name={colorMode === 'light' ? 'moon' : 'sun'}
             fontSize="lg"

@@ -11,8 +11,14 @@ const HomeTabs = () => {
           options: { headerShown: false },
         },
         {
-          route: 'profile',
-          title: 'Profile',
+          route: 'repositories',
+          title: 'Repositories',
+          icon: 'folder',
+          options: { headerShown: false },
+        },
+        {
+          route: 'account',
+          title: 'Account',
           icon: 'user',
           options: { headerShown: false },
         },
