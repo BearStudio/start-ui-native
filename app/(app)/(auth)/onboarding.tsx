@@ -9,9 +9,9 @@ const Onboarding = () => {
   const { colorModeValue, toggleColorMode, colorMode } = useDarkMode();
 
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const logoWhite = require('../../assets/logo-white.png');
+  const logoWhite = require('../../../assets/logo-white.png');
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const logoBlack = require('../../assets/logo-black.png');
+  const logoBlack = require('../../../assets/logo-black.png');
 
   const handleOpenLogin = () => {
     router.push('/login');

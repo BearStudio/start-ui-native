@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect } from 'react';
 
-import { useRootNavigationState, useRouter, useSegments } from 'expo-router';
+import { Redirect, Slot, Stack, useRootNavigationState, useRouter, useSegments } from 'expo-router';
 
 import useAuthStore from '@/modules/auth/auth.store';
 
@@ -14,27 +14,13 @@ const ProtectedRoutesProvider = ({
   const navigationState = useRootNavigationState();
   const segments = useSegments();
   const router = useRouter();
+  console.log({navigationState})
   const isAuthenticated = useAuthStore((state) => !!state.token);
+  if (!isAuthenticated) {
+    return <Redirect href="(auth)" />
+  }
 
-  useEffect(() => {
-    if (!navigationState?.key) return;
+  return <Stack />
 
-    const inAuthGroup = segments?.[0] === '(auth)';
-
-    if (
-      // If the user is not signed in and the initial segment is not anything
-      // segment is not anything in the auth group.
-      !isAuthenticated &&
-      !inAuthGroup
-    ) {
-      // Redirect to the onboarding page.
-      router.replace('/onboarding');
-    } else if (isAuthenticated && (inAuthGroup || segments?.length === 0)) {
-      // go to tabs root (authenticated).
-      router.replace('/(tabs)/home');
-    }
-  }, [isAuthenticated, segments, navigationState?.key]);
-
-  return <>{children}</>;
 };
 export default ProtectedRoutesProvider;

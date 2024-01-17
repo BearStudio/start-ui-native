@@ -1,22 +1,22 @@
-import { useCallback, useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect } from "react";
+import { StatusBar, View } from "react-native";
+import { ThemeContext } from "react-native-ficus-ui";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+export { ErrorBoundary } from 'expo-router';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { StatusBar, View } from 'react-native';
-import { ThemeContext } from 'react-native-ficus-ui';
-
-import theme, { THEME_KEY } from '@/theme';
+import theme, { THEME_KEY } from "@/theme";
 
 const Index = () => {
   const { setTheme } = useContext(ThemeContext);
 
   const loadTheme = useCallback(async () => {
     const themeValue = await AsyncStorage.getItem(THEME_KEY);
-    if (themeValue === 'dark') {
+    if (themeValue === "dark") {
       setTheme(theme.dark);
-      StatusBar.setBarStyle('light-content');
+      StatusBar.setBarStyle("light-content");
     } else {
       setTheme(theme.light);
-      StatusBar.setBarStyle('dark-content');
+      StatusBar.setBarStyle("dark-content");
     }
   }, []);
 

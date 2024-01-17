@@ -1,17 +1,21 @@
 import { Stack } from '@/layout/Stack';
 
+
+
 const AuthStack = () => {
+  console.log('here the auth stack')
   return (
     <Stack
       screens={[
         {
-          route: 'onboarding',
+          route: '(auth)/onboarding',
           title: 'Onboarding',
           options: { headerShown: false },
         },
-        { route: 'login', title: 'Login' },
-        { route: 'register', title: 'Create Account' },
+        { route: '(auth)/login', title: 'Login' },
+        { route: '(auth)/register', title: 'Create Account' },
       ]}
+      initialRouteName='(auth)/onboarding'
     />
   );
 };
