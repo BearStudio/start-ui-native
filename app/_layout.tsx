@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { View, Text } from 'react-native'
 import { QueryClientProvider } from '@tanstack/react-query';
 import { Slot } from 'expo-router';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
@@ -20,7 +20,5 @@ const App = () => {
     </QueryClientProvider>
   );
 };
-
-registerRootComponent(App);
 
 export default App;
