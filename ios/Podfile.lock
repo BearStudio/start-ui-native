@@ -1,10 +1,10 @@
 PODS:
   - ASN1Decoder (1.9.0)
   - boost (1.76.0)
-  - Burnt (0.11.7):
+  - Burnt (0.12.2):
     - ExpoModulesCore
-    - SPAlert
-    - SPIndicator
+    - SPAlert (~> 4.2)
+    - SPIndicator (~> 1.6)
   - CocoaAsyncSocket (7.6.5)
   - DoubleConversion (1.1.6)
   - EASClient (0.6.0):
@@ -642,7 +642,7 @@ PODS:
   - RNVectorIcons (10.0.0):
     - React-Core
   - SocketRocket (0.6.1)
-  - SPAlert (5.1.8)
+  - SPAlert (4.2.0)
   - SPIndicator (1.6.4)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -906,7 +906,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   ASN1Decoder: 4f4bbcaf1d1b8be56daa3280e82863a607f5bda9
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
-  Burnt: ab447594da52c2485e3520c9e68b70ac30d4eaf0
+  Burnt: dde5dd245f124a4594098e3938ba71aae4ec83c3
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   EASClient: 49f8ea858204eb4844d9fb386e5fb7920aee2e30
@@ -987,7 +987,7 @@ SPEC CHECKSUMS:
   RNSVG: 53c661b76829783cdaf9b7a57258f3d3b4c28315
   RNVectorIcons: 8b5bb0fa61d54cd2020af4f24a51841ce365c7e9
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
-  SPAlert: 7027ed9df9a2ba8202cab39fd05b53e110f48a99
+  SPAlert: 735da1f16a887e294719217572ce1f936d8c8782
   SPIndicator: 93e0a4fb23de51294ac48e874c0f081a5e293e4f
   Yoga: b76f1acfda8212aa16b7e26bcce3983230c82603
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a

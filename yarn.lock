@@ -4134,10 +4134,10 @@ builtins@^1.0.3:
   resolved "https://registry.npmjs.org/builtins/-/builtins-1.0.3.tgz"
   integrity sha512-uYBjakWipfaO/bXI7E8rq6kpwHRZK5cNYrUv2OzZSI/FvmdMyXJ2tG9dKcjEC5YHmHpUAwsargWIZNWdxb/bnQ==
 
-burnt@0.11.7:
-  version "0.11.7"
-  resolved "https://registry.npmjs.org/burnt/-/burnt-0.11.7.tgz"
-  integrity sha512-Td70Axu53eDdEFDehCW1IvBY6xopdgcIISHMDKhQQFKAuoxdYHsensfXIzOAsjqTaNFA8NFmnYfLdQhAoPc9MA==
+burnt@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/burnt/-/burnt-0.12.2.tgz#827dfb8fe2b5844d52060d9aa61dd9a683902d52"
+  integrity sha512-bbZjGN4Om7dykr8ZcLb0tTO5L2becMR+HIez1ySUGgG/rvK+ePgBEuBA6lMOZqOTsUXhIKFUBH0sCXQ25fq5SA==
   dependencies:
     sf-symbols-typescript "^1.0.0"
     sonner "^0.3.5"
