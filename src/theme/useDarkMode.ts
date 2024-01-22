@@ -1,13 +1,14 @@
 import { useCallback } from 'react';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'react-native';
 import { useTheme } from 'react-native-ficus-ui';
 
-import ficusThemes, { THEME_KEY } from '@/theme';
+import useAuthStore from '@/modules/auth/auth.store';
+import ficusThemes from '@/theme';
 
 export const useDarkMode = () => {
   const { theme, setTheme } = useTheme();
+  const setAppMode = useAuthStore((state) => state.setAppMode);
 
   const colorModeValue = useCallback(
     <Value = unknown>(lightValue: Value, darkValue: Value) =>
@@ -18,14 +19,14 @@ export const useDarkMode = () => {
   const setColorMode = async (colorMode: 'dark' | 'light') => {
     setTheme(ficusThemes[colorMode]);
     StatusBar.setBarStyle(`${colorMode}-content`);
-    await AsyncStorage.setItem(THEME_KEY, colorMode);
+    setAppMode(colorMode);
   };
 
-  const toggleColorMode = async () => {
+  const toggleColorMode = () => {
     const newTheme = theme.name === 'dark' ? 'light' : 'dark';
     StatusBar.setBarStyle(`${theme.name as 'dark' | 'light'}-content`);
     setTheme(ficusThemes[newTheme]);
-    await AsyncStorage.setItem(THEME_KEY, newTheme);
+    setAppMode(newTheme);
   };
 
   const getThemeColor = (color: `${string}.${ColorShade}`) => {

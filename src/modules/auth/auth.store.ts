@@ -8,6 +8,8 @@ import { AUTH_STORAGE_KEY } from '@/modules/auth/auth.constants';
 type AuthState = {
   token: string | null;
   setToken: (newToken: string | null) => void;
+  appMode: 'light' | 'dark';
+  setAppMode: (newAppMode: 'light' | 'dark') => void;
   logout: () => void;
   isHydrated: boolean;
   setIsHydrated: (isHydrated: boolean) => void;
@@ -18,6 +20,10 @@ const useAuthStore = create<AuthState>()(
     persist(
       (set) => ({
         isHydrated: false,
+        appMode: 'light',
+        setAppMode: (newAppMode: 'light' | 'dark') => {
+          set({ appMode: newAppMode });
+        },
         token: null,
         setIsHydrated: (isHydrated: boolean) => {
           set({ isHydrated });
@@ -33,8 +39,9 @@ const useAuthStore = create<AuthState>()(
       {
         name: AUTH_STORAGE_KEY,
         storage: createJSONStorage(() => AsyncStorage), // Specifying the storage
-        partialize: (state) => ({ token: state.token }), // Persist only the token
-        onRehydrateStorage: () => (state, error) => { // Called when the storage is rehydrated
+        partialize: (state) => ({ token: state.token, appMode: state.appMode }), // Persist only the token and app mode
+        onRehydrateStorage: () => (state, error) => {
+          // Called when the storage is rehydrated
           if (error) {
             console.error(error);
           }

@@ -1,6 +1,11 @@
 import { useLayoutEffect, useMemo } from 'react';
 
-import { useRootNavigationState, useRouter, useSegments } from 'expo-router';
+import {
+  SplashScreen,
+  useRootNavigationState,
+  useRouter,
+  useSegments,
+} from 'expo-router';
 import { useShallow } from 'zustand/react/shallow';
 
 import useAuthStore from '@/modules/auth/auth.store';
@@ -22,6 +27,7 @@ const useProtectedRoute = () => {
     if (!navigationKey || !isHydrated) {
       return;
     }
+    SplashScreen.hideAsync();
 
     if (!isAuthentificated && !inAuthGroup) {
       router.replace('/onboarding');
