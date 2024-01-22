@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Appearance } from 'react-native';
 import { create } from 'zustand';
 import { createJSONStorage, devtools, persist } from 'zustand/middleware';
 
@@ -15,12 +16,16 @@ type AuthState = {
   setIsHydrated: (isHydrated: boolean) => void;
 };
 
+// Apperance is a React Native API that allows you to determine if the user prefers a dark or light mode
+const DEFAULT_SYSTEM_MODE =
+  Appearance.getColorScheme() === 'dark' ? 'dark' : 'light';
+
 const useAuthStore = create<AuthState>()(
   devtools(
     persist(
       (set) => ({
         isHydrated: false,
-        appMode: 'light',
+        appMode: DEFAULT_SYSTEM_MODE,
         setAppMode: (newAppMode: 'light' | 'dark') => {
           set({ appMode: newAppMode });
         },
@@ -46,7 +51,7 @@ const useAuthStore = create<AuthState>()(
             console.error(error);
           }
           state?.setIsHydrated?.(true);
-        }
+        },
       }
     )
   )
