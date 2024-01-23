@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo } from 'react';
+import { useLayoutEffect, useMemo, useRef } from 'react';
 
 import {
   SplashScreen,
@@ -16,7 +16,7 @@ const useProtectedRoute = () => {
   const router = useRouter();
   const isAuthentificated = useAuthStore(useShallow((state) => !!state.token));
   const isHydrated = useAuthStore(useShallow((state) => state.isHydrated));
-
+  const currentRouteRef = useRef<'auth' | 'tabs' | null>(null);
   const navigationKey = useMemo(() => {
     return rootNavigationState?.key;
   }, [rootNavigationState]);
@@ -29,10 +29,16 @@ const useProtectedRoute = () => {
     }
     SplashScreen.hideAsync();
 
-    if (!isAuthentificated && !inAuthGroup) {
+    if (
+      !isAuthentificated &&
+      !inAuthGroup &&
+      currentRouteRef.current !== 'auth'
+    ) {
       router.replace('/onboarding');
-    } else if (isAuthentificated && inAuthGroup) {
+      currentRouteRef.current = 'auth';
+    } else if (isAuthentificated && currentRouteRef.current !== 'tabs') {
       router.replace('/(tabs)/home');
+      currentRouteRef.current = 'tabs';
     }
   }, [isAuthentificated, segments, navigationKey, isHydrated]);
 };
