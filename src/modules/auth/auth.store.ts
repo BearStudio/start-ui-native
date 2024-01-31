@@ -9,6 +9,8 @@ type AuthState = {
   token: string | null;
   setToken: (newToken: string | null) => void;
   logout: () => void;
+  isHydrated: boolean;
+  setIsHydrated: (isHydrated: boolean) => void;
 };
 
 const useAuthStore = create<AuthState>()(
@@ -23,11 +25,22 @@ const useAuthStore = create<AuthState>()(
           set({ token: null });
           queryClient.clear();
         },
+        isHydrated: false,
+        setIsHydrated: (isHydrated: boolean) => {
+          set({ isHydrated });
+        },
       }),
       {
         name: AUTH_STORAGE_KEY,
         storage: createJSONStorage(() => AsyncStorage), // Specifying the storage
         partialize: (state) => ({ token: state.token }), // Persist only the token
+        onRehydrateStorage: () => (state, error) => {
+          // Called when the storage is rehydrated
+          if (error) {
+            console.error(error);
+          }
+          state?.setIsHydrated?.(true);
+        },
       }
     )
   )
