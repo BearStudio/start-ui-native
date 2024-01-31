@@ -164,6 +164,7 @@ const Account = () => {
                       onPress={() => profileForm.submit()}
                       colorScheme="brand"
                       isLoading={isUpdatingAccount}
+                      full
                     >
                       Update
                     </Button>
@@ -198,12 +199,13 @@ const Account = () => {
                       returnKeyType: 'done',
                     }}
                   />
-                  <Stack direction="row" spacing={10} alignItems="center">
+                  <VStack spacing="md" alignItems="center">
                     <Button
                       onPress={() => emailForm.submit()}
                       colorScheme="brand"
                       isLoading={isUpdatingAccountEmail}
                       isDisabled={email === account.email}
+                      full
                     >
                       Update
                     </Button>
@@ -230,7 +232,7 @@ const Account = () => {
                         Cancel
                       </Button>
                     )}
-                  </Stack>
+                  </VStack>
                 </Stack>
               </Formiz>
               <Divider
@@ -256,6 +258,7 @@ const Account = () => {
                     getThemeColor('red.400')
                   )}
                   bg={colorModeValue('white', 'gray.700')}
+                  colorScheme="white"
                   borderWidth={1}
                   borderColor={colorModeValue('gray.200', 'gray.600')}
                 >

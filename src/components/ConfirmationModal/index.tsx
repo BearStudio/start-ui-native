@@ -87,7 +87,6 @@ export const ConfirmationModal: FC<
             {confirmLabel}
           </ButtonIcon>
           <Button
-            colorScheme="gray"
             onPress={onCancel}
             full
             color={colorModeValue(
@@ -95,6 +94,7 @@ export const ConfirmationModal: FC<
               getThemeColor('red.400')
             )}
             bg={colorModeValue('white', 'gray.700')}
+            colorScheme="white"
             borderWidth={1}
             borderColor={colorModeValue('gray.200', 'gray.600')}
           >
