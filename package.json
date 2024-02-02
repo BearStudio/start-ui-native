@@ -32,7 +32,6 @@
     "@zodios/react": "10.4.5",
     "axios": "1.4.0",
     "babel-plugin-transform-inline-environment-variables": "0.4.4",
-    "burnt": "0.11.7",
     "color": "4.2.3",
     "expo": "50.0.4",
     "expo-build-properties": "0.11.0",
@@ -77,6 +76,6 @@
     "openapi-zod-client": "1.13.2",
     "react-native-dotenv": "3.4.8",
     "tsx": "4.6.2",
-    "typescript": "5.3.0"
+    "typescript": "5.3.3"
   }
 }
