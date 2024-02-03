@@ -45,7 +45,8 @@
           "modes": ["peripheral", "central"],
           "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices"
         }
-      ]
+      ],
+      ["expo-router", { "root": "./app" }]
     ],
     "extra": {
       "eas": {

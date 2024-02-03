@@ -11,8 +11,8 @@
       },
       "channel": "development",
       "env": {
-        "API_URL": "https://start-ui-v2.vercel.app/api/rest",
-        "OPEN_API_URL": "https://start-ui-v2.vercel.app/api/openapi.json"
+        "API_URL": "https://demo.start-ui.com/api/rest",
+        "OPEN_API_URL": "https://demo.start-ui.com/api/openapi.json"
       }
     },
     "preview": {
@@ -22,8 +22,8 @@
       },
       "channel": "preview",
       "env": {
-        "API_URL": "https://start-ui-v2.vercel.app/api/rest",
-        "OPEN_API_URL": "https://start-ui-v2.vercel.app/api/openapi.json"
+        "API_URL": "https://demo.start-ui.com/api/rest",
+        "OPEN_API_URL": "https://demo.start-ui.com/api/openapi.json"
       }
     },
     "production": {
@@ -32,8 +32,8 @@
       },
       "channel": "production",
       "env": {
-        "API_URL": "https://start-ui-v2.vercel.app/api/rest",
-        "OPEN_API_URL": "https://start-ui-v2.vercel.app/api/openapi.json"
+        "API_URL": "https://demo.start-ui.com/api/rest",
+        "OPEN_API_URL": "https://demo.start-ui.com/api/openapi.json"
       }
     }
   },

@@ -1,11 +1,19 @@
-import { Link } from 'expo-router';
-import { Box, Button, Stack, Text } from 'react-native-ficus-ui';
+import { Link, useRouter } from 'expo-router';
+import {
+  Box,
+  Button,
+  List,
+  Stack,
+  Text,
+  TouchableOpacity,
+} from 'react-native-ficus-ui';
 
 import { LoadingScreen } from '@/layout/LoadingScreen';
 import { useRepositories } from '@/modules/repositories/repositories.service';
 import { useDarkMode } from '@/theme/useDarkMode';
 
 const Repositories = () => {
+  const router = useRouter();
   const { colorModeValue } = useDarkMode();
 
   const repositories = useRepositories();
@@ -20,43 +28,46 @@ const Repositories = () => {
           </Text>
         )}
 
-      <Stack flex={1} spacing={6}>
-        {repositories.isSuccess &&
-          repositories.data.pages
-            .flatMap((page) => page.items)
-            .map((repository) => (
-              <Stack
-                key={repository.id}
-                p={14}
-                bg={colorModeValue('white', 'gray.700')}
-                borderRadius="md"
-              >
-                <Stack spacing={10}>
-                  <Text
-                    fontSize="xl"
-                    fontWeight="bold"
-                    color={colorModeValue('gray.900', 'gray.50')}
-                  >
-                    {repository.name}
+      <List
+        keyExtractor={(item) => `repository-${item?.id}`}
+        data={repositories?.data?.pages
+          .flatMap((page) => page.items)
+          .filter((item) => !!item)}
+        renderItem={({ item: repository }) => (
+          <TouchableOpacity onPress={() => router.replace(repository.link)}>
+            <Stack
+              p={14}
+              bg={colorModeValue('white', 'gray.700')}
+              borderRadius="md"
+            >
+              <Stack spacing={10}>
+                <Text
+                  fontSize="xl"
+                  fontWeight="bold"
+                  color={colorModeValue('gray.900', 'gray.50')}
+                >
+                  {repository.name}
+                </Text>
+                {!!repository.description && (
+                  <Text color={colorModeValue('gray.900', 'gray.50')}>
+                    {repository.description}
                   </Text>
-                  {!!repository.description && (
-                    <Text color={colorModeValue('gray.900', 'gray.50')}>
-                      {repository.description}
-                    </Text>
-                  )}
-                  <Link href={repository.link}>
-                    <Text
-                      fontSize="sm"
-                      color={colorModeValue('gray.900', 'gray.50')}
-                      textDecorLine="underline"
-                    >
-                      {repository.link}
-                    </Text>
-                  </Link>
-                </Stack>
+                )}
+                <Link href={repository.link}>
+                  <Text
+                    fontSize="sm"
+                    color={colorModeValue('gray.900', 'gray.50')}
+                    textDecorLine="underline"
+                  >
+                    {repository.link}
+                  </Text>
+                </Link>
               </Stack>
-            ))}
-      </Stack>
+            </Stack>
+          </TouchableOpacity>
+        )}
+        ItemSeparatorComponent={() => <Box h={10} />}
+      />
       {repositories.hasNextPage && (
         <Box>
           <Button

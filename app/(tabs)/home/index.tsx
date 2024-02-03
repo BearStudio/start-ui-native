@@ -1,5 +1,5 @@
 import { useRouter } from 'expo-router';
-import { Box, Stack, Text } from 'react-native-ficus-ui';
+import { Box, Stack, Text, VStack } from 'react-native-ficus-ui';
 
 import { ButtonIcon } from '@/components/ButtonIcon';
 import { useDarkMode } from '@/theme/useDarkMode';
@@ -27,7 +27,7 @@ const Home = () => {
           </Text>
         </Text>
       </Box>
-      <Stack direction="row" spacing={4}>
+      <VStack spacing="lg">
         <ButtonIcon
           icon="github"
           iconFamily="Feather"
@@ -40,8 +40,10 @@ const Home = () => {
             getThemeColor('gray.200')
           )}
           bg={colorModeValue('white', 'gray.700')}
+          colorScheme="white"
           borderWidth={1}
           borderColor={colorModeValue('gray.200', 'gray.600')}
+          full
         >
           Github Repository
         </ButtonIcon>
@@ -60,12 +62,14 @@ const Home = () => {
             getThemeColor('gray.200')
           )}
           bg={colorModeValue('white', 'gray.700')}
+          colorScheme="white"
           borderWidth={1}
           borderColor={colorModeValue('gray.200', 'gray.600')}
+          full
         >
           Open issue
         </ButtonIcon>
-      </Stack>
+      </VStack>
     </Stack>
   );
 };
