@@ -4,11 +4,10 @@ import { FieldProps, useField } from '@formiz/core';
 import { TextInput, TextInputProps } from 'react-native';
 import { Input } from 'react-native-ficus-ui';
 
+import { FormGroup, FormGroupProps } from '@/components/FormGroup';
 import { useDarkMode } from '@/theme/useDarkMode';
 
-import { FormGroup, FormGroupProps } from './FormGroup';
-
-type FieldInputProps<FormattedValue = string> = FieldProps<
+export type FieldInputProps<FormattedValue = string> = FieldProps<
   string,
   FormattedValue
 > &
