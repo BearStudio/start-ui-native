@@ -22,7 +22,6 @@ const useProtectedRoute = () => {
   }, [rootNavigationState]);
 
   useLayoutEffect(() => {
-    console.log(process.env.STORYBOOK_ENABLED, 'from hook');
     if (process.env.STORYBOOK_ENABLED === 'true') {
       return;
     }
