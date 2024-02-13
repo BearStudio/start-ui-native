@@ -7,7 +7,6 @@ import { ThemeContext } from 'react-native-ficus-ui';
 
 import theme, { THEME_KEY } from '@/theme';
 
-// Prevent native splash screen from autohiding before App component declaration
 SplashScreen.preventAutoHideAsync();
 
 const Index = () => {
@@ -30,4 +29,5 @@ const Index = () => {
 
   return <View />;
 };
+
 export default Index;

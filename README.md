@@ -63,7 +63,28 @@ yarn android # Launch on your android device if detected, or an Android emulator
 yarn ios     # Launch on your iOS device if detected, or an iOS emulator
 ```
 
----
+## Storybook Integration
+
+Start UI Native is equipped with Storybook, enhancing component development with an isolated and interactive environment. Storybook is essential for UI development, allowing you to build and test components independently from the app's main user interface.
+
+### Running Storybook
+
+Execute the command below to launch Storybook. It toggles an environment variable `process.env.STORYBOOK_ENABLED` to `true`, activating Storybook mode.
+
+```bash
+yarn storybook
+```
+
+Conversely, starting your app normally will **not set** `process.env.STORYBOOK_ENABLED`, which means the app will not enter Storybook mode.
+
+```bash
+yarn start
+```
+
+### Developing with Storybook
+
+Instead of a separate `stories` directory, we create stories alongside our components. For each component, create a `ComponentName.stories.tsx` file in the same directory as the component. Write your stories within this file to showcase and test the different states and props of the component. This approach keeps relevant stories and components tightly coupled and easily maintainable.
+
 
 ## [Expo EAS builds](https://docs.expo.dev/build/introduction/)
 
