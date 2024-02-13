@@ -75,7 +75,7 @@ Execute the command below to launch Storybook. It toggles an environment variabl
 yarn storybook
 ```
 
-Conversely, starting your app normally will set `process.env.STORYBOOK_ENABLED` to `false`, which means the app will not enter Storybook mode.
+Conversely, starting your app normally will **not set** `process.env.STORYBOOK_ENABLED`, which means the app will not enter Storybook mode.
 
 ```bash
 yarn start

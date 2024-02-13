@@ -16,16 +16,12 @@ const useProtectedRoute = () => {
   const router = useRouter();
   const isAuthentificated = useAuthStore(useShallow((state) => !!state.token));
   const isHydrated = useAuthStore(useShallow((state) => state.isHydrated));
-  const currentRouteRef = useRef<'auth' | 'tabs' | null>(null);
+  const currentRouteRef = useRef<'auth' | 'tabs' | 'storybook' | null>(null);
   const navigationKey = useMemo(() => {
     return rootNavigationState?.key;
   }, [rootNavigationState]);
 
   useLayoutEffect(() => {
-    // When storybook is enabled, we don't want to redirect to the auth or tabs, but we stay on the same route to display storybook
-    if (process.env.STORYBOOK_ENABLED === 'true') {
-      return;
-    }
     const inAuthGroup = segments[0] === '(auth)';
 
     if (!navigationKey || !isHydrated) {
@@ -33,7 +29,10 @@ const useProtectedRoute = () => {
     }
     SplashScreen.hideAsync();
 
-    if (
+    if (process.env.STORYBOOK_ENABLED === 'true') {
+      router.replace('/storybook');
+      currentRouteRef.current !== 'storybook';
+    } else if (
       !isAuthentificated &&
       !inAuthGroup &&
       currentRouteRef.current !== 'auth'
