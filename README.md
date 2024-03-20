@@ -1,17 +1,12 @@
 <h1 align="center"><img src="assets/thumbnail.png" alt="Start UI Native" /></h1>
 
-> [!CAUTION]  
-> This project is in WIP status 🚧, use it carefully! It's not ready for production.  
-> We are currently updating a lot of things on the starter (screens, api, ...) in order to make it stable and usefull 👌.  
-> 
-> StartUI [native] needs StartUI [web] v2 in order to work correctly.  
-> Make sure to have a local/deployed installation of StartUI [web] v2 before using
-> StartUI [native].
-
 🚀 Start UI [native] is a opinionated [Expo](https://expo.dev/) starter repository created & maintained by the [BearStudio Team](https://www.bearstudio.fr/team) and other contributors.
 It represents our team's up-to-date stack that we use when creating React Native apps for our clients.
 
 This starter is oriented to use Expo with Expo EAS features to have full access to native code.
+
+StartUI [native] needs StartUI [web] v2 as API in order to work correctly.  
+Make sure to have a local/deployed installation of StartUI [web] v2 before using StartUI [native].
 
 ---
 
