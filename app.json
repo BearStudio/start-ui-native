@@ -46,7 +46,8 @@
           "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices"
         }
       ],
-      ["expo-router"]
+      ["expo-router"],
+      "expo-font"
     ],
     "extra": {
       "eas": {
