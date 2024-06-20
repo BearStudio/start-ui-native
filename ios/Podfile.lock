@@ -1565,7 +1565,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNSVG (15.2.0):
+  - RNSVG (15.3.0):
     - React-Core
   - RNVectorIcons (10.0.0):
     - React-Core
@@ -1871,7 +1871,7 @@ SPEC CHECKSUMS:
   hermes-engine: 16b8530de1b383cdada1476cf52d1b52f0692cbc
   MultiplatformBleAdapter: 5a6a897b006764392f9cef785e4360f54fb9477d
   RCT-Folly: 02617c592a293bd6d418e0a88ff4ee1f88329b47
-  RCTDeprecation: efb313d8126259e9294dc4ee0002f44a6f676aba
+  RCTDeprecation: 4dc9c8fbcb15bc9e8f3cfa601ddc190e120f099b
   RCTRequired: f49ea29cece52aee20db633ae7edc4b271435562
   RCTTypeSafety: a11979ff0570d230d74de9f604f7d19692157bc4
   ReachabilitySwift: 2128f3a8c9107e1ad33574c6e58e8285d460b149
@@ -1925,7 +1925,7 @@ SPEC CHECKSUMS:
   RNDateTimePicker: b6a9b35a785ecbe12b4e7d6de5439d0aa4614146
   RNReanimated: 35f9ac9c3ac42d0497ebd1cce5c39d7687a8493e
   RNScreens: b32a9ff15bea7fcdbe5dff6477bc503f792b1208
-  RNSVG: 43b64ed39c14ce830d840903774154ca0c1f27ec
+  RNSVG: 7c3f3fac9de6d67eee5525a8bafffafaaf022991
   RNVectorIcons: 8b5bb0fa61d54cd2020af4f24a51841ce365c7e9
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   sqlite3: 02d1f07eaaa01f80a1c16b4b31dfcbb3345ee01a
@@ -1933,4 +1933,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: edb7b99090148dfc48e388e35b25b9a313d67ffd
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.11.3
