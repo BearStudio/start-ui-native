@@ -12,7 +12,7 @@ Make sure to have a local/deployed installation of StartUI [web] v2 before using
 
 ## Technology
 
-- 🚀 [Expo SDK 50](https://expo.dev/)
+- 🚀 [Expo SDK 51](https://expo.dev/)
 - 📱 [Expo EAS](https://expo.dev/eas)
 - ⚛️ [Expo Router 3](https://expo.github.io/router/docs/)
 - 🌿 [Ficus UI](https://ficus-ui.com/)
