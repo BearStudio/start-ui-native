@@ -47,6 +47,12 @@ API_URL='your api url here'
 OPEN_API_URL='your open api api url here'
 ```
 
+### Example demo
+```env
+API_URL=https://demo.start-ui.com/api/rest
+OPEN_API_URL=https://demo.start-ui.com/api/openapi.json
+```
+
 ### Installation
 
 ```bash
