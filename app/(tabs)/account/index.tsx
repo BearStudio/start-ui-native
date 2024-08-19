@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { Formiz, useForm, useFormFields } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
+import { useTranslation } from 'react-i18next';
 import {
   Box,
   Button,
@@ -34,6 +35,7 @@ import { useDarkMode } from '@/theme/useDarkMode';
 
 const Account = () => {
   const logout = useAuthStore((state) => state.logout);
+  const { t } = useTranslation();
   const { account, isLoading, isError, refetch: refetchAccount } = useAccount();
   const { showError, showSuccess, showInfo } = useToast();
 
@@ -55,14 +57,14 @@ const Account = () => {
 
   const { updateAccount, isLoading: isUpdatingAccount } = useAccountUpdate({
     onSuccess: () => {
-      showSuccess('Account updated');
+      showSuccess(t('account:feedbacks.updateAccount.success'));
       refetchAccount();
     },
     onError: (err) => {
       showError(
         err.response?.data?.message?.startsWith('[DEMO]')
-          ? 'This is a read-only demo, this action is disabled.'
-          : 'An error occured during account update, please try again'
+          ? t('account:feedbacks.updateAccount.error.demo')
+          : t('account:feedbacks.updateAccount.error.default')
       );
     },
   });
@@ -76,8 +78,8 @@ const Account = () => {
       onError: (err) => {
         showError(
           err.response?.data?.message?.startsWith('[DEMO]')
-            ? 'This is a read-only demo, this action is disabled.'
-            : 'An error occured during account email update, please try again'
+            ? t('account:feedbacks.updateAccountEmail.error.demo')
+            : t('account:feedbacks.updateAccountEmail.error.default')
         );
       },
     });
@@ -87,14 +89,14 @@ const Account = () => {
       onSuccess: () => {
         updateEmailCodeModal.onClose();
         refetchAccount();
-        showSuccess('Account email updated');
+        t('account:feedbacks.updateAccountEmailValidate.success');
       },
       onError: () => {
         emailValidationCodeForm.setValues({
           code: null,
         });
         emailValidationCodeForm.setErrors({
-          code: 'Code is incorrect, please try again',
+          code: t('account:feedbacks.updateAccountEmailValidate.error'),
         });
       },
     });
@@ -112,7 +114,7 @@ const Account = () => {
   const deleteAccountForm = useForm({
     onValidSubmit: () => {
       deleteAccountModal.onClose();
-      showInfo('No delete account api yet on Start UI V2');
+      showInfo(t('account:confirmationModals.deleteAccount.submit'));
     },
   });
 
@@ -135,7 +137,9 @@ const Account = () => {
   if (isError || !account) {
     return (
       <Box flex={1} p={20}>
-        <Button onPress={() => refetchAccount()}>Retry</Button>
+        <Button onPress={() => refetchAccount()}>
+          {t('account:actions.retry')}
+        </Button>
       </Box>
     );
   }
@@ -146,14 +150,14 @@ const Account = () => {
         <Content>
           <VStack spacing="xl">
             <Box>
-              <SectionTitle>Profile informations</SectionTitle>
+              <SectionTitle>{t('account:sections.profile.title')}</SectionTitle>
               <Box mt="lg">
                 <Formiz connect={profileForm}>
                   <Stack spacing="md">
                     <FieldInput
                       name="name"
-                      label="Name"
-                      required="Name is required"
+                      label={t('account:sections.profile.input.label')}
+                      required={t('account:sections.profile.input.required')}
                       defaultValue={account.name}
                       componentProps={{
                         autoCapitalize: 'none',
@@ -166,7 +170,7 @@ const Account = () => {
                       isLoading={isUpdatingAccount}
                       full
                     >
-                      Update
+                      {t('commons:actions.update')}
                     </Button>
                   </Stack>
                 </Formiz>
@@ -177,18 +181,20 @@ const Account = () => {
               />
             </Box>
             <Stack spacing="md">
-              <SectionTitle>Update your email</SectionTitle>
+              <SectionTitle>{t('account:sections.email.title')}</SectionTitle>
               <Formiz connect={emailForm}>
                 <Stack spacing="md">
                   <FieldInput
                     name="email"
-                    label="Mail address"
-                    required="Mail is required"
+                    label={t('account:sections.email.input.label')}
+                    required={t('account:sections.email.input.required')}
                     defaultValue={account.email}
                     validations={[
                       {
                         handler: isEmail(),
-                        message: 'Mail is invalid',
+                        message: t(
+                          'account:sections.email.input.validations.email'
+                        ),
                       },
                     ]}
                     componentProps={{
@@ -207,14 +213,14 @@ const Account = () => {
                       isDisabled={email === account.email}
                       full
                     >
-                      Update
+                      {t('commons:actions.update')}
                     </Button>
                     {email === account.email ? (
                       <Text
                         fontSize="lg"
                         color={colorModeValue('gray.500', 'gray.300')}
                       >
-                        This is your current email
+                        {t('account:sections.email.feedbacks.isEmail')}
                       </Text>
                     ) : (
                       <Button
@@ -229,7 +235,7 @@ const Account = () => {
                         borderWidth={1}
                         borderColor={colorModeValue('gray.200', 'gray.600')}
                       >
-                        Cancel
+                        {t('commons:actions.cancel')}
                       </Button>
                     )}
                   </VStack>
@@ -241,7 +247,9 @@ const Account = () => {
               />
             </Stack>
             <Box>
-              <SectionTitle>Preferences</SectionTitle>
+              <SectionTitle>
+                {t('account:sections.preferences.title')}
+              </SectionTitle>
               <VStack spacing="lg">
                 <ThemeSwitcher />
                 <Divider
@@ -262,7 +270,7 @@ const Account = () => {
                   borderWidth={1}
                   borderColor={colorModeValue('gray.200', 'gray.600')}
                 >
-                  Logout
+                  {t('account:actions.logout')}
                 </ButtonIcon>
                 <ButtonIcon
                   icon="trash"
@@ -271,7 +279,7 @@ const Account = () => {
                   colorScheme="error"
                   full
                 >
-                  Delete account
+                  {t('account:actions.deleteAccount')}
                 </ButtonIcon>
               </VStack>
             </Box>
@@ -290,10 +298,10 @@ const Account = () => {
       />
 
       <ConfirmationModal
-        title="Logout"
-        description="Do you really want to logout from the application?"
+        title={t('account:confirmationModals.logout.title')}
+        description={t('account:confirmationModals.logout.description')}
         confirmColorScheme="error"
-        confirmLabel="Logout"
+        confirmLabel={t('account:confirmationModals.logout.confirmLabel')}
         confirmIcon="logout"
         onConfirm={logout}
         onCancel={logoutModal.onClose}
@@ -301,10 +309,12 @@ const Account = () => {
       />
 
       <ConfirmationModal
-        title="Delete account"
-        description="Do you really want to delete your account?"
+        title={t('account:confirmationModals.deleteAccount.title')}
+        description={t('account:confirmationModals.deleteAccount.description')}
         confirmColorScheme="error"
-        confirmLabel="Confirm the deletion of account"
+        confirmLabel={t(
+          'account:confirmationModals.deleteAccount.confirmLabel'
+        )}
         isDisabledConfirm={!confirmation}
         onConfirm={() => deleteAccountForm.submit()}
         onCancel={deleteAccountModal.onClose}
@@ -313,26 +323,31 @@ const Account = () => {
       >
         <Formiz connect={deleteAccountForm}>
           <Stack spacing="lg">
-            <CardStatus type="warning" title="Warning">
+            <CardStatus
+              type="warning"
+              title={t('account:confirmationModals.deleteAccount.card.title')}
+            >
               <Text
                 color={colorModeValue('gray.800', 'gray.100')}
                 fontWeight="bold"
                 mt="lg"
               >
-                This action is irreversible and immediate. All your data will be
-                will be deleted immediately. You will have to recreate an
-                account.
+                {t('account:confirmationModals.deleteAccount.card.description')}
               </Text>
             </CardStatus>
 
             <FieldInput
               name="confirmation"
-              label='Enter "DELETION"'
-              required="Confirmation required"
+              label={t('account:confirmationModals.deleteAccount.input.label')}
+              required={t(
+                'account:confirmationModals.deleteAccount.input.required'
+              )}
               validations={[
                 {
                   handler: (value) => value === 'DELETION',
-                  message: 'Please enter "DELETION" to validate',
+                  message: t(
+                    'account:confirmationModals.deleteAccount.input.validations.isValid'
+                  ),
                 },
               ]}
             />

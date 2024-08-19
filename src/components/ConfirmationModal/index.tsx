@@ -1,5 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { GestureResponderEvent } from 'react-native';
 import { Box, Button, Flex, Modal, Text, VStack } from 'react-native-ficus-ui';
 import {
@@ -52,6 +53,7 @@ export const ConfirmationModal: FC<
   ...rest
 }) => {
   const { colorModeValue, getThemeColor } = useDarkMode();
+  const { t } = useTranslation();
 
   return (
     <Modal animationIn="slideInUp" h={260} onBackdropPress={onCancel} {...rest}>
@@ -98,7 +100,7 @@ export const ConfirmationModal: FC<
             borderWidth={1}
             borderColor={colorModeValue('gray.200', 'gray.600')}
           >
-            Cancel
+            {t('commons:actions.cancel')}
           </Button>
         </VStack>
       </Flex>

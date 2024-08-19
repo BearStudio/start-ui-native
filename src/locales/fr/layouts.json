@@ -1,0 +1,12 @@
+{
+  "auth": {
+    "onboarding": "Embarquement",
+    "login": "Connexion",
+    "register": "Créer un compte"
+  },
+  "tabs": {
+    "account": "Compte",
+    "home": "Accueil",
+    "repositories": "Dépôts"
+  }
+}

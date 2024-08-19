@@ -1,0 +1,21 @@
+{
+  "card": {
+    "title": "Demo mode",
+    "description": "Enjoy the features! You can sign in with"
+  },
+  "feedbacks": {
+    "error": "Failed to log in. Please try again"
+  },
+  "validation": {
+    "success": "Successfully logged in",
+    "error": "Code is incorrect, please try again"
+  },
+  "input": {
+    "label": "Mail address",
+    "required": "Mail is required",
+    "validations": {
+      "email": "Mail is invalid"
+    }
+  },
+  "actions": { "login": "Sign in" }
+}

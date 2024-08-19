@@ -21,3 +21,7 @@ src/api/generated-api.*
 .env.production
 
 devices.json
+
+# VSCode
+/.vscode/*
+!/.vscode/extensions.json

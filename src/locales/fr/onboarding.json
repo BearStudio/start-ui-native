@@ -1,0 +1,9 @@
+{
+  "logo": "Logo Start UI Native",
+  "description": "Un starter UI opinioné avec Expo, Ficus UI, React Query & Formiz",
+  "actions": {
+    "login": "Se connecter",
+    "alreadyHaveAnAccount": "Vous avez déjà un compte ?",
+    "register": "S'inscrire avec un email"
+  }
+}
