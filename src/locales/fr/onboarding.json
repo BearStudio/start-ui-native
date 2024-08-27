@@ -1,6 +1,6 @@
 {
   "logo": "Logo Start UI Native",
-  "description": "Un starter UI opinioné avec Expo, Ficus UI, React Query & Formiz",
+  "description": "Un starter UI dogmatique avec Expo, Ficus UI, Zodios & Formiz",
   "actions": {
     "login": "Se connecter",
     "alreadyHaveAnAccount": "Vous avez déjà un compte ?",

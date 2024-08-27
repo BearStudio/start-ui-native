@@ -52,10 +52,13 @@
         "description": "This action is irreversible and immediate. All your data will be will be deleted immediately. You will have to recreate an account."
       },
       "input": {
-        "label": "Enter \"DELETION\"",
+        "label": "Enter \"{{handlerValue}}\"",
         "required": "Confirmation required",
         "validations": {
-          "isValid": "Please enter \"DELETION\" to validate"
+          "isValid": {
+            "message": "Please enter \"{{handlerValue}}\" to validate",
+            "handlerValue": "DELETION"
+          }
         }
       }
     }

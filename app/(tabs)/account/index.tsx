@@ -130,6 +130,10 @@ const Account = () => {
     fields: ['confirmation'] as const,
   });
 
+  const handlerValue = t(
+    'account:confirmationModals.deleteAccount.input.validations.isValid.handlerValue'
+  );
+
   if (isLoading) {
     return <LoadingScreen />;
   }
@@ -338,15 +342,20 @@ const Account = () => {
 
             <FieldInput
               name="confirmation"
-              label={t('account:confirmationModals.deleteAccount.input.label')}
+              label={t('account:confirmationModals.deleteAccount.input.label', {
+                handlerValue,
+              })}
               required={t(
                 'account:confirmationModals.deleteAccount.input.required'
               )}
               validations={[
                 {
-                  handler: (value) => value === 'DELETION',
+                  handler: (value) => value === handlerValue,
                   message: t(
-                    'account:confirmationModals.deleteAccount.input.validations.isValid'
+                    'account:confirmationModals.deleteAccount.input.validations.isValid.message',
+                    {
+                      handlerValue,
+                    }
                   ),
                 },
               ]}

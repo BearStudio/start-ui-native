@@ -52,10 +52,13 @@
         "description": "Cette action est irréversible et immédiate. Toutes vos données seront supprimées immédiatement. Vous devrez recréer un compte."
       },
       "input": {
-        "label": "Entrez \"SUPPRESSION\"",
+        "label": "Entrez \"{{handlerValue}}\"",
         "required": "Confirmation requise",
         "validations": {
-          "isValid": "Veuillez entrer \"SUPPRESSION\" pour valider"
+          "isValid": {
+            "message": "Veuillez entrer \"{{handlerValue}}\" pour valider",
+            "handlerValue": "SUPPRESSION"
+          }
         }
       }
     }
