@@ -38,13 +38,9 @@ const CardWarningRegister = () => {
         <Button
           onPress={() => router.push('/login')}
           full
-          bg="transparent"
-          borderColor={colorModeValue('gray.800', 'gray.200')}
-          borderWidth={1}
-          borderRadius="md"
-          py={6}
-          mt={6}
-          mb={4}
+          colorScheme="brand"
+          bg={colorModeValue(undefined, 'gray.800')}
+          variant={colorModeValue('outline', 'solid')}
         >
           {t('register:card.actions.login')}
         </Button>

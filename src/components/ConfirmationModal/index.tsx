@@ -2,7 +2,16 @@ import { FC, PropsWithChildren } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { GestureResponderEvent } from 'react-native';
-import { Box, Button, Flex, Modal, Text, VStack } from 'react-native-ficus-ui';
+import {
+  Box,
+  Button,
+  Center,
+  DraggableModal,
+  DraggableModalProps,
+  Flex,
+  Text,
+  VStack,
+} from 'react-native-ficus-ui';
 import {
   BackgroundPropsType,
   BorderPropsType,
@@ -12,13 +21,12 @@ import {
   SpacingPropsType,
   VariantPropsType,
 } from 'react-native-ficus-ui/lib/typescript/types';
-import { ModalProps as RNModalProps } from 'react-native-modal';
 
 import { useDarkMode } from '@/theme/useDarkMode';
 
 import { ButtonIcon } from '../ButtonIcon';
 
-export type ConfirmationModalProps = Partial<RNModalProps> &
+export type ConfirmationModalProps = Partial<DraggableModalProps> &
   BorderPropsType &
   SpacingPropsType &
   BorderRadiusPropsType &
@@ -35,6 +43,7 @@ export type ConfirmationModalProps = Partial<RNModalProps> &
     isDisabledConfirm?: boolean;
     onConfirm: (event?: GestureResponderEvent) => void;
     onCancel: (event?: GestureResponderEvent) => void;
+    snapPoints?: string[];
   };
 
 export const ConfirmationModal: FC<
@@ -50,14 +59,40 @@ export const ConfirmationModal: FC<
   onConfirm,
   onCancel,
   children,
+  snapPoints = ['40%'],
   ...rest
 }) => {
   const { colorModeValue, getThemeColor } = useDarkMode();
   const { t } = useTranslation();
 
   return (
-    <Modal animationIn="slideInUp" h={260} onBackdropPress={onCancel} {...rest}>
-      <Flex p="xl" justifyContent="space-between">
+    <DraggableModal
+      snapPoints={snapPoints}
+      onClose={onCancel}
+      bg={colorModeValue('white', getThemeColor('gray.800'))}
+      handleComponent={() => (
+        <Center h={30}>
+          <Box
+            bg={colorModeValue(getThemeColor('gray.800'), 'white')}
+            h={5}
+            w={30}
+            borderRadius="xl"
+          />
+        </Center>
+      )}
+      backdropComponent={({ style }) => (
+        <Box style={style} bg="black" opacity={0.4} />
+      )}
+      backgroundComponent={({ style }) => (
+        <Box
+          style={style}
+          borderTopRadius="2xl"
+          bg={colorModeValue('white', getThemeColor('gray.800'))}
+        />
+      )}
+      {...rest}
+    >
+      <Flex p="xl" pt="md" justifyContent="space-between">
         <Box>
           <Text
             fontWeight="bold"
@@ -104,6 +139,6 @@ export const ConfirmationModal: FC<
           </Button>
         </VStack>
       </Flex>
-    </Modal>
+    </DraggableModal>
   );
 };

@@ -2,6 +2,7 @@ import { FC, PropsWithChildren, useEffect, useRef } from 'react';
 
 import { Form, Formiz } from '@formiz/core';
 import { useTranslation } from 'react-i18next';
+import { BottomSheetTextInput } from '@gorhom/bottom-sheet';
 import { TextInput } from 'react-native';
 import { Box, Text, TouchableOpacity } from 'react-native-ficus-ui';
 
@@ -41,8 +42,8 @@ export const ConfirmationCodeModal: FC<
       onConfirm={() => form.submit()}
       onCancel={onClose}
       h={400}
-      isVisible={isOpen}
-      avoidKeyboard
+      isOpen={isOpen}
+      snapPoints={['50%']}
     >
       <Box my="lg">
         <Formiz connect={form}>
@@ -55,6 +56,11 @@ export const ConfirmationCodeModal: FC<
               if (code?.length === 6) {
                 form.submit();
               }
+            }}
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            pinInputProps={{
+              InputComponent: BottomSheetTextInput,
             }}
           />
         </Formiz>

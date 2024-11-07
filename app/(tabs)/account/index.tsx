@@ -297,7 +297,7 @@ const Account = () => {
         isOpen={updateEmailCodeModal.isOpen}
         onClose={updateEmailCodeModal.onClose}
         form={emailValidationCodeForm}
-        email={account.email}
+        email={account.email as string}
         isLoadingConfirm={isValidatingAccountEmail}
       />
 
@@ -309,7 +309,8 @@ const Account = () => {
         confirmIcon="logout"
         onConfirm={logout}
         onCancel={logoutModal.onClose}
-        isVisible={logoutModal.isOpen}
+        isOpen={logoutModal.isOpen}
+        snapPoints={['30%']}
       />
 
       <ConfirmationModal
@@ -322,8 +323,8 @@ const Account = () => {
         isDisabledConfirm={!confirmation}
         onConfirm={() => deleteAccountForm.submit()}
         onCancel={deleteAccountModal.onClose}
-        isVisible={deleteAccountModal.isOpen}
-        h={420}
+        isOpen={deleteAccountModal.isOpen}
+        snapPoints={['45%']}
       >
         <Formiz connect={deleteAccountForm}>
           <Stack spacing="lg">
