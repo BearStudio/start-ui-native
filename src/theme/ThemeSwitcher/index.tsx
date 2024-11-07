@@ -1,10 +1,12 @@
 import React from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { Stack, Switch, Text } from 'react-native-ficus-ui';
 
 import { useDarkMode } from '@/theme/useDarkMode';
 
 export default function ThemeSwitcher() {
+  const { t } = useTranslation();
   const { colorMode, toggleColorMode, colorModeValue } = useDarkMode();
 
   return (
@@ -14,7 +16,7 @@ export default function ThemeSwitcher() {
         fontWeight="500"
         color={colorModeValue('gray.900', 'gray.400')}
       >
-        Light mode
+        {t('components:ThemeSwitcher.light')}
       </Text>
       <Switch
         on={colorMode === 'dark'}
@@ -26,7 +28,7 @@ export default function ThemeSwitcher() {
         fontWeight="500"
         color={colorModeValue('gray.500', 'gray.100')}
       >
-        Dark mode
+        {t('components:ThemeSwitcher.dark')}
       </Text>
     </Stack>
   );

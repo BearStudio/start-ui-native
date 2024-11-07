@@ -1,5 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { GestureResponderEvent } from 'react-native';
 import {
   Box,
@@ -62,6 +63,7 @@ export const ConfirmationModal: FC<
   ...rest
 }) => {
   const { colorModeValue, getThemeColor } = useDarkMode();
+  const { t } = useTranslation();
 
   return (
     <DraggableModal
@@ -133,7 +135,7 @@ export const ConfirmationModal: FC<
             borderWidth={1}
             borderColor={colorModeValue('gray.200', 'gray.600')}
           >
-            Cancel
+            {t('commons:actions.cancel')}
           </Button>
         </VStack>
       </Flex>

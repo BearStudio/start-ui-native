@@ -1,0 +1,12 @@
+{
+  "auth": {
+    "onboarding": "Onboarding",
+    "login": "Login",
+    "register": "Create Account"
+  },
+  "tabs": {
+    "account": "Account",
+    "home": "Home",
+    "repositories": "Repositories"
+  }
+}

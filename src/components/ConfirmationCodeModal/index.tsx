@@ -1,6 +1,7 @@
 import { FC, PropsWithChildren, useEffect, useRef } from 'react';
 
 import { Form, Formiz } from '@formiz/core';
+import { useTranslation } from 'react-i18next';
 import { BottomSheetTextInput } from '@gorhom/bottom-sheet';
 import { TextInput } from 'react-native';
 import { Box, Text, TouchableOpacity } from 'react-native-ficus-ui';
@@ -23,6 +24,7 @@ export const ConfirmationCodeModal: FC<
   PropsWithChildren<ConfirmationCodeModalProps>
 > = ({ isOpen, onClose, form, email, isLoadingConfirm = false }) => {
   const { colorModeValue } = useDarkMode();
+  const { t } = useTranslation();
   const codeInputRef = useRef<TextInput>(null);
 
   useEffect(() => {
@@ -33,9 +35,9 @@ export const ConfirmationCodeModal: FC<
 
   return (
     <ConfirmationModal
-      title="Check your inbox for the code"
-      description={`We've sent a 6-character code to ${email}. The code expires shortly (5 minutes).`}
-      confirmLabel="Confirm"
+      title={t('components:ConfirmationCodeModal.title')}
+      description={t('components:ConfirmationCodeModal.description', { email })}
+      confirmLabel={t('components:ConfirmationCodeModal.confirmLabel')}
       isLoadingConfirm={isLoadingConfirm}
       onConfirm={() => form.submit()}
       onCancel={onClose}
@@ -48,7 +50,7 @@ export const ConfirmationCodeModal: FC<
           <FieldCodeInput
             ref={codeInputRef}
             name="code"
-            required="Validation code is required"
+            required={t('components:ConfirmationCodeModal.required')}
             codeLength={6}
             onValueChange={(code) => {
               if (code?.length === 6) {
@@ -63,10 +65,13 @@ export const ConfirmationCodeModal: FC<
           />
         </Formiz>
 
-        <CardStatus type="info" title="Demo mode">
+        <CardStatus
+          type="info"
+          title={t('components:ConfirmationCodeModal.card.title')}
+        >
           <Box flexDirection="row" flexWrap="wrap" mt="sm">
             <Text fontSize="lg" color={colorModeValue('gray.800', 'gray.50')}>
-              To quickly validate, use the code{' '}
+              {t('components:ConfirmationCodeModal.card.description')}{' '}
             </Text>
             <TouchableOpacity
               onPress={() => {

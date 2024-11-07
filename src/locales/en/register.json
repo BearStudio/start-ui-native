@@ -1,0 +1,28 @@
+{
+  "card": {
+    "title": "Demo mode",
+    "description": "This is a read-only demo, but you can Sign in to test some of the features. Just remember, no changes can be made. Enjoy the features!",
+    "actions": { "login": "Sign in" }
+  },
+  "feedbacks": {
+    "createAccount": {
+      "error": {
+        "demo": "This is a read-only demo, this action is disabled.",
+        "default": "An error occured during your registration, please try again"
+      }
+    },
+    "accountValidate": {
+      "success": "Successfully logged in",
+      "error": "Code is incorrect, please try again"
+    }
+  },
+  "inputs": {
+    "email": {
+      "label": "Mail address",
+      "required": "Mail is required",
+      "validations": { "email": "Mail is invalid" }
+    },
+    "name": { "label": "Name", "required": "Name is required" }
+  },
+  "actions": { "register": "Sign up" }
+}

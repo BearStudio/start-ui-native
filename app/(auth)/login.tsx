@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { Formiz, useForm, useFormContext, useFormFields } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
+import { useTranslation } from 'react-i18next';
 import {
   Box,
   Button,
@@ -24,17 +25,18 @@ import { useToast } from '@/modules/toast/useToast';
 import { useDarkMode } from '@/theme/useDarkMode';
 
 const CardInfoAuthStep = () => {
+  const { t } = useTranslation();
   const loginForm = useFormContext();
   const { colorModeValue } = useDarkMode();
   return (
-    <CardStatus type="info" title="Demo mode" mt="md">
+    <CardStatus type="info" title={t('login:card.title')} mt="md">
       <Box flexDirection="row" alignItems="center" flexWrap="wrap">
         <Text
           fontSize="lg"
           color={colorModeValue('gray.800', 'gray.50')}
           my="sm"
         >
-          Enjoy the features! You can sign in with{' '}
+          {t('login:card.description')}{' '}
         </Text>
         <TouchableOpacity
           onPress={() => loginForm.setValues({ email: 'admin@admin.com' })}
@@ -54,6 +56,7 @@ const CardInfoAuthStep = () => {
 };
 
 const Login = () => {
+  const { t } = useTranslation();
   const loginForm = useForm<{
     email: string;
     code: string;
@@ -87,7 +90,7 @@ const Login = () => {
       validateEmailCodeModal.onOpen();
     },
     onError: (err) => {
-      showError('Failed to log in. Please try again');
+      showError(t('login:feedbacks.error'));
       console.error('Authentication error:', err);
     },
   });
@@ -96,14 +99,14 @@ const Login = () => {
     useAuthLoginValidate(emailToken as string, {
       onSuccess: () => {
         validateEmailCodeModal.onClose();
-        showSuccess('Successfully logged in');
+        showSuccess(t('login:validation.success'));
       },
       onError: () => {
         emailValidationCodeForm.setValues({
           code: null,
         });
         emailValidationCodeForm.setErrors({
-          code: 'Code is incorrect, please try again',
+          code: t('login:validation.error'),
         });
       },
     });
@@ -114,9 +117,14 @@ const Login = () => {
         <Content>
           <FieldInput
             name="email"
-            label="Mail address"
-            required="Mail is required"
-            validations={[{ handler: isEmail(), message: 'Mail is invalid' }]}
+            label={t('login:input.label')}
+            required={t('login:input.required')}
+            validations={[
+              {
+                handler: isEmail(),
+                message: t('login:input.validations.email'),
+              },
+            ]}
             componentProps={{
               autoCapitalize: 'none',
               keyboardType: 'email-address',
@@ -133,7 +141,7 @@ const Login = () => {
             colorScheme="brand"
             full
           >
-            Sign in
+            {t('login:actions.login')}
           </Button>
         </Footer>
       </Formiz>

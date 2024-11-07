@@ -1,0 +1,9 @@
+{
+  "logo": "Logo Start UI Native",
+  "description": "Un starter UI dogmatique avec Expo, Ficus UI, Zodios & Formiz",
+  "actions": {
+    "login": "Se connecter",
+    "alreadyHaveAnAccount": "Vous avez déjà un compte ?",
+    "register": "S'inscrire avec un email"
+  }
+}

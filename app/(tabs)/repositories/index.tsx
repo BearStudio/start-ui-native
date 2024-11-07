@@ -1,4 +1,5 @@
 import { Link, useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import {
   Box,
   Button,
@@ -14,6 +15,7 @@ import { useDarkMode } from '@/theme/useDarkMode';
 
 const Repositories = () => {
   const router = useRouter();
+  const { t } = useTranslation();
   const { colorModeValue } = useDarkMode();
 
   const repositories = useRepositories();
@@ -24,7 +26,7 @@ const Repositories = () => {
       {repositories.isSuccess &&
         !repositories.data.pages.flatMap((page) => page.items).length && (
           <Text fontSize="sm" color="text-dimmed">
-            No repositories
+            {t('repositories:noRepositories')}
           </Text>
         )}
 
@@ -74,7 +76,7 @@ const Repositories = () => {
             onPress={() => repositories.fetchNextPage()}
             isLoading={repositories.isFetchingNextPage}
           >
-            Load more
+            {t('repositories:loadMore')}
           </Button>
         </Box>
       )}

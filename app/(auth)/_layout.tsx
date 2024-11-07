@@ -1,16 +1,19 @@
+import { useTranslation } from 'react-i18next';
+
 import { Stack } from '@/layout/Stack';
 
 const AuthStack = () => {
+  const { t } = useTranslation();
   return (
     <Stack
       screens={[
         {
           route: 'onboarding',
-          title: 'Onboarding',
+          title: t('layouts:auth.onboarding'),
           options: { headerShown: false },
         },
-        { route: 'login', title: 'Login' },
-        { route: 'register', title: 'Create Account' },
+        { route: 'login', title: t('layouts:auth.login') },
+        { route: 'register', title: t('layouts:auth.register') },
       ]}
     />
   );

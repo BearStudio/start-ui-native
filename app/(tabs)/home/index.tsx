@@ -1,4 +1,5 @@
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { Box, Stack, Text, VStack } from 'react-native-ficus-ui';
 
 import { ButtonIcon } from '@/components/ButtonIcon';
@@ -6,6 +7,7 @@ import { useDarkMode } from '@/theme/useDarkMode';
 
 const Home = () => {
   const router = useRouter();
+  const { t } = useTranslation();
   const { colorModeValue, getThemeColor } = useDarkMode();
   return (
     <Stack p={20} h="100%" spacing={12}>
@@ -14,16 +16,16 @@ const Home = () => {
         fontWeight="bold"
         color={colorModeValue('black', 'gray.50')}
       >
-        Welcome to 🚀 Start UI [native]
+        {t('home:welcome.title')}
       </Text>
       <Box>
         <Text fontSize="lg" color={colorModeValue('black', 'gray.50')}>
-          An opinionated UI starter with Expo, Ficus UI, Zodios & Formiz
+          {t('home:welcome.description')}
         </Text>
         <Text fontSize="lg" mt="md" color={colorModeValue('black', 'gray.50')}>
-          - From the{' '}
+          {t('home:welcome.from')}{' '}
           <Text fontWeight="bold" color={colorModeValue('black', 'gray.50')}>
-            BearStudio Team
+            {t('home:welcome.author')}
           </Text>
         </Text>
       </Box>
@@ -45,7 +47,7 @@ const Home = () => {
           borderColor={colorModeValue('gray.200', 'gray.600')}
           full
         >
-          Github Repository
+          {t('home:links.github')}
         </ButtonIcon>
 
         <ButtonIcon
@@ -67,7 +69,7 @@ const Home = () => {
           borderColor={colorModeValue('gray.200', 'gray.600')}
           full
         >
-          Open issue
+          {t('home:links.openIssue')}
         </ButtonIcon>
       </VStack>
     </Stack>

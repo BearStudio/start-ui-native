@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import { Formiz, useForm, useFormFields } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { TextInput } from 'react-native';
 import { Box, Button, Stack, Text, useDisclosure } from 'react-native-ficus-ui';
 
@@ -22,17 +23,17 @@ import { focus } from '@/utils/formUtils';
 
 const CardWarningRegister = () => {
   const router = useRouter();
+  const { t } = useTranslation();
   const { colorModeValue } = useDarkMode();
   return (
-    <CardStatus type="warning" title="Demo mode" mt="md">
+    <CardStatus type="warning" title={t('register:card.title')} mt="md">
       <Box flexDirection="row" flexWrap="wrap">
         <Text
           fontSize="lg"
           color={colorModeValue('gray.800', 'gray.50')}
           my="sm"
         >
-          This is a read-only demo, but you can Sign in to test some of the
-          features. Just remember, no changes can be made. Enjoy the features!
+          {t('register:card.description')}
         </Text>
         <Button
           onPress={() => router.push('/login')}
@@ -41,7 +42,7 @@ const CardWarningRegister = () => {
           bg={colorModeValue(undefined, 'gray.800')}
           variant={colorModeValue('outline', 'solid')}
         >
-          Sign in
+          {t('register:card.actions.login')}
         </Button>
       </Box>
     </CardStatus>
@@ -50,6 +51,7 @@ const CardWarningRegister = () => {
 
 const Register = () => {
   const { showError, showSuccess } = useToast();
+  const { t } = useTranslation();
   const nameRef = useRef<TextInput>(null);
   const validateEmailCodeModal = useDisclosure();
   const [emailToken, setEmailToken] = useState<string | null>(null);
@@ -84,8 +86,8 @@ const Register = () => {
     onError: (err) => {
       showError(
         err.response?.data?.message?.startsWith('[DEMO]')
-          ? 'This is a read-only demo, this action is disabled.'
-          : 'An error occured during your registration, please try again'
+          ? t('register:feedbacks.createAccount.error.demo')
+          : t('register:feedbacks.createAccount.error.default')
       );
     },
   });
@@ -94,14 +96,14 @@ const Register = () => {
     useAuthRegisterValidate(emailToken as string, {
       onSuccess: () => {
         validateEmailCodeModal.onClose();
-        showSuccess('Successfully logged in');
+        showSuccess(t('register:feedbacks.accountValidate.success'));
       },
       onError: () => {
         emailValidationCodeForm.setValues({
           code: null,
         });
         emailValidationCodeForm.setErrors({
-          code: 'Code is incorrect, please try again',
+          code: t('register:feedbacks.accountValidate.error'),
         });
       },
     });
@@ -113,12 +115,12 @@ const Register = () => {
           <Stack spacing="md">
             <FieldInput
               name="email"
-              label="Mail address"
-              required="Mail is required"
+              label={t('register:inputs.email.label')}
+              required={t('register:inputs.email.required')}
               validations={[
                 {
                   handler: isEmail(),
-                  message: 'Mail is invalid',
+                  message: t('register:inputs.email.validations.email'),
                 },
               ]}
               componentProps={{
@@ -134,8 +136,8 @@ const Register = () => {
             <FieldInput
               ref={nameRef}
               name="name"
-              label="Name"
-              required="Name is required"
+              label={t('register:inputs.name.label')}
+              required={t('register:inputs.name.required')}
               componentProps={{
                 autoCapitalize: 'none',
                 returnKeyType: 'next',
@@ -154,7 +156,7 @@ const Register = () => {
             colorScheme="brand"
             full
           >
-            Sign up
+            {t('register:actions.register')}
           </Button>
         </Footer>
       </Formiz>

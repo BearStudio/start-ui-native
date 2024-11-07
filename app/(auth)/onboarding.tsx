@@ -1,4 +1,5 @@
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { Image } from 'react-native';
 import { Button, Icon, Stack, Text } from 'react-native-ficus-ui';
 
@@ -6,6 +7,7 @@ import { useDarkMode } from '@/theme/useDarkMode';
 
 const Onboarding = () => {
   const router = useRouter();
+  const { t } = useTranslation();
   const { colorModeValue, toggleColorMode, colorMode } = useDarkMode();
 
   // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -27,14 +29,14 @@ const Onboarding = () => {
             width: '100%',
             height: 80,
           }}
-          accessibilityLabel="Start UI Native Logo"
+          accessibilityLabel={t('onboarding:logo')}
         />
         <Text
           fontSize="lg"
           textAlign="center"
           color={colorModeValue('gray.900', 'gray.50')}
         >
-          An opinionated UI starter with Expo, Ficus UI, React Query & Formiz
+          {t('onboarding:description')}
         </Text>
       </Stack>
       <Stack spacing="md" alignItems="center">
@@ -44,14 +46,14 @@ const Onboarding = () => {
           onPress={() => router.push('/register')}
           colorScheme="brand"
         >
-          Sign up with mail
+          {t('onboarding:actions.register')}
         </Button>
         <Stack direction="row" alignItems="center">
           <Text
             onPress={handleOpenLogin}
             color={colorModeValue('gray.900', 'gray.50')}
           >
-            Already an account?
+            {t('onboarding:actions.alreadyHaveAnAccount')}
           </Text>
           <Button onPress={handleOpenLogin} colorScheme="transparent">
             <Text
@@ -59,7 +61,7 @@ const Onboarding = () => {
               textDecorLine="underline"
               color={colorModeValue('gray.900', 'gray.50')}
             >
-              Sign in
+              {t('onboarding:actions.login')}
             </Text>
           </Button>
         </Stack>
