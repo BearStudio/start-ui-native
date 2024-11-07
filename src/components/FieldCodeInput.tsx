@@ -1,10 +1,16 @@
-import React, { ForwardedRef, useEffect, useState } from 'react';
+import React, { ComponentType, ForwardedRef, useEffect, useState } from 'react';
 
 import { FieldProps, useField } from '@formiz/core';
-import { TextInput, TextInputProps } from 'react-native';
+import { TextInput } from 'react-native';
 import { View } from 'react-native';
-import { CodeField, Cursor } from 'react-native-confirmation-code-field';
-import { Box, Center, Text } from 'react-native-ficus-ui';
+import { Cursor } from 'react-native-confirmation-code-field';
+import {
+  Box,
+  Center,
+  PinInput,
+  PinInputProps,
+  Text,
+} from 'react-native-ficus-ui';
 
 import { useDarkMode } from '@/theme/useDarkMode';
 
@@ -15,8 +21,10 @@ type FieldCodeInputProps<FormattedValue = string> = FieldProps<
   FormattedValue
 > &
   Omit<FormGroupProps, 'id'> & {
-    componentProps?: TextInputProps;
     codeLength: number;
+    pinInputProps?: PinInputProps & {
+      InputComponent?: ComponentType<never>;
+    };
   };
 
 export const FieldCodeInput = React.forwardRef(
@@ -34,7 +42,7 @@ export const FieldCodeInput = React.forwardRef(
       resetKey,
       otherProps,
     } = useField(props);
-    const { label, componentProps, codeLength, ...rest } = otherProps;
+    const { label, pinInputProps, codeLength, ...rest } = otherProps;
 
     const [isTouched, setIsTouched] = useState(false);
     const showError = !isValid && (isTouched || isSubmitted);
@@ -55,13 +63,14 @@ export const FieldCodeInput = React.forwardRef(
         {...rest}
       >
         <Box mb="sm">
-          <CodeField
+          <PinInput
             ref={ref}
             value={value ?? ''}
             onChangeText={setValue}
             cellCount={codeLength}
             keyboardType="number-pad"
             textContentType="oneTimeCode"
+            {...pinInputProps}
             renderCell={({ index, symbol, isFocused }) => (
               <View key={index}>
                 <Center
@@ -81,7 +90,6 @@ export const FieldCodeInput = React.forwardRef(
                 </Center>
               </View>
             )}
-            {...componentProps}
           />
         </Box>
       </FormGroup>
