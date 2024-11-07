@@ -18,6 +18,9 @@ jobs:
             exit 1
           fi
 
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -25,7 +28,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
-          cache: yarn
+          cache: pnpm
 
       - name: Setup EAS
         uses: expo/expo-github-action@v8
@@ -40,7 +43,7 @@ jobs:
           echo 'API_URL="https://demo.start-ui.com/api/rest"' >> .env
           echo 'OPEN_API_URL="https://demo.start-ui.com/api/openapi.json"' >> .env
           cat .env
-          yarn install
+          pnpm install
 
       - name: Publish update
         run: eas update --auto

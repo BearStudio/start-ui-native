@@ -5,8 +5,8 @@
   "main": "expo-router/entry",
   "scripts": {
     "start": "expo start -c",
-    "dev": "yarn start --dev-client",
-    "postinstall": "yarn generate-api",
+    "dev": "pnpm start --dev-client",
+    "postinstall": "pnpm generate-api",
     "generate-api": "mkdir -p ./src/api/ && tsx ./scripts/services-generator.ts",
     "android": "expo run:android",
     "ios": "expo run:ios",
@@ -18,7 +18,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json}": "prettier --write",
-    "*.{ts,tsx,js,jsx}": "yarn lint:staged"
+    "*.{ts,tsx,js,jsx}": "pnpm lint:staged"
   },
   "dependencies": {
     "@babel/preset-env": "7.22.5",

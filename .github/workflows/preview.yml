@@ -23,14 +23,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
-          cache: yarn
+          cache: pnpm
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Setup EAS
         uses: expo/expo-github-action@v8

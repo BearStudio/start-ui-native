@@ -57,11 +57,11 @@ OPEN_API_URL=https://demo.start-ui.com/api/openapi.json
 
 ```bash
 # Install dependencies and generate api client
-yarn
+pnpm install
 
 # Then, choose based on the platform you want to dev on:
-yarn android # Launch on your android device if detected, or an Android emulator
-yarn ios     # Launch on your iOS device if detected, or an iOS emulator
+pnpm android # Launch on your android device if detected, or an Android emulator
+pnpm ios     # Launch on your iOS device if detected, or an iOS emulator
 ```
 
 ## Storybook Integration
@@ -73,13 +73,13 @@ Start UI Native is equipped with Storybook, enhancing component development with
 Execute the command below to launch Storybook. It toggles an environment variable `process.env.STORYBOOK_ENABLED` to `true`, activating Storybook mode.
 
 ```bash
-yarn storybook
+pnpm storybook
 ```
 
 Conversely, starting your app normally will **not set** `process.env.STORYBOOK_ENABLED`, which means the app will not enter Storybook mode.
 
 ```bash
-yarn start
+pnpm start
 ```
 
 ### Developing with Storybook
