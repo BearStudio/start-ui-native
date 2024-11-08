@@ -1,8 +1,8 @@
 import { FC, PropsWithChildren, useEffect, useRef } from 'react';
 
 import { Form, Formiz } from '@formiz/core';
-import { useTranslation } from 'react-i18next';
 import { BottomSheetTextInput } from '@gorhom/bottom-sheet';
+import { useTranslation } from 'react-i18next';
 import { TextInput } from 'react-native';
 import { Box, Text, TouchableOpacity } from 'react-native-ficus-ui';
 
@@ -43,7 +43,6 @@ export const ConfirmationCodeModal: FC<
       onCancel={onClose}
       h={400}
       isOpen={isOpen}
-      snapPoints={['50%']}
     >
       <Box my="lg">
         <Formiz connect={form}>

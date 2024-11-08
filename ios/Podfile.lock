@@ -1959,7 +1959,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (4.0.0-beta.14):
+  - RNScreens (4.0.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2379,11 +2379,11 @@ SPEC CHECKSUMS:
   RNDateTimePicker: b6a9b35a785ecbe12b4e7d6de5439d0aa4614146
   RNGestureHandler: 511250b190a284388f9dd0d2e56c1df76f14cfb8
   RNReanimated: 3e6072b3d49d4fc687b8f1ba3022f0fdc0b43969
-  RNScreens: 6b988457305ab134e9da6f444dd20728f6f447e8
+  RNScreens: de948b09c9a30f3ea52f9840dd6f8ce92b4e33d3
   RNVectorIcons: 8b5bb0fa61d54cd2020af4f24a51841ce365c7e9
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 1d66db49f38fd9e576a1d7c3b081e46ab4c28b9e
 
-PODFILE CHECKSUM: a77f9afc86751cefbfe19e432551dcf9c66c0f73
+PODFILE CHECKSUM: 68e936784ceaf5d269761bbba2dd9ea9ffc314a7
 
 COCOAPODS: 1.15.2
