@@ -1,8 +1,16 @@
-import languageDetector from '@os-team/i18next-react-native-language-detector';
-import i18n from 'i18next';
+/* eslint-disable @typescript-eslint/no-empty-function */
+import i18n, { LanguageDetectorModule } from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import { getLocales } from 'react-native-localize';
 
 import resources from '@/locales';
+
+const languageDetector: LanguageDetectorModule = {
+  type: 'languageDetector',
+  init: () => {},
+  detect: () => getLocales()?.[0]?.languageCode,
+  cacheUserLanguage: () => {},
+};
 
 i18n.use(initReactI18next).use(languageDetector).init({
   resources,

@@ -72,6 +72,17 @@ const Home = () => {
           {t('home:links.openIssue')}
         </ButtonIcon>
       </VStack>
+
+      <Box
+        h={100}
+        w={100}
+        bg="white"
+        m="md"
+        borderRadius="sm"
+        boxShadow="10 10 0 0 blue"
+        justifyContent="center"
+        alignItems="center"
+      />
     </Stack>
   );
 };
