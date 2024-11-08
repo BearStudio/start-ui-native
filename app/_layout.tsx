@@ -18,8 +18,6 @@ import theme from '@/theme';
 export default function RootLayout() {
   useProtectedRoute();
 
-  console.log({ NativeModules });
-
   configureReanimatedLogger({
     level: ReanimatedLogLevel.warn,
     strict: false,
