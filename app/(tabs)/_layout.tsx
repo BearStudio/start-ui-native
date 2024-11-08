@@ -6,6 +6,7 @@ const HomeTabs = () => {
   const { t } = useTranslation();
   return (
     <Tabs
+      initialRouteName="home"
       screens={[
         {
           route: 'home',

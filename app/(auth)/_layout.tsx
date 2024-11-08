@@ -6,6 +6,7 @@ const AuthStack = () => {
   const { t } = useTranslation();
   return (
     <Stack
+      initialRouteName="onboarding"
       screens={[
         {
           route: 'onboarding',

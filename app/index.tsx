@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect } from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { SplashScreen } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar, View } from 'react-native';
 import { ThemeContext } from 'react-native-ficus-ui';
 

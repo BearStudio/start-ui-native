@@ -90,6 +90,7 @@ export const ConfirmationModal: FC<
           bg={colorModeValue('white', getThemeColor('gray.800'))}
         />
       )}
+      h="100%"
       {...rest}
     >
       <Flex p="xl" pt="md" justifyContent="space-between">

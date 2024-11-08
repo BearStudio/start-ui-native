@@ -11,7 +11,10 @@ export type FieldInputProps<FormattedValue = string> = FieldProps<
   string,
   FormattedValue
 > &
-  Omit<FormGroupProps, 'id'> & { componentProps?: TextInputProps };
+  Omit<FormGroupProps, 'id'> & {
+    componentProps?: TextInputProps;
+    InputComponent?: React.ElementType;
+  };
 
 export const FieldInput = React.forwardRef(
   <FormattedValue = string,>(
@@ -46,6 +49,8 @@ export const FieldInput = React.forwardRef(
 
     const { colorModeValue } = useDarkMode();
 
+    const InputComponentObj = props.InputComponent || Input;
+
     return (
       <FormGroup
         id={id}
@@ -54,7 +59,7 @@ export const FieldInput = React.forwardRef(
         label={label}
         {...rest}
       >
-        <Input
+        <InputComponentObj
           ref={ref}
           id={id}
           value={value ?? ''}

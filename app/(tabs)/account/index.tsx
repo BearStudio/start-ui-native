@@ -17,6 +17,7 @@ import { ButtonIcon } from '@/components/ButtonIcon';
 import { CardStatus } from '@/components/CardStatus';
 import { ConfirmationCodeModal } from '@/components/ConfirmationCodeModal';
 import { ConfirmationModal } from '@/components/ConfirmationModal';
+import { DraggableModalInput } from '@/components/DraggableModalInput';
 import { FieldInput } from '@/components/FieldInput';
 import { SectionTitle } from '@/components/SectionTitle';
 import { Container } from '@/layout/Container';
@@ -192,7 +193,7 @@ const Account = () => {
                     name="email"
                     label={t('account:sections.email.input.label')}
                     required={t('account:sections.email.input.required')}
-                    defaultValue={account.email}
+                    defaultValue={account.email as string}
                     validations={[
                       {
                         handler: isEmail(),
@@ -360,6 +361,7 @@ const Account = () => {
                   ),
                 },
               ]}
+              InputComponent={DraggableModalInput}
             />
           </Stack>
         </Formiz>

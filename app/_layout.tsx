@@ -3,7 +3,12 @@ import React from 'react';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { Slot } from 'expo-router';
 import { I18nextProvider } from 'react-i18next';
+import { NativeModules } from 'react-native';
 import { ThemeProvider } from 'react-native-ficus-ui';
+import {
+  ReanimatedLogLevel,
+  configureReanimatedLogger,
+} from 'react-native-reanimated';
 
 import { queryClient } from '@/api/query-client';
 import i18n from '@/lib/i18n';
@@ -12,6 +17,13 @@ import theme from '@/theme';
 
 export default function RootLayout() {
   useProtectedRoute();
+
+  console.log({ NativeModules });
+
+  configureReanimatedLogger({
+    level: ReanimatedLogLevel.warn,
+    strict: false,
+  });
 
   return (
     <QueryClientProvider client={queryClient}>
