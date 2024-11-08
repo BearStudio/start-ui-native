@@ -59,7 +59,7 @@ export const ConfirmationModal: FC<
   onConfirm,
   onCancel,
   children,
-  snapPoints = ['40%'],
+  h = 300,
   ...rest
 }) => {
   const { colorModeValue, getThemeColor } = useDarkMode();
@@ -67,7 +67,6 @@ export const ConfirmationModal: FC<
 
   return (
     <DraggableModal
-      snapPoints={snapPoints}
       onClose={onCancel}
       bg={colorModeValue('white', getThemeColor('gray.800'))}
       handleComponent={() => (
@@ -90,6 +89,8 @@ export const ConfirmationModal: FC<
           bg={colorModeValue('white', getThemeColor('gray.800'))}
         />
       )}
+      h={h}
+      android_keyboardInputMode="adjustResize"
       {...rest}
     >
       <Flex p="xl" pt="md" justifyContent="space-between">

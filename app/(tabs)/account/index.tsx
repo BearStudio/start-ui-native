@@ -17,6 +17,7 @@ import { ButtonIcon } from '@/components/ButtonIcon';
 import { CardStatus } from '@/components/CardStatus';
 import { ConfirmationCodeModal } from '@/components/ConfirmationCodeModal';
 import { ConfirmationModal } from '@/components/ConfirmationModal';
+import { DraggableModalInput } from '@/components/DraggableModalInput';
 import { FieldInput } from '@/components/FieldInput';
 import { SectionTitle } from '@/components/SectionTitle';
 import { Container } from '@/layout/Container';
@@ -192,7 +193,7 @@ const Account = () => {
                     name="email"
                     label={t('account:sections.email.input.label')}
                     required={t('account:sections.email.input.required')}
-                    defaultValue={account.email}
+                    defaultValue={account.email as string}
                     validations={[
                       {
                         handler: isEmail(),
@@ -238,6 +239,7 @@ const Account = () => {
                         bg={colorModeValue('white', 'gray.700')}
                         borderWidth={1}
                         borderColor={colorModeValue('gray.200', 'gray.600')}
+                        full
                       >
                         {t('commons:actions.cancel')}
                       </Button>
@@ -310,7 +312,7 @@ const Account = () => {
         onConfirm={logout}
         onCancel={logoutModal.onClose}
         isOpen={logoutModal.isOpen}
-        snapPoints={['30%']}
+        h={250}
       />
 
       <ConfirmationModal
@@ -324,7 +326,7 @@ const Account = () => {
         onConfirm={() => deleteAccountForm.submit()}
         onCancel={deleteAccountModal.onClose}
         isOpen={deleteAccountModal.isOpen}
-        snapPoints={['45%']}
+        h={450}
       >
         <Formiz connect={deleteAccountForm}>
           <Stack spacing="lg">
@@ -360,6 +362,7 @@ const Account = () => {
                   ),
                 },
               ]}
+              InputComponent={DraggableModalInput}
             />
           </Stack>
         </Formiz>

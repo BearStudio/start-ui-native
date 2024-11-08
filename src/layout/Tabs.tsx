@@ -33,7 +33,6 @@ export const Tabs: FC<TabsProps> = ({
             getThemeColor('gray.200'),
             getThemeColor('gray.900')
           ),
-          paddingTop: '1%',
         },
       }}
     >

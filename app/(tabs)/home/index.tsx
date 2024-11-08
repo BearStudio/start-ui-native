@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Box, Stack, Text, VStack } from 'react-native-ficus-ui';
+import { Box, Center, Stack, Text, VStack } from 'react-native-ficus-ui';
 
 import { ButtonIcon } from '@/components/ButtonIcon';
 import { useDarkMode } from '@/theme/useDarkMode';
@@ -9,6 +9,7 @@ const Home = () => {
   const router = useRouter();
   const { t } = useTranslation();
   const { colorModeValue, getThemeColor } = useDarkMode();
+
   return (
     <Stack p={20} h="100%" spacing={12}>
       <Text
@@ -72,6 +73,31 @@ const Home = () => {
           {t('home:links.openIssue')}
         </ButtonIcon>
       </VStack>
+
+      <Center>
+        <Box
+          h={100}
+          w="90%"
+          bg={colorModeValue('white', 'gray.900')}
+          m="md"
+          borderRadius="sm"
+          boxShadow={`10 10 0 0 ${colorModeValue(
+            getThemeColor('brand.800'),
+            getThemeColor('brand.400')
+          )}`}
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Text
+            color={colorModeValue('brand.900', 'gray.50')}
+            fontSize="2xl"
+            fontWeight="bold"
+            textAlign="center"
+          >
+            Using React Native 0.76 with New Architecture ! 🎉
+          </Text>
+        </Box>
+      </Center>
     </Stack>
   );
 };

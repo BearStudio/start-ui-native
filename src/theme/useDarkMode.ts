@@ -18,12 +18,22 @@ export const useDarkMode = () => {
   const setColorMode = async (colorMode: 'dark' | 'light') => {
     setTheme(ficusThemes[colorMode]);
     StatusBar.setBarStyle(`${colorMode}-content`);
+    StatusBar.setBackgroundColor(
+      colorMode === 'dark'
+        ? getThemeColor('gray.800') || ''
+        : getThemeColor('gray.100') || ''
+    );
     await AsyncStorage.setItem(THEME_KEY, colorMode);
   };
 
   const toggleColorMode = async () => {
     const newTheme = theme.name === 'dark' ? 'light' : 'dark';
     StatusBar.setBarStyle(`${theme.name as 'dark' | 'light'}-content`);
+    StatusBar.setBackgroundColor(
+      theme.name === 'light'
+        ? getThemeColor('gray.800') || ''
+        : getThemeColor('gray.100') || ''
+    );
     setTheme(ficusThemes[newTheme]);
     await AsyncStorage.setItem(THEME_KEY, newTheme);
   };

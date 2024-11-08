@@ -1,11 +1,7 @@
 import { useLayoutEffect, useMemo, useRef } from 'react';
 
-import {
-  SplashScreen,
-  useRootNavigationState,
-  useRouter,
-  useSegments,
-} from 'expo-router';
+import { useRootNavigationState, useRouter, useSegments } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
 import { useShallow } from 'zustand/react/shallow';
 
 import useAuthStore from '@/modules/auth/auth.store';
@@ -27,22 +23,24 @@ const useProtectedRoute = () => {
     if (!navigationKey || !isHydrated) {
       return;
     }
-    SplashScreen.hideAsync();
+    setTimeout(() => {
+      SplashScreen.hideAsync();
 
-    if (process.env.STORYBOOK_ENABLED === 'true') {
-      router.replace('/storybook');
-      currentRouteRef.current !== 'storybook';
-    } else if (
-      !isAuthentificated &&
-      !inAuthGroup &&
-      currentRouteRef.current !== 'auth'
-    ) {
-      router.replace('/onboarding');
-      currentRouteRef.current = 'auth';
-    } else if (isAuthentificated && currentRouteRef.current !== 'tabs') {
-      router.replace('/(tabs)/home');
-      currentRouteRef.current = 'tabs';
-    }
+      if (process.env.STORYBOOK_ENABLED === 'true') {
+        router.replace('/storybook');
+        currentRouteRef.current !== 'storybook';
+      } else if (
+        !isAuthentificated &&
+        !inAuthGroup &&
+        currentRouteRef.current !== 'auth'
+      ) {
+        router.replace('/onboarding');
+        currentRouteRef.current = 'auth';
+      } else if (isAuthentificated && currentRouteRef.current !== 'tabs') {
+        router.replace('/(tabs)/home');
+        currentRouteRef.current = 'tabs';
+      }
+    }, 100);
   }, [isAuthentificated, segments, navigationKey, isHydrated]);
 };
 
