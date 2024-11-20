@@ -1,19 +1,12 @@
-import { Cat, Folder, Home, Rabbit, Turtle } from 'lucide-react-native';
+import { Cat, Rabbit, Turtle } from 'lucide-react-native';
 import { useTheme } from 'react-native-ficus-ui';
 
 import { Tabs } from '@/layout/Tabs';
-import Animated from 'react-native-reanimated';
 
 const HomeTabs = () => {
   const {
     theme: { colors },
   } = useTheme();
-  Animated.View
-  Animated.Text
-  Animated.FlatList
-  Animated.Image
-  Animated.ScrollView
-  Animated.createAnimatedComponent
   return (
     <Tabs
       screens={[
