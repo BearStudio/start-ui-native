@@ -1,8 +1,7 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 import { Tabs as RouterTabs } from 'expo-router';
 
-import { FeatherIcons, TabBarIcon } from '@/components/TabBarIcon';
 import { useDarkMode } from '@/theme/useDarkMode';
 
 type TabsProps = {
@@ -10,7 +9,7 @@ type TabsProps = {
   screens: Array<{
     route: string;
     title?: string;
-    icon?: FeatherIcons;
+    icon?: ReactNode;
     options?: ExplicitAny; // TODO: update
   }>;
 };
@@ -51,7 +50,7 @@ export const Tabs: FC<TabsProps> = ({
               getThemeColor('gray.500'),
               getThemeColor('gray.400')
             ),
-            tabBarIcon: screen.icon ? TabBarIcon(screen.icon) : undefined,
+            tabBarIcon: screen.icon ? () => screen.icon : undefined,
             ...screen.options,
           }}
         />

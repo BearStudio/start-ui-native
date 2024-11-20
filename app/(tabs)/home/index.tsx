@@ -1,74 +1,138 @@
-import { useRouter } from 'expo-router';
-import { Box, Stack, Text, VStack } from 'react-native-ficus-ui';
+import React, { useState } from 'react';
 
-import { ButtonIcon } from '@/components/ButtonIcon';
-import { useDarkMode } from '@/theme/useDarkMode';
+import { Image, TouchableWithoutFeedback } from 'react-native';
+import {
+  Stack,
+  Text,
+  VStack,
+} from 'react-native-ficus-ui';
+import Animated, {
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
+// Composant 1 : Pokémon qui se transforme lors du clic
+const PokemonTransformOnClick = () => {
+  const [pokemonImage, setPokemonImage] = useState(
+    'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png' // Bulbizarre
+  );
+  const fadeOpacity = useSharedValue(1); // Valeur d'opacité animée
+
+  const handlePress = () => {
+    // Animer la disparition avec withTiming
+    fadeOpacity.value = withTiming(0, { duration: 500 }, (isFinished) => {
+      if (isFinished) {
+        // Utiliser runOnJS pour appeler setPokemonImage
+        runOnJS(changePokemonImage)();
+        // Réanimer l'apparition
+        fadeOpacity.value = withTiming(1, { duration: 500 });
+      }
+    });
+  };
+
+  // Fonction pour changer l'image du Pokémon
+  const changePokemonImage = () => {
+    if (pokemonImage.includes('001.png')) {
+      setPokemonImage(
+        'https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png'
+      );
+    } else if (pokemonImage.includes('002.png')) {
+      setPokemonImage(
+        'https://assets.pokemon.com/assets/cms2/img/pokedex/full/003.png'
+      );
+    } else {
+      setPokemonImage(
+        'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png'
+      );
+    }
+  };
+
+  // Style animé pour l'opacité
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: fadeOpacity.value,
+  }));
+
+  return (
+    <TouchableWithoutFeedback onPress={handlePress}>
+      <Animated.View style={[animatedStyle, { width: 100, height: 100 }]}>
+        <Image
+          source={{ uri: pokemonImage }}
+          style={{ width: 100, height: 100 }}
+        />
+      </Animated.View>
+    </TouchableWithoutFeedback>
+  );
+};
+
+// Composant 2 : Pokémon qui bouge lors du clic
+const PokemonMoveOnClick = () => {
+  const translation = useSharedValue(0);
+
+  const handlePress = () => {
+    translation.value = withTiming(translation.value === 0 ? 200 : 0, {
+      duration: 500,
+    });
+  };
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: translation.value }],
+    };
+  });
+
+  return (
+    <TouchableWithoutFeedback onPress={handlePress}>
+      <Animated.View style={animatedStyle}>
+        <Image
+          source={{
+            uri: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png',
+          }} // Salamèche
+          style={{ width: 100, height: 100 }}
+        />
+      </Animated.View>
+    </TouchableWithoutFeedback>
+  );
+};
+// Composant 3 : Pokémon qui tourne lors du clic
+const PokemonRotateOnClick = () => {
+  const rotation = useSharedValue(0);
+
+  const handlePress = () => {
+    rotation.value = withTiming(rotation.value + 360, { duration: 1000 });
+  };
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ rotate: `${rotation.value}deg` }],
+    };
+  });
+
+  return (
+    <TouchableWithoutFeedback onPress={handlePress}>
+      <Animated.View style={animatedStyle}>
+        <Image
+          source={{
+            uri: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png',
+          }} // Carapuce
+          style={{ width: 100, height: 100 }}
+        />
+      </Animated.View>
+    </TouchableWithoutFeedback>
+  );
+};
 const Home = () => {
-  const router = useRouter();
-  const { colorModeValue, getThemeColor } = useDarkMode();
   return (
     <Stack p={20} h="100%" spacing={12}>
-      <Text
-        fontSize="2xl"
-        fontWeight="bold"
-        color={colorModeValue('black', 'gray.50')}
-      >
-        Welcome to 🚀 Start UI [native]
-      </Text>
-      <Box>
-        <Text fontSize="lg" color={colorModeValue('black', 'gray.50')}>
-          An opinionated UI starter with Expo, Ficus UI, Zodios & Formiz
-        </Text>
-        <Text fontSize="lg" mt="md" color={colorModeValue('black', 'gray.50')}>
-          - From the{' '}
-          <Text fontWeight="bold" color={colorModeValue('black', 'gray.50')}>
-            BearStudio Team
-          </Text>
-        </Text>
-      </Box>
+      {/* Ajout des composants Pokémon */}
       <VStack spacing="lg">
-        <ButtonIcon
-          icon="github"
-          iconFamily="Feather"
-          onPress={() =>
-            router.replace('https://github.com/BearStudio/start-ui-native')
-          }
-          iconColor={colorModeValue('gray.500', 'gray.300')}
-          color={colorModeValue(
-            getThemeColor('gray.500'),
-            getThemeColor('gray.200')
-          )}
-          bg={colorModeValue('white', 'gray.700')}
-          colorScheme="white"
-          borderWidth={1}
-          borderColor={colorModeValue('gray.200', 'gray.600')}
-          full
-        >
-          Github Repository
-        </ButtonIcon>
-
-        <ButtonIcon
-          icon="alert-circle"
-          iconFamily="Feather"
-          onPress={() =>
-            router.replace(
-              'https://github.com/BearStudio/start-ui-native/issues/new'
-            )
-          }
-          iconColor={colorModeValue('gray.500', 'gray.300')}
-          color={colorModeValue(
-            getThemeColor('gray.500'),
-            getThemeColor('gray.200')
-          )}
-          bg={colorModeValue('white', 'gray.700')}
-          colorScheme="white"
-          borderWidth={1}
-          borderColor={colorModeValue('gray.200', 'gray.600')}
-          full
-        >
-          Open issue
-        </ButtonIcon>
+        <Text fontSize="xl" fontWeight="bold">
+          Interagissez avec les Pokémon
+        </Text>
+        <PokemonTransformOnClick />
+        <PokemonMoveOnClick />
+        <PokemonRotateOnClick />
       </VStack>
     </Stack>
   );

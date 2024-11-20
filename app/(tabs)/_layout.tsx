@@ -1,25 +1,38 @@
+import { Cat, Folder, Home, Rabbit, Turtle } from 'lucide-react-native';
+import { useTheme } from 'react-native-ficus-ui';
+
 import { Tabs } from '@/layout/Tabs';
+import Animated from 'react-native-reanimated';
 
 const HomeTabs = () => {
+  const {
+    theme: { colors },
+  } = useTheme();
+  Animated.View
+  Animated.Text
+  Animated.FlatList
+  Animated.Image
+  Animated.ScrollView
+  Animated.createAnimatedComponent
   return (
     <Tabs
       screens={[
         {
           route: 'home',
-          title: 'Home',
-          icon: 'home',
+          title: 'Animations',
+          icon: <Rabbit color={colors?.gray[600]} />,
           options: { headerShown: false },
         },
         {
-          route: 'repositories',
-          title: 'Repositories',
-          icon: 'folder',
+          route: 'flat-list-row-animation',
+          title: 'Flat list row animation',
+          icon: <Turtle color={colors?.gray[600]} />,
           options: { headerShown: false },
         },
         {
-          route: 'account',
-          title: 'Account',
-          icon: 'user',
+          route: 'flat-list-animation',
+          title: 'Flat list animation',
+          icon: <Cat color={colors?.gray[600]} />,
           options: { headerShown: false },
         },
       ]}
