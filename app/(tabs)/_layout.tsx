@@ -1,4 +1,4 @@
-import { Cat, Rabbit, Turtle } from 'lucide-react-native';
+import { Cat, Dog, Rabbit, Turtle } from 'lucide-react-native';
 import { useTheme } from 'react-native-ficus-ui';
 
 import { Tabs } from '@/layout/Tabs';
@@ -26,6 +26,12 @@ const HomeTabs = () => {
           route: 'flat-list-animation',
           title: 'Flat list animation',
           icon: <Cat color={colors?.gray[600]} />,
+          options: { headerShown: false },
+        },
+        {
+          route: 'random',
+          title: 'Random animation',
+          icon: <Dog color={colors?.gray[600]} />,
           options: { headerShown: false },
         },
       ]}

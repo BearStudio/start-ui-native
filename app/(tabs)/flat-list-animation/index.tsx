@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react';
 
-import { FlatList } from 'react-native';
 import { Box, Text } from 'react-native-ficus-ui';
 import Animated, { LinearTransition } from 'react-native-reanimated';
 
@@ -10,7 +9,7 @@ import {
 } from '@/constants/pokemons';
 import { Container } from '@/layout/Container';
 import { PokemonItem } from '@/modules/pokemons/PokemonItem';
-import { ITEMS_GAP, ITEM_SIZE } from '@/modules/pokemons/PokemonRowItem';
+import { ITEMS_GAP } from '@/modules/pokemons/PokemonRowItem';
 
 const FlatListAnimation: FC = () => {
   const [listAPokemons, setListAPokemons] = useState(initialListAPokemons);
