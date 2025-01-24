@@ -13,11 +13,8 @@ importers:
   .:
     dependencies:
       '@babel/preset-env':
-        specifier: 7.22.5
-        version: 7.22.5(@babel/core@7.25.2)
-      '@config-plugins/react-native-ble-plx':
-        specifier: 6.0.0
-        version: 6.0.0(expo@52.0.0(@babel/core@7.25.2)(@babel/preset-env@7.22.5(@babel/core@7.25.2))(@expo/metro-runtime@4.0.0(react-native@0.76.1(@babel/core@7.25.2)(@babel/preset-env@7.22.5(@babel/core@7.25.2))(@react-native-community/cli-server-api@15.0.1)(@types/react@18.2.79)(react@18.3.1)))(react-native@0.76.1(@babel/core@7.25.2)(@babel/preset-env@7.22.5(@babel/core@7.25.2))(@react-native-community/cli-server-api@15.0.1)(@types/react@18.2.79)(react@18.3.1))(react@18.3.1))
+        specifier: 7.22.20
+        version: 7.22.20(@babel/core@7.25.2)
       '@expo/vector-icons':
         specifier: 14.0.0
         version: 14.0.0
@@ -121,9 +118,6 @@ importers:
       react-native-animatable:
         specifier: 1.3.3
         version: 1.3.3
-      react-native-ble-plx:
-        specifier: 2.0.3
-        version: 2.0.3
       react-native-confirmation-code-field:
         specifier: 7.3.2
         version: 7.3.2(react-native@0.76.1(@babel/core@7.25.2)(@babel/preset-env@7.22.5(@babel/core@7.25.2))(@react-native-community/cli-server-api@15.0.1)(@types/react@18.2.79)(react@18.3.1))(react@18.3.1)
@@ -1014,12 +1008,6 @@ packages:
 
   '@base2/pretty-print-object@1.0.1':
     resolution: {integrity: sha512-4iri8i1AqYHJE2DstZYkyEprg6Pq6sKx3xn5FpySk9sNhH7qN2LLlHJCfDTZRILNwQNPD7mATWM0TBui7uC1pA==}
-
-  '@config-plugins/react-native-ble-plx@6.0.0':
-    resolution: {integrity: sha512-Uyag6VV2wQyntem6VDui9VrGYjRcoIfgIUjLm0/P0XBCJivSibA8hvO63aPSmBPOX0j9fLPyOe+TjRdYawgSqQ==}
-    deprecated: react-native-ble-plx@>=3.1.1 now ships with an Expo config plugin.
-    peerDependencies:
-      expo: ^48
 
   '@egjs/hammerjs@2.0.17':
     resolution: {integrity: sha512-XQsZgjm2EcVUiZQf11UBJQfmZeEmOW8DpI1gsFeln6w0ae0ii4dMQEQ0kjl6DspdWX1aGY1/loyXnP0JS06e/A==}
@@ -5484,9 +5472,6 @@ packages:
   react-native-animatable@1.3.3:
     resolution: {integrity: sha512-2ckIxZQAsvWn25Ho+DK3d1mXIgj7tITkrS4pYDvx96WyOttSvzzFeQnM2od0+FUMzILbdHDsDEqZvnz1DYNQ1w==}
 
-  react-native-ble-plx@2.0.3:
-    resolution: {integrity: sha512-62LRDBPf/03K7sge+qq2ZuF8PWCGB782G+SBrpgNm5fA5Hs3FCY1ExTJZ1G0tB5ZhBPYEXcKRxPLuFegcDFrqA==}
-
   react-native-confirmation-code-field@7.3.2:
     resolution: {integrity: sha512-uuJKxR+pQrXSx8lmRpekA+Hlle/nkoQKppS8jH7ApqY00+c11nCJg9kuFM0++vdbXg1rKm2P6jPZoSEJK2EaKw==}
     peerDependencies:
@@ -7704,10 +7689,6 @@ snapshots:
       '@babel/helper-validator-identifier': 7.25.9
 
   '@base2/pretty-print-object@1.0.1': {}
-
-  '@config-plugins/react-native-ble-plx@6.0.0(expo@52.0.0(@babel/core@7.25.2)(@babel/preset-env@7.22.5(@babel/core@7.25.2))(@expo/metro-runtime@4.0.0(react-native@0.76.1(@babel/core@7.25.2)(@babel/preset-env@7.22.5(@babel/core@7.25.2))(@react-native-community/cli-server-api@15.0.1)(@types/react@18.2.79)(react@18.3.1)))(react-native@0.76.1(@babel/core@7.25.2)(@babel/preset-env@7.22.5(@babel/core@7.25.2))(@react-native-community/cli-server-api@15.0.1)(@types/react@18.2.79)(react@18.3.1))(react@18.3.1))':
-    dependencies:
-      expo: 52.0.0(@babel/core@7.25.2)(@babel/preset-env@7.22.5(@babel/core@7.25.2))(@expo/metro-runtime@4.0.0(react-native@0.76.1(@babel/core@7.25.2)(@babel/preset-env@7.22.5(@babel/core@7.25.2))(@react-native-community/cli-server-api@15.0.1)(@types/react@18.2.79)(react@18.3.1)))(react-native@0.76.1(@babel/core@7.25.2)(@babel/preset-env@7.22.5(@babel/core@7.25.2))(@react-native-community/cli-server-api@15.0.1)(@types/react@18.2.79)(react@18.3.1))(react@18.3.1)
 
   '@egjs/hammerjs@2.0.17':
     dependencies:
@@ -13316,17 +13297,15 @@ snapshots:
     dependencies:
       prop-types: 15.8.1
 
-  react-native-ble-plx@2.0.3: {}
-
-  react-native-confirmation-code-field@7.3.2(react-native@0.76.1(@babel/core@7.25.2)(@babel/preset-env@7.22.5(@babel/core@7.25.2))(@react-native-community/cli-server-api@15.0.1)(@types/react@18.2.79)(react@18.3.1))(react@18.3.1):
+  react-native-confirmation-code-field@7.3.2(react-native@0.76.6(@babel/core@7.25.2)(@babel/preset-env@7.22.20(@babel/core@7.25.2))(@react-native-community/cli-server-api@15.0.1)(@types/react@18.2.79)(react@18.3.1))(react@18.3.1):
     optionalDependencies:
       react: 18.3.1
-      react-native: 0.76.1(@babel/core@7.25.2)(@babel/preset-env@7.22.5(@babel/core@7.25.2))(@react-native-community/cli-server-api@15.0.1)(@types/react@18.2.79)(react@18.3.1)
+      react-native: 0.76.6(@babel/core@7.25.2)(@babel/preset-env@7.22.20(@babel/core@7.25.2))(@react-native-community/cli-server-api@15.0.1)(@types/react@18.2.79)(react@18.3.1)
 
-  react-native-confirmation-code-field@7.4.0(react-native@0.76.1(@babel/core@7.25.2)(@babel/preset-env@7.22.5(@babel/core@7.25.2))(@react-native-community/cli-server-api@15.0.1)(@types/react@18.2.79)(react@18.3.1))(react@18.3.1):
+  react-native-confirmation-code-field@7.4.0(react-native@0.76.6(@babel/core@7.25.2)(@babel/preset-env@7.22.20(@babel/core@7.25.2))(@react-native-community/cli-server-api@15.0.1)(@types/react@18.2.79)(react@18.3.1))(react@18.3.1):
     optionalDependencies:
       react: 18.3.1
-      react-native: 0.76.1(@babel/core@7.25.2)(@babel/preset-env@7.22.5(@babel/core@7.25.2))(@react-native-community/cli-server-api@15.0.1)(@types/react@18.2.79)(react@18.3.1)
+      react-native: 0.76.6(@babel/core@7.25.2)(@babel/preset-env@7.22.20(@babel/core@7.25.2))(@react-native-community/cli-server-api@15.0.1)(@types/react@18.2.79)(react@18.3.1)
 
   react-native-dotenv@3.4.8(@babel/runtime@7.25.0):
     dependencies:
