@@ -1,4 +1,7 @@
 {
+  "env": {
+    "es6": true
+  },
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "plugin:sonarjs/recommended"
@@ -22,5 +25,6 @@
         "import/no-anonymous-default-export": "off"
       }
     }
-  ]
+  ],
+  "ignorePatterns": ["node_modules/", "android/"]
 }

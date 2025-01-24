@@ -6,9 +6,7 @@ import resources from '@/locales';
 
 const languageDetector: LanguageDetectorModule = {
   type: 'languageDetector',
-  init: () => {},
   detect: () => getLocales()?.[0]?.languageCode ?? 'en',
-  cacheUserLanguage: () => {},
 };
 
 i18n.use(initReactI18next).use(languageDetector).init({
