@@ -64,6 +64,27 @@ pnpm android # Launch on your android device if detected, or an Android emulator
 pnpm ios     # Launch on your iOS device if detected, or an iOS emulator
 ```
 
+### Development
+
+```bash
+# Install dependencies and generate api client
+pnpm install
+
+# With Expo Go
+pnpm dev
+# * press s to swith to Expo Go
+# * scan the QR Code with your phone
+
+# With Android Emulator
+pnpm android # Launch on your android device if detected, or an Android emulator
+
+# With IOS Emulator
+pnpm ios     # Launch on your iOS device if detected, or an iOS emulator
+# If that doesn't work maybe try to:
+# * run pod install on ios folder
+# * run project from xcode (maybe you should select a team for the project)
+```
+
 ## Storybook Integration
 
 Start UI Native is equipped with Storybook, enhancing component development with an isolated and interactive environment. Storybook is essential for UI development, allowing you to build and test components independently from the app's main user interface.
@@ -92,3 +113,10 @@ Instead of a separate `stories` directory, we create stories alongside our compo
 > EAS Build is a hosted service for building app binaries for your Expo and React Native projects.
 
 [Follow the steps here to setup and install the eas cli](https://docs.expo.dev/build/setup/#prerequisites).
+
+
+### BLE / Bluetooth
+
+Bluetooth feature has been removed to simplify expo project setup.
+
+If you want to use this feature, you can find [an expo article](https://expo.dev/blog/how-to-build-a-bluetooth-low-energy-powered-expo-app) that explains how to add it, or you can check the deletion commit of the feature [here](https://github.com/BearStudio/start-ui-native/pull/111/commits/a8d437fff1065f1450113b71a4bd962868f8b4be)
