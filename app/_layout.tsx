@@ -48,6 +48,7 @@ export default function RootLayout() {
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
+
   useProtectedRoute();
 
   configureReanimatedLogger({
