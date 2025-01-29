@@ -22,6 +22,7 @@
     "*.{ts,tsx,js,jsx}": "pnpm lint:staged"
   },
   "dependencies": {
+    "@expo-google-fonts/inter": "0.2.3",
     "@expo/vector-icons": "14.0.4",
     "@formiz/core": "2.4.5",
     "@formiz/validations": "2.0.1",
@@ -72,6 +73,7 @@
     "@babel/core": "7.26.7",
     "@babel/preset-env": "7.26.7",
     "@babel/runtime": "7.26.7",
+    "@gorhom/bottom-sheet": "5.0.4",
     "@react-native-community/cli": "15.0.1",
     "@react-native-community/cli-platform-android": "15.0.1",
     "@react-native-community/cli-platform-ios": "15.0.1",
@@ -83,8 +85,6 @@
     "@storybook/addon-ondevice-actions": "8.5.2",
     "@storybook/addon-ondevice-controls": "8.5.2",
     "@storybook/react-native": "8.5.2",
-    "react-native-svg": "15.8.0",
-    "@gorhom/bottom-sheet": "5.0.4",
     "@trivago/prettier-plugin-sort-imports": "4.3.0",
     "@types/lodash": "4.17.14",
     "@types/react": "18.3.18",
@@ -96,6 +96,7 @@
     "lodash": "4.17.21",
     "openapi-zod-client": "1.13.2",
     "react-native-dotenv": "3.4.11",
+    "react-native-svg": "15.8.0",
     "tsx": "4.6.2",
     "typescript": "5.3.3"
   },

@@ -1,7 +1,6 @@
 import { useLayoutEffect, useMemo, useRef } from 'react';
 
 import { useRootNavigationState, useRouter, useSegments } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
 import { useShallow } from 'zustand/react/shallow';
 
 import useAuthStore from '@/modules/auth/auth.store';
@@ -24,8 +23,6 @@ const useProtectedRoute = () => {
       return;
     }
     setTimeout(() => {
-      SplashScreen.hideAsync();
-
       if (process.env.STORYBOOK_ENABLED === 'true') {
         router.replace('/storybook');
         currentRouteRef.current !== 'storybook';

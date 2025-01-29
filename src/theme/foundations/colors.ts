@@ -1,6 +1,8 @@
+import { ThemeType } from 'react-native-ficus-ui';
+
 import tailwindColors from './tailwindColors';
 
-export const colors = {
+export const colors: ThemeType['colors'] = {
   // Update me with other Tailwind colors or with https://smart-swatch.netlify.app/
   brand: tailwindColors.blue,
   gray: tailwindColors.blueGray,
