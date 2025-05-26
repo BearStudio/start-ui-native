@@ -56,7 +56,7 @@ export const ConfirmationCodeModal: FC<
                 form.submit();
               }
             }}
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+             
             // @ts-ignore
             pinInputProps={{
               InputComponent: BottomSheetTextInput,

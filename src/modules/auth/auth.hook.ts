@@ -1,26 +1,26 @@
 import { useLayoutEffect, useMemo, useRef } from 'react';
 
-import { useRootNavigationState, useRouter, useSegments } from 'expo-router';
+import { useRouter, useSegments } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useShallow } from 'zustand/react/shallow';
 
 import useAuthStore from '@/modules/auth/auth.store';
 
+export const unstable_settings = {
+  initialRouteName: '(auth)',
+};
+
 const useProtectedRoute = () => {
   const segments = useSegments();
-  const rootNavigationState = useRootNavigationState();
   const router = useRouter();
   const isAuthentificated = useAuthStore(useShallow((state) => !!state.token));
   const isHydrated = useAuthStore(useShallow((state) => state.isHydrated));
   const currentRouteRef = useRef<'auth' | 'tabs' | 'storybook' | null>(null);
-  const navigationKey = useMemo(() => {
-    return rootNavigationState?.key;
-  }, [rootNavigationState]);
 
   useLayoutEffect(() => {
     const inAuthGroup = segments[0] === '(auth)';
 
-    if (!navigationKey || !isHydrated) {
+    if (!isHydrated) {
       return;
     }
     setTimeout(() => {
@@ -41,7 +41,7 @@ const useProtectedRoute = () => {
         currentRouteRef.current = 'tabs';
       }
     }, 100);
-  }, [isAuthentificated, segments, navigationKey, isHydrated]);
+  }, [isAuthentificated, segments, isHydrated]);
 };
 
 export default useProtectedRoute;

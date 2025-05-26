@@ -94,7 +94,7 @@ const Home = () => {
             fontWeight="bold"
             textAlign="center"
           >
-            Using React Native 0.76 with New Architecture ! 🎉
+            Using React Native 0.79 with New Architecture ! 🎉
           </Text>
         </Box>
       </Center>
