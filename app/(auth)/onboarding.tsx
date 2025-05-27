@@ -1,12 +1,11 @@
+import logoBlack from '@assets/logo-black.png';
+import logoWhite from '@assets/logo-white.png';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'react-native';
 import { Button, Icon, IconButton, Stack, Text } from 'react-native-ficus-ui';
 
 import { useDarkMode } from '@/theme/useDarkMode';
-
-import logoBlack from '../../assets/logo-black.png';
-import logoWhite from '../../assets/logo-white.png';
 
 const Onboarding = () => {
   const router = useRouter();
