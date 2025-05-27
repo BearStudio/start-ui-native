@@ -7,14 +7,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.bearstudio.startuinative"
@@ -28,6 +21,15 @@
     },
     "scheme": "start-ui-native",
     "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/logo-black-vertical.png",
+          "backgroundColor": "#FFFFFF",
+          "resizeMode": "contain",
+          "imageWidth": 200
+        }
+      ],
       [
         "expo-build-properties",
         {
