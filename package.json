@@ -90,7 +90,6 @@
     "@typescript-eslint/parser": "8.32.1",
     "dotenv": "16.3.1",
     "eslint": "9.26.0",
-    "eslint-config-expo": "~9.2.0",
     "eslint-plugin-sonarjs": "3.0.2",
     "lodash": "4.17.21",
     "openapi-zod-client": "1.13.2",

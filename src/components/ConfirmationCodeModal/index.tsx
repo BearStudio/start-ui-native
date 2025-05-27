@@ -57,7 +57,7 @@ export const ConfirmationCodeModal: FC<
               }
             }}
              
-            // @ts-ignore
+            // @ts-expect-error because BottomSheetTextInput is not a standard TextInput
             pinInputProps={{
               InputComponent: BottomSheetTextInput,
             }}

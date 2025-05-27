@@ -5,15 +5,13 @@ import { Button, Icon, IconButton, Stack, Text } from 'react-native-ficus-ui';
 
 import { useDarkMode } from '@/theme/useDarkMode';
 
+import logoBlack from '../../assets/logo-black.png';
+import logoWhite from '../../assets/logo-white.png';
+
 const Onboarding = () => {
   const router = useRouter();
   const { t } = useTranslation();
   const { colorModeValue, toggleColorMode, colorMode } = useDarkMode();
-
-   
-  const logoWhite = require('../../assets/logo-white.png');
-   
-  const logoBlack = require('../../assets/logo-black.png');
 
   const handleOpenLogin = () => {
     router.push('/login');
