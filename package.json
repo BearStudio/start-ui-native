@@ -15,7 +15,8 @@
     "lint:staged": "tsc --noEmit && eslint --cache --fix",
     "pretty": "prettier -w .",
     "storybook-generate": "sb-rn-get-stories",
-    "storybook-run": "STORYBOOK_ENABLED=true expo start -c"
+    "storybook-run": "STORYBOOK_ENABLED=true expo start -c",
+    "bump": "node ./scripts/bump-build.ts && npx expo prebuild"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json}": "prettier --write",
