@@ -26,6 +26,10 @@
         {
           "image": "./assets/logo-black-vertical.png",
           "backgroundColor": "#FFFFFF",
+          "dark": {
+            "image": "./assets/logo-white-vertical.png",
+            "backgroundColor": "#000000"
+          },
           "resizeMode": "contain",
           "imageWidth": 200
         }
