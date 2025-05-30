@@ -9,6 +9,7 @@ const languageDetector: LanguageDetectorModule = {
   detect: () => getLocales()?.[0]?.languageCode ?? 'en',
 };
 
+// eslint-disable-next-line import/no-named-as-default-member
 i18n.use(initReactI18next).use(languageDetector).init({
   resources,
   compatibilityJSON: 'v3',

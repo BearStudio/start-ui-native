@@ -1,7 +1,7 @@
 import { ApiOf, ZodiosPlugin } from '@zodios/core';
 import { pluginToken } from '@zodios/plugins';
 import { ZodiosHooks } from '@zodios/react';
-import axios from 'axios';
+import { isAxiosError } from 'axios';
 
 import { api } from '@/api/generated-api';
 import useAuthStore from '@/modules/auth/auth.store';
@@ -9,7 +9,7 @@ import useAuthStore from '@/modules/auth/auth.store';
 const logoutUserPlugin: ZodiosPlugin = {
   error: async (_, { method, url }, error) => {
     if (
-      axios.isAxiosError(error) &&
+      isAxiosError(error) &&
       error.response?.status === 401 &&
       !(method === 'post' && url === '/accounts/update-email')
     ) {

@@ -25,7 +25,7 @@ const Index = () => {
       StatusBar.setBarStyle('dark-content');
       StatusBar.setBackgroundColor(getThemeColor('gray.100') || '');
     }
-  }, []);
+  }, [getThemeColor, setTheme]);
 
   useEffect(() => {
     loadTheme();

@@ -1,7 +1,7 @@
 import React, { ForwardedRef, useEffect, useState } from 'react';
 
 import { FieldProps, useField } from '@formiz/core';
-import { TextInput, TextInputProps , View } from 'react-native';
+import { TextInput, TextInputProps, View } from 'react-native';
 import { CodeField, Cursor } from 'react-native-confirmation-code-field';
 import { Box, Center, Text } from 'react-native-ficus-ui';
 
