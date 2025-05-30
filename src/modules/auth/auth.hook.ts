@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 
 import { useRouter, useSegments } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -24,11 +24,9 @@ const useProtectedRoute = () => {
       return;
     }
     setTimeout(() => {
-      SplashScreen.hideAsync();
-
       if (process.env.STORYBOOK_ENABLED === 'true') {
         router.replace('/storybook');
-        currentRouteRef.current !== 'storybook';
+        currentRouteRef.current = 'storybook';
       } else if (
         !isAuthentificated &&
         !inAuthGroup &&
@@ -40,8 +38,10 @@ const useProtectedRoute = () => {
         router.replace('/(tabs)/home');
         currentRouteRef.current = 'tabs';
       }
+
+      SplashScreen.hideAsync();
     }, 100);
-  }, [isAuthentificated, segments, isHydrated]);
+  }, [isAuthentificated, segments, isHydrated, router]);
 };
 
 export default useProtectedRoute;

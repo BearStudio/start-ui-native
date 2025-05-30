@@ -1,17 +1,25 @@
-.cache
-.next
-.db
-.history
-out
-node_modules
-package.json
-package-lock.json
-yarn.lock
-public
-*.md
-*.mdx
-*.hbs
-.env*
-android
-ios
-.expo
+# Ignore node_modules
+node_modules/
+
+# Ignore build outputs
+android/
+ios/
+web-build/
+dist/
+build/
+
+# Ignore Expo specific files
+.expo/
+.expo-shared/
+
+# Ignore system files
+.DS_Store
+
+# Ignore logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore environment files
+.env
+.env.*

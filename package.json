@@ -15,7 +15,8 @@
     "lint:staged": "tsc --noEmit && eslint --cache --fix",
     "pretty": "prettier -w .",
     "storybook-generate": "sb-rn-get-stories",
-    "storybook-run": "STORYBOOK_ENABLED=true expo start -c"
+    "storybook-run": "STORYBOOK_ENABLED=true expo start -c",
+    "bump": "node ./scripts/bump-build.ts && npx expo prebuild"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json}": "prettier --write",
@@ -83,6 +84,9 @@
     "@storybook/addon-ondevice-actions": "8.5.2",
     "@storybook/addon-ondevice-controls": "8.5.2",
     "@storybook/react-native": "8.5.2",
+    "eslint-config-expo": "9.2.0",
+    "eslint-plugin-prettier": "5.4.1",
+    "eslint-config-prettier": "10.1.5",
     "@trivago/prettier-plugin-sort-imports": "4.3.0",
     "@types/lodash": "4.17.14",
     "@types/react": "19.0.14",
