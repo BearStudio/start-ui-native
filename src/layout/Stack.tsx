@@ -7,12 +7,12 @@ import { useDarkMode } from '@/theme/useDarkMode';
 
 type StackProps = {
   initialRouteName?: string;
-  screens: Array<{
+  screens: {
     route: string;
     title?: string;
     icon?: FeatherIcons;
     options?: ExplicitAny; // TODO: update
-  }>;
+  }[];
 };
 
 export const Stack: FC<StackProps> = ({

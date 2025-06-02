@@ -1,8 +1,7 @@
 import React, { ComponentType, ForwardedRef, useEffect, useState } from 'react';
 
 import { FieldProps, useField } from '@formiz/core';
-import { TextInput } from 'react-native';
-import { View } from 'react-native';
+import { TextInput, View } from 'react-native';
 import { Cursor } from 'react-native-confirmation-code-field';
 import {
   Box,

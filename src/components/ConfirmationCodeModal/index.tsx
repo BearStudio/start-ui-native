@@ -56,8 +56,7 @@ export const ConfirmationCodeModal: FC<
                 form.submit();
               }
             }}
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
+            // @ts-expect-error because BottomSheetTextInput is not a standard TextInput
             pinInputProps={{
               InputComponent: BottomSheetTextInput,
             }}

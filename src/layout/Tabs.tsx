@@ -7,12 +7,12 @@ import { useDarkMode } from '@/theme/useDarkMode';
 
 type TabsProps = {
   initialRouteName?: string;
-  screens: Array<{
+  screens: {
     route: string;
     title?: string;
     icon?: FeatherIcons;
     options?: ExplicitAny; // TODO: update
-  }>;
+  }[];
 };
 
 export const Tabs: FC<TabsProps> = ({

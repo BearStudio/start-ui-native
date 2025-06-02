@@ -1,6 +1,6 @@
-const path = require('path'); // eslint-disable-line @typescript-eslint/no-var-requires
-const { getDefaultConfig } = require('expo/metro-config'); // eslint-disable-line @typescript-eslint/no-var-requires
-const withStorybook = require('@storybook/react-native/metro/withStorybook'); // eslint-disable-line @typescript-eslint/no-var-requires
+const path = require('path');
+const { getDefaultConfig } = require('expo/metro-config');
+const withStorybook = require('@storybook/react-native/metro/withStorybook');
 
 /** @type {import('expo/metro-config').MetroConfig} */
 const config = getDefaultConfig(__dirname);

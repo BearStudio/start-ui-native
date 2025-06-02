@@ -1,3 +1,5 @@
+import logoBlack from '@assets/logo-black.png';
+import logoWhite from '@assets/logo-white.png';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'react-native';
@@ -9,11 +11,6 @@ const Onboarding = () => {
   const router = useRouter();
   const { t } = useTranslation();
   const { colorModeValue, toggleColorMode, colorMode } = useDarkMode();
-
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const logoWhite = require('../../assets/logo-white.png');
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const logoBlack = require('../../assets/logo-black.png');
 
   const handleOpenLogin = () => {
     router.push('/login');
