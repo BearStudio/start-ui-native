@@ -23,21 +23,20 @@ import { SectionTitle } from '@/components/SectionTitle';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
 import { LoadingScreen } from '@/layout/LoadingScreen';
+import { authClient } from '@/lib/auth-client';
 import {
-  useAccount,
   useAccountUpdate,
   useAccountUpdateEmail,
   useAccountUpdateEmailValidate,
 } from '@/modules/account/account.service';
-import useAuthStore from '@/modules/auth/auth.store';
 import { useToast } from '@/modules/toast/useToast';
 import ThemeSwitcher from '@/theme/ThemeSwitcher';
 import { useDarkMode } from '@/theme/useDarkMode';
 
 const Account = () => {
-  const logout = useAuthStore((state) => state.logout);
   const { t } = useTranslation();
-  const { account, isLoading, isError, refetch: refetchAccount } = useAccount();
+  const session = authClient.useSession();
+  console.log('session', JSON.stringify(session, null, 2));
   const { showError, showSuccess, showInfo } = useToast();
 
   const logoutModal = useDisclosure();
@@ -59,7 +58,6 @@ const Account = () => {
   const { updateAccount, isLoading: isUpdatingAccount } = useAccountUpdate({
     onSuccess: () => {
       showSuccess(t('account:feedbacks.updateAccount.success'));
-      refetchAccount();
     },
     onError: (err) => {
       showError(
@@ -89,7 +87,6 @@ const Account = () => {
     useAccountUpdateEmailValidate({
       onSuccess: () => {
         updateEmailCodeModal.onClose();
-        refetchAccount();
         t('account:feedbacks.updateAccountEmailValidate.success');
       },
       onError: () => {
@@ -135,18 +132,8 @@ const Account = () => {
     'account:confirmationModals.deleteAccount.input.validations.isValid.handlerValue'
   );
 
-  if (isLoading) {
+  if (session.isPending) {
     return <LoadingScreen />;
-  }
-
-  if (isError || !account) {
-    return (
-      <Box flex={1} p={20}>
-        <Button onPress={() => refetchAccount()}>
-          {t('account:actions.retry')}
-        </Button>
-      </Box>
-    );
   }
 
   return (
@@ -163,7 +150,7 @@ const Account = () => {
                       name="name"
                       label={t('account:sections.profile.input.label')}
                       required={t('account:sections.profile.input.required')}
-                      defaultValue={account.name}
+                      defaultValue={session.data?.user.name}
                       componentProps={{
                         autoCapitalize: 'none',
                         returnKeyType: 'next',
@@ -193,7 +180,7 @@ const Account = () => {
                     name="email"
                     label={t('account:sections.email.input.label')}
                     required={t('account:sections.email.input.required')}
-                    defaultValue={account.email as string}
+                    defaultValue={session.data?.user.email as string}
                     validations={[
                       {
                         handler: isEmail(),
@@ -215,12 +202,12 @@ const Account = () => {
                       onPress={() => emailForm.submit()}
                       colorScheme="brand"
                       isLoading={isUpdatingAccountEmail}
-                      isDisabled={email === account.email}
+                      isDisabled={email === session.data?.user.email}
                       full
                     >
                       {t('commons:actions.update')}
                     </Button>
-                    {email === account.email ? (
+                    {email === session.data?.user.email ? (
                       <Text
                         fontSize="lg"
                         color={colorModeValue('gray.500', 'gray.300')}
@@ -231,7 +218,7 @@ const Account = () => {
                       <Button
                         onPress={() => emailForm.submit()}
                         isLoading={isUpdatingAccountEmail}
-                        isDisabled={email === account.email}
+                        isDisabled={email === session.data?.user.email}
                         color={colorModeValue(
                           getThemeColor('gray.500'),
                           getThemeColor('gray.200')
@@ -299,7 +286,7 @@ const Account = () => {
         isOpen={updateEmailCodeModal.isOpen}
         onClose={updateEmailCodeModal.onClose}
         form={emailValidationCodeForm}
-        email={account.email as string}
+        email={session.data?.user.email as string}
         isLoadingConfirm={isValidatingAccountEmail}
       />
 
@@ -309,7 +296,7 @@ const Account = () => {
         confirmColorScheme="error"
         confirmLabel={t('account:confirmationModals.logout.confirmLabel')}
         confirmIcon="logout"
-        onConfirm={logout}
+        onConfirm={() => authClient.signOut()}
         onCancel={logoutModal.onClose}
         isOpen={logoutModal.isOpen}
         h={250}

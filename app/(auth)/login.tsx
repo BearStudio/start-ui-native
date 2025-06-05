@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { Formiz, useForm, useFormContext, useFormFields } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
 import { useTranslation } from 'react-i18next';
@@ -17,10 +15,7 @@ import { FieldInput } from '@/components/FieldInput';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
 import { Footer } from '@/layout/Footer';
-import {
-  useAuthLogin,
-  useAuthLoginValidate,
-} from '@/modules/auth/auth.service';
+import { authClient } from '@/lib/auth-client';
 import { useToast } from '@/modules/toast/useToast';
 import { useDarkMode } from '@/theme/useDarkMode';
 
@@ -28,6 +23,7 @@ const CardInfoAuthStep = () => {
   const { t } = useTranslation();
   const loginForm = useFormContext();
   const { colorModeValue } = useDarkMode();
+
   return (
     <CardStatus type="info" title={t('login:card.title')} mt="md">
       <Box flexDirection="row" alignItems="center" flexWrap="wrap">
@@ -57,21 +53,55 @@ const CardInfoAuthStep = () => {
 
 const Login = () => {
   const { t } = useTranslation();
-  const loginForm = useForm<{
-    email: string;
-    code: string;
-  }>({
-    onValidSubmit: ({ email }) => {
-      authLogin({ email, language: 'en' });
-    },
-  });
-  const [emailToken, setEmailToken] = useState<string | null>(null);
-
   const { showError, showSuccess } = useToast();
   const validateEmailCodeModal = useDisclosure();
+  const loginForm = useForm<{ email: string; code: string }>({
+    onValidSubmit: async ({ email, code }) => {
+      try {
+        const { error } = await authClient.emailOtp.sendVerificationOtp({
+          email,
+          type: 'sign-in',
+        });
+        if (error) {
+          showError(
+            error.code
+              ? t(
+                  `auth:errorCode.${error.code as unknown as keyof typeof authClient.$ERROR_CODES}`
+                )
+              : t('login:feedbacks.error')
+          );
+          return;
+        }
+        validateEmailCodeModal.onOpen();
+      } catch (err) {
+        showError(t('login:feedbacks.error'));
+        console.error('sendVerificationOtp error:', err);
+      }
+    },
+  });
 
-  const submitValidationCodeEmail = (values: { code: string }) => {
-    loginValidate({ ...values });
+  const submitValidationCodeEmail = async (values: { code: string }) => {
+    try {
+      const { error } = await authClient.signIn.emailOtp({
+        email,
+        otp: values.code,
+      });
+      if (error) {
+        emailValidationCodeForm.setValues({ code: '' });
+        emailValidationCodeForm.setErrors({
+          code: t('login:validation.error'),
+        });
+        return;
+      }
+      validateEmailCodeModal.onClose();
+      showSuccess(t('login:validation.success'));
+    } catch (err) {
+      emailValidationCodeForm.setValues({ code: '' });
+      emailValidationCodeForm.setErrors({
+        code: t('login:validation.error'),
+      });
+      console.error('verify emailOtp error:', err);
+    }
   };
 
   const emailValidationCodeForm = useForm({
@@ -83,33 +113,6 @@ const Login = () => {
     selector: (field) => field.value,
     fields: ['email'] as const,
   });
-
-  const { authLogin, isLoadingAuth } = useAuthLogin({
-    onSuccess: (data) => {
-      setEmailToken(data.token);
-      validateEmailCodeModal.onOpen();
-    },
-    onError: (err) => {
-      showError(t('login:feedbacks.error'));
-      console.error('Authentication error:', err);
-    },
-  });
-
-  const { login: loginValidate, isLoading: isLoadingValidate } =
-    useAuthLoginValidate(emailToken as string, {
-      onSuccess: () => {
-        validateEmailCodeModal.onClose();
-        showSuccess(t('login:validation.success'));
-      },
-      onError: () => {
-        emailValidationCodeForm.setValues({
-          code: null,
-        });
-        emailValidationCodeForm.setErrors({
-          code: t('login:validation.error'),
-        });
-      },
-    });
 
   return (
     <Container>
@@ -137,7 +140,7 @@ const Login = () => {
         <Footer>
           <Button
             onPress={() => loginForm.submit()}
-            isLoading={isLoadingAuth}
+            isLoading={false}
             colorScheme="brand"
             full
           >
@@ -151,7 +154,7 @@ const Login = () => {
         onClose={validateEmailCodeModal.onClose}
         form={emailValidationCodeForm}
         email={email}
-        isLoadingConfirm={isLoadingValidate}
+        isLoadingConfirm={emailValidationCodeForm.isValidating}
       />
     </Container>
   );
