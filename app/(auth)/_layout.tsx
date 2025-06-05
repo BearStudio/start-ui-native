@@ -14,7 +14,6 @@ const AuthStack = () => {
           options: { headerShown: false },
         },
         { route: 'login', title: t('layouts:auth.login') },
-        { route: 'register', title: t('layouts:auth.register') },
       ]}
     />
   );
