@@ -2,9 +2,8 @@ import { useLayoutEffect, useRef } from 'react';
 
 import { useRouter, useSegments } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useShallow } from 'zustand/react/shallow';
 
-import useAuthStore from '@/modules/auth/auth.store';
+import { authClient } from '@/lib/auth-client';
 
 export const unstable_settings = {
   initialRouteName: '(auth)',
@@ -13,8 +12,9 @@ export const unstable_settings = {
 const useProtectedRoute = () => {
   const segments = useSegments();
   const router = useRouter();
-  const isAuthentificated = useAuthStore(useShallow((state) => !!state.token));
-  const isHydrated = useAuthStore(useShallow((state) => state.isHydrated));
+  const session = authClient.useSession();
+  const isAuthentificated = !!session.data?.user;
+  const isHydrated = !session.isPending;
   const currentRouteRef = useRef<'auth' | 'tabs' | 'storybook' | null>(null);
 
   useLayoutEffect(() => {
