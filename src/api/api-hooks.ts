@@ -4,7 +4,7 @@ import { ZodiosHooks } from '@zodios/react';
 import { isAxiosError } from 'axios';
 
 import { api } from '@/api/generated-api';
-import useAuthStore from '@/modules/auth/auth.store';
+import { authClient } from '@/lib/auth-client';
 
 const logoutUserPlugin: ZodiosPlugin = {
   error: async (_, { method, url }, error) => {
@@ -13,7 +13,7 @@ const logoutUserPlugin: ZodiosPlugin = {
       error.response?.status === 401 &&
       !(method === 'post' && url === '/accounts/update-email')
     ) {
-      useAuthStore.getState().logout();
+      authClient.signOut();
     }
     throw error;
   },
@@ -22,7 +22,7 @@ const logoutUserPlugin: ZodiosPlugin = {
 api.use(logoutUserPlugin);
 api.use(
   pluginToken({
-    getToken: async () => useAuthStore.getState().token as string,
+    getToken: async () => await authClient.useSession().data?.session.token,
   })
 );
 

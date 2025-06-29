@@ -27,7 +27,6 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="start-ui-native"/>
-        <data android:scheme="com.bearstudio.startuinative"/>
         <data android:scheme="exp+start-ui-native"/>
       </intent-filter>
     </activity>
