@@ -17,5 +17,8 @@
       "email": "L'email est invalide"
     }
   },
-  "actions": { "login": "Se connecter" }
+  "actions": {
+    "login": "Se connecter",
+    "loginWithGitHub": "Connecter avec GitHub"
+  }
 }

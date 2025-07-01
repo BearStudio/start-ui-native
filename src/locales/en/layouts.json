@@ -1,6 +1,6 @@
 {
   "auth": {
-    "onboarding": "Onboarding",
+    "welcome": "Welcome",
     "login": "Login",
     "register": "Create Account"
   },

@@ -14,6 +14,7 @@ const useProtectedRoute = () => {
   const router = useRouter();
   const session = authClient.useSession();
   const isAuthentificated = !!session.data?.user;
+  const isOnboarded = !!session.data?.user.onboardedAt;
   const isHydrated = !session.isPending;
   const currentRouteRef = useRef<'auth' | 'tabs' | 'storybook' | null>(null);
 
@@ -32,16 +33,20 @@ const useProtectedRoute = () => {
         !inAuthGroup &&
         currentRouteRef.current !== 'auth'
       ) {
-        router.replace('/onboarding');
+        router.replace('/welcome');
         currentRouteRef.current = 'auth';
       } else if (isAuthentificated && currentRouteRef.current !== 'tabs') {
-        router.replace('/(tabs)/home');
+        if (isOnboarded) {
+          router.replace('/(tabs)/home');
+        } else {
+          router.replace('/onboarding');
+        }
         currentRouteRef.current = 'tabs';
       }
 
       SplashScreen.hideAsync();
     }, 100);
-  }, [isAuthentificated, segments, isHydrated, router]);
+  }, [isAuthentificated, segments, isHydrated, router, isOnboarded]);
 };
 
 export default useProtectedRoute;

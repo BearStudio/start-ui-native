@@ -1,6 +1,6 @@
 {
   "auth": {
-    "onboarding": "Introduction",
+    "welcome": "Introduction",
     "login": "Connexion",
     "register": "Créer un compte"
   },

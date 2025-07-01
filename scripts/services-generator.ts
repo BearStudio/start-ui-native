@@ -36,4 +36,6 @@ async function generateClient(openApiDocUrl: string) {
 // Retrieving the URL from the command line arguments
 const openApiDocUrl =
   process.env.OPEN_API_URL ?? 'http://localhost:3000/api/openapi.json';
+
+console.log(openApiDocUrl);
 generateClient(openApiDocUrl);

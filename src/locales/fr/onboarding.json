@@ -1,9 +1,17 @@
 {
-  "logo": "Logo Start UI Native",
-  "description": "Un starter UI dogmatique avec Expo, Ficus UI, Zodios & Formiz",
+  "title": "Bienvenue !",
+  "description": "Commençons par configurer votre profil.",
+  "feedbacks": {
+    "success": "Bienvenue, {{name}} ! Votre profil est prêt.",
+    "error": "Échec de l'initialisation. Veuillez réessayer."
+  },
+  "inputs": {
+    "name": {
+      "label": "Nom",
+      "required": "Le nom est requis"
+    }
+  },
   "actions": {
-    "login": "Se connecter",
-    "alreadyHaveAnAccount": "Vous avez déjà un compte ?",
-    "register": "S'inscrire avec un email"
+    "submit": "Continuer"
   }
-}
+} 

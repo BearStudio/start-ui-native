@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import {
   Box,
   Button,
+  Icon,
   Text,
   TouchableOpacity,
   useDisclosure,
@@ -125,6 +126,8 @@ const Login = () => {
         errorCallbackURL: 'start-ui-native://login',
       });
 
+      console.log(response);
+
       if (response.error) {
         console.log(JSON.stringify(response.error, null, 2));
 
@@ -158,6 +161,17 @@ const Login = () => {
             }}
           />
           <CardInfoAuthStep />
+
+          <Button
+            mt="xl"
+            variant="ghost"
+            full
+            isLoading={social.isLoading}
+            onPress={() => social.mutate('github')}
+            prefix={<Icon name="github" fontFamily="AntDesign" mr="md" />}
+          >
+            {t('login:actions.loginWithGitHub', { provider: 'GitHub' })}
+          </Button>
         </Content>
 
         <Footer>
@@ -168,16 +182,6 @@ const Login = () => {
             full
           >
             {t('login:actions.login')}
-          </Button>
-          <Button
-            mt="md"
-            variant="outline"
-            colorScheme="brand"
-            full
-            isLoading={social.isLoading}
-            onPress={() => social.mutate('github')}
-          >
-            {t('login:actions.loginWithGitHub', { provider: 'GitHub' })}
           </Button>
         </Footer>
       </Formiz>

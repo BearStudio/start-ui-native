@@ -1,82 +1,95 @@
-import logoBlack from '@assets/logo-black.png';
-import logoWhite from '@assets/logo-white.png';
+import { Formiz, useForm } from '@formiz/core';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Image } from 'react-native';
-import { Button, Icon, IconButton, Stack, Text } from 'react-native-ficus-ui';
+import { Box, Button, Spinner, Text } from 'react-native-ficus-ui';
 
+import { apiHooks } from '@/api/api-hooks';
+import { FieldInput } from '@/components/FieldInput';
+import { Container } from '@/layout/Container';
+import { Content } from '@/layout/Content';
+import { Footer } from '@/layout/Footer';
+import { authClient } from '@/lib/auth-client';
+import { useToast } from '@/modules/toast/useToast';
 import { useDarkMode } from '@/theme/useDarkMode';
 
 const Onboarding = () => {
+  const { t } = useTranslation('onboarding');
+  const { showError, showSuccess } = useToast();
   const router = useRouter();
-  const { t } = useTranslation();
-  const { colorModeValue, toggleColorMode, colorMode } = useDarkMode();
+  const { colorModeValue } = useDarkMode();
+  const session = authClient.useSession();
+  console.log(JSON.stringify(session.data, null, 2));
+  // 1) form setup
+  const onboardingForm = useForm<{ name: string }>({
+    onValidSubmit: (values) => {
+      submitOnboarding.mutate(values);
+    },
+  });
 
-  const handleOpenLogin = () => {
-    router.push('/login');
-  };
+  // 2) mutation to your onboarding endpoint
+  const submitOnboarding = apiHooks.useAccountSubmitOnboarding(
+    {},
+    {
+      onSuccess: (_data, variables) => {
+        showSuccess(t('feedbacks.success', { name: variables.name }));
+        router.replace('/'); // or wherever you want to land
+      },
+      onError: (err) => {
+        console.log(JSON.stringify(err, null, 2));
+        showError(t('feedbacks.error'));
+      },
+    }
+  );
+
+  if (session?.isPending) {
+    return <Spinner size="lg" color={colorModeValue('gray.800', 'gray.50')} />;
+  }
 
   return (
-    <Stack p={20} spacing="2xl" h="100%" justifyContent="center">
-      <Stack>
-        <Image
-          source={colorModeValue(logoBlack, logoWhite)}
-          style={{
-            resizeMode: 'contain',
-            width: '100%',
-            height: 80,
-          }}
-          accessibilityLabel={t('onboarding:logo')}
-        />
-        <Text
-          fontSize="lg"
-          textAlign="center"
-          color={colorModeValue('gray.900', 'gray.50')}
-        >
-          {t('onboarding:description')}
-        </Text>
-      </Stack>
-      <Stack spacing="md" alignItems="center">
-        <Button
-          borderRadius="md"
-          full
-          onPress={() => router.push('/register')}
-          colorScheme="brand"
-        >
-          {t('onboarding:actions.register')}
-        </Button>
-        <Stack direction="row" alignItems="center">
-          <Text
-            onPress={handleOpenLogin}
-            color={colorModeValue('gray.900', 'gray.50')}
-          >
-            {t('onboarding:actions.alreadyHaveAnAccount')}
-          </Text>
-          <Button onPress={handleOpenLogin} colorScheme="transparent">
+    <Container>
+      <Formiz connect={onboardingForm}>
+        <Content>
+          {/* Header */}
+          <Box mb="md">
             <Text
-              fontWeight="500"
-              textDecorLine="underline"
-              color={colorModeValue('gray.900', 'gray.50')}
-            >
-              {t('onboarding:actions.login')}
-            </Text>
-          </Button>
-        </Stack>
-        <IconButton
-          onPress={toggleColorMode}
-          icon={
-            <Icon
-              name={colorMode === 'light' ? 'moon' : 'sun'}
               fontSize="lg"
-              fontFamily="Feather"
-              color="gray.50"
-            />
-          }
-          isRound
-          mt="xl"
-        />
-      </Stack>
-    </Stack>
+              fontWeight="bold"
+              color={colorModeValue('gray.900', 'gray.50')}
+              mb="sm"
+            >
+              {t('title')}
+            </Text>
+            <Text fontSize="md" color={colorModeValue('gray.700', 'gray.400')}>
+              {t('description')}
+            </Text>
+          </Box>
+
+          {/* Name field */}
+          <FieldInput
+            name="name"
+            label={t('inputs.name.label')}
+            required={t('inputs.name.required')}
+            defaultValue={session.data?.user.name || ''}
+            componentProps={{
+              autoCapitalize: 'words',
+              returnKeyType: 'done',
+            }}
+          />
+        </Content>
+
+        <Footer>
+          <Button
+            onPress={() => onboardingForm.submit()}
+            isLoading={submitOnboarding.isLoading}
+            isDisabled={onboardingForm.isSubmitted && !onboardingForm.isValid}
+            colorScheme="brand"
+            full
+          >
+            {t('actions.submit')}
+          </Button>
+        </Footer>
+      </Formiz>
+    </Container>
   );
 };
 
