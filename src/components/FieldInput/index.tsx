@@ -5,7 +5,6 @@ import { TextInput, TextInputProps } from 'react-native';
 import { Input } from 'react-native-ficus-ui';
 
 import { FormGroup, FormGroupProps } from '@/components/FormGroup';
-import { useDarkMode } from '@/theme/useDarkMode';
 
 export type FieldInputProps<FormattedValue = string> = FieldProps<
   string,
@@ -47,8 +46,6 @@ export const FieldInput = React.forwardRef(
       setIsTouched(true);
     };
 
-    const { colorModeValue } = useDarkMode();
-
     const InputComponentObj = props.InputComponent || Input;
 
     return (
@@ -65,14 +62,6 @@ export const FieldInput = React.forwardRef(
           value={value ?? ''}
           onChangeText={setValue}
           onBlur={handleBlur}
-          focusBorderColor="brand.500"
-          borderColor={
-            showError ? 'error.500' : colorModeValue('gray.300', 'gray.500')
-          }
-          borderWidth={1}
-          color={colorModeValue('black', 'gray.100')}
-          bg={colorModeValue('white', 'gray.700')}
-          placeholderTextColor={colorModeValue('gray.900', 'gray.50')}
           my={5}
           {...componentProps}
         />

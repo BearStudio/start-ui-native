@@ -18,30 +18,19 @@ import {
   useAuthRegisterValidate,
 } from '@/modules/account/account.service';
 import { useToast } from '@/modules/toast/useToast';
-import { useDarkMode } from '@/theme/useDarkMode';
 import { focus } from '@/utils/formUtils';
 
 const CardWarningRegister = () => {
   const router = useRouter();
   const { t } = useTranslation();
-  const { colorModeValue } = useDarkMode();
+
   return (
     <CardStatus type="warning" title={t('register:card.title')} mt="md">
       <Box flexDirection="row" flexWrap="wrap">
-        <Text
-          fontSize="lg"
-          color={colorModeValue('gray.800', 'gray.50')}
-          my="sm"
-        >
+        <Text fontSize="lg" my="sm">
           {t('register:card.description')}
         </Text>
-        <Button
-          onPress={() => router.push('/login')}
-          full
-          colorScheme="brand"
-          bg={colorModeValue(undefined, 'gray.800')}
-          variant={colorModeValue('outline', 'solid')}
-        >
+        <Button onPress={() => router.push('/login')} full colorScheme="brand">
           {t('register:card.actions.login')}
         </Button>
       </Box>

@@ -1,8 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { Box, BoxProps, Text } from 'react-native-ficus-ui';
-
-import { useDarkMode } from '@/theme/useDarkMode';
+import { Box, BoxProps, Text, useColorModeValue } from 'react-native-ficus-ui';
 
 export type FormGroupProps = BoxProps & {
   label?: string;
@@ -20,19 +18,16 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = ({
   helper,
   ...rest
 }) => {
-  const { colorModeValue } = useDarkMode();
+  const errorTextColor = useColorModeValue('red.500', 'red.300');
+
   return (
     <Box {...rest}>
-      {!!label && (
-        <Text color={colorModeValue('black', 'gray.100')}>{label}</Text>
-      )}
+      {!!label && <Text>{label}</Text>}
       {children}
-      {helper && (
-        <Text fontSize="sm" color={colorModeValue('gray.700', 'gray.300')}>
-          {helper}
-        </Text>
+      {helper && <Text fontSize="sm">{helper}</Text>}
+      {showError && errorMessage && (
+        <Text color={errorTextColor}>{errorMessage}</Text>
       )}
-      {showError && errorMessage && <Text color="red.500">{errorMessage}</Text>}
     </Box>
   );
 };

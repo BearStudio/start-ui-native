@@ -8,7 +8,7 @@ export default ({ config }) => ({
   newArchEnabled: true,
   orientation: 'portrait',
   icon: './assets/start-ui.png',
-  userInterfaceStyle: 'light',
+  userInterfaceStyle: 'automatic',
   assetBundlePatterns: ['**/*'],
   ios: {
     supportsTablet: true,

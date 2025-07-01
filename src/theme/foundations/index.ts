@@ -1,8 +1,8 @@
-import { ThemeType } from 'react-native-ficus-ui';
+import { Dict } from 'react-native-ficus-ui';
 
 import { colors } from './colors';
 
-const foundations: { colors: ThemeType['colors'] } = {
+const foundations: { colors: Dict } = {
   colors,
 };
 

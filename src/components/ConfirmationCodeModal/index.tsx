@@ -6,8 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { TextInput } from 'react-native';
 import { Box, Text, TouchableOpacity } from 'react-native-ficus-ui';
 
-import { useDarkMode } from '@/theme/useDarkMode';
-
 import { CardStatus } from '../CardStatus';
 import { ConfirmationModal } from '../ConfirmationModal';
 import { FieldCodeInput } from '../FieldCodeInput';
@@ -23,7 +21,6 @@ export type ConfirmationCodeModalProps = {
 export const ConfirmationCodeModal: FC<
   PropsWithChildren<ConfirmationCodeModalProps>
 > = ({ isOpen, onClose, form, email, isLoadingConfirm = false }) => {
-  const { colorModeValue } = useDarkMode();
   const { t } = useTranslation();
   const codeInputRef = useRef<TextInput>(null);
 
@@ -56,7 +53,6 @@ export const ConfirmationCodeModal: FC<
                 form.submit();
               }
             }}
-            // @ts-expect-error because BottomSheetTextInput is not a standard TextInput
             pinInputProps={{
               InputComponent: BottomSheetTextInput,
             }}
@@ -66,9 +62,10 @@ export const ConfirmationCodeModal: FC<
         <CardStatus
           type="info"
           title={t('components:ConfirmationCodeModal.card.title')}
+          mt="md"
         >
           <Box flexDirection="row" flexWrap="wrap" mt="sm">
-            <Text fontSize="lg" color={colorModeValue('gray.800', 'gray.50')}>
+            <Text fontSize="lg">
               {t('components:ConfirmationCodeModal.card.description')}{' '}
             </Text>
             <TouchableOpacity
@@ -80,7 +77,6 @@ export const ConfirmationCodeModal: FC<
               <Text
                 fontSize="lg"
                 fontWeight="700"
-                color={colorModeValue('gray.800', 'gray.50')}
                 textDecorationLine="underline"
                 style={{ textDecorationLine: 'underline' }}
               >
