@@ -40,13 +40,8 @@ const Account = () => {
 
   const { colorModeValue, getThemeColor } = useDarkMode();
 
-  // We keep track of the email the user just submitted, so that when the "change email" call succeeds,
-  // we can send the OTP to that new address and later verify it.
   const [pendingEmail, setPendingEmail] = useState<string | null>(null);
 
-  //
-  // 1. HOOK: Update user profile (name)
-  //
   const { updateAccount: updateProfile, isLoading: isUpdatingProfile } =
     useAccountUpdate({
       onSuccess: () => {
@@ -61,9 +56,6 @@ const Account = () => {
       },
     });
 
-  //
-  // 2. HOOK: Update user email (step 1). On success, we dispatch an OTP to `pendingEmail`, then open the modal.
-  //
   const { updateAccount: updateEmail, isLoading: isUpdatingEmail } =
     useAccountUpdate({
       onSuccess: () => {
@@ -97,9 +89,6 @@ const Account = () => {
       },
     });
 
-  //
-  // 3. SUBMIT HANDLERS
-  //
   const submitProfile = (values: { name: string }) => {
     updateProfile({ name: values.name });
   };
@@ -110,24 +99,15 @@ const Account = () => {
     updateEmail({ email: values.email });
   };
 
-  //
-  // 4. SET UP FORMS
-  //
   const profileForm = useForm({ onValidSubmit: submitProfile });
   const emailForm = useForm({ onValidSubmit: submitEmail });
 
-  // We grab the current email‐field value so we can:
-  //  • disable the Update button when it's identical to the session email
-  //  • show a "Cancel" button that resets it back to session.email
   const { email } = useFormFields({
     connect: emailForm,
     selector: (field) => field.value,
     fields: ['email'] as const,
   });
 
-  //
-  // 5. DELETE‐ACCOUNT FORM (unchanged)
-  //
   const deleteAccountForm = useForm({
     onValidSubmit: () => {
       deleteAccountModal.onClose();
@@ -145,9 +125,6 @@ const Account = () => {
     'account:confirmationModals.deleteAccount.input.validations.isValid.handlerValue'
   );
 
-  //
-  // 6. OTP VERIFICATION FORM (step 2). When user submits a valid code, we call verify.
-  //
   const submitValidationCodeEmail = (values: { code: string }) => {
     if (!pendingEmail) {
       // Should never happen, but guard just in case
@@ -176,9 +153,6 @@ const Account = () => {
     onValidSubmit: submitValidationCodeEmail,
   });
 
-  //
-  // 7. RENDER & CONDITIONAL LOADING
-  //
   if (session.isPending) {
     return <LoadingScreen />;
   }
@@ -337,7 +311,6 @@ const Account = () => {
         </Content>
       </Container>
 
-      {/* === CONFIRMATION CODE MODAL (FOR EMAIL OTP) === */}
       <ConfirmationCodeModal
         isOpen={updateEmailCodeModal.isOpen}
         onClose={updateEmailCodeModal.onClose}
@@ -346,7 +319,6 @@ const Account = () => {
         isLoadingConfirm={emailValidationCodeForm.isValidating}
       />
 
-      {/* === CONFIRMATION MODAL FOR LOGOUT === */}
       <ConfirmationModal
         title={t('account:confirmationModals.logout.title')}
         description={t('account:confirmationModals.logout.description')}
@@ -359,7 +331,6 @@ const Account = () => {
         h={250}
       />
 
-      {/* === CONFIRMATION MODAL FOR DELETE ACCOUNT === */}
       <ConfirmationModal
         title={t('account:confirmationModals.deleteAccount.title')}
         description={t('account:confirmationModals.deleteAccount.description')}

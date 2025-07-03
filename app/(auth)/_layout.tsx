@@ -4,6 +4,7 @@ import { Stack } from '@/layout/Stack';
 
 const AuthStack = () => {
   const { t } = useTranslation();
+
   return (
     <Stack
       initialRouteName="welcome"

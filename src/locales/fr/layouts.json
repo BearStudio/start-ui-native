@@ -2,7 +2,8 @@
   "auth": {
     "welcome": "Introduction",
     "login": "Connexion",
-    "register": "Créer un compte"
+    "register": "Créer un compte",
+    "onboarding": "Premiers pas"
   },
   "tabs": {
     "account": "Compte",

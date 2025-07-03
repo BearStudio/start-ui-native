@@ -1,52 +1,44 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 
-import { useRouter, useSegments } from 'expo-router';
+import { useRouter } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 
 import { authClient } from '@/lib/auth-client';
 
-export const unstable_settings = {
-  initialRouteName: '(auth)',
-};
-
 const useProtectedRoute = () => {
-  const segments = useSegments();
   const router = useRouter();
   const session = authClient.useSession();
+  const isPendingSession = !session.isPending;
   const isAuthentificated = !!session.data?.user;
   const isOnboarded = !!session.data?.user.onboardedAt;
-  const isHydrated = !session.isPending;
-  const currentRouteRef = useRef<'auth' | 'tabs' | 'storybook' | null>(null);
+  const [isHydrated, setIsHydrated] = useState(false);
+  // isHydrate should return false on the first pending and its became false but the next ispending isHydrate should always true is like the diff between isLoading and isFetching in react query
+  useEffect(() => {
+    if (!isPendingSession) {
+      setIsHydrated(true);
+    }
+  }, [isPendingSession]);
 
   useLayoutEffect(() => {
-    const inAuthGroup = segments[0] === '(auth)';
-
     if (!isHydrated) {
       return;
     }
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       if (process.env.STORYBOOK_ENABLED === 'true') {
         router.replace('/storybook');
-        currentRouteRef.current = 'storybook';
-      } else if (
-        !isAuthentificated &&
-        !inAuthGroup &&
-        currentRouteRef.current !== 'auth'
-      ) {
-        router.replace('/welcome');
-        currentRouteRef.current = 'auth';
-      } else if (isAuthentificated && currentRouteRef.current !== 'tabs') {
-        if (isOnboarded) {
-          router.replace('/(tabs)/home');
-        } else {
-          router.replace('/onboarding');
-        }
-        currentRouteRef.current = 'tabs';
+      } else if (!isAuthentificated) {
+        router.replace('/(auth)/welcome');
+      } else if (isAuthentificated && !isOnboarded) {
+        router.replace('/(auth)/onboarding');
+      } else {
+        router.replace('/(tabs)/home');
       }
-
       SplashScreen.hideAsync();
     }, 100);
-  }, [isAuthentificated, segments, isHydrated, router, isOnboarded]);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isAuthentificated, isHydrated, isOnboarded, router]);
 };
 
 export default useProtectedRoute;

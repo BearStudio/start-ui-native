@@ -126,11 +126,7 @@ const Login = () => {
         errorCallbackURL: 'start-ui-native://login',
       });
 
-      console.log(response);
-
       if (response.error) {
-        console.log(JSON.stringify(response.error, null, 2));
-
         throw new Error(response.error.message);
       }
       return response.data;

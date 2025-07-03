@@ -1,7 +1,7 @@
 import { Formiz, useForm } from '@formiz/core';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Box, Button, Spinner, Text } from 'react-native-ficus-ui';
+import { Box, Button, Text } from 'react-native-ficus-ui';
 
 import { apiHooks } from '@/api/api-hooks';
 import { FieldInput } from '@/components/FieldInput';
@@ -32,7 +32,7 @@ const Onboarding = () => {
     {
       onSuccess: (_data, variables) => {
         showSuccess(t('feedbacks.success', { name: variables.name }));
-        router.replace('/'); // or wherever you want to land
+        router.replace('/(tabs)/home'); // or wherever you want to land
       },
       onError: (err) => {
         console.log(JSON.stringify(err, null, 2));
@@ -40,10 +40,6 @@ const Onboarding = () => {
       },
     }
   );
-
-  if (session?.isPending) {
-    return <Spinner size="lg" color={colorModeValue('gray.800', 'gray.50')} />;
-  }
 
   return (
     <Container>
