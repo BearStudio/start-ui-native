@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform, StatusBar } from 'react-native';
 import { Dict, useColorMode, useTheme } from 'react-native-ficus-ui';
@@ -6,7 +8,7 @@ import { THEME_KEY } from './config';
 
 export const useAppColorMode = () => {
   const { theme } = useTheme();
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode, setColorMode, toggleColorMode } = useColorMode();
 
   const updateColorMode = async () => {
     await AsyncStorage.setItem(
@@ -26,5 +28,23 @@ export const useAppColorMode = () => {
     toggleColorMode();
   };
 
-  return { updateColorMode };
+  const setDarkMode = useCallback(async () => {
+    await AsyncStorage.setItem(THEME_KEY, 'dark');
+    setColorMode('dark');
+    StatusBar.setBarStyle('light-content');
+    if (Platform.OS === 'android') {
+      StatusBar.setBackgroundColor((theme?.colors?.gray as Dict)?.[800]);
+    }
+  }, [setColorMode, theme?.colors?.gray]);
+
+  const setLightMode = useCallback(async () => {
+    await AsyncStorage.setItem(THEME_KEY, 'light');
+    setColorMode('light');
+    StatusBar.setBarStyle('dark-content');
+    if (Platform.OS === 'android') {
+      StatusBar.setBackgroundColor((theme?.colors?.gray as Dict)?.[100]);
+    }
+  }, [setColorMode, theme?.colors?.gray]);
+
+  return { updateColorMode, setDarkMode, setLightMode };
 };
