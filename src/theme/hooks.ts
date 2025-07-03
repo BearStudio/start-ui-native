@@ -1,7 +1,7 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Platform, StatusBar } from 'react-native';
+import { Appearance, Platform, StatusBar } from 'react-native';
 import { Dict, useColorMode, useTheme } from 'react-native-ficus-ui';
 
 import { THEME_KEY } from './config';
@@ -47,4 +47,22 @@ export const useAppColorMode = () => {
   }, [setColorMode, theme?.colors?.gray]);
 
   return { updateColorMode, setDarkMode, setLightMode };
+};
+
+export const useColorSchemeListener = () => {
+  const { setDarkMode, setLightMode } = useAppColorMode();
+
+  useEffect(() => {
+    const subscription = Appearance.addChangeListener(
+      ({ colorScheme: newColorScheme }) => {
+        if (newColorScheme === 'dark') {
+          setDarkMode();
+        } else {
+          setLightMode();
+        }
+      }
+    );
+
+    return () => subscription.remove();
+  }, [setDarkMode, setLightMode]);
 };

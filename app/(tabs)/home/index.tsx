@@ -30,12 +30,12 @@ const Home = () => {
       <VStack spacing="lg">
         <ButtonIcon
           icon="github"
+          iconSet="Feather"
           onPress={() =>
             router.replace('https://github.com/BearStudio/start-ui-native')
           }
           variant="outline"
           full
-          iconSet="Feather"
         >
           {t('home:links.github')}
         </ButtonIcon>

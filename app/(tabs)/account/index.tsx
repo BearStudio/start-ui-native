@@ -325,7 +325,7 @@ const Account = () => {
               )}
               validations={[
                 {
-                  handler: (value) => value === handlerValue,
+                  handler: (value: string) => value === handlerValue,
                   message: t(
                     'account:confirmationModals.deleteAccount.input.validations.isValid.message',
                     {
