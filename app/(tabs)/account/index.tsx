@@ -335,6 +335,9 @@ const Account = () => {
                 },
               ]}
               InputComponent={DraggableModalInput}
+              componentProps={{
+                colorScheme: 'error',
+              }}
             />
           </Stack>
         </Formiz>
