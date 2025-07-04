@@ -7,7 +7,7 @@ import login from './login.json';
 import welcome from './welcome.json';
 import register from './register.json';
 import onboarding from './onboarding.json';
-import repositories from './repositories.json';
+import books from './books.json';
 
 export default {
   login,
@@ -15,7 +15,7 @@ export default {
   register,
   onboarding,
   layouts,
-  repositories,
+  books,
   home,
   account,
   components,
