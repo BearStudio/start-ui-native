@@ -87,7 +87,13 @@ export default function Books() {
           <BookCard
             book={item}
             onPress={() => {
-              router.navigate(`/books/${item.id}`);
+              router.navigate({
+                pathname: '/books/[id]',
+                params: {
+                  id: item.id,
+                  title: item.title,
+                },
+              });
             }}
           />
         )}

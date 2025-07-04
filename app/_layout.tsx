@@ -10,6 +10,7 @@ import {
 } from 'react-native-reanimated';
 
 import { queryClient } from '@/api/query-client';
+import '@/config/dayjs';
 import i18n from '@/lib/i18n';
 import useProtectedRoute from '@/modules/auth/auth.hook';
 import theme from '@/theme';

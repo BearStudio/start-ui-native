@@ -2,7 +2,14 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Linking, TouchableOpacity } from 'react-native';
-import { Box, Image, Text, VStack } from 'react-native-ficus-ui';
+import {
+  Box,
+  Button,
+  HStack,
+  Image,
+  Text,
+  VStack,
+} from 'react-native-ficus-ui';
 
 import { useDarkMode } from '@/theme/useDarkMode';
 
@@ -38,16 +45,38 @@ const DemoWelcome: React.FC = () => {
     <VStack spacing="md" py="md">
       <VStack spacing="xs">
         <Text
-          fontSize="xl"
+          fontSize="2xl"
           fontWeight="600"
           color={colorModeValue('black', 'white')}
         >
           {t('home:welcome.title')}
         </Text>
-        <Text fontSize="sm" color={colorModeValue('gray.600', 'gray.300')}>
+        <Text fontSize="md" color={colorModeValue('gray.600', 'gray.300')}>
           {t('home:welcome.description')}
         </Text>
       </VStack>
+      <HStack spacing="xl">
+        <Button
+          variant="outline"
+          size="sm"
+          onPress={() =>
+            Linking.openURL('https://github.com/BearStudio/start-ui-native')
+          }
+        >
+          GitHub
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onPress={() =>
+            Linking.openURL(
+              'https://github.com/BearStudio/start-ui-native/issues'
+            )
+          }
+        >
+          Open issue
+        </Button>
+      </HStack>
     </VStack>
   );
 };
