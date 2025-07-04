@@ -1,7 +1,7 @@
 {
   "welcome": {
     "title": "Welcome to 🚀 Start UI [native]",
-    "description": "An opinionated UI starter with Expo, Ficus UI, Zodios & Formiz",
+    "description": "An opinionated frontend starter created & maintained by the BearStudio Team and other contributors. It represents our team’s up-to-date stack using Expo, Ficus UI, Zodios & Formiz for building native mobile applications.",
     "from": "- From the",
     "author": "BearStudio Team"
   },

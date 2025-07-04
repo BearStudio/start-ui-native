@@ -1,105 +1,155 @@
-import { useRouter } from 'expo-router';
-import { useTranslation } from 'react-i18next';
-import { Box, Center, Stack, Text, VStack } from 'react-native-ficus-ui';
+import React from 'react';
 
-import { ButtonIcon } from '@/components/ButtonIcon';
+import { useTranslation } from 'react-i18next';
+import { Linking, TouchableOpacity } from 'react-native';
+import {
+  Box,
+  Button,
+  HStack,
+  Image,
+  Text,
+  VStack,
+} from 'react-native-ficus-ui';
+
 import { useDarkMode } from '@/theme/useDarkMode';
 
-const Home = () => {
-  const router = useRouter();
-  const { t } = useTranslation();
-  const { colorModeValue, getThemeColor } = useDarkMode();
-
+export default function Home() {
   return (
-    <Stack p={20} h="100%" spacing={12}>
-      <Text
-        fontSize="2xl"
-        fontWeight="bold"
-        color={colorModeValue('black', 'gray.50')}
-      >
-        {t('home:welcome.title')}
-      </Text>
-      <Box>
-        <Text fontSize="lg" color={colorModeValue('black', 'gray.50')}>
-          {t('home:welcome.description')}
-        </Text>
-        <Text fontSize="lg" mt="md" color={colorModeValue('black', 'gray.50')}>
-          {t('home:welcome.from')}{' '}
-          <Text fontWeight="bold" color={colorModeValue('black', 'gray.50')}>
-            {t('home:welcome.author')}
-          </Text>
-        </Text>
-      </Box>
+    <Box flex={1} p={20}>
       <VStack spacing="lg">
-        <ButtonIcon
-          icon="github"
-          iconFamily="Feather"
-          onPress={() =>
-            router.replace('https://github.com/BearStudio/start-ui-native')
-          }
-          iconColor={colorModeValue('gray.500', 'gray.300')}
-          color={colorModeValue(
-            getThemeColor('gray.500'),
-            getThemeColor('gray.200')
-          )}
-          bg={colorModeValue('white', 'gray.700')}
-          colorScheme="white"
-          borderWidth={1}
-          borderColor={colorModeValue('gray.200', 'gray.600')}
-          full
-        >
-          {t('home:links.github')}
-        </ButtonIcon>
-
-        <ButtonIcon
-          icon="alert-circle"
-          iconFamily="Feather"
-          onPress={() =>
-            router.replace(
-              'https://github.com/BearStudio/start-ui-native/issues/new'
-            )
-          }
-          iconColor={colorModeValue('gray.500', 'gray.300')}
-          color={colorModeValue(
-            getThemeColor('gray.500'),
-            getThemeColor('gray.200')
-          )}
-          bg={colorModeValue('white', 'gray.700')}
-          colorScheme="white"
-          borderWidth={1}
-          borderColor={colorModeValue('gray.200', 'gray.600')}
-          full
-        >
-          {t('home:links.openIssue')}
-        </ButtonIcon>
+        <DemoWelcome />
+        <DemoMarketingBento />
       </VStack>
+      <DemoCaption />
+    </Box>
+  );
+}
 
-      <Center>
-        <Box
-          h={100}
-          w="90%"
-          bg={colorModeValue('white', 'gray.900')}
-          m="md"
-          borderRadius="sm"
-          boxShadow={`10 10 0 0 ${colorModeValue(
-            getThemeColor('brand.800'),
-            getThemeColor('brand.400')
-          )}`}
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Text
-            color={colorModeValue('brand.900', 'gray.50')}
-            fontSize="2xl"
-            fontWeight="bold"
-            textAlign="center"
-          >
-            Using React Native 0.79 with New Architecture ! 🎉
-          </Text>
-        </Box>
-      </Center>
-    </Stack>
+export const DemoCaption = () => {
+  return (
+    <>
+      <Box flex={1} />
+      <Text mt="md" textAlign="center" fontSize="xs" color="gray.500">
+        Shameless plug 😅 Remember that 🚀 Start&nbsp;UI is free and Open Source
+        😉
+      </Text>
+    </>
   );
 };
 
-export default Home;
+const DemoWelcome: React.FC = () => {
+  const { t } = useTranslation('demo');
+  const { colorModeValue } = useDarkMode();
+
+  return (
+    <VStack spacing="md" py="md">
+      <VStack spacing="xs">
+        <Text
+          fontSize="2xl"
+          fontWeight="600"
+          color={colorModeValue('black', 'white')}
+        >
+          {t('home:welcome.title')}
+        </Text>
+        <Text fontSize="md" color={colorModeValue('gray.600', 'gray.300')}>
+          {t('home:welcome.description')}
+        </Text>
+      </VStack>
+      <HStack spacing="xl">
+        <Button
+          variant="outline"
+          size="sm"
+          onPress={() =>
+            Linking.openURL('https://github.com/BearStudio/start-ui-native')
+          }
+        >
+          GitHub
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onPress={() =>
+            Linking.openURL(
+              'https://github.com/BearStudio/start-ui-native/issues'
+            )
+          }
+        >
+          Open issue
+        </Button>
+      </HStack>
+    </VStack>
+  );
+};
+
+const Tile = ({
+  href,
+  uri,
+  aspectRatio,
+}: {
+  href: string;
+  uri: string;
+  aspectRatio: number;
+}) => {
+  const handleOpenUrl = async (url: string) => {
+    const canOpen = await Linking.canOpenURL(href);
+    if (canOpen) {
+      Linking.openURL(href);
+      return;
+    }
+    console.log('error while trying opening link');
+  };
+  return (
+    <TouchableOpacity
+      onPress={() => handleOpenUrl(href)}
+      accessibilityRole="link"
+      style={{
+        aspectRatio,
+
+        width: '100%',
+        borderRadius: 8,
+        overflow: 'hidden',
+        backgroundColor: 'rgba(0,0,0,0.2)',
+      }}
+      // w="100%"
+      /* w={100}
+      h={200}
+      borderRadius="md"
+      overflow="hidden"
+      bg="rgba(0,0,0,0.2)" */
+    >
+      <Image source={{ uri }} w="100%" h="100%" resizeMode="cover" />
+    </TouchableOpacity>
+  );
+};
+
+export const DemoMarketingBento: React.FC = () => (
+  <Box flexDirection="row" gap={8}>
+    <Box flex={1} gap={8}>
+      <Tile
+        href="https://bear.studio/assets-start-ui-bento-01"
+        uri="https://raw.githubusercontent.com/BearStudio/assets/main/start-ui/marketing-bento-01.jpg"
+        aspectRatio={0.7}
+      />
+
+      <Tile
+        href="https://github.com/BearStudio/start-ui-web"
+        uri="https://start-ui.com/_next/image?url=%2Fweb.jpg&w=3840&q=75"
+        aspectRatio={1.45}
+      />
+    </Box>
+
+    <Box flex={1} gap={8}>
+      <Tile
+        href="https://bear.studio/assets-start-ui-bento-04"
+        uri="https://raw.githubusercontent.com/BearStudio/assets/main/start-ui/marketing-bento-04.jpg"
+        aspectRatio={1.45}
+      />
+
+      <Tile
+        href="https://bear.studio/assets-start-ui-bento-03"
+        uri="https://raw.githubusercontent.com/BearStudio/assets/main/start-ui/marketing-bento-03.jpg"
+        aspectRatio={0.7}
+      />
+    </Box>
+  </Box>
+);

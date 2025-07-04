@@ -17,5 +17,8 @@
       "email": "Mail is invalid"
     }
   },
-  "actions": { "login": "Sign in" }
+  "actions": {
+    "login": "Sign in",
+    "loginWithGitHub": "Login with GitHub"
+  }
 }

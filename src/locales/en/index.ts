@@ -4,16 +4,18 @@ import components from './components.json';
 import home from './home.json';
 import layouts from './layouts.json';
 import login from './login.json';
-import onboarding from './onboarding.json';
+import welcome from './welcome.json';
 import register from './register.json';
-import repositories from './repositories.json';
+import onboarding from './onboarding.json';
+import books from './books.json';
 
 export default {
   login,
-  onboarding,
+  welcome,
   register,
+  onboarding,
   layouts,
-  repositories,
+  books,
   home,
   account,
   components,

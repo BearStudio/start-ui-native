@@ -15,8 +15,8 @@ const HomeTabs = () => {
           options: { headerShown: false },
         },
         {
-          route: 'repositories',
-          title: t('layouts:tabs.repositories'),
+          route: 'books',
+          title: t('layouts:tabs.books'),
           icon: 'folder',
           options: { headerShown: false },
         },

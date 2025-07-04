@@ -6,7 +6,11 @@ const RepositoriesStack = () => {
   const { t } = useTranslation();
   return (
     <Stack
-      screens={[{ route: 'index', title: t('layouts:tabs.repositories') }]}
+      initialRouteName="index"
+      screens={[
+        { route: 'index', title: t('layouts:tabs.books') },
+        { route: '[id]', options: { headerShown: false } },
+      ]}
     />
   );
 };
