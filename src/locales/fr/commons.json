@@ -1,3 +1,9 @@
 {
-  "actions": { "cancel": "Annuler", "update": "Mettre à jour" }
+  "actions": { "cancel": "Annuler", "update": "Mettre à jour" },
+  "toast": {
+    "error": "Erreur",
+    "success": "Succès",
+    "info": "Info",
+    "warning": "Avertissement"
+  }
 }
