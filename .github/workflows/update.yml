@@ -3,8 +3,8 @@ on:
   workflow_dispatch:
 
 env:
-  API_URL: https://demo.start-ui.com/api/rest
-  OPEN_API_URL: https://demo.start-ui.com/api/openapi.json
+  API_URL: https://start-ui-web-restart.vercel.app/api/rest
+  OPEN_API_URL: https://start-ui-web-restart.vercel.app/api/openapi/app/schema'
 
 jobs:
   update:
