@@ -1,18 +1,34 @@
-import { FC } from 'react';
+import { ComponentProps, FC } from 'react';
 
 import { Tabs as RouterTabs } from 'expo-router';
 
 import { FeatherIcons, TabBarIcon } from '@/components/TabBarIcon';
 import { useDarkMode } from '@/theme/useDarkMode';
 
+type RouterTabsComponentProps = ComponentProps<typeof RouterTabs.Screen>;
+
 type TabsProps = {
   initialRouteName?: string;
-  screens: {
+  screens: (RouterTabsComponentProps & {
     route: string;
     title?: string;
     icon?: FeatherIcons;
     options?: ExplicitAny; // TODO: update
-  }[];
+  })[];
+};
+export const useTabBarStyle = () => {
+  const { colorModeValue, getThemeColor } = useDarkMode();
+
+  return {
+    backgroundColor: colorModeValue(
+      getThemeColor('gray.50'),
+      getThemeColor('gray.800')
+    ),
+    borderTopColor: colorModeValue(
+      getThemeColor('gray.200'),
+      getThemeColor('gray.900')
+    ),
+  };
 };
 
 export const Tabs: FC<TabsProps> = ({
@@ -20,20 +36,12 @@ export const Tabs: FC<TabsProps> = ({
   screens = [],
 }) => {
   const { colorModeValue, getThemeColor } = useDarkMode();
+  const tabBarStyle = useTabBarStyle();
   return (
     <RouterTabs
       initialRouteName={initialRouteName}
       screenOptions={{
-        tabBarStyle: {
-          backgroundColor: colorModeValue(
-            getThemeColor('gray.50'),
-            getThemeColor('gray.800')
-          ),
-          borderTopColor: colorModeValue(
-            getThemeColor('gray.200'),
-            getThemeColor('gray.900')
-          ),
-        },
+        tabBarStyle,
       }}
     >
       {screens.map((screen) => (

@@ -9,7 +9,12 @@ const RepositoriesStack = () => {
       initialRouteName="index"
       screens={[
         { route: 'index', title: t('layouts:tabs.books') },
-        { route: '[id]', options: { headerShown: false } },
+        {
+          route: '[id]',
+          options: {
+            headerShown: false,
+          },
+        },
       ]}
     />
   );

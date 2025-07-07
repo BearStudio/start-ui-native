@@ -17,7 +17,7 @@ export const BookCard: React.FC<{
   const bg = book.genre?.color ?? colorModeValue('gray.200', 'gray.700');
 
   return (
-    <TouchableOpacity onPress={onPress} style={{ flex: 1, margin: 4 }}>
+    <TouchableOpacity onPress={onPress} style={{ flex: 1 }}>
       <Box
         position="relative"
         borderRadius="sm"

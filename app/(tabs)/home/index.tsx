@@ -11,17 +11,21 @@ import {
   VStack,
 } from 'react-native-ficus-ui';
 
+import { Container } from '@/layout/Container';
+import { Content } from '@/layout/Content';
 import { useDarkMode } from '@/theme/useDarkMode';
 
 export default function Home() {
   return (
-    <Box flex={1} p={20}>
-      <VStack spacing="lg">
-        <DemoWelcome />
-        <DemoMarketingBento />
-      </VStack>
-      <DemoCaption />
-    </Box>
+    <Container>
+      <Content>
+        <VStack spacing="lg">
+          <DemoWelcome />
+          <DemoMarketingBento />
+        </VStack>
+        <DemoCaption />
+      </Content>
+    </Container>
   );
 }
 
@@ -110,12 +114,6 @@ const Tile = ({
         overflow: 'hidden',
         backgroundColor: 'rgba(0,0,0,0.2)',
       }}
-      // w="100%"
-      /* w={100}
-      h={200}
-      borderRadius="md"
-      overflow="hidden"
-      bg="rgba(0,0,0,0.2)" */
     >
       <Image source={{ uri }} w="100%" h="100%" resizeMode="cover" />
     </TouchableOpacity>
