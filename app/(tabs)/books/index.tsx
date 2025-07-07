@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, FlatList } from 'react-native';
 import { Box, Button, Text, useTheme } from 'react-native-ficus-ui';
 
-import { Layout } from '@/components/Layout';
 import { Container } from '@/layout/Container';
 import { BookCard } from '@/modules/books/bookCard';
 import { Book, useBooksInfinite } from '@/modules/books/books.service';
