@@ -99,7 +99,7 @@
     "eslint-config-prettier": "10.1.5",
     "eslint-plugin-prettier": "5.4.1",
     "eslint-plugin-sonarjs": "3.0.2",
-    "husky": "^9.1.7",
+    "husky": "9.1.7",
     "lodash": "4.17.21",
     "openapi-zod-client": "1.13.2",
     "react-native-dotenv": "3.4.11",
