@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { Box, FlexProps, ScrollBox } from 'react-native-ficus-ui';
+import { FlexProps, ScrollBox } from 'react-native-ficus-ui';
 
 export const Content: FC<PropsWithChildren<FlexProps>> = ({
   children,

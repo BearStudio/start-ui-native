@@ -17,7 +17,7 @@ const HomeTabs = () => {
         {
           route: 'books',
           title: t('layouts:tabs.books'),
-          icon: 'folder',
+          icon: 'book',
           options: { headerShown: false },
         },
         {
