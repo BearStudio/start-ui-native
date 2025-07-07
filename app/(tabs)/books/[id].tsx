@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/fr';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { ActivityIndicator } from 'react-native';
 import {
   Box,
@@ -23,6 +24,7 @@ const BookDetails: React.FC = () => {
   const { setOptions } = useNavigation();
   const { id, title } = useLocalSearchParams<{ id: string; title: string }>();
   const { colorModeValue } = useDarkMode();
+  const { t } = useTranslation('books');
 
   // set header title
   useEffect(() => {
@@ -49,14 +51,14 @@ const BookDetails: React.FC = () => {
         {!!bookQuery.isError && !bookQuery.isLoading && (
           <Center flex={1}>
             <Text fontSize="lg" color="error.600">
-              Une erreur est survenue. Veuillez réessayer.
+              {t('error')}
             </Text>
           </Center>
         )}
         {!bookQuery.isLoading && !bookQuery.isError && !bookQuery.data && (
           <Center flex={1}>
             <Text fontSize="lg" color="error.600">
-              Livre introuvable.
+              {t('notFound')}
             </Text>
           </Center>
         )}
@@ -77,10 +79,10 @@ const BookDetails: React.FC = () => {
 
             {/* Info Card */}
             <Stack borderWidth={2} borderRadius="md" borderColor="gray.300">
-              {/* Titre */}
+              {/* Title */}
               <HStack justifyContent="space-between" alignItems="center" p={8}>
                 <Text color={colorModeValue('gray.600', 'gray.200')}>
-                  Titre
+                  {t('fields.title')}
                 </Text>
                 <Text
                   fontWeight="bold"
@@ -91,10 +93,10 @@ const BookDetails: React.FC = () => {
               </HStack>
               <Divider />
 
-              {/* Auteur */}
+              {/* Author */}
               <HStack justifyContent="space-between" alignItems="center" p={8}>
                 <Text color={colorModeValue('gray.600', 'gray.200')}>
-                  Auteur
+                  {t('fields.author')}
                 </Text>
                 <Text color={colorModeValue('gray.900', 'gray.50')}>
                   {bookQuery.data?.author}
@@ -105,7 +107,7 @@ const BookDetails: React.FC = () => {
               {/* Genre */}
               <HStack justifyContent="space-between" alignItems="center" p={8}>
                 <Text color={colorModeValue('gray.600', 'gray.200')}>
-                  Genre
+                  {t('fields.genre')}
                 </Text>
                 <HStack alignItems="center" spacing={4}>
                   <Box
@@ -121,10 +123,10 @@ const BookDetails: React.FC = () => {
               </HStack>
               <Divider />
 
-              {/* Éditeur */}
+              {/* Publisher */}
               <HStack justifyContent="space-between" alignItems="center" p={8}>
                 <Text color={colorModeValue('gray.600', 'gray.200')}>
-                  Éditeur
+                  {t('fields.publisher')}
                 </Text>
                 <Text color={colorModeValue('gray.900', 'gray.50')}>
                   {(bookQuery.data?.publisher as string) ?? '—'}
@@ -132,10 +134,10 @@ const BookDetails: React.FC = () => {
               </HStack>
               <Divider />
 
-              {/* Date d’ajout */}
+              {/* Created At */}
               <HStack justifyContent="space-between" alignItems="center" p={8}>
                 <Text color={colorModeValue('gray.600', 'gray.200')}>
-                  Date d’ajout
+                  {t('fields.createdAt')}
                 </Text>
                 <Text color={colorModeValue('gray.900', 'gray.50')}>
                   {dayjs(bookQuery.data?.createdAt).format('D MMMM YYYY')}
@@ -143,10 +145,10 @@ const BookDetails: React.FC = () => {
               </HStack>
               <Divider />
 
-              {/* Dernière mise à jour */}
+              {/* Updated At */}
               <HStack justifyContent="space-between" alignItems="center" p={8}>
                 <Text color={colorModeValue('gray.600', 'gray.200')}>
-                  Dernière MAJ
+                  {t('fields.updatedAt')}
                 </Text>
                 <Text color={colorModeValue('gray.900', 'gray.50')}>
                   {dayjs(bookQuery.data?.updatedAt).format('D MMMM YYYY')}

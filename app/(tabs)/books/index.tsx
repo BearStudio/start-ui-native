@@ -10,7 +10,7 @@ import { BookCard } from '@/modules/books/bookCard';
 import { Book, useBooksInfinite } from '@/modules/books/books.service';
 
 export default function Books() {
-  const { t } = useTranslation();
+  const { t } = useTranslation('books');
 
   const {
     data,
@@ -40,7 +40,7 @@ export default function Books() {
           onPress={() => fetchNextPage()}
           isLoading={isFetchingNextPage}
         >
-          {t('books:loadMore')}
+          {t('loadMore')}
         </Button>
       );
     }
@@ -57,9 +57,11 @@ export default function Books() {
       {status === 'error' && (
         <Box flex={1} justifyContent="center" alignItems="center">
           <Text color="red.500" mb="md">
-            {t('books:error')}
+            {t('error')}
           </Text>
-          <Button onPress={() => refetch()}>{t('common:retry')}</Button>
+          <Button onPress={() => refetch()}>
+            {t('commons:actions.retry')}
+          </Button>
         </Box>
       )}
       {status === 'success' && (
@@ -76,7 +78,7 @@ export default function Books() {
           keyExtractor={(item) => item.id}
           ListEmptyComponent={
             <Box flex={1} justifyContent="center" alignItems="center">
-              <Text color="muted.500">{t('books:empty')}</Text>
+              <Text color="muted.500">{t('empty')}</Text>
             </Box>
           }
           renderItem={({ item }) => (

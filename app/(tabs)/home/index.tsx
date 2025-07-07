@@ -30,19 +30,19 @@ export default function Home() {
 }
 
 export const DemoCaption = () => {
+  const { t } = useTranslation('home');
   return (
     <>
       <Box flex={1} />
       <Text mt="md" textAlign="center" fontSize="xs" color="gray.500">
-        Shameless plug 😅 Remember that 🚀 Start&nbsp;UI is free and Open Source
-        😉
+        {t('demo.caption')}
       </Text>
     </>
   );
 };
 
 const DemoWelcome: React.FC = () => {
-  const { t } = useTranslation('demo');
+  const { t } = useTranslation('home');
   const { colorModeValue } = useDarkMode();
 
   return (
@@ -67,7 +67,7 @@ const DemoWelcome: React.FC = () => {
             Linking.openURL('https://github.com/BearStudio/start-ui-native')
           }
         >
-          GitHub
+          {t('demo.github')}
         </Button>
         <Button
           variant="outline"
@@ -78,7 +78,7 @@ const DemoWelcome: React.FC = () => {
             )
           }
         >
-          Open issue
+          {t('demo.openIssue')}
         </Button>
       </HStack>
     </VStack>
