@@ -19,6 +19,7 @@ src/api/generated-api.*
 
 .env
 .env.production
+.eslintcache
 
 devices.json
 
