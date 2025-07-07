@@ -5,7 +5,17 @@ import { Stack } from '@/layout/Stack';
 const AccountStack = () => {
   const { t } = useTranslation();
   return (
-    <Stack screens={[{ route: 'index', title: t('layouts:tabs.account') }]} />
+    <Stack
+      screens={[
+        {
+          route: 'index',
+          title: t('layouts:tabs.account'),
+          options: {
+            isTabBarScreen: true,
+          },
+        },
+      ]}
+    />
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import dayjs from 'dayjs';
 import 'dayjs/locale/fr';
@@ -26,7 +26,6 @@ const BookDetails = () => {
   const { colorModeValue } = useDarkMode();
   const { t } = useTranslation('books');
 
-  // set header title
   useEffect(() => {
     setOptions({
       headerShown: true,

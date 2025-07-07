@@ -8,7 +8,13 @@ const RepositoriesStack = () => {
     <Stack
       initialRouteName="index"
       screens={[
-        { route: 'index', title: t('layouts:tabs.books') },
+        {
+          route: 'index',
+          title: t('layouts:tabs.books'),
+          options: {
+            isTabBarScreen: true,
+          },
+        },
         {
           route: '[id]',
           options: {
