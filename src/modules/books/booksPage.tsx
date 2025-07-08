@@ -86,9 +86,8 @@ const BooksPage = () => {
               book={item}
               onPress={() => {
                 router.navigate({
-                  pathname: '/books/[id]',
+                  pathname: `/book/${item.id}`,
                   params: {
-                    id: item.id,
                     title: item.title,
                   },
                 });

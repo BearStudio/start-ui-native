@@ -4,6 +4,7 @@ import { Tabs } from '@/layout/Tabs';
 
 const HomeTabs = () => {
   const { t } = useTranslation();
+
   return (
     <Tabs
       initialRouteName="home"

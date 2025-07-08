@@ -6,28 +6,32 @@ import { FeatherIcons } from '@/components/TabBarIcon';
 import { Header } from '@/layout/Header';
 import { useDarkMode } from '@/theme/useDarkMode';
 
-type RouterStackComponentProps = ComponentProps<typeof RouterStack.Screen>;
+type RouterStackComponentProps = ComponentProps<typeof RouterStack>;
+type RouterStackScreenComponentProps = ComponentProps<
+  typeof RouterStack.Screen
+>;
 
 type StackProps = {
   initialRouteName?: string;
-  screens: (RouterStackComponentProps & {
+  screens: (RouterStackScreenComponentProps & {
     route: string;
     title?: string;
     icon?: FeatherIcons;
-    options?: RouterStackComponentProps['options'] & {
+    options?: RouterStackScreenComponentProps['options'] & {
       isTabBarScreen?: boolean;
     };
   })[];
-};
+} & RouterStackComponentProps;
 
 export const Stack: FC<StackProps> = ({
   initialRouteName = 'index',
   screens = [],
+  ...rest
 }) => {
   const { colorModeValue, getThemeColor } = useDarkMode();
 
   return (
-    <RouterStack initialRouteName={initialRouteName}>
+    <RouterStack initialRouteName={initialRouteName} {...rest}>
       {screens.map(
         ({
           route,

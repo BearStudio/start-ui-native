@@ -23,6 +23,7 @@ const useProtectedRoute = () => {
     if (!isHydrated) {
       return;
     }
+
     const timeout = setTimeout(() => {
       if (process.env.STORYBOOK_ENABLED === 'true') {
         router.replace('/storybook');

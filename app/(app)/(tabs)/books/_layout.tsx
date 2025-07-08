@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Stack } from '@/layout/Stack';
 
-const RepositoriesStack = () => {
+const BooksStack = () => {
   const { t } = useTranslation();
   return (
     <Stack
@@ -15,15 +15,9 @@ const RepositoriesStack = () => {
             isTabBarScreen: true,
           },
         },
-        {
-          route: '[id]',
-          options: {
-            headerShown: false,
-          },
-        },
       ]}
     />
   );
 };
 
-export default RepositoriesStack;
+export default BooksStack;

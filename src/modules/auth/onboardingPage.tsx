@@ -18,7 +18,7 @@ const OnboardingPage = () => {
   const router = useRouter();
   const { colorModeValue } = useDarkMode();
   const session = authClient.useSession();
-  console.log(JSON.stringify(session.data, null, 2));
+
   // 1) form setup
   const onboardingForm = useForm<{ name: string }>({
     onValidSubmit: (values) => {

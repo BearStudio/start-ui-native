@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import { ComponentProps, FC } from 'react';
 
 import { Feather } from '@expo/vector-icons';
 
-export type FeatherIcons = keyof (typeof Feather)['glyphMap'];
+export type FeatherIcons = ComponentProps<typeof Feather>['name'];
 
 export const TabBarIcon: (
   name: FeatherIcons
