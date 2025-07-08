@@ -37,7 +37,7 @@ const BookDetails = () => {
   const bookQuery = apiHooks.useBookGetById({ params: { id } });
 
   return (
-    <Container isTabBarHidden>
+    <Container>
       <Content>
         {!!bookQuery.isLoading && (
           <Center flex={1}>

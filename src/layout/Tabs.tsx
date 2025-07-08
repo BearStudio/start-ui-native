@@ -17,32 +17,26 @@ type TabsProps = {
     options?: RouterTabsScreenComponentProps['options'];
   })[];
 } & RouterTabsComponentProps;
-export const useTabBarStyle = () => {
-  const { colorModeValue, getThemeColor } = useDarkMode();
-
-  return {
-    backgroundColor: colorModeValue(
-      getThemeColor('gray.50'),
-      getThemeColor('gray.800')
-    ),
-    borderTopColor: colorModeValue(
-      getThemeColor('gray.200'),
-      getThemeColor('gray.900')
-    ),
-  };
-};
 
 export const Tabs: FC<TabsProps> = ({
   initialRouteName = 'index',
   screens = [],
 }) => {
   const { colorModeValue, getThemeColor } = useDarkMode();
-  const tabBarStyle = useTabBarStyle();
   return (
     <RouterTabs
       initialRouteName={initialRouteName}
       screenOptions={{
-        tabBarStyle,
+        tabBarStyle: {
+          backgroundColor: colorModeValue(
+            getThemeColor('gray.50'),
+            getThemeColor('gray.800')
+          ),
+          borderTopColor: colorModeValue(
+            getThemeColor('gray.200'),
+            getThemeColor('gray.900')
+          ),
+        },
       }}
     >
       {screens.map((screen) => {
