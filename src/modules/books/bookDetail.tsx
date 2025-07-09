@@ -4,7 +4,6 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/fr';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator } from 'react-native';
 import {
   Box,
   Center,
@@ -15,9 +14,10 @@ import {
 } from 'react-native-ficus-ui';
 
 import { apiHooks } from '@/api/api-hooks';
+import { Skeleton } from '@/components/Skeleton';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
-import { BookCard } from '@/modules/books/bookCard';
+import { BookCard, BookCardSkeleon } from '@/modules/books/bookCard';
 import { useDarkMode } from '@/theme/useDarkMode';
 
 const BookDetails = () => {
@@ -26,6 +26,8 @@ const BookDetails = () => {
   const { colorModeValue } = useDarkMode();
   const { t } = useTranslation('books');
 
+  // fetch book
+  const bookQuery = apiHooks.useBookGetById({ params: { id } });
   useEffect(() => {
     setOptions({
       headerShown: true,
@@ -33,20 +35,9 @@ const BookDetails = () => {
     });
   }, [setOptions, title]);
 
-  // fetch book
-  const bookQuery = apiHooks.useBookGetById({ params: { id } });
-
   return (
     <Container>
       <Content>
-        {!!bookQuery.isLoading && (
-          <Center flex={1}>
-            <ActivityIndicator
-              size="large"
-              color={colorModeValue('black', 'white')}
-            />
-          </Center>
-        )}
         {!!bookQuery.isError && !bookQuery.isLoading && (
           <Center flex={1}>
             <Text fontSize="lg" color="error.600">
@@ -61,7 +52,7 @@ const BookDetails = () => {
             </Text>
           </Center>
         )}
-        {!!bookQuery.data && !bookQuery.isLoading && (
+        {(!!bookQuery.data || !!bookQuery.isLoading) && (
           <Stack spacing={24}>
             {/* Hero Cover */}
             <Center>
@@ -72,7 +63,9 @@ const BookDetails = () => {
                 overflow="hidden"
                 shadow="xl"
               >
-                <BookCard book={bookQuery.data} />
+                <BookCardSkeleon visible={!bookQuery.isLoading}>
+                  {!!bookQuery?.data && <BookCard book={bookQuery?.data} />}
+                </BookCardSkeleon>
               </Box>
             </Center>
 
@@ -83,12 +76,14 @@ const BookDetails = () => {
                 <Text color={colorModeValue('gray.600', 'gray.200')}>
                   {t('fields.title')}
                 </Text>
-                <Text
-                  fontWeight="bold"
-                  color={colorModeValue('gray.900', 'gray.50')}
-                >
-                  {bookQuery.data?.title}
-                </Text>
+                <Skeleton.Text visible={!bookQuery.isLoading}>
+                  <Text
+                    fontWeight="bold"
+                    color={colorModeValue('gray.900', 'gray.50')}
+                  >
+                    {bookQuery.data?.title}
+                  </Text>
+                </Skeleton.Text>
               </HStack>
               <Divider />
 
@@ -97,9 +92,11 @@ const BookDetails = () => {
                 <Text color={colorModeValue('gray.600', 'gray.200')}>
                   {t('fields.author')}
                 </Text>
-                <Text color={colorModeValue('gray.900', 'gray.50')}>
-                  {bookQuery.data?.author}
-                </Text>
+                <Skeleton.Text visible={!bookQuery.isLoading}>
+                  <Text color={colorModeValue('gray.900', 'gray.50')}>
+                    {bookQuery.data?.author}
+                  </Text>
+                </Skeleton.Text>
               </HStack>
               <Divider />
 
@@ -108,17 +105,19 @@ const BookDetails = () => {
                 <Text color={colorModeValue('gray.600', 'gray.200')}>
                   {t('fields.genre')}
                 </Text>
-                <HStack alignItems="center" spacing={4}>
-                  <Box
-                    bg={bookQuery.data?.genre?.color}
-                    w={4}
-                    h={4}
-                    borderRadius="full"
-                  />
-                  <Text color={colorModeValue('gray.900', 'gray.50')}>
-                    {bookQuery.data?.genre?.name}
-                  </Text>
-                </HStack>
+                <Skeleton.Text visible={!bookQuery.isLoading}>
+                  <HStack alignItems="center" spacing={4}>
+                    <Box
+                      bg={bookQuery.data?.genre?.color}
+                      w={4}
+                      h={4}
+                      borderRadius="full"
+                    />
+                    <Text color={colorModeValue('gray.900', 'gray.50')}>
+                      {bookQuery.data?.genre?.name}
+                    </Text>
+                  </HStack>
+                </Skeleton.Text>
               </HStack>
               <Divider />
 
@@ -127,9 +126,11 @@ const BookDetails = () => {
                 <Text color={colorModeValue('gray.600', 'gray.200')}>
                   {t('fields.publisher')}
                 </Text>
-                <Text color={colorModeValue('gray.900', 'gray.50')}>
-                  {(bookQuery.data?.publisher as string) ?? '—'}
-                </Text>
+                <Skeleton.Text visible={!bookQuery.isLoading}>
+                  <Text color={colorModeValue('gray.900', 'gray.50')}>
+                    {(bookQuery.data?.publisher as string) ?? '—'}
+                  </Text>
+                </Skeleton.Text>
               </HStack>
               <Divider />
 
@@ -138,9 +139,11 @@ const BookDetails = () => {
                 <Text color={colorModeValue('gray.600', 'gray.200')}>
                   {t('fields.createdAt')}
                 </Text>
-                <Text color={colorModeValue('gray.900', 'gray.50')}>
-                  {dayjs(bookQuery.data?.createdAt).format('D MMMM YYYY')}
-                </Text>
+                <Skeleton.Text visible={!bookQuery.isLoading}>
+                  <Text color={colorModeValue('gray.900', 'gray.50')}>
+                    {dayjs(bookQuery.data?.createdAt).format('D MMMM YYYY')}
+                  </Text>
+                </Skeleton.Text>
               </HStack>
               <Divider />
 
@@ -149,9 +152,11 @@ const BookDetails = () => {
                 <Text color={colorModeValue('gray.600', 'gray.200')}>
                   {t('fields.updatedAt')}
                 </Text>
-                <Text color={colorModeValue('gray.900', 'gray.50')}>
-                  {dayjs(bookQuery.data?.updatedAt).format('D MMMM YYYY')}
-                </Text>
+                <Skeleton.Text visible={!bookQuery.isLoading}>
+                  <Text color={colorModeValue('gray.900', 'gray.50')}>
+                    {dayjs(bookQuery.data?.updatedAt).format('D MMMM YYYY')}
+                  </Text>
+                </Skeleton.Text>
               </HStack>
             </Stack>
           </Stack>

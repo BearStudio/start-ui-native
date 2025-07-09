@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import CoverSvg from '@assets/cover.svg';
 import { TouchableOpacity } from 'react-native';
@@ -73,8 +73,17 @@ export const BookCard: React.FC<{
   );
 };
 
-export const BookCardSkeleon = () => {
+export const BookCardSkeleon = ({
+  visible,
+  children,
+}: {
+  visible?: boolean;
+  children?: ReactNode;
+}) => {
   const { getThemeColor } = useDarkMode();
+  if (visible) {
+    return <>{children}</>;
+  }
   return (
     <Card flex={1}>
       {/* 3D SVG cover */}
