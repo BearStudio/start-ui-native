@@ -4,6 +4,7 @@ import { Tabs } from '@/layout/Tabs';
 
 const HomeTabs = () => {
   const { t } = useTranslation();
+
   return (
     <Tabs
       initialRouteName="home"
@@ -15,9 +16,9 @@ const HomeTabs = () => {
           options: { headerShown: false },
         },
         {
-          route: 'repositories',
-          title: t('layouts:tabs.repositories'),
-          icon: 'folder',
+          route: 'books',
+          title: t('layouts:tabs.books'),
+          icon: 'book',
           options: { headerShown: false },
         },
         {

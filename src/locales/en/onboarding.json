@@ -1,9 +1,17 @@
 {
-  "logo": "Start UI Native Logo",
-  "description": "An opinionated UI starter with Expo, Ficus UI, Zodios & Formiz",
+  "title": "Welcome!",
+  "description": "Let's get started by setting up your profile.",
+  "feedbacks": {
+    "success": "Welcome, {{name}}! Your profile is set up.",
+    "error": "Failed to complete onboarding. Please try again."
+  },
+  "inputs": {
+    "name": {
+      "label": "Name",
+      "required": "Name is required"
+    }
+  },
   "actions": {
-    "login": "Sign in",
-    "alreadyHaveAnAccount": "Already have an account?",
-    "register": "Sign up with mail"
+    "submit": "Continue"
   }
-}
+} 

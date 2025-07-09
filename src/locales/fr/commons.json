@@ -1,3 +1,7 @@
 {
-  "actions": { "cancel": "Annuler", "update": "Mettre à jour" }
+  "actions": {
+    "cancel": "Annuler",
+    "update": "Mettre à jour",
+    "retry": "Réessayer"
+  }
 }
