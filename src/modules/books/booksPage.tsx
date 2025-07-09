@@ -2,12 +2,13 @@ import { useCallback } from 'react';
 
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import { Box, Button, Text, useTheme } from 'react-native-ficus-ui';
 
 import { Container } from '@/layout/Container';
 import { BookCard } from '@/modules/books/bookCard';
 import { Book, useBooksInfinite } from '@/modules/books/books.service';
+import { BooksSkeleton } from '@/modules/books/books.skeleton';
 
 const BooksPage = () => {
   const { t } = useTranslation('books');
@@ -30,7 +31,7 @@ const BooksPage = () => {
 
   const renderFooter = useCallback(() => {
     if (isFetchingNextPage) {
-      return <ActivityIndicator style={{ marginVertical: 16 }} />;
+      return <BooksSkeleton length={2} />;
     }
     if (hasNextPage) {
       return (
@@ -49,11 +50,7 @@ const BooksPage = () => {
 
   return (
     <Container px={0} py={0}>
-      {status === 'loading' && (
-        <Box flex={1} justifyContent="center" alignItems="center">
-          <ActivityIndicator />
-        </Box>
-      )}
+      {status === 'loading' && <BooksSkeleton length={6} />}
       {status === 'error' && (
         <Box flex={1} justifyContent="center" alignItems="center">
           <Text color="red.500" mb="md">
