@@ -2,8 +2,8 @@ import { useCallback } from 'react';
 
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { FlatList } from 'react-native';
 import { Box, Button, Text, useTheme } from 'react-native-ficus-ui';
+import Animated, { FadeIn } from 'react-native-reanimated';
 
 import { Container } from '@/layout/Container';
 import { BookCard } from '@/modules/books/bookCard';
@@ -28,25 +28,13 @@ const BooksPage = () => {
     if (hasNextPage && !isFetchingNextPage) fetchNextPage();
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
   const router = useRouter();
-
   const renderFooter = useCallback(() => {
-    if (isFetchingNextPage) {
+    if (isFetchingNextPage || hasNextPage) {
       return <BooksSkeleton length={2} />;
     }
-    if (hasNextPage) {
-      return (
-        <Button
-          variant="ghost"
-          my="md"
-          onPress={() => fetchNextPage()}
-          isLoading={isFetchingNextPage}
-        >
-          {t('loadMore')}
-        </Button>
-      );
-    }
+
     return null;
-  }, [fetchNextPage, hasNextPage, isFetchingNextPage, t]);
+  }, [hasNextPage, isFetchingNextPage]);
 
   return (
     <Container px={0} py={0}>
@@ -62,7 +50,8 @@ const BooksPage = () => {
         </Box>
       )}
       {status === 'success' && (
-        <FlatList
+        <Animated.FlatList
+          entering={FadeIn.duration(250)}
           data={items}
           numColumns={2}
           columnWrapperStyle={{ justifyContent: 'space-between', gap: 8 }}

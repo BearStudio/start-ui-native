@@ -1,13 +1,14 @@
-import { FlatList } from 'react-native';
 import { useTheme } from 'react-native-ficus-ui';
+import Animated, { FadeOut } from 'react-native-reanimated';
 
 import { BookCardSkeleon } from '@/modules/books/bookCard';
 
 export const BooksSkeleton = ({ length }: { length: number }) => {
   const { theme } = useTheme();
   return (
-    <FlatList
+    <Animated.FlatList
       data={Array.from({ length }).map((_, index) => index)}
+      exiting={FadeOut.duration(250)}
       renderItem={() => <BookCardSkeleon />}
       keyExtractor={(i) => i.toString()}
       numColumns={2}

@@ -12,6 +12,7 @@ import {
   Stack,
   Text,
 } from 'react-native-ficus-ui';
+import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 import { apiHooks } from '@/api/api-hooks';
 import { Skeleton } from '@/components/Skeleton';
@@ -63,6 +64,15 @@ const BookDetails = () => {
                 overflow="hidden"
                 shadow="xl"
               >
+                {!bookQuery.isLoading && !!bookQuery?.data ? (
+                  <Animated.View entering={FadeIn.duration(250)}>
+                    <BookCard book={bookQuery?.data} />
+                  </Animated.View>
+                ) : (
+                  <Animated.View exiting={FadeOut.duration(250)}>
+                    <BookCardSkeleon />
+                  </Animated.View>
+                )}
                 <BookCardSkeleon visible={!bookQuery.isLoading}>
                   {!!bookQuery?.data && <BookCard book={bookQuery?.data} />}
                 </BookCardSkeleon>

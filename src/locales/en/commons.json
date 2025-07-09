@@ -1,3 +1,7 @@
 {
-  "actions": { "cancel": "Cancel", "update": "Update" }
+  "actions": {
+    "cancel": "Cancel",
+    "update": "Update",
+    "retry": "Retry"
+  }
 }
