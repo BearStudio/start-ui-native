@@ -1,5 +1,4 @@
 import { Formiz, useForm } from '@formiz/core';
-import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Box, Button, Text } from 'react-native-ficus-ui';
 
@@ -15,10 +14,8 @@ import { useDarkMode } from '@/theme/useDarkMode';
 const OnboardingPage = () => {
   const { t } = useTranslation('onboarding');
   const { showError, showSuccess } = useToast();
-  const router = useRouter();
   const { colorModeValue } = useDarkMode();
   const session = authClient.useSession();
-
   // 1) form setup
   const onboardingForm = useForm<{ name: string }>({
     onValidSubmit: (values) => {
@@ -31,8 +28,8 @@ const OnboardingPage = () => {
     {},
     {
       onSuccess: (_data, variables) => {
+        session?.refetch?.();
         showSuccess(t('feedbacks.success', { name: variables.name }));
-        router.replace('/(tabs)/home'); // or wherever you want to land
       },
       onError: (err) => {
         console.log(JSON.stringify(err, null, 2));
