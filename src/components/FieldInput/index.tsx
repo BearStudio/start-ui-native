@@ -1,8 +1,8 @@
 import React, { ForwardedRef, useEffect, useState } from 'react';
 
 import { FieldProps, useField } from '@formiz/core';
-import { TextInput, TextInputProps } from 'react-native';
-import { Input } from 'react-native-ficus-ui';
+import { TextInput } from 'react-native';
+import { Input, InputProps } from 'react-native-ficus-ui';
 
 import { FormGroup, FormGroupProps } from '@/components/FormGroup';
 
@@ -11,7 +11,7 @@ export type FieldInputProps<FormattedValue = string> = FieldProps<
   FormattedValue
 > &
   Omit<FormGroupProps, 'id'> & {
-    componentProps?: TextInputProps;
+    componentProps?: InputProps;
     InputComponent?: React.ElementType;
   };
 
