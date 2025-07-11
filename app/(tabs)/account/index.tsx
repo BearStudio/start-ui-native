@@ -10,6 +10,7 @@ import {
   Stack,
   Text,
   VStack,
+  useColorModeValue,
   useDisclosure,
 } from 'react-native-ficus-ui';
 
@@ -32,7 +33,6 @@ import {
 import useAuthStore from '@/modules/auth/auth.store';
 import { useToast } from '@/modules/toast/useToast';
 import ThemeSwitcher from '@/theme/ThemeSwitcher';
-import { useDarkMode } from '@/theme/useDarkMode';
 
 const Account = () => {
   const logout = useAuthStore((state) => state.logout);
@@ -43,8 +43,6 @@ const Account = () => {
   const logoutModal = useDisclosure();
   const deleteAccountModal = useDisclosure();
   const updateEmailCodeModal = useDisclosure();
-
-  const { colorModeValue, getThemeColor } = useDarkMode();
 
   const [emailToken, setEmailToken] = useState<string | null>(null);
 
@@ -131,6 +129,8 @@ const Account = () => {
     fields: ['confirmation'] as const,
   });
 
+  const dividerColor = useColorModeValue('gray.200', 'gray.700');
+
   const handlerValue = t(
     'account:confirmationModals.deleteAccount.input.validations.isValid.handlerValue'
   );
@@ -180,10 +180,7 @@ const Account = () => {
                   </Stack>
                 </Formiz>
               </Box>
-              <Divider
-                mt="xl"
-                borderColor={colorModeValue('gray.200', 'gray.700')}
-              />
+              <Divider mt="xl" borderColor={dividerColor} />
             </Box>
             <Stack spacing="md">
               <SectionTitle>{t('account:sections.email.title')}</SectionTitle>
@@ -221,10 +218,7 @@ const Account = () => {
                       {t('commons:actions.update')}
                     </Button>
                     {email === account.email ? (
-                      <Text
-                        fontSize="lg"
-                        color={colorModeValue('gray.500', 'gray.300')}
-                      >
+                      <Text fontSize="lg">
                         {t('account:sections.email.feedbacks.isEmail')}
                       </Text>
                     ) : (
@@ -232,13 +226,7 @@ const Account = () => {
                         onPress={() => emailForm.submit()}
                         isLoading={isUpdatingAccountEmail}
                         isDisabled={email === account.email}
-                        color={colorModeValue(
-                          getThemeColor('gray.500'),
-                          getThemeColor('gray.200')
-                        )}
-                        bg={colorModeValue('white', 'gray.700')}
-                        borderWidth={1}
-                        borderColor={colorModeValue('gray.200', 'gray.600')}
+                        variant="outline"
                         full
                       >
                         {t('commons:actions.cancel')}
@@ -247,10 +235,7 @@ const Account = () => {
                   </VStack>
                 </Stack>
               </Formiz>
-              <Divider
-                mt="xl"
-                borderColor={colorModeValue('gray.200', 'gray.700')}
-              />
+              <Divider mt="xl" borderColor={dividerColor} />
             </Stack>
             <Box>
               <SectionTitle>
@@ -258,31 +243,21 @@ const Account = () => {
               </SectionTitle>
               <VStack spacing="lg">
                 <ThemeSwitcher />
-                <Divider
-                  my="lg"
-                  borderColor={colorModeValue('gray.200', 'gray.700')}
-                />
+                <Divider my="lg" borderColor={dividerColor} />
                 <ButtonIcon
                   icon="logout"
                   onPress={logoutModal.onOpen}
+                  variant="outline"
+                  iconSet="AntDesign"
                   full
-                  iconColor={colorModeValue('red.500', 'red.400')}
-                  color={colorModeValue(
-                    getThemeColor('red.500'),
-                    getThemeColor('red.400')
-                  )}
-                  bg={colorModeValue('white', 'gray.700')}
-                  colorScheme="white"
-                  borderWidth={1}
-                  borderColor={colorModeValue('gray.200', 'gray.600')}
                 >
                   {t('account:actions.logout')}
                 </ButtonIcon>
                 <ButtonIcon
                   icon="trash"
-                  iconFamily="Feather"
                   onPress={deleteAccountModal.onOpen}
                   colorScheme="error"
+                  variant="outline"
                   full
                 >
                   {t('account:actions.deleteAccount')}
@@ -309,6 +284,7 @@ const Account = () => {
         confirmColorScheme="error"
         confirmLabel={t('account:confirmationModals.logout.confirmLabel')}
         confirmIcon="logout"
+        confirmIconSet="AntDesign"
         onConfirm={logout}
         onCancel={logoutModal.onClose}
         isOpen={logoutModal.isOpen}
@@ -334,11 +310,7 @@ const Account = () => {
               type="warning"
               title={t('account:confirmationModals.deleteAccount.card.title')}
             >
-              <Text
-                color={colorModeValue('gray.800', 'gray.100')}
-                fontWeight="bold"
-                mt="lg"
-              >
+              <Text fontWeight="bold" mt="lg">
                 {t('account:confirmationModals.deleteAccount.card.description')}
               </Text>
             </CardStatus>
@@ -353,7 +325,7 @@ const Account = () => {
               )}
               validations={[
                 {
-                  handler: (value) => value === handlerValue,
+                  handler: (value: string) => value === handlerValue,
                   message: t(
                     'account:confirmationModals.deleteAccount.input.validations.isValid.message',
                     {
@@ -363,6 +335,9 @@ const Account = () => {
                 },
               ]}
               InputComponent={DraggableModalInput}
+              componentProps={{
+                colorScheme: 'error',
+              }}
             />
           </Stack>
         </Formiz>

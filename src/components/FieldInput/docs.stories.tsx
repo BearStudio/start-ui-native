@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Formiz, useForm } from '@formiz/core';
 import { isEmail, isMinLength } from '@formiz/validations';
 import { Meta, StoryObj } from '@storybook/react';

@@ -1,8 +1,12 @@
 import React, { FC } from 'react';
 
-import { Box, BoxProps, Icon, Text } from 'react-native-ficus-ui';
-
-import { useDarkMode } from '@/theme/useDarkMode';
+import {
+  Box,
+  BoxProps,
+  Icon,
+  Text,
+  useColorModeValue,
+} from 'react-native-ficus-ui';
 
 type CardStatusProps = {
   title: string;
@@ -34,12 +38,11 @@ export const CardStatus: FC<CardStatusProps> = ({
   type,
   ...rest
 }) => {
-  const { colorModeValue } = useDarkMode();
   const { iconName, iconColor, iconColorDark } =
     statusStyles[type] || statusStyles.info;
   return (
     <Box
-      bg={colorModeValue('gray.200', 'gray.600')}
+      bg={useColorModeValue('gray.200', 'gray.600')}
       p="md"
       px="lg"
       borderRadius="md"
@@ -50,17 +53,11 @@ export const CardStatus: FC<CardStatusProps> = ({
       <Box flexDirection="row" alignItems="center">
         <Icon
           name={iconName}
-          fontFamily="AntDesign"
-          fontSize="xl"
-          color={colorModeValue(iconColor, iconColorDark)}
+          color={useColorModeValue(iconColor, iconColorDark)}
+          iconSet="AntDesign"
         />
         {title && (
-          <Text
-            fontSize="lg"
-            fontWeight="bold"
-            color={colorModeValue('gray.800', 'gray.100')}
-            ml="md"
-          >
+          <Text fontSize="lg" fontWeight="bold" ml="md">
             {title}
           </Text>
         )}

@@ -1,3 +1,9 @@
 {
-  "actions": { "cancel": "Cancel", "update": "Update" }
+  "actions": { "cancel": "Cancel", "update": "Update" },
+  "toast": {
+    "error": "Error",
+    "success": "Success",
+    "info": "Info",
+    "warning": "Warning"
+  }
 }

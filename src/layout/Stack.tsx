@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
 import { Stack as RouterStack } from 'expo-router';
+import { Dict, useColorModeValue, useTheme } from 'react-native-ficus-ui';
 
 import { FeatherIcons, TabBarIcon } from '@/components/TabBarIcon';
-import { useDarkMode } from '@/theme/useDarkMode';
 
 type StackProps = {
   initialRouteName?: string;
@@ -19,21 +19,23 @@ export const Stack: FC<StackProps> = ({
   initialRouteName = 'index',
   screens = [],
 }) => {
-  const { colorModeValue, getThemeColor } = useDarkMode();
+  const { theme } = useTheme();
+
+  const backgroundColor = useColorModeValue(
+    (theme?.colors?.gray as Dict)?.[100],
+    (theme?.colors?.gray as Dict)?.[800]
+  );
 
   return (
     <RouterStack
       initialRouteName={initialRouteName}
       screenOptions={{
         headerStyle: {
-          backgroundColor: colorModeValue(
-            getThemeColor('gray.100'),
-            getThemeColor('gray.800')
-          ),
+          backgroundColor,
         },
-        headerTintColor: colorModeValue(
-          getThemeColor('gray.800'),
-          getThemeColor('gray.100')
+        headerTintColor: useColorModeValue(
+          (theme?.colors?.gray as Dict)?.[800],
+          (theme?.colors?.gray as Dict)?.[100]
         ),
         headerTitleStyle: {
           fontWeight: 'bold',
@@ -48,10 +50,7 @@ export const Stack: FC<StackProps> = ({
             title: screen.title,
             tabBarIcon: screen.icon ? TabBarIcon(screen.icon) : undefined,
             contentStyle: {
-              backgroundColor: colorModeValue(
-                getThemeColor('gray.100'),
-                getThemeColor('gray.800')
-              ),
+              backgroundColor,
             },
             ...screen.options,
           }}

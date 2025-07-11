@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
 import { Tabs as RouterTabs } from 'expo-router';
+import { Dict, useColorModeValue, useTheme } from 'react-native-ficus-ui';
 
 import { FeatherIcons, TabBarIcon } from '@/components/TabBarIcon';
-import { useDarkMode } from '@/theme/useDarkMode';
 
 type TabsProps = {
   initialRouteName?: string;
@@ -19,19 +19,30 @@ export const Tabs: FC<TabsProps> = ({
   initialRouteName = 'index',
   screens = [],
 }) => {
-  const { colorModeValue, getThemeColor } = useDarkMode();
+  const { theme } = useTheme();
+
+  const tabBarActiveTintColor = useColorModeValue(
+    (theme?.colors?.gray as Dict)?.[800],
+    (theme?.colors?.gray as Dict)?.[100]
+  );
+
+  const tabBarInactiveTintColor = useColorModeValue(
+    (theme?.colors?.gray as Dict)?.[500],
+    (theme?.colors?.gray as Dict)?.[400]
+  );
+
   return (
     <RouterTabs
       initialRouteName={initialRouteName}
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: colorModeValue(
-            getThemeColor('gray.50'),
-            getThemeColor('gray.800')
+          backgroundColor: useColorModeValue(
+            (theme?.colors?.gray as Dict)?.[50],
+            (theme?.colors?.gray as Dict)?.[800]
           ),
-          borderTopColor: colorModeValue(
-            getThemeColor('gray.200'),
-            getThemeColor('gray.900')
+          borderTopColor: useColorModeValue(
+            (theme?.colors?.gray as Dict)?.[200],
+            (theme?.colors?.gray as Dict)?.[900]
           ),
         },
       }}
@@ -42,14 +53,8 @@ export const Tabs: FC<TabsProps> = ({
           name={screen.route}
           options={{
             title: screen.title,
-            tabBarActiveTintColor: colorModeValue(
-              getThemeColor('brand.800'),
-              getThemeColor('brand.100')
-            ),
-            tabBarInactiveTintColor: colorModeValue(
-              getThemeColor('gray.500'),
-              getThemeColor('gray.400')
-            ),
+            tabBarActiveTintColor,
+            tabBarInactiveTintColor,
             tabBarIcon: screen.icon ? TabBarIcon(screen.icon) : undefined,
             ...screen.options,
           }}

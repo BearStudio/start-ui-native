@@ -1,12 +1,10 @@
 import React, { ForwardedRef, useEffect, useState } from 'react';
 
 import { FieldProps, useField } from '@formiz/core';
-import { TextInput, TextInputProps, View } from 'react-native';
-import { CodeField, Cursor } from 'react-native-confirmation-code-field';
-import { Box, Center, Text } from 'react-native-ficus-ui';
+import { TextInput, TextInputProps } from 'react-native';
+import { Box, PinInput } from 'react-native-ficus-ui';
 
 import { FormGroup, FormGroupProps } from '@/components/FormGroup';
-import { useDarkMode } from '@/theme/useDarkMode';
 
 type FieldCodeInputProps<FormattedValue = string> = FieldProps<
   string,
@@ -41,8 +39,6 @@ export const FieldCodeInput = React.forwardRef(
       setIsTouched(false);
     }, [resetKey]);
 
-    const { colorModeValue } = useDarkMode();
-
     return (
       <FormGroup
         id={id}
@@ -53,32 +49,13 @@ export const FieldCodeInput = React.forwardRef(
         {...rest}
       >
         <Box mb="sm">
-          <CodeField
+          <PinInput
             ref={ref}
             value={value ?? ''}
             onChangeText={setValue}
-            cellCount={codeLength}
             keyboardType="number-pad"
             textContentType="oneTimeCode"
-            renderCell={({ index, symbol, isFocused }) => (
-              <View key={index}>
-                <Center
-                  bg={colorModeValue('gray.300', 'gray.600')}
-                  w={40}
-                  h={40}
-                  borderRadius="md"
-                  borderWidth={isFocused || showError ? 2 : 0}
-                  borderColor={showError ? 'red.500' : 'brand.500'}
-                >
-                  <Text
-                    color={colorModeValue('black', 'gray.100')}
-                    fontWeight="bold"
-                  >
-                    {symbol || (isFocused ? <Cursor /> : null)}
-                  </Text>
-                </Center>
-              </View>
-            )}
+            cellCount={codeLength}
             {...componentProps}
           />
         </Box>

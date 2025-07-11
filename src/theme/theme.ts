@@ -1,7 +1,16 @@
-import dark from '@/theme/themes/dark';
-import light from '@/theme/themes/light';
+import foundations from './foundations';
 
 export const theme = {
-  light,
-  dark,
+  name: 'startUINativeTheme',
+  ...foundations,
+  components: {
+    Modal: {
+      baseStyle: {
+        bg: 'gray.100',
+        _dark: {
+          bg: 'gray.900',
+        },
+      },
+    },
+  },
 };

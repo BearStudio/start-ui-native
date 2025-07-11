@@ -22,20 +22,15 @@ import {
   useAuthLoginValidate,
 } from '@/modules/auth/auth.service';
 import { useToast } from '@/modules/toast/useToast';
-import { useDarkMode } from '@/theme/useDarkMode';
 
 const CardInfoAuthStep = () => {
   const { t } = useTranslation();
   const loginForm = useFormContext();
-  const { colorModeValue } = useDarkMode();
+
   return (
     <CardStatus type="info" title={t('login:card.title')} mt="md">
       <Box flexDirection="row" alignItems="center" flexWrap="wrap">
-        <Text
-          fontSize="lg"
-          color={colorModeValue('gray.800', 'gray.50')}
-          my="sm"
-        >
+        <Text fontSize="lg" my="sm">
           {t('login:card.description')}{' '}
         </Text>
         <TouchableOpacity
@@ -44,7 +39,6 @@ const CardInfoAuthStep = () => {
           <Text
             fontSize="lg"
             fontWeight="700"
-            color={colorModeValue('gray.800', 'gray.50')}
             style={{ textDecorationLine: 'underline' }}
           >
             admin@admin.com
