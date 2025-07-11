@@ -119,8 +119,8 @@ importers:
         specifier: 7.4.0
         version: 7.4.0(react-native@0.79.2(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
       react-native-ficus-ui:
-        specifier: 2.0.0-alpha8
-        version: 2.0.0-alpha8(@babel/core@7.26.7)(@babel/runtime@7.26.7)(@types/react@19.0.14)(react-native-gesture-handler@2.25.0(react-native@0.79.2(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-reanimated@3.17.5(@babel/core@7.26.7)(react-native@0.79.2(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.2(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
+        specifier: 2.0.0
+        version: 2.0.0(@babel/core@7.26.7)(@babel/runtime@7.26.7)(@types/react@19.0.14)(react-native-gesture-handler@2.25.0(react-native@0.79.2(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-reanimated@3.17.5(@babel/core@7.26.7)(react-native@0.79.2(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.2(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
       react-native-gesture-handler:
         specifier: 2.25.0
         version: 2.25.0(react-native@0.79.2(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
@@ -5086,8 +5086,8 @@ packages:
       react: '*'
       react-native: '*'
 
-  react-native-ficus-ui@2.0.0-alpha8:
-    resolution: {integrity: sha512-Sl/Hs6ZNC+725zgG/d3HclXs9+erZ0bfHU3DbJwQ4CKFs8+YU1z7HJAkoaW+2aGqYvRAhsebROYkcIAx5rUu9g==}
+  react-native-ficus-ui@2.0.0:
+    resolution: {integrity: sha512-dO51ttP3ft3S89BlYvHrPjoxQbdek4xDS7JIMFjPTELjoFw+WAC9/AvRctGhiVIEdv38ApuqUjcS/in/TVNQ8w==}
     engines: {node: '>= 22.0.0'}
     peerDependencies:
       react: '*'
@@ -12297,7 +12297,7 @@ snapshots:
       react: 19.0.0
       react-native: 0.79.2(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0)
 
-  react-native-ficus-ui@2.0.0-alpha8(@babel/core@7.26.7)(@babel/runtime@7.26.7)(@types/react@19.0.14)(react-native-gesture-handler@2.25.0(react-native@0.79.2(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-reanimated@3.17.5(@babel/core@7.26.7)(react-native@0.79.2(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.2(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0):
+  react-native-ficus-ui@2.0.0(@babel/core@7.26.7)(@babel/runtime@7.26.7)(@types/react@19.0.14)(react-native-gesture-handler@2.25.0(react-native@0.79.2(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-reanimated@3.17.5(@babel/core@7.26.7)(react-native@0.79.2(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.2(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0):
     dependencies:
       '@chakra-ui/utils': 2.2.2(react@19.0.0)
       '@gorhom/bottom-sheet': 5.0.4(@types/react@19.0.14)(react-native-gesture-handler@2.25.0(react-native@0.79.2(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-reanimated@3.17.5(@babel/core@7.26.7)(react-native@0.79.2(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.2(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
