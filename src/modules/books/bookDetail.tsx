@@ -11,6 +11,7 @@ import {
   HStack,
   Stack,
   Text,
+  useColorModeValue,
 } from 'react-native-ficus-ui';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
@@ -19,12 +20,10 @@ import { Skeleton } from '@/components/Skeleton';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
 import { BookCard, BookCardSkeleon } from '@/modules/books/bookCard';
-import { useDarkMode } from '@/theme/useDarkMode';
 
 const BookDetails = () => {
   const { setOptions } = useNavigation();
   const { id, title } = useLocalSearchParams<{ id: string; title: string }>();
-  const { colorModeValue } = useDarkMode();
   const { t } = useTranslation('books');
 
   // fetch book
@@ -83,13 +82,13 @@ const BookDetails = () => {
             <Stack borderWidth={2} borderRadius="md" borderColor="gray.300">
               {/* Title */}
               <HStack justifyContent="space-between" alignItems="center" p={8}>
-                <Text color={colorModeValue('gray.600', 'gray.200')}>
+                <Text color={useColorModeValue('gray.600', 'gray.200')}>
                   {t('fields.title')}
                 </Text>
                 <Skeleton.Text visible={!bookQuery.isLoading}>
                   <Text
                     fontWeight="bold"
-                    color={colorModeValue('gray.900', 'gray.50')}
+                    color={useColorModeValue('gray.900', 'gray.50')}
                   >
                     {bookQuery.data?.title}
                   </Text>
@@ -99,11 +98,11 @@ const BookDetails = () => {
 
               {/* Author */}
               <HStack justifyContent="space-between" alignItems="center" p={8}>
-                <Text color={colorModeValue('gray.600', 'gray.200')}>
+                <Text color={useColorModeValue('gray.600', 'gray.200')}>
                   {t('fields.author')}
                 </Text>
                 <Skeleton.Text visible={!bookQuery.isLoading}>
-                  <Text color={colorModeValue('gray.900', 'gray.50')}>
+                  <Text color={useColorModeValue('gray.900', 'gray.50')}>
                     {bookQuery.data?.author}
                   </Text>
                 </Skeleton.Text>
@@ -112,7 +111,7 @@ const BookDetails = () => {
 
               {/* Genre */}
               <HStack justifyContent="space-between" alignItems="center" p={8}>
-                <Text color={colorModeValue('gray.600', 'gray.200')}>
+                <Text color={useColorModeValue('gray.600', 'gray.200')}>
                   {t('fields.genre')}
                 </Text>
                 <Skeleton.Text visible={!bookQuery.isLoading}>
@@ -123,7 +122,7 @@ const BookDetails = () => {
                       h={4}
                       borderRadius="full"
                     />
-                    <Text color={colorModeValue('gray.900', 'gray.50')}>
+                    <Text color={useColorModeValue('gray.900', 'gray.50')}>
                       {bookQuery.data?.genre?.name}
                     </Text>
                   </HStack>
@@ -133,11 +132,11 @@ const BookDetails = () => {
 
               {/* Publisher */}
               <HStack justifyContent="space-between" alignItems="center" p={8}>
-                <Text color={colorModeValue('gray.600', 'gray.200')}>
+                <Text color={useColorModeValue('gray.600', 'gray.200')}>
                   {t('fields.publisher')}
                 </Text>
                 <Skeleton.Text visible={!bookQuery.isLoading}>
-                  <Text color={colorModeValue('gray.900', 'gray.50')}>
+                  <Text color={useColorModeValue('gray.900', 'gray.50')}>
                     {(bookQuery.data?.publisher as string) ?? '—'}
                   </Text>
                 </Skeleton.Text>
@@ -146,11 +145,11 @@ const BookDetails = () => {
 
               {/* Created At */}
               <HStack justifyContent="space-between" alignItems="center" p={8}>
-                <Text color={colorModeValue('gray.600', 'gray.200')}>
+                <Text color={useColorModeValue('gray.600', 'gray.200')}>
                   {t('fields.createdAt')}
                 </Text>
                 <Skeleton.Text visible={!bookQuery.isLoading}>
-                  <Text color={colorModeValue('gray.900', 'gray.50')}>
+                  <Text color={useColorModeValue('gray.900', 'gray.50')}>
                     {dayjs(bookQuery.data?.createdAt).format('D MMMM YYYY')}
                   </Text>
                 </Skeleton.Text>
@@ -159,11 +158,11 @@ const BookDetails = () => {
 
               {/* Updated At */}
               <HStack justifyContent="space-between" alignItems="center" p={8}>
-                <Text color={colorModeValue('gray.600', 'gray.200')}>
+                <Text color={useColorModeValue('gray.600', 'gray.200')}>
                   {t('fields.updatedAt')}
                 </Text>
                 <Skeleton.Text visible={!bookQuery.isLoading}>
-                  <Text color={colorModeValue('gray.900', 'gray.50')}>
+                  <Text color={useColorModeValue('gray.900', 'gray.50')}>
                     {dayjs(bookQuery.data?.updatedAt).format('D MMMM YYYY')}
                   </Text>
                 </Skeleton.Text>

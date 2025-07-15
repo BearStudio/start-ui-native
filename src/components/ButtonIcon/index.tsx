@@ -1,43 +1,46 @@
 import { FC, PropsWithChildren } from 'react';
 
 import { Button, ButtonProps, Icon } from 'react-native-ficus-ui';
-import {
-  IconProps,
-  iconFontFamilyType,
-} from 'react-native-ficus-ui/lib/typescript/components/icon/icon.type';
 
 export type ButtonIconProps = ButtonProps & {
   icon?: string;
   iconSize?: string;
-  iconFamily?: iconFontFamilyType;
-  iconColor?: IconProps['color'];
+  iconSet?:
+    | 'Ionicons'
+    | 'AntDesign'
+    | 'Entypo'
+    | 'EvilIcons'
+    | 'Feather'
+    | 'FontAwesome'
+    | 'FontAwesome5'
+    | 'Foundation'
+    | 'MaterialIcons'
+    | 'MaterialCommunityIcons'
+    | 'Octicons'
+    | 'Zocial'
+    | 'Fontisto'
+    | 'SimpleLineIcons';
 };
 
 export const ButtonIcon: FC<PropsWithChildren<ButtonIconProps>> = ({
   icon,
   iconSize = 'xl',
-  iconFamily = 'AntDesign',
+  iconSet = 'Ionicons',
   children,
-  color = 'white',
-  iconColor = 'white',
+  color,
   ...rest
 }) => {
   return (
-    <Button
-      prefix={
-        icon ? (
-          <Icon
-            name={icon}
-            fontSize={iconSize}
-            fontFamily={iconFamily}
-            color={iconColor}
-            mr="md"
-          />
-        ) : undefined
-      }
-      color={color}
-      {...rest}
-    >
+    <Button color={color} {...rest}>
+      {icon ? (
+        <Icon
+          name={icon}
+          size={iconSize}
+          color={color}
+          iconSet={iconSet}
+          mr="md"
+        />
+      ) : undefined}
       {children}
     </Button>
   );

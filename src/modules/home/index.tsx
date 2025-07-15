@@ -9,11 +9,11 @@ import {
   Image,
   Text,
   VStack,
+  useColorModeValue,
 } from 'react-native-ficus-ui';
 
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
-import { useDarkMode } from '@/theme/useDarkMode';
 
 const HomePage = () => {
   return (
@@ -43,7 +43,6 @@ export const DemoCaption = () => {
 
 const DemoWelcome: React.FC = () => {
   const { t } = useTranslation('home');
-  const { colorModeValue } = useDarkMode();
 
   return (
     <VStack spacing="md" py="md">
@@ -51,11 +50,11 @@ const DemoWelcome: React.FC = () => {
         <Text
           fontSize="2xl"
           fontWeight="600"
-          color={colorModeValue('black', 'white')}
+          color={useColorModeValue('black', 'white')}
         >
           {t('home:welcome.title')}
         </Text>
-        <Text fontSize="md" color={colorModeValue('gray.600', 'gray.300')}>
+        <Text fontSize="md" color={useColorModeValue('gray.600', 'gray.300')}>
           {t('home:welcome.description')}
         </Text>
       </VStack>

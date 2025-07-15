@@ -1,9 +1,7 @@
-import React from 'react';
-
 import { QueryClientProvider } from '@tanstack/react-query';
 import { Slot } from 'expo-router';
 import { I18nextProvider } from 'react-i18next';
-import { ThemeProvider } from 'react-native-ficus-ui';
+import { FicusProvider } from 'react-native-ficus-ui';
 import {
   ReanimatedLogLevel,
   configureReanimatedLogger,
@@ -25,11 +23,11 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme.light}>
+      <FicusProvider theme={theme}>
         <I18nextProvider i18n={i18n}>
           <Slot />
         </I18nextProvider>
-      </ThemeProvider>
+      </FicusProvider>
     </QueryClientProvider>
   );
 }

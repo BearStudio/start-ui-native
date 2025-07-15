@@ -3,5 +3,11 @@
     "cancel": "Annuler",
     "update": "Mettre à jour",
     "retry": "Réessayer"
+  },
+  "toast": {
+    "error": "Erreur",
+    "success": "Succès",
+    "info": "Info",
+    "warning": "Avertissement"
   }
 }

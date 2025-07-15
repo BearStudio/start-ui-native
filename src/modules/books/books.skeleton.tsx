@@ -5,6 +5,7 @@ import { BookCardSkeleon } from '@/modules/books/bookCard';
 
 export const BooksSkeleton = ({ length }: { length: number }) => {
   const { theme } = useTheme();
+  console.log(theme?.space?.xl);
   return (
     <Animated.FlatList
       data={Array.from({ length }).map((_, index) => index)}
@@ -14,8 +15,8 @@ export const BooksSkeleton = ({ length }: { length: number }) => {
       numColumns={2}
       columnWrapperStyle={{ justifyContent: 'space-between', gap: 8 }}
       contentContainerStyle={{
-        paddingHorizontal: theme?.spacing?.xl,
-        paddingVertical: theme?.spacing?.md,
+        paddingHorizontal: theme?.space?.xl as number,
+        paddingVertical: theme?.space?.md as number,
         gap: 8,
         overflow: 'visible',
       }}

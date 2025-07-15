@@ -10,7 +10,8 @@
     "updateAccountEmail": {
       "error": {
         "demo": "Ceci est une démo en lecture seule, cette action est désactivée.",
-        "default": "Une erreur est survenue lors de la mise à jour de l'email du compte, veuillez réessayer"
+        "default": "Une erreur est survenue lors de la mise à jour de l'email du compte, veuillez réessayer",
+        "otpSend": "Une erreur s'est produite lors de l'envoi du code de vérification, veuillez réessayer"
       }
     },
     "updateAccountEmailValidate": {

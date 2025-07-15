@@ -1,6 +1,9 @@
 import { Stack } from '@/layout/Stack';
+import { useColorSchemeListener } from '@/theme/hooks';
 
 const Storybook = () => {
+  useColorSchemeListener();
+
   return (
     <Stack
       screens={[

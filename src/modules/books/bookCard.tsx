@@ -2,11 +2,17 @@ import React, { ReactNode } from 'react';
 
 import CoverSvg from '@assets/cover.svg';
 import { TouchableOpacity } from 'react-native';
-import { Box, BoxProps, Text } from 'react-native-ficus-ui';
+import {
+  Box,
+  BoxProps,
+  Dict,
+  Text,
+  useColorModeValue,
+  useTheme,
+} from 'react-native-ficus-ui';
 
 import { Skeleton } from '@/components/Skeleton';
 import { Book } from '@/modules/books/books.service';
-import { useDarkMode } from '@/theme/useDarkMode';
 
 const Card = (props: BoxProps) => {
   return (
@@ -49,8 +55,7 @@ export const BookCard: React.FC<{
   book: Book;
   onPress?: () => void;
 }> = ({ book, onPress }) => {
-  const { colorModeValue } = useDarkMode();
-  const bg = book.genre?.color ?? colorModeValue('gray.200', 'gray.700');
+  const bg = book.genre?.color ?? useColorModeValue('gray.200', 'gray.700');
 
   return (
     <TouchableOpacity onPress={onPress} style={{ flex: 1 }}>
@@ -80,14 +85,14 @@ export const BookCardSkeleon = ({
   visible?: boolean;
   children?: ReactNode;
 }) => {
-  const { getThemeColor } = useDarkMode();
+  const { theme } = useTheme();
   if (visible) {
     return <>{children}</>;
   }
   return (
     <Card flex={1}>
       {/* 3D SVG cover */}
-      <CardBackground color={getThemeColor('gray.300') ?? 'gray'} />
+      <CardBackground color={(theme?.colors?.gray as Dict)?.[300] ?? 'gray'} />
 
       {/* Title & author overlay */}
       <CardContent>

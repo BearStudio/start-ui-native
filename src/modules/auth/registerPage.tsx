@@ -5,7 +5,14 @@ import { isEmail } from '@formiz/validations';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { TextInput } from 'react-native';
-import { Box, Button, Stack, Text, useDisclosure } from 'react-native-ficus-ui';
+import {
+  Box,
+  Button,
+  Stack,
+  Text,
+  useColorModeValue,
+  useDisclosure,
+} from 'react-native-ficus-ui';
 
 import { CardStatus } from '@/components/CardStatus';
 import { ConfirmationCodeModal } from '@/components/ConfirmationCodeModal';
@@ -15,19 +22,17 @@ import { Content } from '@/layout/Content';
 import { Footer } from '@/layout/Footer';
 import { authClient } from '@/lib/auth-client';
 import { useToast } from '@/modules/toast/useToast';
-import { useDarkMode } from '@/theme/useDarkMode';
 import { focus } from '@/utils/formUtils';
 
 const CardWarningRegister = () => {
   const router = useRouter();
   const { t } = useTranslation();
-  const { colorModeValue } = useDarkMode();
   return (
     <CardStatus type="warning" title={t('register:card.title')} mt="md">
       <Box flexDirection="row" flexWrap="wrap">
         <Text
           fontSize="lg"
-          color={colorModeValue('gray.800', 'gray.50')}
+          color={useColorModeValue('gray.800', 'gray.50')}
           my="sm"
         >
           {t('register:card.description')}
@@ -36,8 +41,8 @@ const CardWarningRegister = () => {
           onPress={() => router.push('/login')}
           full
           colorScheme="brand"
-          bg={colorModeValue(undefined, 'gray.800')}
-          variant={colorModeValue('outline', 'solid')}
+          bg={useColorModeValue(undefined, 'gray.800')}
+          variant={useColorModeValue('outline', 'solid')}
         >
           {t('register:card.actions.login')}
         </Button>

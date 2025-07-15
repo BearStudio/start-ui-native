@@ -8,6 +8,7 @@ import {
   Icon,
   Text,
   TouchableOpacity,
+  useColorModeValue,
   useDisclosure,
 } from 'react-native-ficus-ui';
 
@@ -19,19 +20,17 @@ import { Content } from '@/layout/Content';
 import { Footer } from '@/layout/Footer';
 import { authClient } from '@/lib/auth-client';
 import { useToast } from '@/modules/toast/useToast';
-import { useDarkMode } from '@/theme/useDarkMode';
 
 const CardInfoAuthStep = () => {
   const { t } = useTranslation();
   const loginForm = useFormContext();
-  const { colorModeValue } = useDarkMode();
 
   return (
     <CardStatus type="info" title={t('login:card.title')} mt="md">
       <Box flexDirection="row" alignItems="center" flexWrap="wrap">
         <Text
           fontSize="lg"
-          color={colorModeValue('gray.800', 'gray.50')}
+          color={useColorModeValue('gray.800', 'gray.50')}
           my="sm"
         >
           {t('login:card.description')}{' '}
@@ -42,7 +41,7 @@ const CardInfoAuthStep = () => {
           <Text
             fontSize="lg"
             fontWeight="700"
-            color={colorModeValue('gray.800', 'gray.50')}
+            color={useColorModeValue('gray.800', 'gray.50')}
             style={{ textDecorationLine: 'underline' }}
           >
             admin@admin.com
@@ -67,9 +66,7 @@ const LoginPage = () => {
         if (error) {
           showError(
             error.code
-              ? t(
-                  `auth:errorCode.${error.code as unknown as keyof typeof authClient.$ERROR_CODES}`
-                )
+              ? t(`auth:errorCode.${String(error.code)}`)
               : t('login:feedbacks.error')
           );
           return;
@@ -164,8 +161,8 @@ const LoginPage = () => {
             full
             isLoading={social.isLoading}
             onPress={() => social.mutate('github')}
-            prefix={<Icon name="github" fontFamily="AntDesign" mr="md" />}
           >
+            <Icon name="github" iconSet="AntDesign" mr="md" />
             {t('login:actions.loginWithGitHub', { provider: 'GitHub' })}
           </Button>
         </Content>

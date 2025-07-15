@@ -1,9 +1,12 @@
 import { useTranslation } from 'react-i18next';
 
 import { Tabs } from '@/layout/Tabs';
+import { useColorSchemeListener } from '@/theme/hooks';
 
 const HomeTabs = () => {
   const { t } = useTranslation();
+
+  useColorSchemeListener();
 
   return (
     <Tabs

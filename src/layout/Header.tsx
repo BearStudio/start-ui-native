@@ -5,14 +5,14 @@ import { StatusBar } from 'react-native';
 import {
   Box,
   BoxProps,
-  Icon,
-  IconButton,
+  Dict,
   Text,
+  useColorModeValue,
   useTheme,
 } from 'react-native-ficus-ui';
 import Animated, { FadeInUp, FadeOutUp } from 'react-native-reanimated';
 
-import { useDarkMode } from '@/theme/useDarkMode';
+import { ButtonIcon } from '@/components/ButtonIcon';
 
 export const HEADER_HEIGHT = 64;
 
@@ -30,7 +30,6 @@ export const Header: FC<HeaderProps> = ({
 }) => {
   const router = useRouter();
   const { theme } = useTheme();
-  const { colorModeValue } = useDarkMode();
 
   const handleGoBack = () => {
     if (router.canGoBack()) {
@@ -45,20 +44,23 @@ export const Header: FC<HeaderProps> = ({
       style={{ position: 'relative', zIndex: 10 }}
     >
       <StatusBar
-        backgroundColor={colorModeValue(
+        backgroundColor={useColorModeValue(
           'white',
-          theme.colors?.gray?.[600] ?? 'gray'
+          (theme.colors?.gray as Dict)?.[600] ?? 'gray'
         )}
-        barStyle={colorModeValue('dark-content', 'light-content')}
+        barStyle={useColorModeValue('dark-content', 'light-content')}
       />
       <Box
         h={HEADER_HEIGHT}
         w="100%"
         flexDirection="row"
         alignItems="center"
-        bg={colorModeValue('white', theme.colors?.gray?.[600] ?? 'gray')}
-        style={{ gap: theme.spacing?.lg }}
-        borderColor={colorModeValue('gray.200', 'gray.700')}
+        bg={useColorModeValue(
+          'white',
+          (theme.colors?.gray as Dict)?.[600] ?? 'gray'
+        )}
+        style={{ gap: theme.space?.lg as number }}
+        borderColor={useColorModeValue('gray.200', 'gray.700')}
         borderWidth={1}
         borderTopWidth={0}
         px="lg"
@@ -67,13 +69,14 @@ export const Header: FC<HeaderProps> = ({
         {...rest}
       >
         {hasGoBack && router.canGoBack() ? (
-          <IconButton
+          <ButtonIcon
             variant="ghost"
             onPress={handleGoBack}
-            color={colorModeValue('gray.700', 'white')}
+            color={useColorModeValue('gray.700', 'white')}
             alignSelf="center"
             size="lg"
-            icon={<Icon fontFamily="Feather" name="arrow-left" fontSize="md" />}
+            icon="arrow-left"
+            iconSet="Feather"
           />
         ) : (
           <Box w={10} />
@@ -85,7 +88,7 @@ export const Header: FC<HeaderProps> = ({
             fontWeight="bold"
             numberOfLines={1}
             ellipsizeMode="tail"
-            color={colorModeValue('gray.800', 'gray.100')}
+            color={useColorModeValue('gray.800', 'gray.100')}
           >
             {title}
           </Text>

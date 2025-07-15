@@ -1,6 +1,6 @@
 import { Formiz, useForm } from '@formiz/core';
 import { useTranslation } from 'react-i18next';
-import { Box, Button, Text } from 'react-native-ficus-ui';
+import { Box, Button, Text, useColorModeValue } from 'react-native-ficus-ui';
 
 import { apiHooks } from '@/api/api-hooks';
 import { FieldInput } from '@/components/FieldInput';
@@ -9,12 +9,10 @@ import { Content } from '@/layout/Content';
 import { Footer } from '@/layout/Footer';
 import { authClient } from '@/lib/auth-client';
 import { useToast } from '@/modules/toast/useToast';
-import { useDarkMode } from '@/theme/useDarkMode';
 
 const OnboardingPage = () => {
   const { t } = useTranslation('onboarding');
   const { showError, showSuccess } = useToast();
-  const { colorModeValue } = useDarkMode();
   const session = authClient.useSession();
   // 1) form setup
   const onboardingForm = useForm<{ name: string }>({
@@ -47,12 +45,15 @@ const OnboardingPage = () => {
             <Text
               fontSize="lg"
               fontWeight="bold"
-              color={colorModeValue('gray.900', 'gray.50')}
+              color={useColorModeValue('gray.900', 'gray.50')}
               mb="sm"
             >
               {t('title')}
             </Text>
-            <Text fontSize="md" color={colorModeValue('gray.700', 'gray.400')}>
+            <Text
+              fontSize="md"
+              color={useColorModeValue('gray.700', 'gray.400')}
+            >
               {t('description')}
             </Text>
           </Box>

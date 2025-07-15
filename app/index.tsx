@@ -1,31 +1,32 @@
-import { useCallback, useContext, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar, View } from 'react-native';
-import { ThemeContext } from 'react-native-ficus-ui';
+import { View, useColorScheme } from 'react-native';
 
-import theme, { THEME_KEY } from '@/theme';
-import { useDarkMode } from '@/theme/useDarkMode';
+import { THEME_KEY } from '@/theme';
+import { useAppColorMode } from '@/theme/hooks';
 
 SplashScreen.preventAutoHideAsync();
 
 const Index = () => {
-  const { setTheme } = useContext(ThemeContext);
-  const { getThemeColor } = useDarkMode();
+  const { setDarkMode, setLightMode } = useAppColorMode();
+  const colorScheme = useColorScheme();
 
   const loadTheme = useCallback(async () => {
-    const themeValue = await AsyncStorage.getItem(THEME_KEY);
-    if (themeValue === 'dark') {
-      setTheme(theme.dark);
-      StatusBar.setBarStyle('light-content');
-      StatusBar.setBackgroundColor(getThemeColor('gray.800') || '');
+    if (colorScheme === 'dark') {
+      setDarkMode();
     } else {
-      setTheme(theme.light);
-      StatusBar.setBarStyle('dark-content');
-      StatusBar.setBackgroundColor(getThemeColor('gray.100') || '');
+      const themeValue = await AsyncStorage.getItem(THEME_KEY);
+      if (!!themeValue) {
+        if (themeValue === 'dark') {
+          setDarkMode();
+        } else {
+          setLightMode();
+        }
+      }
     }
-  }, [getThemeColor, setTheme]);
+  }, [setDarkMode, setLightMode, colorScheme]);
 
   useEffect(() => {
     loadTheme();

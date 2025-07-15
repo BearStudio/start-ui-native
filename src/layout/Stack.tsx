@@ -1,10 +1,10 @@
 import { ComponentProps, FC } from 'react';
 
 import { Stack as RouterStack } from 'expo-router';
+import { Dict, useColorModeValue, useTheme } from 'react-native-ficus-ui';
 
 import { FeatherIcons } from '@/components/TabBarIcon';
 import { Header } from '@/layout/Header';
-import { useDarkMode } from '@/theme/useDarkMode';
 
 type RouterStackComponentProps = ComponentProps<typeof RouterStack>;
 type RouterStackScreenComponentProps = ComponentProps<
@@ -28,7 +28,12 @@ export const Stack: FC<StackProps> = ({
   screens = [],
   ...rest
 }) => {
-  const { colorModeValue, getThemeColor } = useDarkMode();
+  const { theme } = useTheme();
+
+  const backgroundColor = useColorModeValue(
+    (theme?.colors?.gray as Dict)?.[100],
+    (theme?.colors?.gray as Dict)?.[800]
+  );
 
   return (
     <RouterStack initialRouteName={initialRouteName} {...rest}>
@@ -46,10 +51,7 @@ export const Stack: FC<StackProps> = ({
             options={{
               title: title,
               contentStyle: {
-                backgroundColor: colorModeValue(
-                  getThemeColor('gray.100'),
-                  getThemeColor('gray.800')
-                ),
+                backgroundColor,
               },
               header: ({ options }) => (
                 <Header title={options.title} hasGoBack={!isTabBarScreen} />

@@ -1,9 +1,12 @@
 import { useTranslation } from 'react-i18next';
 
 import { Stack } from '@/layout/Stack';
+import { useColorSchemeListener } from '@/theme/hooks';
 
 const AuthStack = () => {
   const { t } = useTranslation();
+
+  useColorSchemeListener();
 
   return (
     <Stack
