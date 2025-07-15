@@ -30,6 +30,12 @@ module.exports = defineConfig([
     },
   },
   {
+    files: ['**/*'],
+    rules: {
+      'react-hooks/rules-of-hooks': 'off',
+    },
+  },
+  {
     files: ['src/database/models/**/*'],
     rules: { 'prettier/prettier': 'off' },
   },

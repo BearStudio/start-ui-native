@@ -24,55 +24,60 @@ import { SectionTitle } from '@/components/SectionTitle';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
 import { LoadingScreen } from '@/layout/LoadingScreen';
-import {
-  useAccount,
-  useAccountUpdate,
-  useAccountUpdateEmail,
-  useAccountUpdateEmailValidate,
-} from '@/modules/account/account.service';
-import useAuthStore from '@/modules/auth/auth.store';
+import { authClient } from '@/lib/auth-client';
+import { useAccountUpdate } from '@/modules/account/account.service';
 import { useToast } from '@/modules/toast/useToast';
 import ThemeSwitcher from '@/theme/ThemeSwitcher';
 
-const Account = () => {
-  const logout = useAuthStore((state) => state.logout);
+const AccountPage = () => {
   const { t } = useTranslation();
-  const { account, isLoading, isError, refetch: refetchAccount } = useAccount();
+  const session = authClient.useSession();
   const { showError, showSuccess, showInfo } = useToast();
 
   const logoutModal = useDisclosure();
   const deleteAccountModal = useDisclosure();
   const updateEmailCodeModal = useDisclosure();
 
-  const [emailToken, setEmailToken] = useState<string | null>(null);
+  const dividerColor = useColorModeValue('gray.200', 'gray.700');
 
-  const submitValidationCodeEmail = (values: { code: string }) => {
-    updateAccountEmailValidate({ ...values, token: emailToken ?? '' });
-  };
+  const [pendingEmail, setPendingEmail] = useState<string | null>(null);
 
-  const emailValidationCodeForm = useForm({
-    onValidSubmit: submitValidationCodeEmail,
-  });
+  const { updateAccount: updateProfile, isLoading: isUpdatingProfile } =
+    useAccountUpdate({
+      onSuccess: () => {
+        showSuccess(t('account:feedbacks.updateAccount.success'));
+      },
+      onError: (err) => {
+        showError(
+          err.response?.data?.message?.startsWith('[DEMO]')
+            ? t('account:feedbacks.updateAccount.error.demo')
+            : t('account:feedbacks.updateAccount.error.default')
+        );
+      },
+    });
 
-  const { updateAccount, isLoading: isUpdatingAccount } = useAccountUpdate({
-    onSuccess: () => {
-      showSuccess(t('account:feedbacks.updateAccount.success'));
-      refetchAccount();
-    },
-    onError: (err) => {
-      showError(
-        err.response?.data?.message?.startsWith('[DEMO]')
-          ? t('account:feedbacks.updateAccount.error.demo')
-          : t('account:feedbacks.updateAccount.error.default')
-      );
-    },
-  });
-
-  const { updateAccountEmail, isLoading: isUpdatingAccountEmail } =
-    useAccountUpdateEmail({
-      onSuccess: (data) => {
-        setEmailToken(data.token);
-        updateEmailCodeModal.onOpen();
+  const { updateAccount: updateEmail, isLoading: isUpdatingEmail } =
+    useAccountUpdate({
+      onSuccess: () => {
+        if (pendingEmail) {
+          authClient.emailOtp
+            .sendVerificationOtp({
+              email: pendingEmail,
+              type: 'email-verification',
+            })
+            .catch((otpErr: ExplicitAny) => {
+              if (
+                !/email-verification email not implemented/.test(otpErr.message)
+              ) {
+                showError(
+                  t('account:feedbacks.updateAccountEmail.error.otpSend')
+                );
+              }
+            })
+            .finally(() => {
+              updateEmailCodeModal.onOpen();
+            });
+        }
       },
       onError: (err) => {
         showError(
@@ -83,44 +88,29 @@ const Account = () => {
       },
     });
 
-  const { updateAccountEmailValidate, isLoading: isValidatingAccountEmail } =
-    useAccountUpdateEmailValidate({
-      onSuccess: () => {
-        updateEmailCodeModal.onClose();
-        refetchAccount();
-        t('account:feedbacks.updateAccountEmailValidate.success');
-      },
-      onError: () => {
-        emailValidationCodeForm.setValues({
-          code: null,
-        });
-        emailValidationCodeForm.setErrors({
-          code: t('account:feedbacks.updateAccountEmailValidate.error'),
-        });
-      },
-    });
-
   const submitProfile = (values: { name: string }) => {
-    updateAccount({ ...values });
+    updateProfile({ name: values.name });
   };
 
   const submitEmail = (values: { email: string }) => {
-    updateAccountEmail({ ...values });
+    setPendingEmail(values.email);
+    updateEmail({ email: values.email });
   };
 
   const profileForm = useForm({ onValidSubmit: submitProfile });
   const emailForm = useForm({ onValidSubmit: submitEmail });
-  const deleteAccountForm = useForm({
-    onValidSubmit: () => {
-      deleteAccountModal.onClose();
-      showInfo(t('account:confirmationModals.deleteAccount.submit'));
-    },
-  });
 
   const { email } = useFormFields({
     connect: emailForm,
     selector: (field) => field.value,
     fields: ['email'] as const,
+  });
+
+  const deleteAccountForm = useForm({
+    onValidSubmit: () => {
+      deleteAccountModal.onClose();
+      showInfo(t('account:confirmationModals.deleteAccount.submit'));
+    },
   });
 
   const { confirmation } = useFormFields({
@@ -129,24 +119,38 @@ const Account = () => {
     fields: ['confirmation'] as const,
   });
 
-  const dividerColor = useColorModeValue('gray.200', 'gray.700');
-
   const handlerValue = t(
     'account:confirmationModals.deleteAccount.input.validations.isValid.handlerValue'
   );
 
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
+  const submitValidationCodeEmail = (values: { code: string }) => {
+    if (!pendingEmail) {
+      showError(t('account:feedbacks.updateAccountEmailValidate.error'));
+      return;
+    }
+    authClient.emailOtp
+      .verifyEmail({
+        email: pendingEmail,
+        otp: values.code,
+      })
+      .then(() => {
+        updateEmailCodeModal.onClose();
+        showSuccess(t('account:feedbacks.updateAccountEmailValidate.success'));
+      })
+      .catch(() => {
+        emailValidationCodeForm.setValues({ code: '' });
+        emailValidationCodeForm.setErrors({
+          code: t('account:feedbacks.updateAccountEmailValidate.error'),
+        });
+      });
+  };
 
-  if (isError || !account) {
-    return (
-      <Box flex={1} p={20}>
-        <Button onPress={() => refetchAccount()}>
-          {t('account:actions.retry')}
-        </Button>
-      </Box>
-    );
+  const emailValidationCodeForm = useForm({
+    onValidSubmit: submitValidationCodeEmail,
+  });
+
+  if (session.isPending) {
+    return <LoadingScreen />;
   }
 
   return (
@@ -163,7 +167,7 @@ const Account = () => {
                       name="name"
                       label={t('account:sections.profile.input.label')}
                       required={t('account:sections.profile.input.required')}
-                      defaultValue={account.name}
+                      defaultValue={session.data?.user.name}
                       componentProps={{
                         autoCapitalize: 'none',
                         returnKeyType: 'next',
@@ -172,7 +176,7 @@ const Account = () => {
                     <Button
                       onPress={() => profileForm.submit()}
                       colorScheme="brand"
-                      isLoading={isUpdatingAccount}
+                      isLoading={isUpdatingProfile}
                       full
                     >
                       {t('commons:actions.update')}
@@ -182,6 +186,7 @@ const Account = () => {
               </Box>
               <Divider mt="xl" borderColor={dividerColor} />
             </Box>
+
             <Stack spacing="md">
               <SectionTitle>{t('account:sections.email.title')}</SectionTitle>
               <Formiz connect={emailForm}>
@@ -190,7 +195,7 @@ const Account = () => {
                     name="email"
                     label={t('account:sections.email.input.label')}
                     required={t('account:sections.email.input.required')}
-                    defaultValue={account.email as string}
+                    defaultValue={(session.data?.user.email as string) || ''}
                     validations={[
                       {
                         handler: isEmail(),
@@ -211,21 +216,27 @@ const Account = () => {
                     <Button
                       onPress={() => emailForm.submit()}
                       colorScheme="brand"
-                      isLoading={isUpdatingAccountEmail}
-                      isDisabled={email === account.email}
+                      isLoading={isUpdatingEmail}
+                      isDisabled={email === session.data?.user.email}
                       full
                     >
                       {t('commons:actions.update')}
                     </Button>
-                    {email === account.email ? (
-                      <Text fontSize="lg">
+                    {email === session.data?.user.email ? (
+                      <Text
+                        fontSize="lg"
+                        color={useColorModeValue('gray.500', 'gray.300')}
+                      >
                         {t('account:sections.email.feedbacks.isEmail')}
                       </Text>
                     ) : (
                       <Button
-                        onPress={() => emailForm.submit()}
-                        isLoading={isUpdatingAccountEmail}
-                        isDisabled={email === account.email}
+                        onPress={() =>
+                          emailForm.reset({
+                            email: session.data?.user.email as string,
+                          } as any)
+                        }
+                        isDisabled={isUpdatingEmail}
                         variant="outline"
                         full
                       >
@@ -237,6 +248,7 @@ const Account = () => {
               </Formiz>
               <Divider mt="xl" borderColor={dividerColor} />
             </Stack>
+
             <Box>
               <SectionTitle>
                 {t('account:sections.preferences.title')}
@@ -274,8 +286,8 @@ const Account = () => {
         isOpen={updateEmailCodeModal.isOpen}
         onClose={updateEmailCodeModal.onClose}
         form={emailValidationCodeForm}
-        email={account.email as string}
-        isLoadingConfirm={isValidatingAccountEmail}
+        email={pendingEmail || (session.data?.user.email as string)}
+        isLoadingConfirm={emailValidationCodeForm.isValidating}
       />
 
       <ConfirmationModal
@@ -284,8 +296,7 @@ const Account = () => {
         confirmColorScheme="error"
         confirmLabel={t('account:confirmationModals.logout.confirmLabel')}
         confirmIcon="logout"
-        confirmIconSet="AntDesign"
-        onConfirm={logout}
+        onConfirm={() => authClient.signOut()}
         onCancel={logoutModal.onClose}
         isOpen={logoutModal.isOpen}
         h={250}
@@ -310,7 +321,11 @@ const Account = () => {
               type="warning"
               title={t('account:confirmationModals.deleteAccount.card.title')}
             >
-              <Text fontWeight="bold" mt="lg">
+              <Text
+                color={useColorModeValue('gray.800', 'gray.100')}
+                fontWeight="bold"
+                mt="lg"
+              >
                 {t('account:confirmationModals.deleteAccount.card.description')}
               </Text>
             </CardStatus>
@@ -335,9 +350,6 @@ const Account = () => {
                 },
               ]}
               InputComponent={DraggableModalInput}
-              componentProps={{
-                colorScheme: 'error',
-              }}
             />
           </Stack>
         </Formiz>
@@ -346,4 +358,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default AccountPage;

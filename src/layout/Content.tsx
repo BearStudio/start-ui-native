@@ -7,7 +7,12 @@ export const Content: FC<PropsWithChildren<FlexProps>> = ({
   ...rest
 }) => {
   return (
-    <ScrollBox flex={1} p="xl" minH="100%" {...rest}>
+    <ScrollBox
+      flexGrow={1}
+      p="xl"
+      contentContainerStyle={{ flex: 1 }}
+      {...rest}
+    >
       {children}
     </ScrollBox>
   );
