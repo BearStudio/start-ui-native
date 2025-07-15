@@ -6,13 +6,13 @@ import {
   Box,
   BoxProps,
   Dict,
+  Icon,
+  IconButton,
   Text,
   useColorModeValue,
   useTheme,
 } from 'react-native-ficus-ui';
 import Animated, { FadeInUp, FadeOutUp } from 'react-native-reanimated';
-
-import { ButtonIcon } from '@/components/ButtonIcon';
 
 export const HEADER_HEIGHT = 64;
 
@@ -69,14 +69,14 @@ export const Header: FC<HeaderProps> = ({
         {...rest}
       >
         {hasGoBack && router.canGoBack() ? (
-          <ButtonIcon
+          <IconButton
             variant="ghost"
             onPress={handleGoBack}
             color={useColorModeValue('gray.700', 'white')}
             alignSelf="center"
-            size="lg"
-            icon="arrow-left"
-            iconSet="Feather"
+            size="xl"
+            icon={<Icon name="arrow-left" iconSet="Feather" />}
+            rounded="full"
           />
         ) : (
           <Box w={10} />

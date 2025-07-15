@@ -5,7 +5,6 @@ import { BookCardSkeleon } from '@/modules/books/bookCard';
 
 export const BooksSkeleton = ({ length }: { length: number }) => {
   const { theme } = useTheme();
-  console.log(theme?.space?.xl);
   return (
     <Animated.FlatList
       data={Array.from({ length }).map((_, index) => index)}
