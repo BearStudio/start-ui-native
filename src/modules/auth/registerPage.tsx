@@ -1,11 +1,18 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import { Formiz, useForm, useFormFields } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { TextInput } from 'react-native';
-import { Box, Button, Stack, Text, useDisclosure } from 'react-native-ficus-ui';
+import {
+  Box,
+  Button,
+  Stack,
+  Text,
+  useColorModeValue,
+  useDisclosure,
+} from 'react-native-ficus-ui';
 
 import { CardStatus } from '@/components/CardStatus';
 import { ConfirmationCodeModal } from '@/components/ConfirmationCodeModal';
@@ -13,24 +20,30 @@ import { FieldInput } from '@/components/FieldInput';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
 import { Footer } from '@/layout/Footer';
-import {
-  useAuthRegister,
-  useAuthRegisterValidate,
-} from '@/modules/account/account.service';
+import { authClient } from '@/lib/auth-client';
 import { useToast } from '@/modules/toast/useToast';
 import { focus } from '@/utils/formUtils';
 
 const CardWarningRegister = () => {
   const router = useRouter();
   const { t } = useTranslation();
-
   return (
     <CardStatus type="warning" title={t('register:card.title')} mt="md">
       <Box flexDirection="row" flexWrap="wrap">
-        <Text fontSize="lg" my="sm">
+        <Text
+          fontSize="lg"
+          color={useColorModeValue('gray.800', 'gray.50')}
+          my="sm"
+        >
           {t('register:card.description')}
         </Text>
-        <Button onPress={() => router.push('/login')} full colorScheme="brand">
+        <Button
+          onPress={() => router.push('/login')}
+          full
+          colorScheme="brand"
+          bg={useColorModeValue(undefined, 'gray.800')}
+          variant={useColorModeValue('outline', 'solid')}
+        >
           {t('register:card.actions.login')}
         </Button>
       </Box>
@@ -38,20 +51,35 @@ const CardWarningRegister = () => {
   );
 };
 
-const Register = () => {
+const RegisterPage = () => {
   const { showError, showSuccess } = useToast();
   const { t } = useTranslation();
   const nameRef = useRef<TextInput>(null);
   const validateEmailCodeModal = useDisclosure();
-  const [emailToken, setEmailToken] = useState<string | null>(null);
-
-  const submitForm = (values: { email: string; name: string }) => {
-    createAccount({
-      ...values,
-    });
-  };
-
-  const registerForm = useForm({ onValidSubmit: submitForm });
+  const registerForm = useForm<{ email: string; name: string }>({
+    onValidSubmit: async ({ email, name }) => {
+      try {
+        const { error } = await authClient.emailOtp.sendVerificationOtp({
+          email,
+          type: 'sign-in',
+        });
+        if (error) {
+          showError(
+            error.code
+              ? t(
+                  `auth:errorCode.${error.code as unknown as keyof typeof authClient.$ERROR_CODES}`
+                )
+              : t('register:feedbacks.createAccount.error.default')
+          );
+          return;
+        }
+        validateEmailCodeModal.onOpen();
+      } catch (err) {
+        showError(t('register:feedbacks.createAccount.error.default'));
+        console.error('sendVerificationOtp error:', err);
+      }
+    },
+  });
 
   const { email } = useFormFields({
     connect: registerForm,
@@ -59,43 +87,31 @@ const Register = () => {
     fields: ['email'] as const,
   });
 
-  const submitValidationCodeEmail = (values: { code: string }) => {
-    accountValidate({ ...values });
-  };
-
   const emailValidationCodeForm = useForm({
-    onValidSubmit: submitValidationCodeEmail,
-  });
-
-  const { createAccount, isLoading } = useAuthRegister({
-    onSuccess: (data) => {
-      setEmailToken(data.token);
-      validateEmailCodeModal.onOpen();
-    },
-    onError: (err) => {
-      showError(
-        err.response?.data?.message?.startsWith('[DEMO]')
-          ? t('register:feedbacks.createAccount.error.demo')
-          : t('register:feedbacks.createAccount.error.default')
-      );
-    },
-  });
-
-  const { accountValidate, isLoading: isLoadingValidate } =
-    useAuthRegisterValidate(emailToken as string, {
-      onSuccess: () => {
+    onValidSubmit: async (values: { code: string }) => {
+      try {
+        const { error } = await authClient.signIn.emailOtp({
+          email,
+          otp: values.code,
+        });
+        if (error) {
+          emailValidationCodeForm.setValues({ code: '' });
+          emailValidationCodeForm.setErrors({
+            code: t('register:feedbacks.accountValidate.error'),
+          });
+          return;
+        }
         validateEmailCodeModal.onClose();
         showSuccess(t('register:feedbacks.accountValidate.success'));
-      },
-      onError: () => {
-        emailValidationCodeForm.setValues({
-          code: null,
-        });
+      } catch (err) {
+        emailValidationCodeForm.setValues({ code: '' });
         emailValidationCodeForm.setErrors({
           code: t('register:feedbacks.accountValidate.error'),
         });
-      },
-    });
+        console.error('verify emailOtp error:', err);
+      }
+    },
+  });
 
   return (
     <Container>
@@ -140,7 +156,7 @@ const Register = () => {
         <Footer>
           <Button
             onPress={() => registerForm.submit()}
-            isLoading={isLoading}
+            isLoading={registerForm.isValidating}
             isDisabled={registerForm.isSubmitted && !registerForm.isValid}
             colorScheme="brand"
             full
@@ -155,10 +171,10 @@ const Register = () => {
         onClose={validateEmailCodeModal.onClose}
         form={emailValidationCodeForm}
         email={email}
-        isLoadingConfirm={isLoadingValidate}
+        isLoadingConfirm={emailValidationCodeForm.isValidating}
       />
     </Container>
   );
 };
 
-export default Register;
+export default RegisterPage;

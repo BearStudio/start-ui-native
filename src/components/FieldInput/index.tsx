@@ -2,7 +2,7 @@ import React, { ForwardedRef, useEffect, useState } from 'react';
 
 import { FieldProps, useField } from '@formiz/core';
 import { TextInput } from 'react-native';
-import { Input, InputProps } from 'react-native-ficus-ui';
+import { Input, InputProps, useColorModeValue } from 'react-native-ficus-ui';
 
 import { FormGroup, FormGroupProps } from '@/components/FormGroup';
 
@@ -63,6 +63,7 @@ export const FieldInput = React.forwardRef(
           onChangeText={setValue}
           onBlur={handleBlur}
           my={5}
+          placeholderTextColor={useColorModeValue('brand.600', 'white')}
           {...componentProps}
         />
       </FormGroup>

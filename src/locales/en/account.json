@@ -7,10 +7,12 @@
         "default": "An error occured during account update, please try again"
       }
     },
+
     "updateAccountEmail": {
       "error": {
         "demo": "This is a read-only demo, this action is disabled.",
-        "default": "An error occured during account email update, please try again"
+        "default": "An error occurred during account email update, please try again",
+        "otpSend": "An error occurred while sending the verification code, please try again"
       }
     },
     "updateAccountEmailValidate": {
