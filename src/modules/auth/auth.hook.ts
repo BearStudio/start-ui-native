@@ -28,7 +28,7 @@ const useProtectedRoute = () => {
       if (process.env.STORYBOOK_ENABLED === 'true') {
         router.replace('/storybook');
       } else if (!isAuthentificated) {
-        router.replace('/(auth)/welcome');
+        router.replace('/(auth)/login');
       } else if (isAuthentificated && !isOnboarded) {
         router.replace('/(auth)/onboarding');
       } else {

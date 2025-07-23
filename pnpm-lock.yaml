@@ -31,6 +31,9 @@ importers:
       '@react-native-async-storage/async-storage':
         specifier: 2.1.2
         version: 2.1.2(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))
+      '@react-native-picker/picker':
+        specifier: 2.11.1
+        version: 2.11.1(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
       '@tanstack/react-query':
         specifier: 4.29.25
         version: 4.29.25(react-dom@19.0.0(react@19.0.0))(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
@@ -112,6 +115,9 @@ importers:
       i18next:
         specifier: 23.12.7
         version: 23.12.7
+      lucide-react-native:
+        specifier: ^0.525.0
+        version: 0.525.0(react-native-svg@15.11.2(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
       prettier:
         specifier: 3.4.2
         version: 3.4.2
@@ -208,7 +214,7 @@ importers:
         version: 8.5.2(prettier@3.4.2)(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)(storybook@8.6.14(prettier@3.4.2))
       '@storybook/addon-ondevice-controls':
         specifier: 8.5.2
-        version: 8.5.2(2qwhacnbzxepuwj63ezb2ncqi4)
+        version: 8.5.2(pqbax2xgph6gmter56ctkk2jlm)
       '@storybook/react-native':
         specifier: 8.5.2
         version: 8.5.2(ewerywlwhuufgszfnroalynaku)
@@ -1736,6 +1742,12 @@ packages:
 
   '@react-native-picker/picker@2.11.0':
     resolution: {integrity: sha512-QuZU6gbxmOID5zZgd/H90NgBnbJ3VV6qVzp6c7/dDrmWdX8S0X5YFYgDcQFjE3dRen9wB9FWnj2VVdPU64adSg==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+
+  '@react-native-picker/picker@2.11.1':
+    resolution: {integrity: sha512-ThklnkK4fV3yynnIIRBkxxjxR4IFbdMNJVF6tlLdOJ/zEFUEFUEdXY0KmH0iYzMwY8W4/InWsLiA7AkpAbnexA==}
     peerDependencies:
       react: '*'
       react-native: '*'
@@ -4588,6 +4600,13 @@ packages:
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
+
+  lucide-react-native@0.525.0:
+    resolution: {integrity: sha512-f9iIdoZJCDIXhzAMQCNgaiWdiq42ls5ieXvVXwlNHN1q7c5zC1n1U0yOVu6J0oNSF8zvYqY3pK3UPOX+T2YpIQ==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-native: '*'
+      react-native-svg: ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0
 
   makeerror@1.0.12:
     resolution: {integrity: sha512-JmqCvUhmt43madlpFzG4BQzG2Z3m6tvQDNKdClZnO3VbIudJYmxsT0FNJMeiB2+JTSlTQTSbU8QdesVmwJcmLg==}
@@ -8356,6 +8375,11 @@ snapshots:
       react: 19.0.0
       react-native: 0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0)
 
+  '@react-native-picker/picker@2.11.1(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)':
+    dependencies:
+      react: 19.0.0
+      react-native: 0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0)
+
   '@react-native/assets-registry@0.79.5': {}
 
   '@react-native/babel-plugin-codegen@0.79.2(@babel/core@7.26.7)':
@@ -8744,7 +8768,7 @@ snapshots:
       storybook: 8.6.14(prettier@2.8.8)
       uuid: 9.0.1
 
-  '@storybook/addon-controls@8.6.14(storybook@8.6.14(prettier@3.4.2))':
+  '@storybook/addon-controls@8.6.14(storybook@8.6.14(prettier@2.8.8))':
     dependencies:
       '@storybook/global': 5.0.0
       dequal: 2.0.3
@@ -8766,15 +8790,15 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@storybook/addon-ondevice-controls@8.5.2(2qwhacnbzxepuwj63ezb2ncqi4)':
+  '@storybook/addon-ondevice-controls@8.5.2(pqbax2xgph6gmter56ctkk2jlm)':
     dependencies:
       '@gorhom/bottom-sheet': 5.0.4(@types/react@19.0.14)(react-native-gesture-handler@2.25.0(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-reanimated@3.17.5(@babel/core@7.26.7)(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
       '@react-native-community/datetimepicker': 8.3.0(expo@53.0.19(@babel/core@7.26.7)(@expo/metro-runtime@5.0.4(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0)))(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
       '@react-native-community/slider': 4.5.4
-      '@storybook/addon-controls': 8.6.14(storybook@8.6.14(prettier@3.4.2))
+      '@storybook/addon-controls': 8.6.14(storybook@8.6.14(prettier@2.8.8))
       '@storybook/core': 8.6.14(prettier@3.4.2)(storybook@8.6.14(prettier@3.4.2))
       '@storybook/react-native-theming': 8.6.4(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
-      '@storybook/react-native-ui': 8.6.4(jn7blfpwiy2yi23nkoq4vo6zva)
+      '@storybook/react-native-ui': 8.6.4(k2iozjmbigaoooaisx3nnghzqe)
       deep-equal: 1.1.2
       prop-types: 15.8.1
       react: 19.0.0
@@ -8796,7 +8820,7 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@storybook/components@8.6.14(storybook@8.6.14(prettier@3.4.2))':
+  '@storybook/components@8.6.14(storybook@8.6.14(prettier@2.8.8))':
     dependencies:
       storybook: 8.6.14(prettier@2.8.8)
 
@@ -8848,15 +8872,15 @@ snapshots:
 
   '@storybook/global@5.0.0': {}
 
-  '@storybook/manager-api@8.6.14(storybook@8.6.14(prettier@3.4.2))':
+  '@storybook/manager-api@8.6.14(storybook@8.6.14(prettier@2.8.8))':
     dependencies:
       storybook: 8.6.14(prettier@2.8.8)
 
-  '@storybook/preview-api@8.6.14(storybook@8.6.14(prettier@3.4.2))':
+  '@storybook/preview-api@8.6.14(storybook@8.6.14(prettier@2.8.8))':
     dependencies:
       storybook: 8.6.14(prettier@2.8.8)
 
-  '@storybook/react-dom-shim@8.6.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.14(prettier@3.4.2))':
+  '@storybook/react-dom-shim@8.6.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.14(prettier@2.8.8))':
     dependencies:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
@@ -8868,11 +8892,11 @@ snapshots:
       react: 19.0.0
       react-native: 0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0)
 
-  '@storybook/react-native-ui@8.6.4(jn7blfpwiy2yi23nkoq4vo6zva)':
+  '@storybook/react-native-ui@8.6.4(k2iozjmbigaoooaisx3nnghzqe)':
     dependencies:
       '@gorhom/bottom-sheet': 5.0.4(@types/react@19.0.14)(react-native-gesture-handler@2.25.0(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-reanimated@3.17.5(@babel/core@7.26.7)(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
       '@storybook/core': 8.6.14(prettier@3.4.2)(storybook@8.6.14(prettier@3.4.2))
-      '@storybook/react': 8.6.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.14(prettier@3.4.2))(typescript@5.8.3)
+      '@storybook/react': 8.6.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.14(prettier@2.8.8))(typescript@5.8.3)
       '@storybook/react-native-theming': 8.6.4(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
       fuse.js: 7.1.0
       lodash: 4.17.21
@@ -8899,7 +8923,7 @@ snapshots:
     dependencies:
       '@gorhom/bottom-sheet': 5.0.4(@types/react@19.0.14)(react-native-gesture-handler@2.25.0(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-reanimated@3.17.5(@babel/core@7.26.7)(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
       '@storybook/core': 8.6.14(prettier@2.8.8)(storybook@8.6.14(prettier@3.4.2))
-      '@storybook/react': 8.6.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.14(prettier@3.4.2))(typescript@5.8.3)
+      '@storybook/react': 8.6.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.14(prettier@2.8.8))(typescript@5.8.3)
       '@storybook/react-native-theming': 8.6.4(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
       fuse.js: 7.1.0
       lodash: 4.17.21
@@ -8928,7 +8952,7 @@ snapshots:
       '@storybook/core': 8.6.14(prettier@2.8.8)(storybook@8.6.14(prettier@3.4.2))
       '@storybook/csf': 0.1.13
       '@storybook/global': 5.0.0
-      '@storybook/react': 8.6.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.14(prettier@3.4.2))(typescript@5.8.3)
+      '@storybook/react': 8.6.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.14(prettier@2.8.8))(typescript@5.8.3)
       '@storybook/react-native-theming': 8.6.4(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
       '@storybook/react-native-ui': 8.6.4(o7jckycdyq3wax2fgiiajbcjfm)
       chokidar: 3.6.0
@@ -8959,13 +8983,13 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@storybook/react@8.6.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.14(prettier@3.4.2))(typescript@5.8.3)':
+  '@storybook/react@8.6.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.14(prettier@2.8.8))(typescript@5.8.3)':
     dependencies:
-      '@storybook/components': 8.6.14(storybook@8.6.14(prettier@3.4.2))
+      '@storybook/components': 8.6.14(storybook@8.6.14(prettier@2.8.8))
       '@storybook/global': 5.0.0
-      '@storybook/manager-api': 8.6.14(storybook@8.6.14(prettier@3.4.2))
-      '@storybook/preview-api': 8.6.14(storybook@8.6.14(prettier@3.4.2))
-      '@storybook/react-dom-shim': 8.6.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.14(prettier@3.4.2))
+      '@storybook/manager-api': 8.6.14(storybook@8.6.14(prettier@2.8.8))
+      '@storybook/preview-api': 8.6.14(storybook@8.6.14(prettier@2.8.8))
+      '@storybook/react-dom-shim': 8.6.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.14(prettier@2.8.8))
       '@storybook/theming': 8.6.14(storybook@8.6.14(prettier@3.4.2))
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
@@ -11947,6 +11971,12 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
+
+  lucide-react-native@0.525.0(react-native-svg@15.11.2(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0):
+    dependencies:
+      react: 19.0.0
+      react-native: 0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0)
+      react-native-svg: 15.11.2(react-native@0.79.5(@babel/core@7.26.7)(@react-native-community/cli@15.0.1(typescript@5.8.3))(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
 
   makeerror@1.0.12:
     dependencies:

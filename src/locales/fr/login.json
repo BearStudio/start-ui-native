@@ -1,7 +1,8 @@
 {
+  "title": "Connexion ou inscription",
+  "subtitle": "Entrez votre email pour vous connecter ou créer un compte",
   "card": {
-    "title": "Mode démo",
-    "description": "Profitez des fonctionnalités ! Vous pouvez vous connecter avec"
+    "or": "OU"
   },
   "feedbacks": {
     "error": "Échec de la connexion. Veuillez réessayer"
@@ -10,15 +11,25 @@
     "success": "Connexion réussie",
     "error": "Le code est incorrect, veuillez réessayer"
   },
+  "verification": {
+    "back": "Retour",
+    "title": "Vérification",
+    "description": "Nous avons envoyé un code à {{email}}. Entrez-le ci-dessous.",
+    "required": "Le code est requis",
+    "confirm": "Confirmer",
+    "resend": "Renvoyer le code",
+    "expires": "Le code expire bientôt (5 minutes)"
+  },
   "input": {
     "label": "Adresse email",
     "required": "L'email est requis",
+    "placeholder": "Email",
     "validations": {
       "email": "L'email est invalide"
     }
   },
   "actions": {
-    "login": "Se connecter",
+    "login": "Continuez avec Email",
     "loginWithGitHub": "Connecter avec GitHub"
   }
 }

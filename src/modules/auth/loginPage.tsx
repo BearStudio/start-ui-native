@@ -1,63 +1,54 @@
-import { Formiz, useForm, useFormContext, useFormFields } from '@formiz/core';
+import { Formiz, useForm } from '@formiz/core';
 import { isEmail } from '@formiz/validations';
 import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import {
   Box,
   Button,
-  Icon,
+  HStack,
   Text,
-  TouchableOpacity,
   useColorModeValue,
-  useDisclosure,
 } from 'react-native-ficus-ui';
 
-import { CardStatus } from '@/components/CardStatus';
-import { ConfirmationCodeModal } from '@/components/ConfirmationCodeModal';
 import { FieldInput } from '@/components/FieldInput';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
-import { Footer } from '@/layout/Footer';
+import { HeaderAuth } from '@/layout/HeaderAuth';
 import { authClient } from '@/lib/auth-client';
+import { CardInfoAuthStep } from '@/modules/auth/CardInfoAuthStep';
 import { useToast } from '@/modules/toast/useToast';
 
-const CardInfoAuthStep = () => {
+export const Separator = () => {
+  const lineColor = useColorModeValue('brand.200', 'brand.600');
+  const textColor = useColorModeValue('brand.500', 'brand.400');
   const { t } = useTranslation();
-  const loginForm = useFormContext();
-
   return (
-    <CardStatus type="info" title={t('login:card.title')} mt="md">
-      <Box flexDirection="row" alignItems="center" flexWrap="wrap">
-        <Text
-          fontSize="lg"
-          color={useColorModeValue('gray.800', 'gray.50')}
-          my="sm"
-        >
-          {t('login:card.description')}{' '}
-        </Text>
-        <TouchableOpacity
-          onPress={() => loginForm.setValues({ email: 'admin@admin.com' })}
-        >
-          <Text
-            fontSize="lg"
-            fontWeight="700"
-            color={useColorModeValue('gray.800', 'gray.50')}
-            style={{ textDecorationLine: 'underline' }}
-          >
-            admin@admin.com
-          </Text>
-        </TouchableOpacity>
-      </Box>
-    </CardStatus>
+    <HStack w="100%" alignItems="center" my="xl" spacing="sm">
+      <Box flex={1} h={1} bg={lineColor} />
+
+      {/* “OR” label */}
+      <Text
+        variant="medium"
+        fontSize="sm"
+        color={textColor}
+        px="sm" /* a touch of breathing room */
+      >
+        {t('login:card.or')}
+      </Text>
+
+      {/* right line */}
+      <Box flex={1} h={1} bg={lineColor} />
+    </HStack>
   );
 };
 
 const LoginPage = () => {
   const { t } = useTranslation();
-  const { showError, showSuccess } = useToast();
-  const validateEmailCodeModal = useDisclosure();
-  const loginForm = useForm<{ email: string; code: string }>({
-    onValidSubmit: async ({ email, code }) => {
+  const { showError } = useToast();
+  const router = useRouter();
+  const loginForm = useForm<{ email: string }>({
+    onValidSubmit: async ({ email }) => {
       try {
         const { error } = await authClient.emailOtp.sendVerificationOtp({
           email,
@@ -71,46 +62,17 @@ const LoginPage = () => {
           );
           return;
         }
-        validateEmailCodeModal.onOpen();
+        router.navigate({
+          pathname: '/verify',
+          params: {
+            email,
+          },
+        });
       } catch (err) {
         showError(t('login:feedbacks.error'));
         console.error('sendVerificationOtp error:', err);
       }
     },
-  });
-
-  const submitValidationCodeEmail = async (values: { code: string }) => {
-    try {
-      const { error } = await authClient.signIn.emailOtp({
-        email,
-        otp: values.code,
-      });
-      if (error) {
-        emailValidationCodeForm.setValues({ code: '' });
-        emailValidationCodeForm.setErrors({
-          code: t('login:validation.error'),
-        });
-        return;
-      }
-      validateEmailCodeModal.onClose();
-      showSuccess(t('login:validation.success'));
-    } catch (err) {
-      emailValidationCodeForm.setValues({ code: '' });
-      emailValidationCodeForm.setErrors({
-        code: t('login:validation.error'),
-      });
-      console.error('verify emailOtp error:', err);
-    }
-  };
-
-  const emailValidationCodeForm = useForm({
-    onValidSubmit: submitValidationCodeEmail,
-  });
-
-  const { email } = useFormFields({
-    connect: loginForm,
-    selector: (field) => field.value,
-    fields: ['email'] as const,
   });
 
   const social = useMutation({
@@ -135,11 +97,30 @@ const LoginPage = () => {
 
   return (
     <Container>
+      <HeaderAuth />
       <Formiz connect={loginForm}>
-        <Content>
+        <Content
+          contentContainerStyle={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Text fontSize="2xl" variant="bold">
+            {/* Login or Sign Up */}
+            {t('login:title')}
+          </Text>
+          <Text
+            fontSize="sm"
+            variant="medium"
+            color={useColorModeValue('brand.600', 'white')}
+            mt="md"
+          >
+            {/* Enter your email to login or create an account */}
+            {t('login:subtitle')}
+          </Text>
           <FieldInput
             name="email"
-            label={t('login:input.label')}
             required={t('login:input.required')}
             validations={[
               {
@@ -147,45 +128,39 @@ const LoginPage = () => {
                 message: t('login:input.validations.email'),
               },
             ]}
+            mt="xl"
             componentProps={{
               autoCapitalize: 'none',
               keyboardType: 'email-address',
               returnKeyType: 'next',
+              placeholder: 'Email',
             }}
           />
-          <CardInfoAuthStep />
-
           <Button
-            mt="xl"
-            variant="ghost"
+            onPress={() => loginForm.submit()}
+            isLoading={false}
+            variant="@primary"
+            full
+            mt={16}
+          >
+            {t('login:actions.login')}
+          </Button>
+
+          {process.env.MODE === 'DEV' && (
+            <CardInfoAuthStep type="email" mt="16" />
+          )}
+
+          <Separator />
+          <Button
+            variant="@secondary"
             full
             isLoading={social.isLoading}
             onPress={() => social.mutate('github')}
           >
-            <Icon name="github" iconSet="AntDesign" mr="md" />
             {t('login:actions.loginWithGitHub', { provider: 'GitHub' })}
           </Button>
         </Content>
-
-        <Footer>
-          <Button
-            onPress={() => loginForm.submit()}
-            isLoading={false}
-            colorScheme="brand"
-            full
-          >
-            {t('login:actions.login')}
-          </Button>
-        </Footer>
       </Formiz>
-
-      <ConfirmationCodeModal
-        isOpen={validateEmailCodeModal.isOpen}
-        onClose={validateEmailCodeModal.onClose}
-        form={emailValidationCodeForm}
-        email={email}
-        isLoadingConfirm={emailValidationCodeForm.isValidating}
-      />
     </Container>
   );
 };

@@ -4,14 +4,15 @@ import { HStack, Switch, Text, useColorMode } from 'react-native-ficus-ui';
 import { useAppColorMode } from '../hooks';
 
 export default function ThemeSwitcher() {
-  const { t } = useTranslation();
+  // ✅ Hooks must be called unconditionally at the top level
+  const { t } = useTranslation(['components']);
   const { colorMode } = useColorMode();
   const { updateColorMode } = useAppColorMode();
 
   return (
     <HStack mt="lg" alignItems="center" spacing={8}>
       <Text fontSize="lg" fontWeight="500">
-        {t('components:ThemeSwitcher.light')}
+        {t('ThemeSwitcher.light')}
       </Text>
       <Switch
         isChecked={colorMode === 'dark'}
@@ -19,7 +20,7 @@ export default function ThemeSwitcher() {
         colorScheme="brand"
       />
       <Text fontSize="lg" fontWeight="500">
-        {t('components:ThemeSwitcher.dark')}
+        {t('ThemeSwitcher.dark')}
       </Text>
     </HStack>
   );

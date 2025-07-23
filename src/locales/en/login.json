@@ -1,6 +1,8 @@
 {
+  "title": "Login or Sign Up",
+  "subtitle": "Enter your email to login or create an account",
   "card": {
-    "title": "Demo mode",
+    "or": "OR",
     "description": "Enjoy the features! You can sign in with"
   },
   "feedbacks": {
@@ -10,15 +12,25 @@
     "success": "Successfully logged in",
     "error": "Code is incorrect, please try again"
   },
+  "verification": {
+    "back": "Back",
+    "title": "Verification",
+    "description": "We have sent a code to {{email}}. Enter it below.",
+    "required": "Code is required",
+    "confirm": "Confirm",
+    "resend": "Resend code",
+    "expires": "The code expires shortly (5 minutes)"
+  },
   "input": {
     "label": "Mail address",
     "required": "Mail is required",
+    "placeholder": "Email",
     "validations": {
       "email": "Mail is invalid"
     }
   },
   "actions": {
-    "login": "Sign in",
+    "login": "Continue with Email",
     "loginWithGitHub": "Login with GitHub"
   }
 }

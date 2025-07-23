@@ -10,16 +10,29 @@ const AuthStack = () => {
 
   return (
     <Stack
-      initialRouteName="welcome"
+      initialRouteName="login"
       screens={[
         {
-          route: 'welcome',
-          title: t('layouts:auth.welcome'),
-          options: { headerShown: false },
+          route: 'login',
+          title: t('layouts:auth.login'),
+          options: {
+            headerShown: false,
+          },
         },
-        { route: 'login', title: t('layouts:auth.login') },
-        { route: 'register', title: t('layouts:auth.register') },
-        { route: 'onboarding', title: t('layouts:auth.onboarding') },
+        {
+          route: 'onboarding',
+          title: t('layouts:auth.onboarding'),
+          options: {
+            headerShown: false,
+          },
+        },
+        {
+          route: 'verify',
+          title: t('layouts:auth.verify'),
+          options: {
+            headerShown: false,
+          },
+        },
       ]}
     />
   );

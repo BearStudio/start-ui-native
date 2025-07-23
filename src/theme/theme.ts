@@ -1,3 +1,8 @@
+import { ThemeProviderProps } from 'react-native-ficus-ui';
+
+import { buttonTheme } from '@/theme/button.theme';
+import { textTheme } from '@/theme/text.theme';
+
 import foundations from './foundations';
 
 export const theme = {
@@ -12,5 +17,18 @@ export const theme = {
         },
       },
     },
+    Button: buttonTheme,
+    Text: textTheme,
+    Input: {
+      baseStyle: {
+        borderColor: 'brand.200',
+        bg: 'transparent',
+
+        _dark: {
+          bg: 'transparent',
+          borderColor: 'brand.800',
+        },
+      },
+    },
   },
-};
+} as ThemeProviderProps['theme'];

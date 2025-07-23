@@ -30,9 +30,9 @@ import { useToast } from '@/modules/toast/useToast';
 import ThemeSwitcher from '@/theme/ThemeSwitcher';
 
 const AccountPage = () => {
-  const { t } = useTranslation();
   const session = authClient.useSession();
   const { showError, showSuccess, showInfo } = useToast();
+  const { t } = useTranslation();
 
   const logoutModal = useDisclosure();
   const deleteAccountModal = useDisclosure();
@@ -225,7 +225,10 @@ const AccountPage = () => {
                     {email === session.data?.user.email ? (
                       <Text
                         fontSize="lg"
-                        color={useColorModeValue('gray.500', 'gray.300')}
+                        color="gray.500"
+                        _dark={{
+                          color: 'gray.300',
+                        }}
                       >
                         {t('account:sections.email.feedbacks.isEmail')}
                       </Text>
@@ -322,7 +325,10 @@ const AccountPage = () => {
               title={t('account:confirmationModals.deleteAccount.card.title')}
             >
               <Text
-                color={useColorModeValue('gray.800', 'gray.100')}
+                color="gray.800"
+                _dark={{
+                  color: 'gray.100',
+                }}
                 fontWeight="bold"
                 mt="lg"
               >
