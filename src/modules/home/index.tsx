@@ -34,9 +34,19 @@ export const DemoCaption = () => {
   return (
     <>
       <Box flex={1} />
-      <Text mt="md" textAlign="center" fontSize="xs" color="neutral.500">
-        {t('demo.caption')}
-      </Text>
+      <Box mt="md" align="center">
+        <Text
+          textAlign="center"
+          fontSize="sm"
+          color="neutral.600"
+          _dark={{
+            color: 'neutral.300',
+          }}
+          w="60%"
+        >
+          {t('demo.caption')}
+        </Text>
+      </Box>
     </>
   );
 };

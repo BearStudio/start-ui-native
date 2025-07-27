@@ -10,7 +10,7 @@ import {
   useColorModeValue,
 } from 'react-native-ficus-ui';
 
-export const AccountCard = ({ children, ...props }: BoxProps) => {
+export const DataCard = ({ children, ...props }: BoxProps) => {
   const bg = useColorModeValue('white', 'neutral.900');
   const border = useColorModeValue('neutral.200', 'neutral.800');
 
@@ -31,27 +31,34 @@ export const AccountCard = ({ children, ...props }: BoxProps) => {
   );
 };
 
-export const AccountCardTitle = (props: TextProps) => (
+export const DataCardTitle = (props: TextProps) => (
   <Text fontSize="lg" fontWeight="bold" mb="sm" {...props} />
 );
 
-interface AccountCardRowProps extends BoxProps {
+interface DataCardRowProps extends BoxProps {
   label?: string;
   /** Right‐hand content */
   children: React.ReactNode;
+  direction?: 'row' | 'column';
 }
 
-export const AccountCardRow: FC<AccountCardRowProps> = ({
+export const DataCardRow: FC<DataCardRowProps> = ({
   label,
   children,
+  direction = 'column',
   ...props
 }) => {
-  const labelColor = useColorModeValue('neutral.600', 'neutral.400');
+  const labelColor = useColorModeValue('neutral.600', 'neutral.300');
 
   return (
-    <Box px="md" py="md" {...props}>
+    <Box px="md" py="md" flexDirection={direction} {...props}>
       {!!label && (
-        <Text fontSize="sm" fontWeight="medium" color={labelColor}>
+        <Text
+          fontSize="md"
+          w={direction === 'row' ? '30%' : 'full'}
+          variant="semiBold"
+          color={labelColor}
+        >
           {label}
         </Text>
       )}
@@ -62,7 +69,7 @@ export const AccountCardRow: FC<AccountCardRowProps> = ({
   );
 };
 
-export const AccountCardRowDivider = (props: BoxProps) => {
+export const DataCardRowDivider = (props: BoxProps) => {
   const border = useColorModeValue('neutral.200', 'neutral.800');
 
   return <Divider h={1} color={border} />;

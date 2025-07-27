@@ -79,6 +79,34 @@ export const BookCard: React.FC<{
   );
 };
 
+export const BookCardDetails: React.FC<{
+  book: Book;
+  onPress?: () => void;
+}> = ({ book, onPress }) => {
+  const bg =
+    book.genre?.color ?? useColorModeValue('neutral.200', 'neutral.700');
+
+  return (
+    <TouchableOpacity onPress={onPress} style={{ flex: 1 }}>
+      <Card>
+        {/* 3D SVG cover */}
+        <CardBackground color={bg} />
+        {/* Title & author overlay */}
+        <CardContent pl="2xl" p="xl">
+          <Text color="white" fontSize="xl" variant="bold" numberOfLines={2}>
+            {book.title}
+          </Text>
+          {book.author && (
+            <Text color="white" fontSize="sm" opacity={0.7} numberOfLines={1}>
+              By {book.author}
+            </Text>
+          )}
+        </CardContent>
+      </Card>
+    </TouchableOpacity>
+  );
+};
+
 export const BookCardSkeleon = ({
   visible,
   children,

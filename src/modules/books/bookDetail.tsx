@@ -1,25 +1,22 @@
 import { useEffect } from 'react';
 
-import dayjs from 'dayjs';
 import 'dayjs/locale/fr';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import {
-  Box,
-  Center,
-  Divider,
-  HStack,
-  Stack,
-  Text,
-  useColorModeValue,
-} from 'react-native-ficus-ui';
+import { Box, Center, Text, useColorModeValue } from 'react-native-ficus-ui';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 import { apiHooks } from '@/api/api-hooks';
+import {
+  DataCard,
+  DataCardRow,
+  DataCardRowDivider,
+  DataCardTitle,
+} from '@/components/DataCard';
 import { Skeleton } from '@/components/Skeleton';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
-import { BookCard, BookCardSkeleon } from '@/modules/books/bookCard';
+import { BookCardDetails, BookCardSkeleon } from '@/modules/books/bookCard';
 
 const BookDetails = () => {
   const { setOptions } = useNavigation();
@@ -53,19 +50,77 @@ const BookDetails = () => {
           </Center>
         )}
         {(!!bookQuery.data || !!bookQuery.isLoading) && (
-          <Stack spacing={24}>
+          <>
+            {/* Info Card */}
+            <DataCard>
+              <DataCardRow direction="row" label={t('fields.title')}>
+                <DataCardTitle>
+                  {bookQuery.data?.title || t('fields.title')}
+                </DataCardTitle>
+              </DataCardRow>
+              <DataCardRowDivider />
+
+              <DataCardRow direction="row" label={t('fields.author')}>
+                <Skeleton.Text visible={!bookQuery.isLoading}>
+                  <Text
+                    color={useColorModeValue('neutral.900', 'neutral.50')}
+                    fontSize="md"
+                    variant="semiBold"
+                  >
+                    {bookQuery.data?.author}
+                  </Text>
+                </Skeleton.Text>
+              </DataCardRow>
+              <DataCardRowDivider />
+
+              <DataCardRow direction="row" label={t('fields.genre')}>
+                <Skeleton.Text visible={!bookQuery.isLoading}>
+                  <Box flexDirection="row" alignItems="center">
+                    <Box
+                      bg={bookQuery.data?.genre?.color}
+                      w={4}
+                      h={4}
+                      borderRadius="full"
+                      mr={2}
+                    />
+                    <Text
+                      color={useColorModeValue('neutral.900', 'neutral.50')}
+                      fontSize="md"
+                      variant="semiBold"
+                    >
+                      {bookQuery.data?.genre?.name}
+                    </Text>
+                  </Box>
+                </Skeleton.Text>
+              </DataCardRow>
+              <DataCardRowDivider />
+
+              <DataCardRow direction="row" label={t('fields.publisher')}>
+                <Skeleton.Text visible={!bookQuery.isLoading}>
+                  <Text
+                    color={useColorModeValue('neutral.900', 'neutral.50')}
+                    fontSize="md"
+                    variant="semiBold"
+                  >
+                    {(bookQuery.data?.publisher as string) ?? '—'}
+                  </Text>
+                </Skeleton.Text>
+              </DataCardRow>
+              <DataCardRowDivider />
+            </DataCard>
+
             {/* Hero Cover */}
-            <Center>
+            <Center mt="2xl">
               <Box
-                w={180}
-                h={270}
+                w={240}
+                h={360}
                 borderRadius="lg"
                 overflow="hidden"
                 shadow="xl"
               >
                 {!bookQuery.isLoading && !!bookQuery?.data ? (
                   <Animated.View entering={FadeIn.duration(250)}>
-                    <BookCard book={bookQuery?.data} />
+                    <BookCardDetails book={bookQuery?.data} />
                   </Animated.View>
                 ) : (
                   <Animated.View exiting={FadeOut.duration(250)}>
@@ -73,104 +128,13 @@ const BookDetails = () => {
                   </Animated.View>
                 )}
                 <BookCardSkeleon visible={!bookQuery.isLoading}>
-                  {!!bookQuery?.data && <BookCard book={bookQuery?.data} />}
+                  {!!bookQuery?.data && (
+                    <BookCardDetails book={bookQuery?.data} />
+                  )}
                 </BookCardSkeleon>
               </Box>
             </Center>
-
-            {/* Info Card */}
-            <Stack borderWidth={2} borderRadius="md" borderColor="neutral.300">
-              {/* Title */}
-              <HStack justifyContent="space-between" alignItems="center" p={8}>
-                <Text color={useColorModeValue('neutral.600', 'neutral.200')}>
-                  {t('fields.title')}
-                </Text>
-                <Skeleton.Text visible={!bookQuery.isLoading}>
-                  <Text
-                    fontWeight="bold"
-                    color={useColorModeValue('neutral.900', 'neutral.50')}
-                  >
-                    {bookQuery.data?.title}
-                  </Text>
-                </Skeleton.Text>
-              </HStack>
-              <Divider />
-
-              {/* Author */}
-              <HStack justifyContent="space-between" alignItems="center" p={8}>
-                <Text color={useColorModeValue('neutral.600', 'neutral.200')}>
-                  {t('fields.author')}
-                </Text>
-                <Skeleton.Text visible={!bookQuery.isLoading}>
-                  <Text color={useColorModeValue('neutral.900', 'neutral.50')}>
-                    {bookQuery.data?.author}
-                  </Text>
-                </Skeleton.Text>
-              </HStack>
-              <Divider />
-
-              {/* Genre */}
-              <HStack justifyContent="space-between" alignItems="center" p={8}>
-                <Text color={useColorModeValue('neutral.600', 'neutral.200')}>
-                  {t('fields.genre')}
-                </Text>
-                <Skeleton.Text visible={!bookQuery.isLoading}>
-                  <HStack alignItems="center" spacing={4}>
-                    <Box
-                      bg={bookQuery.data?.genre?.color}
-                      w={4}
-                      h={4}
-                      borderRadius="full"
-                    />
-                    <Text
-                      color={useColorModeValue('neutral.900', 'neutral.50')}
-                    >
-                      {bookQuery.data?.genre?.name}
-                    </Text>
-                  </HStack>
-                </Skeleton.Text>
-              </HStack>
-              <Divider />
-
-              {/* Publisher */}
-              <HStack justifyContent="space-between" alignItems="center" p={8}>
-                <Text color={useColorModeValue('neutral.600', 'neutral.200')}>
-                  {t('fields.publisher')}
-                </Text>
-                <Skeleton.Text visible={!bookQuery.isLoading}>
-                  <Text color={useColorModeValue('neutral.900', 'neutral.50')}>
-                    {(bookQuery.data?.publisher as string) ?? '—'}
-                  </Text>
-                </Skeleton.Text>
-              </HStack>
-              <Divider />
-
-              {/* Created At */}
-              <HStack justifyContent="space-between" alignItems="center" p={8}>
-                <Text color={useColorModeValue('neutral.600', 'neutral.200')}>
-                  {t('fields.createdAt')}
-                </Text>
-                <Skeleton.Text visible={!bookQuery.isLoading}>
-                  <Text color={useColorModeValue('neutral.900', 'neutral.50')}>
-                    {dayjs(bookQuery.data?.createdAt).format('D MMMM YYYY')}
-                  </Text>
-                </Skeleton.Text>
-              </HStack>
-              <Divider />
-
-              {/* Updated At */}
-              <HStack justifyContent="space-between" alignItems="center" p={8}>
-                <Text color={useColorModeValue('neutral.600', 'neutral.200')}>
-                  {t('fields.updatedAt')}
-                </Text>
-                <Skeleton.Text visible={!bookQuery.isLoading}>
-                  <Text color={useColorModeValue('neutral.900', 'neutral.50')}>
-                    {dayjs(bookQuery.data?.updatedAt).format('D MMMM YYYY')}
-                  </Text>
-                </Skeleton.Text>
-              </HStack>
-            </Stack>
-          </Stack>
+          </>
         )}
       </Content>
     </Container>

@@ -19,7 +19,9 @@ const TabBarIcon: FC<TabBarIconProps> = ({
   if (focused && FocusedIcon) {
     return <Box as={FocusedIcon} stroke={color} color={color} />;
   }
-  return <Box as={Icon} stroke={color} color="transparent" opacity={0.5} />;
+  return (
+    <Box as={Icon} stroke={color} color={color} strokeWidth={1} opacity={0.6} />
+  );
 };
 
 export default TabBarIcon;

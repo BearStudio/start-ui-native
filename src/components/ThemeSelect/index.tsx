@@ -37,7 +37,7 @@ export const ThemeSelect = ({
   const themeOptions = [
     { label: t('ThemeSwitcher.light'), value: 'light', icon: Sun },
     { label: t('ThemeSwitcher.dark'), value: 'dark', icon: Moon },
-    { label: 'System', value: 'system', icon: Monitor },
+    { label: t('ThemeSwitcher.system'), value: 'system', icon: Monitor },
   ] as const;
   return (
     <Box {...rest}>

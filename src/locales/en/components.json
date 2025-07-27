@@ -10,8 +10,9 @@
     }
   },
   "ThemeSwitcher": {
-    "light": "Light mode",
-    "dark": "Dark mode"
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
   },
   "languages": {
     "en": "English",

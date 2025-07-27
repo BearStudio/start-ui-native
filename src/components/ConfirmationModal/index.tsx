@@ -68,7 +68,7 @@ export const ConfirmationModal: FC<
     >
       <Flex p="xl" pt="md">
         <Box mb="lg">
-          <Text fontWeight="bold" fontSize="3xl">
+          <Text fontWeight="bold" fontSize="xl">
             {title}
           </Text>
           {!!description && (

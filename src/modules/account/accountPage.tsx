@@ -14,6 +14,12 @@ import {
 import { ButtonIcon } from '@/components/ButtonIcon';
 import { CardStatus } from '@/components/CardStatus';
 import { ConfirmationModal } from '@/components/ConfirmationModal';
+import {
+  DataCard,
+  DataCardRow,
+  DataCardRowDivider,
+  DataCardTitle,
+} from '@/components/DataCard';
 import { DraggableModalInput } from '@/components/DraggableModalInput';
 import { FieldInput } from '@/components/FieldInput';
 import { LanguageSelect } from '@/components/LanguageSelect';
@@ -23,12 +29,6 @@ import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
 import { LoadingScreen } from '@/layout/LoadingScreen';
 import { authClient } from '@/lib/auth-client';
-import {
-  AccountCard,
-  AccountCardRow,
-  AccountCardRowDivider,
-  AccountCardTitle,
-} from '@/modules/account/AccountCard';
 import { useAccountUpdate } from '@/modules/account/account.service';
 import { useToast } from '@/modules/toast/useToast';
 
@@ -45,6 +45,8 @@ const AccountPage = () => {
     useAccountUpdate({
       onSuccess: () => {
         showSuccess(t('account:feedbacks.updateAccount.success'));
+        session.refetch();
+        updateNameModal.onClose();
       },
       onError: (err) => {
         showError(
@@ -78,6 +80,8 @@ const AccountPage = () => {
     'account:confirmationModals.deleteAccount.input.validations.isValid.handlerValue'
   );
 
+  const colorIcon = useColorModeValue('neutral.500', 'neutral.400');
+
   if (session.isPending || !session.data) {
     return <LoadingScreen />;
   }
@@ -86,16 +90,16 @@ const AccountPage = () => {
     <>
       <Container>
         <Content>
-          <AccountCard mb="xl">
-            <AccountCardRow>
+          <DataCard mb="xl">
+            <DataCardRow>
               <Avatar
                 size="sm"
                 src={session.data?.user.image || ''}
                 name={session.data?.user.name || ''}
               />
-              <AccountCardTitle>
+              <DataCardTitle>
                 {session.data?.user.name || t('account:sections.profile.title')}
-              </AccountCardTitle>
+              </DataCardTitle>
               <Box flex={1} />
               <ButtonIcon
                 icon="logout"
@@ -106,10 +110,10 @@ const AccountPage = () => {
               >
                 {t('account:actions.logout')}
               </ButtonIcon>
-            </AccountCardRow>
+            </DataCardRow>
 
-            <AccountCardRowDivider />
-            <AccountCardRow label="Name">
+            <DataCardRowDivider />
+            <DataCardRow label="Name">
               <TouchableOpacity
                 flexDirection="row"
                 align="center"
@@ -123,14 +127,10 @@ const AccountPage = () => {
                 >
                   {session.data?.user.name}
                 </Text>
-                <LucideIcon
-                  icon={Edit2}
-                  size="md"
-                  color={useColorModeValue('neutral.500', 'neutral.400')}
-                />
+                <LucideIcon icon={Edit2} size="md" color={colorIcon} />
               </TouchableOpacity>
-            </AccountCardRow>
-            <AccountCardRow label="Email">
+            </DataCardRow>
+            <DataCardRow label="Email">
               <Text
                 fontSize="md"
                 color="neutral.800"
@@ -138,23 +138,23 @@ const AccountPage = () => {
               >
                 {session.data?.user.email || t('account:sections.email.title')}
               </Text>
-            </AccountCardRow>
-          </AccountCard>
-          <AccountCard>
-            <AccountCardRow>
-              <AccountCardTitle>
+            </DataCardRow>
+          </DataCard>
+          <DataCard>
+            <DataCardRow>
+              <DataCardTitle>
                 {t('account:sections.profile.displayPreferences')}
-              </AccountCardTitle>
-            </AccountCardRow>
-            <AccountCardRowDivider />
-            <AccountCardRow label="Theme">
+              </DataCardTitle>
+            </DataCardRow>
+            <DataCardRowDivider />
+            <DataCardRow label="Theme">
               <ThemeSelect type="select" />
-            </AccountCardRow>
-            <AccountCardRowDivider />
-            <AccountCardRow label="Language">
+            </DataCardRow>
+            <DataCardRowDivider />
+            <DataCardRow label="Language">
               <LanguageSelect />
-            </AccountCardRow>
-          </AccountCard>
+            </DataCardRow>
+          </DataCard>
           <Box h={50} />
         </Content>
       </Container>
