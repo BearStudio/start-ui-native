@@ -28,6 +28,9 @@ const variants = {
   /** 500 – pas de décor */
   medium: defineStyle({ fontWeight: '500' }),
 
+  /** 600 – pas de décor */
+  semiBold: defineStyle({ fontWeight: '600' }),
+
   /** 700 – pas de décor */
   bold: defineStyle({ fontWeight: '700' }),
 
@@ -50,7 +53,7 @@ const variants = {
 export const textTheme = defineStyleConfig({
   baseStyle: {
     // couleur “par défaut” : on laisse Ficus gérer _dark/_light si présent.
-    color: 'brand.900',
+    color: 'neutral.900',
     _dark: {
       color: 'white',
     },

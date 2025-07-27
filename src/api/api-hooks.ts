@@ -4,6 +4,7 @@ import { isAxiosError } from 'axios';
 
 import { api } from '@/api/generated-api';
 import { authClient } from '@/lib/auth-client';
+import useSessionStore from '@/modules/auth/auth.store';
 
 const logoutUserPlugin: ZodiosPlugin = {
   error: async (_, { method, url }, error) => {
@@ -13,6 +14,7 @@ const logoutUserPlugin: ZodiosPlugin = {
       !(method === 'post' && url === '/accounts/update-email')
     ) {
       authClient.signOut();
+      useSessionStore.getState().clearUser();
     }
     throw error;
   },
@@ -21,6 +23,9 @@ const logoutUserPlugin: ZodiosPlugin = {
 const cookieSessionPlugin: ZodiosPlugin = {
   request: async (_api, config: any) => {
     const cookie = await authClient.getCookie();
+    if (!cookie) {
+      useSessionStore.getState().clearUser();
+    }
     if (cookie) {
       config.headers = {
         ...config.headers,

@@ -1,9 +1,8 @@
-import { ComponentProps, FC } from 'react';
+import { ComponentProps, FC, ReactNode } from 'react';
 
 import { Stack as RouterStack } from 'expo-router';
 import { Dict, useColorModeValue, useTheme } from 'react-native-ficus-ui';
 
-import { FeatherIcons } from '@/components/TabBarIcon';
 import { Header } from '@/layout/Header';
 
 type RouterStackComponentProps = ComponentProps<typeof RouterStack>;
@@ -16,7 +15,7 @@ type StackProps = {
   screens: (RouterStackScreenComponentProps & {
     route: string;
     title?: string;
-    icon?: FeatherIcons;
+    icon?: ReactNode;
     options?: RouterStackScreenComponentProps['options'] & {
       isTabBarScreen?: boolean;
     };
@@ -31,8 +30,8 @@ export const Stack: FC<StackProps> = ({
   const { theme } = useTheme();
 
   const backgroundColor = useColorModeValue(
-    (theme?.colors?.gray as Dict)?.[100],
-    (theme?.colors?.gray as Dict)?.[800]
+    (theme?.colors?.neutral as Dict)?.[100],
+    (theme?.colors?.neutral as Dict)?.[800]
   );
 
   return (

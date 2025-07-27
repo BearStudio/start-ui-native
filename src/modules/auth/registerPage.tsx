@@ -32,7 +32,7 @@ const CardWarningRegister = () => {
       <Box flexDirection="row" flexWrap="wrap">
         <Text
           fontSize="lg"
-          color={useColorModeValue('gray.800', 'gray.50')}
+          color={useColorModeValue('neutral.800', 'neutral.50')}
           my="sm"
         >
           {t('register:card.description')}
@@ -40,8 +40,8 @@ const CardWarningRegister = () => {
         <Button
           onPress={() => router.push('/login')}
           full
-          colorScheme="brand"
-          bg={useColorModeValue(undefined, 'gray.800')}
+          colorScheme="neutral"
+          bg={useColorModeValue(undefined, 'neutral.800')}
           variant={useColorModeValue('outline', 'solid')}
         >
           {t('register:card.actions.login')}
@@ -158,7 +158,7 @@ const RegisterPage = () => {
             onPress={() => registerForm.submit()}
             isLoading={registerForm.isValidating}
             isDisabled={registerForm.isSubmitted && !registerForm.isValid}
-            colorScheme="brand"
+            colorScheme="neutral"
             full
           >
             {t('register:actions.register')}

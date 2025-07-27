@@ -34,7 +34,7 @@ export const DemoCaption = () => {
   return (
     <>
       <Box flex={1} />
-      <Text mt="md" textAlign="center" fontSize="xs" color="gray.500">
+      <Text mt="md" textAlign="center" fontSize="xs" color="neutral.500">
         {t('demo.caption')}
       </Text>
     </>
@@ -54,7 +54,10 @@ const DemoWelcome: React.FC = () => {
         >
           {t('home:welcome.title')}
         </Text>
-        <Text fontSize="md" color={useColorModeValue('gray.600', 'gray.300')}>
+        <Text
+          fontSize="md"
+          color={useColorModeValue('neutral.600', 'neutral.300')}
+        >
           {t('home:welcome.description')}
         </Text>
       </VStack>

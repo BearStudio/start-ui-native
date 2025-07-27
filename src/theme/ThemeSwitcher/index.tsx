@@ -17,7 +17,7 @@ export default function ThemeSwitcher() {
       <Switch
         isChecked={colorMode === 'dark'}
         onPress={updateColorMode}
-        colorScheme="brand"
+        colorScheme="neutral"
       />
       <Text fontSize="lg" fontWeight="500">
         {t('ThemeSwitcher.dark')}

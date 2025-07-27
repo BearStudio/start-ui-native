@@ -8,11 +8,11 @@ type AccessibleColor = {
 };
 
 const accessibleColorMap: Record<string, AccessibleColor> = {
-  brand: {
-    bg: 'brand.900',
+  neutral: {
+    bg: 'neutral.900',
     color: 'white',
-    pressedBg: 'brand.800',
-    loaderColor: 'brand.900',
+    pressedBg: 'neutral.800',
+    loaderColor: 'neutral.900',
   },
   red: {
     bg: 'red.500',
@@ -30,12 +30,12 @@ const baseStyle = defineStyle({
 
 const variantGhost = defineStyle((props) => {
   const { colorScheme: c } = props;
-  if (c === 'brand') {
+  if (c === 'neutral') {
     return {
       bg: 'transparent',
-      color: 'brand.950',
+      color: 'neutral.950',
       _dark: { color: 'white' },
-      _pressed: { bg: 'brand.100', _dark: { bg: 'brand.800' } },
+      _pressed: { bg: 'neutral.100', _dark: { bg: 'neutral.800' } },
     };
   }
   return {
@@ -66,18 +66,21 @@ const variantSolid = defineStyle((props) => {
   return {
     bg,
     color,
-    _dark: { bg: `${c}.300`, color: 'gray.800' },
-    _pressed: { bg: pressedBg, _dark: { bg: `${c}.400`, color: 'gray.800' } },
+    _dark: { bg: `${c}.300`, color: 'neutral.800' },
+    _pressed: {
+      bg: pressedBg,
+      _dark: { bg: `${c}.400`, color: 'neutral.800' },
+    },
   };
 });
 
 const variantLink = defineStyle((props) => {
   const { colorScheme: c } = props;
-  const linkColor = c === 'brand' ? 'brand.950' : `${c}.500`;
+  const linkColor = c === 'neutral' ? 'neutral.950' : `${c}.500`;
   return {
     bg: 'transparent',
     color: linkColor,
-    _dark: { color: c === 'brand' ? 'white' : `${c}.300` },
+    _dark: { color: c === 'neutral' ? 'white' : `${c}.300` },
     textDecorationLine: 'underline',
     shadow: 0,
     _pressed: { opacity: 0.8 },
@@ -86,10 +89,10 @@ const variantLink = defineStyle((props) => {
 
 // Aliases “@primary”, “@secondary”, “@dangerPrimary”, “@dangerSecondary”
 const variantPrimary = defineStyle((props) =>
-  variantSolid({ ...props, colorScheme: 'brand' })
+  variantSolid({ ...props, colorScheme: 'neutral' })
 );
 const variantSecondary = defineStyle((props) =>
-  variantOutline({ ...props, colorScheme: 'brand' })
+  variantOutline({ ...props, colorScheme: 'neutral' })
 );
 const variantDangerPrimary = defineStyle((props) =>
   variantSolid({ ...props, colorScheme: 'red' })

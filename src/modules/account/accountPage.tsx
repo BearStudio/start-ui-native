@@ -1,33 +1,36 @@
-import { useState } from 'react';
-
 import { Formiz, useForm, useFormFields } from '@formiz/core';
-import { isEmail } from '@formiz/validations';
+import { Edit2 } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import {
+  Avatar,
   Box,
-  Button,
-  Divider,
   Stack,
   Text,
-  VStack,
+  TouchableOpacity,
   useColorModeValue,
   useDisclosure,
 } from 'react-native-ficus-ui';
 
 import { ButtonIcon } from '@/components/ButtonIcon';
 import { CardStatus } from '@/components/CardStatus';
-import { ConfirmationCodeModal } from '@/components/ConfirmationCodeModal';
 import { ConfirmationModal } from '@/components/ConfirmationModal';
 import { DraggableModalInput } from '@/components/DraggableModalInput';
 import { FieldInput } from '@/components/FieldInput';
-import { SectionTitle } from '@/components/SectionTitle';
+import { LanguageSelect } from '@/components/LanguageSelect';
+import { LucideIcon } from '@/components/LucideIcon';
+import { ThemeSelect } from '@/components/ThemeSelect';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
 import { LoadingScreen } from '@/layout/LoadingScreen';
 import { authClient } from '@/lib/auth-client';
+import {
+  AccountCard,
+  AccountCardRow,
+  AccountCardRowDivider,
+  AccountCardTitle,
+} from '@/modules/account/AccountCard';
 import { useAccountUpdate } from '@/modules/account/account.service';
 import { useToast } from '@/modules/toast/useToast';
-import ThemeSwitcher from '@/theme/ThemeSwitcher';
 
 const AccountPage = () => {
   const session = authClient.useSession();
@@ -36,11 +39,7 @@ const AccountPage = () => {
 
   const logoutModal = useDisclosure();
   const deleteAccountModal = useDisclosure();
-  const updateEmailCodeModal = useDisclosure();
-
-  const dividerColor = useColorModeValue('gray.200', 'gray.700');
-
-  const [pendingEmail, setPendingEmail] = useState<string | null>(null);
+  const updateNameModal = useDisclosure();
 
   const { updateAccount: updateProfile, isLoading: isUpdatingProfile } =
     useAccountUpdate({
@@ -56,55 +55,11 @@ const AccountPage = () => {
       },
     });
 
-  const { updateAccount: updateEmail, isLoading: isUpdatingEmail } =
-    useAccountUpdate({
-      onSuccess: () => {
-        if (pendingEmail) {
-          authClient.emailOtp
-            .sendVerificationOtp({
-              email: pendingEmail,
-              type: 'email-verification',
-            })
-            .catch((otpErr: ExplicitAny) => {
-              if (
-                !/email-verification email not implemented/.test(otpErr.message)
-              ) {
-                showError(
-                  t('account:feedbacks.updateAccountEmail.error.otpSend')
-                );
-              }
-            })
-            .finally(() => {
-              updateEmailCodeModal.onOpen();
-            });
-        }
-      },
-      onError: (err) => {
-        showError(
-          err.response?.data?.message?.startsWith('[DEMO]')
-            ? t('account:feedbacks.updateAccountEmail.error.demo')
-            : t('account:feedbacks.updateAccountEmail.error.default')
-        );
-      },
-    });
-
   const submitProfile = (values: { name: string }) => {
     updateProfile({ name: values.name });
   };
 
-  const submitEmail = (values: { email: string }) => {
-    setPendingEmail(values.email);
-    updateEmail({ email: values.email });
-  };
-
   const profileForm = useForm({ onValidSubmit: submitProfile });
-  const emailForm = useForm({ onValidSubmit: submitEmail });
-
-  const { email } = useFormFields({
-    connect: emailForm,
-    selector: (field) => field.value,
-    fields: ['email'] as const,
-  });
 
   const deleteAccountForm = useForm({
     onValidSubmit: () => {
@@ -123,33 +78,7 @@ const AccountPage = () => {
     'account:confirmationModals.deleteAccount.input.validations.isValid.handlerValue'
   );
 
-  const submitValidationCodeEmail = (values: { code: string }) => {
-    if (!pendingEmail) {
-      showError(t('account:feedbacks.updateAccountEmailValidate.error'));
-      return;
-    }
-    authClient.emailOtp
-      .verifyEmail({
-        email: pendingEmail,
-        otp: values.code,
-      })
-      .then(() => {
-        updateEmailCodeModal.onClose();
-        showSuccess(t('account:feedbacks.updateAccountEmailValidate.success'));
-      })
-      .catch(() => {
-        emailValidationCodeForm.setValues({ code: '' });
-        emailValidationCodeForm.setErrors({
-          code: t('account:feedbacks.updateAccountEmailValidate.error'),
-        });
-      });
-  };
-
-  const emailValidationCodeForm = useForm({
-    onValidSubmit: submitValidationCodeEmail,
-  });
-
-  if (session.isPending) {
+  if (session.isPending || !session.data) {
     return <LoadingScreen />;
   }
 
@@ -157,141 +86,78 @@ const AccountPage = () => {
     <>
       <Container>
         <Content>
-          <VStack spacing="xl">
-            <Box>
-              <SectionTitle>{t('account:sections.profile.title')}</SectionTitle>
-              <Box mt="lg">
-                <Formiz connect={profileForm}>
-                  <Stack spacing="md">
-                    <FieldInput
-                      name="name"
-                      label={t('account:sections.profile.input.label')}
-                      required={t('account:sections.profile.input.required')}
-                      defaultValue={session.data?.user.name}
-                      componentProps={{
-                        autoCapitalize: 'none',
-                        returnKeyType: 'next',
-                      }}
-                    />
-                    <Button
-                      onPress={() => profileForm.submit()}
-                      colorScheme="brand"
-                      isLoading={isUpdatingProfile}
-                      full
-                    >
-                      {t('commons:actions.update')}
-                    </Button>
-                  </Stack>
-                </Formiz>
-              </Box>
-              <Divider mt="xl" borderColor={dividerColor} />
-            </Box>
+          <AccountCard mb="xl">
+            <AccountCardRow>
+              <Avatar
+                size="sm"
+                src={session.data?.user.image || ''}
+                name={session.data?.user.name || ''}
+              />
+              <AccountCardTitle>
+                {session.data?.user.name || t('account:sections.profile.title')}
+              </AccountCardTitle>
+              <Box flex={1} />
+              <ButtonIcon
+                icon="logout"
+                onPress={logoutModal.onOpen}
+                variant="ghost"
+                iconSet="AntDesign"
+                size="sm"
+              >
+                {t('account:actions.logout')}
+              </ButtonIcon>
+            </AccountCardRow>
 
-            <Stack spacing="md">
-              <SectionTitle>{t('account:sections.email.title')}</SectionTitle>
-              <Formiz connect={emailForm}>
-                <Stack spacing="md">
-                  <FieldInput
-                    name="email"
-                    label={t('account:sections.email.input.label')}
-                    required={t('account:sections.email.input.required')}
-                    defaultValue={(session.data?.user.email as string) || ''}
-                    validations={[
-                      {
-                        handler: isEmail(),
-                        message: t(
-                          'account:sections.email.input.validations.email'
-                        ),
-                      },
-                    ]}
-                    componentProps={{
-                      textContentType: 'emailAddress',
-                      autoCapitalize: 'none',
-                      autoComplete: 'email',
-                      keyboardType: 'email-address',
-                      returnKeyType: 'done',
-                    }}
-                  />
-                  <VStack spacing="md" alignItems="center">
-                    <Button
-                      onPress={() => emailForm.submit()}
-                      colorScheme="brand"
-                      isLoading={isUpdatingEmail}
-                      isDisabled={email === session.data?.user.email}
-                      full
-                    >
-                      {t('commons:actions.update')}
-                    </Button>
-                    {email === session.data?.user.email ? (
-                      <Text
-                        fontSize="lg"
-                        color="gray.500"
-                        _dark={{
-                          color: 'gray.300',
-                        }}
-                      >
-                        {t('account:sections.email.feedbacks.isEmail')}
-                      </Text>
-                    ) : (
-                      <Button
-                        onPress={() =>
-                          emailForm.reset({
-                            email: session.data?.user.email as string,
-                          } as any)
-                        }
-                        isDisabled={isUpdatingEmail}
-                        variant="outline"
-                        full
-                      >
-                        {t('commons:actions.cancel')}
-                      </Button>
-                    )}
-                  </VStack>
-                </Stack>
-              </Formiz>
-              <Divider mt="xl" borderColor={dividerColor} />
-            </Stack>
-
-            <Box>
-              <SectionTitle>
-                {t('account:sections.preferences.title')}
-              </SectionTitle>
-              <VStack spacing="lg">
-                <ThemeSwitcher />
-                <Divider my="lg" borderColor={dividerColor} />
-                <ButtonIcon
-                  icon="logout"
-                  onPress={logoutModal.onOpen}
-                  variant="outline"
-                  iconSet="AntDesign"
-                  full
+            <AccountCardRowDivider />
+            <AccountCardRow label="Name">
+              <TouchableOpacity
+                flexDirection="row"
+                align="center"
+                gap="md"
+                onPress={updateNameModal.onOpen}
+              >
+                <Text
+                  fontSize="md"
+                  color="neutral.800"
+                  _dark={{ color: 'neutral.200' }}
                 >
-                  {t('account:actions.logout')}
-                </ButtonIcon>
-                <ButtonIcon
-                  icon="trash"
-                  onPress={deleteAccountModal.onOpen}
-                  colorScheme="error"
-                  variant="outline"
-                  full
-                >
-                  {t('account:actions.deleteAccount')}
-                </ButtonIcon>
-              </VStack>
-            </Box>
-          </VStack>
-
+                  {session.data?.user.name}
+                </Text>
+                <LucideIcon
+                  icon={Edit2}
+                  size="md"
+                  color={useColorModeValue('neutral.500', 'neutral.400')}
+                />
+              </TouchableOpacity>
+            </AccountCardRow>
+            <AccountCardRow label="Email">
+              <Text
+                fontSize="md"
+                color="neutral.800"
+                _dark={{ color: 'neutral.200' }}
+              >
+                {session.data?.user.email || t('account:sections.email.title')}
+              </Text>
+            </AccountCardRow>
+          </AccountCard>
+          <AccountCard>
+            <AccountCardRow>
+              <AccountCardTitle>
+                {t('account:sections.profile.displayPreferences')}
+              </AccountCardTitle>
+            </AccountCardRow>
+            <AccountCardRowDivider />
+            <AccountCardRow label="Theme">
+              <ThemeSelect type="select" />
+            </AccountCardRow>
+            <AccountCardRowDivider />
+            <AccountCardRow label="Language">
+              <LanguageSelect />
+            </AccountCardRow>
+          </AccountCard>
           <Box h={50} />
         </Content>
       </Container>
-
-      <ConfirmationCodeModal
-        isOpen={updateEmailCodeModal.isOpen}
-        onClose={updateEmailCodeModal.onClose}
-        form={emailValidationCodeForm}
-        email={pendingEmail || (session.data?.user.email as string)}
-        isLoadingConfirm={emailValidationCodeForm.isValidating}
-      />
 
       <ConfirmationModal
         title={t('account:confirmationModals.logout.title')}
@@ -299,11 +165,37 @@ const AccountPage = () => {
         confirmColorScheme="error"
         confirmLabel={t('account:confirmationModals.logout.confirmLabel')}
         confirmIcon="logout"
+        confirmIconSet="AntDesign"
         onConfirm={() => authClient.signOut()}
-        onCancel={logoutModal.onClose}
+        onClose={logoutModal.onClose}
         isOpen={logoutModal.isOpen}
-        h={250}
+        h={150}
       />
+
+      <ConfirmationModal
+        title={t('account:sections.profile.updateName.title')}
+        confirmColorScheme="neutral"
+        confirmLabel={t('commons:actions.update')}
+        isOpen={updateNameModal.isOpen}
+        onClose={updateNameModal.onClose}
+        onConfirm={() => profileForm.submit()}
+        isLoadingConfirm={isUpdatingProfile}
+        h={180}
+      >
+        <Formiz connect={profileForm}>
+          <Stack spacing="lg">
+            <FieldInput
+              name="name"
+              required={t('account:sections.profile.input.required')}
+              defaultValue={session.data?.user.name}
+              componentProps={{
+                autoCapitalize: 'none',
+                returnKeyType: 'done',
+              }}
+            />
+          </Stack>
+        </Formiz>
+      </ConfirmationModal>
 
       <ConfirmationModal
         title={t('account:confirmationModals.deleteAccount.title')}
@@ -314,7 +206,7 @@ const AccountPage = () => {
         )}
         isDisabledConfirm={!confirmation}
         onConfirm={() => deleteAccountForm.submit()}
-        onCancel={deleteAccountModal.onClose}
+        onClose={deleteAccountModal.onClose}
         isOpen={deleteAccountModal.isOpen}
         h={450}
       >
@@ -325,9 +217,9 @@ const AccountPage = () => {
               title={t('account:confirmationModals.deleteAccount.card.title')}
             >
               <Text
-                color="gray.800"
+                color="neutral.800"
                 _dark={{
-                  color: 'gray.100',
+                  color: 'neutral.100',
                 }}
                 fontWeight="bold"
                 mt="lg"

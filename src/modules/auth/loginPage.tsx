@@ -14,14 +14,13 @@ import {
 import { FieldInput } from '@/components/FieldInput';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
-import { HeaderAuth } from '@/layout/HeaderAuth';
 import { authClient } from '@/lib/auth-client';
 import { CardInfoAuthStep } from '@/modules/auth/CardInfoAuthStep';
 import { useToast } from '@/modules/toast/useToast';
 
 export const Separator = () => {
-  const lineColor = useColorModeValue('brand.200', 'brand.600');
-  const textColor = useColorModeValue('brand.500', 'brand.400');
+  const lineColor = useColorModeValue('neutral.200', 'neutral.600');
+  const textColor = useColorModeValue('neutral.500', 'neutral.400');
   const { t } = useTranslation();
   return (
     <HStack w="100%" alignItems="center" my="xl" spacing="sm">
@@ -97,7 +96,6 @@ const LoginPage = () => {
 
   return (
     <Container>
-      <HeaderAuth />
       <Formiz connect={loginForm}>
         <Content
           contentContainerStyle={{
@@ -113,7 +111,7 @@ const LoginPage = () => {
           <Text
             fontSize="sm"
             variant="medium"
-            color={useColorModeValue('brand.600', 'white')}
+            color={useColorModeValue('neutral.600', 'white')}
             mt="md"
           >
             {/* Enter your email to login or create an account */}

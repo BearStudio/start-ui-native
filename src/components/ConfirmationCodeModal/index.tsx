@@ -37,7 +37,7 @@ export const ConfirmationCodeModal: FC<
       confirmLabel={t('components:ConfirmationCodeModal.confirmLabel')}
       isLoadingConfirm={isLoadingConfirm}
       onConfirm={() => form.submit()}
-      onCancel={onClose}
+      onClose={onClose}
       h={400}
       isOpen={isOpen}
     >

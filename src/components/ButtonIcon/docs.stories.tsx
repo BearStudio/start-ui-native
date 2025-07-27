@@ -14,7 +14,7 @@ export const Default: Story = {
   args: {
     icon: 'star',
     children: 'Default Button',
-    colorScheme: 'brand',
+    colorScheme: 'neutral',
   },
 };
 
@@ -57,6 +57,6 @@ export const DifferentIconFamily: Story = {
     icon: 'apple1',
     iconSet: 'AntDesign',
     children: 'Apple Button',
-    colorScheme: 'brand',
+    colorScheme: 'neutral',
   },
 };

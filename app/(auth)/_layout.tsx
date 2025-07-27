@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
+import { HeaderAuth } from '@/layout/HeaderAuth';
 import { Stack } from '@/layout/Stack';
 import { useColorSchemeListener } from '@/theme/hooks';
 
@@ -16,21 +17,21 @@ const AuthStack = () => {
           route: 'login',
           title: t('layouts:auth.login'),
           options: {
-            headerShown: false,
+            header: () => <HeaderAuth />,
           },
         },
         {
           route: 'onboarding',
           title: t('layouts:auth.onboarding'),
           options: {
-            headerShown: false,
+            header: () => <HeaderAuth />,
           },
         },
         {
           route: 'verify',
           title: t('layouts:auth.verify'),
           options: {
-            headerShown: false,
+            header: () => <HeaderAuth />,
           },
         },
       ]}

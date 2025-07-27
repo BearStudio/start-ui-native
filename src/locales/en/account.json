@@ -7,7 +7,6 @@
         "default": "An error occured during account update, please try again"
       }
     },
-
     "updateAccountEmail": {
       "error": {
         "demo": "This is a read-only demo, this action is disabled.",
@@ -23,7 +22,14 @@
   "sections": {
     "profile": {
       "title": "Profile informations",
-      "input": { "label": "Name", "required": "Name is required" }
+      "input": {
+        "label": "Name",
+        "required": "Name is required"
+      },
+      "displayPreferences": "Display preferences",
+      "updateName": {
+        "title": "Update your name"
+      }
     },
     "email": {
       "title": "Update your email",
@@ -34,9 +40,13 @@
           "email": "Mail is invalid"
         }
       },
-      "feedbacks": { "isEmail": "This is your current email" }
+      "feedbacks": {
+        "isEmail": "This is your current email"
+      }
     },
-    "preferences": { "title": "Preferences" }
+    "preferences": {
+      "title": "Preferences"
+    }
   },
   "confirmationModals": {
     "logout": {
@@ -67,7 +77,7 @@
   },
   "actions": {
     "retry": "Retry",
-    "logout": "Logout",
+    "logout": "Sign Out",
     "deleteAccount": "Delete account"
   }
 }

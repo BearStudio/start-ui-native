@@ -12,5 +12,13 @@
   "ThemeSwitcher": {
     "light": "Light mode",
     "dark": "Dark mode"
+  },
+  "languages": {
+    "en": "English",
+    "fr": "French"
+  },
+  "HeaderAuth": {
+    "selectTheme": "Select a theme...",
+    "selectLanguage": "Select a language..."
   }
 }

@@ -44,7 +44,7 @@ const WelcomePage = () => {
       <Stack spacing="md" alignItems="center">
         <Button
           onPress={() => router.push('/register')}
-          colorScheme="brand"
+          colorScheme="neutral"
           full
         >
           {t('actions.register')}
@@ -62,7 +62,7 @@ const WelcomePage = () => {
           icon={
             <Icon
               name={colorMode === 'light' ? 'moon' : 'sun'}
-              color="gray.50"
+              color="neutral.50"
               iconSet="Feather"
             />
           }

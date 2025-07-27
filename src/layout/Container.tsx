@@ -10,7 +10,7 @@ export const Container: FC<PropsWithChildren<FlexProps>> = ({
     <SafeAreaBox flex={1}>
       <Flex
         {...rest}
-        bg="white"
+        bg="neutral.50"
         _dark={{
           bg: 'black',
         }}

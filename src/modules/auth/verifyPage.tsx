@@ -20,9 +20,9 @@ import { FieldCodeInput } from '@/components/FieldCodeInput';
 import { LucideIcon } from '@/components/LucideIcon';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
-import { HeaderAuth } from '@/layout/HeaderAuth';
 import { authClient } from '@/lib/auth-client';
 import { CardInfoAuthStep } from '@/modules/auth/CardInfoAuthStep';
+import useSessionStore from '@/modules/auth/auth.store';
 import { useToast } from '@/modules/toast/useToast';
 
 export const VerifyPage = () => {
@@ -47,6 +47,11 @@ export const VerifyPage = () => {
           });
           return;
         }
+        const session = await authClient.getSession();
+        if (session.data?.user) {
+          useSessionStore.getState().setUser(session.data?.user);
+        }
+
         showSuccess(t('login:validation.success'));
         // TODO: navigate into the app
       } catch (err) {
@@ -82,12 +87,11 @@ export const VerifyPage = () => {
     },
   });
 
-  const lineColor = useColorModeValue('brand.200', 'brand.600');
-  const textColor = useColorModeValue('brand.500', 'brand.400');
+  const lineColor = useColorModeValue('neutral.200', 'neutral.600');
+  const textColor = useColorModeValue('neutral.500', 'neutral.400');
 
   return (
     <Container>
-      <HeaderAuth />
       <Content
         contentContainerStyle={{
           flex: 1,
@@ -99,7 +103,7 @@ export const VerifyPage = () => {
           <Button
             variant="link"
             onPress={() => router.back()}
-            colorScheme="brand"
+            colorScheme="neutral"
             px={0}
           >
             <LucideIcon icon={ArrowLeft} size={16} />
@@ -111,8 +115,12 @@ export const VerifyPage = () => {
           </Text>
 
           {/* Description */}
-          <Text fontSize="sm" variant="medium" color={textColor} mb="lg">
-            {t('login:verification.description', { email })}
+          <Text fontSize="sm" variant="medium" color={textColor} mb="md">
+            {t('login:verification.description1')}{' '}
+            <Text fontSize="sm" variant="semiBold" color={textColor} mx={10}>
+              {email}
+            </Text>{' '}
+            {t('login:verification.description1')}
           </Text>
 
           {/* Code Input */}

@@ -63,7 +63,7 @@ export const FieldInput = React.forwardRef(
           onChangeText={setValue}
           onBlur={handleBlur}
           my={5}
-          placeholderTextColor={useColorModeValue('brand.600', 'white')}
+          placeholderTextColor={useColorModeValue('neutral.600', 'white')}
           {...componentProps}
         />
       </FormGroup>

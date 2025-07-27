@@ -8,8 +8,8 @@ export const LoadingScreen = () => {
     <Box h="100%" p={5} justifyContent="center" alignItems="center">
       <ActivityIndicator
         color={useColorModeValue(
-          (theme?.colors?.gray as Dict)?.[600],
-          (theme?.colors?.gray as Dict)?.[400]
+          (theme?.colors?.neutral as Dict)?.[600],
+          (theme?.colors?.neutral as Dict)?.[400]
         )}
         size="large"
       />

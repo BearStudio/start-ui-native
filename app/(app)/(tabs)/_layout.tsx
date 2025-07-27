@@ -1,6 +1,13 @@
+import BookFilled from '@assets/tabs/book-filled.svg';
+import Book from '@assets/tabs/book.svg';
+import HouseFilled from '@assets/tabs/house-filled.svg';
+import House from '@assets/tabs/house.svg';
+import UserCircleFilled from '@assets/tabs/user-circle-filled.svg';
+import UserCircle from '@assets/tabs/user-circle.svg';
 import { useTranslation } from 'react-i18next';
 
 import { Tabs } from '@/layout/Tabs';
+import { TabsHeader } from '@/layout/TabsHeader';
 import { useColorSchemeListener } from '@/theme/hooks';
 
 const HomeTabs = () => {
@@ -15,19 +22,22 @@ const HomeTabs = () => {
         {
           route: 'home',
           title: t('layouts:tabs.home'),
-          icon: 'home',
-          options: { headerShown: false },
+          icon: House,
+          focusedIcon: HouseFilled,
+          options: { header: () => <TabsHeader /> },
         },
         {
           route: 'books',
           title: t('layouts:tabs.books'),
-          icon: 'book',
+          icon: Book,
+          focusedIcon: BookFilled,
           options: { headerShown: false },
         },
         {
           route: 'account',
           title: t('layouts:tabs.account'),
-          icon: 'user',
+          icon: UserCircle,
+          focusedIcon: UserCircleFilled,
           options: { headerShown: false },
         },
       ]}

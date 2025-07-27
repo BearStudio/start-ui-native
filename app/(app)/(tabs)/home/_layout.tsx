@@ -11,7 +11,7 @@ const HomeStack = () => {
           route: 'index',
           title: t('layouts:tabs.home'),
           options: {
-            isTabBarScreen: true,
+            headerShown: false,
           },
         },
       ]}

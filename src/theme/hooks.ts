@@ -20,8 +20,8 @@ export const useAppColorMode = () => {
     if (Platform.OS === 'android') {
       StatusBar.setBackgroundColor(
         colorMode === 'light'
-          ? (theme?.colors?.gray as Dict)?.[800]
-          : (theme?.colors?.gray as Dict)?.[100]
+          ? (theme?.colors?.neutral as Dict)?.[800]
+          : (theme?.colors?.neutral as Dict)?.[100]
       );
     }
 
@@ -33,18 +33,18 @@ export const useAppColorMode = () => {
     setColorMode('dark');
     StatusBar.setBarStyle('light-content');
     if (Platform.OS === 'android') {
-      StatusBar.setBackgroundColor((theme?.colors?.gray as Dict)?.[800]);
+      StatusBar.setBackgroundColor((theme?.colors?.neutral as Dict)?.[800]);
     }
-  }, [setColorMode, theme?.colors?.gray]);
+  }, [setColorMode, theme?.colors?.neutral]);
 
   const setLightMode = useCallback(async () => {
     await AsyncStorage.setItem(THEME_KEY, 'light');
     setColorMode('light');
     StatusBar.setBarStyle('dark-content');
     if (Platform.OS === 'android') {
-      StatusBar.setBackgroundColor((theme?.colors?.gray as Dict)?.[100]);
+      StatusBar.setBackgroundColor((theme?.colors?.neutral as Dict)?.[100]);
     }
-  }, [setColorMode, theme?.colors?.gray]);
+  }, [setColorMode, theme?.colors?.neutral]);
 
   return { updateColorMode, setDarkMode, setLightMode };
 };

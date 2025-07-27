@@ -22,7 +22,13 @@
   "sections": {
     "profile": {
       "title": "Informations du profil",
-      "input": { "label": "Nom", "required": "Le nom est requis" }
+      "input": {
+        "label": "Nom",
+        "required": "Le nom est requis"
+      },
+      "updateName": {
+        "title": "Mettez à jour votre nom"
+      }
     },
     "email": {
       "title": "Mettre à jour votre email",
@@ -33,9 +39,13 @@
           "email": "L'email est invalide"
         }
       },
-      "feedbacks": { "isEmail": "Ceci est votre email actuel" }
+      "feedbacks": {
+        "isEmail": "Ceci est votre email actuel"
+      }
     },
-    "preferences": { "title": "Préférences" }
+    "preferences": {
+      "title": "Préférences"
+    }
   },
   "confirmationModals": {
     "logout": {

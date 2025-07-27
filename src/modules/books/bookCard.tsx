@@ -55,7 +55,8 @@ export const BookCard: React.FC<{
   book: Book;
   onPress?: () => void;
 }> = ({ book, onPress }) => {
-  const bg = book.genre?.color ?? useColorModeValue('gray.200', 'gray.700');
+  const bg =
+    book.genre?.color ?? useColorModeValue('neutral.200', 'neutral.700');
 
   return (
     <TouchableOpacity onPress={onPress} style={{ flex: 1 }}>
@@ -92,7 +93,9 @@ export const BookCardSkeleon = ({
   return (
     <Card flex={1}>
       {/* 3D SVG cover */}
-      <CardBackground color={(theme?.colors?.gray as Dict)?.[300] ?? 'gray'} />
+      <CardBackground
+        color={(theme?.colors?.neutral as Dict)?.[300] ?? 'neutral'}
+      />
 
       {/* Title & author overlay */}
       <CardContent>

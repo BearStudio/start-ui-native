@@ -14,7 +14,8 @@
   "verification": {
     "back": "Retour",
     "title": "Vérification",
-    "description": "Nous avons envoyé un code à {{email}}. Entrez-le ci-dessous.",
+    "description1": "Nous avons envoyé un code à",
+    "description2": "Entrez-le ci-dessous.",
     "required": "Le code est requis",
     "confirm": "Confirmer",
     "resend": "Renvoyer le code",

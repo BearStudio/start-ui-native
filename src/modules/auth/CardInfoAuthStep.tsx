@@ -35,7 +35,7 @@ export const CardInfoAuthStep = ({
       alignItems="center"
       flexWrap="wrap"
       borderWidth={1}
-      borderColor="brand.200"
+      borderColor="neutral.200"
       borderRadius="lg"
       px={16}
       py={12}
@@ -55,7 +55,7 @@ export const CardInfoAuthStep = ({
               <Text
                 fontSize="lg"
                 fontWeight="700"
-                color={useColorModeValue('gray.800', 'gray.50')}
+                color={useColorModeValue('neutral.800', 'neutral.50')}
                 style={{ textDecorationLine: 'underline' }}
               >
                 admin@admin.com
@@ -64,14 +64,14 @@ export const CardInfoAuthStep = ({
           )}
           {type === 'code' && (
             <HStack spacing="md">
-              <Text fontSize="sm" color="brand.500">
+              <Text fontSize="sm" color="neutral.500">
                 {t('login:verify.addCode')}
               </Text>
               <TouchableOpacity onPress={handlePress}>
                 <Text
                   fontSize="lg"
                   fontWeight="700"
-                  color={useColorModeValue('gray.800', 'gray.50')}
+                  color={useColorModeValue('neutral.800', 'neutral.50')}
                   style={{ textDecorationLine: 'underline' }}
                 >
                   000000

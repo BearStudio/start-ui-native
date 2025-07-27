@@ -1,9 +1,17 @@
 import { Formiz, useForm } from '@formiz/core';
+import { LogOut } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { Box, Button, Text, useColorModeValue } from 'react-native-ficus-ui';
+import {
+  Box,
+  Button,
+  HStack,
+  Text,
+  useColorModeValue,
+} from 'react-native-ficus-ui';
 
 import { apiHooks } from '@/api/api-hooks';
 import { FieldInput } from '@/components/FieldInput';
+import { LucideIcon } from '@/components/LucideIcon';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
 import { Footer } from '@/layout/Footer';
@@ -14,14 +22,13 @@ const OnboardingPage = () => {
   const { t } = useTranslation('onboarding');
   const { showError, showSuccess } = useToast();
   const session = authClient.useSession();
-  // 1) form setup
+
   const onboardingForm = useForm<{ name: string }>({
     onValidSubmit: (values) => {
       submitOnboarding.mutate(values);
     },
   });
 
-  // 2) mutation to your onboarding endpoint
   const submitOnboarding = apiHooks.useAccountSubmitOnboarding(
     {},
     {
@@ -35,24 +42,28 @@ const OnboardingPage = () => {
       },
     }
   );
-
   return (
     <Container>
       <Formiz connect={onboardingForm}>
-        <Content>
+        <Content
+          contentContainerStyle={{
+            flex: 1,
+            justifyContent: 'center',
+            paddingHorizontal: 24,
+          }}
+        >
           {/* Header */}
           <Box mb="md">
             <Text
-              fontSize="lg"
+              fontSize="xl"
               fontWeight="bold"
-              color={useColorModeValue('gray.900', 'gray.50')}
-              mb="sm"
+              color={useColorModeValue('neutral.900', 'neutral.50')}
             >
               {t('title')}
             </Text>
             <Text
               fontSize="md"
-              color={useColorModeValue('gray.700', 'gray.400')}
+              color={useColorModeValue('neutral.700', 'neutral.400')}
             >
               {t('description')}
             </Text>
@@ -69,18 +80,31 @@ const OnboardingPage = () => {
               returnKeyType: 'done',
             }}
           />
-        </Content>
 
-        <Footer>
+          {/* Submit button */}
           <Button
             onPress={() => onboardingForm.submit()}
             isLoading={submitOnboarding.isLoading}
             isDisabled={onboardingForm.isSubmitted && !onboardingForm.isValid}
-            colorScheme="brand"
-            full
+            variant="@primary"
+            size="md"
+            mt="md"
           >
             {t('actions.submit')}
           </Button>
+        </Content>
+
+        {/* Footer */}
+        <Footer alignItems="center">
+          <Text size="sm" color="neutral.700">
+            {t('loggedWith', { email: session?.data?.user?.email })}
+          </Text>
+          <HStack as="TouchableOpacity" alignItems="center" spacing="sm">
+            <LucideIcon icon={LogOut} size={12} color="neutral.700" />
+            <Text size="sm" color="neutral.700">
+              {t('actions.logout')}
+            </Text>
+          </HStack>
         </Footer>
       </Formiz>
     </Container>
