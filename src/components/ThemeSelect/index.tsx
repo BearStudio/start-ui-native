@@ -1,6 +1,6 @@
 import { LucideChevronsUpDown, Monitor, Moon, Sun } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { useColorScheme } from 'react-native';
+import { Appearance } from 'react-native';
 import {
   Box,
   BoxProps,
@@ -12,6 +12,7 @@ import {
 } from 'react-native-ficus-ui';
 
 import { LucideIcon } from '@/components/LucideIcon';
+import useSessionStore from '@/modules/auth/auth.store';
 
 export const ThemeSelect = ({
   type = 'icon',
@@ -20,19 +21,29 @@ export const ThemeSelect = ({
   type?: 'select' | 'icon';
 }) => {
   const { t } = useTranslation(['components']);
-  const { colorMode, setColorMode } = useColorMode();
-  const systemColorScheme = useColorScheme();
+  const modeTheme = useSessionStore((state) => state.theme);
+  const { setColorMode } = useColorMode();
+
+  const handleChangeTheme = (value: 'light' | 'dark' | 'system') => {
+    const systemColorScheme = Appearance.getColorScheme();
+    const newColorMode = value === 'system' ? systemColorScheme : value;
+    if (newColorMode) {
+      Appearance.setColorScheme(newColorMode);
+      setColorMode(newColorMode);
+      useSessionStore.getState().setTheme(value);
+    }
+  };
 
   const themeOptions = [
     { label: t('ThemeSwitcher.light'), value: 'light', icon: Sun },
     { label: t('ThemeSwitcher.dark'), value: 'dark', icon: Moon },
-    { label: 'System', value: systemColorScheme, icon: Monitor },
+    { label: 'System', value: 'system', icon: Monitor },
   ] as const;
   return (
     <Box {...rest}>
       <Select
-        value={colorMode}
-        onValueChange={(val) => setColorMode(val)}
+        value={modeTheme}
+        onValueChange={handleChangeTheme}
         items={themeOptions.map((option) => ({
           label: option.label,
           value: option.value,
@@ -46,7 +57,7 @@ export const ThemeSelect = ({
             px={0}
             icon={
               <LucideIcon
-                icon={themeOptions.find((i) => i.value === colorMode)?.icon}
+                icon={themeOptions.find((i) => i.value === modeTheme)?.icon}
                 size={20}
               />
             }
@@ -55,11 +66,11 @@ export const ThemeSelect = ({
         ) : (
           <Button variant="ghost" gap="sm" px={0}>
             <LucideIcon
-              icon={themeOptions.find((i) => i.value === colorMode)?.icon}
+              icon={themeOptions.find((i) => i.value === modeTheme)?.icon}
               color={useColorModeValue('neutral.900', 'white')}
               size="md"
             />
-            {themeOptions.find((i) => i.value === colorMode)?.label}
+            {themeOptions.find((i) => i.value === modeTheme)?.label}
             <LucideIcon
               icon={LucideChevronsUpDown}
               color={useColorModeValue('neutral.900', 'white')}

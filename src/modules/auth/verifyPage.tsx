@@ -49,7 +49,10 @@ export const VerifyPage = () => {
         }
         const session = await authClient.getSession();
         if (session.data?.user) {
-          useSessionStore.getState().setUser(session.data?.user);
+          useSessionStore.getState().setIsAuthentificated(true);
+          useSessionStore
+            .getState()
+            .setIsOnboarded(!!session.data.user.onboardedAt);
         }
 
         showSuccess(t('login:validation.success'));

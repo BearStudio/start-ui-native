@@ -1,18 +1,17 @@
-// stores/useSessionStore.ts
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { User } from 'better-auth';
 import { create } from 'zustand';
 import { createJSONStorage, devtools, persist } from 'zustand/middleware';
 
 export const SESSION_STORAGE_KEY = 'user-session-storage';
-type StoreUser = User & {
-  onboardedAt?: Date | null;
-};
 
 type SessionState = {
-  user: StoreUser | null;
-  setUser: (user: StoreUser | null) => void;
-  clearUser: () => void;
+  isAuthentificated: boolean;
+  isOnboarded: boolean;
+  theme: 'light' | 'dark' | 'system';
+  setIsAuthentificated: (value: boolean) => void;
+  setIsOnboarded: (value: boolean) => void;
+  setTheme: (value: 'light' | 'dark' | 'system') => void;
+  reset: () => void;
   isHydrated: boolean;
   setIsHydrated: (value: boolean) => void;
 };
@@ -21,9 +20,14 @@ const useSessionStore = create<SessionState>()(
   devtools(
     persist(
       (set) => ({
-        user: null,
-        setUser: (user) => set({ user }),
-        clearUser: () => set({ user: null }),
+        isAuthentificated: false,
+        isOnboarded: false,
+        setIsAuthentificated: (value) => set({ isAuthentificated: value }),
+        setIsOnboarded: (value) => set({ isOnboarded: value }),
+        theme: 'system',
+        setTheme: (value) => set({ theme: value }),
+        reset: () =>
+          set({ isAuthentificated: false, isOnboarded: false, theme: 'light' }),
         isHydrated: false,
         setIsHydrated: (value) => set({ isHydrated: value }),
       }),
@@ -31,7 +35,9 @@ const useSessionStore = create<SessionState>()(
         name: SESSION_STORAGE_KEY,
         storage: createJSONStorage(() => AsyncStorage),
         partialize: (state) => ({
-          user: state.user,
+          isAuthentificated: state.isAuthentificated,
+          isOnboarded: state.isOnboarded,
+          theme: state.theme,
         }),
         onRehydrateStorage: () => (state, error) => {
           if (error) {

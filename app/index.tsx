@@ -1,32 +1,33 @@
 import { useCallback, useEffect } from 'react';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as SplashScreen from 'expo-splash-screen';
-import { View, useColorScheme } from 'react-native';
+import { Appearance, View } from 'react-native';
 
-import { THEME_KEY } from '@/theme';
+import useSessionStore from '@/modules/auth/auth.store';
 import { useAppColorMode } from '@/theme/hooks';
 
 SplashScreen.preventAutoHideAsync();
 
 const Index = () => {
   const { setDarkMode, setLightMode } = useAppColorMode();
-  const colorScheme = useColorScheme();
+  const themeMode = useSessionStore((state) => state.theme);
 
-  const loadTheme = useCallback(async () => {
-    if (colorScheme === 'dark') {
+  const loadTheme = useCallback(() => {
+    if (themeMode === 'dark') {
       setDarkMode();
-    } else {
-      const themeValue = await AsyncStorage.getItem(THEME_KEY);
-      if (!!themeValue) {
-        if (themeValue === 'dark') {
-          setDarkMode();
-        } else {
-          setLightMode();
-        }
+    } else if (themeMode === 'light') {
+      setLightMode();
+    } else if (themeMode === 'system') {
+      // Default to system theme
+      const systemColorScheme = Appearance.getColorScheme();
+      if (systemColorScheme === 'dark') {
+        setDarkMode();
+      }
+      if (systemColorScheme === 'light') {
+        setLightMode();
       }
     }
-  }, [setDarkMode, setLightMode, colorScheme]);
+  }, [themeMode, setDarkMode, setLightMode]);
 
   useEffect(() => {
     loadTheme();

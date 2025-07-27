@@ -7,10 +7,9 @@ import useSessionStore from '@/modules/auth/auth.store';
 
 const useProtectedRoute = () => {
   const router = useRouter();
-  const session = useSessionStore((state) => state.user);
-  const isAuthentificated = !!session;
+  const isAuthentificated = useSessionStore((state) => state.isAuthentificated);
   const isHydrated = useSessionStore((state) => state.isHydrated);
-  const isOnboarded = !!session?.onboardedAt;
+  const isOnboarded = useSessionStore((state) => state.isOnboarded);
 
   useLayoutEffect(() => {
     if (!isHydrated) {

@@ -14,7 +14,7 @@ const logoutUserPlugin: ZodiosPlugin = {
       !(method === 'post' && url === '/accounts/update-email')
     ) {
       authClient.signOut();
-      useSessionStore.getState().clearUser();
+      useSessionStore.getState().reset();
     }
     throw error;
   },
@@ -24,7 +24,7 @@ const cookieSessionPlugin: ZodiosPlugin = {
   request: async (_api, config: any) => {
     const cookie = await authClient.getCookie();
     if (!cookie) {
-      useSessionStore.getState().clearUser();
+      useSessionStore.getState().reset();
     }
     if (cookie) {
       config.headers = {
