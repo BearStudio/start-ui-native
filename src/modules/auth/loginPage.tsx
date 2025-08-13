@@ -103,6 +103,7 @@ const LoginPage = () => {
             justifyContent: 'center',
             alignItems: 'center',
           }}
+          p={48}
         >
           <Text fontSize="2xl" variant="bold">
             {/* Login or Sign Up */}
@@ -138,6 +139,7 @@ const LoginPage = () => {
             onPress={() => loginForm.submit()}
             isLoading={false}
             variant="@primary"
+            size="lg"
             full
             mt={16}
           >
@@ -155,7 +157,7 @@ const LoginPage = () => {
             isLoading={social.isLoading}
             onPress={() => social.mutate('github')}
           >
-            {t('login:actions.loginWithGitHub', { provider: 'GitHub' })}
+            {t('login:actions.loginWithGitHub')}
           </Button>
         </Content>
       </Formiz>

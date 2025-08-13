@@ -4,14 +4,12 @@ import 'dayjs/locale/fr';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Box, Center, Text, useColorModeValue } from 'react-native-ficus-ui';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 import { apiHooks } from '@/api/api-hooks';
 import {
   DataCard,
   DataCardRow,
   DataCardRowDivider,
-  DataCardTitle,
 } from '@/components/DataCard';
 import { Skeleton } from '@/components/Skeleton';
 import { Container } from '@/layout/Container';
@@ -52,11 +50,15 @@ const BookDetails = () => {
         {(!!bookQuery.data || !!bookQuery.isLoading) && (
           <>
             {/* Info Card */}
-            <DataCard>
+            <DataCard px={16}>
               <DataCardRow direction="row" label={t('fields.title')}>
-                <DataCardTitle>
+                <Text
+                  color={useColorModeValue('neutral.900', 'neutral.50')}
+                  fontSize="sm"
+                  variant="medium"
+                >
                   {bookQuery.data?.title || t('fields.title')}
-                </DataCardTitle>
+                </Text>
               </DataCardRow>
               <DataCardRowDivider />
 
@@ -64,8 +66,8 @@ const BookDetails = () => {
                 <Skeleton.Text visible={!bookQuery.isLoading}>
                   <Text
                     color={useColorModeValue('neutral.900', 'neutral.50')}
-                    fontSize="md"
-                    variant="semiBold"
+                    fontSize="sm"
+                    variant="medium"
                   >
                     {bookQuery.data?.author}
                   </Text>
@@ -85,8 +87,8 @@ const BookDetails = () => {
                     />
                     <Text
                       color={useColorModeValue('neutral.900', 'neutral.50')}
-                      fontSize="md"
-                      variant="semiBold"
+                      fontSize="sm"
+                      variant="medium"
                     >
                       {bookQuery.data?.genre?.name}
                     </Text>
@@ -99,8 +101,8 @@ const BookDetails = () => {
                 <Skeleton.Text visible={!bookQuery.isLoading}>
                   <Text
                     color={useColorModeValue('neutral.900', 'neutral.50')}
-                    fontSize="md"
-                    variant="semiBold"
+                    fontSize="sm"
+                    variant="medium"
                   >
                     {(bookQuery.data?.publisher as string) ?? '—'}
                   </Text>
@@ -118,15 +120,6 @@ const BookDetails = () => {
                 overflow="hidden"
                 shadow="xl"
               >
-                {!bookQuery.isLoading && !!bookQuery?.data ? (
-                  <Animated.View entering={FadeIn.duration(250)}>
-                    <BookCardDetails book={bookQuery?.data} />
-                  </Animated.View>
-                ) : (
-                  <Animated.View exiting={FadeOut.duration(250)}>
-                    <BookCardSkeleon />
-                  </Animated.View>
-                )}
                 <BookCardSkeleon visible={!bookQuery.isLoading}>
                   {!!bookQuery?.data && (
                     <BookCardDetails book={bookQuery?.data} />

@@ -37,7 +37,7 @@ export const DemoCaption = () => {
       <Box mt="md" align="center">
         <Text
           textAlign="center"
-          fontSize="sm"
+          fontSize="xs"
           color="neutral.600"
           _dark={{
             color: 'neutral.300',
@@ -58,14 +58,14 @@ const DemoWelcome: React.FC = () => {
     <VStack spacing="md" py="md">
       <VStack spacing="xs">
         <Text
-          fontSize="2xl"
+          fontSize="md"
           fontWeight="600"
           color={useColorModeValue('black', 'white')}
         >
           {t('home:welcome.title')}
         </Text>
         <Text
-          fontSize="md"
+          fontSize="sm"
           color={useColorModeValue('neutral.600', 'neutral.300')}
         >
           {t('home:welcome.description')}
@@ -74,7 +74,7 @@ const DemoWelcome: React.FC = () => {
       <HStack spacing="xl">
         <Button
           variant="outline"
-          size="sm"
+          size="xs"
           onPress={() =>
             Linking.openURL('https://github.com/BearStudio/start-ui-native')
           }
@@ -83,7 +83,7 @@ const DemoWelcome: React.FC = () => {
         </Button>
         <Button
           variant="outline"
-          size="sm"
+          size="xs"
           onPress={() =>
             Linking.openURL(
               'https://github.com/BearStudio/start-ui-native/issues'

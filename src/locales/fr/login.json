@@ -31,6 +31,9 @@
   },
   "actions": {
     "login": "Continuez avec Email",
-    "loginWithGitHub": "Connecter avec GitHub"
+    "loginWithGitHub": "Continuez avec GitHub"
+  },
+  "verify": {
+    "addEmail": "Vous pouvez vous connecter avec"
   }
 }

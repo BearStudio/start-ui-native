@@ -42,34 +42,47 @@ export const CardInfoAuthStep = ({
       w="100%"
       {...rest}
     >
-      <Box flexDirection="row" gap="md">
-        <Box mt={8}>
+      <Box flexDirection="row">
+        <Box mt={4}>
           <LucideIcon icon={TerminalIcon} size={16} color="black" />
         </Box>
         <Box>
-          <Text fontSize="lg" my="sm">
+          <Text fontSize="sm" variant="medium">
             Dev mode
           </Text>
           {type === 'email' && (
-            <TouchableOpacity onPress={handlePress}>
+            <HStack spacing="sm">
               <Text
-                fontSize="lg"
-                fontWeight="700"
-                color={useColorModeValue('neutral.800', 'neutral.50')}
-                style={{ textDecorationLine: 'underline' }}
+                fontSize="sm"
+                color="neutral.600"
+                _dark={{ color: 'neutral.300' }}
               >
-                admin@admin.com
+                {t('login:verify.addEmail')}
               </Text>
-            </TouchableOpacity>
+              <TouchableOpacity onPress={handlePress}>
+                <Text
+                  fontSize="sm"
+                  fontWeight="700"
+                  color={useColorModeValue('neutral.800', 'neutral.50')}
+                  style={{ textDecorationLine: 'underline' }}
+                >
+                  admin@admin.com
+                </Text>
+              </TouchableOpacity>
+            </HStack>
           )}
           {type === 'code' && (
-            <HStack spacing="md">
-              <Text fontSize="sm" color="neutral.500">
+            <HStack spacing="sm">
+              <Text
+                fontSize="sm"
+                color="neutral.600"
+                _dark={{ color: 'neutral.300' }}
+              >
                 {t('login:verify.addCode')}
               </Text>
               <TouchableOpacity onPress={handlePress}>
                 <Text
-                  fontSize="lg"
+                  fontSize="sm"
                   fontWeight="700"
                   color={useColorModeValue('neutral.800', 'neutral.50')}
                   style={{ textDecorationLine: 'underline' }}

@@ -1,18 +1,21 @@
 import { FC } from 'react';
 
 import { useRouter } from 'expo-router';
+import { ArrowLeft } from 'lucide-react-native';
 import { StatusBar } from 'react-native';
 import {
   Box,
   BoxProps,
   Dict,
-  Icon,
+  Divider,
   IconButton,
   Text,
   useColorModeValue,
   useTheme,
 } from 'react-native-ficus-ui';
 import Animated, { FadeInUp, FadeOutUp } from 'react-native-reanimated';
+
+import { LucideIcon } from '@/components/LucideIcon';
 
 export const HEADER_HEIGHT = 64;
 
@@ -61,35 +64,41 @@ export const Header: FC<HeaderProps> = ({
           'white',
           (theme.colors?.neutral as Dict)?.[900] ?? 'neutral'
         )}
-        style={{ gap: theme.space?.lg as number }}
         borderColor={useColorModeValue('neutral.200', 'neutral.800')}
         borderWidth={1}
         borderTopWidth={0}
         borderLeftWidth={0}
         borderRightWidth={0}
-        px="md"
-        pl={hasGoBack ? undefined : 'xl'}
-        // borderBottomRadius={32}
+        px={16}
         {...rest}
       >
         {hasGoBack && router.canGoBack() ? (
-          <IconButton
-            variant="ghost"
-            onPress={handleGoBack}
-            color={useColorModeValue('neutral.700', 'white')}
-            alignSelf="center"
-            size="xl"
-            icon={<Icon name="arrow-left" iconSet="Feather" />}
-            rounded="full"
-          />
-        ) : (
-          <Box w={10} />
-        )}
+          <>
+            <IconButton
+              variant="ghost"
+              onPress={handleGoBack}
+              color={useColorModeValue('neutral.700', 'white')}
+              alignSelf="center"
+              size="lg"
+              icon={<LucideIcon icon={ArrowLeft} size={16} />}
+              rounded="md"
+            />
+            <Divider
+              orientation="vertical"
+              h={16}
+              color="neutral.200"
+              _dark={{
+                color: 'neutral.800',
+              }}
+              mr="lg"
+            />
+          </>
+        ) : null}
 
         <Box flex={1} flexDirection="column">
           <Text
-            fontSize="2xl"
-            fontWeight="bold"
+            fontSize="md"
+            variant="medium"
             numberOfLines={1}
             ellipsizeMode="tail"
             color={useColorModeValue('neutral.800', 'neutral.100')}

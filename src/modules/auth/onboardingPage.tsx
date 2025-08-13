@@ -16,6 +16,7 @@ import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
 import { Footer } from '@/layout/Footer';
 import { authClient } from '@/lib/auth-client';
+import useSessionStore from '@/modules/auth/auth.store';
 import { useToast } from '@/modules/toast/useToast';
 
 const OnboardingPage = () => {
@@ -99,7 +100,15 @@ const OnboardingPage = () => {
           <Text size="sm" color="neutral.700">
             {t('loggedWith', { email: session?.data?.user?.email })}
           </Text>
-          <HStack as="TouchableOpacity" alignItems="center" spacing="sm">
+          <HStack
+            as="TouchableOpacity"
+            alignItems="center"
+            spacing="sm"
+            onPress={() => {
+              authClient.signOut();
+              useSessionStore.getState().reset();
+            }}
+          >
             <LucideIcon icon={LogOut} size={12} color="neutral.700" />
             <Text size="sm" color="neutral.700">
               {t('actions.logout')}

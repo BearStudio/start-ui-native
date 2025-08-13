@@ -64,16 +64,18 @@ export const ThemeSelect = ({
             aria-label="Toggle theme"
           />
         ) : (
-          <Button variant="ghost" gap="sm" px={0}>
+          <Button variant="ghost" gap="sm" px={0} color="neutral.950">
             <LucideIcon
               icon={themeOptions.find((i) => i.value === modeTheme)?.icon}
               color={useColorModeValue('neutral.900', 'white')}
+              opacity={0.8}
               size="md"
             />
             {themeOptions.find((i) => i.value === modeTheme)?.label}
             <LucideIcon
               icon={LucideChevronsUpDown}
               color={useColorModeValue('neutral.900', 'white')}
+              opacity={0.8}
               size="md"
             />
           </Button>

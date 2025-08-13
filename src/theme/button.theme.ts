@@ -14,10 +14,10 @@ const accessibleColorMap: Record<string, AccessibleColor> = {
     pressedBg: 'neutral.800',
     loaderColor: 'neutral.900',
   },
-  red: {
-    bg: 'red.500',
+  negative: {
+    bg: 'negative.500',
     color: 'white',
-    pressedBg: 'red.600',
+    pressedBg: 'negative.600',
     loaderColor: 'white',
   },
 };
@@ -95,10 +95,10 @@ const variantSecondary = defineStyle((props) =>
   variantOutline({ ...props, colorScheme: 'neutral' })
 );
 const variantDangerPrimary = defineStyle((props) =>
-  variantSolid({ ...props, colorScheme: 'red' })
+  variantSolid({ ...props, colorScheme: 'negative' })
 );
 const variantDangerSecondary = defineStyle((props) =>
-  variantOutline({ ...props, colorScheme: 'red' })
+  variantOutline({ ...props, colorScheme: 'negative' })
 );
 
 const sizes = {
@@ -108,6 +108,7 @@ const sizes = {
     px: 8,
     gap: 4,
     fontSize: 12,
+    fontWeight: '500',
   }),
   sm: defineStyle({
     rounded: 'lg',
@@ -115,6 +116,7 @@ const sizes = {
     px: 12,
     gap: 6,
     fontSize: 14,
+    fontWeight: '500',
   }),
   md: defineStyle({
     rounded: 'lg',
@@ -122,13 +124,15 @@ const sizes = {
     px: 14,
     gap: 8,
     fontSize: 14,
+    fontWeight: '500',
   }),
   lg: defineStyle({
     rounded: 'lg',
     h: 40,
     px: 16,
     gap: 12,
-    fontSize: 17,
+    fontSize: 14,
+    fontWeight: '500',
   }),
 };
 

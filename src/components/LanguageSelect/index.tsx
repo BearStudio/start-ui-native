@@ -28,16 +28,18 @@ export const LanguageSelect = (props: BoxProps) => {
         items={languageOptions}
         placeholder={{ label: t('HeaderAuth.selectLanguage'), value: null }}
       >
-        <Button variant="ghost" gap="sm" px={0}>
+        <Button variant="ghost" gap="sm" px={0} color="neutral.950">
           <LucideIcon
             icon={LucideLanguages}
             color={useColorModeValue('neutral.900', 'white')}
+            opacity={0.8}
             size={16}
           />
           {languageOptions.find((i) => i.value === i18n.language)?.label}
           <LucideIcon
             icon={LucideChevronsUpDown}
             color={useColorModeValue('neutral.900', 'white')}
+            opacity={0.8}
             size={16}
           />
         </Button>

@@ -1,9 +1,10 @@
 import { Formiz, useForm, useFormFields } from '@formiz/core';
-import { Edit2 } from 'lucide-react-native';
+import { LogOut, PenLine } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import {
   Avatar,
   Box,
+  Button,
   Stack,
   Text,
   TouchableOpacity,
@@ -11,7 +12,6 @@ import {
   useDisclosure,
 } from 'react-native-ficus-ui';
 
-import { ButtonIcon } from '@/components/ButtonIcon';
 import { CardStatus } from '@/components/CardStatus';
 import { ConfirmationModal } from '@/components/ConfirmationModal';
 import {
@@ -30,6 +30,7 @@ import { Content } from '@/layout/Content';
 import { LoadingScreen } from '@/layout/LoadingScreen';
 import { authClient } from '@/lib/auth-client';
 import { useAccountUpdate } from '@/modules/account/account.service';
+import useSessionStore from '@/modules/auth/auth.store';
 import { useToast } from '@/modules/toast/useToast';
 
 const AccountPage = () => {
@@ -91,25 +92,33 @@ const AccountPage = () => {
       <Container>
         <Content>
           <DataCard mb="xl">
-            <DataCardRow>
+            <DataCardRow
+              contentProps={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 'lg',
+              }}
+            >
               <Avatar
-                size="sm"
+                w={32}
+                h={32}
+                size="xs"
                 src={session.data?.user.image || ''}
                 name={session.data?.user.name || ''}
               />
-              <DataCardTitle>
+              <DataCardTitle
+                textAlignVertical="center"
+                py={0}
+                lineHeight={12}
+                mt="xs"
+              >
                 {session.data?.user.name || t('account:sections.profile.title')}
               </DataCardTitle>
               <Box flex={1} />
-              <ButtonIcon
-                icon="logout"
-                onPress={logoutModal.onOpen}
-                variant="ghost"
-                iconSet="AntDesign"
-                size="sm"
-              >
+              <Button onPress={logoutModal.onOpen} variant="ghost" size="sm">
+                <LucideIcon icon={LogOut} size="md" />
                 {t('account:actions.logout')}
-              </ButtonIcon>
+              </Button>
             </DataCardRow>
 
             <DataCardRowDivider />
@@ -121,22 +130,24 @@ const AccountPage = () => {
                 onPress={updateNameModal.onOpen}
               >
                 <Text
-                  fontSize="md"
-                  color="neutral.800"
+                  fontSize="sm"
+                  color="neutral.950"
                   _dark={{ color: 'neutral.200' }}
                 >
                   {session.data?.user.name}
                 </Text>
-                <LucideIcon icon={Edit2} size="md" color={colorIcon} />
+                <LucideIcon icon={PenLine} size={16} color={colorIcon} />
               </TouchableOpacity>
             </DataCardRow>
+            <DataCardRowDivider />
+
             <DataCardRow label="Email">
               <Text
-                fontSize="md"
-                color="neutral.800"
+                fontSize="sm"
+                color="neutral.950"
                 _dark={{ color: 'neutral.200' }}
               >
-                {session.data?.user.email || t('account:sections.email.title')}
+                {session.data?.user.email}
               </Text>
             </DataCardRow>
           </DataCard>
@@ -166,7 +177,11 @@ const AccountPage = () => {
         confirmLabel={t('account:confirmationModals.logout.confirmLabel')}
         confirmIcon="logout"
         confirmIconSet="AntDesign"
-        onConfirm={() => authClient.signOut()}
+        onConfirm={() => {
+          authClient.signOut();
+          logoutModal.onClose();
+          useSessionStore.getState().reset();
+        }}
         onClose={logoutModal.onClose}
         isOpen={logoutModal.isOpen}
         h={150}
@@ -217,7 +232,7 @@ const AccountPage = () => {
               title={t('account:confirmationModals.deleteAccount.card.title')}
             >
               <Text
-                color="neutral.800"
+                color="neutral.950"
                 _dark={{
                   color: 'neutral.100',
                 }}

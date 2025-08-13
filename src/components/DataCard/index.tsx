@@ -4,7 +4,6 @@ import {
   Box,
   BoxProps,
   Divider,
-  HStack,
   Text,
   TextProps,
   useColorModeValue,
@@ -32,7 +31,7 @@ export const DataCard = ({ children, ...props }: BoxProps) => {
 };
 
 export const DataCardTitle = (props: TextProps) => (
-  <Text fontSize="lg" fontWeight="bold" mb="sm" {...props} />
+  <Text fontSize="md" variant="semiBold" mb="sm" {...props} />
 );
 
 interface DataCardRowProps extends BoxProps {
@@ -40,31 +39,45 @@ interface DataCardRowProps extends BoxProps {
   /** Right‐hand content */
   children: React.ReactNode;
   direction?: 'row' | 'column';
+  contentProps?: BoxProps;
 }
 
 export const DataCardRow: FC<DataCardRowProps> = ({
   label,
   children,
   direction = 'column',
+  contentProps,
   ...props
 }) => {
   const labelColor = useColorModeValue('neutral.600', 'neutral.300');
 
   return (
-    <Box px="md" py="md" flexDirection={direction} {...props}>
+    <Box
+      px={direction === 'row' ? 0 : 16}
+      py={12}
+      flexDirection={direction}
+      {...props}
+    >
       {!!label && (
-        <Text
-          fontSize="md"
-          w={direction === 'row' ? '30%' : 'full'}
-          variant="semiBold"
-          color={labelColor}
-        >
-          {label}
-        </Text>
+        <Box w={direction === 'row' ? 100 : undefined}>
+          <Text
+            fontSize={direction === 'row' ? 'sm' : 'xs'}
+            variant="semiBold"
+            color={labelColor}
+          >
+            {label}
+          </Text>
+        </Box>
       )}
-      <HStack alignItems="center" gap="md">
+      <Box
+        // alignItems="center"
+        gap={direction === 'row' ? 'md' : undefined}
+        flex={direction === 'row' ? 1 : undefined}
+        flexShrink={1}
+        {...contentProps}
+      >
         {children}
-      </HStack>
+      </Box>
     </Box>
   );
 };

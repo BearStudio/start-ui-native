@@ -56,7 +56,7 @@ const BooksPage = () => {
           numColumns={2}
           columnWrapperStyle={{ justifyContent: 'space-between', gap: 8 }}
           contentContainerStyle={{
-            paddingHorizontal: theme?.space?.xl as number,
+            paddingHorizontal: 16,
             paddingVertical: theme?.space?.md as number,
             gap: 8,
             overflow: 'visible',
