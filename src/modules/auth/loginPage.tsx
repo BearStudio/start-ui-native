@@ -11,7 +11,9 @@ import {
   useColorModeValue,
 } from 'react-native-ficus-ui';
 
+import { EnvironmentVariablesModal } from '@/components/EnvironmentVariablesModal';
 import { FieldInput } from '@/components/FieldInput';
+import { useEnvironmentCheck } from '@/hooks/useEnvironmentCheck';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
 import { authClient } from '@/lib/auth-client';
@@ -46,6 +48,13 @@ const LoginPage = () => {
   const { t } = useTranslation();
   const { showError } = useToast();
   const router = useRouter();
+  const {
+    isModalVisible,
+    missingVariables,
+    showEnvironmentModal,
+    hideEnvironmentModal,
+  } = useEnvironmentCheck();
+
   const loginForm = useForm<{ email: string }>({
     onValidSubmit: async ({ email }) => {
       try {
@@ -93,6 +102,13 @@ const LoginPage = () => {
       console.log(JSON.stringify(error, null, 2));
     },
   });
+
+  const handleGitHubLogin = () => {
+    const canProceed = showEnvironmentModal();
+    if (canProceed) {
+      social.mutate('github');
+    }
+  };
 
   return (
     <Container>
@@ -155,12 +171,18 @@ const LoginPage = () => {
             variant="@secondary"
             full
             isLoading={social.isLoading}
-            onPress={() => social.mutate('github')}
+            onPress={handleGitHubLogin}
           >
             {t('login:actions.loginWithGitHub')}
           </Button>
         </Content>
       </Formiz>
+
+      <EnvironmentVariablesModal
+        isOpen={isModalVisible}
+        onClose={hideEnvironmentModal}
+        missingVariables={missingVariables}
+      />
     </Container>
   );
 };
