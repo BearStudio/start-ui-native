@@ -44,6 +44,11 @@ export default ({ config }) => ({
         ios: {
           flipper: true,
         },
+        android: {
+          targetSdkVersion: 35,
+          compileSdkVersion: 35,
+          buildToolsVersion: '35.0.0',
+        },
       },
     ],
     'expo-router',
