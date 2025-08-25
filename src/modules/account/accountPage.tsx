@@ -1,6 +1,7 @@
 import { Formiz, useForm, useFormFields } from '@formiz/core';
 import { LogOut, PenLine } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
+import { Platform } from 'react-native';
 import {
   Avatar,
   Box,
@@ -185,7 +186,7 @@ const AccountPage = () => {
         }}
         onClose={logoutModal.onClose}
         isOpen={logoutModal.isOpen}
-        h={150}
+        h={Platform.OS === 'ios' ? 180 : 160}
       />
 
       <ConfirmationModal

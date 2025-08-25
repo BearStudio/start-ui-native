@@ -9,6 +9,7 @@ import {
   Text,
   VStack,
 } from 'react-native-ficus-ui';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ButtonIcon } from '../ButtonIcon';
 
@@ -59,6 +60,7 @@ export const ConfirmationModal: FC<
   h = 300,
   ...rest
 }) => {
+  const insets = useSafeAreaInsets();
   return (
     <DraggableModal
       onClose={onClose}
@@ -66,7 +68,7 @@ export const ConfirmationModal: FC<
       android_keyboardInputMode="adjustResize"
       {...rest}
     >
-      <Flex p="xl" pt="md">
+      <Flex p="xl" pt="md" pb={insets.bottom}>
         <Box mb="lg">
           <Text fontWeight="bold" fontSize="xl">
             {title}
