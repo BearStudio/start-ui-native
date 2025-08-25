@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import {
   Box,
   BoxProps,
-  HStack,
   Text,
   TouchableOpacity,
   useColorModeValue,
@@ -32,8 +31,6 @@ export const CardInfoAuthStep = ({
 
   return (
     <Box
-      alignItems="center"
-      flexWrap="wrap"
       borderWidth={1}
       borderColor="neutral.200"
       borderRadius="lg"
@@ -42,26 +39,27 @@ export const CardInfoAuthStep = ({
       w="100%"
       {...rest}
     >
-      <Box flexDirection="row">
-        <Box mt={4}>
+      <Box flexDirection="row" w="100%">
+        <Box mt={4} mr={8}>
           <LucideIcon icon={TerminalIcon} size={16} color="black" />
         </Box>
-        <Box>
+        <Box flex={1}>
           <Text fontSize="sm" variant="medium">
             Dev mode
           </Text>
           {type === 'email' && (
-            <HStack spacing="sm">
+            <Box flexDirection="row" flexWrap="wrap" alignItems="center" mt={4}>
               <Text
-                fontSize="sm"
+                fontSize="xs"
                 color="neutral.600"
                 _dark={{ color: 'neutral.300' }}
+                mr={4}
               >
                 {t('login:verify.addEmail')}
               </Text>
               <TouchableOpacity onPress={handlePress}>
                 <Text
-                  fontSize="sm"
+                  fontSize="xs"
                   fontWeight="700"
                   color={useColorModeValue('neutral.800', 'neutral.50')}
                   style={{ textDecorationLine: 'underline' }}
@@ -69,14 +67,15 @@ export const CardInfoAuthStep = ({
                   admin@admin.com
                 </Text>
               </TouchableOpacity>
-            </HStack>
+            </Box>
           )}
           {type === 'code' && (
-            <HStack spacing="sm">
+            <Box flexDirection="row" flexWrap="wrap" alignItems="center" mt={4}>
               <Text
                 fontSize="sm"
                 color="neutral.600"
                 _dark={{ color: 'neutral.300' }}
+                mr={4}
               >
                 {t('login:verify.addCode')}
               </Text>
@@ -90,7 +89,7 @@ export const CardInfoAuthStep = ({
                   000000
                 </Text>
               </TouchableOpacity>
-            </HStack>
+            </Box>
           )}
         </Box>
       </Box>

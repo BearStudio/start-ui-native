@@ -14,6 +14,7 @@ import {
   useTheme,
 } from 'react-native-ficus-ui';
 import Animated, { FadeInUp, FadeOutUp } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { LucideIcon } from '@/components/LucideIcon';
 
@@ -46,6 +47,8 @@ export const Header: FC<HeaderProps> = ({
     (theme.colors?.neutral as Dict)?.[900] ?? 'neutral'
   );
 
+  const insets = useSafeAreaInsets();
+
   return (
     <Animated.View
       entering={FadeInUp.duration(300)}
@@ -57,7 +60,8 @@ export const Header: FC<HeaderProps> = ({
         barStyle={statusBarStyle}
       />
       <Box
-        h={HEADER_HEIGHT}
+        pt={insets.top}
+        pb="lg"
         flexDirection="row"
         alignItems="center"
         bg={useColorModeValue(
