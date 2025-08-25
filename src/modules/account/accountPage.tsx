@@ -107,10 +107,11 @@ const AccountPage = () => {
                 name={session.data?.user.name || ''}
               />
               <DataCardTitle
-                textAlignVertical="center"
+                justifyContent="center"
+                alignItems="center"
                 py={0}
-                lineHeight={12}
                 mt="xs"
+                textAlign="center"
               >
                 {session.data?.user.name || t('account:sections.profile.title')}
               </DataCardTitle>
