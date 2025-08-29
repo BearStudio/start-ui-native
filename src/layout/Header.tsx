@@ -60,7 +60,7 @@ export const Header: FC<HeaderProps> = ({
         barStyle={statusBarStyle}
       />
       <Box
-        pt={insets.top}
+        pt={insets.top + 16}
         pb="lg"
         flexDirection="row"
         alignItems="center"

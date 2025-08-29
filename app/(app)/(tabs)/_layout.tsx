@@ -7,7 +7,7 @@ import UserCircle from '@assets/tabs/user-circle.svg';
 import { useTranslation } from 'react-i18next';
 
 import { Tabs } from '@/layout/Tabs';
-import { TabsHeader } from '@/layout/TabsHeader';
+import { HomeHeader } from '@/layout/HomeHeader';
 import { useColorSchemeListener } from '@/theme/hooks';
 
 const HomeTabs = () => {
@@ -24,7 +24,7 @@ const HomeTabs = () => {
           title: t('layouts:tabs.home'),
           icon: House,
           focusedIcon: HouseFilled,
-          options: { header: () => <TabsHeader /> },
+          options: { header: () => <HomeHeader /> },
         },
         {
           route: 'books',

@@ -10,7 +10,7 @@ import {
 } from 'react-native-ficus-ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-export const TabsHeader = () => {
+export const HomeHeader = () => {
   const { colorMode } = useColorMode();
   const statusBarStyle = useColorModeValue('dark-content', 'light-content');
   const { theme } = useTheme();
@@ -26,7 +26,7 @@ export const TabsHeader = () => {
         alignItems="center"
         gap="xl"
         py="lg"
-        pt={insets.top}
+        pt={insets.top + 16}
         bg="white"
         _dark={{ bg: 'neutral.900' }}
         borderBottomColor={useColorModeValue('neutral.200', 'neutral.800')}
