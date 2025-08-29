@@ -9,25 +9,25 @@
 /* Begin PBXBuildFile section */
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		7BDB165B05999C3151F74EB1 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 54CE7F7866EC9863694C2BFE /* PrivacyInfo.xcprivacy */; };
+		4A30EBFBFE84E1122744BAB7 /* libPods-StartUINative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0C02F1AE47ED7B13716201 /* libPods-StartUINative.a */; };
+		9A594E9123BDFB82371DA8C3 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = EF898F37F399E556E458763D /* PrivacyInfo.xcprivacy */; };
+		AAEF1FBEAEA240801BE80016 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD89081420328727268170 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		C71C76CEDEBB24FECD19CB84 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8A17CBE724C26E1B62FD56 /* ExpoModulesProvider.swift */; };
-		DD7C117069E25BB7019D915C /* libPods-StartUINative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99AD0796C9CFE6B598A201A1 /* libPods-StartUINative.a */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01DD89081420328727268170 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-StartUINative/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* StartUINative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StartUINative.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = StartUINative/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = StartUINative/Info.plist; sourceTree = "<group>"; };
-		41D3C1B01461D2E90D809025 /* Pods-StartUINative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StartUINative.debug.xcconfig"; path = "Target Support Files/Pods-StartUINative/Pods-StartUINative.debug.xcconfig"; sourceTree = "<group>"; };
-		4F8A17CBE724C26E1B62FD56 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-StartUINative/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
-		54CE7F7866EC9863694C2BFE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = StartUINative/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		68580202B2E362D27B8776F5 /* Pods-StartUINative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StartUINative.release.xcconfig"; path = "Target Support Files/Pods-StartUINative/Pods-StartUINative.release.xcconfig"; sourceTree = "<group>"; };
-		99AD0796C9CFE6B598A201A1 /* libPods-StartUINative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StartUINative.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		34B5855BDB24C97F78A672B8 /* Pods-StartUINative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StartUINative.debug.xcconfig"; path = "Target Support Files/Pods-StartUINative/Pods-StartUINative.debug.xcconfig"; sourceTree = "<group>"; };
+		821387680DAEF160D0A956AF /* Pods-StartUINative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StartUINative.release.xcconfig"; path = "Target Support Files/Pods-StartUINative/Pods-StartUINative.release.xcconfig"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = StartUINative/SplashScreen.storyboard; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
+		DA0C02F1AE47ED7B13716201 /* libPods-StartUINative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StartUINative.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		EF898F37F399E556E458763D /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = StartUINative/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = StartUINative/AppDelegate.swift; sourceTree = "<group>"; };
 		F11748442D0722820044C1D9 /* StartUINative-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "StartUINative-Bridging-Header.h"; path = "StartUINative/StartUINative-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -37,7 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD7C117069E25BB7019D915C /* libPods-StartUINative.a in Frameworks */,
+				4A30EBFBFE84E1122744BAB7 /* libPods-StartUINative.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,15 +53,7 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				54CE7F7866EC9863694C2BFE /* PrivacyInfo.xcprivacy */,
-			);
-			name = StartUINative;
-			sourceTree = "<group>";
-		};
-		2CC3E796A45F60333DF92543 /* StartUINative */ = {
-			isa = PBXGroup;
-			children = (
-				4F8A17CBE724C26E1B62FD56 /* ExpoModulesProvider.swift */,
+				EF898F37F399E556E458763D /* PrivacyInfo.xcprivacy */,
 			);
 			name = StartUINative;
 			sourceTree = "<group>";
@@ -70,9 +62,17 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				99AD0796C9CFE6B598A201A1 /* libPods-StartUINative.a */,
+				DA0C02F1AE47ED7B13716201 /* libPods-StartUINative.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		63C221B3D13D97E283166B75 /* StartUINative */ = {
+			isa = PBXGroup;
+			children = (
+				01DD89081420328727268170 /* ExpoModulesProvider.swift */,
+			);
+			name = StartUINative;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -89,8 +89,8 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				DFD154A8B9A6F520EBDE8B0A /* Pods */,
-				FA3F6A77F76B6ED13B72527F /* ExpoModulesProviders */,
+				A09E38745CD6ABE29827CE5F /* Pods */,
+				EE4F62AF3C6D2C1D0A9989E3 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -105,6 +105,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A09E38745CD6ABE29827CE5F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				34B5855BDB24C97F78A672B8 /* Pods-StartUINative.debug.xcconfig */,
+				821387680DAEF160D0A956AF /* Pods-StartUINative.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		BB2F792B24A3F905000567C9 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,20 +124,10 @@
 			path = StartUINative/Supporting;
 			sourceTree = "<group>";
 		};
-		DFD154A8B9A6F520EBDE8B0A /* Pods */ = {
+		EE4F62AF3C6D2C1D0A9989E3 /* ExpoModulesProviders */ = {
 			isa = PBXGroup;
 			children = (
-				41D3C1B01461D2E90D809025 /* Pods-StartUINative.debug.xcconfig */,
-				68580202B2E362D27B8776F5 /* Pods-StartUINative.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
-			sourceTree = "<group>";
-		};
-		FA3F6A77F76B6ED13B72527F /* ExpoModulesProviders */ = {
-			isa = PBXGroup;
-			children = (
-				2CC3E796A45F60333DF92543 /* StartUINative */,
+				63C221B3D13D97E283166B75 /* StartUINative */,
 			);
 			name = ExpoModulesProviders;
 			sourceTree = "<group>";
@@ -140,13 +140,13 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "StartUINative" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
-				03965587677CC24DAB706F88 /* [Expo] Configure project */,
+				41DF73ED520FDCEB7CACF9EE /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				17F6393D49E570C5FB5C3DA4 /* [CP] Embed Pods Frameworks */,
+				FB9ED5CD5DB7086C823AB74A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -196,7 +196,7 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				7BDB165B05999C3151F74EB1 /* PrivacyInfo.xcprivacy in Resources */,
+				9A594E9123BDFB82371DA8C3 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,25 +217,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [[ -f \"$PODS_ROOT/../.xcode.env\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env\"\nfi\nif [[ -f \"$PODS_ROOT/../.xcode.env.local\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env.local\"\nfi\n\n# The project root by default is one level up from the ios directory\nexport PROJECT_ROOT=\"$PROJECT_DIR\"/..\n\nif [[ \"$CONFIGURATION\" = *Debug* ]]; then\n  export SKIP_BUNDLING=1\nfi\nif [[ -z \"$ENTRY_FILE\" ]]; then\n  # Set the entry JS file using the bundler's entry resolution.\n  export ENTRY_FILE=\"$(\"$NODE_BINARY\" -e \"require('expo/scripts/resolveAppEntry')\" \"$PROJECT_ROOT\" ios absolute | tail -n 1)\"\nfi\n\nif [[ -z \"$CLI_PATH\" ]]; then\n  # Use Expo CLI\n  export CLI_PATH=\"$(\"$NODE_BINARY\" --print \"require.resolve('@expo/cli', { paths: [require.resolve('expo/package.json')] })\")\"\nfi\nif [[ -z \"$BUNDLE_COMMAND\" ]]; then\n  # Default Expo CLI command for bundling\n  export BUNDLE_COMMAND=\"export:embed\"\nfi\n\n# Source .xcode.env.updates if it exists to allow\n# SKIP_BUNDLING to be unset if needed\nif [[ -f \"$PODS_ROOT/../.xcode.env.updates\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env.updates\"\nfi\n# Source local changes to allow overrides\n# if needed\nif [[ -f \"$PODS_ROOT/../.xcode.env.local\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env.local\"\nfi\n\n`\"$NODE_BINARY\" --print \"require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'\"`\n\n";
-		};
-		03965587677CC24DAB706F88 /* [Expo] Configure project */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "[Expo] Configure project";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-StartUINative/expo-configure-project.sh\"\n";
 		};
 		08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -259,23 +240,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		17F6393D49E570C5FB5C3DA4 /* [CP] Embed Pods Frameworks */ = {
+		41DF73ED520FDCEB7CACF9EE /* [Expo] Configure project */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-StartUINative/Pods-StartUINative-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
+			inputFileListPaths = (
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+			);
+			name = "[Expo] Configure project";
+			outputFileListPaths = (
+			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StartUINative/Pods-StartUINative-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-StartUINative/expo-configure-project.sh\"\n";
 		};
 		800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -365,6 +347,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StartUINative/Pods-StartUINative-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FB9ED5CD5DB7086C823AB74A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StartUINative/Pods-StartUINative-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StartUINative/Pods-StartUINative-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -373,7 +373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */,
-				C71C76CEDEBB24FECD19CB84 /* ExpoModulesProvider.swift in Sources */,
+				AAEF1FBEAEA240801BE80016 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,7 +382,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 41D3C1B01461D2E90D809025 /* Pods-StartUINative.debug.xcconfig */;
+			baseConfigurationReference = 34B5855BDB24C97F78A672B8 /* Pods-StartUINative.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -407,7 +407,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bearstudio.startuinative;
-				PRODUCT_NAME = StartUINative;
+				PRODUCT_NAME = "StartUINative";
 				SWIFT_OBJC_BRIDGING_HEADER = "StartUINative/StartUINative-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -418,7 +418,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 68580202B2E362D27B8776F5 /* Pods-StartUINative.release.xcconfig */;
+			baseConfigurationReference = 821387680DAEF160D0A956AF /* Pods-StartUINative.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -438,7 +438,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bearstudio.startuinative;
-				PRODUCT_NAME = StartUINative;
+				PRODUCT_NAME = "StartUINative";
 				SWIFT_OBJC_BRIDGING_HEADER = "StartUINative/StartUINative-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

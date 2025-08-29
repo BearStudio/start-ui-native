@@ -28,10 +28,10 @@ export default ({ config }) => ({
     [
       'expo-splash-screen',
       {
-        image: './assets/logo-black-vertical.png',
+        image: './assets/splash-light.png',
         backgroundColor: '#FFFFFF',
         dark: {
-          image: './assets/logo-white-vertical.png',
+          image: './assets/splash-dark.png',
           backgroundColor: '#000000',
         },
         resizeMode: 'contain',
