@@ -6,8 +6,8 @@ import UserCircleFilled from '@assets/tabs/user-circle-filled.svg';
 import UserCircle from '@assets/tabs/user-circle.svg';
 import { useTranslation } from 'react-i18next';
 
-import { Tabs } from '@/layout/Tabs';
 import { HomeHeader } from '@/layout/HomeHeader';
+import { Tabs } from '@/layout/Tabs';
 import { useColorSchemeListener } from '@/theme/hooks';
 
 const HomeTabs = () => {
