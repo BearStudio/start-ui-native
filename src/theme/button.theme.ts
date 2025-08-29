@@ -52,7 +52,7 @@ const variantOutline = defineStyle((props) => {
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: `${c}.200`,
-    _dark: { color: 'white' },
+    _dark: { color: 'white', borderColor: `${c}.800` },
   };
 });
 

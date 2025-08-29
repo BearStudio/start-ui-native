@@ -40,8 +40,15 @@ export const CardInfoAuthStep = ({
       {...rest}
     >
       <Box flexDirection="row" w="100%">
-        <Box mt={4} mr={8}>
-          <LucideIcon icon={TerminalIcon} size={16} color="black" />
+        <Box mt={1} mr={8}>
+          <LucideIcon
+            icon={TerminalIcon}
+            size={16}
+            color="black"
+            _dark={{
+              color: 'white',
+            }}
+          />
         </Box>
         <Box flex={1}>
           <Text fontSize="sm" variant="medium">
@@ -50,8 +57,9 @@ export const CardInfoAuthStep = ({
           {type === 'email' && (
             <Box flexDirection="row" flexWrap="wrap" alignItems="center" mt={4}>
               <Text
-                fontSize="xs"
+                fontSize="sm"
                 color="neutral.600"
+                variant="regular"
                 _dark={{ color: 'neutral.300' }}
                 mr={4}
               >
@@ -59,8 +67,8 @@ export const CardInfoAuthStep = ({
               </Text>
               <TouchableOpacity onPress={handlePress}>
                 <Text
-                  fontSize="xs"
-                  fontWeight="700"
+                  fontSize="sm"
+                  variant="medium"
                   color={useColorModeValue('neutral.800', 'neutral.50')}
                   style={{ textDecorationLine: 'underline' }}
                 >

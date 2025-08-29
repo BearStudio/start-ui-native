@@ -4,18 +4,18 @@ import { defineStyle, defineStyleConfig } from 'react-native-ficus-ui';
 /* 1.  Échelles de taille (3xs → 6xl) – aucune police imposée         */
 /* ------------------------------------------------------------------ */
 const sizes = {
-  '3xs': defineStyle({ fontSize: 8, lineHeight: 12 }),
-  '2xs': defineStyle({ fontSize: 10, lineHeight: 14 }),
-  xs: defineStyle({ fontSize: 12, lineHeight: 18 }),
-  sm: defineStyle({ fontSize: 14, lineHeight: 21 }),
-  md: defineStyle({ fontSize: 16, lineHeight: 24 }),
-  lg: defineStyle({ fontSize: 18, lineHeight: 27 }),
-  xl: defineStyle({ fontSize: 20, lineHeight: 30 }),
-  '2xl': defineStyle({ fontSize: 24, lineHeight: 32 }),
-  '3xl': defineStyle({ fontSize: 30, lineHeight: 40 }),
-  '4xl': defineStyle({ fontSize: 36, lineHeight: 46 }),
-  '5xl': defineStyle({ fontSize: 48, lineHeight: 62 }),
-  '6xl': defineStyle({ fontSize: 60, lineHeight: 74 }),
+  '3xs': defineStyle({ fontSize: 8 }),
+  '2xs': defineStyle({ fontSize: 10 }),
+  xs: defineStyle({ fontSize: 12 }),
+  sm: defineStyle({ fontSize: 14 }),
+  md: defineStyle({ fontSize: 16 }),
+  lg: defineStyle({ fontSize: 18 }),
+  xl: defineStyle({ fontSize: 20 }),
+  '2xl': defineStyle({ fontSize: 24 }),
+  '3xl': defineStyle({ fontSize: 30 }),
+  '4xl': defineStyle({ fontSize: 36 }),
+  '5xl': defineStyle({ fontSize: 48 }),
+  '6xl': defineStyle({ fontSize: 60 }),
 };
 
 /* ------------------------------------------------------------------ */

@@ -130,6 +130,7 @@ const LoginPage = () => {
             variant="medium"
             color={useColorModeValue('neutral.600', 'white')}
             mt="md"
+            textAlign="center"
           >
             {/* Enter your email to login or create an account */}
             {t('login:subtitle')}
@@ -168,7 +169,7 @@ const LoginPage = () => {
 
           <Separator />
           <Button
-            variant="@secondary"
+            variant="outline"
             full
             isLoading={social.isLoading}
             onPress={handleGitHubLogin}
