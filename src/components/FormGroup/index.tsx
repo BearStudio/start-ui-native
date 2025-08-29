@@ -22,7 +22,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = ({
 
   return (
     <Box {...rest}>
-      {!!label && <Text>{label}</Text>}
+      {!!label && <Text variant="semiBold">{label}</Text>}
       {children}
       {helper && <Text fontSize="sm">{helper}</Text>}
       {showError && errorMessage && (

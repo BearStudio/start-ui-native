@@ -69,7 +69,7 @@ export const FieldCodeInput = forwardRef(
         isRequired={isRequired}
         {...rest}
       >
-        <Box mb={16} maxW={250}>
+        <Box mb={16} maxW={250} mt="xs">
           <PinInput
             ref={ref}
             value={value ?? ''}

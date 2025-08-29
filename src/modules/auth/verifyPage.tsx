@@ -2,19 +2,11 @@
 import { useEffect, useRef } from 'react';
 
 import { Formiz, useForm } from '@formiz/core';
-import { useMutation } from '@tanstack/react-query';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ArrowLeft } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { TextInput } from 'react-native';
-import {
-  Box,
-  Button,
-  HStack,
-  Text,
-  TouchableOpacity,
-  useColorModeValue,
-} from 'react-native-ficus-ui';
+import { Box, Button, Text } from 'react-native-ficus-ui';
 
 import { FieldCodeInput } from '@/components/FieldCodeInput';
 import { LucideIcon } from '@/components/LucideIcon';
@@ -30,7 +22,7 @@ export const VerifyPage = () => {
     email: string;
   }>();
   const { t } = useTranslation();
-  const { showError, showSuccess } = useToast();
+  const { showSuccess } = useToast();
 
   // Formiz instance for the 6-digit code
   const codeForm = useForm<{ code: string }>({
@@ -73,26 +65,6 @@ export const VerifyPage = () => {
     codeInputRef.current?.focus();
   }, []);
 
-  // Optional: resend OTP mutation
-  const resend = useMutation({
-    mutationFn: async () => {
-      const { error } = await authClient.emailOtp.sendVerificationOtp({
-        email,
-        type: 'sign-in',
-      });
-      if (error) throw error;
-    },
-    onSuccess: () => {
-      showSuccess(t('login:feedbacks.otpSent'));
-    },
-    onError: () => {
-      showError(t('login:feedbacks.error'));
-    },
-  });
-
-  const lineColor = useColorModeValue('neutral.200', 'neutral.600');
-  const textColor = useColorModeValue('neutral.500', 'neutral.400');
-
   return (
     <Container>
       <Content
@@ -113,23 +85,53 @@ export const VerifyPage = () => {
             {t('login:verification.back')}
           </Button>
           {/* Title */}
-          <Text fontSize="2xl" variant="bold" mb="sm">
+          <Text fontSize="lg" variant="bold" mb="sm">
             {t('login:verification.title')}
           </Text>
 
           {/* Description */}
-          <Text fontSize="sm" variant="medium" color={textColor} mb="md">
-            {t('login:verification.description1')}{' '}
-            <Text fontSize="sm" variant="semiBold" color={textColor} mx={10}>
-              {email}
-            </Text>{' '}
-            {t('login:verification.description1')}
-          </Text>
+          <Box>
+            <Text
+              fontSize="md"
+              variant="medium"
+              color="neutral.600"
+              _dark={{
+                color: 'neutral.300',
+              }}
+            >
+              {t('login:verification.description1')}
+            </Text>
+            <Text
+              fontSize="md"
+              variant="medium"
+              color="neutral.600"
+              _dark={{
+                color: 'neutral.300',
+              }}
+              mb="md"
+            >
+              <Text
+                fontSize="md"
+                variant="bold"
+                color="neutral.600"
+                _dark={{
+                  color: 'neutral.300',
+                }}
+                mx={10}
+              >
+                {email}
+              </Text>
+              {'. '}
+              {t('login:verification.description2')}
+            </Text>
+          </Box>
 
           {/* Code Input */}
           <FieldCodeInput
             ref={codeInputRef}
             name="code"
+            mt="md"
+            label={t('login:verification.code')}
             required={t('login:verification.required')}
             codeLength={6}
             onValueChange={(code) => {
@@ -138,31 +140,26 @@ export const VerifyPage = () => {
               }
             }}
           />
-
+          <Text
+            fontSize="sm"
+            color="neutral.600"
+            _dark={{
+              color: 'neutral.300',
+            }}
+            mb="md"
+          >
+            {t('login:verification.expires')}
+          </Text>
           {/* Confirm button */}
           <Button
             mt="lg"
-            full
             variant="@primary"
+            size="lg"
             isLoading={codeForm.isValidating}
             onPress={() => codeForm.submit()}
           >
             {t('login:verification.confirm')}
           </Button>
-
-          {/* Resend / Expiry */}
-          <HStack w="100%" alignItems="center" my="xl" spacing="sm">
-            <Box flex={1} h={1} bg={lineColor} />
-            <TouchableOpacity onPress={() => resend.mutate()}>
-              <Text variant="medium" fontSize="sm" color={textColor} px="sm">
-                {t('login:verification.resend')}
-              </Text>
-            </TouchableOpacity>
-            <Box flex={1} h={1} bg={lineColor} />
-          </HStack>
-          <Text fontSize="xs" color={textColor} textAlign="center">
-            {t('login:verification.expires')}
-          </Text>
 
           {/* Dev-mode Card */}
           {process.env.MODE === 'DEV' && (

@@ -16,6 +16,7 @@
     "title": "Vérification",
     "description1": "Nous avons envoyé un code à",
     "description2": "Entrez-le ci-dessous.",
+    "code": "Code de vérification",
     "required": "Le code est requis",
     "confirm": "Confirmer",
     "resend": "Renvoyer le code",
@@ -34,6 +35,7 @@
     "loginWithGitHub": "Continuez avec GitHub"
   },
   "verify": {
-    "addEmail": "Vous pouvez vous connecter avec"
+    "addEmail": "Vous pouvez vous connecter avec",
+    "addCode": "Vous pouvez utiliser le code"
   }
 }
