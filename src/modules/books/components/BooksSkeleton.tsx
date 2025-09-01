@@ -1,7 +1,7 @@
 import { useTheme } from 'react-native-ficus-ui';
 import Animated, { FadeOut } from 'react-native-reanimated';
 
-import { BookCardSkeleon } from '@/modules/books/bookCard';
+import { BookCardSkeleon } from '@/modules/books/components/BookCard';
 
 export const BooksSkeleton = ({ length }: { length: number }) => {
   const { theme } = useTheme();
@@ -22,3 +22,5 @@ export const BooksSkeleton = ({ length }: { length: number }) => {
     />
   );
 };
+
+export default BooksSkeleton;

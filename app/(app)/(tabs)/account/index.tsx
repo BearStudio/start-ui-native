@@ -1,4 +1,4 @@
-import AccountPage from '@/modules/account/accountPage';
+import AccountPage from '@/modules/account/pages/AccountPage';
 
 const Account = () => {
   return <AccountPage />;

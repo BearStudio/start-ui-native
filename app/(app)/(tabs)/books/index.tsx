@@ -1,4 +1,4 @@
-import BooksPage from '@/modules/books/booksPage';
+import BooksPage from '@/modules/books/pages/BooksPage';
 
 export default function Books() {
   return <BooksPage />;

@@ -17,7 +17,7 @@ import { useEnvironmentCheck } from '@/hooks/useEnvironmentCheck';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
 import { authClient } from '@/lib/auth-client';
-import { CardInfoAuthStep } from '@/modules/auth/CardInfoAuthStep';
+import { CardInfoAuthStep } from '@/modules/auth/components/CardInfoAuthStep';
 import { useToast } from '@/modules/toast/useToast';
 
 export const Separator = () => {

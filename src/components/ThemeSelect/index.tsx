@@ -12,7 +12,7 @@ import {
 } from 'react-native-ficus-ui';
 
 import { LucideIcon } from '@/components/LucideIcon';
-import useSessionStore from '@/modules/auth/auth.store';
+import useSessionStore from '@/modules/auth/stores/auth.store';
 
 export const ThemeSelect = ({
   type = 'icon',

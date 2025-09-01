@@ -12,7 +12,7 @@ import {
 } from 'react-native-ficus-ui';
 
 import { Skeleton } from '@/components/Skeleton';
-import { Book } from '@/modules/books/books.service';
+import { Book } from '@/modules/books/services/books.service';
 
 const Card = (props: BoxProps) => {
   return (

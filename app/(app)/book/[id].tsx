@@ -1,9 +1,9 @@
 import React from 'react';
 
-import BookDetails from '@/modules/books/bookDetail';
+import BookDetailPage from '@/modules/books/pages/BookDetailPage';
 
 const BookId: React.FC = () => {
-  return <BookDetails />;
+  return <BookDetailPage />;
 };
 
 export default BookId;

@@ -1,4 +1,4 @@
-import { VerifyPage } from '@/modules/auth/verifyPage';
+import VerifyPage from '@/modules/auth/pages/VerifyPage';
 
 const Verify = () => {
   return <VerifyPage />;

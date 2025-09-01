@@ -3,7 +3,7 @@ import { useLayoutEffect } from 'react';
 import { useRouter } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 
-import useSessionStore from '@/modules/auth/auth.store';
+import useSessionStore from '@/modules/auth/stores/auth.store';
 
 const useProtectedRoute = () => {
   const router = useRouter();

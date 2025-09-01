@@ -13,11 +13,11 @@ import { LucideIcon } from '@/components/LucideIcon';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
 import { authClient } from '@/lib/auth-client';
-import { CardInfoAuthStep } from '@/modules/auth/CardInfoAuthStep';
-import useSessionStore from '@/modules/auth/auth.store';
+import { CardInfoAuthStep } from '@/modules/auth/components/CardInfoAuthStep';
+import useSessionStore from '@/modules/auth/stores/auth.store';
 import { useToast } from '@/modules/toast/useToast';
 
-export const VerifyPage = () => {
+const VerifyPage = () => {
   const { email } = useLocalSearchParams<{
     email: string;
   }>();
@@ -170,3 +170,5 @@ export const VerifyPage = () => {
     </Container>
   );
 };
+
+export default VerifyPage;

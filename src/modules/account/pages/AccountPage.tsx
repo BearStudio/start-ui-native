@@ -30,8 +30,8 @@ import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
 import { LoadingScreen } from '@/layout/LoadingScreen';
 import { authClient } from '@/lib/auth-client';
-import { useAccountUpdate } from '@/modules/account/account.service';
-import useSessionStore from '@/modules/auth/auth.store';
+import { useAccountUpdate } from '@/modules/account/services/account.service';
+import useSessionStore from '@/modules/auth/stores/auth.store';
 import { useToast } from '@/modules/toast/useToast';
 
 const AccountPage = () => {

@@ -6,9 +6,9 @@ import { Box, Button, Text, useTheme } from 'react-native-ficus-ui';
 import Animated, { FadeIn } from 'react-native-reanimated';
 
 import { Container } from '@/layout/Container';
-import { BookCard } from '@/modules/books/bookCard';
-import { Book, useBooksInfinite } from '@/modules/books/books.service';
-import { BooksSkeleton } from '@/modules/books/books.skeleton';
+import { BookCard } from '@/modules/books/components/BookCard';
+import { BooksSkeleton } from '@/modules/books/components/BooksSkeleton';
+import { Book, useBooksInfinite } from '@/modules/books/services/books.service';
 
 const BooksPage = () => {
   const { t } = useTranslation('books');

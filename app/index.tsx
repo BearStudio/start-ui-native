@@ -3,7 +3,7 @@ import { useCallback, useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import { Appearance, View } from 'react-native';
 
-import useSessionStore from '@/modules/auth/auth.store';
+import useSessionStore from '@/modules/auth/stores/auth.store';
 import { useAppColorMode } from '@/theme/hooks';
 
 SplashScreen.preventAutoHideAsync();

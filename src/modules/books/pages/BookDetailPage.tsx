@@ -14,7 +14,10 @@ import {
 import { Skeleton } from '@/components/Skeleton';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
-import { BookCardDetails, BookCardSkeleon } from '@/modules/books/bookCard';
+import {
+  BookCardDetails,
+  BookCardSkeleon,
+} from '@/modules/books/components/BookCard';
 
 const BookDetails = () => {
   const { setOptions } = useNavigation();

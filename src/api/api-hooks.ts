@@ -4,7 +4,7 @@ import { isAxiosError } from 'axios';
 
 import { api } from '@/api/generated-api';
 import { authClient } from '@/lib/auth-client';
-import useSessionStore from '@/modules/auth/auth.store';
+import useSessionStore from '@/modules/auth/stores/auth.store';
 
 const logoutUserPlugin: ZodiosPlugin = {
   error: async (_, { method, url }, error) => {
