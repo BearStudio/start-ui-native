@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import { HeaderAuth } from '@/layout/HeaderAuth';
+import { HeaderAuth } from '@/layout/Header';
 import { Stack } from '@/layout/Stack';
 import { useColorSchemeListener } from '@/theme/hooks';
 
