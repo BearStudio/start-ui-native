@@ -1,0 +1,25 @@
+{
+  "ConfirmationCodeModal": {
+    "title": "Check your inbox for the code",
+    "description": "We've sent a 6-character code to {{email}}. The code expires shortly (5 minutes).",
+    "confirmLabel": "Confirm",
+    "required": "Validation code is required",
+    "card": {
+      "title": "Demo mode",
+      "description": "To quickly validate, use the code"
+    }
+  },
+  "ThemeSwitcher": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "languages": {
+    "en": "English",
+    "fr": "French"
+  },
+  "HeaderAuth": {
+    "selectTheme": "Select a theme...",
+    "selectLanguage": "Select a language..."
+  }
+}

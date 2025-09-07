@@ -1,0 +1,16 @@
+{
+  "noBooks": "No books",
+  "loadMore": "Load more",
+  "title": "Books",
+  "error": "An error occurred. Please try again.",
+  "empty": "No books found.",
+  "notFound": "Book not found.",
+  "fields": {
+    "title": "Title",
+    "author": "Author",
+    "genre": "Genre",
+    "publisher": "Publisher",
+    "createdAt": "Added on",
+    "updatedAt": "Last updated"
+  }
+}

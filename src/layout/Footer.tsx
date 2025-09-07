@@ -1,15 +1,11 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { Box, BoxProps } from 'react-native-ficus-ui';
-
-import { useDarkMode } from '@/theme/useDarkMode';
+import { Box, BoxProps, useColorModeValue } from 'react-native-ficus-ui';
 
 export const Footer: FC<PropsWithChildren<BoxProps>> = ({
   children,
   ...rest
 }) => {
-  const { colorModeValue } = useDarkMode();
-
   return (
     <Box
       position="absolute"
@@ -17,7 +13,7 @@ export const Footer: FC<PropsWithChildren<BoxProps>> = ({
       py="lg"
       px="xl"
       w="100%"
-      bg={colorModeValue('gray.50', 'gray.800')}
+      bg={useColorModeValue('neutral.50', 'neutral.800')}
       {...rest}
     >
       {children}

@@ -1,0 +1,19 @@
+{
+  "title": "Bienvenue !",
+  "description": "Personnalisons votre expérience.",
+  "feedbacks": {
+    "success": "Bienvenue, {{name}} ! Votre profil est prêt.",
+    "error": "Échec de l'initialisation. Veuillez réessayer."
+  },
+  "inputs": {
+    "name": {
+      "label": "Quel est votre nom ?",
+      "required": "Le nom est requis"
+    }
+  },
+  "actions": {
+    "submit": "Continuer",
+    "logout": "Se déconnecter"
+  },
+  "loggedWith": "Connecté en tant que {{email}}"
+}

@@ -1,11 +1,27 @@
-import { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 
-import { Feather } from '@expo/vector-icons';
+import { Box } from 'react-native-ficus-ui';
 
-export type FeatherIcons = keyof (typeof Feather)['glyphMap'];
+type TabBarIconProps = {
+  icon: React.ComponentType<ExplicitAny>;
+  focusedIcon?: React.ComponentType<ExplicitAny>;
+  focused: boolean;
+  color: string;
+};
 
-export const TabBarIcon: (
-  name: FeatherIcons
-) => FC<{ color: string; size: number; focused: boolean }> =
-  (name) =>
-  ({ color, size }) => <Feather name={name} size={size} color={color} />;
+const TabBarIcon: FC<TabBarIconProps> = ({
+  icon: Icon,
+  focusedIcon: FocusedIcon,
+  focused,
+  color,
+}) => {
+  if (focused && FocusedIcon) {
+    return <Box as={FocusedIcon} stroke={color} color={color} />;
+  }
+  return (
+    <Box as={Icon} stroke={color} color={color} strokeWidth={1} opacity={0.6} />
+  );
+};
+
+export default TabBarIcon;

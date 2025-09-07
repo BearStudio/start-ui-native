@@ -1,0 +1,83 @@
+{
+  "feedbacks": {
+    "updateAccount": {
+      "success": "Account updated",
+      "error": {
+        "demo": "This is a read-only demo, this action is disabled.",
+        "default": "An error occured during account update, please try again"
+      }
+    },
+    "updateAccountEmail": {
+      "error": {
+        "demo": "This is a read-only demo, this action is disabled.",
+        "default": "An error occurred during account email update, please try again",
+        "otpSend": "An error occurred while sending the verification code, please try again"
+      }
+    },
+    "updateAccountEmailValidate": {
+      "success": "Account email updated",
+      "error": "Code is incorrect, please try again"
+    }
+  },
+  "sections": {
+    "profile": {
+      "title": "Profile informations",
+      "input": {
+        "label": "Name",
+        "required": "Name is required"
+      },
+      "displayPreferences": "Display preferences",
+      "updateName": {
+        "title": "Update your name"
+      }
+    },
+    "email": {
+      "title": "Update your email",
+      "input": {
+        "label": "Mail address",
+        "required": "Mail is required",
+        "validations": {
+          "email": "Mail is invalid"
+        }
+      },
+      "feedbacks": {
+        "isEmail": "This is your current email"
+      }
+    },
+    "preferences": {
+      "title": "Preferences"
+    }
+  },
+  "confirmationModals": {
+    "logout": {
+      "title": "Logout",
+      "description": "Do you really want to logout from the application?",
+      "confirmLabel": "Logout"
+    },
+    "deleteAccount": {
+      "title": "Delete account",
+      "description": "Do you really want to delete your account?",
+      "confirmLabel": "Confirm the deletion of account",
+      "submit": "No delete account api yet on Start UI V2",
+      "card": {
+        "title": "Warning",
+        "description": "This action is irreversible and immediate. All your data will be will be deleted immediately. You will have to recreate an account."
+      },
+      "input": {
+        "label": "Enter \"{{handlerValue}}\"",
+        "required": "Confirmation required",
+        "validations": {
+          "isValid": {
+            "message": "Please enter \"{{handlerValue}}\" to validate",
+            "handlerValue": "DELETION"
+          }
+        }
+      }
+    }
+  },
+  "actions": {
+    "retry": "Retry",
+    "logout": "Sign Out",
+    "deleteAccount": "Delete account"
+  }
+}

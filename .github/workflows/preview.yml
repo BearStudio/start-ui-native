@@ -2,8 +2,8 @@ name: App preview
 on: pull_request
 
 env:
-  API_URL: https://demo.start-ui.com/api/rest
-  OPEN_API_URL: https://demo.start-ui.com/api/openapi.json
+  API_URL: https://start-ui-web-restart.vercel.app/api/rest
+  OPEN_API_URL: https://start-ui-web-restart.vercel.app/api/openapi/app/schema
 
 jobs:
   update:
@@ -23,14 +23,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.x
-          cache: yarn
+          node-version: 22.x
+          cache: pnpm
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Setup EAS
         uses: expo/expo-github-action@v8

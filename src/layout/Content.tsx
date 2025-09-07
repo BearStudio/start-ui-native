@@ -1,13 +1,18 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { FlexProps, ScrollBox } from 'react-native-ficus-ui';
+import { ScrollBox, ScrollBoxProps } from 'react-native-ficus-ui';
 
-export const Content: FC<PropsWithChildren<FlexProps>> = ({
+export const Content: FC<PropsWithChildren<ScrollBoxProps>> = ({
   children,
   ...rest
 }) => {
   return (
-    <ScrollBox flex={1} p="xl" minH="100%" {...rest}>
+    <ScrollBox
+      flexGrow={1}
+      p="xl"
+      contentContainerStyle={{ flex: 1 }}
+      {...rest}
+    >
       {children}
     </ScrollBox>
   );

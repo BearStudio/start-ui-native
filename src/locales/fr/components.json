@@ -1,0 +1,25 @@
+{
+  "ConfirmationCodeModal": {
+    "title": "Vérifiez votre boîte de réception",
+    "description": "Nous avons envoyé un code à 6 caractères à {{email}}. Le code expire bientôt (5 minutes).",
+    "confirmLabel": "Confirmer",
+    "required": "Le code de validation est requis",
+    "card": {
+      "title": "Mode démo",
+      "description": "Pour valider rapidement, utilisez le code"
+    }
+  },
+  "ThemeSwitcher": {
+    "light": "Clair",
+    "dark": "Sombre",
+    "system": "Système"
+  },
+  "languages": {
+    "en": "Anglais",
+    "fr": "Français"
+  },
+  "HeaderAuth": {
+    "selectTheme": "Choisissez un thème...",
+    "selectLanguage": "Choisissez une langue..."
+  }
+}

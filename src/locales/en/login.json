@@ -1,0 +1,42 @@
+{
+  "title": "Login or Sign Up",
+  "subtitle": "Enter your email to login or create an account",
+  "card": {
+    "or": "OR",
+    "description": "Enjoy the features! You can sign in with"
+  },
+  "feedbacks": {
+    "error": "Failed to log in. Please try again"
+  },
+  "validation": {
+    "success": "Successfully logged in",
+    "error": "Code is incorrect, please try again"
+  },
+  "verification": {
+    "back": "Back",
+    "title": "Verification",
+    "description1": "We have sent a code to",
+    "description2": "Enter it below.",
+    "code": "Verification code",
+    "required": "Code is required",
+    "confirm": "Confirm",
+    "resend": "Resend code",
+    "expires": "The code expires shortly (5 minutes)"
+  },
+  "input": {
+    "label": "Mail address",
+    "required": "Mail is required",
+    "placeholder": "Email",
+    "validations": {
+      "email": "Mail is invalid"
+    }
+  },
+  "actions": {
+    "login": "Continue with Email",
+    "loginWithGitHub": "Continue with GitHub"
+  },
+  "verify": {
+    "addEmail": "You can login with",
+    "addCode": "You can use the code"
+  }
+}

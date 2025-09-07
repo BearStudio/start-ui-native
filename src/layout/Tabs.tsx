@@ -1,38 +1,55 @@
-import { FC, ReactNode } from 'react';
+import { ComponentProps, FC } from 'react';
 
 import { Tabs as RouterTabs } from 'expo-router';
+import { Dict, useColorModeValue, useTheme } from 'react-native-ficus-ui';
 
-import { useDarkMode } from '@/theme/useDarkMode';
+import TabBarIcon from '@/components/TabBarIcon';
+
+type RouterTabsScreenComponentProps = ComponentProps<typeof RouterTabs.Screen>;
+type RouterTabsComponentProps = ComponentProps<typeof RouterTabs>;
 
 type TabsProps = {
   initialRouteName?: string;
-  screens: Array<{
+  screens: (RouterTabsScreenComponentProps & {
     route: string;
     title?: string;
-    icon?: ReactNode;
-    options?: ExplicitAny; // TODO: update
-  }>;
-};
+    icon: React.ComponentType<ExplicitAny>;
+    focusedIcon?: React.ComponentType<ExplicitAny>;
+    options?: RouterTabsScreenComponentProps['options'];
+  })[];
+} & RouterTabsComponentProps;
 
 export const Tabs: FC<TabsProps> = ({
   initialRouteName = 'index',
   screens = [],
 }) => {
-  const { colorModeValue, getThemeColor } = useDarkMode();
+  const { theme } = useTheme();
+  const borderColor = useColorModeValue(
+    (theme?.colors?.neutral as Dict)?.[200],
+    (theme?.colors?.neutral as Dict)?.[800]
+  );
+  const backgroundColor = useColorModeValue(
+    (theme?.colors?.neutral as Dict)?.[50],
+    (theme?.colors?.neutral as Dict)?.[900]
+  );
+  const tabBarActiveTintColor = useColorModeValue(
+    (theme?.colors?.neutral as Dict)?.['800'],
+    (theme?.colors?.neutral as Dict)?.['50']
+  );
+  const tabBarInactiveTintColor = useColorModeValue(
+    (theme?.colors?.neutral as Dict)?.['500'],
+    (theme?.colors?.neutral as Dict)?.['400']
+  );
   return (
     <RouterTabs
       initialRouteName={initialRouteName}
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: colorModeValue(
-            getThemeColor('gray.50'),
-            getThemeColor('gray.800')
-          ),
-          borderTopColor: colorModeValue(
-            getThemeColor('gray.200'),
-            getThemeColor('gray.900')
-          ),
-          paddingTop: '1%',
+          backgroundColor,
+          height: 64,
+          paddingTop: 2,
+          borderTopWidth: 1,
+          borderColor,
         },
       }}
     >
@@ -42,15 +59,17 @@ export const Tabs: FC<TabsProps> = ({
           name={screen.route}
           options={{
             title: screen.title,
-            tabBarActiveTintColor: colorModeValue(
-              getThemeColor('brand.800'),
-              getThemeColor('brand.100')
+            tabBarActiveTintColor,
+            tabBarInactiveTintColor,
+            tabBarIcon: ({ focused, color }) => (
+              <TabBarIcon
+                color={color}
+                focused={focused}
+                icon={screen.icon}
+                focusedIcon={screen.focusedIcon}
+              />
             ),
-            tabBarInactiveTintColor: colorModeValue(
-              getThemeColor('gray.500'),
-              getThemeColor('gray.400')
-            ),
-            tabBarIcon: screen.icon ? () => screen.icon : undefined,
+
             ...screen.options,
           }}
         />

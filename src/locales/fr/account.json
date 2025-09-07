@@ -1,0 +1,82 @@
+{
+  "feedbacks": {
+    "updateAccount": {
+      "success": "Compte mis à jour",
+      "error": {
+        "demo": "Ceci est une démo en lecture seule, cette action est désactivée.",
+        "default": "Une erreur est survenue lors de la mise à jour du compte, veuillez réessayer"
+      }
+    },
+    "updateAccountEmail": {
+      "error": {
+        "demo": "Ceci est une démo en lecture seule, cette action est désactivée.",
+        "default": "Une erreur est survenue lors de la mise à jour de l'email du compte, veuillez réessayer",
+        "otpSend": "Une erreur s'est produite lors de l'envoi du code de vérification, veuillez réessayer"
+      }
+    },
+    "updateAccountEmailValidate": {
+      "success": "Email du compte mis à jour",
+      "error": "Le code est incorrect, veuillez réessayer"
+    }
+  },
+  "sections": {
+    "profile": {
+      "title": "Informations du profil",
+      "input": {
+        "label": "Nom",
+        "required": "Le nom est requis"
+      },
+      "updateName": {
+        "title": "Mettez à jour votre nom"
+      }
+    },
+    "email": {
+      "title": "Mettre à jour votre email",
+      "input": {
+        "label": "Adresse email",
+        "required": "L'email est requis",
+        "validations": {
+          "email": "L'email est invalide"
+        }
+      },
+      "feedbacks": {
+        "isEmail": "Ceci est votre email actuel"
+      }
+    },
+    "preferences": {
+      "title": "Préférences"
+    }
+  },
+  "confirmationModals": {
+    "logout": {
+      "title": "Déconnexion",
+      "description": "Voulez-vous vraiment vous déconnecter de l'application?",
+      "confirmLabel": "Déconnexion"
+    },
+    "deleteAccount": {
+      "title": "Supprimer le compte",
+      "description": "Voulez-vous vraiment supprimer votre compte?",
+      "confirmLabel": "Confirmer la suppression du compte",
+      "submit": "Pas encore d'API de suppression de compte sur Start UI V2",
+      "card": {
+        "title": "Avertissement",
+        "description": "Cette action est irréversible et immédiate. Toutes vos données seront supprimées immédiatement. Vous devrez recréer un compte."
+      },
+      "input": {
+        "label": "Entrez \"{{handlerValue}}\"",
+        "required": "Confirmation requise",
+        "validations": {
+          "isValid": {
+            "message": "Veuillez entrer \"{{handlerValue}}\" pour valider",
+            "handlerValue": "SUPPRESSION"
+          }
+        }
+      }
+    }
+  },
+  "actions": {
+    "retry": "Réessayer",
+    "logout": "Déconnexion",
+    "deleteAccount": "Supprimer le compte"
+  }
+}

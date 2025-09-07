@@ -1,0 +1,17 @@
+{
+  "welcome": {
+    "title": "Bienvenue sur 🚀 Start UI [native]",
+    "description": "Un starter frontend dogmatique créé et maintenu par l'équipe BearStudio et d'autres contributeurs. Il représente la stack à jour de notre équipe, basée sur Expo, Ficus UI, Zodios & Formiz, pour construire des applications mobiles natives.",
+    "from": "- De la part de",
+    "author": "L'équipe BearStudio"
+  },
+  "links": {
+    "github": "Dépôt GitHub",
+    "openIssue": "Ouvrir un problème"
+  },
+  "demo": {
+    "caption": "Petit clin d'œil 😅 N'oubliez pas que 🚀 Start UI est gratuit et open source 😉",
+    "github": "GitHub",
+    "openIssue": "Ouvrir un problème"
+  }
+}

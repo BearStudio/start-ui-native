@@ -1,62 +1,66 @@
-import { FC } from 'react';
+import { ComponentProps, FC, ReactNode } from 'react';
 
 import { Stack as RouterStack } from 'expo-router';
+import { Dict, useColorModeValue, useTheme } from 'react-native-ficus-ui';
 
-import { FeatherIcons } from '@/components/TabBarIcon';
-import { useDarkMode } from '@/theme/useDarkMode';
+import { Header } from '@/layout/Header';
+
+type RouterStackComponentProps = ComponentProps<typeof RouterStack>;
+type RouterStackScreenComponentProps = ComponentProps<
+  typeof RouterStack.Screen
+>;
 
 type StackProps = {
   initialRouteName?: string;
-  screens: Array<{
+  screens: (RouterStackScreenComponentProps & {
     route: string;
     title?: string;
-    icon?: FeatherIcons;
-    options?: ExplicitAny; // TODO: update
-  }>;
-};
+    icon?: ReactNode;
+    options?: RouterStackScreenComponentProps['options'] & {
+      isTabBarScreen?: boolean;
+    };
+  })[];
+} & RouterStackComponentProps;
 
 export const Stack: FC<StackProps> = ({
   initialRouteName = 'index',
   screens = [],
+  ...rest
 }) => {
-  const { colorModeValue, getThemeColor } = useDarkMode();
+  const { theme } = useTheme();
+
+  const backgroundColor = useColorModeValue(
+    (theme?.colors?.neutral as Dict)?.[100],
+    (theme?.colors?.neutral as Dict)?.[800]
+  );
 
   return (
-    <RouterStack
-      initialRouteName={initialRouteName}
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: colorModeValue(
-            getThemeColor('gray.100'),
-            getThemeColor('gray.800')
-          ),
-        },
-        headerTintColor: colorModeValue(
-          getThemeColor('gray.800'),
-          getThemeColor('gray.100')
-        ),
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-      }}
-    >
-      {screens.map((screen) => (
-        <RouterStack.Screen
-          key={screen.route}
-          name={screen.route}
-          options={{
-            title: screen.title,
-            tabBarIcon: screen.icon ? null : undefined,
-            contentStyle: {
-              backgroundColor: colorModeValue(
-                getThemeColor('gray.100'),
-                getThemeColor('gray.800')
+    <RouterStack initialRouteName={initialRouteName} {...rest}>
+      {screens.map(
+        ({
+          route,
+          title,
+          icon,
+          options: { isTabBarScreen, ...otherOptions } = {},
+          ...rest
+        }) => (
+          <RouterStack.Screen
+            key={route}
+            name={route}
+            options={{
+              title: title,
+              contentStyle: {
+                backgroundColor,
+              },
+              header: ({ options }) => (
+                <Header title={options.title} hasGoBack={!isTabBarScreen} />
               ),
-            },
-            ...screen.options,
-          }}
-        />
-      ))}
+              ...otherOptions,
+            }}
+            {...rest}
+          />
+        )
+      )}
     </RouterStack>
   );
 };

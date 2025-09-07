@@ -1,17 +1,19 @@
 import React, { ForwardedRef, useEffect, useState } from 'react';
 
 import { FieldProps, useField } from '@formiz/core';
-import { TextInput, TextInputProps } from 'react-native';
-import { Input } from 'react-native-ficus-ui';
+import { TextInput } from 'react-native';
+import { Input, InputProps, useColorModeValue } from 'react-native-ficus-ui';
 
 import { FormGroup, FormGroupProps } from '@/components/FormGroup';
-import { useDarkMode } from '@/theme/useDarkMode';
 
 export type FieldInputProps<FormattedValue = string> = FieldProps<
   string,
   FormattedValue
 > &
-  Omit<FormGroupProps, 'id'> & { componentProps?: TextInputProps };
+  Omit<FormGroupProps, 'id'> & {
+    componentProps?: InputProps;
+    InputComponent?: React.ElementType;
+  };
 
 export const FieldInput = React.forwardRef(
   <FormattedValue = string,>(
@@ -44,7 +46,7 @@ export const FieldInput = React.forwardRef(
       setIsTouched(true);
     };
 
-    const { colorModeValue } = useDarkMode();
+    const InputComponentObj = props.InputComponent || Input;
 
     return (
       <FormGroup
@@ -54,21 +56,14 @@ export const FieldInput = React.forwardRef(
         label={label}
         {...rest}
       >
-        <Input
+        <InputComponentObj
           ref={ref}
           id={id}
           value={value ?? ''}
           onChangeText={setValue}
           onBlur={handleBlur}
-          focusBorderColor="brand.500"
-          borderColor={
-            showError ? 'error.500' : colorModeValue('gray.300', 'gray.500')
-          }
-          borderWidth={1}
-          color={colorModeValue('black', 'gray.100')}
-          bg={colorModeValue('white', 'gray.700')}
-          placeholderTextColor={colorModeValue('gray.900', 'gray.50')}
           my={5}
+          placeholderTextColor={useColorModeValue('neutral.600', 'white')}
           {...componentProps}
         />
       </FormGroup>

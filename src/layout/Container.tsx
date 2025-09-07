@@ -8,7 +8,15 @@ export const Container: FC<PropsWithChildren<FlexProps>> = ({
 }) => {
   return (
     <SafeAreaBox flex={1}>
-      <Flex {...rest}>{children}</Flex>
+      <Flex
+        {...rest}
+        bg="neutral.50"
+        _dark={{
+          bg: 'black',
+        }}
+      >
+        {children}
+      </Flex>
     </SafeAreaBox>
   );
 };

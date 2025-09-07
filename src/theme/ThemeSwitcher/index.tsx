@@ -1,33 +1,27 @@
-import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { HStack, Switch, Text, useColorMode } from 'react-native-ficus-ui';
 
-import { Stack, Switch, Text } from 'react-native-ficus-ui';
-
-import { useDarkMode } from '@/theme/useDarkMode';
+import { useAppColorMode } from '../hooks';
 
 export default function ThemeSwitcher() {
-  const { colorMode, toggleColorMode, colorModeValue } = useDarkMode();
+  // ✅ Hooks must be called unconditionally at the top level
+  const { t } = useTranslation(['components']);
+  const { colorMode } = useColorMode();
+  const { updateColorMode } = useAppColorMode();
 
   return (
-    <Stack mt="lg" direction="row" alignItems="center" spacing={8}>
-      <Text
-        fontSize="lg"
-        fontWeight="500"
-        color={colorModeValue('gray.900', 'gray.400')}
-      >
-        Light mode
+    <HStack mt="lg" alignItems="center" spacing={8}>
+      <Text fontSize="lg" fontWeight="500">
+        {t('ThemeSwitcher.light')}
       </Text>
       <Switch
-        on={colorMode === 'dark'}
-        onPress={toggleColorMode}
-        colorScheme="brand"
+        isChecked={colorMode === 'dark'}
+        onPress={updateColorMode}
+        colorScheme="neutral"
       />
-      <Text
-        fontSize="lg"
-        fontWeight="500"
-        color={colorModeValue('gray.500', 'gray.100')}
-      >
-        Dark mode
+      <Text fontSize="lg" fontWeight="500">
+        {t('ThemeSwitcher.dark')}
       </Text>
-    </Stack>
+    </HStack>
   );
 }

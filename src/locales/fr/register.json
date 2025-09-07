@@ -1,0 +1,28 @@
+{
+  "card": {
+    "title": "Mode démo",
+    "description": "Ceci est une démo en lecture seule, mais vous pouvez vous connecter pour tester certaines fonctionnalités. N'oubliez pas, aucune modification ne peut être apportée. Profitez des fonctionnalités !",
+    "actions": { "login": "Se connecter" }
+  },
+  "feedbacks": {
+    "createAccount": {
+      "error": {
+        "demo": "Ceci est une démo en lecture seule, cette action est désactivée.",
+        "default": "Une erreur est survenue lors de votre inscription, veuillez réessayer"
+      }
+    },
+    "accountValidate": {
+      "success": "Connexion réussie",
+      "error": "Le code est incorrect, veuillez réessayer"
+    }
+  },
+  "inputs": {
+    "email": {
+      "label": "Adresse email",
+      "required": "L'email est requis",
+      "validations": { "email": "L'email est invalide" }
+    },
+    "name": { "label": "Nom", "required": "Le nom est requis" }
+  },
+  "actions": { "register": "S'inscrire" }
+}

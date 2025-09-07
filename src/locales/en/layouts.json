@@ -1,0 +1,13 @@
+{
+  "auth": {
+    "welcome": "Welcome",
+    "login": "Login",
+    "register": "Create Account",
+    "onboarding": "Onboarding"
+  },
+  "tabs": {
+    "account": "Account",
+    "home": "Home",
+    "books": "Books"
+  }
+}

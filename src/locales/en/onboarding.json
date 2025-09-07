@@ -1,0 +1,19 @@
+{
+  "title": "Welcome!",
+  "description": "Let's personalize your experience.",
+  "feedbacks": {
+    "success": "Welcome, {{name}}! Your profile is set up.",
+    "error": "Failed to complete onboarding. Please try again."
+  },
+  "inputs": {
+    "name": {
+      "label": "Whats your name?",
+      "required": "Name is required"
+    }
+  },
+  "actions": {
+    "submit": "Continue",
+    "logout": "Logout"
+  },
+  "loggedWith": "Logged in as {{email}}"
+}

@@ -1,0 +1,41 @@
+{
+  "title": "Connexion ou inscription",
+  "subtitle": "Entrez votre email pour vous connecter ou créer un compte",
+  "card": {
+    "or": "OU"
+  },
+  "feedbacks": {
+    "error": "Échec de la connexion. Veuillez réessayer"
+  },
+  "validation": {
+    "success": "Connexion réussie",
+    "error": "Le code est incorrect, veuillez réessayer"
+  },
+  "verification": {
+    "back": "Retour",
+    "title": "Vérification",
+    "description1": "Nous avons envoyé un code à",
+    "description2": "Entrez-le ci-dessous.",
+    "code": "Code de vérification",
+    "required": "Le code est requis",
+    "confirm": "Confirmer",
+    "resend": "Renvoyer le code",
+    "expires": "Le code expire bientôt (5 minutes)"
+  },
+  "input": {
+    "label": "Adresse email",
+    "required": "L'email est requis",
+    "placeholder": "Email",
+    "validations": {
+      "email": "L'email est invalide"
+    }
+  },
+  "actions": {
+    "login": "Continuez avec Email",
+    "loginWithGitHub": "Continuez avec GitHub"
+  },
+  "verify": {
+    "addEmail": "Vous pouvez vous connecter avec",
+    "addCode": "Vous pouvez utiliser le code"
+  }
+}

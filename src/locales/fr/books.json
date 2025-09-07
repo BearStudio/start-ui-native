@@ -1,0 +1,16 @@
+{
+  "noBooks": "Aucun dépôt",
+  "loadMore": "Charger plus",
+  "title": "Référentiels",
+  "error": "Une erreur est survenue. Veuillez réessayer.",
+  "empty": "Aucun livre trouvé.",
+  "notFound": "Livre introuvable.",
+  "fields": {
+    "title": "Titre",
+    "author": "Auteur",
+    "genre": "Genre",
+    "publisher": "Éditeur",
+    "createdAt": "Date d'ajout",
+    "updatedAt": "Dernière MAJ"
+  }
+}
