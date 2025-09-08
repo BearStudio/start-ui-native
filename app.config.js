@@ -7,17 +7,17 @@ export default ({ config }) => ({
   version: '1.0.0',
   newArchEnabled: true,
   orientation: 'portrait',
-  icon: './assets/start-ui.png',
   userInterfaceStyle: 'automatic',
   assetBundlePatterns: ['**/*'],
   ios: {
     supportsTablet: true,
     bundleIdentifier: 'com.bearstudio.startuinative',
     buildNumber: buildConfig.buildNumber,
+    icon: './assets/start-ui-native.png',
   },
   android: {
     adaptiveIcon: {
-      foregroundImage: './assets/start-ui.png',
+      foregroundImage: './assets/start-ui-native.png',
       backgroundColor: '#ffffff',
     },
     package: 'com.bearstudio.startuinative',
