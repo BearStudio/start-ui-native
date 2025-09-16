@@ -54,21 +54,23 @@ const LoginPage = () => {
     onClose: closeDemoWarning,
   } = useDisclosure();
 
+  const emailOtpMutation = useMutation({
+    mutationFn: async (email: string) => {
+      const { data, error } = await authClient.emailOtp.sendVerificationOtp({
+        email,
+        type: 'sign-in',
+      });
+      if (error) {
+        throw new Error(error.message);
+      }
+      return data;
+    },
+  });
+
   const loginForm = useForm<{ email: string }>({
     onValidSubmit: async ({ email }) => {
       try {
-        const { error } = await authClient.emailOtp.sendVerificationOtp({
-          email,
-          type: 'sign-in',
-        });
-        if (error) {
-          showError(
-            error.code
-              ? t(`auth:errorCode.${String(error.code)}`)
-              : t('login:feedbacks.error')
-          );
-          return;
-        }
+        await emailOtpMutation.mutateAsync(email);
         router.navigate({
           pathname: '/verify',
           params: {
@@ -160,7 +162,7 @@ const LoginPage = () => {
           />
           <Button
             onPress={() => loginForm.submit()}
-            isLoading={false}
+            isLoading={emailOtpMutation.isLoading}
             variant="@primary"
             size="lg"
             full
@@ -177,7 +179,7 @@ const LoginPage = () => {
           <Button
             variant="outline"
             full
-            // isLoading={social.isLoading}
+            isLoading={social.isLoading}
             onPress={handleGitHubLogin}
           >
             {t('login:actions.loginWithGitHub')}

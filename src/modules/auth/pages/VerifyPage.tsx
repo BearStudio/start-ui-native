@@ -2,6 +2,7 @@
 import { useEffect, useRef } from 'react';
 
 import { Formiz, useForm } from '@formiz/core';
+import { useMutation } from '@tanstack/react-query';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ArrowLeft } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
@@ -24,30 +25,35 @@ const VerifyPage = () => {
   const { t } = useTranslation();
   const { showSuccess } = useToast();
 
+  const signInMutation = useMutation({
+    mutationFn: async ({ code }: { code: string }) => {
+      const { error } = await authClient.signIn.emailOtp({
+        email,
+        otp: code,
+      });
+      if (error) {
+        codeForm.setValues({ code: '' });
+        codeForm.setErrors({
+          code: t('login:validation.error'),
+        });
+        throw error;
+      }
+      const session = await authClient.getSession();
+      if (session.data?.user) {
+        useSessionStore.getState().setIsAuthentificated(true);
+        useSessionStore
+          .getState()
+          .setIsOnboarded(!!session.data.user.onboardedAt);
+      }
+      showSuccess(t('login:validation.success'));
+    },
+  });
+
   // Formiz instance for the 6-digit code
   const codeForm = useForm<{ code: string }>({
     onValidSubmit: async ({ code }) => {
       try {
-        const { error } = await authClient.signIn.emailOtp({
-          email,
-          otp: code,
-        });
-        if (error) {
-          codeForm.setValues({ code: '' });
-          codeForm.setErrors({
-            code: t('login:validation.error'),
-          });
-          return;
-        }
-        const session = await authClient.getSession();
-        if (session.data?.user) {
-          useSessionStore.getState().setIsAuthentificated(true);
-          useSessionStore
-            .getState()
-            .setIsOnboarded(!!session.data.user.onboardedAt);
-        }
-
-        showSuccess(t('login:validation.success'));
+        signInMutation.mutate({ code });
         // TODO: navigate into the app
       } catch (err) {
         codeForm.setValues({ code: '' });
@@ -155,7 +161,7 @@ const VerifyPage = () => {
             mt="lg"
             variant="@primary"
             size="lg"
-            isLoading={codeForm.isValidating}
+            isLoading={signInMutation.isLoading}
             onPress={() => codeForm.submit()}
           >
             {t('login:verification.confirm')}
