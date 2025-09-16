@@ -9,11 +9,11 @@ import {
   HStack,
   Text,
   useColorModeValue,
+  useDisclosure,
 } from 'react-native-ficus-ui';
 
-import { EnvironmentVariablesModal } from '@/components/EnvironmentVariablesModal';
+import { DemoModeWarningModal } from '@/components/DemoModeWarningModal';
 import { FieldInput } from '@/components/FieldInput';
-import { useEnvironmentCheck } from '@/hooks/useEnvironmentCheck';
 import { Container } from '@/layout/Container';
 import { Content } from '@/layout/Content';
 import { authClient } from '@/lib/auth-client';
@@ -49,11 +49,10 @@ const LoginPage = () => {
   const { showError } = useToast();
   const router = useRouter();
   const {
-    isModalVisible,
-    missingVariables,
-    showEnvironmentModal,
-    hideEnvironmentModal,
-  } = useEnvironmentCheck();
+    isOpen: isOpenDemoWarning,
+    onOpen: onOpenDemoWarning,
+    onClose: closeDemoWarning,
+  } = useDisclosure();
 
   const loginForm = useForm<{ email: string }>({
     onValidSubmit: async ({ email }) => {
@@ -104,10 +103,17 @@ const LoginPage = () => {
   });
 
   const handleGitHubLogin = () => {
-    const canProceed = showEnvironmentModal();
-    if (canProceed) {
-      social.mutate('github');
+    // Check if demo mode is active
+    if (process.env.DEMO_MODE === 'true') {
+      onOpenDemoWarning();
+      return;
     }
+
+    social.mutate('github');
+  };
+
+  const handleDemoWarningClose = () => {
+    closeDemoWarning();
   };
 
   return (
@@ -171,7 +177,7 @@ const LoginPage = () => {
           <Button
             variant="outline"
             full
-            isLoading={social.isLoading}
+            // isLoading={social.isLoading}
             onPress={handleGitHubLogin}
           >
             {t('login:actions.loginWithGitHub')}
@@ -179,10 +185,9 @@ const LoginPage = () => {
         </Content>
       </Formiz>
 
-      <EnvironmentVariablesModal
-        isOpen={isModalVisible}
-        onClose={hideEnvironmentModal}
-        missingVariables={missingVariables}
+      <DemoModeWarningModal
+        isOpen={isOpenDemoWarning}
+        onClose={handleDemoWarningClose}
       />
     </Container>
   );
