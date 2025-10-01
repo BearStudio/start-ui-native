@@ -1,3 +1,5 @@
+import { useMutation } from '@tanstack/react-query';
+import appConfig from 'app.config';
 import { useRouter } from 'expo-router';
 import {
   Button,
@@ -9,6 +11,7 @@ import {
   Text,
 } from 'react-native-ficus-ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { toast } from 'sonner-native';
 import { z } from 'zod';
 
 import { Form } from '@/lib/tanstack-form/components';
@@ -37,6 +40,24 @@ export const ViewSignIn = () => {
         pathname: '/(public)/otp-verification',
         params: { email: submission.value.email },
       });
+    },
+  });
+
+  const social = useMutation({
+    mutationFn: async (
+      provider: Parameters<typeof authClient.signIn.social>[0]['provider']
+    ) => {
+      const response = await authClient.signIn.social({
+        provider,
+        callbackURL: `${appConfig.scheme}//(logged)/(tabs)/home`,
+      });
+      if (response.error) {
+        throw new Error(response.error.message);
+      }
+      return response.data;
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 
@@ -87,7 +108,11 @@ export const ViewSignIn = () => {
             </Text>
             <Divider color="neutral.200" flex={1} orientation="horizontal" />
           </HStack>
-          <Button full variant="@secondary">
+          <Button
+            full
+            variant="@secondary"
+            onPress={() => social.mutate('github')}
+          >
             Login with GitHub
           </Button>
         </Stack>

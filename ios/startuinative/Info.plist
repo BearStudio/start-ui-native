@@ -27,7 +27,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>startuinative</string>
+          <string>start-ui-native</string>
           <string>com.bearstudio.startuinative</string>
         </array>
       </dict>

@@ -50,8 +50,4 @@ tsconfig.tsbuildinfo
 .env.production.local
 
 
-# generated native folders
-/ios
-/android
-
 .tanstack

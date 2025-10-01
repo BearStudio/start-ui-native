@@ -10,6 +10,8 @@ import 'react-native-reanimated';
 
 import theme from '@/lib/ficus-ui/theme';
 
+import { Sonner } from '@/components/sonner';
+
 import { authClient } from '@/features/auth/client';
 
 const queryClient = new QueryClient();
@@ -34,6 +36,7 @@ export default function RootLayout() {
           <GestureHandlerRootView>
             <BottomSheetModalProvider>
               <Slot />
+              <Sonner />
             </BottomSheetModalProvider>
           </GestureHandlerRootView>
         </Box>

@@ -1,12 +1,11 @@
-import { ConfigContext, ExpoConfig } from 'expo/config';
+import { ExpoConfig } from 'expo/config';
 
 const BUILD_NUMBER: `${number}` = '1';
 
-export default ({ config }: ConfigContext): ExpoConfig => ({
-  ...config,
+export default {
   name: 'Start UI [native]',
   slug: 'start-ui-native',
-  scheme: 'startuinative',
+  scheme: 'start-ui-native',
   owner: 'bearstudio',
   version: '1.0.0',
   runtimeVersion: '1.0.0',
@@ -15,7 +14,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   icon: './src/assets/images/icon.png',
   userInterfaceStyle: 'automatic',
   backgroundColor: '#FFFFFF',
-  experiments: { typedRoutes: true, reactCompiler: true, tsconfigPaths: true },
+  experiments: {
+    typedRoutes: true,
+    reactCompiler: true,
+    tsconfigPaths: true,
+  },
   ios: {
     bundleIdentifier: 'com.bearstudio.startuinative',
     buildNumber: BUILD_NUMBER,
@@ -55,4 +58,4 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     'expo-localization',
   ],
   githubUrl: 'https://github.com/bearstudio/start-ui-native',
-});
+} satisfies ExpoConfig;

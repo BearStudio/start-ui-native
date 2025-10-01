@@ -1389,30 +1389,7 @@ PODS:
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-  - react-native-pager-view (6.5.1):
-    - hermes-engine
-    - RCTRequired
-    - RCTTypeSafety
-    - React-Core
-    - React-Core-prebuilt
-    - React-debug
-    - React-Fabric
-    - React-featureflags
-    - React-graphics
-    - React-ImageManager
-    - React-jsi
-    - react-native-pager-view/common (= 6.5.1)
-    - React-NativeModulesApple
-    - React-RCTFabric
-    - React-renderercss
-    - React-rendererdebug
-    - React-utils
-    - ReactCodegen
-    - ReactCommon/turbomodule/bridging
-    - ReactCommon/turbomodule/core
-    - ReactNativeDependencies
-    - Yoga
-  - react-native-pager-view/common (6.5.1):
+  - react-native-pager-view (6.9.1):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1503,7 +1480,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - react-native-slider (4.5.4):
+  - react-native-slider (5.0.1):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1515,7 +1492,7 @@ PODS:
     - React-graphics
     - React-ImageManager
     - React-jsi
-    - react-native-slider/common (= 4.5.4)
+    - react-native-slider/common (= 5.0.1)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-renderercss
@@ -1526,7 +1503,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - react-native-slider/common (4.5.4):
+  - react-native-slider/common (5.0.1):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2271,9 +2248,9 @@ DEPENDENCIES:
   - "React-logger (from `../node_modules/.pnpm/react-native@0.81.4_@babel+core@7.28.4_@types+react@19.1.13_react@19.1.0/node_modules/react-native/ReactCommon/logger`)"
   - "React-Mapbuffer (from `../node_modules/.pnpm/react-native@0.81.4_@babel+core@7.28.4_@types+react@19.1.13_react@19.1.0/node_modules/react-native/ReactCommon`)"
   - "React-microtasksnativemodule (from `../node_modules/.pnpm/react-native@0.81.4_@babel+core@7.28.4_@types+react@19.1.13_react@19.1.0/node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)"
-  - "react-native-pager-view (from `../node_modules/.pnpm/react-native-pager-view@6.5.1_react-native@0.81.4_@babel+core@7.28.4_@types+react@19.1.13_react@19.1.0__react@19.1.0/node_modules/react-native-pager-view`)"
+  - "react-native-pager-view (from `../node_modules/.pnpm/react-native-pager-view@6.9.1_react-native@0.81.4_@babel+core@7.28.4_@types+react@19.1.13_react@19.1.0__react@19.1.0/node_modules/react-native-pager-view`)"
   - "react-native-safe-area-context (from `../node_modules/.pnpm/react-native-safe-area-context@5.6.1_react-native@0.81.4_@babel+core@7.28.4_@types+reac_fe43de07bb991ce6faa15eda6b4e7cf9/node_modules/react-native-safe-area-context`)"
-  - "react-native-slider (from `../node_modules/.pnpm/@react-native-community+slider@4.5.4/node_modules/@react-native-community/slider`)"
+  - "react-native-slider (from `../node_modules/.pnpm/@react-native-community+slider@5.0.1/node_modules/@react-native-community/slider`)"
   - "React-NativeModulesApple (from `../node_modules/.pnpm/react-native@0.81.4_@babel+core@7.28.4_@types+react@19.1.13_react@19.1.0/node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)"
   - "React-oscompat (from `../node_modules/.pnpm/react-native@0.81.4_@babel+core@7.28.4_@types+react@19.1.13_react@19.1.0/node_modules/react-native/ReactCommon/oscompat`)"
   - "React-perflogger (from `../node_modules/.pnpm/react-native@0.81.4_@babel+core@7.28.4_@types+react@19.1.13_react@19.1.0/node_modules/react-native/ReactCommon/reactperflogger`)"
@@ -2437,11 +2414,11 @@ EXTERNAL SOURCES:
   React-microtasksnativemodule:
     :path: "../node_modules/.pnpm/react-native@0.81.4_@babel+core@7.28.4_@types+react@19.1.13_react@19.1.0/node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
   react-native-pager-view:
-    :path: "../node_modules/.pnpm/react-native-pager-view@6.5.1_react-native@0.81.4_@babel+core@7.28.4_@types+react@19.1.13_react@19.1.0__react@19.1.0/node_modules/react-native-pager-view"
+    :path: "../node_modules/.pnpm/react-native-pager-view@6.9.1_react-native@0.81.4_@babel+core@7.28.4_@types+react@19.1.13_react@19.1.0__react@19.1.0/node_modules/react-native-pager-view"
   react-native-safe-area-context:
     :path: "../node_modules/.pnpm/react-native-safe-area-context@5.6.1_react-native@0.81.4_@babel+core@7.28.4_@types+reac_fe43de07bb991ce6faa15eda6b4e7cf9/node_modules/react-native-safe-area-context"
   react-native-slider:
-    :path: "../node_modules/.pnpm/@react-native-community+slider@4.5.4/node_modules/@react-native-community/slider"
+    :path: "../node_modules/.pnpm/@react-native-community+slider@5.0.1/node_modules/@react-native-community/slider"
   React-NativeModulesApple:
     :path: "../node_modules/.pnpm/react-native@0.81.4_@babel+core@7.28.4_@types+react@19.1.13_react@19.1.0/node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios"
   React-oscompat:
@@ -2580,9 +2557,9 @@ SPEC CHECKSUMS:
   React-logger: 7b234de35acb469ce76d6bbb0457f664d6f32f62
   React-Mapbuffer: fbe1da882a187e5898bdf125e1cc6e603d27ecae
   React-microtasksnativemodule: 76905804171d8ccbe69329fc84c57eb7934add7f
-  react-native-pager-view: 93babea16517ba022f577a5a5369cbc018bbd650
+  react-native-pager-view: c8817c1d9f4643417e68f0b846c51214b2252eea
   react-native-safe-area-context: 42a1b4f8774b577d03b53de7326e3d5757fe9513
-  react-native-slider: 39d6a7ffc645ae289946d05781cadb309c4d3b22
+  react-native-slider: 8c562583722c396a3682f451f0b6e68e351ec3b9
   React-NativeModulesApple: a9464983ccc0f66f45e93558671f60fc7536e438
   React-oscompat: 73db7dbc80edef36a9d6ed3c6c4e1724ead4236d
   React-perflogger: 123272debf907cc423962adafcf4513320e43757
