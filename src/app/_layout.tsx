@@ -32,7 +32,7 @@ export default function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
       <FicusProvider theme={theme}>
-        <Box flex={1}>
+        <Box flex={1} bg="white">
           <GestureHandlerRootView>
             <BottomSheetModalProvider>
               <Slot />

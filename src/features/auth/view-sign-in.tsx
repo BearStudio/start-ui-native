@@ -49,7 +49,8 @@ export const ViewSignIn = () => {
     ) => {
       const response = await authClient.signIn.social({
         provider,
-        callbackURL: `${appConfig.scheme}//(logged)/(tabs)/home`,
+        callbackURL: `${appConfig.scheme}//home`,
+        errorCallbackURL: `${appConfig.scheme}//sign-in`,
       });
       if (response.error) {
         throw new Error(response.error.message);
