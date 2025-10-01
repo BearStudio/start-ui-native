@@ -15,6 +15,7 @@ import { Form } from '@/lib/tanstack-form/components';
 import { useAppForm } from '@/lib/tanstack-form/config';
 
 import { IconSun, Logo } from '@/components/icons/generated';
+import { Version } from '@/components/version';
 
 import { authClient } from '@/features/auth/client';
 import { ViewSafeContent } from '@/layout/view-safe-content';
@@ -91,6 +92,17 @@ export const ViewSignIn = () => {
           </Button>
         </Stack>
       </Center>
+      <HStack
+        p={24}
+        justifyContent="center"
+        alignItems="center"
+        position="absolute"
+        bottom={insets.bottom}
+        left={0}
+        right={0}
+      >
+        <Version textAlign="center" />
+      </HStack>
     </ViewSafeContent>
   );
 };

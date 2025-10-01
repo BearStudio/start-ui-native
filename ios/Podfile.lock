@@ -1,4 +1,6 @@
 PODS:
+  - EXApplication (7.0.7):
+    - ExpoModulesCore
   - EXConstants (18.0.9):
     - ExpoModulesCore
   - Expo (54.0.10):
@@ -2213,6 +2215,7 @@ PODS:
   - Yoga (0.0.0)
 
 DEPENDENCIES:
+  - "EXApplication (from `../node_modules/.pnpm/expo-application@7.0.7_expo@54.0.10/node_modules/expo-application/ios`)"
   - "EXConstants (from `../node_modules/.pnpm/expo-constants@18.0.9_expo@54.0.10_react-native@0.81.4_@babel+core@7.28.4_@types+react@19.1.13_react@19.1.0_/node_modules/expo-constants/ios`)"
   - "Expo (from `../node_modules/.pnpm/expo@54.0.10_@babel+core@7.28.4_@expo+metro-runtime@6.1.2_expo-router@6.0.8_react-nativ_be94bcbf129ee57f192a0d340db8c468/node_modules/expo`)"
   - "ExpoAsset (from `../node_modules/.pnpm/expo-asset@12.0.9_expo@54.0.10_react-native@0.81.4_@babel+core@7.28.4_@types+react@19.1.13_react@19.1.0__react@19.1.0/node_modules/expo-asset/ios`)"
@@ -2322,6 +2325,8 @@ SPEC REPOS:
     - SDWebImageWebPCoder
 
 EXTERNAL SOURCES:
+  EXApplication:
+    :path: "../node_modules/.pnpm/expo-application@7.0.7_expo@54.0.10/node_modules/expo-application/ios"
   EXConstants:
     :path: "../node_modules/.pnpm/expo-constants@18.0.9_expo@54.0.10_react-native@0.81.4_@babel+core@7.28.4_@types+react@19.1.13_react@19.1.0_/node_modules/expo-constants/ios"
   Expo:
@@ -2517,6 +2522,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/.pnpm/react-native@0.81.4_@babel+core@7.28.4_@types+react@19.1.13_react@19.1.0/node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  EXApplication: 296622817d459f46b6c5fe8691f4aac44d2b79e7
   EXConstants: a95804601ee4a6aa7800645f9b070d753b1142b3
   Expo: c839a13691635386c0134f204dbbaed3cebff0a8
   ExpoAsset: 9ba6fbd677fb8e241a3899ac00fa735bc911eadf
