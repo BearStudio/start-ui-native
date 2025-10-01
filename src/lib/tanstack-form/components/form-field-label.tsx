@@ -4,6 +4,12 @@ type FormFieldLabelProps = TextProps;
 
 export const FormFieldLabel = (props: FormFieldLabelProps) => {
   return (
-    <Text color="neutral.800" fontSize="sm" fontWeight="medium" {...props} />
+    <Text
+      color="neutral.800"
+      _dark={{ color: 'neutral.200' }}
+      fontSize="sm"
+      fontWeight="medium"
+      {...props}
+    />
   );
 };

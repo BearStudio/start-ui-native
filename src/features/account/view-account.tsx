@@ -17,6 +17,7 @@ import { useAppForm } from '@/lib/tanstack-form/config';
 import { BottomSheet, BottomSheetBox } from '@/components/bottom-sheet';
 import { FullLoader } from '@/components/full-loader';
 import { IconEdit3, IconLogOut } from '@/components/icons/generated';
+import { ThemeToggle } from '@/components/theme-toggle';
 import { Version } from '@/components/version';
 
 import { authClient } from '@/features/auth/client';
@@ -54,7 +55,7 @@ export const ViewAccount = () => {
 
   return (
     <Box p={16} flex={1}>
-      <Box flex={1}>
+      <Stack gap={16} flex={1}>
         {ui
           .match('pending', () => <FullLoader />)
           .match('error', () => <></>)
@@ -173,7 +174,27 @@ export const ViewAccount = () => {
             </Box>
           ))
           .exhaustive()}
-      </Box>
+        <Box
+          bg="white"
+          borderRadius="md"
+          borderWidth={1}
+          borderColor="neutral.200"
+        >
+          <Box p={16}>
+            <Text fontWeight="bold">Display Preferences</Text>
+          </Box>
+
+          <Divider color="neutral.200" />
+          <Box p={16}>
+            <Stack spacing={2}>
+              <Text fontSize="xs" fontWeight="medium" color="neutral.700">
+                Email
+              </Text>
+              <ThemeToggle />
+            </Stack>
+          </Box>
+        </Box>
+      </Stack>
       <Version textAlign="center" />
     </Box>
   );

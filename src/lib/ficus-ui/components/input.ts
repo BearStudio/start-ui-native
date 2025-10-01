@@ -9,15 +9,20 @@ export default defineStyleConfig<
   baseStyle: {
     borderRadius: 'md',
     _disabled: { opacity: 0.7 },
+    _focused: { borderWidth: 2 },
   },
   sizes: { sm: { h: 32 }, md: { h: 36 }, lg: { h: 40 } },
   variants: {
     default: {
-      borderColor: 'neutral.200',
       borderWidth: 1,
+      borderColor: 'neutral.300',
       placeholderTextColor: 'neutral.600',
       backgroundColor: 'white',
-      _focused: { borderWidth: 2 },
+      _dark: {
+        borderColor: 'neutral.600',
+        backgroundColor: 'neutral.950',
+        placeholderTextColor: 'neutral.300',
+      },
     },
   },
 });

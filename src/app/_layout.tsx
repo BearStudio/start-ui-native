@@ -4,7 +4,8 @@ import { Slot } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
-import { Box, FicusProvider } from 'react-native-ficus-ui';
+import { useColorScheme } from 'react-native';
+import { Box, FicusProvider, useColorMode } from 'react-native-ficus-ui';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'react-native-reanimated';
 
@@ -29,10 +30,18 @@ export default function RootLayout() {
     }
   }, [isAppReady]);
 
+  const colorScheme = useColorScheme();
+  const { setColorMode } = useColorMode();
+
+  // Update app theme on device preference appearance update
+  useEffect(() => {
+    setColorMode(colorScheme ?? 'light');
+  }, [colorScheme, setColorMode]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <FicusProvider theme={theme}>
-        <Box flex={1} bg="white">
+        <Box flex={1} bg="white" _dark={{ bg: 'neutral.950' }}>
           <GestureHandlerRootView>
             <BottomSheetModalProvider>
               <Slot />

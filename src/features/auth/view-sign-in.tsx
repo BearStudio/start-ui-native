@@ -6,7 +6,6 @@ import {
   Center,
   Divider,
   HStack,
-  IconButton,
   Stack,
   Text,
 } from 'react-native-ficus-ui';
@@ -17,7 +16,8 @@ import { z } from 'zod';
 import { Form } from '@/lib/tanstack-form/components';
 import { useAppForm } from '@/lib/tanstack-form/config';
 
-import { IconSun, Logo } from '@/components/icons/generated';
+import { Logo } from '@/components/icons/generated';
+import { ThemeToggle } from '@/components/theme-toggle';
 import { Version } from '@/components/version';
 
 import { authClient } from '@/features/auth/client';
@@ -74,7 +74,7 @@ export const ViewSignIn = () => {
         right={0}
       >
         <Logo color="black" _dark={{ color: 'white' }} width={96} height={22} />
-        <IconButton icon={<IconSun />} variant="@ghost" />
+        <ThemeToggle />
       </HStack>
       <Center flex={1} p={24}>
         <Stack spacing={24} w="100%">
@@ -82,7 +82,7 @@ export const ViewSignIn = () => {
             <Text fontWeight="bold" fontSize="2xl">
               Login to your account
             </Text>
-            <Text fontWeight={400} fontSize="sm">
+            <Text fontWeight={400} fontSize="sm" variant="muted">
               Enter your email to login to your account
             </Text>
           </Stack>
@@ -104,7 +104,7 @@ export const ViewSignIn = () => {
           </Form>
           <HStack alignItems="center" spacing={16}>
             <Divider color="neutral.200" flex={1} orientation="horizontal" />
-            <Text color="neutral.600" fontSize="sm">
+            <Text fontSize="sm" variant="muted">
               OR
             </Text>
             <Divider color="neutral.200" flex={1} orientation="horizontal" />

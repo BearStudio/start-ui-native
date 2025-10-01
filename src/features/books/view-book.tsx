@@ -36,7 +36,6 @@ export const ViewBook = (props: { bookId: string }) => {
         .match('default', ({ data }) => (
           <Stack gap={16}>
             <Box
-              bg="white"
               px={16}
               py={4}
               gap={4}

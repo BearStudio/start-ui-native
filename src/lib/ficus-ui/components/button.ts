@@ -14,18 +14,29 @@ export default defineStyleConfig<
   },
   baseStyle: {
     borderRadius: 'md',
+    borderColor: 'brand.200',
     _disabled: { opacity: 0.7 },
+    _dark: {
+      borderColor: 'brand.600',
+    },
   },
   variants: {
     '@primary': {
       backgroundColor: 'brand.900',
       color: 'white',
+      _dark: {
+        backgroundColor: 'brand.50',
+        color: 'brand.900',
+      },
     },
     '@secondary': {
       backgroundColor: 'white',
-      borderWidth: 1,
-      borderColor: 'brand.200',
       color: 'brand.950',
+      borderWidth: 1,
+      _dark: {
+        backgroundColor: 'brand.800',
+        color: 'brand.50',
+      },
     },
     '@destructive': {
       backgroundColor: 'negative.600',
@@ -34,11 +45,13 @@ export default defineStyleConfig<
     '@ghost': {
       backgroundColor: 'transparent',
       color: 'neutral.950',
+      _dark: { color: 'neutral.100' },
     },
     '@link': {
+      px: 0,
       backgroundColor: 'transparent',
       color: 'neutral.950',
-      px: 0,
+      _dark: { color: 'neutral.100' },
     },
   },
 });

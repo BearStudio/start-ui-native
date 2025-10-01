@@ -1,18 +1,12 @@
 import { useLocalSearchParams } from 'expo-router';
-import {
-  Button,
-  Center,
-  HStack,
-  IconButton,
-  Stack,
-  Text,
-} from 'react-native-ficus-ui';
+import { Button, Center, HStack, Stack, Text } from 'react-native-ficus-ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { z } from 'zod';
 
 import { useAppForm } from '@/lib/tanstack-form/config';
 
-import { IconArrowLeft, IconSun, Logo } from '@/components/icons/generated';
+import { IconArrowLeft, Logo } from '@/components/icons/generated';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 import { authClient } from '@/features/auth/client';
 import { ViewSafeContent } from '@/layout/view-safe-content';
@@ -52,7 +46,7 @@ export const ViewOtpVerification = () => {
         right={0}
       >
         <Logo color="black" _dark={{ color: 'white' }} width={96} height={22} />
-        <IconButton icon={<IconSun />} variant="@ghost" />
+        <ThemeToggle />
       </HStack>
       <Center flex={1} p={24}>
         <form.AppForm>

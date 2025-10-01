@@ -3,7 +3,7 @@ import { Text, TextProps } from 'react-native-ficus-ui';
 
 export const Version = (props: TextProps) => {
   return (
-    <Text fontSize="xs" fontWeight="300" color="gray.600" {...props}>
+    <Text fontSize="xs" fontWeight="400" variant="muted" {...props}>
       Version {nativeApplicationVersion} • {nativeBuildVersion}
     </Text>
   );
