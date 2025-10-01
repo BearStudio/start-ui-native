@@ -1,5 +1,6 @@
 import { Tabs } from 'expo-router';
 
+import { HapticTab } from '@/components/haptic-tab';
 import {
   IconBookOpenDuotone,
   IconBookOpenFill,
@@ -15,6 +16,7 @@ export default function TabLayout() {
       screenOptions={{
         headerTitleAlign: 'left',
         tabBarActiveTintColor: 'black',
+        tabBarButton: (props) => <HapticTab {...props} />,
       }}
     >
       <Tabs.Screen
