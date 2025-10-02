@@ -2,9 +2,11 @@ import { ExpoConfig } from 'expo/config';
 
 const BUILD_NUMBER: `${number}` = '1';
 
+const EXPO_PROJECT_ID = 'af6ae74c-f04d-497a-9733-b2b7539f77c5';
+
 export default {
   name: 'Start UI [native]',
-  slug: 'start-ui-native',
+  slug: 'start-ui-native-v9iizxkbojzedvpfkfzcq',
   scheme: 'start-ui-native',
   owner: 'bearstudio',
   version: '1.0.0',
@@ -58,4 +60,12 @@ export default {
     'expo-localization',
   ],
   githubUrl: 'https://github.com/bearstudio/start-ui-native',
+  updates: {
+    url: 'https://u.expo.dev/af6ae74c-f04d-497a-9733-b2b7539f77c5',
+  },
+  extra: {
+    eas: {
+      projectId: EXPO_PROJECT_ID,
+    },
+  },
 } satisfies ExpoConfig;

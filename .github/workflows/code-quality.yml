@@ -11,20 +11,20 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v4
 
-      - name: Install pnpm
+      - name: 🏗 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: 📦 Install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 'lts/*'
-          cache: 'pnpm'
-
-      - name: Install deps
+      - name: 📦 Install dependencies
         run: pnpm install
 
       - name: Run eslint
@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [22, 24, 'lts/*']
+        node: [22, 'lts/*']
     steps:
       - uses: actions/checkout@v4
 
