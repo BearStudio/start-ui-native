@@ -1,7 +1,8 @@
 import { getUiState } from '@bearstudio/ui-state';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { Link } from 'expo-router';
-import { Button, FlashList, Text } from 'react-native-ficus-ui';
+import { ActivityIndicator } from 'react-native';
+import { FlashList, Text } from 'react-native-ficus-ui';
 
 import { api } from '@/lib/hey-api/api';
 
@@ -48,18 +49,18 @@ export const ViewBooks = () => {
                 <Link.Trigger>
                   <BookCover book={item} />
                 </Link.Trigger>
-                {/* <Link.Preview /> */}
+                <Link.Preview />
               </Link>
             )}
-            ListFooterComponent={() => (
-              <Button
-                variant="@ghost"
-                onPress={() => books.fetchNextPage()}
-                isDisabled={!books.hasNextPage}
-              >
-                Load more
-              </Button>
-            )}
+            onEndReached={() => {
+              if (!books.hasNextPage) {
+                return;
+              }
+              books.fetchNextPage();
+            }}
+            ListFooterComponent={
+              books.isFetchingNextPage ? <ActivityIndicator /> : undefined
+            }
           />
         ))
         .exhaustive()}

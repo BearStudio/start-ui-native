@@ -53,7 +53,10 @@ export default function LoggedLayout() {
         options={{ title: t('layout:tabs.books.title') }}
       />
       {/* Add new logged-in View that's not included in tabs here */}
-      <Stack.Screen name="books/[id]" options={{ headerShown: true }} />
+      <Stack.Screen
+        name="books/[id]"
+        options={{ headerShown: true, title: t('layout:tabs.books.title') }}
+      />
     </Stack>
   );
 }

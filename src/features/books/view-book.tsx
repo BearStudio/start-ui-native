@@ -1,9 +1,9 @@
 import { getUiState } from '@bearstudio/ui-state';
 import { useQuery } from '@tanstack/react-query';
-import { useNavigation } from 'expo-router';
+import { useIsPreview, useNavigation } from 'expo-router';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Divider, HStack, Stack, Text } from 'react-native-ficus-ui';
+import { Center, Divider, HStack, Stack, Text } from 'react-native-ficus-ui';
 
 import { api } from '@/lib/hey-api/api';
 
@@ -15,13 +15,16 @@ import { ViewTabContent } from '@/layout/view-tab-content';
 
 export const ViewBook = (props: { bookId: string }) => {
   const navigation = useNavigation();
+  const isPreview = useIsPreview();
   const { t } = useTranslation(['books']);
 
   const book = useQuery(api.bookGetByIdOptions({ path: { id: props.bookId } }));
 
   useEffect(() => {
-    navigation.setOptions({ title: book.data?.title });
-  }, [navigation, book.data?.title]);
+    if (!isPreview && navigation.isFocused()) {
+      navigation.setOptions({ title: book.data?.title });
+    }
+  }, [navigation, book.data?.title, isPreview]);
 
   const ui = getUiState((set) => {
     if (book.isPending) return set('pending');
@@ -38,7 +41,7 @@ export const ViewBook = (props: { bookId: string }) => {
         .match('pending', () => <FullLoader />)
         .match('error', () => <></>)
         .match('default', ({ data }) => (
-          <Stack gap={16}>
+          <Stack gap={16} flex={1}>
             <Card>
               <CardBody py={4}>
                 <HStack gap={8} py={12}>
@@ -98,7 +101,9 @@ export const ViewBook = (props: { bookId: string }) => {
                 </HStack>
               </CardBody>
             </Card>
-            <BookCover book={data} alignSelf="center" h="60%" />
+            <Center flex={1}>
+              <BookCover book={data} alignSelf="center" h="80%" />
+            </Center>
           </Stack>
         ))
         .exhaustive()}

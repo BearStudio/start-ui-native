@@ -22,10 +22,10 @@ export const BookCover = ({
       borderRadius="lg"
       {...props}
     >
-      <Text fontSize="xl" fontWeight="500" color="white">
+      <Text fontSize="md" fontWeight="bold" color="white">
         {book.title}
       </Text>
-      <Text fontWeight="200" color="white">
+      <Text fontSize="xs" fontWeight="medium" color="white">
         {book.author}
       </Text>
     </Box>
