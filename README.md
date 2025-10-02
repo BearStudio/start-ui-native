@@ -1,50 +1,70 @@
-# Welcome to your Expo app 👋
+<h1 align="center"><img src=".github/assets/thumbnail.png" alt="Start UI Native" /></h1>
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+🚀 Start UI <small>[native]</small> is an opinionated native starter repository created & maintained by the [BearStudio Team](https://www.bearstudio.fr/team) and other contributors.
+It represents our team's up-to-date stack that we use when creating native apps for our clients.
 
-## Get started
 
-1. Install dependencies
+# Technologies
 
-   ```bash
-   npm install
-   ```
+[⚙️ Node.js](https://nodejs.org), [🟦 TypeScript](https://www.typescriptlang.org/), [⚛️ React](https://react.dev/), [📱 React Native](https://reactnative.dev/), [🚀 Expo](https://docs.expo.dev/), [🔐 Better Auth](https://www.better-auth.com/), [🌿 Ficus UI](https://ficus-ui.com/), [🌴 Tanstack Form](https://tanstack.com/form/), [🌴 Tanstack Query](https://tanstack.com/query/), [👋 Hey API](https://heyapi.dev/)
 
-2. Start the app
+# Requirements
 
-   ```bash
-   npx expo start
-   ```
+* [Node.js](https://nodejs.org) >= 22
+* [pnpm](https://pnpm.io/)
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+# Getting Started
 
 ```bash
-npm run reset-project
+pnpm create start-ui -t native -b restart myApp
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+That will scaffold a new folder with the latest version of 🚀 Start UI <small>[native]</small> 🎉
 
-## Learn more
+# Installation
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+cp .env.example .env # Setup your env variables
+cp .vscode/settings.example.json .vscode/settings.json  # (Optionnal) Setup your VS Code
+pnpm install # Install dependencies
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Connect to your API
 
-## Join the community
+Using Hey API, you can quickly connect your app with any REST API. Just put your openapi url as `EXPO_PUBLIC_OPENAPI_URL` environment variable and run
 
-Join our community of developers creating universal apps.
+```bash
+pnpm gen:api
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+A new folder `/src/lib/hey-api/generated` will be created with stuff like to combine use Tanstack Query to fetch data.
+
+For example
+```ts
+import { api } from '@/lib/hey-api/api';
+
+useQuery(api.bookGetByIdOptions({ path: { id: props.bookId } }));
+```
+
+# Run
+
+```bash
+pnpm dev          # To use Expo Go
+pnpm dev:ios      # To use a local ios build
+pnpm dev:android  # To use a local android build
+```
+
+### Generate custom icons components from svg files
+
+Put the custom svg files into the `app/components/icons/svg-sources` folder and then run the following command:
+
+```bash
+pnpm gen:icons
+```
+
+If you want to use the same set of custom duotone icons that Start UI is already using, checkout
+[Phosphor](https://phosphoricons.com/)
+
+> [!WARNING]
+> All svg icons should be svg files prefixed by `icon-` (example: `icon-externel-link`) with **square size** and **filled with `#000` color** (will be replaced by `currentColor`).
+
