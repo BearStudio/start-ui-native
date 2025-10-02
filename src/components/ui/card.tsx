@@ -14,7 +14,7 @@ export const Card = (props: BoxProps) => {
       borderWidth={1}
       borderColor="neutral.200"
       bg="white"
-      _dark={{ bg: 'neutral.950', borderColor: 'neutral.600' }}
+      _dark={{ bg: 'neutral.950', borderColor: 'neutral.800' }}
       {...props}
     />
   );
