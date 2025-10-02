@@ -68,4 +68,4 @@ export default {
       projectId: EXPO_PROJECT_ID,
     },
   },
-} satisfies ExpoConfig;
+} as const satisfies ExpoConfig;

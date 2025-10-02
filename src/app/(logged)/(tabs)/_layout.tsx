@@ -48,6 +48,7 @@ export default function TabLayout() {
         name="home"
         options={{
           title: t('layout:tabs.home.title'),
+          headerShown: false,
           tabBarIcon: (props) => {
             const Icon = props.focused ? IconHouseFill : IconHouseDuotone;
             return <Icon color={props.color} w={props.size} h={props.size} />;

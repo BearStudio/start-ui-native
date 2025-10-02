@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useNavigation } from 'expo-router';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Divider, Flex, HStack, Stack, Text } from 'react-native-ficus-ui';
+import { Divider, HStack, Stack, Text } from 'react-native-ficus-ui';
 
 import { api } from '@/lib/hey-api/api';
 
@@ -11,6 +11,7 @@ import { Card, CardBody } from '@/components/ui/card';
 import { FullLoader } from '@/components/ui/full-loader';
 
 import { BookCover } from '@/features/books/book-cover';
+import { ViewTabContent } from '@/layout/view-tab-content';
 
 export const ViewBook = (props: { bookId: string }) => {
   const navigation = useNavigation();
@@ -32,7 +33,7 @@ export const ViewBook = (props: { bookId: string }) => {
   });
 
   return (
-    <Flex p={16}>
+    <ViewTabContent>
       {ui
         .match('pending', () => <FullLoader />)
         .match('error', () => <></>)
@@ -101,6 +102,6 @@ export const ViewBook = (props: { bookId: string }) => {
           </Stack>
         ))
         .exhaustive()}
-    </Flex>
+    </ViewTabContent>
   );
 };

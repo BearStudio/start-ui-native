@@ -8,6 +8,7 @@ import { api } from '@/lib/hey-api/api';
 import { FullLoader } from '@/components/ui/full-loader';
 
 import { BookCover } from '@/features/books/book-cover';
+import { ViewTabContent } from '@/layout/view-tab-content';
 
 export const ViewBooks = () => {
   const books = useInfiniteQuery({
@@ -28,7 +29,7 @@ export const ViewBooks = () => {
   });
 
   return (
-    <>
+    <ViewTabContent>
       {ui
         .match('pending', () => <FullLoader />)
         .match('error', () => <></>)
@@ -38,7 +39,6 @@ export const ViewBooks = () => {
             data={data}
             keyExtractor={(item) => item.id}
             numColumns={2}
-            p={16}
             horizontal={false}
             renderItem={({ item }) => (
               <Link
@@ -63,6 +63,6 @@ export const ViewBooks = () => {
           />
         ))
         .exhaustive()}
-    </>
+    </ViewTabContent>
   );
 };

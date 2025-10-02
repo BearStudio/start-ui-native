@@ -3,7 +3,6 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import {
   Avatar,
-  Box,
   Button,
   Divider,
   HStack,
@@ -24,6 +23,7 @@ import { ThemeSwitcher } from '@/components/ui/theme-switcher';
 import { Version } from '@/components/version';
 
 import { authClient } from '@/features/auth/client';
+import { ViewTabContent } from '@/layout/view-tab-content';
 
 export const ViewAccount = () => {
   const session = authClient.useSession();
@@ -58,7 +58,7 @@ export const ViewAccount = () => {
   });
 
   return (
-    <Box p={16} flex={1}>
+    <ViewTabContent>
       <Stack gap={16} flex={1}>
         {ui
           .match('pending', () => <FullLoader />)
@@ -200,6 +200,6 @@ export const ViewAccount = () => {
         </Card>
       </Stack>
       <Version textAlign="center" />
-    </Box>
+    </ViewTabContent>
   );
 };

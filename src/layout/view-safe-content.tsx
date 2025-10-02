@@ -1,26 +1,11 @@
-import { ScrollView, ScrollViewProps, ViewProps } from 'react-native';
+import { ComponentProps } from 'react';
+import { ficus } from 'react-native-ficus-ui';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export const ViewSafeContent = (props: ViewProps) => {
-  return (
-    <SafeAreaView
-      {...props}
-      style={{
-        flex: 1,
-      }}
-    />
-  );
-};
+const FicusSafeAreaView = ficus(SafeAreaView);
 
-export const ScrollViewSafeContent = (props: ScrollViewProps) => {
-  return (
-    <ViewSafeContent>
-      <ScrollView
-        {...props}
-        style={{
-          flex: 1,
-        }}
-      />
-    </ViewSafeContent>
-  );
+export const ViewSafeContent = (
+  props: ComponentProps<typeof FicusSafeAreaView>
+) => {
+  return <FicusSafeAreaView flex={1} {...props} />;
 };
