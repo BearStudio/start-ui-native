@@ -1,7 +1,7 @@
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback } from 'react';
 
-import { FullLoader } from '@/components/full-loader';
+import { FullLoader } from '@/components/ui/full-loader';
 
 import { authClient } from '@/features/auth/client';
 

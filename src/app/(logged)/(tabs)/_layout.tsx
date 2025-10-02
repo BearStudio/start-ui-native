@@ -1,4 +1,7 @@
 import { Tabs } from 'expo-router';
+import { useColorModeValue } from 'react-native-ficus-ui';
+
+import theme from '@/lib/ficus-ui/theme';
 
 import { HapticTab } from '@/components/haptic-tab';
 import {
@@ -11,12 +14,31 @@ import {
 } from '@/components/icons/generated';
 
 export default function TabLayout() {
+  const themedStyle = useColorModeValue(
+    {
+      backgroundColor: 'white',
+      color: theme.colors.neutral[950],
+      sceneBackgroundColor: theme.colors.neutral[50],
+    },
+    {
+      backgroundColor: theme.colors.neutral[950],
+      color: 'white',
+      sceneBackgroundColor: theme.colors.neutral[900],
+    }
+  );
+
   return (
     <Tabs
       screenOptions={{
         headerTitleAlign: 'left',
-        tabBarActiveTintColor: 'black',
+        headerStyle: { backgroundColor: themedStyle.backgroundColor },
+        headerTintColor: themedStyle.color,
+        tabBarStyle: { backgroundColor: themedStyle.backgroundColor },
+        tabBarActiveTintColor: themedStyle.color,
         tabBarButton: (props) => <HapticTab {...props} />,
+        sceneStyle: {
+          backgroundColor: themedStyle.sceneBackgroundColor,
+        },
       }}
     >
       <Tabs.Screen

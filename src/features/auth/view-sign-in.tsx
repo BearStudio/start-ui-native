@@ -17,7 +17,7 @@ import { Form } from '@/lib/tanstack-form/components';
 import { useAppForm } from '@/lib/tanstack-form/config';
 
 import { Logo } from '@/components/icons/generated';
-import { ThemeToggle } from '@/components/theme-toggle';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { Version } from '@/components/version';
 
 import { authClient } from '@/features/auth/client';

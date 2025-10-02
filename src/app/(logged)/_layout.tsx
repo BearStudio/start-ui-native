@@ -1,5 +1,8 @@
 import { Stack, useRouter } from 'expo-router';
 import { useEffect } from 'react';
+import { useColorModeValue } from 'react-native-ficus-ui';
+
+import theme from '@/lib/ficus-ui/theme';
 
 import { authClient } from '@/features/auth/client';
 import { ViewOnboarding } from '@/features/auth/view-onboarding';
@@ -14,12 +17,35 @@ export default function LoggedLayout() {
     }
   }, [router, session.data, session.isPending]);
 
+  const themedStyle = useColorModeValue(
+    {
+      backgroundColor: 'white',
+      color: theme.colors.neutral[950],
+      sceneBackgroundColor: theme.colors.neutral[50],
+    },
+    {
+      backgroundColor: theme.colors.neutral[950],
+      color: 'white',
+      sceneBackgroundColor: theme.colors.neutral[900],
+    }
+  );
+
   if (!session.data?.user?.name) {
     return <ViewOnboarding />;
   }
 
   return (
-    <Stack initialRouteName="(tabs)" screenOptions={{ headerShown: false }}>
+    <Stack
+      initialRouteName="(tabs)"
+      screenOptions={{
+        headerShown: false,
+        headerStyle: { backgroundColor: themedStyle.backgroundColor },
+        headerTintColor: themedStyle.color,
+        contentStyle: {
+          backgroundColor: themedStyle.sceneBackgroundColor,
+        },
+      }}
+    >
       <Stack.Screen name="(tabs)" options={{ title: 'Books' }} />
       {/* Add new logged-in View that's not included in tabs here */}
       <Stack.Screen name="books/[id]" options={{ headerShown: true }} />

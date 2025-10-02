@@ -2,11 +2,12 @@ import { getUiState } from '@bearstudio/ui-state';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigation } from 'expo-router';
 import { useEffect } from 'react';
-import { Box, Divider, Flex, HStack, Stack, Text } from 'react-native-ficus-ui';
+import { Divider, Flex, HStack, Stack, Text } from 'react-native-ficus-ui';
 
 import { api } from '@/lib/hey-api/api';
 
-import { FullLoader } from '@/components/full-loader';
+import { Card, CardBody } from '@/components/ui/card';
+import { FullLoader } from '@/components/ui/full-loader';
 
 import { BookCover } from '@/features/books/book-cover';
 
@@ -35,70 +36,65 @@ export const ViewBook = (props: { bookId: string }) => {
         .match('error', () => <></>)
         .match('default', ({ data }) => (
           <Stack gap={16}>
-            <Box
-              px={16}
-              py={4}
-              gap={4}
-              borderRadius="lg"
-              borderWidth={1}
-              borderColor="neutral.200"
-            >
-              <HStack gap={8} py={12}>
-                <Text
-                  flex={1}
-                  fontWeight="medium"
-                  fontSize="sm"
-                  color="neutral.600"
-                >
-                  Title
-                </Text>
-                <Text flex={2} fontWeight="medium" fontSize="sm">
-                  {data.title}
-                </Text>
-              </HStack>
-              <Divider color="neutral.200" />
-              <HStack gap={8} py={12}>
-                <Text
-                  flex={1}
-                  fontWeight="medium"
-                  fontSize="sm"
-                  color="neutral.600"
-                >
-                  Author
-                </Text>
-                <Text flex={2} fontWeight="medium" fontSize="sm">
-                  {data.author}
-                </Text>
-              </HStack>
-              <Divider color="neutral.200" />
-              <HStack gap={8} py={12}>
-                <Text
-                  flex={1}
-                  fontWeight="medium"
-                  fontSize="sm"
-                  color="neutral.600"
-                >
-                  Genre
-                </Text>
-                <Text flex={2} fontWeight="medium" fontSize="sm">
-                  {data.genre?.name ?? 'Unknown'}
-                </Text>
-              </HStack>
-              <Divider color="neutral.200" />
-              <HStack gap={8} py={12}>
-                <Text
-                  flex={1}
-                  fontWeight="medium"
-                  fontSize="sm"
-                  color="neutral.600"
-                >
-                  Publisher
-                </Text>
-                <Text flex={2} fontWeight="medium" fontSize="sm">
-                  {data.publisher?.toString() ?? 'Unknown'}
-                </Text>
-              </HStack>
-            </Box>
+            <Card>
+              <CardBody py={4}>
+                <HStack gap={8} py={12}>
+                  <Text
+                    flex={1}
+                    fontWeight="medium"
+                    fontSize="sm"
+                    variant="muted"
+                  >
+                    Title
+                  </Text>
+                  <Text flex={2} fontWeight="medium" fontSize="sm">
+                    {data.title}
+                  </Text>
+                </HStack>
+                <Divider />
+                <HStack gap={8} py={12}>
+                  <Text
+                    flex={1}
+                    fontWeight="medium"
+                    fontSize="sm"
+                    variant="muted"
+                  >
+                    Author
+                  </Text>
+                  <Text flex={2} fontWeight="medium" fontSize="sm">
+                    {data.author}
+                  </Text>
+                </HStack>
+                <Divider />
+                <HStack gap={8} py={12}>
+                  <Text
+                    flex={1}
+                    fontWeight="medium"
+                    fontSize="sm"
+                    variant="muted"
+                  >
+                    Genre
+                  </Text>
+                  <Text flex={2} fontWeight="medium" fontSize="sm">
+                    {data.genre?.name ?? 'Unknown'}
+                  </Text>
+                </HStack>
+                <Divider />
+                <HStack gap={8} py={12}>
+                  <Text
+                    flex={1}
+                    fontWeight="medium"
+                    fontSize="sm"
+                    variant="muted"
+                  >
+                    Publisher
+                  </Text>
+                  <Text flex={2} fontWeight="medium" fontSize="sm">
+                    {data.publisher?.toString() ?? 'Unknown'}
+                  </Text>
+                </HStack>
+              </CardBody>
+            </Card>
             <BookCover book={data} alignSelf="center" h="60%" />
           </Stack>
         ))

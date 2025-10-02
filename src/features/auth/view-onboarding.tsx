@@ -5,7 +5,7 @@ import z from 'zod';
 import { useAppForm } from '@/lib/tanstack-form/config';
 
 import { Logo } from '@/components/icons/generated';
-import { ThemeToggle } from '@/components/theme-toggle';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 import { authClient } from '@/features/auth/client';
 import { ViewSafeContent } from '@/layout/view-safe-content';

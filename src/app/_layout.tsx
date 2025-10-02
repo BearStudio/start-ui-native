@@ -11,7 +11,7 @@ import 'react-native-reanimated';
 
 import theme from '@/lib/ficus-ui/theme';
 
-import { Sonner } from '@/components/sonner';
+import { Sonner } from '@/components/ui/sonner';
 
 import { authClient } from '@/features/auth/client';
 

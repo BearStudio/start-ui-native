@@ -14,10 +14,11 @@ import z from 'zod';
 
 import { useAppForm } from '@/lib/tanstack-form/config';
 
-import { BottomSheet, BottomSheetBox } from '@/components/bottom-sheet';
-import { FullLoader } from '@/components/full-loader';
 import { IconEdit3, IconLogOut } from '@/components/icons/generated';
-import { ThemeToggle } from '@/components/theme-toggle';
+import { BottomSheet, BottomSheetBox } from '@/components/ui/bottom-sheet';
+import { Card, CardBody, CardHeader, CardTitle } from '@/components/ui/card';
+import { FullLoader } from '@/components/ui/full-loader';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { Version } from '@/components/version';
 
 import { authClient } from '@/features/auth/client';
@@ -61,20 +62,15 @@ export const ViewAccount = () => {
           .match('error', () => <></>)
           .match('not-logged', () => <></>)
           .match('default', ({ data }) => (
-            <Box
-              bg="white"
-              borderRadius="md"
-              borderWidth={1}
-              borderColor="neutral.200"
-            >
-              <HStack p={16} justifyContent="space-between">
+            <Card>
+              <CardHeader>
                 <HStack alignItems="center" spacing={8}>
                   <Avatar
                     name={data.user.name}
                     size="xs"
                     colorScheme="neutral"
                   />
-                  <Text fontWeight="bold">{data.user.name}</Text>
+                  <CardTitle>{data.user.name}</CardTitle>
                 </HStack>
                 <Button
                   variant="@ghost"
@@ -91,7 +87,7 @@ export const ViewAccount = () => {
                   <BottomSheetBox gap={16}>
                     <Stack gap={4}>
                       <Text fontWeight="bold">Account Sign out</Text>
-                      <Text color="neutral.600" fontSize="sm" fontWeight="500">
+                      <Text fontSize="sm" fontWeight="500" variant="muted">
                         You are about to end your session
                       </Text>
                     </Stack>
@@ -115,11 +111,11 @@ export const ViewAccount = () => {
                     </Button>
                   </BottomSheetBox>
                 </BottomSheet>
-              </HStack>
-              <Divider color="neutral.200" />
-              <Box p={16}>
+              </CardHeader>
+              <Divider />
+              <CardBody>
                 <Stack spacing={2}>
-                  <Text fontSize="xs" fontWeight="medium" color="neutral.700">
+                  <Text fontSize="xs" fontWeight="medium" variant="muted">
                     Name
                   </Text>
                   <Button
@@ -159,41 +155,35 @@ export const ViewAccount = () => {
                     </BottomSheetBox>
                   </BottomSheet>
                 </Stack>
-              </Box>
-              <Divider color="neutral.200" />
-              <Box p={16}>
+              </CardBody>
+              <Divider />
+              <CardBody>
                 <Stack spacing={2}>
-                  <Text fontSize="xs" fontWeight="medium" color="neutral.700">
+                  <Text fontSize="xs" fontWeight="medium" variant="muted">
                     Email
                   </Text>
                   <Text fontSize="sm" fontWeight="medium">
                     {data.user.email}
                   </Text>
                 </Stack>
-              </Box>
-            </Box>
+              </CardBody>
+            </Card>
           ))
           .exhaustive()}
-        <Box
-          bg="white"
-          borderRadius="md"
-          borderWidth={1}
-          borderColor="neutral.200"
-        >
-          <Box p={16}>
-            <Text fontWeight="bold">Display Preferences</Text>
-          </Box>
-
-          <Divider color="neutral.200" />
-          <Box p={16}>
+        <Card>
+          <CardHeader>
+            <CardTitle>Display Preferences</CardTitle>
+          </CardHeader>
+          <Divider />
+          <CardBody p={16}>
             <Stack spacing={2}>
-              <Text fontSize="xs" fontWeight="medium" color="neutral.700">
-                Email
+              <Text fontSize="xs" fontWeight="medium" variant="muted">
+                Theme
               </Text>
               <ThemeToggle />
             </Stack>
-          </Box>
-        </Box>
+          </CardBody>
+        </Card>
       </Stack>
       <Version textAlign="center" />
     </Box>

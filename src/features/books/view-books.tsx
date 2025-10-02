@@ -5,7 +5,7 @@ import { Button, FlashList, Text } from 'react-native-ficus-ui';
 
 import { api } from '@/lib/hey-api/api';
 
-import { FullLoader } from '@/components/full-loader';
+import { FullLoader } from '@/components/ui/full-loader';
 
 import { BookCover } from '@/features/books/book-cover';
 

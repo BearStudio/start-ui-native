@@ -4,8 +4,15 @@ import {
   BottomSheetView,
 } from '@gorhom/bottom-sheet';
 import { memo, useEffect, useRef } from 'react';
-import { Box, ficus, theme, useDisclosure } from 'react-native-ficus-ui';
+import {
+  Box,
+  ficus,
+  useColorModeValue,
+  useDisclosure,
+} from 'react-native-ficus-ui';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+
+import theme from '@/lib/ficus-ui/theme';
 
 const FicusBottomSheet = ficus(BottomSheetModal, {
   baseStyle: { flex: 1, borderRadius: 'md' },
@@ -37,15 +44,23 @@ export const BottomSheet = ({
     }
   };
 
+  const backgroundColor = useColorModeValue('white', theme.colors.neutral[900]);
+  const handleColor = useColorModeValue(
+    theme.colors.neutral[200],
+    theme.colors.neutral[500]
+  );
+
   return (
     <FicusBottomSheet
       {...props}
       backdropComponent={BackdropAnimated}
       handleIndicatorStyle={{
-        backgroundColor: theme.colors.gray[200],
+        backgroundColor: handleColor,
         width: 64,
         height: 5,
       }}
+      backgroundStyle={{ backgroundColor }}
+      handleStyle={{ backgroundColor: 'transparent' }}
       ref={ref}
       onChange={handleChange}
     />
