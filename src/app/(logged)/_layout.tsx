@@ -1,5 +1,6 @@
 import { Stack, useRouter } from 'expo-router';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useColorModeValue } from 'react-native-ficus-ui';
 
 import theme from '@/lib/ficus-ui/theme';
@@ -10,6 +11,7 @@ import { ViewOnboarding } from '@/features/auth/view-onboarding';
 export default function LoggedLayout() {
   const router = useRouter();
   const session = authClient.useSession();
+  const { t } = useTranslation(['layout']);
 
   useEffect(() => {
     if (!session.isPending && !session.data) {
@@ -46,7 +48,10 @@ export default function LoggedLayout() {
         },
       }}
     >
-      <Stack.Screen name="(tabs)" options={{ title: 'Books' }} />
+      <Stack.Screen
+        name="(tabs)"
+        options={{ title: t('layout:tabs.books.title') }}
+      />
       {/* Add new logged-in View that's not included in tabs here */}
       <Stack.Screen name="books/[id]" options={{ headerShown: true }} />
     </Stack>
