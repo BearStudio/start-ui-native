@@ -61,7 +61,7 @@ export default {
   ],
   githubUrl: 'https://github.com/bearstudio/start-ui-native',
   updates: {
-    url: 'https://u.expo.dev/af6ae74c-f04d-497a-9733-b2b7539f77c5',
+    url: `https://u.expo.dev/${EXPO_PROJECT_ID}`,
   },
   extra: {
     eas: {

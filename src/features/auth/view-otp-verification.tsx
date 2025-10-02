@@ -1,13 +1,14 @@
-import { useLocalSearchParams } from 'expo-router';
-import { Button, Center, HStack, Stack, Text } from 'react-native-ficus-ui';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
+import { Button, Center, Stack, Text } from 'react-native-ficus-ui';
+import { toast } from 'sonner-native';
 import { z } from 'zod';
 
 import { useAppForm } from '@/lib/tanstack-form/config';
 
-import { IconArrowLeft, Logo } from '@/components/icons/generated';
-import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { IconArrowLeft } from '@/components/icons/generated';
 
+import { AuthHeader } from '@/features/auth/auth-header';
 import { authClient } from '@/features/auth/client';
 import { ViewSafeContent } from '@/layout/view-safe-content';
 
@@ -15,7 +16,9 @@ export const ViewOtpVerification = () => {
   const session = authClient.useSession();
   const { email } = useLocalSearchParams();
 
-  const insets = useSafeAreaInsets();
+  const { t } = useTranslation(['auth']);
+
+  const router = useRouter();
 
   const form = useAppForm({
     defaultValues: { code: '' },
@@ -24,10 +27,17 @@ export const ViewOtpVerification = () => {
       if (typeof email !== 'string') {
         return;
       }
-      await authClient.signIn.emailOtp({
-        email,
-        otp: submission.value.code,
-      });
+      await authClient.signIn.emailOtp(
+        {
+          email,
+          otp: submission.value.code,
+        },
+        {
+          onError: ({ error }) => {
+            toast.error(error.message);
+          },
+        }
+      );
 
       // Refetch session to update guards and redirect
       session.refetch();
@@ -36,32 +46,22 @@ export const ViewOtpVerification = () => {
 
   return (
     <ViewSafeContent>
-      <HStack
-        justifyContent="space-between"
-        p={24}
-        alignItems="center"
-        position="absolute"
-        top={insets.top}
-        left={0}
-        right={0}
-      >
-        <Logo color="black" _dark={{ color: 'white' }} width={96} height={22} />
-        <ThemeToggle />
-      </HStack>
+      <AuthHeader />
       <Center flex={1} p={24}>
         <form.AppForm>
           <Stack spacing={24} w="100%">
-            <Button gap={4} variant="@ghost" pl={0}>
+            <Button variant="@ghost" pl={0} onPress={router.back}>
               <IconArrowLeft width={18} height={18} />
-              Back
+              {t('auth:verification.back')}
             </Button>
             <Stack spacing={8}>
               <Text fontWeight="bold" fontSize="lg">
-                Verification
+                {t('auth:verification.title')}
               </Text>
               <Text fontWeight={400} fontSize="sm">
-                If you have an account, we have sent a code to{' '}
-                <Text fontWeight={800}>{email}</Text>. Enter it below.
+                {t('auth:verification.description')}
+                <Text fontWeight={800}>{email}</Text>.{' '}
+                {t('auth:verification.enterItBelow')}
               </Text>
             </Stack>
             <Stack spacing={16}>
@@ -69,16 +69,18 @@ export const ViewOtpVerification = () => {
                 <form.AppField name="code">
                   {(field) => (
                     <field.Field>
-                      <field.Label>Verification code</field.Label>
+                      <field.Label>
+                        {t('auth:verification.verificationCode.label')}
+                      </field.Label>
                       <field.FieldOtp codeLength={6} />
                       <field.Helper>
-                        The code expires shortly (5 minutes)
+                        {t('auth:verification.expireHint')}
                       </field.Helper>
                     </field.Field>
                   )}
                 </form.AppField>
               </Stack>
-              <form.Submit>Confirm</form.Submit>
+              <form.Submit>{t('auth:verification.confirm')}</form.Submit>
             </Stack>
           </Stack>
         </form.AppForm>

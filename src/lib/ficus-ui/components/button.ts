@@ -13,6 +13,7 @@ export default defineStyleConfig<
     lg: { h: 40, fontSize: 'sm', fontWeight: 'medium' },
   },
   baseStyle: {
+    gap: 4,
     borderRadius: 'md',
     borderColor: 'brand.200',
     _disabled: { opacity: 0.7 },

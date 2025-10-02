@@ -1,0 +1,17 @@
+{
+  "user": {
+    "signOut": "Sign out",
+    "name": "Name",
+    "email": "Email",
+    "updateName": {
+      "title": "Update name",
+      "cancel": "Cancel",
+      "save": "Save"
+    }
+  },
+  "displayPreferences": {
+    "title": "Display preferences",
+    "theme": "Theme",
+    "language": "Language"
+  }
+}

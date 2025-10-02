@@ -2,6 +2,7 @@ import { getUiState } from '@bearstudio/ui-state';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigation } from 'expo-router';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Divider, Flex, HStack, Stack, Text } from 'react-native-ficus-ui';
 
 import { api } from '@/lib/hey-api/api';
@@ -13,6 +14,7 @@ import { BookCover } from '@/features/books/book-cover';
 
 export const ViewBook = (props: { bookId: string }) => {
   const navigation = useNavigation();
+  const { t } = useTranslation(['books']);
 
   const book = useQuery(api.bookGetByIdOptions({ path: { id: props.bookId } }));
 
@@ -45,7 +47,7 @@ export const ViewBook = (props: { bookId: string }) => {
                     fontSize="sm"
                     variant="muted"
                   >
-                    Title
+                    {t('books:common.title')}
                   </Text>
                   <Text flex={2} fontWeight="medium" fontSize="sm">
                     {data.title}
@@ -59,7 +61,7 @@ export const ViewBook = (props: { bookId: string }) => {
                     fontSize="sm"
                     variant="muted"
                   >
-                    Author
+                    {t('books:common.author')}
                   </Text>
                   <Text flex={2} fontWeight="medium" fontSize="sm">
                     {data.author}
@@ -73,7 +75,7 @@ export const ViewBook = (props: { bookId: string }) => {
                     fontSize="sm"
                     variant="muted"
                   >
-                    Genre
+                    {t('books:common.genre')}
                   </Text>
                   <Text flex={2} fontWeight="medium" fontSize="sm">
                     {data.genre?.name ?? 'Unknown'}
@@ -87,7 +89,7 @@ export const ViewBook = (props: { bookId: string }) => {
                     fontSize="sm"
                     variant="muted"
                   >
-                    Publisher
+                    {t('books:common.publisher')}
                   </Text>
                   <Text flex={2} fontWeight="medium" fontSize="sm">
                     {data.publisher?.toString() ?? 'Unknown'}

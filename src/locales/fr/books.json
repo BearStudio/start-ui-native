@@ -1,0 +1,8 @@
+{
+  "common": {
+    "title": "Titre",
+    "author": "Auteur",
+    "genre": "Genre",
+    "publisher": "Éditeur"
+  }
+}

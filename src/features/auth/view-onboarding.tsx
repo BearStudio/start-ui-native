@@ -1,17 +1,15 @@
-import { Center, HStack, Stack, Text } from 'react-native-ficus-ui';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTranslation } from 'react-i18next';
+import { Center, Stack, Text } from 'react-native-ficus-ui';
 import z from 'zod';
 
 import { useAppForm } from '@/lib/tanstack-form/config';
 
-import { Logo } from '@/components/icons/generated';
-import { ThemeToggle } from '@/components/ui/theme-toggle';
-
+import { AuthHeader } from '@/features/auth/auth-header';
 import { authClient } from '@/features/auth/client';
 import { ViewSafeContent } from '@/layout/view-safe-content';
 
 export const ViewOnboarding = () => {
-  const insets = useSafeAreaInsets();
+  const { t } = useTranslation(['auth']);
 
   const form = useAppForm({
     defaultValues: { name: '' },
@@ -27,26 +25,15 @@ export const ViewOnboarding = () => {
 
   return (
     <ViewSafeContent>
-      <HStack
-        justifyContent="space-between"
-        p={24}
-        alignItems="center"
-        position="absolute"
-        top={insets.top}
-        left={0}
-        right={0}
-      >
-        <Logo color="black" _dark={{ color: 'white' }} width={96} height={22} />
-        <ThemeToggle />
-      </HStack>
+      <AuthHeader />
       <Center flex={1} p={24}>
         <Stack spacing={24} w="100%">
           <Stack spacing={8}>
             <Text fontWeight="bold" fontSize="lg">
-              Welcome
+              {t('auth:onboarding.title')}
             </Text>
             <Text fontWeight={400} fontSize="sm">
-              Let's personalize your experience
+              {t('auth:onboarding.subtitle')}
             </Text>
           </Stack>
           <form.AppForm>
@@ -55,13 +42,15 @@ export const ViewOnboarding = () => {
                 <form.AppField name="name">
                   {(field) => (
                     <field.Field>
-                      <field.Label>What is your name?</field.Label>
+                      <field.Label>
+                        {t('auth:onboarding.name.label')}
+                      </field.Label>
                       <field.FieldText />
                     </field.Field>
                   )}
                 </form.AppField>
               </Stack>
-              <form.Submit>Continue</form.Submit>
+              <form.Submit>{t('auth:onboarding.continue')}</form.Submit>
             </Stack>
           </form.AppForm>
         </Stack>

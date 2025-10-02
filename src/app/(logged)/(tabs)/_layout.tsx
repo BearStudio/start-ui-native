@@ -1,4 +1,5 @@
 import { Tabs } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { useColorModeValue } from 'react-native-ficus-ui';
 
 import theme from '@/lib/ficus-ui/theme';
@@ -14,6 +15,8 @@ import {
 } from '@/components/icons/generated';
 
 export default function TabLayout() {
+  const { t } = useTranslation(['layout']);
+
   const themedStyle = useColorModeValue(
     {
       backgroundColor: 'white',
@@ -44,7 +47,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="home"
         options={{
-          title: 'Home',
+          title: t('layout:tabs.home.title'),
           tabBarIcon: (props) => {
             const Icon = props.focused ? IconHouseFill : IconHouseDuotone;
             return <Icon color={props.color} w={props.size} h={props.size} />;
@@ -54,7 +57,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="books"
         options={{
-          title: 'Books',
+          title: t('layout:tabs.books.title'),
           tabBarIcon: (props) => {
             const Icon = props.focused ? IconBookOpenFill : IconBookOpenDuotone;
             return <Icon color={props.color} w={props.size} h={props.size} />;
@@ -64,7 +67,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="account"
         options={{
-          title: 'Account',
+          title: t('layout:tabs.account.title'),
           tabBarIcon: (props) => {
             const Icon = props.focused
               ? IconUserCircleFill

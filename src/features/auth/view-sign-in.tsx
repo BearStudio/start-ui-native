@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import appConfig from 'app.config';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import {
   Button,
   Center,
@@ -16,15 +17,16 @@ import { z } from 'zod';
 import { Form } from '@/lib/tanstack-form/components';
 import { useAppForm } from '@/lib/tanstack-form/config';
 
-import { Logo } from '@/components/icons/generated';
-import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { Version } from '@/components/version';
 
+import { AuthHeader } from '@/features/auth/auth-header';
 import { authClient } from '@/features/auth/client';
 import { ViewSafeContent } from '@/layout/view-safe-content';
 
 export const ViewSignIn = () => {
   const insets = useSafeAreaInsets();
+
+  const { t } = useTranslation(['auth']);
 
   const router = useRouter();
 
@@ -64,26 +66,20 @@ export const ViewSignIn = () => {
 
   return (
     <ViewSafeContent>
-      <HStack
-        justifyContent="space-between"
-        p={24}
-        alignItems="center"
-        position="absolute"
-        top={insets.top}
-        left={0}
-        right={0}
-      >
-        <Logo color="black" _dark={{ color: 'white' }} width={96} height={22} />
-        <ThemeToggle />
-      </HStack>
+      <AuthHeader />
       <Center flex={1} p={24}>
         <Stack spacing={24} w="100%">
           <Stack align="center" spacing={8}>
-            <Text fontWeight="bold" fontSize="2xl">
-              Login to your account
+            <Text fontWeight="bold" fontSize="2xl" textAlign="center">
+              {t('auth:signin.title')}
             </Text>
-            <Text fontWeight={400} fontSize="sm" variant="muted">
-              Enter your email to login to your account
+            <Text
+              fontWeight={400}
+              fontSize="sm"
+              variant="muted"
+              textAlign="center"
+            >
+              {t('auth:signin.subtitle')}
             </Text>
           </Stack>
           <Form form={form}>
@@ -92,20 +88,26 @@ export const ViewSignIn = () => {
                 {(field) => (
                   <field.Field>
                     <field.FieldText
-                      placeholder="Email"
+                      placeholder={t('auth:signin.email.placeholder')}
                       autoCapitalize="none"
                       placeholderTextColor="neutral.600"
                     />
                   </field.Field>
                 )}
               </form.AppField>
-              <form.Submit full>Login with email</form.Submit>
+              <form.Submit full>{t('auth:signin.loginWithEmail')}</form.Submit>
             </Stack>
           </Form>
           <HStack alignItems="center" spacing={16}>
             <Divider color="neutral.200" flex={1} orientation="horizontal" />
-            <Text fontSize="sm" variant="muted">
-              OR
+            <Text
+              fontSize="sm"
+              variant="muted"
+              textTransform="uppercase"
+              textAlign="center"
+              w={24}
+            >
+              {t('auth:signin.or')}
             </Text>
             <Divider color="neutral.200" flex={1} orientation="horizontal" />
           </HStack>
@@ -114,7 +116,7 @@ export const ViewSignIn = () => {
             variant="@secondary"
             onPress={() => social.mutate('github')}
           >
-            Login with GitHub
+            {t('auth:signin.loginWithGithub')}
           </Button>
         </Stack>
       </Center>

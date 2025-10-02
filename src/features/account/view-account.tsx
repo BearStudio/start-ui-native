@@ -1,5 +1,6 @@
 import { getUiState } from '@bearstudio/ui-state';
 import { useQueryClient } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 import {
   Avatar,
   Box,
@@ -18,7 +19,8 @@ import { IconEdit3, IconLogOut } from '@/components/icons/generated';
 import { BottomSheet, BottomSheetBox } from '@/components/ui/bottom-sheet';
 import { Card, CardBody, CardHeader, CardTitle } from '@/components/ui/card';
 import { FullLoader } from '@/components/ui/full-loader';
-import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { LocaleSwitcher } from '@/components/ui/locale-switcher';
+import { ThemeSwitcher } from '@/components/ui/theme-switcher';
 import { Version } from '@/components/version';
 
 import { authClient } from '@/features/auth/client';
@@ -26,6 +28,7 @@ import { authClient } from '@/features/auth/client';
 export const ViewAccount = () => {
   const session = authClient.useSession();
   const queryClient = useQueryClient();
+  const { t } = useTranslation(['account', 'auth']);
 
   const signoutSheet = useDisclosure();
   const updateNameSheet = useDisclosure();
@@ -72,13 +75,9 @@ export const ViewAccount = () => {
                   />
                   <CardTitle>{data.user.name}</CardTitle>
                 </HStack>
-                <Button
-                  variant="@ghost"
-                  onPress={() => signoutSheet.onOpen()}
-                  gap={4}
-                >
+                <Button variant="@ghost" onPress={() => signoutSheet.onOpen()}>
                   <IconLogOut width={14} height={14} />
-                  Sign out
+                  {t('account:user.signOut')}
                 </Button>
                 <BottomSheet
                   isOpen={signoutSheet.isOpen}
@@ -86,9 +85,11 @@ export const ViewAccount = () => {
                 >
                   <BottomSheetBox gap={16}>
                     <Stack gap={4}>
-                      <Text fontWeight="bold">Account Sign out</Text>
+                      <Text fontWeight="bold">
+                        {t('auth:signOut.confirm.title')}
+                      </Text>
                       <Text fontSize="sm" fontWeight="500" variant="muted">
-                        You are about to end your session
+                        {t('auth:signOut.confirm.description')}
                       </Text>
                     </Stack>
                     <Button
@@ -96,7 +97,7 @@ export const ViewAccount = () => {
                       full
                       onPress={() => signoutSheet.onClose()}
                     >
-                      Cancel
+                      {t('auth:signOut.confirm.cancel')}
                     </Button>
                     <Button
                       onPress={() => {
@@ -107,7 +108,7 @@ export const ViewAccount = () => {
                       gap={8}
                     >
                       <IconLogOut width={20} height={20} />
-                      Sign out
+                      {t('auth:signOut.confirm.signOut')}
                     </Button>
                   </BottomSheetBox>
                 </BottomSheet>
@@ -116,7 +117,7 @@ export const ViewAccount = () => {
               <CardBody>
                 <Stack spacing={2}>
                   <Text fontSize="xs" fontWeight="medium" variant="muted">
-                    Name
+                    {t('account:user.name')}
                   </Text>
                   <Button
                     variant="@link"
@@ -133,12 +134,14 @@ export const ViewAccount = () => {
                     onClose={updateNameSheet.onClose}
                   >
                     <BottomSheetBox gap={16}>
-                      <Text fontWeight="bold">Update name</Text>
+                      <Text fontWeight="bold">
+                        {t('account:user.updateName.title')}
+                      </Text>
                       <updateNameForm.AppForm>
                         <updateNameForm.AppField name="name">
                           {(field) => (
                             <field.Field>
-                              <field.FieldText />
+                              <field.FieldText autoFocus />
                             </field.Field>
                           )}
                         </updateNameForm.AppField>
@@ -148,9 +151,11 @@ export const ViewAccount = () => {
                           full
                           onPress={() => updateNameSheet.onClose()}
                         >
-                          Cancel
+                          {t('account:user.updateName.cancel')}
                         </Button>
-                        <updateNameForm.Submit full>Save</updateNameForm.Submit>
+                        <updateNameForm.Submit full>
+                          {t('account:user.updateName.save')}
+                        </updateNameForm.Submit>
                       </updateNameForm.AppForm>
                     </BottomSheetBox>
                   </BottomSheet>
@@ -160,7 +165,7 @@ export const ViewAccount = () => {
               <CardBody>
                 <Stack spacing={2}>
                   <Text fontSize="xs" fontWeight="medium" variant="muted">
-                    Email
+                    {t('account:user.email')}
                   </Text>
                   <Text fontSize="sm" fontWeight="medium">
                     {data.user.email}
@@ -172,15 +177,24 @@ export const ViewAccount = () => {
           .exhaustive()}
         <Card>
           <CardHeader>
-            <CardTitle>Display Preferences</CardTitle>
+            <CardTitle>{t('account:displayPreferences.title')}</CardTitle>
           </CardHeader>
           <Divider />
           <CardBody p={16}>
             <Stack spacing={2}>
               <Text fontSize="xs" fontWeight="medium" variant="muted">
-                Theme
+                {t('account:displayPreferences.theme')}
               </Text>
-              <ThemeToggle />
+              <ThemeSwitcher />
+            </Stack>
+          </CardBody>
+          <Divider />
+          <CardBody p={16}>
+            <Stack spacing={2}>
+              <Text fontSize="xs" fontWeight="medium" variant="muted">
+                {t('account:displayPreferences.language')}
+              </Text>
+              <LocaleSwitcher />
             </Stack>
           </CardBody>
         </Card>

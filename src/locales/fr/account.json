@@ -1,0 +1,17 @@
+{
+  "user": {
+    "signOut": "Déconnexion",
+    "name": "Nom",
+    "email": "Email",
+    "updateName": {
+      "title": "Modifier le nom",
+      "cancel": "Annuler",
+      "save": "Sauvegarder"
+    }
+  },
+  "displayPreferences": {
+    "title": "Préférences d'affichage",
+    "theme": "Thème",
+    "language": "Langue"
+  }
+}
