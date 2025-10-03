@@ -91,6 +91,9 @@ export const ViewSignIn = () => {
                       placeholder={t('auth:signin.email.placeholder')}
                       autoCapitalize="none"
                       placeholderTextColor="neutral.600"
+                      keyboardType="email-address"
+                      returnKeyType="done"
+                      onSubmitEditing={form.handleSubmit}
                     />
                   </field.Field>
                 )}

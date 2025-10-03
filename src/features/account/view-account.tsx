@@ -141,7 +141,11 @@ export const ViewAccount = () => {
                         <updateNameForm.AppField name="name">
                           {(field) => (
                             <field.Field>
-                              <field.FieldText autoFocus />
+                              <field.FieldText
+                                autoFocus
+                                returnKeyType="done"
+                                onSubmitEditing={updateNameForm.handleSubmit}
+                              />
                             </field.Field>
                           )}
                         </updateNameForm.AppField>

@@ -45,7 +45,11 @@ export const ViewOnboarding = () => {
                       <field.Label>
                         {t('auth:onboarding.name.label')}
                       </field.Label>
-                      <field.FieldText />
+                      <field.FieldText
+                        autoFocus
+                        returnKeyType="done"
+                        onSubmitEditing={form.handleSubmit}
+                      />
                     </field.Field>
                   )}
                 </form.AppField>
