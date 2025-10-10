@@ -29,15 +29,25 @@ cp .vscode/settings.example.json .vscode/settings.json  # (Optionnal) Setup your
 pnpm install # Install dependencies
 ```
 
-## Connect to your API
+## Environment variables
 
-Using Hey API, you can quickly connect your app with any REST API. Just put your openapi url as `EXPO_PUBLIC_OPENAPI_URL` environment variable and run
+🚨 Using Expo Go, should not be `localhost`, use public IP instead
+
+```bash
+EXPO_PUBLIC_BASE_URL # Base URL of your server, usefull if you are using Start UI [web]
+
+# OPTIONAL TO OVERRIDE
+EXPO_PUBLIC_AUTH_URL # Better-auth url (default `${EXPO_PUBLIC_BASE_URL}/api/auth`)
+EXPO_PUBLIC_OPENAPI_URL # OpenAPI contract URL (default `${EXPO_PUBLIC_BASE_URL}/openapi/app/schema`)
+```
+
+## API SDK generation
 
 ```bash
 pnpm gen:api
 ```
 
-A new folder `/src/lib/hey-api/generated` will be created with stuff like to combine use Tanstack Query to fetch data.
+A new folder `/src/lib/hey-api/generated` will be created with stuff like to combine use Tanstack Query to fetch data, based on env variables.
 
 For example
 ```ts
