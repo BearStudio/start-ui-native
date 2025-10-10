@@ -2,6 +2,7 @@ import { Tabs } from 'expo-router';
 import { Icon, Label, NativeTabs } from 'expo-router/unstable-native-tabs';
 import { ComponentProps } from 'react';
 import { useTranslation } from 'react-i18next';
+import { DynamicColorIOS } from 'react-native';
 import { useColorModeValue } from 'react-native-ficus-ui';
 
 import theme from '@/lib/ficus-ui/theme';
@@ -70,7 +71,9 @@ export default function TabLayout() {
 
   if (isApple) {
     return (
-      <NativeTabs>
+      <NativeTabs
+        tintColor={DynamicColorIOS({ dark: 'white', light: 'black' })}
+      >
         {TABS.map((tab) => (
           <NativeTabs.Trigger
             key={tab.name}
@@ -94,9 +97,7 @@ export default function TabLayout() {
         tabBarStyle: { backgroundColor: themedStyle.backgroundColor },
         tabBarActiveTintColor: themedStyle.color,
         tabBarButton: (props) => <HapticTab {...props} />,
-        sceneStyle: {
-          backgroundColor: themedStyle.sceneBackgroundColor,
-        },
+        sceneStyle: { backgroundColor: themedStyle.sceneBackgroundColor },
       }}
     >
       {TABS.map((tab) => (
