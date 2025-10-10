@@ -12,8 +12,8 @@ importers:
         specifier: 1.0.2
         version: 1.0.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@better-auth/expo':
-        specifier: 1.3.24
-        version: 1.3.24(better-auth@1.3.24(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(expo-constants@18.0.9)(expo-crypto@15.0.7(expo@54.0.13))(expo-linking@8.0.8)(expo-secure-store@15.0.7(expo@54.0.13))(expo-web-browser@15.0.8(expo@54.0.13)(react-native@0.81.4(@babel/core@7.28.4)(@types/react@19.1.13)(react@19.1.0)))
+        specifier: 1.3.27
+        version: 1.3.27(better-auth@1.3.27(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(expo-constants@18.0.9)(expo-crypto@15.0.7(expo@54.0.13))(expo-linking@8.0.8)(expo-secure-store@15.0.7(expo@54.0.13))(expo-web-browser@15.0.8(expo@54.0.13)(react-native@0.81.4(@babel/core@7.28.4)(@types/react@19.1.13)(react@19.1.0)))
       '@expo/metro-runtime':
         specifier: 6.1.2
         version: 6.1.2(expo@54.0.13)(react-dom@19.1.0(react@19.1.0))(react-native@0.81.4(@babel/core@7.28.4)(@types/react@19.1.13)(react@19.1.0))(react@19.1.0)
@@ -42,8 +42,8 @@ importers:
         specifier: 5.90.2
         version: 5.90.2(react@19.1.0)
       better-auth:
-        specifier: 1.3.24
-        version: 1.3.24(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 1.3.27
+        version: 1.3.27(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       dayjs:
         specifier: 1.11.18
         version: 1.11.18
@@ -927,13 +927,13 @@ packages:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
-  '@better-auth/core@1.3.24':
-    resolution: {integrity: sha512-nU4aj5SA0COXAls0p3htIWmGPOG+76HULd9tG8CEUfwcK95rRrUIUN74FKvsAu3b18AVj3E7cL4bYrQS3KYKRw==}
+  '@better-auth/core@1.3.27':
+    resolution: {integrity: sha512-3Sfdax6MQyronY+znx7bOsfQHI6m1SThvJWb0RDscFEAhfqLy95k1sl+/PgGyg0cwc2cUXoEiAOSqYdFYrg3vA==}
 
-  '@better-auth/expo@1.3.24':
-    resolution: {integrity: sha512-mF9uuyYem8WDyrWO0iuyn+/LiYOgfXpAm3m6clcxV+/h6HKWsCE5vPUGMMy3RjjmCNsZOxz10PsZJlWFmdVmYw==}
+  '@better-auth/expo@1.3.27':
+    resolution: {integrity: sha512-2bZ4Fi7Moa99ymjkIwRUzENbqmzZNjD9cjlq2lpuiF/+TGOA2LYJmS7RnR/i9+UHKi5T3AsXgrIRMFQgYtgZ2Q==}
     peerDependencies:
-      better-auth: 1.3.24
+      better-auth: 1.3.27
       expo-constants: '>=17.0.0'
       expo-crypto: '>=13.0.0'
       expo-linking: '>=7.0.0'
@@ -2389,8 +2389,8 @@ packages:
     resolution: {integrity: sha512-wrH5NNqren/QMtKUEEJf7z86YjfqW/2uw3IL3/xpqZUC95SSVIFXYQeeGjL6FT/X68IROu6RMehZQS5foy2BXw==}
     hasBin: true
 
-  better-auth@1.3.24:
-    resolution: {integrity: sha512-LyxIbnB2FExhjqQ/J1G8S8EAbmTBDFOz6CjqHNNu15Gux+c4fF0Si1YNLprROEb4EGNuGUfslurW0Q6nZ+Dobg==}
+  better-auth@1.3.27:
+    resolution: {integrity: sha512-SwiGAJ7yU6dBhNg0NdV1h5M8T5sa7/AszZVc4vBfMDrLLmvUfbt9JoJ0uRUJUEdKRAAxTyl9yA+F3+GhtAD80w==}
     peerDependencies:
       '@lynx-js/react': '*'
       '@sveltejs/kit': '*'
@@ -7104,15 +7104,15 @@ snapshots:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
-  '@better-auth/core@1.3.24':
+  '@better-auth/core@1.3.27':
     dependencies:
       better-call: 1.0.19
       zod: 4.1.11
 
-  '@better-auth/expo@1.3.24(better-auth@1.3.24(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(expo-constants@18.0.9)(expo-crypto@15.0.7(expo@54.0.13))(expo-linking@8.0.8)(expo-secure-store@15.0.7(expo@54.0.13))(expo-web-browser@15.0.8(expo@54.0.13)(react-native@0.81.4(@babel/core@7.28.4)(@types/react@19.1.13)(react@19.1.0)))':
+  '@better-auth/expo@1.3.27(better-auth@1.3.27(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(expo-constants@18.0.9)(expo-crypto@15.0.7(expo@54.0.13))(expo-linking@8.0.8)(expo-secure-store@15.0.7(expo@54.0.13))(expo-web-browser@15.0.8(expo@54.0.13)(react-native@0.81.4(@babel/core@7.28.4)(@types/react@19.1.13)(react@19.1.0)))':
     dependencies:
       '@better-fetch/fetch': 1.1.18
-      better-auth: 1.3.24(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      better-auth: 1.3.27(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       expo-constants: 18.0.9(expo@54.0.13)(react-native@0.81.4(@babel/core@7.28.4)(@types/react@19.1.13)(react@19.1.0))
       expo-crypto: 15.0.7(expo@54.0.13)
       expo-linking: 8.0.8(expo@54.0.13)(react-native@0.81.4(@babel/core@7.28.4)(@types/react@19.1.13)(react@19.1.0))(react@19.1.0)
@@ -9160,9 +9160,9 @@ snapshots:
 
   baseline-browser-mapping@2.8.6: {}
 
-  better-auth@1.3.24(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  better-auth@1.3.27(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
-      '@better-auth/core': 1.3.24
+      '@better-auth/core': 1.3.27
       '@better-auth/utils': 0.3.0
       '@better-fetch/fetch': 1.1.18
       '@noble/ciphers': 2.0.1

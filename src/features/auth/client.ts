@@ -28,5 +28,4 @@ export const authClient = createAuthClient({
       },
     }),
   ],
-  trustedOrigins: [authBaseURL, `${appConfig.scheme}://*`],
 });

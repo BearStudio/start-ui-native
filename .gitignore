@@ -51,3 +51,4 @@ tsconfig.tsbuildinfo
 
 
 .tanstack
+src/lib/hey-api/generated/*
