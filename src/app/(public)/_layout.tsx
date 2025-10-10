@@ -8,10 +8,10 @@ export default function PublicLayout() {
   const session = authClient.useSession();
 
   useEffect(() => {
-    if (!session.isPending && session.data) {
+    if (!session.isPending && session.data?.user) {
       router.replace('/(logged)/(tabs)/home');
     }
-  }, [router, session.data, session.isPending]);
+  }, [router, session.data?.user, session.isPending]);
 
   return <Slot />;
 }

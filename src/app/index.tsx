@@ -26,7 +26,7 @@ export default function Index() {
         return;
       }
       router.replace(
-        session.data?.session ? '/(logged)/(tabs)/home' : '/(public)/sign-in'
+        session.data?.user?.id ? '/(logged)/(tabs)/home' : '/(public)/sign-in'
       );
     }, [session.data, session.isPending])
   );

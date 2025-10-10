@@ -1,16 +1,12 @@
 import {
+  BottomSheetBackdrop,
+  BottomSheetBackdropProps,
   BottomSheetModal,
   BottomSheetModalProps,
   BottomSheetView,
 } from '@gorhom/bottom-sheet';
-import { memo, useEffect, useRef } from 'react';
-import {
-  Box,
-  ficus,
-  useColorModeValue,
-  useDisclosure,
-} from 'react-native-ficus-ui';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import { useEffect, useMemo, useRef } from 'react';
+import { ficus, useColorModeValue, useDisclosure } from 'react-native-ficus-ui';
 
 import theme from '@/lib/ficus-ui/theme';
 
@@ -50,10 +46,23 @@ export const BottomSheet = ({
     theme.colors.neutral[500]
   );
 
+  const renderBackdrop = useMemo(
+    () => (backdropProps: BottomSheetBackdropProps) => (
+      <BottomSheetBackdrop
+        {...backdropProps}
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+        pressBehavior="close"
+        opacity={0.8}
+      />
+    ),
+    []
+  );
+
   return (
     <FicusBottomSheet
       {...props}
-      backdropComponent={BackdropAnimated}
+      backdropComponent={renderBackdrop}
       handleIndicatorStyle={{
         backgroundColor: handleColor,
         width: 64,
@@ -68,32 +77,5 @@ export const BottomSheet = ({
 };
 
 export const BottomSheetBox = ficus(BottomSheetView, {
-  baseStyle: {
-    flex: 1,
-    px: 24,
-    pt: 12,
-    pb: 48,
-  },
+  baseStyle: { flex: 1, px: 24, pt: 12, pb: 48 },
 });
-
-const BackdropAnimated = memo(() => (
-  <Animated.View
-    entering={FadeIn.duration(300)}
-    exiting={FadeOut.duration(100)}
-    style={{
-      position: 'absolute',
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
-    }}
-  >
-    <Box
-      style={{
-        backgroundColor: 'black',
-        opacity: 0.8,
-        flex: 1,
-      }}
-    />
-  </Animated.View>
-));

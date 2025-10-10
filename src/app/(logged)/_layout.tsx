@@ -14,10 +14,10 @@ export default function LoggedLayout() {
   const { t } = useTranslation(['layout']);
 
   useEffect(() => {
-    if (!session.isPending && !session.data) {
+    if (!session.isPending && !session.data?.user) {
       router.replace('/(public)/sign-in');
     }
-  }, [router, session.data, session.isPending]);
+  }, [router, session.data?.user, session.isPending]);
 
   const themedStyle = useColorModeValue(
     {
@@ -43,9 +43,7 @@ export default function LoggedLayout() {
         headerShown: false,
         headerStyle: { backgroundColor: themedStyle.backgroundColor },
         headerTintColor: themedStyle.color,
-        contentStyle: {
-          backgroundColor: themedStyle.sceneBackgroundColor,
-        },
+        contentStyle: { backgroundColor: themedStyle.sceneBackgroundColor },
       }}
     >
       <Stack.Screen
