@@ -16,7 +16,7 @@ It represents our team's up-to-date stack that we use when creating native apps 
 # Getting Started
 
 ```bash
-pnpm create start-ui -t native -b restart myApp
+pnpm create start-ui -t native myApp
 ```
 
 That will scaffold a new folder with the latest version of 🚀 Start UI <small>[native]</small> 🎉
