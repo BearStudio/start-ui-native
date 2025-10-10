@@ -1,0 +1,13 @@
+{
+  "tabs": {
+    "home": {
+      "title": "Accueil"
+    },
+    "books": {
+      "title": "Livres"
+    },
+    "account": {
+      "title": "Compte"
+    }
+  }
+}

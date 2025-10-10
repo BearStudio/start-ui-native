@@ -1,0 +1,6 @@
+{
+  "files.readonlyInclude": {
+    "**/*.gen.ts": true,
+    "**/generated/**/*": true
+  }
+}

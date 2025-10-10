@@ -1,122 +1,89 @@
-<h1 align="center"><img src="assets/thumbnail.png" alt="Start UI Native" /></h1>
+<h1 align="center"><img src=".github/assets/thumbnail.png" alt="Start UI Native" /></h1>
 
-🚀 Start UI [native] is a opinionated [Expo](https://expo.dev/) starter repository created & maintained by the [BearStudio Team](https://www.bearstudio.fr/team) and other contributors.
-It represents our team's up-to-date stack that we use when creating React Native apps for our clients.
+🚀 Start UI <small>[native]</small> is an opinionated native starter repository created & maintained by the [BearStudio Team](https://www.bearstudio.fr/team) and other contributors.
+It represents our team's up-to-date stack that we use when creating native apps for our clients.
 
-This starter is oriented to use Expo with Expo EAS features to have full access to native code.
 
-StartUI [native] needs [StartUI web](https://github.com/BearStudio/start-ui-web) v2 as API in order to work correctly.  
-Make sure to have a local/deployed installation of StartUI [web] v2 before using StartUI [native].
+# Technologies
 
----
+[⚙️ Node.js](https://nodejs.org), [🟦 TypeScript](https://www.typescriptlang.org/), [⚛️ React](https://react.dev/), [📱 React Native](https://reactnative.dev/), [🚀 Expo](https://docs.expo.dev/), [🔐 Better Auth](https://www.better-auth.com/), [🌿 Ficus UI](https://ficus-ui.com/), [🌴 Tanstack Form](https://tanstack.com/form/), [🌴 Tanstack Query](https://tanstack.com/query/), [👋 Hey API](https://heyapi.dev/)
 
-## Technology
+# Requirements
 
-- 🚀 [Expo SDK 52](https://expo.dev/)
-- 📱 [Expo EAS](https://expo.dev/eas)
-- ⚛️ [Expo Router 4](https://expo.github.io/router/docs/)
-- 🌿 [Ficus UI](https://ficus-ui.com/)
-- 🐜 [Formiz](https://formiz-react.com/)
-- ↔ [Zodios](https://www.zodios.org/)
+* [Node.js](https://nodejs.org) >= 22
+* [pnpm](https://pnpm.io/)
 
----
-
-## Getting Started
-
-### Prerequisites
-
-This app is using Expo Go with [Expo development builds](https://docs.expo.dev/workflow/overview/#development-builds). In order to launch the app, you will need to install android and ios tooling:
-
-#### Android
-
-See https://reactnative.dev/docs/environment-setup?guide=native&platform=android
-
-#### iOS
-
-See https://reactnative.dev/docs/environment-setup?guide=native&platform=ios
-
-### Update .env values
-
-Put your env values on .env file. Environment variables inserted on your local machine or on Expo EAS platform will overwrite the variables of .env file.
+# Getting Started
 
 ```bash
-# Env var used to call api endpoints — generally it will be your start-ui-web api url
-API_URL='your api url here'
-
-# Env var used to get the open api file, used to generate zodios client
-OPEN_API_URL='your open api api url here'
+pnpm create start-ui -t native -b restart myApp
 ```
 
-### Example demo
-```env
-API_URL=https://demo.start-ui.com/api/rest
-OPEN_API_URL=https://demo.start-ui.com/api/openapi.json
-```
+That will scaffold a new folder with the latest version of 🚀 Start UI <small>[native]</small> 🎉
 
-### Installation
+# Installation
 
 ```bash
-# Install dependencies and generate api client
-pnpm install
-
-# Then, choose based on the platform you want to dev on:
-pnpm android # Launch on your android device if detected, or an Android emulator
-pnpm ios     # Launch on your iOS device if detected, or an iOS emulator
+cp .env.example .env # Setup your env variables
+cp .vscode/settings.example.json .vscode/settings.json  # (Optionnal) Setup your VS Code
+pnpm install # Install dependencies
 ```
 
-### Development
+## Connect to your API
+
+Using Hey API, you can quickly connect your app with any REST API. Just put your openapi url as `EXPO_PUBLIC_OPENAPI_URL` environment variable and run
 
 ```bash
-# Install dependencies and generate api client
-pnpm install
-
-# With Expo Go
-pnpm dev
-# * press s to swith to Expo Go
-# * scan the QR Code with your phone
-
-# With Android Emulator
-pnpm android # Launch on your android device if detected, or an Android emulator
-
-# With IOS Emulator
-pnpm ios     # Launch on your iOS device if detected, or an iOS emulator
-# If that doesn't work maybe try to:
-# * run pod install on ios folder
-# * run project from xcode (maybe you should select a team for the project)
+pnpm gen:api
 ```
 
-## Storybook Integration
+A new folder `/src/lib/hey-api/generated` will be created with stuff like to combine use Tanstack Query to fetch data.
 
-Start UI Native is equipped with Storybook, enhancing component development with an isolated and interactive environment. Storybook is essential for UI development, allowing you to build and test components independently from the app's main user interface.
+For example
+```ts
+import { api } from '@/lib/hey-api/api';
 
-### Running Storybook
+useQuery(api.bookGetByIdOptions({ path: { id: props.bookId } }));
+```
 
-Execute the command below to launch Storybook. It toggles an environment variable `process.env.STORYBOOK_ENABLED` to `true`, activating Storybook mode.
+# Run
 
 ```bash
-pnpm storybook
+pnpm dev          # To use Expo Go
+pnpm dev:ios      # To use a local ios build
+pnpm dev:android  # To use a local android build
 ```
 
-Conversely, starting your app normally will **not set** `process.env.STORYBOOK_ENABLED`, which means the app will not enter Storybook mode.
+### Generate custom icons components from svg files
+
+Put the custom svg files into the `app/components/icons/svg-sources` folder and then run the following command:
 
 ```bash
-pnpm start
+pnpm gen:icons
 ```
 
-### Developing with Storybook
+If you want to use the same set of custom duotone icons that Start UI is already using, checkout
+[Phosphor](https://phosphoricons.com/)
 
-Instead of a separate `stories` directory, we create stories alongside our components. For each component, create a `ComponentName.stories.tsx` file in the same directory as the component. Write your stories within this file to showcase and test the different states and props of the component. This approach keeps relevant stories and components tightly coupled and easily maintainable.
+> [!WARNING]
+> All svg icons should be svg files prefixed by `icon-` (example: `icon-externel-link`) with **square size** and **filled with `#000` color** (will be replaced by `currentColor`).
 
+## EAS Preview
 
-## [Expo EAS builds](https://docs.expo.dev/build/introduction/)
+To be able to use previews on PR, you have to setup your project with EAS
 
-> EAS Build is a hosted service for building app binaries for your Expo and React Native projects.
-
-[Follow the steps here to setup and install the eas cli](https://docs.expo.dev/build/setup/#prerequisites).
-
-
-### BLE / Bluetooth
-
-Bluetooth feature has been removed to simplify expo project setup.
-
-If you want to use this feature, you can find [an expo article](https://expo.dev/blog/how-to-build-a-bluetooth-low-energy-powered-expo-app) that explains how to add it, or you can check the deletion commit of the feature [here](https://github.com/BearStudio/start-ui-native/pull/111/commits/a8d437fff1065f1450113b71a4bd962868f8b4be)
+1. Setup Expo access token 
+    * Create it: https://expo.dev/accounts/{account}/settings/access-tokens
+    * Add it as GitHub repository secrets: https://github.com/xxx/xxx/settings/secrets/actions
+2. Add GitHub repository variables: https://github.com/xxx/xxx/settings/variables/actions
+    * `API_URL`
+    * `AUTH_URL`
+    * `OPENAPI_URL` 
+3. Setup Expo project: https://expo.dev/
+    * Create your project
+    * Get project's id
+    * Set as `EXPO_PROJECT_ID` in `app.config.ts`
+4. Setup eas
+    * `eas login`
+    * `eas init --id {projectid}`
+    * `eas update:configure`

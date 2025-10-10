@@ -1,4 +1,4 @@
-import en from './en';
-import fr from './fr';
+import en from '@/locales/en';
+import fr from '@/locales/fr';
 
-export default { en, fr };
+export default { en, fr } as const;

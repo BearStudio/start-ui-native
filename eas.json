@@ -1,40 +1,21 @@
 {
   "cli": {
-    "version": ">= 3.8.1"
+    "version": ">= 16.20.0",
+    "appVersionSource": "remote"
   },
   "build": {
     "development": {
       "developmentClient": true,
       "distribution": "internal",
-      "ios": {
-        "resourceClass": "m-medium"
-      },
-      "channel": "development",
-      "env": {
-        "API_URL": "https://demo.start-ui.com/api/rest",
-        "OPEN_API_URL": "https://demo.start-ui.com/api/openapi.json"
-      }
+      "channel": "development"
     },
     "preview": {
       "distribution": "internal",
-      "ios": {
-        "resourceClass": "m-medium"
-      },
-      "channel": "preview",
-      "env": {
-        "API_URL": "https://demo.start-ui.com/api/rest",
-        "OPEN_API_URL": "https://demo.start-ui.com/api/openapi.json"
-      }
+      "channel": "preview"
     },
     "production": {
-      "ios": {
-        "resourceClass": "m-medium"
-      },
-      "channel": "production",
-      "env": {
-        "API_URL": "https://demo.start-ui.com/api/rest",
-        "OPEN_API_URL": "https://demo.start-ui.com/api/openapi.json"
-      }
+      "autoIncrement": true,
+      "channel": "production"
     }
   },
   "submit": {

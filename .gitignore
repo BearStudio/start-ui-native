@@ -1,27 +1,54 @@
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# dependencies
 node_modules/
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# Expo
 .expo/
 dist/
-npm-debug.*
+web-build/
+expo-env.d.ts
+
+# Native
+.kotlin/
+*.orig.*
 *.jks
 *.p8
 *.p12
 *.key
 *.mobileprovision
-*.orig.*
-web-build/
 
-# macOS
-.DS_Store
-
-# Temporary files created by Metro to check the health of the file watcher
+# Metro
 .metro-health-check*
-src/api/generated-api.*
 
-.env
-.env.production
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-devices.json
-
-# VSCode
+# misc
+.DS_Store
+*.pem
 /.vscode/*
 !/.vscode/extensions.json
+!/.vscode/settings.example.json
+.idea/
+.eslintcache
+.db
+tsconfig.tsbuildinfo
+
+# local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+
+.tanstack
+src/lib/hey-api/generated/*
