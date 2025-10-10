@@ -6,6 +6,7 @@
     "module": "ESNext",
     "target": "ES2022",
     "skipLibCheck": true,
+    "strict": true,
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitAny": true,

@@ -15,7 +15,7 @@ export const ViewBooks = () => {
   const books = useInfiniteQuery({
     ...api.bookGetAllInfiniteOptions(),
     getNextPageParam: (lastPage) => lastPage.nextCursor,
-    initialPageParam: undefined,
+    initialPageParam: {},
   });
 
   const ui = getUiState((set) => {
