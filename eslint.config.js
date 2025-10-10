@@ -51,7 +51,7 @@ export default tslint.config(
         'error',
         {
           case: 'kebabCase',
-          ignore: ['^routeTree\\.gen\\.ts$', '^Icon(.*)\\.tsx', '^Logo.tsx'],
+          ignore: ['^Icon(.*)\\.tsx', '^Logo.tsx'],
         },
       ],
     },

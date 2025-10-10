@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "prepare": "run-p gen:* && lefthook install",
     "prebuild": "expo prebuild",
     "start": "expo start",
     "dev": "expo start --go",
@@ -15,7 +16,7 @@
     "lint:ts": "tsc --noEmit",
     "pretty": "prettier -w .",
     "gen:api": "dotenv -- npx @hey-api/openapi-ts -f ./src/lib/hey-api/config.ts",
-    "gen:icons": "svgr --config-file src/components/icons/svgr.config.cjs src/components/icons/svg-sources && prettier -w src/components/icons/generated && tsc --fix",
+    "gen:icons": "svgr --config-file src/components/icons/svgr.config.cjs src/components/icons/svg-sources && prettier -w src/components/icons/generated",
     "android": "expo run:android",
     "ios": "expo run:ios"
   },
@@ -71,7 +72,7 @@
   "devDependencies": {
     "@eslint-react/eslint-plugin": "1.53.1",
     "@eslint/js": "9.36.0",
-    "@hey-api/openapi-ts": "0.84.3",
+    "@hey-api/openapi-ts": "0.85.1",
     "@svgr/cli": "8.1.0",
     "@types/node": "24.6.1",
     "@types/react": "19.1.13",
@@ -89,5 +90,8 @@
     "ts-plugin-sort-import-suggestions": "1.0.4",
     "typescript": "5.9.2",
     "typescript-eslint": "8.44.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["lefthook", "unrs-resolver"]
   }
 }

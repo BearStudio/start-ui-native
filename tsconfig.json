@@ -11,30 +11,15 @@
     "noImplicitAny": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
-    "typeRoots": [
-      "node_modules/@types",
-      "src/app/types"
-    ],
+    "typeRoots": ["node_modules/@types", "src/app/types"],
     "plugins": [
       {
         "name": "ts-plugin-sort-import-suggestions",
-        "moveUpPatterns": [
-          "@/",
-          "\\.{1,2}/"
-        ]
+        "moveUpPatterns": ["@/", "\\.{1,2}/"]
       }
     ]
   },
-  "include": [
-    "src",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-  ],
-  "exclude": [
-    "src/lib/hey-api/generated"
-  ]
+  "include": ["src", ".expo/types/**/*.ts", "expo-env.d.ts"]
 }

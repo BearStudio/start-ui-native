@@ -7,5 +7,8 @@ export default defineConfig({
     {
       name: '@tanstack/react-query',
     },
+    {
+      name: '@hey-api/typescript',
+    },
   ],
 });
