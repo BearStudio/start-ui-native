@@ -31,19 +31,21 @@ export const LocaleSwitcher = () => {
       <BottomSheet {...sheet}>
         <BottomSheetBox gap={24}>
           {AVAILABLE_LANGUAGES.map((language) => (
-            <HStack key={language.key}>
+            <HStack
+              key={language.key}
+              as={Pressable}
+              onPress={() => {
+                i18n.changeLanguage(language.key);
+                sheet.onClose();
+              }}
+              py={4}
+            >
               <Box w={32}>
                 {language.key === i18n.language && (
                   <IconCheck width={16} height={16} color="neutral.500" />
                 )}
               </Box>
-              <Box
-                as={Pressable}
-                onPress={() => {
-                  i18n.changeLanguage(language.key);
-                  sheet.onClose();
-                }}
-              >
+              <Box>
                 <Text fontWeight="bold">
                   {t(`common:languages.values.${language.key}`)}
                 </Text>

@@ -63,19 +63,21 @@ export const ThemeSwitcher = (props: { minimize?: boolean }) => {
       <BottomSheet {...sheet}>
         <BottomSheetBox gap={24}>
           {(['system', 'light', 'dark'] as const).map((mode) => (
-            <HStack key={mode}>
+            <HStack
+              key={mode}
+              as={Pressable}
+              onPress={() => {
+                updateColorMode(mode);
+                sheet.onClose();
+              }}
+              py={4}
+            >
               <Box w={32}>
                 {mode === currentTheme && (
                   <IconCheck width={16} height={16} color="neutral.500" />
                 )}
               </Box>
-              <Box
-                as={Pressable}
-                onPress={() => {
-                  updateColorMode(mode);
-                  sheet.onClose();
-                }}
-              >
+              <Box>
                 <Text fontWeight="bold">
                   {t(`common:themes.values.${mode}`)}
                 </Text>

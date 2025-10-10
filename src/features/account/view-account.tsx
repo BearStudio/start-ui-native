@@ -210,8 +210,8 @@ export const ViewAccount = () => {
             </Stack>
           </CardBody>
         </Card>
+        <Version textAlign="center" />
       </Stack>
-      <Version textAlign="center" />
     </ViewTabContent>
   );
 };
