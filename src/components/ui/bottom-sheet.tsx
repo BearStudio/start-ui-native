@@ -77,5 +77,5 @@ export const BottomSheet = ({
 };
 
 export const BottomSheetBox = ficus(BottomSheetView, {
-  baseStyle: { flex: 1, px: 24, pt: 12, pb: 48 },
+  baseStyle: { flex: 1, px: 24, pt: 12, pb: 64, minH: 260 },
 });

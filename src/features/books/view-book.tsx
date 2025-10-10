@@ -36,7 +36,7 @@ export const ViewBook = (props: { bookId: string }) => {
   });
 
   return (
-    <ViewTabContent>
+    <ViewTabContent withHeader>
       {ui
         .match('pending', () => <FullLoader />)
         .match('error', () => <></>)
