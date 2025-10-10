@@ -6,7 +6,8 @@
     "updateName": {
       "title": "Modifier le nom",
       "cancel": "Annuler",
-      "save": "Sauvegarder"
+      "save": "Sauvegarder",
+      "error": "Une erreur est survenue lors de la modification du nom"
     }
   },
   "displayPreferences": {

@@ -2,14 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import appConfig from 'app.config';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import {
-  Button,
-  Center,
-  Divider,
-  HStack,
-  Stack,
-  Text,
-} from 'react-native-ficus-ui';
+import { Center, HStack, Stack, Text } from 'react-native-ficus-ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { toast } from 'sonner-native';
 import { z } from 'zod';
@@ -45,7 +38,8 @@ export const ViewSignIn = () => {
     },
   });
 
-  const social = useMutation({
+  // For social sign in integration
+  const _social = useMutation({
     mutationFn: async (
       provider: Parameters<typeof authClient.signIn.social>[0]['provider']
     ) => {
@@ -68,7 +62,7 @@ export const ViewSignIn = () => {
     <ViewSafeContent>
       <AuthHeader />
       <Center flex={1} p={24}>
-        <Stack spacing={24} w="100%">
+        <Stack spacing={24} w="100%" maxW={320}>
           <Stack align="center" spacing={8}>
             <Text fontWeight="bold" fontSize="2xl" textAlign="center">
               {t('auth:signin.title')}
@@ -101,7 +95,8 @@ export const ViewSignIn = () => {
               <form.Submit full>{t('auth:signin.loginWithEmail')}</form.Submit>
             </Stack>
           </Form>
-          <HStack alignItems="center" spacing={16}>
+          {/* For social sign in integration */}
+          {/* <HStack alignItems="center" spacing={16}>
             <Divider color="neutral.200" flex={1} orientation="horizontal" />
             <Text
               fontSize="sm"
@@ -113,14 +108,14 @@ export const ViewSignIn = () => {
               {t('auth:signin.or')}
             </Text>
             <Divider color="neutral.200" flex={1} orientation="horizontal" />
-          </HStack>
-          <Button
+          </HStack> */}
+          {/* <Button
             full
             variant="@secondary"
             onPress={() => social.mutate('github')}
           >
             {t('auth:signin.loginWithGithub')}
-          </Button>
+          </Button> */}
         </Stack>
       </Center>
       <HStack

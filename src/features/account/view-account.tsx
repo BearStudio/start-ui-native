@@ -10,6 +10,7 @@ import {
   Text,
   useDisclosure,
 } from 'react-native-ficus-ui';
+import { toast } from 'sonner-native';
 import z from 'zod';
 
 import { useAppForm } from '@/lib/tanstack-form/config';
@@ -41,7 +42,14 @@ export const ViewAccount = () => {
       }),
     },
     onSubmit: async (submission) => {
-      await authClient.updateUser({ name: submission.value.name });
+      await authClient.updateUser(
+        { name: submission.value.name },
+        {
+          onError: () => {
+            toast.error(t('account:user.updateName.error'));
+          },
+        }
+      );
       updateNameSheet.onClose();
     },
   });

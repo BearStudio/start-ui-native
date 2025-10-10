@@ -6,7 +6,8 @@
     "updateName": {
       "title": "Update name",
       "cancel": "Cancel",
-      "save": "Save"
+      "save": "Save",
+      "error": "An error occurred during name update"
     }
   },
   "displayPreferences": {
