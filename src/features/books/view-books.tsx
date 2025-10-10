@@ -30,7 +30,7 @@ export const ViewBooks = () => {
   });
 
   return (
-    <ViewTabContent>
+    <ViewTabContent withHeader>
       {ui
         .match('pending', () => <FullLoader />)
         .match('error', () => <></>)

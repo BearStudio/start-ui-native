@@ -1,7 +1,6 @@
 import { ExpoConfig } from 'expo/config';
 
 const BUILD_NUMBER: `${number}` = '1';
-
 const EXPO_PROJECT_ID = 'af6ae74c-f04d-497a-9733-b2b7539f77c5';
 
 export default {
@@ -58,6 +57,7 @@ export default {
     'expo-web-browser',
     'expo-secure-store',
     'expo-localization',
+    'expo-font',
   ],
   githubUrl: 'https://github.com/bearstudio/start-ui-native',
   updates: {

@@ -1,4 +1,6 @@
 import { Tabs } from 'expo-router';
+import { Icon, Label, NativeTabs } from 'expo-router/unstable-native-tabs';
+import { ComponentProps } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useColorModeValue } from 'react-native-ficus-ui';
 
@@ -13,6 +15,42 @@ import {
   IconUserCircleDuotone,
   IconUserCircleFill,
 } from '@/components/icons/generated';
+
+import { isApple } from '@/constants/device';
+
+const TABS = [
+  {
+    name: 'home',
+    translationKey: 'layout:tabs.home.title',
+    icon: IconHouseDuotone,
+    iconFocused: IconHouseFill,
+    headerShown: false,
+    iosIconSf: 'house.fill',
+  },
+  {
+    name: 'books',
+    translationKey: 'layout:tabs.books.title',
+    icon: IconBookOpenFill,
+    iconFocused: IconBookOpenDuotone,
+    headerShown: true,
+    iosIconSf: 'book.fill',
+  },
+  {
+    name: 'account',
+    translationKey: 'layout:tabs.account.title',
+    icon: IconUserCircleFill,
+    iconFocused: IconUserCircleDuotone,
+    headerShown: false,
+    iosIconSf: 'person.fill',
+  },
+] as const satisfies {
+  name: string;
+  translationKey: string;
+  icon: typeof IconHouseDuotone;
+  iconFocused: typeof IconHouseDuotone;
+  headerShown: boolean;
+  iosIconSf: ComponentProps<typeof Icon>['sf'];
+}[];
 
 export default function TabLayout() {
   const { t } = useTranslation(['layout']);
@@ -30,6 +68,23 @@ export default function TabLayout() {
     }
   );
 
+  if (isApple) {
+    return (
+      <NativeTabs>
+        {TABS.map((tab) => (
+          <NativeTabs.Trigger
+            key={tab.name}
+            name={tab.name}
+            options={{ backgroundColor: themedStyle.backgroundColor }}
+          >
+            <Label>{t(tab.translationKey)}</Label>
+            <Icon sf={tab.iosIconSf} />
+          </NativeTabs.Trigger>
+        ))}
+      </NativeTabs>
+    );
+  }
+
   return (
     <Tabs
       screenOptions={{
@@ -44,39 +99,20 @@ export default function TabLayout() {
         },
       }}
     >
-      <Tabs.Screen
-        name="home"
-        options={{
-          title: t('layout:tabs.home.title'),
-          headerShown: false,
-          tabBarIcon: (props) => {
-            const Icon = props.focused ? IconHouseFill : IconHouseDuotone;
-            return <Icon color={props.color} w={props.size} h={props.size} />;
-          },
-        }}
-      />
-      <Tabs.Screen
-        name="books"
-        options={{
-          title: t('layout:tabs.books.title'),
-          tabBarIcon: (props) => {
-            const Icon = props.focused ? IconBookOpenFill : IconBookOpenDuotone;
-            return <Icon color={props.color} w={props.size} h={props.size} />;
-          },
-        }}
-      />
-      <Tabs.Screen
-        name="account"
-        options={{
-          title: t('layout:tabs.account.title'),
-          tabBarIcon: (props) => {
-            const Icon = props.focused
-              ? IconUserCircleFill
-              : IconUserCircleDuotone;
-            return <Icon color={props.color} w={props.size} h={props.size} />;
-          },
-        }}
-      />
+      {TABS.map((tab) => (
+        <Tabs.Screen
+          key={tab.name}
+          name={tab.name}
+          options={{
+            title: t(tab.translationKey),
+            headerShown: tab.headerShown,
+            tabBarIcon: (props) => {
+              const Icon = props.focused ? tab.iconFocused : tab.icon;
+              return <Icon color={props.color} w={props.size} h={props.size} />;
+            },
+          }}
+        />
+      ))}
     </Tabs>
   );
 }
