@@ -91,7 +91,36 @@
     "typescript": "5.9.2",
     "typescript-eslint": "8.44.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bearstudio/start-ui-native.git"
+  },
+  "contributors": [
+    {
+      "name": "Nicolas Torion",
+      "email": "nicolas@bearstudio.fr",
+      "url": "https://github.com/ntorionbearstudio"
+    },
+    {
+      "name": "Hugo Pérard",
+      "email": "hugo.perard@bearstudio.fr",
+      "url": "https://github.com/hugoperard"
+    },
+    {
+      "name": "Omar Borji",
+      "email": "omar@bearstudio.fr",
+      "url": "https://github.com/omar-bear"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bearstudio/start-ui-native/issues"
+  },
+  "homepage": "https://github.com/bearstudio/start-ui-native#readme",
   "pnpm": {
-    "onlyBuiltDependencies": ["lefthook", "unrs-resolver"]
+    "onlyBuiltDependencies": [
+      "lefthook",
+      "unrs-resolver"
+    ]
   }
 }
