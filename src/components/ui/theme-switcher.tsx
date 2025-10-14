@@ -12,7 +12,7 @@ import {
   useDisclosure,
 } from 'react-native-ficus-ui';
 
-import { THEME_KEY } from '@/lib/ficus-ui/theme';
+import { STORAGE_KEY_THEME } from '@/lib/ficus-ui/theme';
 import { themeQueryKey, useThemeMode } from '@/hooks/use-theme-mode';
 
 import {
@@ -37,7 +37,7 @@ export const ThemeSwitcher = (props: { minimize?: boolean }) => {
   const Icon = currentTheme !== 'system' ? ColorModeIcon : IconDevices;
 
   const updateColorMode = (value: 'light' | 'dark' | 'system') => {
-    AsyncStorage.setItem(THEME_KEY, value);
+    AsyncStorage.setItem(STORAGE_KEY_THEME, value);
     queryClient.setQueryData(themeQueryKey, value);
     Appearance.setColorScheme(value === 'system' ? null : value);
   };
