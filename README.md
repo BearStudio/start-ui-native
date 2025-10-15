@@ -31,7 +31,7 @@ pnpm install # Install dependencies
 
 ## Environment variables
 
-🚨 Using Expo Go, should not be `localhost`, use public IP instead
+🚨 Using Expo Go, local development urls should not be `localhost`, use public IP instead
 
 ```bash
 EXPO_PUBLIC_BASE_URL # Base URL of your server, usefull if you are using Start UI [web]
@@ -58,13 +58,23 @@ useQuery(api.bookGetByIdOptions({ path: { id: props.bookId } }));
 
 # Run
 
+
+### Expo Go
+
 ```bash
-pnpm dev          # To use Expo Go
-pnpm dev:ios      # To use a local ios build
-pnpm dev:android  # To use a local android build
+pnpm dev
 ```
 
-### Generate custom icons components from svg files
+### Local build
+
+```bash
+pnpm prebuild     # To generate local builds
+
+pnpm dev:ios      # To run with local ios build
+pnpm dev:android  # To run with local android build
+```
+
+## Generate custom icons components from svg files
 
 Put the custom svg files into the `app/components/icons/svg-sources` folder and then run the following command:
 
@@ -78,7 +88,7 @@ If you want to use the same set of custom duotone icons that Start UI is already
 > [!WARNING]
 > All svg icons should be svg files prefixed by `icon-` (example: `icon-externel-link`) with **square size** and **filled with `#000` color** (will be replaced by `currentColor`).
 
-## EAS Preview
+# EAS Preview
 
 To be able to use previews on PR, you have to setup your project with EAS
 
