@@ -52,8 +52,8 @@ export const MarketingBento = () => (
         />
 
         <MarketingTile
-          href="https://github.com/BearStudio/start-ui-web"
-          uri="https://start-ui.com/_next/image?url=%2Fweb.jpg&w=3840&q=75"
+          href="https://bear.studio/assets-start-ui-bento-05"
+          uri="https://raw.githubusercontent.com/BearStudio/assets/main/start-ui/marketing-bento-05.jpg"
           aspectRatio={1.45}
         />
       </Box>
