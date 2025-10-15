@@ -2,7 +2,7 @@
   "welcome": {
     "title": "Bienvenue sur Start UI [native]",
     "description": "Un starter native \"opinionné\", conçu et maintenu par l’équipe BearStudio et d’autres contributeurs. Il reflète la stack actuelle que notre équipe privilégie pour développer des applications natives pour nos clients.",
-    "documentation": "Documentation",
-    "openIssue": "Ouvrir un ticket"
+    "openIssue": "Ouvrir un ticket",
+    "share": "Partager"
   }
 }
