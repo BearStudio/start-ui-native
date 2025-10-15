@@ -3,6 +3,11 @@ import { Link } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Button, HStack, ScrollBox, Stack, Text } from 'react-native-ficus-ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { toast } from 'sonner-native';
+
+import { useShare } from '@/hooks/use-share';
+
+import { IconShare2 } from '@/components/icons/generated';
 
 import { MarketingBento } from '@/features/marketing/marketing-bento';
 import { ViewTabContent } from '@/layout/view-tab-content';
@@ -10,6 +15,8 @@ import { ViewTabContent } from '@/layout/view-tab-content';
 export const ViewHome = () => {
   const { t } = useTranslation(['home']);
   const insets = useSafeAreaInsets();
+
+  const share = useShare();
 
   return (
     <ViewTabContent mt={insets.top} gap={16}>
@@ -31,6 +38,24 @@ export const ViewHome = () => {
               {t('home:welcome.openIssue')}
             </Button>
           </Link>
+          <Button
+            size="sm"
+            variant="@secondary"
+            onPress={() =>
+              share.mutate(
+                {
+                  title: 'Github • Start UI [native]',
+                  message: appConfig.githubUrl,
+                },
+                {
+                  onError: (error) => toast.error(error.message),
+                }
+              )
+            }
+          >
+            <IconShare2 width={16} height={16} />
+            {t('home:welcome.share')}
+          </Button>
         </HStack>
         <MarketingBento />
       </ScrollBox>
