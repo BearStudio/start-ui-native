@@ -3,7 +3,6 @@ import { Link } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Button, HStack, ScrollBox, Stack, Text } from 'react-native-ficus-ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { toast } from 'sonner-native';
 
 import { useShare } from '@/hooks/use-share';
 
@@ -42,16 +41,12 @@ export const ViewHome = () => {
             size="sm"
             variant="@secondary"
             onPress={() =>
-              share.mutate(
-                {
-                  title: 'Github • Start UI [native]',
-                  message: appConfig.githubUrl,
-                },
-                {
-                  onError: (error) => toast.error(error.message),
-                }
-              )
+              share.open({
+                title: 'Github • Start UI [native]',
+                message: appConfig.githubUrl,
+              })
             }
+            isLoading={share.isPending}
           >
             <IconShare2 width={16} height={16} />
             {t('home:welcome.share')}
