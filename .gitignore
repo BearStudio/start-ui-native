@@ -49,6 +49,10 @@ tsconfig.tsbuildinfo
 .env.test.local
 .env.production.local
 
+# local builds
+android/
+ios/
+
 # hey-api
 src/lib/hey-api/generated/*
 openapi-ts-error-*.log
