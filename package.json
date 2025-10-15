@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "prepare": "run-p gen:* && lefthook install",
+    "prepare": "pnpm gen:api && lefthook install",
     "prebuild": "expo prebuild",
     "start": "expo start",
     "dev": "expo start --go",
