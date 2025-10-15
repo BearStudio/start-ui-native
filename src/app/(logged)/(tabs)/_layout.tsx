@@ -19,6 +19,8 @@ import {
 
 import { isApple } from '@/constants/device';
 
+export const WITH_NATIVE_TABS = isApple;
+
 const TABS = [
   {
     name: 'home',
@@ -69,7 +71,7 @@ export default function TabLayout() {
     }
   );
 
-  if (isApple) {
+  if (WITH_NATIVE_TABS) {
     return (
       <NativeTabs
         tintColor={DynamicColorIOS({ dark: 'white', light: 'black' })}

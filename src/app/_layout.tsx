@@ -4,6 +4,10 @@ import { Slot } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { Box, FicusProvider } from 'react-native-ficus-ui';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {
+  initialWindowMetrics,
+  SafeAreaProvider,
+} from 'react-native-safe-area-context';
 import 'react-native-reanimated';
 import '@/lib/i18n';
 
@@ -24,15 +28,17 @@ export default function RootLayout() {
     <QueryClientProvider client={queryClient}>
       <FicusProvider theme={theme}>
         <Box flex={1} bg="white" _dark={{ bg: 'neutral.950' }}>
-          <GestureHandlerRootView>
-            <BottomSheetModalProvider>
-              <SplashScreenManager>
-                <Slot />
-              </SplashScreenManager>
-              <Sonner />
-              <ThemeManager />
-            </BottomSheetModalProvider>
-          </GestureHandlerRootView>
+          <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+            <GestureHandlerRootView>
+              <BottomSheetModalProvider>
+                <SplashScreenManager>
+                  <Slot />
+                </SplashScreenManager>
+                <Sonner />
+                <ThemeManager />
+              </BottomSheetModalProvider>
+            </GestureHandlerRootView>
+          </SafeAreaProvider>
         </Box>
       </FicusProvider>
     </QueryClientProvider>
