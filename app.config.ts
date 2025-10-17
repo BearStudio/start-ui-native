@@ -32,12 +32,11 @@ export default {
     adaptiveIcon: {
       backgroundColor: '#FFFFFF',
       foregroundImage: './src/assets/images/android-icon-foreground.png',
-      backgroundImage: './src/assets/images/android-icon-background.png',
       monochromeImage: './src/assets/images/android-icon-monochrome.png',
     },
     edgeToEdgeEnabled: true,
     // playStoreUrl:
-    // 'https://play.google.com/store/apps/details?id=com.yummix.app',
+    // 'https://play.google.com/store/apps/details?id=com.bearstudio.startuinative',
   },
   plugins: [
     'expo-router',
