@@ -1,4 +1,5 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
+import { Button, ScrollBox, Stack } from 'react-native-ficus-ui';
 
 import * as icons from './generated';
 
@@ -7,13 +8,15 @@ export default {
 };
 
 export const AllIcons = () => (
-  <div className="grid auto-cols-max grid-flow-col gap-2">
-    {Object.entries(icons).map(([name, Icon]) => (
-      <CustomIcon name={name} key={name}>
-        <Icon />
-      </CustomIcon>
-    ))}
-  </div>
+  <ScrollBox>
+    <Stack spacing="md" px={24}>
+      {Object.entries(icons).map(([name, Icon]) => (
+        <CustomIcon name={name} key={name}>
+          <Icon />
+        </CustomIcon>
+      ))}
+    </Stack>
+  </ScrollBox>
 );
 
 const CustomIcon = ({
@@ -24,12 +27,9 @@ const CustomIcon = ({
   name: string;
 }) => {
   return (
-    <button
-      type="button"
-      title={name}
-      className="text-4xl text-neutral-600 dark:text-neutral-300"
-    >
+    <Button variant="outline" p={3} full>
       {children}
-    </button>
+      {name}
+    </Button>
   );
 };
