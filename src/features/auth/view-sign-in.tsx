@@ -14,8 +14,8 @@ import { Version } from '@/components/version';
 
 import { AuthHeader } from '@/features/auth/auth-header';
 import { authClient } from '@/features/auth/client';
-import { ViewSafeContent } from '@/layout/view-safe-content';
 import { LoginEmailHint } from '@/features/devtools/login-hint';
+import { ViewSafeContent } from '@/layout/view-safe-content';
 
 export const ViewSignIn = () => {
   const insets = useSafeAreaInsets();
