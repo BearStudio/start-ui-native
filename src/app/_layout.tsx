@@ -12,6 +12,8 @@ import theme from '@/lib/ficus-ui/theme';
 import { ThemeManager } from '@/components/theme-manager';
 import { Sonner } from '@/components/ui/sonner';
 
+import { SplashScreenManager } from '@/layout/splash-screen-manager';
+
 const queryClient = new QueryClient();
 
 // SplashScreen hide management in on src/app/index.tsx
@@ -24,7 +26,9 @@ export default function RootLayout() {
         <Box flex={1} bg="white" _dark={{ bg: 'neutral.950' }}>
           <GestureHandlerRootView>
             <BottomSheetModalProvider>
-              <Slot />
+              <SplashScreenManager>
+                <Slot />
+              </SplashScreenManager>
               <Sonner />
               <ThemeManager />
             </BottomSheetModalProvider>
