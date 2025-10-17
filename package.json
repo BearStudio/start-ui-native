@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "prepare": "run-p gen:* && lefthook install",
+    "prepare": "pnpm gen:api && lefthook install",
     "prebuild": "expo prebuild",
     "start": "expo start",
     "dev": "expo start --go",
@@ -42,7 +42,7 @@
     "expo-keep-awake": "15.0.7",
     "expo-linking": "8.0.8",
     "expo-localization": "17.0.7",
-    "expo-router": "6.0.11",
+    "expo-router": "6.0.12",
     "expo-secure-store": "15.0.7",
     "expo-splash-screen": "31.0.10",
     "expo-status-bar": "3.0.8",
