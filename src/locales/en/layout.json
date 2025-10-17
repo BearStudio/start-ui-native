@@ -9,5 +9,9 @@
     "account": {
       "title": "Account"
     }
+  },
+  "notFound": {
+    "title": "This page doesn't exists 🤔",
+    "backInSafety": "Back in safe place"
   }
 }
