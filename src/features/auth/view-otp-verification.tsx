@@ -10,6 +10,7 @@ import { IconArrowLeft } from '@/components/icons/generated';
 
 import { AuthHeader } from '@/features/auth/auth-header';
 import { authClient } from '@/features/auth/client';
+import { LoginOtpHint } from '@/features/devtools/login-hint';
 import { ViewSafeContent } from '@/layout/view-safe-content';
 
 export const ViewOtpVerification = () => {
@@ -82,6 +83,7 @@ export const ViewOtpVerification = () => {
               </Stack>
               <form.Submit>{t('auth:verification.confirm')}</form.Submit>
             </Stack>
+            <LoginOtpHint />
           </Stack>
         </form.AppForm>
       </Center>

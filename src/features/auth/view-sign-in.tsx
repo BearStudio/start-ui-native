@@ -15,6 +15,7 @@ import { Version } from '@/components/version';
 import { AuthHeader } from '@/features/auth/auth-header';
 import { authClient } from '@/features/auth/client';
 import { ViewSafeContent } from '@/layout/view-safe-content';
+import { LoginEmailHint } from '@/features/devtools/login-hint';
 
 export const ViewSignIn = () => {
   const insets = useSafeAreaInsets();
@@ -62,21 +63,21 @@ export const ViewSignIn = () => {
     <ViewSafeContent>
       <AuthHeader />
       <Center flex={1} p={24}>
-        <Stack spacing={24} w="100%" maxW={320}>
-          <Stack align="center" spacing={8}>
-            <Text fontWeight="bold" fontSize="2xl" textAlign="center">
-              {t('auth:signin.title')}
-            </Text>
-            <Text
-              fontWeight={400}
-              fontSize="sm"
-              variant="muted"
-              textAlign="center"
-            >
-              {t('auth:signin.subtitle')}
-            </Text>
-          </Stack>
-          <Form form={form}>
+        <Form form={form}>
+          <Stack spacing={24} w="100%" maxW={320}>
+            <Stack align="center" spacing={8}>
+              <Text fontWeight="bold" fontSize="2xl" textAlign="center">
+                {t('auth:signin.title')}
+              </Text>
+              <Text
+                fontWeight={400}
+                fontSize="sm"
+                variant="muted"
+                textAlign="center"
+              >
+                {t('auth:signin.subtitle')}
+              </Text>
+            </Stack>
             <Stack spacing={16}>
               <form.AppField name="email">
                 {(field) => (
@@ -94,9 +95,8 @@ export const ViewSignIn = () => {
               </form.AppField>
               <form.Submit full>{t('auth:signin.loginWithEmail')}</form.Submit>
             </Stack>
-          </Form>
-          {/* For social sign in integration */}
-          {/* <HStack alignItems="center" spacing={16}>
+            {/* For social sign in integration */}
+            {/* <HStack alignItems="center" spacing={16}>
             <Divider color="neutral.200" flex={1} orientation="horizontal" />
             <Text
               fontSize="sm"
@@ -109,14 +109,16 @@ export const ViewSignIn = () => {
             </Text>
             <Divider color="neutral.200" flex={1} orientation="horizontal" />
           </HStack> */}
-          {/* <Button
+            {/* <Button
             full
             variant="@secondary"
             onPress={() => social.mutate('github')}
           >
             {t('auth:signin.loginWithGithub')}
           </Button> */}
-        </Stack>
+            <LoginEmailHint />
+          </Stack>
+        </Form>
       </Center>
       <HStack
         p={24}
