@@ -6,7 +6,6 @@ import { Box, FicusProvider } from 'react-native-ficus-ui';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'react-native-reanimated';
 import '@/lib/i18n';
-import '@/development/dev-menu';
 
 import theme from '@/lib/ficus-ui/theme';
 
