@@ -11,6 +11,8 @@
     "dev": "expo start --go",
     "dev:android": "expo run:android",
     "dev:ios": "expo run:ios",
+    "storybook:ios": "EXPO_PUBLIC_ENVIRONMENT='storybook' expo start --go --port 8083 && npx uri-scheme open exp://127.0.0.1:8083/--/storybook --ios",
+    "storybook:android": "EXPO_PUBLIC_ENVIRONMENT='storybook' expo start --go --port 8083 && npx uri-scheme open exp://127.0.0.1:8083/--/storybook --android",
     "lint": "run-p lint:*",
     "lint:eslint": "eslint ./src --fix",
     "lint:ts": "tsc --noEmit",
