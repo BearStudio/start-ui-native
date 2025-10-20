@@ -46,15 +46,17 @@ export default function LoggedLayout() {
         contentStyle: { backgroundColor: themedStyle.sceneBackgroundColor },
       }}
     >
-      <Stack.Screen
-        name="(tabs)"
-        options={{ title: t('layout:tabs.books.title') }}
-      />
-      {/* Add new logged-in View that's not included in tabs here */}
-      <Stack.Screen
-        name="books/[id]"
-        options={{ headerShown: true, title: t('layout:tabs.books.title') }}
-      />
+      <Stack.Protected guard={!!session.data?.user?.id}>
+        <Stack.Screen
+          name="(tabs)"
+          options={{ title: t('layout:tabs.books.title') }}
+        />
+        {/* Add new logged-in View that's not included in tabs here */}
+        <Stack.Screen
+          name="books/[id]"
+          options={{ headerShown: true, title: t('layout:tabs.books.title') }}
+        />
+      </Stack.Protected>
     </Stack>
   );
 }

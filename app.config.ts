@@ -24,7 +24,7 @@ export default {
     bundleIdentifier: 'com.bearstudio.startuinative',
     buildNumber: BUILD_NUMBER,
     supportsTablet: true,
-    // appStoreUrl: 'https://apps.apple.com/fr/app/bearstudio/xxxx',
+    // appStoreUrl: 'https://apps.apple.com/fr/app/bearstudio/startuinative',
   },
   android: {
     package: 'com.bearstudio.startuinative',
