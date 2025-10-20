@@ -1,8 +1,6 @@
 import { SplashScreen } from 'expo-router';
 import { PropsWithChildren, useEffect } from 'react';
 
-import { FullLoader } from '@/components/ui/full-loader';
-
 import { authClient } from '@/features/auth/client';
 
 export const SplashScreenManager = (props: PropsWithChildren) => {
@@ -17,10 +15,6 @@ export const SplashScreenManager = (props: PropsWithChildren) => {
       SplashScreen.hide();
     }
   }, [isAppReady]);
-
-  if (!isAppReady) {
-    return <FullLoader />;
-  }
 
   return props.children;
 };
