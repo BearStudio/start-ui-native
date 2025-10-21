@@ -82,13 +82,12 @@ pnpm dev:android  # To run with local android build
 
 Storybook is managed as a specific mode of the app that is launch apart in port 8083
 
-> [!NOTE]  
-> For now, Storybook is not launch on real device. Improvement is in progress
-
 ```bash
-pnpm storybook:ios     # Run app in storybook mode on ios
-pnpm storybook:android # Run app in storybook mode on android
+pnpm storybook   # To run app in storybook mode
 ```
+
+> [!TIP]
+> You can open Storybook in another tab and switch between the app and Storybook by pressing `i` or `a` in each terminal.
 
 
 ## Generate custom icons components from svg files
