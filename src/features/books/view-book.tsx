@@ -1,7 +1,5 @@
 import { getUiState } from '@bearstudio/ui-state';
 import { useQuery } from '@tanstack/react-query';
-import { useIsPreview, useNavigation } from 'expo-router';
-import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Center, Divider, HStack, Stack, Text } from 'react-native-ficus-ui';
 
@@ -14,17 +12,9 @@ import { BookCover } from '@/features/books/book-cover';
 import { ViewTabContent } from '@/layout/view-tab-content';
 
 export const ViewBook = (props: { bookId: string }) => {
-  const navigation = useNavigation();
-  const isPreview = useIsPreview();
   const { t } = useTranslation(['books']);
 
   const book = useQuery(api.bookGetByIdOptions({ path: { id: props.bookId } }));
-
-  useEffect(() => {
-    if (!isPreview && navigation.isFocused()) {
-      navigation.setOptions({ title: book.data?.title });
-    }
-  }, [navigation, book.data?.title, isPreview]);
 
   const ui = getUiState((set) => {
     if (book.isPending) return set('pending');

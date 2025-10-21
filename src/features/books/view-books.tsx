@@ -43,7 +43,10 @@ export const ViewBooks = () => {
             horizontal={false}
             renderItem={({ item }) => (
               <Link
-                href={{ pathname: '/books/[id]', params: { id: item.id } }}
+                href={{
+                  pathname: '/books/[id]',
+                  params: { id: item.id, title: item.title },
+                }}
                 style={{ padding: 8, flex: 1 }}
               >
                 <Link.Trigger>
