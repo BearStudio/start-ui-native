@@ -33,7 +33,9 @@ pnpm install # Install dependencies
 
 ## Environment variables
 
-🚨 Using Expo Go, local development urls should not be `localhost`, use public IP instead
+
+> [!TIP]  
+> Using Expo Go, local development urls should not be `localhost`, use public IP instead
 
 ```bash
 EXPO_PUBLIC_BASE_URL # Base URL of your server, usefull if you are using Start UI [web]
@@ -75,6 +77,18 @@ pnpm prebuild     # To generate local builds
 pnpm dev:ios      # To run with local ios build
 pnpm dev:android  # To run with local android build
 ```
+
+## Storybook
+
+Storybook is managed as a specific mode of the app that is launch apart in port 8083
+
+```bash
+pnpm storybook   # To run app in storybook mode
+```
+
+> [!TIP]
+> You can open Storybook in another tab and switch between the app and Storybook by pressing `i` or `a` in each terminal.
+
 
 ## Generate custom icons components from svg files
 

@@ -1,4 +1,4 @@
-import { Slot, useRouter } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import { useEffect } from 'react';
 
 import { authClient } from '@/features/auth/client';
@@ -13,5 +13,17 @@ export default function PublicLayout() {
     }
   }, [router, session.data?.user, session.isPending]);
 
-  return <Slot />;
+  return (
+    <Stack
+      initialRouteName="sign-in"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Protected guard={!session.data?.user?.id}>
+        <Stack.Screen name="sign-in" />
+        <Stack.Screen name="otp-verification" />
+      </Stack.Protected>
+    </Stack>
+  );
 }

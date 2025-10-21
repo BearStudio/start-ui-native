@@ -1,4 +1,5 @@
-import { router, useFocusEffect } from 'expo-router';
+import Constants from 'expo-constants';
+import { Redirect, router, useFocusEffect } from 'expo-router';
 import { useCallback } from 'react';
 
 import { FullLoader } from '@/components/ui/full-loader';
@@ -19,6 +20,10 @@ export default function Index() {
       );
     }, [session.data, session.isPending])
   );
+
+  if (Constants.expoConfig?.extra?.isStorybook) {
+    return <Redirect href="/storybook" />;
+  }
 
   if (session.isPending) {
     return <FullLoader />;

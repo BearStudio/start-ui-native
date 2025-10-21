@@ -3,8 +3,11 @@ import { ExpoConfig } from 'expo/config';
 const BUILD_NUMBER: `${number}` = '1';
 const EXPO_PROJECT_ID = 'af6ae74c-f04d-497a-9733-b2b7539f77c5';
 
+const appPrefix =
+  process.env.EXPO_PUBLIC_ENVIRONMENT === 'storybook' ? 'Storybook • ' : '';
+
 export default {
-  name: 'Start UI [native]',
+  name: appPrefix + 'Start UI [native]',
   slug: 'start-ui-native-v9iizxkbojzedvpfkfzcq',
   scheme: 'start-ui-native',
   owner: 'bearstudio',
@@ -24,7 +27,7 @@ export default {
     bundleIdentifier: 'com.bearstudio.startuinative',
     buildNumber: BUILD_NUMBER,
     supportsTablet: true,
-    // appStoreUrl: 'https://apps.apple.com/fr/app/bearstudio/xxxx',
+    // appStoreUrl: 'https://apps.apple.com/fr/app/bearstudio/startuinative',
   },
   android: {
     package: 'com.bearstudio.startuinative',
@@ -63,6 +66,7 @@ export default {
     url: `https://u.expo.dev/${EXPO_PROJECT_ID}`,
   },
   extra: {
+    isStorybook: process.env.EXPO_PUBLIC_ENVIRONMENT === 'storybook',
     eas: {
       projectId: EXPO_PROJECT_ID,
     },

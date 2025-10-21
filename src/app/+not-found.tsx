@@ -1,11 +1,13 @@
-import { Link } from 'expo-router';
+import { Link, usePathname } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Box, Button, Center, Text } from 'react-native-ficus-ui';
 
 import { ViewSafeContent } from '@/layout/view-safe-content';
 
-export default function () {
+export default function NotFound() {
   const { t } = useTranslation(['layout']);
+
+  const path = usePathname();
 
   return (
     <ViewSafeContent>
@@ -16,6 +18,9 @@ export default function () {
             <Button>{t('layout:notFound.backInSafety')}</Button>
           </Link>
         </Box>
+        {process.env.NODE_ENV === 'development' && (
+          <Text fontSize="sm">{path}</Text>
+        )}
       </Center>
     </ViewSafeContent>
   );

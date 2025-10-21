@@ -11,6 +11,7 @@
     "dev": "expo start --go",
     "dev:android": "expo run:android",
     "dev:ios": "expo run:ios",
+    "storybook": "EXPO_PUBLIC_ENVIRONMENT='storybook' expo start --go --port 8083",
     "lint": "run-p lint:*",
     "lint:eslint": "eslint ./src --fix",
     "lint:ts": "tsc --noEmit",
@@ -35,6 +36,7 @@
     "dayjs": "1.11.18",
     "expo": "54.0.13",
     "expo-application": "7.0.7",
+    "expo-constants": "18.0.9",
     "expo-device": "8.0.9",
     "expo-font": "14.0.9",
     "expo-haptics": "15.0.7",
@@ -69,9 +71,13 @@
     "zod": "4.1.11"
   },
   "devDependencies": {
+    "@babel/core": "7.28.4",
     "@eslint-react/eslint-plugin": "1.53.1",
     "@eslint/js": "9.36.0",
     "@hey-api/openapi-ts": "0.85.1",
+    "@storybook/addon-ondevice-actions": "9.1.4",
+    "@storybook/addon-ondevice-controls": "9.1.4",
+    "@storybook/react-native": "9.1.4",
     "@svgr/cli": "8.1.0",
     "@types/node": "24.6.1",
     "@types/react": "19.1.13",
@@ -87,6 +93,7 @@
     "lefthook": "1.13.4",
     "npm-run-all": "4.1.5",
     "prettier": "3.6.2",
+    "storybook": "9.1.10",
     "ts-plugin-sort-import-suggestions": "1.0.4",
     "typescript": "5.9.2",
     "typescript-eslint": "8.44.1"
@@ -121,6 +128,9 @@
     "onlyBuiltDependencies": [
       "lefthook",
       "unrs-resolver"
-    ]
+    ],
+    "overrides": {
+      "@react-native-community/slider": "5.0.1"
+    }
   }
 }
