@@ -32,7 +32,7 @@ const MarketingTile = ({
         backgroundColor: 'rgba(0,0,0,0.2)',
       }}
     >
-      <Image source={src} placeholder={{ blurhash }} transition={1000} />
+      <Image source={src} placeholder={{ blurhash }} />
     </TouchableOpacity>
   );
 };
