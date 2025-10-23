@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import appConfig from 'app.config';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
+import { View } from 'react-native';
 import { Center, HStack, Stack, Text } from 'react-native-ficus-ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { toast } from 'sonner-native';
@@ -10,6 +11,7 @@ import { z } from 'zod';
 import { Form } from '@/lib/tanstack-form/components';
 import { useAppForm } from '@/lib/tanstack-form/config';
 
+import { Badge } from '@/components/ui/badge';
 import { Version } from '@/components/version';
 
 import { AuthHeader } from '@/features/auth/auth-header';
@@ -62,6 +64,14 @@ export const ViewSignIn = () => {
   return (
     <ViewSafeContent>
       <AuthHeader />
+      <View className="bg-background p-2">
+        <View className="flex-row flex-wrap gap-4 px-5">
+          <Badge variant="default">Default</Badge>
+          <Badge variant="secondary">Secondary</Badge>
+          <Badge variant="destructive">Destructive</Badge>
+          <Badge variant="outline">Outline</Badge>
+        </View>
+      </View>
       <Center flex={1} p={24}>
         <Form form={form}>
           <Stack spacing={24} w="100%" maxW={400}>

@@ -2,5 +2,17 @@
   "files.readonlyInclude": {
     "**/*.gen.ts": true,
     "**/generated/**/*": true
-  }
+  },
+  "i18n-ally.localesPaths": [
+    "src/locales",
+    "src/lib/i18n"
+  ],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "headerClassName"
+  ]
 }
