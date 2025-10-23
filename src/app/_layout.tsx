@@ -11,6 +11,8 @@ import {
 import 'react-native-reanimated';
 import '@/lib/i18n';
 
+import '@/styles/app.css';
+
 import theme from '@/lib/ficus-ui/theme';
 
 import { ThemeManager } from '@/components/theme-manager';

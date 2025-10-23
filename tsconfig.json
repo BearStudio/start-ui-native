@@ -22,5 +22,10 @@
       }
     ]
   },
-  "include": ["src", ".expo/types/**/*.ts", "expo-env.d.ts"]
+  "include": [
+    "src",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "nativewind-env.d.ts"
+  ]
 }
