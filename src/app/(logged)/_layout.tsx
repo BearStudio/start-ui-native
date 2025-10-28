@@ -6,7 +6,7 @@ import { useColorModeValue } from 'react-native-ficus-ui';
 import theme from '@/lib/ficus-ui/theme';
 
 import { authClient } from '@/features/auth/client';
-import { ViewOnboarding } from '@/features/auth/view-onboarding';
+import { ViewAuthOnboarding } from '@/features/auth/view-auth-onboarding';
 
 export default function LoggedLayout() {
   const router = useRouter();
@@ -33,7 +33,7 @@ export default function LoggedLayout() {
   );
 
   if (!session.data?.user?.name) {
-    return <ViewOnboarding />;
+    return <ViewAuthOnboarding />;
   }
 
   return (

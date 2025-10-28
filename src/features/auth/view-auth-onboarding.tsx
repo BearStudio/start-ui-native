@@ -8,7 +8,7 @@ import { AuthHeader } from '@/features/auth/auth-header';
 import { authClient } from '@/features/auth/client';
 import { ViewSafeContent } from '@/layout/view-safe-content';
 
-export const ViewOnboarding = () => {
+export const ViewAuthOnboarding = () => {
   const { t } = useTranslation(['auth']);
 
   const form = useAppForm({
