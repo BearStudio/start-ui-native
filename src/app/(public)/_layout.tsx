@@ -1,11 +1,15 @@
 import { Stack, useRouter } from 'expo-router';
 import { useEffect } from 'react';
 
+import { useThemedStyle } from '@/hooks/use-themed-style';
+
 import { authClient } from '@/features/auth/client';
 
 export default function PublicLayout() {
   const router = useRouter();
   const session = authClient.useSession();
+
+  const themedStyle = useThemedStyle();
 
   useEffect(() => {
     if (!session.isPending && session.data?.user) {
@@ -18,6 +22,10 @@ export default function PublicLayout() {
       initialRouteName="sign-in"
       screenOptions={{
         headerShown: false,
+        headerTitleAlign: 'left',
+        headerStyle: { backgroundColor: themedStyle.backgroundColor },
+        headerTintColor: themedStyle.color,
+        contentStyle: { backgroundColor: themedStyle.sceneBackgroundColor },
       }}
     >
       <Stack.Protected guard={!session.data?.user?.id}>
