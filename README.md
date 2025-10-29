@@ -78,6 +78,10 @@ pnpm dev:ios      # To run with local ios build
 pnpm dev:android  # To run with local android build
 ```
 
+### Devtools
+
+You can use @dev-plugins pressing `Shift + m` in your Expo terminal.
+
 ## Storybook
 
 Storybook is managed as a specific mode of the app that is launch apart in port 8083

@@ -16,9 +16,10 @@ import theme from '@/lib/ficus-ui/theme';
 import { ThemeManager } from '@/components/theme-manager';
 import { Sonner } from '@/components/ui/sonner';
 
+import { DevTools } from '@/features/devtools/devtools';
 import { SplashScreenManager } from '@/layout/splash-screen-manager';
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 // SplashScreen hide management in on src/app/index.tsx
 SplashScreen.preventAutoHideAsync();
@@ -36,6 +37,7 @@ export default function RootLayout() {
                 </SplashScreenManager>
                 <Sonner />
                 <ThemeManager />
+                {process.env.NODE_ENV === 'development' && <DevTools />}
               </BottomSheetModalProvider>
             </GestureHandlerRootView>
           </SafeAreaProvider>
