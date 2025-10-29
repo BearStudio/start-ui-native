@@ -1,0 +1,18 @@
+{
+  "continue": "Continuer",
+  "end": "Commencer",
+  "welcome": {
+    "title": "Bienvenu sur"
+  },
+  "features": {
+    "titleOne": "\"Opinionated\"",
+    "titleTwo": "UI Starter",
+    "authentication": "Authentification",
+    "account": "Compte",
+    "darkMode": "Mode sombre",
+    "translations": "Traductions",
+    "storybook": "Storybook",
+    "devtools": "Devtools",
+    "more": "Et plus..."
+  }
+}

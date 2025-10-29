@@ -1,39 +1,43 @@
-import { useState } from 'react';
-import {
-  Box,
-  Button,
-  Center,
-  HStack,
-  List,
-  Stack,
-  Text,
-  WINDOW_HEIGHT,
-  WINDOW_WIDTH,
-} from 'react-native-ficus-ui';
+import { useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FlatList } from 'react-native';
+import { Box, Button, HStack, WINDOW_WIDTH } from 'react-native-ficus-ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import {
-  AppOnboardingScreenTwo,
+  AppOnboardingScreenFeatures,
   AppOnboardingScreenWelcome,
 } from '@/features/app-onboarding/app-onboarding-screens';
+import { useOnboardingStore } from '@/features/app-onboarding/store';
 import { ViewSafeContent } from '@/layout/view-safe-content';
 
 const appOnboardingScreens = [
-  { Component: AppOnboardingScreenWelcome },
-  { Component: AppOnboardingScreenTwo },
+  { name: 'welcome', Component: AppOnboardingScreenWelcome },
+  { name: 'features', Component: AppOnboardingScreenFeatures },
 ];
 
 export const ViewOnboarding = () => {
+  const { t } = useTranslation(['appOnboarding']);
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const insets = useSafeAreaInsets();
 
+  const listRef = useRef<FlatList>(null);
+
+  const doneOnboarding = useOnboardingStore((state) => state.setDone);
+
   return (
-    <Box w={WINDOW_WIDTH} h={WINDOW_HEIGHT} position="relative">
-      <List
+    <ViewSafeContent>
+      <FlatList
+        ref={listRef}
         horizontal
+        data={appOnboardingScreens}
+        renderItem={({ item }) => <item.Component />}
         showsHorizontalScrollIndicator={false}
         decelerationRate="fast"
+        bounces={false}
+        snapToAlignment="center"
         snapToOffsets={appOnboardingScreens.map(
           (_, index) => index + WINDOW_WIDTH
         )}
@@ -42,49 +46,49 @@ export const ViewOnboarding = () => {
             setCurrentIndex(viewableItems[0]?.index);
           }
         }}
-        bounces={false}
-        snapToAlignment="center"
-        data={appOnboardingScreens}
-        renderItem={({ item }) => <item.Component />}
-        contentContainerStyle={{
-          justifyContent: 'center',
-        }}
+        getItemLayout={(_, index) => ({
+          offset: WINDOW_WIDTH * index,
+          length: WINDOW_WIDTH,
+          index,
+        })}
       />
-      <Center
+      <Box
         position="absolute"
+        alignItems="center"
         bottom={insets.bottom}
         left={0}
         right={0}
-        p={16}
-        gap={24}
+        p={32}
+        gap={16}
       >
-        <Button full>Continue</Button>
         <HStack gap={4}>
-          {appOnboardingScreens.map((_, index) =>
-            index === currentIndex ? (
-              <Box
-                key={index.toString()}
-                w={16}
-                h={8}
-                borderWidth={0.5}
-                borderRadius="full"
-                borderColor="neutral.100"
-                bg="neutral.600"
-              />
-            ) : (
-              <Box
-                key={index.toString()}
-                w={8}
-                h={8}
-                borderWidth={0.5}
-                borderRadius="full"
-                borderColor="neutral.600"
-                bg="neutral.100"
-              />
-            )
-          )}
+          {appOnboardingScreens.map((screen, index) => (
+            <Box
+              key={screen.name.toString()}
+              w={index === currentIndex ? 16 : 8}
+              h={8}
+              borderRadius="full"
+              bg="white"
+              opacity={index === currentIndex ? 1 : 0.5}
+            />
+          ))}
         </HStack>
-      </Center>
-    </Box>
+        {currentIndex === appOnboardingScreens.length - 1 ? (
+          <Button full size="xl" onPress={() => doneOnboarding()}>
+            {t('appOnboarding:end')}
+          </Button>
+        ) : (
+          <Button
+            full
+            size="xl"
+            onPress={() =>
+              listRef.current?.scrollToIndex({ index: currentIndex + 1 })
+            }
+          >
+            {t('appOnboarding:continue')}
+          </Button>
+        )}
+      </Box>
+    </ViewSafeContent>
   );
 };

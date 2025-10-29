@@ -12,7 +12,11 @@ export default defineStyleConfig<
     md: { h: 24, fontSize: 'sm', fontWeight: 'medium' },
     lg: { h: 32, fontSize: 'md', fontWeight: 'medium' },
   },
-  baseStyle: { px: 8, textTransform: 'none', borderRadius: 'md' },
+  baseStyle: {
+    px: 8,
+    textTransform: 'none',
+    borderRadius: 'md',
+  },
   variants: {
     '@primary': {
       backgroundColor: 'brand.900',

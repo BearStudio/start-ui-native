@@ -1,6 +1,7 @@
 import 'dayjs/locale/fr.js';
 
 import account from './account.json' with { type: 'json' };
+import appOnboarding from './app-onboarding.json' with { type: 'json' };
 import auth from './auth.json' with { type: 'json' };
 import books from './books.json' with { type: 'json' };
 import common from './common.json' with { type: 'json' };
@@ -14,4 +15,5 @@ export default {
   common,
   home,
   layout,
+  appOnboarding,
 } as const;
