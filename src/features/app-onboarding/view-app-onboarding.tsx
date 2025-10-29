@@ -125,7 +125,8 @@ export const ViewOnboarding = () => {
           </HStack>
           <Button
             full
-            variant="@secondary"
+            bg="white"
+            color="neutral.900"
             size="lg"
             onPress={() => {
               if (currentIndex === appOnboardingScreens.length - 1) {

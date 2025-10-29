@@ -81,7 +81,7 @@ export const AppOnboardingScreenFeatures = () => {
         <Stack gap={8}>
           <HStack flexWrap="wrap" gap={8}>
             {features.map((feature) => (
-              <Badge key={feature} variant="@secondary">
+              <Badge key={feature} bg="white" color="neutral.900">
                 <Box pr={4}>
                   <Icon top={2} icon={IconCheck} color="brand.900" size={16} />
                 </Box>
