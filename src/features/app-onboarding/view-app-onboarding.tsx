@@ -33,6 +33,8 @@ const appOnboardingScreens = [
   { name: 'features', Component: AppOnboardingScreenFeatures },
 ];
 
+const backgroundImageSize = { width: 1536, height: 1024 };
+
 export const ViewOnboarding = () => {
   const { t } = useTranslation(['appOnboarding']);
 
@@ -61,10 +63,12 @@ export const ViewOnboarding = () => {
   });
 
   const animatedImageStyles = useAnimatedStyle(() => {
+    const maxScrollX = WINDOW_WIDTH * (appOnboardingScreens.length - 1);
+
     const right = interpolate(
       scrollX.value,
-      [0, WINDOW_WIDTH * (appOnboardingScreens.length - 1)],
-      [700, 800]
+      [0, maxScrollX],
+      [650, Math.min(750, backgroundImageSize.width - WINDOW_WIDTH)]
     );
 
     return { right };
