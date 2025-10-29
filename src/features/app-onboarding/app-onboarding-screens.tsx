@@ -13,12 +13,6 @@ import {
 
 import { IconCheck } from '@/components/icons/generated';
 import { Icon } from '@/components/icons/icon';
-import { Image } from '@/components/ui/image';
-
-// @ts-expect-error TODO fix the import error
-import mascotImage from '@/features/app-onboarding/mascot.png';
-
-const containerHeight = WINDOW_HEIGHT / 2;
 
 const OnboardingScreenContainer = (props: PropsWithChildren) => (
   <Center w={WINDOW_WIDTH} p={32}>
@@ -42,16 +36,6 @@ export const AppOnboardingScreenWelcome = () => {
       <Text fontSize="6xl" fontWeight="bold" color="white">
         Native
       </Text>
-      <Box position="absolute" right={-32} bottom={containerHeight / 4}>
-        <Image
-          source={mascotImage}
-          contentFit="contain"
-          style={{
-            height: containerHeight / 1.5,
-            aspectRatio: 2 / 3,
-          }}
-        />
-      </Box>
     </OnboardingScreenContainer>
   );
 };

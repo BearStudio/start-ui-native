@@ -25,6 +25,8 @@ import {
 } from '@/features/app-onboarding/app-onboarding-screens';
 // @ts-expect-error fix image import
 import backgroundImage from '@/features/app-onboarding/layout-login-image.jpg';
+// @ts-expect-error TODO fix the import error
+import mascotImage from '@/features/app-onboarding/mascot.png';
 import { useOnboardingStore } from '@/features/app-onboarding/store';
 import { ViewSafeContent } from '@/layout/view-safe-content';
 
@@ -62,7 +64,7 @@ export const ViewOnboarding = () => {
     },
   });
 
-  const animatedImageStyles = useAnimatedStyle(() => {
+  const backgroundAnimatedStyle = useAnimatedStyle(() => {
     const maxScrollX = WINDOW_WIDTH * (appOnboardingScreens.length - 1);
 
     const right = interpolate(
@@ -72,6 +74,35 @@ export const ViewOnboarding = () => {
     );
 
     return { right };
+  });
+
+  const mascotAnimatedStyle = useAnimatedStyle(() => {
+    const maxScrollX = WINDOW_WIDTH * (appOnboardingScreens.length - 1);
+
+    const leftStart = WINDOW_WIDTH / 3.5;
+    const topStart = WINDOW_HEIGHT / 2.5;
+
+    const left = interpolate(
+      scrollX.value,
+      [0, maxScrollX],
+      [leftStart, leftStart - 50]
+    );
+
+    const top = interpolate(
+      scrollX.value,
+      [0, maxScrollX],
+      [topStart, topStart + 80]
+    );
+
+    const rotate = interpolate(scrollX.value, [0, maxScrollX], [2, 10]);
+
+    const scale = interpolate(scrollX.value, [0, maxScrollX], [1, 0.7]);
+
+    return {
+      left,
+      top,
+      transform: [{ rotate: `${rotate}deg` }, { scale }],
+    };
   });
 
   return (
@@ -84,11 +115,23 @@ export const ViewOnboarding = () => {
             position: 'absolute',
             zIndex: -1,
           },
-          animatedImageStyles,
+          backgroundAnimatedStyle,
         ]}
       >
         <Animated.Image source={backgroundImage} />
       </Animated.View>
+      <Animated.Image
+        source={mascotImage}
+        style={[
+          {
+            objectFit: 'contain',
+            height: WINDOW_HEIGHT / 3,
+            aspectRatio: 2 / 3,
+            position: 'absolute',
+          },
+          mascotAnimatedStyle,
+        ]}
+      />
       <ViewSafeContent>
         <Animated.FlatList
           ref={listRef}
