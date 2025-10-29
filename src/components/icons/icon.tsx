@@ -6,7 +6,7 @@ export const Icon = ({
   size,
   ...props
 }: StyleProps & {
-  icon: LucideIcon;
+  icon: LucideIcon | ReturnType<typeof ficus>;
   color?: string;
   size?: number;
 }) => {
