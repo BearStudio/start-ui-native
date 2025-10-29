@@ -12,8 +12,6 @@ export default function Index() {
   const session = authClient.useSession();
   const isOnboarded = useOnboardingStore((state) => state.done);
 
-  console.log({ isOnboarded });
-
   // Manage first app redirection
   useFocusEffect(
     useCallback(() => {
