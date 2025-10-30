@@ -2,7 +2,7 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Slot } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { Box, FicusProvider } from 'react-native-ficus-ui';
+import { FicusProvider } from 'react-native-ficus-ui';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {
   initialWindowMetrics,
@@ -28,20 +28,18 @@ export default function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
       <FicusProvider theme={theme}>
-        <Box flex={1} bg="white" _dark={{ bg: 'neutral.950' }}>
-          <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-            <GestureHandlerRootView>
-              <BottomSheetModalProvider>
-                <SplashScreenManager>
-                  <Slot />
-                </SplashScreenManager>
-                <Sonner />
-                <ThemeManager />
-                {process.env.NODE_ENV === 'development' && <DevTools />}
-              </BottomSheetModalProvider>
-            </GestureHandlerRootView>
-          </SafeAreaProvider>
-        </Box>
+        <ThemeManager />
+        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+          <GestureHandlerRootView>
+            <BottomSheetModalProvider>
+              <SplashScreenManager>
+                <Slot />
+              </SplashScreenManager>
+              <Sonner />
+              {process.env.NODE_ENV === 'development' && <DevTools />}
+            </BottomSheetModalProvider>
+          </GestureHandlerRootView>
+        </SafeAreaProvider>
       </FicusProvider>
     </QueryClientProvider>
   );

@@ -26,7 +26,7 @@ export const ViewAuthOnboarding = () => {
   return (
     <ViewSafeContent>
       <AuthHeader />
-      <Center flex={1} p={24}>
+      <Center flex={1} p={24} maxW={400}>
         <Stack spacing={24} w="100%">
           <Stack spacing={8}>
             <Text fontWeight="bold" fontSize="lg">
