@@ -50,7 +50,7 @@ export const ViewOtpVerification = () => {
       <AuthHeader />
       <Center flex={1} p={24}>
         <form.AppForm>
-          <Stack spacing={24} w="100%">
+          <Stack spacing={24} w="100%" maxW={400}>
             <Button variant="@ghost" pl={0} onPress={router.back}>
               <IconArrowLeft width={18} height={18} />
               {t('auth:verification.back')}

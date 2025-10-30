@@ -3,9 +3,8 @@ import { Icon, Label, NativeTabs } from 'expo-router/unstable-native-tabs';
 import { ComponentProps } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DynamicColorIOS } from 'react-native';
-import { useColorModeValue } from 'react-native-ficus-ui';
 
-import theme from '@/lib/ficus-ui/theme';
+import { useThemedStyle } from '@/hooks/use-themed-style';
 
 import { HapticTab } from '@/components/haptic-tab';
 import {
@@ -58,18 +57,7 @@ const TABS = [
 export default function TabLayout() {
   const { t } = useTranslation(['layout']);
 
-  const themedStyle = useColorModeValue(
-    {
-      backgroundColor: 'white',
-      color: theme.colors.neutral[950],
-      sceneBackgroundColor: theme.colors.neutral[50],
-    },
-    {
-      backgroundColor: theme.colors.neutral[950],
-      color: 'white',
-      sceneBackgroundColor: theme.colors.neutral[900],
-    }
-  );
+  const themedStyle = useThemedStyle();
 
   if (WITH_NATIVE_TABS) {
     return (

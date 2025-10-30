@@ -64,7 +64,7 @@ export const ViewSignIn = () => {
       <AuthHeader />
       <Center flex={1} p={24}>
         <Form form={form}>
-          <Stack spacing={24} w="100%" maxW={320}>
+          <Stack spacing={24} w="100%" maxW={400}>
             <Stack align="center" spacing={8}>
               <Text fontWeight="bold" fontSize="2xl" textAlign="center">
                 {t('auth:signin.title')}

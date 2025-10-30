@@ -1,12 +1,11 @@
 import { Stack, useRouter } from 'expo-router';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useColorModeValue } from 'react-native-ficus-ui';
 
-import theme from '@/lib/ficus-ui/theme';
+import { useThemedStyle } from '@/hooks/use-themed-style';
 
 import { authClient } from '@/features/auth/client';
-import { ViewOnboarding } from '@/features/auth/view-onboarding';
+import { ViewAuthOnboarding } from '@/features/auth/view-auth-onboarding';
 
 export default function LoggedLayout() {
   const router = useRouter();
@@ -19,21 +18,10 @@ export default function LoggedLayout() {
     }
   }, [router, session.data?.user, session.isPending]);
 
-  const themedStyle = useColorModeValue(
-    {
-      backgroundColor: 'white',
-      color: theme.colors.neutral[950],
-      sceneBackgroundColor: theme.colors.neutral[50],
-    },
-    {
-      backgroundColor: theme.colors.neutral[950],
-      color: 'white',
-      sceneBackgroundColor: theme.colors.neutral[900],
-    }
-  );
+  const themedStyle = useThemedStyle();
 
   if (!session.data?.user?.name) {
-    return <ViewOnboarding />;
+    return <ViewAuthOnboarding />;
   }
 
   return (

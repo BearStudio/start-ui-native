@@ -21,6 +21,6 @@ export const ThemeManager = () => {
   }, [currentTheme, colorScheme, setFicusColorMode]);
 
   return (
-    <StatusBar style={currentTheme !== 'system' ? currentTheme : 'auto'} />
+    <StatusBar style={currentTheme === 'system' ? 'auto' : currentTheme} />
   );
 };

@@ -8,7 +8,7 @@ import { AuthHeader } from '@/features/auth/auth-header';
 import { authClient } from '@/features/auth/client';
 import { ViewSafeContent } from '@/layout/view-safe-content';
 
-export const ViewOnboarding = () => {
+export const ViewAuthOnboarding = () => {
   const { t } = useTranslation(['auth']);
 
   const form = useAppForm({
@@ -26,7 +26,7 @@ export const ViewOnboarding = () => {
   return (
     <ViewSafeContent>
       <AuthHeader />
-      <Center flex={1} p={24}>
+      <Center flex={1} p={24} maxW={400}>
         <Stack spacing={24} w="100%">
           <Stack spacing={8}>
             <Text fontWeight="bold" fontSize="lg">

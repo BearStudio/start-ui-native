@@ -1,0 +1,18 @@
+{
+  "continue": "Continue",
+  "end": "Let's start",
+  "welcome": {
+    "title": "Welcome on"
+  },
+  "features": {
+    "titleOne": "Opinionated",
+    "titleTwo": "UI Starter",
+    "authentication": "Authentication",
+    "account": "Account",
+    "darkMode": "Dark mode",
+    "translations": "Translations",
+    "storybook": "Storybook",
+    "devtools": "Devtools",
+    "more": "And more..."
+  }
+}
