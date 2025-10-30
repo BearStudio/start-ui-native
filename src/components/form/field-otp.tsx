@@ -1,5 +1,11 @@
 import { useStore } from '@tanstack/react-form';
-import { ComponentProps, ComponentRef, useRef } from 'react';
+import {
+  ComponentProps,
+  ComponentRef,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react';
 import { Box, BoxProps, PinInput } from 'react-native-ficus-ui';
 
 import { FormFieldError } from '@/lib/tanstack-form/components';
@@ -28,6 +34,21 @@ export default function FieldOtp(
     };
   });
 
+  const shouldAutoSubmit =
+    autoSubmit && field.state.value?.length === codeLength;
+
+  const submitForm = useCallback(() => {
+    if (!field.form.state.isSubmitted) {
+      field.form.handleSubmit();
+    }
+  }, [field.form]);
+
+  useEffect(() => {
+    if (shouldAutoSubmit) {
+      submitForm();
+    }
+  }, [shouldAutoSubmit, submitForm]);
+
   return (
     <Box {...containerProps} ref={containerRef}>
       <PinInput
@@ -45,9 +66,6 @@ export default function FieldOtp(
         value={field.state.value}
         onChangeText={(value) => {
           field.handleChange(value);
-          if (autoSubmit && value.length === codeLength) {
-            field.form.handleSubmit();
-          }
         }}
         onBlur={(e) => {
           field.handleBlur();
