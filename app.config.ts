@@ -11,7 +11,9 @@ export default {
   scheme: 'start-ui-native',
   owner: 'bearstudio',
   version: '1.0.0',
-  runtimeVersion: '1.0.0',
+  runtimeVersion: {
+    policy: 'appVersion',
+  },
   platforms: ['android', 'ios'],
   orientation: 'default',
   icon: './src/assets/images/icon.png',
