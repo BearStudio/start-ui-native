@@ -1,4 +1,4 @@
-name: 🔨 EAS build
+name: 🚀 EAS update
 
 env:
   EXPO_PUBLIC_API_URL: ${{ vars.API_URL }}
@@ -8,7 +8,7 @@ env:
 on: workflow_dispatch
 
 jobs:
-  build:
+  update:
     runs-on: ubuntu-latest
     steps:
       - name: 🏗 Setup repo
@@ -32,5 +32,5 @@ jobs:
       - name: Generate API SDK
         run: pnpm gen:api
 
-      - name: 🚀 Build app
-        run: eas build --non-interactive
+      - name: 🚀 Create update
+        run: eas update --auto --branch main --non-interactive
