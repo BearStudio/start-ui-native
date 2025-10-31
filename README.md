@@ -10,6 +10,14 @@ It represents our team's up-to-date stack that we use when creating native apps 
 
 [⚙️ Node.js](https://nodejs.org), [🟦 TypeScript](https://www.typescriptlang.org/), [⚛️ React](https://react.dev/), [📱 React Native](https://reactnative.dev/), [🚀 Expo](https://docs.expo.dev/), [🔐 Better Auth](https://www.better-auth.com/), [🌿 Ficus UI](https://ficus-ui.com/), [🌴 Tanstack Form](https://tanstack.com/form/), [🌴 Tanstack Query](https://tanstack.com/query/), [👋 Hey API](https://heyapi.dev/)
 
+
+# Test with Expo Go
+
+<p align="center">
+  <img src=".github/assets/expo-go-main.svg" alt="Expo Go Main" style="max-width: 256px; max-height: 256px;" />
+</p>
+
+
 # Requirements
 
 * [Node.js](https://nodejs.org) >= 22
