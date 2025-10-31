@@ -35,4 +35,4 @@ jobs:
         run: pnpm gen:api
 
       - name: 🚀 Build app
-        run: eas build --non-interactive --profile development --platform all
+        run: eas build --profile development --platform all --non-interactive

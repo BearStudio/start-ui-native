@@ -6,20 +6,7 @@
   "build": {
     "development": {
       "channel": "development",
-      "distribution": "internal",
       "developmentClient": true,
-      "ios": {
-        "simulator": true
-      }
-    },
-    "development-device": {
-      "extends": "development",
-      "ios": {
-        "simulator": false
-      }
-    },
-    "preview": {
-      "channel": "preview",
       "distribution": "internal"
     },
     "production": {
@@ -28,6 +15,11 @@
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {},
+      "android": {
+        "releaseStatus": "draft"
+      }
+    }
   }
 }
