@@ -29,5 +29,8 @@ jobs:
       - name: 📦 Install dependencies
         run: pnpm install
 
+      - name: Generate API SDK
+        run: pnpm gen:api
+
       - name: 🚀 Create update
         run: eas update --auto --non-interactive

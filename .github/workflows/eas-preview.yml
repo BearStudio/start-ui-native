@@ -32,6 +32,9 @@ jobs:
       - name: 📦 Install dependencies
         run: pnpm install
 
+      - name: Generate API SDK
+        run: pnpm gen:api
+
       - name: 🚀 Create preview
         uses: expo/expo-github-action/preview@v8
         with:
