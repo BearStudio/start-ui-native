@@ -5,7 +5,9 @@ env:
   EXPO_PUBLIC_AUTH_URL: ${{ vars.AUTH_URL }}
   EXPO_PUBLIC_OPENAPI_URL: ${{ vars.OPENAPI_URL }}
 
-on: workflow_dispatch
+on:
+  push:
+    branches: [main]
 
 jobs:
   build:
@@ -30,4 +32,4 @@ jobs:
         run: pnpm install
 
       - name: 🚀 Build app
-        run: eas build --non-interactive
+        run: eas build --non-interactive --profile development --platform all

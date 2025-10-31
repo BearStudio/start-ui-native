@@ -1,6 +1,5 @@
 import { ExpoConfig } from 'expo/config';
 
-const BUILD_NUMBER: `${number}` = '1';
 const EXPO_PROJECT_ID = 'af6ae74c-f04d-497a-9733-b2b7539f77c5';
 
 const appPrefix =
@@ -25,13 +24,14 @@ export default {
   },
   ios: {
     bundleIdentifier: 'com.bearstudio.startuinative',
-    buildNumber: BUILD_NUMBER,
     supportsTablet: true,
+    infoPlist: {
+      ITSAppUsesNonExemptEncryption: false,
+    },
     // appStoreUrl: 'https://apps.apple.com/fr/app/bearstudio/startuinative',
   },
   android: {
     package: 'com.bearstudio.startuinative',
-    versionCode: +BUILD_NUMBER,
     adaptiveIcon: {
       backgroundColor: '#FFFFFF',
       foregroundImage: './src/assets/images/android-icon-foreground.png',
