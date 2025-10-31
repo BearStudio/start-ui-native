@@ -5,9 +5,7 @@ env:
   EXPO_PUBLIC_AUTH_URL: ${{ vars.AUTH_URL }}
   EXPO_PUBLIC_OPENAPI_URL: ${{ vars.OPENAPI_URL }}
 
-on:
-  push:
-    branches: [main]
+on: workflow_dispatch
 
 jobs:
   update:

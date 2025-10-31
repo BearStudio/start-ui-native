@@ -5,17 +5,26 @@
   },
   "build": {
     "development": {
-      "developmentClient": true,
+      "channel": "development",
       "distribution": "internal",
-      "channel": "development"
+      "developmentClient": true,
+      "ios": {
+        "simulator": true
+      }
+    },
+    "development-device": {
+      "extends": "development",
+      "ios": {
+        "simulator": false
+      }
     },
     "preview": {
-      "distribution": "internal",
-      "channel": "preview"
+      "channel": "preview",
+      "distribution": "internal"
     },
     "production": {
-      "autoIncrement": true,
-      "channel": "production"
+      "channel": "production",
+      "autoIncrement": true
     }
   },
   "submit": {
