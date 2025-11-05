@@ -7,9 +7,19 @@ import { isApple } from '@/constants/device';
 export const ViewTabContent = ({
   withHeader = isApple && WITH_NATIVE_TABS,
   children,
+  fixed,
   ...props
-}: BoxProps & { withHeader?: boolean }) => {
+}: BoxProps & { withHeader?: boolean; fixed?: boolean }) => {
   const insets = useSafeAreaInsets();
+
+  if (fixed) {
+    return (
+      <Box p={16} pt={(withHeader ? 0 : insets.top) + 16} flex={1} {...props}>
+        {children}
+        <Box h={insets.bottom} />
+      </Box>
+    );
+  }
 
   return (
     <ScrollBox

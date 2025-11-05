@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { Box, Button, HStack, Text, VStack } from 'react-native-ficus-ui';
 
-import { Card, CardBody, CardHeader, CardTitle } from './card';
+import { Card, CardBody, CardHeader, CardTitle } from '.';
 
 const meta: Meta<typeof Card> = {
   title: 'UI/Card',

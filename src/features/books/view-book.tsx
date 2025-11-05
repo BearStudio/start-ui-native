@@ -6,7 +6,7 @@ import { Center, Divider, HStack, Stack, Text } from 'react-native-ficus-ui';
 import { api } from '@/lib/hey-api/api';
 
 import { Card, CardBody } from '@/components/ui/card';
-import { FullLoader } from '@/components/ui/full-loader';
+import { Skeleton } from '@/components/ui/skeleton';
 
 import { BookCover } from '@/features/books/book-cover';
 import { ViewTabContent } from '@/layout/view-tab-content';
@@ -26,13 +26,13 @@ export const ViewBook = (props: { bookId: string }) => {
   });
 
   return (
-    <ViewTabContent withHeader>
+    <ViewTabContent withHeader fixed>
       {ui
-        .match('pending', () => <FullLoader />)
+        .match('pending', () => <Skeleton style={{ maxHeight: 170 }} />)
         .match('error', () => <></>)
         .match('default', ({ data }) => (
           <Stack gap={16} flex={1}>
-            <Card>
+            <Card maxW={500}>
               <CardBody py={4}>
                 <HStack gap={8} py={12}>
                   <Text
@@ -91,8 +91,8 @@ export const ViewBook = (props: { bookId: string }) => {
                 </HStack>
               </CardBody>
             </Card>
-            <Center flex={1}>
-              <BookCover book={data} alignSelf="center" h="80%" />
+            <Center h="60%" p={16}>
+              <BookCover book={data} />
             </Center>
           </Stack>
         ))

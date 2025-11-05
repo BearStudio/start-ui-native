@@ -2,11 +2,17 @@ import { getUiState } from '@bearstudio/ui-state';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { Link } from 'expo-router';
 import { ActivityIndicator } from 'react-native';
-import { FlashList, Text } from 'react-native-ficus-ui';
+import {
+  Box,
+  FlashList,
+  HStack,
+  Text,
+  useMediaQuery,
+} from 'react-native-ficus-ui';
 
 import { api } from '@/lib/hey-api/api';
 
-import { FullLoader } from '@/components/ui/full-loader';
+import { Skeleton } from '@/components/ui/skeleton';
 
 import { BookCover } from '@/features/books/book-cover';
 import { ViewTabContent } from '@/layout/view-tab-content';
@@ -29,17 +35,40 @@ export const ViewBooks = () => {
     });
   });
 
+  const [isTablet] = useMediaQuery({
+    minWidth: 480,
+  });
+
   return (
     <ViewTabContent withHeader>
       {ui
-        .match('pending', () => <FullLoader />)
+        .match('pending', () => (
+          <HStack>
+            <Box flex={1} p={8} aspectRatio={2 / 3}>
+              <Skeleton />
+            </Box>
+            <Box flex={1} p={8} aspectRatio={2 / 3}>
+              <Skeleton />
+            </Box>
+            {isTablet && (
+              <>
+                <Box flex={1} p={8} aspectRatio={2 / 3}>
+                  <Skeleton />
+                </Box>
+                <Box flex={1} p={8} aspectRatio={2 / 3}>
+                  <Skeleton />
+                </Box>
+              </>
+            )}
+          </HStack>
+        ))
         .match('error', () => <></>)
         .match('empty', () => <Text>There is no books</Text>)
         .match('default', ({ data }) => (
           <FlashList
             data={data}
             keyExtractor={(item) => item.id}
-            numColumns={2}
+            numColumns={isTablet ? 4 : 2}
             horizontal={false}
             renderItem={({ item }) => (
               <Link
@@ -47,10 +76,10 @@ export const ViewBooks = () => {
                   pathname: '/books/[id]',
                   params: { id: item.id, title: item.title },
                 }}
-                style={{ padding: 8, flex: 1 }}
+                style={{ aspectRatio: 2 / 3 }}
               >
                 <Link.Trigger>
-                  <BookCover book={item} />
+                  <BookCover book={item} p={8} />
                 </Link.Trigger>
                 <Link.Preview />
               </Link>
