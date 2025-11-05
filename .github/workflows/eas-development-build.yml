@@ -1,0 +1,38 @@
+name: 🔨 EAS build
+
+env:
+  EXPO_PUBLIC_API_URL: ${{ vars.API_URL }}
+  EXPO_PUBLIC_AUTH_URL: ${{ vars.AUTH_URL }}
+  EXPO_PUBLIC_OPENAPI_URL: ${{ vars.OPENAPI_URL }}
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v5
+
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 'lts/*'
+          cache: 'pnpm'
+
+      - name: 🏗 Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: 📦 Install dependencies
+        run: pnpm install
+
+      - name: Generate API SDK
+        run: pnpm gen:api
+
+      - name: 🚀 Build app
+        run: eas build --profile development --platform all --non-interactive
