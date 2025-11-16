@@ -116,21 +116,26 @@ If you want to use the same set of custom duotone icons that Start UI is already
 > [!WARNING]
 > All svg icons should be svg files prefixed by `icon-` (example: `icon-externel-link`) with **square size** and **filled with `#000` color** (will be replaced by `currentColor`).
 
-# EAS Preview
 
-To be able to use previews on PR, you have to setup your project with EAS
+# EAS
+
+## Installation
+
+> [!TIP]
+> To be able to use previews on PR, you have to setup your project with EAS
 
 1. Setup Expo access token 
     * Create it: https://expo.dev/accounts/{account}/settings/access-tokens
     * Add it as GitHub repository secrets: https://github.com/xxx/xxx/settings/secrets/actions
 2. Add GitHub repository variables: https://github.com/xxx/xxx/settings/variables/actions
-    * `API_URL`
-    * `AUTH_URL`
-    * `OPENAPI_URL` 
+    * `BASE_URL`
 3. Setup Expo project: https://expo.dev/
     * Create your project
     * Get project's id
-    * Set as `EXPO_PROJECT_ID` in `app.config.ts`
+    * Set as `EAS_PROJECT_ID` in `app.config.ts`
+    * Setup environment variables for each environment : 
+        * `APP_ENV`
+        * `EXPO_PUBLIC_BASE_URL`
 4. Setup eas
     * `eas login`
     * `eas init --id {projectid}`
