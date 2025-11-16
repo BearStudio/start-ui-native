@@ -1,4 +1,3 @@
-import appConfig from 'app.config';
 import { Link } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Button, HStack, Stack, Text } from 'react-native-ficus-ui';
@@ -7,6 +6,7 @@ import { useShare } from '@/hooks/use-share';
 
 import { IconShare2 } from '@/components/icons/generated';
 
+import { appConfig } from '@/constants/config';
 import { MarketingBento } from '@/features/marketing/marketing-bento';
 import { ViewTabContent } from '@/layout/view-tab-content';
 
