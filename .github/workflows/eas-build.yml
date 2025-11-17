@@ -1,12 +1,19 @@
-name: 🚀 EAS update
+name: 🔨 EAS build
 
-env:
-  BASE_URL: ${{ vars.BASE_URL }}
-
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        options:
+          - development
+          - preview
+          - production
+        required: true
+        description: 'Environment to build'
 
 jobs:
-  update:
+  eas-build:
     runs-on: ubuntu-latest
     steps:
       - name: 🏗 Setup repo
@@ -24,11 +31,5 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: 📦 Install dependencies
-        run: pnpm install
-
-      - name: Generate API SDK
-        run: pnpm gen:api
-
-      - name: 🚀 Create update
-        run: eas update --auto --branch main --non-interactive
+      - name: 🚀 Run EAS build
+        run: pnpm eas:build --environment ${{ inputs.environment }}

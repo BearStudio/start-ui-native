@@ -2,9 +2,9 @@ import { ConfigContext, ExpoConfig } from 'expo/config';
 
 // Replace these with your EAS project ID and project slug.
 // You can find them at https://expo.dev/accounts/[account]/projects/[project].
-const EAS_PROJECT_ID = 'af6ae74c-f04d-497a-9733-b2b7539f77c5';
-const PROJECT_SLUG = 'start-ui-native-v9iizxkbojzedvpfkfzcq';
-const OWNER = 'bearstudio';
+const EAS_PROJECT_ID = 'b5bbd925-db32-4e2b-8f31-cf07e22fa4ef';
+const PROJECT_SLUG = 'start-ui-native';
+const OWNER = 'bearstudioorg';
 
 // App production config
 const APP_NAME = 'Start UI [native]';

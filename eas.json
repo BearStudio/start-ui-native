@@ -6,11 +6,18 @@
   "build": {
     "development": {
       "channel": "development",
+      "environment": "development",
       "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "channel": "preview",
+      "environment": "preview",
       "distribution": "internal"
     },
     "production": {
       "channel": "production",
+      "environment": "production",
       "autoIncrement": true
     }
   },

@@ -1,0 +1,27 @@
+name: Update
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        options:
+          - development
+          - preview
+          - production
+        required: true
+
+jobs:
+  update_android:
+    type: update
+    params:
+      channel: ${{ inputs.environment }}
+      branch: ${{ inputs.environment }}
+      platform: android
+
+  update_ios:
+    type: update
+    params:
+      channel: ${{ inputs.environment }}
+      branch: ${{ inputs.environment }}
+      platform: ios

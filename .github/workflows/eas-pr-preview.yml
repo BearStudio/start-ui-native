@@ -1,4 +1,4 @@
-name: 📱 EAS Preview
+name: 📱 EAS PR Preview
 
 env:
   BASE_URL: ${{ vars.BASE_URL }}
@@ -29,9 +29,6 @@ jobs:
 
       - name: 📦 Install dependencies
         run: pnpm install
-
-      - name: Generate API SDK
-        run: pnpm gen:api
 
       - name: 🚀 Create preview
         uses: expo/expo-github-action/preview@v8

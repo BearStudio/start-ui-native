@@ -39,6 +39,9 @@ cp .vscode/settings.example.json .vscode/settings.json  # (Optionnal) Setup your
 pnpm install # Install dependencies
 ```
 
+> [!TIP]  
+> If your expo project is setup with Expo environment variables, you can run `eas env:pull {environment}` to generate .env.example with environment configuration
+
 ## Environment variables
 
 
@@ -46,6 +49,7 @@ pnpm install # Install dependencies
 > Using Expo Go, local development urls should not be `localhost`, use public IP instead
 
 ```bash
+APP_ENV # The key to identify application environment on expo
 EXPO_PUBLIC_BASE_URL # Base URL of your server, usefull if you are using Start UI [web]
 
 # OPTIONAL TO OVERRIDE
@@ -70,11 +74,17 @@ useQuery(api.bookGetByIdOptions({ path: { id: props.bookId } }));
 
 # Run
 
-
 ### Expo Go
 
 ```bash
 pnpm dev
+```
+
+### EAS development build
+
+You should have a development build on Expo, then install it in the wanted device/simulator and run
+```bash
+pnpm start
 ```
 
 ### Local build
@@ -140,3 +150,16 @@ If you want to use the same set of custom duotone icons that Start UI is already
     * `eas login`
     * `eas init --id {projectid}`
     * `eas update:configure`
+
+## Build / Update
+
+You may should run locally `eas build --profile development --platform all` first to setup credentials
+
+```bash
+pnpm eas:build # Create new build for iOS and Android
+
+pnpm eas:update # Create new update for iOS and Android
+```
+
+> [!TIP]
+> Each command have a related Github workflow to be run from Github interface

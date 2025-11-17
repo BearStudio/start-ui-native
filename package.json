@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "expo start",
+    "postinstall": "pnpm gen:api",
     "dev": "expo start --go",
     "dev:android": "expo run:android",
     "dev:ios": "expo run:ios",
@@ -20,7 +21,8 @@
     "ios": "expo run:ios",
     "expo:check": "expo install --check",
     "expo:prebuild": "expo prebuild",
-    "eas:build": "eas workflow:run eas-build.yml"
+    "eas:build": "eas workflow:run build.yml",
+    "eas:update": "eas workflow:run update.yml"
   },
   "dependencies": {
     "@bearstudio/ui-state": "1.0.2",

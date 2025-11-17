@@ -1,0 +1,25 @@
+name: Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        options:
+          - development
+          - preview
+          - production
+        required: true
+
+jobs:
+  build_android:
+    type: build
+    params:
+      profile: ${{ inputs.environment }}
+      platform: android
+
+  build_ios:
+    type: build
+    params:
+      profile: ${{ inputs.environment }}
+      platform: ios
