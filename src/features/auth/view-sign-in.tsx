@@ -1,5 +1,4 @@
 import { useMutation } from '@tanstack/react-query';
-import appConfig from 'app.config';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Center, HStack, Stack, Text } from 'react-native-ficus-ui';
@@ -12,6 +11,7 @@ import { useAppForm } from '@/lib/tanstack-form/config';
 
 import { Version } from '@/components/version';
 
+import { appConfig } from '@/constants/config';
 import { AuthHeader } from '@/features/auth/auth-header';
 import { authClient } from '@/features/auth/client';
 import { LoginEmailHint } from '@/features/devtools/login-hint';

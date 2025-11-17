@@ -10,6 +10,14 @@ It represents our team's up-to-date stack that we use when creating native apps 
 
 [⚙️ Node.js](https://nodejs.org), [🟦 TypeScript](https://www.typescriptlang.org/), [⚛️ React](https://react.dev/), [📱 React Native](https://reactnative.dev/), [🚀 Expo](https://docs.expo.dev/), [🔐 Better Auth](https://www.better-auth.com/), [🌿 Ficus UI](https://ficus-ui.com/), [🌴 Tanstack Form](https://tanstack.com/form/), [🌴 Tanstack Query](https://tanstack.com/query/), [👋 Hey API](https://heyapi.dev/)
 
+
+# Test with Expo Go
+
+<p align="center">
+  <img src=".github/assets/expo-go-main.svg" alt="Expo Go Main" style="max-width: 256px; max-height: 256px;" />
+</p>
+
+
 # Requirements
 
 * [Node.js](https://nodejs.org) >= 22
@@ -31,6 +39,9 @@ cp .vscode/settings.example.json .vscode/settings.json  # (Optionnal) Setup your
 pnpm install # Install dependencies
 ```
 
+> [!TIP]  
+> If your expo project is setup with Expo environment variables, you can run `eas env:pull {environment}` to generate .env.example with environment configuration
+
 ## Environment variables
 
 
@@ -38,6 +49,7 @@ pnpm install # Install dependencies
 > Using Expo Go, local development urls should not be `localhost`, use public IP instead
 
 ```bash
+APP_ENV # The key to identify application environment on expo
 EXPO_PUBLIC_BASE_URL # Base URL of your server, usefull if you are using Start UI [web]
 
 # OPTIONAL TO OVERRIDE
@@ -62,11 +74,17 @@ useQuery(api.bookGetByIdOptions({ path: { id: props.bookId } }));
 
 # Run
 
-
 ### Expo Go
 
 ```bash
 pnpm dev
+```
+
+### EAS development build
+
+You should have a development build on Expo, then install it in the wanted device/simulator and run
+```bash
+pnpm start
 ```
 
 ### Local build
@@ -108,22 +126,40 @@ If you want to use the same set of custom duotone icons that Start UI is already
 > [!WARNING]
 > All svg icons should be svg files prefixed by `icon-` (example: `icon-externel-link`) with **square size** and **filled with `#000` color** (will be replaced by `currentColor`).
 
-# EAS Preview
 
-To be able to use previews on PR, you have to setup your project with EAS
+# EAS
+
+## Installation
+
+> [!TIP]
+> To be able to use previews on PR, you have to setup your project with EAS
 
 1. Setup Expo access token 
     * Create it: https://expo.dev/accounts/{account}/settings/access-tokens
     * Add it as GitHub repository secrets: https://github.com/xxx/xxx/settings/secrets/actions
 2. Add GitHub repository variables: https://github.com/xxx/xxx/settings/variables/actions
-    * `API_URL`
-    * `AUTH_URL`
-    * `OPENAPI_URL` 
+    * `BASE_URL`
 3. Setup Expo project: https://expo.dev/
     * Create your project
     * Get project's id
-    * Set as `EXPO_PROJECT_ID` in `app.config.ts`
+    * Set as `EAS_PROJECT_ID` in `app.config.ts`
+    * Setup environment variables for each environment : 
+        * `APP_ENV`
+        * `EXPO_PUBLIC_BASE_URL`
 4. Setup eas
     * `eas login`
     * `eas init --id {projectid}`
     * `eas update:configure`
+
+## Build / Update
+
+You may should run locally `eas build --profile development --platform all` first to setup credentials
+
+```bash
+pnpm eas:build # Create new build for iOS and Android
+
+pnpm eas:update # Create new update for iOS and Android
+```
+
+> [!TIP]
+> Each command have a related Github workflow to be run from Github interface

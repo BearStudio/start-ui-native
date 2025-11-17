@@ -16,10 +16,11 @@ export default defineStyleConfig<
     gap: 4,
     borderRadius: 'md',
     borderColor: 'brand.200',
-    _disabled: { opacity: 0.7 },
+    _disabled: { opacity: 0.5 },
     _dark: {
       borderColor: 'brand.600',
     },
+    _pressed: { opacity: 0.7 },
   },
   variants: {
     '@primary': {

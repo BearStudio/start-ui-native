@@ -1,16 +1,19 @@
 name: 🔨 EAS build
 
-env:
-  EXPO_PUBLIC_API_URL: ${{ vars.API_URL }}
-  EXPO_PUBLIC_AUTH_URL: ${{ vars.AUTH_URL }}
-  EXPO_PUBLIC_OPENAPI_URL: ${{ vars.OPENAPI_URL }}
-
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        options:
+          - development
+          - preview
+          - production
+        required: true
+        description: 'Environment to build'
 
 jobs:
-  build:
+  eas-build:
     runs-on: ubuntu-latest
     steps:
       - name: 🏗 Setup repo
@@ -28,8 +31,5 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: 📦 Install dependencies
-        run: pnpm install
-
-      - name: 🚀 Build app
-        run: eas build --non-interactive
+      - name: 🚀 Run EAS build
+        run: pnpm eas:build --environment ${{ inputs.environment }}

@@ -1,16 +1,19 @@
-name: 🚀 EAS update
-
-env:
-  EXPO_PUBLIC_API_URL: ${{ vars.API_URL }}
-  EXPO_PUBLIC_AUTH_URL: ${{ vars.AUTH_URL }}
-  EXPO_PUBLIC_OPENAPI_URL: ${{ vars.OPENAPI_URL }}
+name: 🔨 EAS update
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        options:
+          - development
+          - preview
+          - production
+        required: true
+        description: 'Environment to update'
 
 jobs:
-  update:
+  eas-update:
     runs-on: ubuntu-latest
     steps:
       - name: 🏗 Setup repo
@@ -28,8 +31,5 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: 📦 Install dependencies
-        run: pnpm install
-
-      - name: 🚀 Create update
-        run: eas update --auto --non-interactive
+      - name: 🚀 Run EAS update
+        run: pnpm eas:update --environment ${{ inputs.environment }}
