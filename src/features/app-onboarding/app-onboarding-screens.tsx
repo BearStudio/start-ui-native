@@ -82,3 +82,8 @@ export const AppOnboardingScreenFeatures = () => {
     </OnboardingScreenContainer>
   );
 };
+
+export const appOnboardingScreens = [
+  { name: 'welcome', Component: AppOnboardingScreenWelcome },
+  { name: 'features', Component: AppOnboardingScreenFeatures },
+];

@@ -40,7 +40,7 @@ export const ThemeSwitcher = (props: { minimize?: boolean }) => {
   const updateColorMode = (value: 'light' | 'dark' | 'system') => {
     AsyncStorage.setItem(STORAGE_KEY_THEME, value);
     queryClient.setQueryData(themeQueryKey, value);
-    Appearance.setColorScheme(value === 'system' ? null : value);
+    Appearance.setColorScheme(value === 'system' ? 'unspecified' : value);
   };
 
   return (

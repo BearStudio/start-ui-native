@@ -1,6 +1,5 @@
-import { Tabs } from 'expo-router';
-import { Icon, Label, NativeTabs } from 'expo-router/unstable-native-tabs';
-import { ComponentProps } from 'react';
+import { Icon, Label, Tabs } from 'expo-router';
+import { NativeTabs, SFSymbolIcon } from 'expo-router/unstable-native-tabs';
 import { useTranslation } from 'react-i18next';
 import { DynamicColorIOS } from 'react-native';
 
@@ -51,7 +50,7 @@ const TABS = [
   icon: typeof IconHouseDuotone;
   iconFocused: typeof IconHouseDuotone;
   headerShown: boolean;
-  iosIconSf: ComponentProps<typeof Icon>['sf'];
+  iosIconSf: SFSymbolIcon['sf'];
 }[];
 
 export default function TabLayout() {
@@ -68,7 +67,7 @@ export default function TabLayout() {
           <NativeTabs.Trigger
             key={tab.name}
             name={tab.name}
-            options={{ backgroundColor: themedStyle.backgroundColor }}
+            contentStyle={{ backgroundColor: themedStyle.backgroundColor }}
           >
             <Label>{t(tab.translationKey)}</Label>
             <Icon sf={tab.iosIconSf} />

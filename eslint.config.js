@@ -1,7 +1,6 @@
 import react from '@eslint-react/eslint-plugin';
 import eslint from '@eslint/js';
 import tanstackQuery from '@tanstack/eslint-plugin-query';
-import reactHooks from 'eslint-plugin-react-hooks';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import sonarjs from 'eslint-plugin-sonarjs';
 import unicorn from 'eslint-plugin-unicorn';
@@ -13,7 +12,6 @@ export default tslint.config(
   sonarjs.configs.recommended,
   ...tanstackQuery.configs['flat/recommended'],
   react.configs['recommended-typescript'],
-  reactHooks.configs['recommended-latest'],
   { ignores: ['src/lib/hey-api/generated/'] },
   {
     rules: {

@@ -5,7 +5,7 @@ import {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 
-import { appOnboardingScreens } from '@/features/app-onboarding/view-app-onboarding';
+import { appOnboardingScreens } from '@/features/app-onboarding/app-onboarding-screens';
 
 export const useMascotAnimatedStyle = (scrollX: SharedValue<number>) => {
   return useAnimatedStyle(() => {

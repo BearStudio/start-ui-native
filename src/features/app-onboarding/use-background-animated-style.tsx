@@ -5,7 +5,7 @@ import {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 
-import { appOnboardingScreens } from '@/features/app-onboarding/view-app-onboarding';
+import { appOnboardingScreens } from './app-onboarding-screens';
 
 const backgroundImageSize = { width: 1536, height: 1024 };
 

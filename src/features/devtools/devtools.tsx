@@ -3,7 +3,7 @@ import { useReactNavigationDevTools } from '@dev-plugins/react-navigation';
 import { useReactQueryDevTools } from '@dev-plugins/react-query';
 import { useNavigationContainerRef } from 'expo-router';
 
-import { queryClient } from '@/app/_layout';
+import { queryClient } from '@/lib/tanstack-query/config';
 
 export const DevTools = () => {
   useReactQueryDevTools(queryClient);

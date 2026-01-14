@@ -42,10 +42,9 @@ export default function LoggedLayout() {
         {/* Add new logged-in View that's not included in tabs here */}
         <Stack.Screen
           name="books/[id]"
-          options={(props) => ({
+          options={{
             headerShown: true,
-            title: (props.route.params as { title?: string })?.title,
-          })}
+          }}
         />
       </Stack.Protected>
     </Stack>

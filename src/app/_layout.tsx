@@ -1,5 +1,5 @@
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { Slot } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { FicusProvider } from 'react-native-ficus-ui';
@@ -12,14 +12,13 @@ import 'react-native-reanimated';
 import '@/lib/i18n';
 
 import theme from '@/lib/ficus-ui/theme';
+import { queryClient } from '@/lib/tanstack-query/config';
 
 import { ThemeManager } from '@/components/theme-manager';
 import { Sonner } from '@/components/ui/sonner';
 
 import { DevTools } from '@/features/devtools/devtools';
 import { SplashScreenManager } from '@/layout/splash-screen-manager';
-
-export const queryClient = new QueryClient();
 
 // SplashScreen hide management in on src/app/index.tsx
 SplashScreen.preventAutoHideAsync();

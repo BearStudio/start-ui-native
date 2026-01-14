@@ -6,7 +6,7 @@ export const Sonner = ({ ...props }: ComponentProps<typeof Toaster>) => {
   const scheme = useColorScheme();
   return (
     <Toaster
-      theme={scheme ?? 'system'}
+      theme={scheme === 'unspecified' ? 'system' : scheme}
       position="top-center"
       visibleToasts={2}
       {...props}

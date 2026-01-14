@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
-import { useColorScheme } from 'react-native';
+import { ColorSchemeName, useColorScheme } from 'react-native';
 import { useColorMode } from 'react-native-ficus-ui';
 
 import { useThemeMode } from '@/hooks/use-theme-mode';
@@ -14,9 +14,14 @@ export const ThemeManager = () => {
   const themeQuery = useThemeMode();
   const currentTheme = themeQuery.data ?? 'system';
 
+  const getAutoTheme = (colorScheme: ColorSchemeName) =>
+    colorScheme === 'unspecified' ? 'light' : colorScheme;
+
   useEffect(() => {
     if (colorScheme) {
-      setFicusColorMode(currentTheme === 'system' ? colorScheme : currentTheme);
+      setFicusColorMode(
+        currentTheme === 'system' ? getAutoTheme(colorScheme) : currentTheme
+      );
     }
   }, [currentTheme, colorScheme, setFicusColorMode]);
 
