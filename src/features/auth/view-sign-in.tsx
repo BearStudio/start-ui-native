@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import appConfig from 'app.config';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Center, HStack, Stack, Text } from 'react-native-ficus-ui';
+import { Center, HStack, Stack } from 'react-native-ficus-ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { toast } from 'sonner-native';
 import { z } from 'zod';
@@ -16,6 +16,7 @@ import { AuthHeader } from '@/features/auth/auth-header';
 import { authClient } from '@/features/auth/client';
 import { LoginEmailHint } from '@/features/devtools/login-hint';
 import { ViewSafeContent } from '@/layout/view-safe-content';
+import { Text } from '@/components/ui/text';
 
 export const ViewSignIn = () => {
   const insets = useSafeAreaInsets();
@@ -66,15 +67,8 @@ export const ViewSignIn = () => {
         <Form form={form}>
           <Stack spacing={24} w="100%" maxW={400}>
             <Stack align="center" spacing={8}>
-              <Text fontWeight="bold" fontSize="2xl" textAlign="center">
-                {t('auth:signin.title')}
-              </Text>
-              <Text
-                fontWeight={400}
-                fontSize="sm"
-                variant="muted"
-                textAlign="center"
-              >
+              <Text variant="h2">{t('auth:signin.title')}</Text>
+              <Text className="font-normal text-sm text-center text-neutral-600 dark:text-neutral-400">
                 {t('auth:signin.subtitle')}
               </Text>
             </Stack>
