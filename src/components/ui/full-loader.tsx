@@ -1,5 +1,6 @@
 import { ActivityIndicator } from 'react-native';
-import { Center } from 'react-native-ficus-ui';
+
+import { Center } from '@/components/ui/stack';
 
 export const FullLoader = () => {
   return (

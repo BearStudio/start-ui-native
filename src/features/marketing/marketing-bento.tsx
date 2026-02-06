@@ -1,7 +1,9 @@
 import { Linking, TouchableOpacity } from 'react-native';
-import { Box, Stack, Text } from 'react-native-ficus-ui';
 
+import { Box } from '@/components/ui/box';
 import { Image } from '@/components/ui/image';
+import { Stack } from '@/components/ui/stack';
+import { Text } from '@/components/ui/text';
 
 const MarketingTile = ({
   href,
@@ -38,17 +40,12 @@ const MarketingTile = ({
 };
 
 export const MarketingBento = () => (
-  <Stack spacing={8} mt={24}>
-    <Text
-      textAlign="center"
-      fontSize="2xs"
-      color="neutral.600"
-      _dark={{ color: 'neutral.300' }}
-    >
+  <Stack spacing={8} className="mt-6">
+    <Text className="text-center text-[0.625rem] text-neutral-600 dark:text-neutral-300">
       Shameless plug 😅 Remember that 🚀 Start UI is free and Open Source 😉
     </Text>
-    <Box flexDirection="row" gap={8}>
-      <Box flex={1} gap={8}>
+    <Box className="flex flex-1 flex-row gap-2">
+      <Box className="flex flex-1 flex-col gap-2">
         <MarketingTile
           href="https://bear.studio/assets-start-ui-bento-01"
           src="https://raw.githubusercontent.com/BearStudio/assets/main/start-ui/marketing-bento-01.jpg"
@@ -64,7 +61,7 @@ export const MarketingBento = () => (
         />
       </Box>
 
-      <Box flex={1} gap={8}>
+      <Box className="flex flex-1 flex-col gap-2">
         <MarketingTile
           href="https://bear.studio/assets-start-ui-bento-04"
           src="https://raw.githubusercontent.com/BearStudio/assets/main/start-ui/marketing-bento-04.jpg"

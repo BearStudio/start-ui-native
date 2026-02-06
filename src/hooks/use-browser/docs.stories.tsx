@@ -1,6 +1,6 @@
-import { Button } from 'react-native-ficus-ui';
-
 import { useBrowser } from '@/hooks/use-browser';
+
+import { Button } from '@/components/ui/button';
 
 export default {
   title: 'Hooks/useBrowser',

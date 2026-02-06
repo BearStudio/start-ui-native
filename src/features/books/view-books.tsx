@@ -1,12 +1,13 @@
 import { getUiState } from '@bearstudio/ui-state';
+import { FlashList } from '@shopify/flash-list';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { Link } from 'expo-router';
 import { ActivityIndicator } from 'react-native';
-import { FlashList, Text } from 'react-native-ficus-ui';
 
 import { api } from '@/lib/hey-api/api';
 
 import { FullLoader } from '@/components/ui/full-loader';
+import { Text } from '@/components/ui/text';
 
 import { BookCover } from '@/features/books/book-cover';
 import { ViewTabContent } from '@/layout/view-tab-content';

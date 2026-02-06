@@ -1,5 +1,8 @@
 import { ReactElement } from 'react';
-import { Button, ScrollBox, Stack } from 'react-native-ficus-ui';
+
+import { Button } from '@/components/ui/button';
+import { ScrollBox } from '@/components/ui/scroll-box';
+import { Stack } from '@/components/ui/stack';
 
 import * as icons from './generated';
 
@@ -8,8 +11,8 @@ export default {
 };
 
 export const AllIcons = () => (
-  <ScrollBox>
-    <Stack spacing="md" px={24}>
+  <ScrollBox className="flex-1">
+    <Stack spacing={24} className="px-6">
       {Object.entries(icons).map(([name, Icon]) => (
         <CustomIcon name={name} key={name}>
           <Icon />
@@ -27,7 +30,7 @@ const CustomIcon = ({
   name: string;
 }) => {
   return (
-    <Button variant="outline" p={3} full>
+    <Button variant="outline" className="w-full p-4">
       {children}
       {name}
     </Button>

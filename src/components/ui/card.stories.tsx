@@ -1,33 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
-import { Box, Button, HStack, Text, VStack } from 'react-native-ficus-ui';
+
+import { Box } from '@/components/ui/box';
+import { Button } from '@/components/ui/button';
+import { HStack, Stack } from '@/components/ui/stack';
+import { Text } from '@/components/ui/text';
 
 import { Card, CardBody, CardHeader, CardTitle } from './card';
 
 const meta: Meta<typeof Card> = {
   title: 'UI/Card',
   component: Card,
-  argTypes: {
-    borderRadius: {
-      control: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', 'full'],
-    },
-    borderWidth: { control: 'number' },
-    borderColor: { control: 'text' },
-    bg: { control: 'text' },
-  },
-  args: {
-    borderRadius: 'md',
-    borderWidth: 1,
-    borderColor: 'pink.200',
-    bg: 'white',
-  },
   parameters: {
     notes:
-      'Card basique basé sur react-native-ficus-ui. Utilise `_dark` pour le thème sombre.',
+      'Card component using custom Box, HStack, Text. Supports dark mode via Tailwind.',
   },
   decorators: [
     (Story) => (
-      <Box p={16} bg="white" justifyContent="center" flex={1}>
+      <Box className="flex flex-1 justify-center bg-white p-4">
         <Story />
       </Box>
     ),
@@ -56,7 +45,7 @@ export const WithHeaderAndBody: Story = {
     <Card {...args}>
       <CardHeader>
         <CardTitle>Payment method</CardTitle>
-        <HStack gap={8}>
+        <HStack spacing={8}>
           <Button size="sm" variant="ghost">
             Edit
           </Button>
@@ -64,20 +53,20 @@ export const WithHeaderAndBody: Story = {
       </CardHeader>
 
       <CardBody>
-        <VStack gap={8}>
-          <HStack justifyContent="space-between">
-            <Text color="neutral.500">Card holder</Text>
-            <Text fontWeight="semibold">Aziz Ouertani</Text>
+        <Stack spacing={8}>
+          <HStack className="justify-between">
+            <Text className="text-neutral-500">Card holder</Text>
+            <Text className="font-semibold">Aziz Ouertani</Text>
           </HStack>
-          <HStack justifyContent="space-between">
-            <Text color="neutral.500">Number</Text>
-            <Text fontWeight="semibold">**** **** **** 4242</Text>
+          <HStack className="justify-between">
+            <Text className="text-neutral-500">Number</Text>
+            <Text className="font-semibold">**** **** **** 4242</Text>
           </HStack>
-          <HStack justifyContent="space-between">
-            <Text color="neutral.500">Expires</Text>
-            <Text fontWeight="semibold">12/27</Text>
+          <HStack className="justify-between">
+            <Text className="text-neutral-500">Expires</Text>
+            <Text className="font-semibold">12/27</Text>
           </HStack>
-        </VStack>
+        </Stack>
       </CardBody>
     </Card>
   ),
@@ -89,7 +78,7 @@ export const PressableHeaderActions: Story = {
     <Card {...args}>
       <CardHeader>
         <CardTitle>Team</CardTitle>
-        <HStack gap={8}>
+        <HStack spacing={8}>
           <Button size="sm" variant="outline">
             Invite
           </Button>
@@ -97,28 +86,28 @@ export const PressableHeaderActions: Story = {
         </HStack>
       </CardHeader>
       <CardBody>
-        <VStack gap={6}>
+        <Stack spacing={6}>
           <Text>- Hugo Pérard</Text>
           <Text>- Nicolas Troion</Text>
           <Text>- Aziz Ouertani</Text>
           <Text>- Omar Borji</Text>
-        </VStack>
+        </Stack>
       </CardBody>
     </Card>
   ),
 };
 
 export const DarkModeHint: Story = {
-  name: 'Dark mode (via `_dark`)',
+  name: 'Dark mode',
   render: (args) => (
-    <Box bg="neutral.950" p={16} flex={1} justifyContent="center">
-      <Card {...args} alignSelf="center">
+    <Box className="flex flex-1 justify-center bg-neutral-950 p-4">
+      <Card {...args} className="self-center">
         <CardHeader>
-          <CardTitle color="white">Dark mode preview</CardTitle>
+          <CardTitle className="text-white">Dark mode preview</CardTitle>
         </CardHeader>
         <CardBody>
-          <Text color="gray.900">
-            Surround with a dark container to preview the `_dark` styles.
+          <Text className="text-neutral-900">
+            Surround with a dark container to preview dark styles.
           </Text>
         </CardBody>
       </Card>

@@ -6,21 +6,21 @@ import {
   BottomSheetView,
 } from '@gorhom/bottom-sheet';
 import { useEffect, useMemo, useRef } from 'react';
-import { ficus, useColorModeValue, useDisclosure } from 'react-native-ficus-ui';
+import { useColorScheme } from 'react-native';
 
-import theme from '@/lib/ficus-ui/theme';
+import { cn } from '@/lib/tailwind/utils';
 
-const FicusBottomSheet = ficus(BottomSheetModal, {
-  baseStyle: { flex: 1, borderRadius: 'md' },
-});
+const neutral200 = '#e5e5e5';
+const neutral500 = '#737373';
+const neutral900 = '#171717';
 
 export const BottomSheet = ({
   isOpen,
   onClose,
   ...props
-}: BottomSheetModalProps &
-  Pick<ReturnType<typeof useDisclosure>, 'isOpen' | 'onClose'>) => {
+}: BottomSheetModalProps & { isOpen?: boolean; onClose?: () => void }) => {
   const ref = useRef<BottomSheetModal>(null);
+  const colorScheme = useColorScheme();
 
   useEffect(() => {
     if (!ref.current) {
@@ -40,11 +40,8 @@ export const BottomSheet = ({
     }
   };
 
-  const backgroundColor = useColorModeValue('white', theme.colors.neutral[900]);
-  const handleColor = useColorModeValue(
-    theme.colors.neutral[200],
-    theme.colors.neutral[500]
-  );
+  const backgroundColor = colorScheme === 'dark' ? neutral900 : 'white';
+  const handleColor = colorScheme === 'dark' ? neutral500 : neutral200;
 
   const renderBackdrop = useMemo(
     () => (backdropProps: BottomSheetBackdropProps) => (
@@ -60,7 +57,7 @@ export const BottomSheet = ({
   );
 
   return (
-    <FicusBottomSheet
+    <BottomSheetModal
       {...props}
       backdropComponent={renderBackdrop}
       handleIndicatorStyle={{
@@ -68,7 +65,7 @@ export const BottomSheet = ({
         width: 64,
         height: 5,
       }}
-      backgroundStyle={{ backgroundColor }}
+      backgroundStyle={{ backgroundColor, flex: 1, borderRadius: 8 }}
       handleStyle={{ backgroundColor: 'transparent' }}
       ref={ref}
       onChange={handleChange}
@@ -76,6 +73,30 @@ export const BottomSheet = ({
   );
 };
 
-export const BottomSheetBox = ficus(BottomSheetView, {
-  baseStyle: { flex: 1, px: 24, pt: 12, pb: 64, minH: 260 },
-});
+type BottomSheetBoxProps = React.ComponentProps<typeof BottomSheetView> & {
+  className?: string;
+  gap?: number;
+};
+
+export const BottomSheetBox = ({
+  className,
+  style,
+  gap,
+  ...props
+}: BottomSheetBoxProps) => (
+  <BottomSheetView
+    style={[
+      {
+        flex: 1,
+        paddingHorizontal: 24,
+        paddingTop: 12,
+        paddingBottom: 64,
+        minHeight: 260,
+        gap,
+      },
+      style,
+    ]}
+    className={cn(className)}
+    {...props}
+  />
+);

@@ -1,6 +1,7 @@
-import { Box, BoxProps, Text } from 'react-native-ficus-ui';
-
 import { BookGetByIdResponse } from '@/lib/hey-api/generated';
+
+import { Box, type BoxProps } from '@/components/ui/box';
+import { Text } from '@/components/ui/text';
 
 export type BookCoverProps = BoxProps & { book: BookGetByIdResponse };
 
@@ -8,26 +9,21 @@ const COVER_HEIGHT = 240;
 
 export const BookCover = ({
   book,
-  h = COVER_HEIGHT,
+  className,
+  style,
   ...props
 }: BookCoverProps) => {
   return (
     <Box
-      justifyContent="space-between"
-      p={16}
-      bg={book.genre?.color}
-      h={h}
-      w="100%"
-      aspectRatio={2 / 3}
-      borderRadius="lg"
+      className="flex aspect-[2/3] w-full justify-between rounded-lg p-4"
+      style={[
+        { height: COVER_HEIGHT, backgroundColor: book.genre?.color },
+        style,
+      ]}
       {...props}
     >
-      <Text fontSize="md" fontWeight="bold" color="white">
-        {book.title}
-      </Text>
-      <Text fontSize="xs" fontWeight="medium" color="white">
-        {book.author}
-      </Text>
+      <Text className="text-base font-bold text-white">{book.title}</Text>
+      <Text className="text-xs font-medium text-white">{book.author}</Text>
     </Box>
   );
 };

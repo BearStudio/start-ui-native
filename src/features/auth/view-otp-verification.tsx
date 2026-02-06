@@ -1,12 +1,14 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Button, Center, Stack, Text } from 'react-native-ficus-ui';
 import { toast } from 'sonner-native';
 import { z } from 'zod';
 
 import { useAppForm } from '@/lib/tanstack-form/config';
 
 import { IconArrowLeft } from '@/components/icons/generated';
+import { Button } from '@/components/ui/button';
+import { Center, Stack } from '@/components/ui/stack';
+import { Text } from '@/components/ui/text';
 
 import { AuthHeader } from '@/features/auth/auth-header';
 import { authClient } from '@/features/auth/client';
@@ -51,17 +53,17 @@ export const ViewOtpVerification = () => {
       <Center flex={1} p={24}>
         <form.AppForm>
           <Stack spacing={24} w="100%" maxW={400}>
-            <Button variant="@ghost" pl={0} onPress={router.back}>
+            <Button variant="ghost" className="pl-0" onPress={router.back}>
               <IconArrowLeft width={18} height={18} />
               {t('auth:verification.back')}
             </Button>
             <Stack spacing={8}>
-              <Text fontWeight="bold" fontSize="lg">
+              <Text className="text-lg font-bold">
                 {t('auth:verification.title')}
               </Text>
-              <Text fontWeight={400} fontSize="sm">
+              <Text className="text-sm font-normal">
                 {t('auth:verification.description')}
-                <Text fontWeight={800}>{email}</Text>.{' '}
+                <Text className="font-extrabold">{email}</Text>.{' '}
                 {t('auth:verification.enterItBelow')}
               </Text>
             </Stack>

@@ -1,6 +1,7 @@
-import { ScrollBox, Stack } from 'react-native-ficus-ui';
-
 import { useAppForm } from '@/lib/tanstack-form/config';
+
+import { ScrollBox } from '@/components/ui/scroll-box';
+import { Stack } from '@/components/ui/stack';
 
 export default {
   title: 'Form/Fields',
@@ -10,7 +11,7 @@ export const AllFields = () => {
   const form = useAppForm({ defaultValues: { text: '', otp: '' } });
   return (
     <form.AppForm>
-      <ScrollBox p={16}>
+      <ScrollBox className="flex-1 p-4">
         <Stack spacing={16}>
           <form.AppField name="text">
             {(field) => (

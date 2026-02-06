@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useQuery } from '@tanstack/react-query';
 import z from 'zod';
 
-import { STORAGE_KEY_THEME } from '@/lib/ficus-ui/theme';
+import { STORAGE_KEY_THEME } from '@/lib/theme';
 
 export const themeQueryKey = ['app-theme', STORAGE_KEY_THEME];
 

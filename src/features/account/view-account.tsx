@@ -1,25 +1,22 @@
 import { getUiState } from '@bearstudio/ui-state';
 import { useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
-import {
-  Avatar,
-  Button,
-  Divider,
-  HStack,
-  Stack,
-  Text,
-  useDisclosure,
-} from 'react-native-ficus-ui';
 import { toast } from 'sonner-native';
 import z from 'zod';
 
 import { useAppForm } from '@/lib/tanstack-form/config';
+import { useDisclosure } from '@/hooks/use-disclosure';
 
 import { IconEdit3, IconLogOut } from '@/components/icons/generated';
+import { AvatarWithFallback } from '@/components/ui/avatar';
 import { BottomSheet, BottomSheetBox } from '@/components/ui/bottom-sheet';
+import { Button } from '@/components/ui/button';
 import { Card, CardBody, CardHeader, CardTitle } from '@/components/ui/card';
+import { Divider } from '@/components/ui/divider';
 import { FullLoader } from '@/components/ui/full-loader';
 import { LocaleSwitcher } from '@/components/ui/locale-switcher';
+import { HStack, Stack } from '@/components/ui/stack';
+import { Text } from '@/components/ui/text';
 import { ThemeSwitcher } from '@/components/ui/theme-switcher';
 import { Version } from '@/components/version';
 
@@ -67,7 +64,7 @@ export const ViewAccount = () => {
 
   return (
     <ViewTabContent>
-      <Stack gap={16} flex={1}>
+      <Stack spacing={16} className="flex-1">
         {ui
           .match('pending', () => <FullLoader />)
           .match('error', () => <></>)
@@ -75,15 +72,15 @@ export const ViewAccount = () => {
           .match('default', ({ data }) => (
             <Card>
               <CardHeader>
-                <HStack alignItems="center" spacing={8}>
-                  <Avatar
+                <HStack spacing={8} alignItems="center">
+                  <AvatarWithFallback
                     name={data.user.name}
                     size="xs"
-                    colorScheme="neutral"
+                    image={data.user.image}
                   />
                   <CardTitle>{data.user.name}</CardTitle>
                 </HStack>
-                <Button variant="@ghost" onPress={() => signoutSheet.onOpen()}>
+                <Button variant="ghost" onPress={() => signoutSheet.onOpen()}>
                   <IconLogOut width={14} height={14} />
                   {t('account:user.signOut')}
                 </Button>
@@ -92,17 +89,17 @@ export const ViewAccount = () => {
                   onClose={signoutSheet.onClose}
                 >
                   <BottomSheetBox gap={16}>
-                    <Stack gap={4}>
-                      <Text fontWeight="bold">
+                    <Stack spacing={4}>
+                      <Text className="font-bold">
                         {t('auth:signOut.confirm.title')}
                       </Text>
-                      <Text fontSize="sm" fontWeight="500" variant="muted">
+                      <Text className="text-sm font-medium" variant="muted">
                         {t('auth:signOut.confirm.description')}
                       </Text>
                     </Stack>
                     <Button
-                      variant="@secondary"
-                      full
+                      variant="secondary"
+                      className="w-full"
                       onPress={() => signoutSheet.onClose()}
                     >
                       {t('auth:signOut.confirm.cancel')}
@@ -112,8 +109,7 @@ export const ViewAccount = () => {
                         queryClient.clear();
                         authClient.signOut();
                       }}
-                      full
-                      gap={8}
+                      className="w-full gap-2"
                     >
                       <IconLogOut width={20} height={20} />
                       {t('auth:signOut.confirm.signOut')}
@@ -124,25 +120,24 @@ export const ViewAccount = () => {
               <Divider />
               <CardBody>
                 <Stack spacing={2}>
-                  <Text fontSize="xs" fontWeight="medium" variant="muted">
+                  <Text className="text-xs font-medium" variant="muted">
                     {t('account:user.name')}
                   </Text>
                   <Button
-                    variant="@link"
-                    size="xs"
-                    fontSize="sm"
-                    fontWeight="medium"
+                    variant="link"
+                    size="sm"
+                    className="font-medium"
                     onPress={() => updateNameSheet.onOpen()}
                   >
                     {data.user.name}{' '}
-                    <IconEdit3 width={16} height={16} color="neutral.600" />
+                    <IconEdit3 width={16} height={16} color="#525252" />
                   </Button>
                   <BottomSheet
                     isOpen={updateNameSheet.isOpen}
                     onClose={updateNameSheet.onClose}
                   >
                     <BottomSheetBox gap={16}>
-                      <Text fontWeight="bold">
+                      <Text className="font-bold">
                         {t('account:user.updateName.title')}
                       </Text>
                       <updateNameForm.AppForm>
@@ -159,8 +154,8 @@ export const ViewAccount = () => {
                         </updateNameForm.AppField>
 
                         <Button
-                          variant="@secondary"
-                          full
+                          variant="secondary"
+                          className="w-full"
                           onPress={() => updateNameSheet.onClose()}
                         >
                           {t('account:user.updateName.cancel')}
@@ -176,12 +171,10 @@ export const ViewAccount = () => {
               <Divider />
               <CardBody>
                 <Stack spacing={2}>
-                  <Text fontSize="xs" fontWeight="medium" variant="muted">
+                  <Text className="text-xs font-medium" variant="muted">
                     {t('account:user.email')}
                   </Text>
-                  <Text fontSize="sm" fontWeight="medium">
-                    {data.user.email}
-                  </Text>
+                  <Text className="text-sm font-medium">{data.user.email}</Text>
                 </Stack>
               </CardBody>
             </Card>
@@ -192,25 +185,25 @@ export const ViewAccount = () => {
             <CardTitle>{t('account:displayPreferences.title')}</CardTitle>
           </CardHeader>
           <Divider />
-          <CardBody p={16}>
+          <CardBody className="p-4">
             <Stack spacing={2}>
-              <Text fontSize="xs" fontWeight="medium" variant="muted">
+              <Text className="text-xs font-medium" variant="muted">
                 {t('account:displayPreferences.theme')}
               </Text>
               <ThemeSwitcher />
             </Stack>
           </CardBody>
           <Divider />
-          <CardBody p={16}>
+          <CardBody className="p-4">
             <Stack spacing={2}>
-              <Text fontSize="xs" fontWeight="medium" variant="muted">
+              <Text className="text-xs font-medium" variant="muted">
                 {t('account:displayPreferences.language')}
               </Text>
               <LocaleSwitcher />
             </Stack>
           </CardBody>
         </Card>
-        <Version textAlign="center" />
+        <Version className="text-center" />
       </Stack>
     </ViewTabContent>
   );

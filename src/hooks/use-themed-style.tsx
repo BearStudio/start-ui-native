@@ -1,18 +1,16 @@
-import { useColorModeValue } from 'react-native-ficus-ui';
+import { useColorScheme } from 'react-native';
 
-import theme from '@/lib/ficus-ui/theme';
+const neutral50 = '#fafafa';
+const neutral900 = '#171717';
+const neutral950 = '#0a0a0a';
 
 export const useThemedStyle = () => {
-  return useColorModeValue(
-    {
-      backgroundColor: 'white',
-      color: theme.colors.neutral[950],
-      sceneBackgroundColor: theme.colors.neutral[50],
-    },
-    {
-      backgroundColor: theme.colors.neutral[950],
-      color: 'white',
-      sceneBackgroundColor: theme.colors.neutral[900],
-    }
-  );
+  const colorScheme = useColorScheme();
+  const isDark = colorScheme === 'dark';
+
+  return {
+    backgroundColor: isDark ? neutral950 : 'white',
+    color: isDark ? 'white' : neutral950,
+    sceneBackgroundColor: isDark ? neutral900 : neutral50,
+  };
 };

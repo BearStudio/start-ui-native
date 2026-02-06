@@ -1,14 +1,11 @@
-import { Text, TextProps } from 'react-native-ficus-ui';
+import { Text } from '@/components/ui/text';
 
-type FormFieldLabelProps = TextProps;
+type FormFieldLabelProps = React.ComponentProps<typeof Text>;
 
 export const FormFieldLabel = (props: FormFieldLabelProps) => {
   return (
     <Text
-      color="neutral.800"
-      _dark={{ color: 'neutral.200' }}
-      fontSize="sm"
-      fontWeight="medium"
+      className="text-sm font-medium text-neutral-800 dark:text-neutral-200"
       {...props}
     />
   );

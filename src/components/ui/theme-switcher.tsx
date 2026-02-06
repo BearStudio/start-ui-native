@@ -2,18 +2,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useQueryClient } from '@tanstack/react-query';
 import { LucideSunMoon } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { Appearance } from 'react-native';
-import {
-  Box,
-  Button,
-  HStack,
-  IconButton,
-  Pressable,
-  Text,
-  useDisclosure,
-} from 'react-native-ficus-ui';
+import { Appearance, Pressable } from 'react-native';
 
-import { STORAGE_KEY_THEME } from '@/lib/ficus-ui/theme';
+import { STORAGE_KEY_THEME } from '@/lib/theme';
+import { useDisclosure } from '@/hooks/use-disclosure';
 import { themeQueryKey, useThemeMode } from '@/hooks/use-theme-mode';
 
 import {
@@ -24,6 +16,10 @@ import {
 } from '@/components/icons/generated';
 import { Icon } from '@/components/icons/icon';
 import { BottomSheet, BottomSheetBox } from '@/components/ui/bottom-sheet';
+import { Box } from '@/components/ui/box';
+import { Button } from '@/components/ui/button';
+import { HStack } from '@/components/ui/stack';
+import { Text } from '@/components/ui/text';
 
 export const ThemeSwitcher = (props: { minimize?: boolean }) => {
   const { t } = useTranslation(['common']);
@@ -46,45 +42,40 @@ export const ThemeSwitcher = (props: { minimize?: boolean }) => {
   return (
     <>
       {props.minimize ? (
-        <IconButton
-          icon={<Icon icon={DisplayIcon} />}
-          variant="@ghost"
-          color="neutral.500"
-          onPress={sheet.onOpen}
-          size="lg"
-        />
+        <Button variant="ghost" size="icon" onPress={sheet.onOpen}>
+          <Icon icon={DisplayIcon} size={20} color="#737373" />
+        </Button>
       ) : (
-        <Button variant="@link" gap={8} onPress={sheet.onOpen}>
-          <Icon icon={DisplayIcon} size={16} color="neutral.500" />
+        <Button variant="link" className="gap-2" onPress={sheet.onOpen}>
+          <Icon icon={DisplayIcon} size={16} color="#737373" />
           <Text>{t(`common:themes.values.${currentTheme}`)}</Text>
           {!!currentTheme && (
-            <IconChevronsUpDown width={16} height={16} color="neutral.500" />
+            <IconChevronsUpDown width={16} height={16} color="#737373" />
           )}
         </Button>
       )}
-      <BottomSheet {...sheet}>
+      <BottomSheet isOpen={sheet.isOpen} onClose={sheet.onClose}>
         <BottomSheetBox gap={24}>
           {(['system', 'light', 'dark'] as const).map((mode) => (
-            <HStack
+            <Pressable
               key={mode}
-              as={Pressable}
               onPress={() => {
                 updateColorMode(mode);
                 sheet.onClose();
               }}
-              py={4}
+              className="flex flex-row items-center py-1"
             >
-              <Box w={32}>
+              <Box className="w-8">
                 {mode === currentTheme && (
-                  <IconCheck width={16} height={16} color="neutral.500" />
+                  <IconCheck width={16} height={16} color="#737373" />
                 )}
               </Box>
               <Box>
-                <Text fontWeight="bold">
+                <Text className="font-bold">
                   {t(`common:themes.values.${mode}`)}
                 </Text>
               </Box>
-            </HStack>
+            </Pressable>
           ))}
         </BottomSheetBox>
       </BottomSheet>

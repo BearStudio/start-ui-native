@@ -1,33 +1,26 @@
-import {
-  Box,
-  BoxProps,
-  HStack,
-  StackProps,
-  Text,
-  TextProps,
-} from 'react-native-ficus-ui';
+import type { ViewProps } from 'react-native';
+
+import { Box, type BoxProps } from '@/components/ui/box';
+import { HStack } from '@/components/ui/stack';
+import { Text } from '@/components/ui/text';
 
 export const Card = (props: BoxProps) => {
   return (
     <Box
-      borderRadius="md"
-      borderWidth={1}
-      borderColor="neutral.200"
-      bg="white"
-      _dark={{ bg: 'neutral.950', borderColor: 'neutral.800' }}
+      className="rounded-md border border-neutral-200 bg-white dark:bg-neutral-950 dark:border-neutral-800"
       {...props}
     />
   );
 };
 
-export const CardHeader = (props: StackProps) => {
-  return <HStack p={16} justifyContent="space-between" {...props} />;
+export const CardHeader = (props: ViewProps) => {
+  return <HStack className="justify-between p-4" {...props} />;
 };
 
-export const CardTitle = (props: TextProps) => {
-  return <Text fontWeight="bold" {...props} />;
+export const CardTitle = (props: React.ComponentProps<typeof Text>) => {
+  return <Text className="font-bold" {...props} />;
 };
 
 export const CardBody = (props: BoxProps) => {
-  return <Box p={16} {...props} />;
+  return <Box className="p-4" {...props} />;
 };

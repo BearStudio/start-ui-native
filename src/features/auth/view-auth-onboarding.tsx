@@ -1,8 +1,10 @@
 import { useTranslation } from 'react-i18next';
-import { Center, Stack, Text } from 'react-native-ficus-ui';
 import z from 'zod';
 
 import { useAppForm } from '@/lib/tanstack-form/config';
+
+import { Center, Stack } from '@/components/ui/stack';
+import { Text } from '@/components/ui/text';
 
 import { AuthHeader } from '@/features/auth/auth-header';
 import { authClient } from '@/features/auth/client';
@@ -29,10 +31,10 @@ export const ViewAuthOnboarding = () => {
       <Center flex={1} p={24} maxW={400}>
         <Stack spacing={24} w="100%">
           <Stack spacing={8}>
-            <Text fontWeight="bold" fontSize="lg">
+            <Text className="text-lg font-bold">
               {t('auth:onboarding.title')}
             </Text>
-            <Text fontWeight={400} fontSize="sm">
+            <Text className="text-sm font-normal">
               {t('auth:onboarding.subtitle')}
             </Text>
           </Stack>
