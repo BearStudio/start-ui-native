@@ -1,24 +1,25 @@
 import { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Dimensions } from 'react-native';
+import { View } from 'react-native';
 
 import { IconCheck } from '@/components/icons/generated';
-import { Icon } from '@/components/icons/icon';
 import { Badge } from '@/components/ui/badge';
-import { Center, HStack, Stack } from '@/components/ui/stack';
 import { Text } from '@/components/ui/text';
 
-const { width: WINDOW_WIDTH, height: WINDOW_HEIGHT } = Dimensions.get('window');
+import { deviceScreen } from '@/constants/device';
 
 const OnboardingScreenContainer = (props: PropsWithChildren) => (
-  <Center className="w-full p-8" style={{ width: WINDOW_WIDTH }}>
-    <Stack
+  <View
+    className="w-full p-8 items-center justify-center"
+    style={{ width: deviceScreen.width }}
+  >
+    <View
       className="h-1/2 w-full max-w-[400px]"
-      style={{ height: WINDOW_HEIGHT / 2 }}
+      style={{ height: deviceScreen.height / 2 }}
     >
       {props.children}
-    </Stack>
-  </Center>
+    </View>
+  </View>
 );
 
 export const AppOnboardingScreenWelcome = () => {
@@ -48,34 +49,34 @@ export const AppOnboardingScreenFeatures = () => {
   ];
   return (
     <OnboardingScreenContainer>
-      <Stack spacing={16}>
-        <Stack>
+      <View className="gap-4">
+        <View>
           <Text className="text-4xl font-bold text-white">
             {t('appOnboarding:features.titleOne')}
           </Text>
           <Text className="text-4xl font-bold text-white">
             {t('appOnboarding:features.titleTwo')}
           </Text>
-        </Stack>
-        <Stack spacing={8}>
-          <HStack spacing={8} className="flex-wrap">
+        </View>
+        <View className="gap-2">
+          <View className="flex flex-row flex-wrap gap-2">
             {features.map((feature) => (
               <Badge
                 key={feature}
                 className="flex-row items-center gap-1 bg-white text-neutral-900"
               >
-                <Icon icon={IconCheck} size={16} color="#171717" />
+                <IconCheck className="text-neutral-900 w-8 h-8" />
                 <Text className="text-neutral-900">
                   {t(`appOnboarding:features.${feature}`)}
                 </Text>
               </Badge>
             ))}
-          </HStack>
+          </View>
           <Text className="font-medium text-white opacity-80">
             {t('appOnboarding:features.more')}
           </Text>
-        </Stack>
-      </Stack>
+        </View>
+      </View>
     </OnboardingScreenContainer>
   );
 };

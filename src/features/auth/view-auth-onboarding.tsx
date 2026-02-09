@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next';
+import { View } from 'react-native';
 import z from 'zod';
 
 import { useAppForm } from '@/lib/tanstack-form/config';
 
-import { Center, Stack } from '@/components/ui/stack';
 import { Text } from '@/components/ui/text';
 
 import { AuthHeader } from '@/features/auth/auth-header';
@@ -28,19 +28,19 @@ export const ViewAuthOnboarding = () => {
   return (
     <ViewSafeContent>
       <AuthHeader />
-      <Center flex={1} p={24} maxW={400}>
-        <Stack spacing={24} w="100%">
-          <Stack spacing={8}>
+      <View className="flex-1 p-6 max-w-[400px] items-center justify-center w-full">
+        <View className="w-full gap-6">
+          <View className="gap-2">
             <Text className="text-lg font-bold">
               {t('auth:onboarding.title')}
             </Text>
             <Text className="text-sm font-normal">
               {t('auth:onboarding.subtitle')}
             </Text>
-          </Stack>
+          </View>
           <form.AppForm>
-            <Stack spacing={16}>
-              <Stack spacing={8}>
+            <View className="gap-4">
+              <View className="gap-2">
                 <form.AppField name="name">
                   {(field) => (
                     <field.Field>
@@ -55,12 +55,12 @@ export const ViewAuthOnboarding = () => {
                     </field.Field>
                   )}
                 </form.AppField>
-              </Stack>
+              </View>
               <form.Submit>{t('auth:onboarding.continue')}</form.Submit>
-            </Stack>
+            </View>
           </form.AppForm>
-        </Stack>
-      </Center>
+        </View>
+      </View>
     </ViewSafeContent>
   );
 };

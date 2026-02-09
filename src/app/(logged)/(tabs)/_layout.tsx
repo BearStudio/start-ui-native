@@ -98,8 +98,14 @@ export default function TabLayout() {
             title: t(tab.translationKey),
             headerShown: tab.headerShown,
             tabBarIcon: (props) => {
-              const Icon = props.focused ? tab.iconFocused : tab.icon;
-              return <Icon color={props.color} w={props.size} h={props.size} />;
+              const TabIcon = props.focused ? tab.iconFocused : tab.icon;
+              return (
+                <TabIcon
+                  color={props.color}
+                  width={props.size}
+                  height={props.size}
+                />
+              );
             },
           }}
         />

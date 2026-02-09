@@ -1,8 +1,7 @@
 import { ReactElement } from 'react';
+import { ScrollView, View } from 'react-native';
 
 import { Button } from '@/components/ui/button';
-import { ScrollBox } from '@/components/ui/scroll-box';
-import { Stack } from '@/components/ui/stack';
 
 import * as icons from './generated';
 
@@ -11,15 +10,15 @@ export default {
 };
 
 export const AllIcons = () => (
-  <ScrollBox className="flex-1">
-    <Stack spacing={24} className="px-6">
+  <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
+    <View className="gap-6 px-6">
       {Object.entries(icons).map(([name, Icon]) => (
         <CustomIcon name={name} key={name}>
           <Icon />
         </CustomIcon>
       ))}
-    </Stack>
-  </ScrollBox>
+    </View>
+  </ScrollView>
 );
 
 const CustomIcon = ({

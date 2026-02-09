@@ -1,14 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList } from 'react-native';
-import {
-  Box,
-  Button,
-  HStack,
-  WINDOW_HEIGHT,
-  WINDOW_WIDTH,
-} from 'react-native-ficus-ui';
+import { View } from 'react-native';
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
@@ -16,7 +10,9 @@ import Animated, {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { AnimatedStepIndicator } from '@/components/ui/animated-step-indicator';
+import { Button } from '@/components/ui/button';
 
+import { deviceScreen } from '@/constants/device';
 import {
   AppOnboardingScreenFeatures,
   AppOnboardingScreenWelcome,
@@ -55,14 +51,28 @@ export const ViewOnboarding = () => {
 
   const doneOnboarding = useOnboardingStore((state) => state.setDone);
 
+  const onViewableItemsChanged = useCallback(
+    ({ viewableItems }: { viewableItems: { index: number | null }[] }) => {
+      const lastViewableIndex = viewableItems.at(-1)?.index;
+      if (lastViewableIndex !== undefined && lastViewableIndex !== null) {
+        setCurrentScreenIndex(lastViewableIndex);
+      }
+    },
+    []
+  );
+
+  const viewabilityConfig = useRef({
+    viewAreaCoveragePercentThreshold: 30,
+  }).current;
+
   return (
     <>
       <StatusBar style="light" />
       <Animated.View
         style={[
           {
-            width: WINDOW_WIDTH,
-            height: WINDOW_HEIGHT,
+            width: deviceScreen.width,
+            height: deviceScreen.height,
             position: 'absolute',
             zIndex: -1,
           },
@@ -71,7 +81,10 @@ export const ViewOnboarding = () => {
       >
         <Animated.Image
           source={backgroundImage}
-          style={{ minHeight: WINDOW_HEIGHT, minWidth: WINDOW_WIDTH }}
+          style={{
+            minHeight: deviceScreen.height,
+            minWidth: deviceScreen.width,
+          }}
         />
       </Animated.View>
       <Animated.Image
@@ -79,7 +92,7 @@ export const ViewOnboarding = () => {
         style={[
           {
             objectFit: 'contain',
-            height: WINDOW_HEIGHT / 3,
+            height: deviceScreen.height / 3,
             aspectRatio: 2 / 3,
             position: 'absolute',
           },
@@ -97,41 +110,27 @@ export const ViewOnboarding = () => {
           bounces={false}
           snapToAlignment="center"
           snapToOffsets={appOnboardingScreens.map(
-            (_, index) => index * WINDOW_WIDTH
+            (_, index) => index * deviceScreen.width
           )}
-          viewabilityConfig={{
-            viewAreaCoveragePercentThreshold: 30,
-          }}
-          onViewableItemsChanged={({ viewableItems }) => {
-            const lastViewableIndex = viewableItems.at(-1)?.index;
-            if (lastViewableIndex || lastViewableIndex === 0) {
-              setCurrentScreenIndex(lastViewableIndex);
-            }
-          }}
+          viewabilityConfig={viewabilityConfig}
+          onViewableItemsChanged={onViewableItemsChanged}
           onScroll={scrollHandler}
         />
-        <Box
-          position="absolute"
-          alignItems="center"
-          bottom={insets.bottom}
-          left={0}
-          right={0}
-          p={32}
-          gap={16}
+        <View
+          className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-4 p-8"
+          style={{ bottom: insets.bottom }}
         >
-          <HStack gap={4}>
+          <View className="flex flex-row gap-4">
             {appOnboardingScreens.map((screen, index) => (
               <AnimatedStepIndicator
                 key={screen.name.toString()}
                 isActive={index === currentScreenIndex}
               />
             ))}
-          </HStack>
+          </View>
           <Button
-            full
-            bg="white"
-            color="neutral.900"
             size="lg"
+            className="w-full"
             onPress={() => {
               if (currentScreenIndex === appOnboardingScreens.length - 1) {
                 doneOnboarding();
@@ -146,7 +145,7 @@ export const ViewOnboarding = () => {
               `appOnboarding:${currentScreenIndex === appOnboardingScreens.length - 1 ? 'end' : 'continue'}`
             )}
           </Button>
-        </Box>
+        </View>
       </ViewSafeContent>
     </>
   );

@@ -3,7 +3,7 @@ import { Platform, Pressable } from 'react-native';
 
 import { cn } from '@/lib/tailwind/utils';
 
-import { TextClassContext } from '@/components/ui/text';
+import { Text, TextClassContext } from '@/components/ui/text';
 
 const buttonVariants = cva(
   cn(
@@ -105,7 +105,7 @@ type ButtonProps = React.ComponentProps<typeof Pressable> &
   React.RefAttributes<typeof Pressable> &
   VariantProps<typeof buttonVariants>;
 
-function Button({ className, variant, size, ...props }: ButtonProps) {
+function Button({ className, variant, size, children, ...props }: ButtonProps) {
   return (
     <TextClassContext value={buttonTextVariants({ variant, size })}>
       <Pressable
@@ -116,7 +116,9 @@ function Button({ className, variant, size, ...props }: ButtonProps) {
         )}
         role="button"
         {...props}
-      />
+      >
+        {typeof children === 'string' ? <Text>{children}</Text> : children}
+      </Pressable>
     </TextClassContext>
   );
 }

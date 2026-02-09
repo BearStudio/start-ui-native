@@ -1,12 +1,12 @@
 import appConfig from 'app.config';
 import { Link } from 'expo-router';
 import { useTranslation } from 'react-i18next';
+import { View } from 'react-native';
 
 import { useShare } from '@/hooks/use-share';
 
 import { IconShare2 } from '@/components/icons/generated';
 import { Button } from '@/components/ui/button';
-import { HStack, Stack } from '@/components/ui/stack';
 import { Text } from '@/components/ui/text';
 
 import { MarketingBento } from '@/features/marketing/marketing-bento';
@@ -19,11 +19,11 @@ export const ViewHome = () => {
 
   return (
     <ViewTabContent gap={16}>
-      <Stack spacing={8}>
+      <View className="gap-2">
         <Text className="text-xl font-bold">{t('home:welcome.title')}</Text>
         <Text className="font-medium">{t('home:welcome.description')}</Text>
-      </Stack>
-      <HStack spacing={8} className="mt-4">
+      </View>
+      <View className="mt-4 flex flex-row gap-2">
         <Link href={appConfig.githubUrl} asChild>
           <Button size="sm" variant="secondary">
             GitHub
@@ -48,7 +48,7 @@ export const ViewHome = () => {
           <IconShare2 width={16} height={16} />
           {t('home:welcome.share')}
         </Button>
-      </HStack>
+      </View>
       <MarketingBento />
     </ViewTabContent>
   );

@@ -1,15 +1,10 @@
+import { ScrollView, type ScrollViewProps, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
-import { Box } from '@/components/ui/box';
-import { ScrollBox } from '@/components/ui/scroll-box';
 
 import { WITH_NATIVE_TABS } from '@/app/(logged)/(tabs)/_layout';
 import { isApple } from '@/constants/device';
 
-type ViewTabContentProps = Omit<
-  React.ComponentProps<typeof ScrollBox>,
-  'gap'
-> & {
+type ViewTabContentProps = Omit<ScrollViewProps, 'gap'> & {
   withHeader?: boolean;
   gap?: number;
 };
@@ -24,7 +19,7 @@ export const ViewTabContent = ({
   const insets = useSafeAreaInsets();
 
   return (
-    <ScrollBox
+    <ScrollView
       className="flex-1 p-4"
       contentContainerStyle={[
         {
@@ -33,10 +28,11 @@ export const ViewTabContent = ({
         },
         contentContainerStyle,
       ]}
+      showsVerticalScrollIndicator={false}
       {...props}
     >
       {children}
-      <Box style={{ height: insets.bottom }} />
-    </ScrollBox>
+      <View style={{ height: insets.bottom }} />
+    </ScrollView>
   );
 };

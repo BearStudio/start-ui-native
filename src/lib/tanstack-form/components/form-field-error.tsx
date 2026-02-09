@@ -1,10 +1,10 @@
 import { useStore } from '@tanstack/react-form';
+import { View } from 'react-native';
 
 import { FieldContextMeta } from '@/lib/tanstack-form/components/form-field';
 import { useFieldContext } from '@/lib/tanstack-form/context';
 
 import { IconAlertCircle } from '@/components/icons/generated';
-import { HStack } from '@/components/ui/stack';
 import { Text } from '@/components/ui/text';
 
 export const FormFieldError = (props: React.ComponentProps<typeof Text>) => {
@@ -23,11 +23,11 @@ export const FormFieldError = (props: React.ComponentProps<typeof Text>) => {
   }
 
   return (
-    <HStack spacing={2} alignItems="center">
+    <View className="flex flex-row items-center gap-0.5">
       <IconAlertCircle width={16} height={16} color="#ef4444" />
       <Text id={meta.errorId} className="font-medium text-red-500" {...props}>
         {meta.errorMessage}
       </Text>
-    </HStack>
+    </View>
   );
 };

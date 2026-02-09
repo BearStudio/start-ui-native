@@ -27,15 +27,15 @@ export const LoginEmailHint = () => {
 
   return (
     <Pressable onPress={() => form.setFieldValue('email', mockedEmail)}>
-      <Card className="border-neutral-200 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900">
+      <Card>
         <CardHeader>
           <CardTitle>
-            <Icon icon={TerminalIcon} size={16} color="#262626" />
+            <Icon icon={TerminalIcon} />
             <Text> {env.data?.isDev ? 'Dev mode' : 'Demo mode'}</Text>
           </CardTitle>
         </CardHeader>
 
-        <CardBody className="pt-0">
+        <CardBody className="p-4 pt-0">
           <Text className="font-medium">
             You can login with{' '}
             <Text className="font-bold underline">{mockedEmail}</Text>
@@ -57,15 +57,15 @@ export const LoginOtpHint = () => {
 
   return (
     <Pressable onPress={() => form.setFieldValue('code', mockedOtp)}>
-      <Card className="border-neutral-200 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900">
+      <Card>
         <CardHeader>
           <CardTitle>
-            <Icon icon={TerminalIcon} size={16} color="#262626" />
+            <Icon icon={TerminalIcon} />
             <Text> {env.data?.isDev ? 'Dev mode' : 'Demo mode'}</Text>
           </CardTitle>
         </CardHeader>
 
-        <CardBody className="pt-0">
+        <CardBody className="p-4 pt-0">
           <Text className="font-medium">
             Use the code{' '}
             <Text className="font-bold underline">{mockedOtp}</Text>

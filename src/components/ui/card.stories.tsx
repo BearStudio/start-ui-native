@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { View } from 'react-native';
 
-import { Box } from '@/components/ui/box';
 import { Button } from '@/components/ui/button';
-import { HStack, Stack } from '@/components/ui/stack';
 import { Text } from '@/components/ui/text';
 
 import { Card, CardBody, CardHeader, CardTitle } from './card';
@@ -12,13 +11,13 @@ const meta: Meta<typeof Card> = {
   component: Card,
   parameters: {
     notes:
-      'Card component using custom Box, HStack, Text. Supports dark mode via Tailwind.',
+      'Card component using View and Text. Supports dark mode via Tailwind.',
   },
   decorators: [
     (Story) => (
-      <Box className="flex flex-1 justify-center bg-white p-4">
+      <View className="flex flex-1 justify-center bg-white p-4">
         <Story />
-      </Box>
+      </View>
     ),
   ],
 };
@@ -45,28 +44,28 @@ export const WithHeaderAndBody: Story = {
     <Card {...args}>
       <CardHeader>
         <CardTitle>Payment method</CardTitle>
-        <HStack spacing={8}>
+        <View className="flex flex-row gap-2">
           <Button size="sm" variant="ghost">
             Edit
           </Button>
-        </HStack>
+        </View>
       </CardHeader>
 
       <CardBody>
-        <Stack spacing={8}>
-          <HStack className="justify-between">
+        <View className="gap-2">
+          <View className="flex flex-row justify-between">
             <Text className="text-neutral-500">Card holder</Text>
             <Text className="font-semibold">Aziz Ouertani</Text>
-          </HStack>
-          <HStack className="justify-between">
+          </View>
+          <View className="flex flex-row justify-between">
             <Text className="text-neutral-500">Number</Text>
             <Text className="font-semibold">**** **** **** 4242</Text>
-          </HStack>
-          <HStack className="justify-between">
+          </View>
+          <View className="flex flex-row justify-between">
             <Text className="text-neutral-500">Expires</Text>
             <Text className="font-semibold">12/27</Text>
-          </HStack>
-        </Stack>
+          </View>
+        </View>
       </CardBody>
     </Card>
   ),
@@ -78,20 +77,20 @@ export const PressableHeaderActions: Story = {
     <Card {...args}>
       <CardHeader>
         <CardTitle>Team</CardTitle>
-        <HStack spacing={8}>
+        <View className="flex flex-row gap-2">
           <Button size="sm" variant="outline">
             Invite
           </Button>
           <Button size="sm">New</Button>
-        </HStack>
+        </View>
       </CardHeader>
       <CardBody>
-        <Stack spacing={6}>
+        <View className="gap-1.5">
           <Text>- Hugo Pérard</Text>
           <Text>- Nicolas Troion</Text>
           <Text>- Aziz Ouertani</Text>
           <Text>- Omar Borji</Text>
-        </Stack>
+        </View>
       </CardBody>
     </Card>
   ),
@@ -100,7 +99,7 @@ export const PressableHeaderActions: Story = {
 export const DarkModeHint: Story = {
   name: 'Dark mode',
   render: (args) => (
-    <Box className="flex flex-1 justify-center bg-neutral-950 p-4">
+    <View className="flex flex-1 justify-center bg-neutral-950 p-4">
       <Card {...args} className="self-center">
         <CardHeader>
           <CardTitle className="text-white">Dark mode preview</CardTitle>
@@ -111,6 +110,6 @@ export const DarkModeHint: Story = {
           </Text>
         </CardBody>
       </Card>
-    </Box>
+    </View>
   ),
 };

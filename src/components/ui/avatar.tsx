@@ -78,7 +78,7 @@ function AvatarWithFallback({
   const sizeClass = sizeClasses[size];
   return (
     <Avatar alt={name} className={cn(sizeClass, className)} {...props}>
-      {image && <AvatarImage source={{ uri: image }} />}
+      {image ? <AvatarImage source={{ uri: image }} /> : null}
       <AvatarFallback>
         <Text className="text-muted-foreground text-xs font-medium">
           {getInitials(name)}

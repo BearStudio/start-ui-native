@@ -10,7 +10,6 @@ import '@/lib/i18n';
 
 import '@/global.css';
 
-import { ThemeManager } from '@/components/theme-manager';
 import { Sonner } from '@/components/ui/sonner';
 
 import { DevTools } from '@/features/devtools/devtools';
@@ -24,7 +23,6 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeManager />
       <SafeAreaListener
         onChange={({ insets }) => {
           Uniwind.updateInsets(insets);

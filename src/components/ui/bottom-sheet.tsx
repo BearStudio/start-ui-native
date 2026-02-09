@@ -73,17 +73,17 @@ export const BottomSheet = ({
   );
 };
 
-type BottomSheetBoxProps = React.ComponentProps<typeof BottomSheetView> & {
+type BottomSheetContentProps = React.ComponentProps<typeof BottomSheetView> & {
   className?: string;
   gap?: number;
 };
 
-export const BottomSheetBox = ({
+export const BottomSheetContent = ({
   className,
   style,
   gap,
   ...props
-}: BottomSheetBoxProps) => (
+}: BottomSheetContentProps) => (
   <BottomSheetView
     style={[
       {

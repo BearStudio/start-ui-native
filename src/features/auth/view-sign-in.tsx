@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import appConfig from 'app.config';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { toast } from 'sonner-native';
 import { z } from 'zod';
@@ -9,7 +10,6 @@ import { z } from 'zod';
 import { Form } from '@/lib/tanstack-form/components';
 import { useAppForm } from '@/lib/tanstack-form/config';
 
-import { Center, HStack, Stack } from '@/components/ui/stack';
 import { Text } from '@/components/ui/text';
 import { Version } from '@/components/version';
 
@@ -61,23 +61,18 @@ export const ViewSignIn = () => {
   });
 
   return (
-    <ViewSafeContent>
+    <ViewSafeContent className="justify-center">
       <AuthHeader />
-      <Center flex={1} p={24} className="items-center justify-center">
+      <View className="p-8 items-center justify-center">
         <Form form={form}>
-          <Stack
-            spacing={24}
-            w="100%"
-            maxW={400}
-            className="w-full max-w-[400px]"
-          >
-            <Stack align="center" spacing={8}>
+          <View className="w-full max-w-[400px] gap-6">
+            <View className="items-center gap-2">
               <Text variant="h2">{t('auth:signin.title')}</Text>
               <Text className="font-normal text-sm text-center text-neutral-600 dark:text-neutral-400">
                 {t('auth:signin.subtitle')}
               </Text>
-            </Stack>
-            <Stack spacing={16}>
+            </View>
+            <View className="gap-4">
               <form.AppField name="email">
                 {(field) => (
                   <field.Field>
@@ -93,9 +88,8 @@ export const ViewSignIn = () => {
                 )}
               </form.AppField>
               <form.Submit full>{t('auth:signin.loginWithEmail')}</form.Submit>
-            </Stack>
-            {/* For social sign in integration */}
-            {/* <HStack alignItems="center" spacing={16}>
+              {/* For social sign in integration */}
+              {/* <HStack alignItems="center" spacing={16}>
             <Divider color="neutral.200" flex={1} orientation="horizontal" />
             <Text
               fontSize="sm"
@@ -108,23 +102,24 @@ export const ViewSignIn = () => {
             </Text>
             <Divider color="neutral.200" flex={1} orientation="horizontal" />
           </HStack> */}
-            {/* <Button
+              {/* <Button
             full
             variant="@secondary"
             onPress={() => social.mutate('github')}
           >
             {t('auth:signin.loginWithGithub')}
           </Button> */}
-            <LoginEmailHint />
-          </Stack>
+              <LoginEmailHint />
+            </View>
+          </View>
         </Form>
-      </Center>
-      <HStack
-        className="absolute left-0 right-0 items-center justify-center p-6"
+      </View>
+      <View
+        className="absolute left-0 right-0 flex flex-row items-center justify-center p-6"
         style={{ bottom: insets.bottom }}
       >
         <Version className="text-center" />
-      </HStack>
+      </View>
     </ViewSafeContent>
   );
 };

@@ -1,8 +1,7 @@
 import { ReactNode, useEffect, useId } from 'react';
+import { View } from 'react-native';
 
 import { useFieldContext } from '@/lib/tanstack-form/context';
-
-import { Box } from '@/components/ui/box';
 
 type FormFieldSize = 'sm' | 'default' | 'lg';
 
@@ -37,5 +36,5 @@ export const FormField = (props: {
     }));
   }, [setFieldMeta, id, props.size]);
 
-  return <Box className="gap-1">{props.children}</Box>;
+  return <View className="gap-1">{props.children}</View>;
 };

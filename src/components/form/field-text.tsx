@@ -3,16 +3,16 @@ import {
   useBottomSheetInternal,
 } from '@gorhom/bottom-sheet';
 import { useStore } from '@tanstack/react-form';
+import { View, type ViewProps } from 'react-native';
 
 import { FormFieldError } from '@/lib/tanstack-form/components';
 import { FieldContextMeta } from '@/lib/tanstack-form/components/form-field';
 import { useFieldContext } from '@/lib/tanstack-form/context';
 
-import { Box } from '@/components/ui/box';
 import { Input } from '@/components/ui/input';
 
 type FieldTextProps = React.ComponentProps<typeof Input> & {
-  containerProps?: React.ComponentProps<typeof Box>;
+  containerProps?: ViewProps;
 };
 
 export default function FieldText(props: FieldTextProps) {
@@ -33,7 +33,7 @@ export default function FieldText(props: FieldTextProps) {
   const isBottomSheet = useBottomSheetInternal(true);
 
   return (
-    <Box className="gap-1" {...containerProps}>
+    <View className="gap-1" {...containerProps}>
       <Input
         as={isBottomSheet ? BottomSheetTextInput : undefined}
         id={meta.id}
@@ -55,6 +55,6 @@ export default function FieldText(props: FieldTextProps) {
         }}
       />
       <FormFieldError />
-    </Box>
+    </View>
   );
 }

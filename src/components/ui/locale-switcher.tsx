@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Pressable } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import { AVAILABLE_LANGUAGES } from '@/lib/i18n/constants';
 import { useDisclosure } from '@/hooks/use-disclosure';
@@ -9,8 +9,7 @@ import {
   IconChevronsUpDown,
   IconLanguages,
 } from '@/components/icons/generated';
-import { BottomSheet, BottomSheetBox } from '@/components/ui/bottom-sheet';
-import { Box } from '@/components/ui/box';
+import { BottomSheet, BottomSheetContent } from '@/components/ui/bottom-sheet';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 
@@ -26,7 +25,7 @@ export const LocaleSwitcher = () => {
         <IconChevronsUpDown width={16} height={16} color="#737373" />
       </Button>
       <BottomSheet isOpen={sheet.isOpen} onClose={sheet.onClose}>
-        <BottomSheetBox gap={24}>
+        <BottomSheetContent gap={24}>
           {AVAILABLE_LANGUAGES.map((language) => (
             <Pressable
               key={language.key}
@@ -36,12 +35,12 @@ export const LocaleSwitcher = () => {
               }}
               className="flex flex-row items-center py-1"
             >
-              <Box className="w-8">
+              <View className="w-8">
                 {language.key === i18n.language && (
                   <IconCheck width={16} height={16} color="#737373" />
                 )}
-              </Box>
-              <Box>
+              </View>
+              <View>
                 <Text className="font-bold">
                   {t(`common:languages.values.${language.key}`)}
                 </Text>
@@ -52,10 +51,10 @@ export const LocaleSwitcher = () => {
                     })}
                   </Text>
                 )}
-              </Box>
+              </View>
             </Pressable>
           ))}
-        </BottomSheetBox>
+        </BottomSheetContent>
       </BottomSheet>
     </>
   );

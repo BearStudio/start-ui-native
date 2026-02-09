@@ -1,18 +1,18 @@
-import { WINDOW_HEIGHT, WINDOW_WIDTH } from '@gorhom/bottom-sheet';
 import {
   interpolate,
   SharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
 
+import { deviceScreen } from '@/constants/device';
 import { appOnboardingScreens } from '@/features/app-onboarding/view-app-onboarding';
 
 export const useMascotAnimatedStyle = (scrollX: SharedValue<number>) => {
   return useAnimatedStyle(() => {
-    const maxScrollX = WINDOW_WIDTH * (appOnboardingScreens.length - 1);
+    const maxScrollX = deviceScreen.width * (appOnboardingScreens.length - 1);
 
-    const leftStart = WINDOW_WIDTH / 3.5;
-    const topStart = WINDOW_HEIGHT / 2.5;
+    const leftStart = deviceScreen.width / 3.5;
+    const topStart = deviceScreen.height / 2.5;
 
     const left = interpolate(
       scrollX.value,
