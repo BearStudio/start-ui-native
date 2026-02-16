@@ -25,7 +25,7 @@ export const LocaleSwitcher = () => {
         <IconChevronsUpDown width={16} height={16} color="#737373" />
       </Button>
       <BottomSheet isOpen={sheet.isOpen} onClose={sheet.onClose}>
-        <BottomSheetContent gap={24}>
+        <BottomSheetContent>
           {AVAILABLE_LANGUAGES.map((language) => (
             <Pressable
               key={language.key}

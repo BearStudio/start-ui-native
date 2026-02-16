@@ -42,7 +42,7 @@ const MarketingTile = ({
 
 export const MarketingBento = () => (
   <View className="mt-6 gap-2">
-    <Text className="text-center text-[0.625rem] text-neutral-600 dark:text-neutral-300">
+    <Text className="text-center text-[0.625rem] text-muted-foreground">
       Shameless plug 😅 Remember that 🚀 Start UI is free and Open Source 😉
     </Text>
     <View className="flex flex-1 flex-row gap-2">

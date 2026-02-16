@@ -2,10 +2,9 @@ import { Stack, useRouter } from 'expo-router';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useThemedStyle } from '@/hooks/use-themed-style';
-
 import { authClient } from '@/features/auth/client';
 import { ViewAuthOnboarding } from '@/features/auth/view-auth-onboarding';
+import { useThemedStyle } from '@/features/theme/use-themed-style';
 
 export default function LoggedLayout() {
   const router = useRouter();

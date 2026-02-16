@@ -83,6 +83,7 @@ function Text({
   }) {
   const textClass = React.use(TextClassContext);
   const Component = asChild ? Slot.Text : RNText;
+
   return (
     <Component
       className={cn(textVariants({ variant }), textClass, className)}

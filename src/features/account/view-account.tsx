@@ -88,7 +88,7 @@ export const ViewAccount = () => {
                   isOpen={signoutSheet.isOpen}
                   onClose={signoutSheet.onClose}
                 >
-                  <BottomSheetContent gap={16}>
+                  <BottomSheetContent>
                     <View className="gap-1">
                       <Text className="font-bold">
                         {t('auth:signOut.confirm.title')}
@@ -136,7 +136,7 @@ export const ViewAccount = () => {
                     isOpen={updateNameSheet.isOpen}
                     onClose={updateNameSheet.onClose}
                   >
-                    <BottomSheetContent gap={16}>
+                    <BottomSheetContent>
                       <Text className="font-bold">
                         {t('account:user.updateName.title')}
                       </Text>

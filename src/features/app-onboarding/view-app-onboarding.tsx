@@ -13,10 +13,7 @@ import { AnimatedStepIndicator } from '@/components/ui/animated-step-indicator';
 import { Button } from '@/components/ui/button';
 
 import { deviceScreen } from '@/constants/device';
-import {
-  AppOnboardingScreenFeatures,
-  AppOnboardingScreenWelcome,
-} from '@/features/app-onboarding/app-onboarding-screens';
+import { appOnboardingScreens } from '@/features/app-onboarding';
 // @ts-expect-error fix image import
 import backgroundImage from '@/features/app-onboarding/layout-login-image.jpg';
 // @ts-expect-error fix image import
@@ -25,11 +22,6 @@ import { useOnboardingStore } from '@/features/app-onboarding/store';
 import { useBackgroundAnimatedStyle } from '@/features/app-onboarding/use-background-animated-style';
 import { useMascotAnimatedStyle } from '@/features/app-onboarding/use-mascot-animated-style';
 import { ViewSafeContent } from '@/layout/view-safe-content';
-
-export const appOnboardingScreens = [
-  { name: 'welcome', Component: AppOnboardingScreenWelcome },
-  { name: 'features', Component: AppOnboardingScreenFeatures },
-];
 
 export const ViewOnboarding = () => {
   const { t } = useTranslation(['appOnboarding']);

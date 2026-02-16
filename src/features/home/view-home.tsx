@@ -18,7 +18,7 @@ export const ViewHome = () => {
   const share = useShare();
 
   return (
-    <ViewTabContent gap={16}>
+    <ViewTabContent>
       <View className="gap-2">
         <Text className="text-xl font-bold">{t('home:welcome.title')}</Text>
         <Text className="font-medium">{t('home:welcome.description')}</Text>

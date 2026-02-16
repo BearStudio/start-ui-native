@@ -1,9 +1,8 @@
 import { Stack, useRouter } from 'expo-router';
 import { useEffect } from 'react';
 
-import { useThemedStyle } from '@/hooks/use-themed-style';
-
 import { authClient } from '@/features/auth/client';
+import { useThemedStyle } from '@/features/theme/use-themed-style';
 
 export default function PublicLayout() {
   const router = useRouter();

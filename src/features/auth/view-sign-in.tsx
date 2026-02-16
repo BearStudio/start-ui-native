@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { toast } from 'sonner-native';
+import { useCSSVariable } from 'uniwind';
 import { z } from 'zod';
 
 import { Form } from '@/lib/tanstack-form/components';
@@ -60,6 +61,10 @@ export const ViewSignIn = () => {
     },
   });
 
+  const primaryColor = useCSSVariable('--color-primary');
+
+  console.log(primaryColor);
+
   return (
     <ViewSafeContent className="justify-center">
       <AuthHeader />
@@ -68,7 +73,7 @@ export const ViewSignIn = () => {
           <View className="w-full max-w-[400px] gap-6">
             <View className="items-center gap-2">
               <Text variant="h2">{t('auth:signin.title')}</Text>
-              <Text className="font-normal text-sm text-center text-neutral-600 dark:text-neutral-400">
+              <Text className="font-normal text-sm text-center text-muted-foreground">
                 {t('auth:signin.subtitle')}
               </Text>
             </View>

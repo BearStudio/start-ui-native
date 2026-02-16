@@ -5,7 +5,7 @@ import {
 } from 'react-native-reanimated';
 
 import { deviceScreen } from '@/constants/device';
-import { appOnboardingScreens } from '@/features/app-onboarding/view-app-onboarding';
+import { appOnboardingScreens } from '@/features/app-onboarding';
 
 const backgroundImageSize = { width: 1536, height: 1024 };
 

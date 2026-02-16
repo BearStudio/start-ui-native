@@ -8,11 +8,12 @@ import { Uniwind } from 'uniwind';
 import 'react-native-reanimated';
 import '@/lib/i18n';
 
-import '@/global.css';
+import '../global.css';
 
 import { Sonner } from '@/components/ui/sonner';
 
 import { DevTools } from '@/features/devtools/devtools';
+import { useThemeSync } from '@/features/theme/use-theme-sync';
 import { SplashScreenManager } from '@/layout/splash-screen-manager';
 
 export const queryClient = new QueryClient();
@@ -21,6 +22,8 @@ export const queryClient = new QueryClient();
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  useThemeSync();
+
   return (
     <QueryClientProvider client={queryClient}>
       <SafeAreaListener
@@ -34,7 +37,9 @@ export default function RootLayout() {
               <Slot />
             </SplashScreenManager>
             <Sonner />
-            {process.env.NODE_ENV === 'development' && <DevTools />}
+            {process.env.NODE_ENV === 'development' && (
+              <DevTools queryClient={queryClient} />
+            )}
           </BottomSheetModalProvider>
         </GestureHandlerRootView>
       </SafeAreaListener>

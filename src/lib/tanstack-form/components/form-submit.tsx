@@ -24,7 +24,6 @@ export default function FormSubmit({
       {([canSubmit, isSubmitting]) => (
         <Button
           disabled={!canSubmit || isSubmitting}
-          variant="default"
           className={cn(full && 'w-full', className)}
           onPress={() => form.handleSubmit()}
           {...props}

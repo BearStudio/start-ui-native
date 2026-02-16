@@ -4,8 +4,6 @@ import { ComponentProps } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DynamicColorIOS } from 'react-native';
 
-import { useThemedStyle } from '@/hooks/use-themed-style';
-
 import { HapticTab } from '@/components/haptic-tab';
 import {
   IconBookOpenDuotone,
@@ -17,6 +15,7 @@ import {
 } from '@/components/icons/generated';
 
 import { isApple } from '@/constants/device';
+import { useThemedStyle } from '@/features/theme/use-themed-style';
 
 export const WITH_NATIVE_TABS = isApple;
 
