@@ -1,0 +1,4 @@
+flows:
+  - '**/*.yaml'
+excludeTags:
+  - subflow

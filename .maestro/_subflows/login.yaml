@@ -1,0 +1,24 @@
+appId: ${APP_ID}
+tags:
+  - subflow
+---
+- clearState
+- launchApp
+
+# Complete app onboarding (2 screens)
+- runFlow: ../\_subflows/complete-app-onboarding.yaml
+
+# Sign in with test email
+- tapOn:
+    id: 'sign-in-email'
+- inputText: ${TEST_EMAIL}
+- tapOn:
+    id: 'sign-in-submit'
+
+# Enter OTP (auto-submits after 6 digits)
+- tapOn:
+    id: 'otp-input'
+- inputText: ${TEST_OTP}
+
+# Wait for home screen to load
+- waitForAnimationToEnd

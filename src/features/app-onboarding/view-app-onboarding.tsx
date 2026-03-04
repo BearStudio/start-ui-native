@@ -128,6 +128,7 @@ export const ViewOnboarding = () => {
             ))}
           </HStack>
           <Button
+            testID="app-onboarding-continue"
             full
             bg="white"
             color="neutral.900"

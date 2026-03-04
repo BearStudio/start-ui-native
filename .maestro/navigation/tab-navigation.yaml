@@ -1,0 +1,23 @@
+appId: ${APP_ID}
+tags:
+  - navigation
+  - smokeTest
+---
+- runFlow: ../\_subflows/login.yaml
+
+# Verify Home tab is visible
+- assertVisible: 'Home'
+
+# Navigate to Books tab
+- tapOn: 'Books'
+- waitForAnimationToEnd
+
+# Navigate to Account tab
+- tapOn: 'Account'
+- waitForAnimationToEnd
+- assertVisible:
+    id: 'account-sign-out'
+
+# Navigate back to Home tab
+- tapOn: 'Home'
+- waitForAnimationToEnd
