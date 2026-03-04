@@ -13,6 +13,11 @@ const authBaseURL: string =
 
 export const authClient = createAuthClient({
   baseURL: authBaseURL,
+  fetchOptions: {
+    headers: {
+      origin: `${appConfig.scheme}://`,
+    },
+  },
   plugins: [
     expoClient({
       scheme: appConfig.scheme,
