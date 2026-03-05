@@ -83,6 +83,7 @@ export const ViewSignIn = () => {
                 {(field) => (
                   <field.Field>
                     <field.FieldText
+                      accessibilityLabel="sign-in-email"
                       placeholder={t('auth:signin.email.placeholder')}
                       autoCapitalize="none"
                       placeholderTextColor="neutral.600"
@@ -93,7 +94,9 @@ export const ViewSignIn = () => {
                   </field.Field>
                 )}
               </form.AppField>
-              <form.Submit full>{t('auth:signin.loginWithEmail')}</form.Submit>
+              <form.Submit full testID="sign-in-submit">
+                {t('auth:signin.loginWithEmail')}
+              </form.Submit>
             </Stack>
             {/* For social sign in integration */}
             {/* <HStack alignItems="center" spacing={16}>

@@ -1,0 +1,14 @@
+appId: com.bearstudio.startuinative
+tags:
+  - books
+---
+- runFlow: ../_subflows/login.yaml
+
+# Navigate to Books tab
+- tapOn: 'Books'
+- waitForAnimationToEnd
+
+# Assert books list is visible (wait for API data)
+- extendedWaitUntil:
+    visible: 'Books'
+    timeout: 10000

@@ -83,7 +83,11 @@ export const ViewAccount = () => {
                   />
                   <CardTitle>{data.user.name}</CardTitle>
                 </HStack>
-                <Button variant="@ghost" onPress={() => signoutSheet.onOpen()}>
+                <Button
+                  testID="account-sign-out"
+                  variant="@ghost"
+                  onPress={() => signoutSheet.onOpen()}
+                >
                   <IconLogOut width={14} height={14} />
                   {t('account:user.signOut')}
                 </Button>
@@ -108,6 +112,7 @@ export const ViewAccount = () => {
                       {t('auth:signOut.confirm.cancel')}
                     </Button>
                     <Button
+                      testID="confirm-sign-out"
                       onPress={() => {
                         queryClient.clear();
                         authClient.signOut();

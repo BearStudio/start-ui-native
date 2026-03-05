@@ -46,6 +46,7 @@ export const ViewAuthOnboarding = () => {
                         {t('auth:onboarding.name.label')}
                       </field.Label>
                       <field.FieldText
+                        testID="onboarding-name"
                         autoFocus
                         returnKeyType="done"
                         onSubmitEditing={form.handleSubmit}
@@ -54,7 +55,9 @@ export const ViewAuthOnboarding = () => {
                   )}
                 </form.AppField>
               </Stack>
-              <form.Submit>{t('auth:onboarding.continue')}</form.Submit>
+              <form.Submit testID="onboarding-submit">
+                {t('auth:onboarding.continue')}
+              </form.Submit>
             </Stack>
           </form.AppForm>
         </Stack>

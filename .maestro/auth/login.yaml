@@ -1,0 +1,9 @@
+appId: com.bearstudio.startuinative
+tags:
+  - auth
+  - smokeTest
+---
+- runFlow: ../_subflows/login.yaml
+
+# Assert we reached the home screen
+- assertVisible: 'Home'

@@ -1,0 +1,9 @@
+appId: com.bearstudio.startuinative
+tags:
+  - subflow
+---
+# Skip the 2-screen app onboarding
+- tapOn:
+    id: 'app-onboarding-continue'
+- tapOn:
+    id: 'app-onboarding-continue'

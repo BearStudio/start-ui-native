@@ -81,7 +81,9 @@ export const ViewOtpVerification = () => {
                   )}
                 </form.AppField>
               </Stack>
-              <form.Submit>{t('auth:verification.confirm')}</form.Submit>
+              <form.Submit testID="otp-submit">
+                {t('auth:verification.confirm')}
+              </form.Submit>
             </Stack>
             <LoginOtpHint />
           </Stack>

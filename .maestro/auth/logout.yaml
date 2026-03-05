@@ -1,0 +1,20 @@
+appId: com.bearstudio.startuinative
+tags:
+  - auth
+---
+- runFlow: ../_subflows/login.yaml
+
+# Navigate to account tab
+- tapOn: 'Account'
+
+# Tap sign out
+- tapOn:
+    id: 'account-sign-out'
+
+# Confirm sign out
+- tapOn:
+    id: 'confirm-sign-out'
+
+# Assert we're back on sign-in screen
+- assertVisible:
+    id: 'sign-in-email'
