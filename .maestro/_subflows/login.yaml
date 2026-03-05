@@ -2,26 +2,25 @@ appId: com.bearstudio.startuinative
 tags:
   - subflow
 env:
-  TEST_EMAIL: admin@admin.com
+  TEST_EMAIL: 'admin@admin.com'
   TEST_OTP: '000000'
 ---
-- launchApp
-- openLink: exp://127.0.0.1:19000
-
+- openLink: exp://10.0.1.159:8081
 
 # Complete app onboarding (2 screens)
-- runFlow: ./complete-app-onboarding.yaml
+#- runFlow: ./complete-app-onboarding.yaml
 
 # Sign in with test email
 - tapOn:
-    id: 'sign-in-email'
+    label: "sign-in-email"
 - inputText: ${TEST_EMAIL}
 - tapOn:
     id: 'sign-in-submit'
 
 # Enter OTP (auto-submits after 6 digits)
 - tapOn:
-    id: 'otp-input'
+    label: "otp-input"
+    index: 0
 - inputText: ${TEST_OTP}
 
 # Wait for home screen to load

@@ -83,7 +83,7 @@ export const ViewSignIn = () => {
                 {(field) => (
                   <field.Field>
                     <field.FieldText
-                      testID="sign-in-email"
+                      accessibilityLabel="sign-in-email"
                       placeholder={t('auth:signin.email.placeholder')}
                       autoCapitalize="none"
                       placeholderTextColor="neutral.600"
