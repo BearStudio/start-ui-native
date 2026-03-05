@@ -1,8 +1,8 @@
-appId: ${APP_ID}
+appId: com.bearstudio.startuinative
 tags:
   - books
 ---
-- runFlow: ../\_subflows/login.yaml
+- runFlow: ../_subflows/login.yaml
 
 # Navigate to Books tab
 - tapOn: 'Books'

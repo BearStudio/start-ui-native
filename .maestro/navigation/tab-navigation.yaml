@@ -1,9 +1,9 @@
-appId: ${APP_ID}
+appId: com.bearstudio.startuinative
 tags:
   - navigation
   - smokeTest
 ---
-- runFlow: ../\_subflows/login.yaml
+- runFlow: ../_subflows/login.yaml
 
 # Verify Home tab is visible
 - assertVisible: 'Home'

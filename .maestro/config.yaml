@@ -2,3 +2,8 @@ flows:
   - '**/*.yaml'
 excludeTags:
   - subflow
+env:
+  APP_ID: com.bearstudio.startuinative
+  TEST_EMAIL: admin@admin.com
+  TEST_OTP: '000000'
+  TEST_USER_NAME: Admin

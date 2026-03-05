@@ -20,8 +20,8 @@
     "gen:icons": "svgr --config-file src/components/icons/svgr.config.cjs src/components/icons/svg-sources && prettier -w src/components/icons/generated",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "test:e2e": "maestro test .maestro/ --env .env.maestro",
-    "test:e2e:smoke": "maestro test .maestro/ --env .env.maestro --include-tags smokeTest"
+    "test:e2e": "maestro test .maestro/",
+    "test:e2e:smoke": "maestro test .maestro/ --include-tags smokeTest"
   },
   "dependencies": {
     "@bearstudio/ui-state": "1.0.2",
