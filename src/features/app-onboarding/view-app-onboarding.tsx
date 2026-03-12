@@ -8,6 +8,7 @@ import Animated, {
   useSharedValue,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ScopedTheme } from 'uniwind';
 
 import { AnimatedStepIndicator } from '@/components/ui/animated-step-indicator';
 import { Button } from '@/components/ui/button';
@@ -58,7 +59,7 @@ export const ViewOnboarding = () => {
   }).current;
 
   return (
-    <>
+    <ScopedTheme theme="dark">
       <StatusBar style="light" />
       <Animated.View
         style={[
@@ -112,7 +113,7 @@ export const ViewOnboarding = () => {
           className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-4 p-8"
           style={{ bottom: insets.bottom }}
         >
-          <View className="flex flex-row gap-4">
+          <View className="flex flex-row gap-2">
             {appOnboardingScreens.map((screen, index) => (
               <AnimatedStepIndicator
                 key={screen.name.toString()}
@@ -139,6 +140,6 @@ export const ViewOnboarding = () => {
           </Button>
         </View>
       </ViewSafeContent>
-    </>
+    </ScopedTheme>
   );
 };

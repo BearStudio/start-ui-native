@@ -19,5 +19,5 @@ const storybookConfig = withStorybook(config, {
 });
 
 module.exports = withUniwindConfig(storybookConfig, {
-  cssEntryFile: './src/global.css',
+  cssEntryFile: './src/app.css',
 });

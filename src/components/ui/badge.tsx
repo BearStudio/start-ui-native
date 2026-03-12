@@ -10,7 +10,7 @@ const badgeVariants = cva(
   cn(
     'border-border group shrink-0 flex-row items-center justify-center gap-1 overflow-hidden rounded-full border px-2 py-0.5',
     Platform.select({
-      web: 'focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/30 aria-invalid:border-destructive w-fit whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] [&>svg]:pointer-events-none [&>svg]:size-3',
+      web: 'focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/30 aria-invalid:border-destructive w-fit whitespace-nowrap transition-colors transition-shadow focus-visible:ring-[3px] [&>svg]:pointer-events-none [&>svg]:size-3',
     })
   ),
   {

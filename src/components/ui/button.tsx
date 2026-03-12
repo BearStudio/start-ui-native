@@ -1,3 +1,4 @@
+import { getUiState } from '@bearstudio/ui-state';
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 import { Platform, Pressable } from 'react-native';
@@ -111,6 +112,24 @@ type ButtonProps = React.ComponentProps<typeof Pressable> &
   VariantProps<typeof buttonVariants>;
 
 function Button({ className, variant, size, children, ...props }: ButtonProps) {
+  const content = getUiState((set) => {
+    if (typeof children === 'function') return set('function', { children });
+    if (!children) return set('empty');
+    if (Array.isArray(children))
+      return set('array', {
+        children: children.map((child) =>
+          typeof child === 'string' || typeof child === 'number' ? (
+            <Text key={String(child)}>{child}</Text>
+          ) : (
+            child
+          )
+        ),
+      });
+    if (typeof children === 'string' || typeof children === 'number')
+      return set('text', { children });
+
+    return set('default', { children });
+  });
   return (
     <TextClassContext value={buttonTextVariants({ variant, size })}>
       <Pressable
@@ -122,15 +141,22 @@ function Button({ className, variant, size, children, ...props }: ButtonProps) {
         role="button"
         {...props}
       >
-        {typeof children === 'function'
-          ? children
-          : React.Children.map(children, (child) =>
+        {content
+          .match('function', ({ children }) => children)
+          .match('text', ({ children }) => <Text>{children}</Text>)
+          .match('array', ({ children }) =>
+            children.map((child, index) =>
               typeof child === 'string' || typeof child === 'number' ? (
-                <Text>{child}</Text>
+                // eslint-disable-next-line @eslint-react/no-array-index-key
+                <Text key={String(child) + index}>{child}</Text>
               ) : (
                 child
               )
-            )}
+            )
+          )
+          .match('empty', () => null)
+          .match('default', ({ children }) => children)
+          .exhaustive()}
       </Pressable>
     </TextClassContext>
   );

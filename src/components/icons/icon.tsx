@@ -1,17 +1,31 @@
-import type { StyleProp } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 import { useResolveClassNames } from 'uniwind';
 
 import { cn } from '@/lib/tailwind/utils';
 
 type IconProps = {
-  icon: React.ComponentType<{ style: StyleProp<ExplicitAny> }>;
+  icon: React.ComponentType<
+    {
+      style?: StyleProp<ExplicitAny>;
+      width?: number;
+      height?: number;
+    } & Record<string, unknown>
+  >;
   className?: string;
 };
 
 export const Icon = ({ icon: IconComponent, className }: IconProps) => {
-  const styles = useResolveClassNames(
-    cn('color-primary-foreground w-4 h-4', className)
-  );
+  const resolved = useResolveClassNames(
+    cn('text-foreground size-4', className)
+  ) as ViewStyle;
 
-  return <IconComponent style={styles} />;
+  const { width, height, ...style } = resolved;
+
+  return (
+    <IconComponent
+      style={style}
+      {...(typeof width === 'number' && { width })}
+      {...(typeof height === 'number' && { height })}
+    />
+  );
 };

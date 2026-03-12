@@ -28,11 +28,11 @@ export const AppOnboardingScreenWelcome = () => {
 
   return (
     <OnboardingScreenContainer>
-      <Text className="text-xl text-white">
+      <Text className="text-xl text-primary">
         {t('appOnboarding:welcome.title')}
       </Text>
-      <Text className="text-6xl font-bold text-white">Start UI</Text>
-      <Text className="text-6xl font-bold text-white">Native</Text>
+      <Text className="text-6xl font-bold text-primary">Start UI</Text>
+      <Text className="text-6xl font-bold text-primary">Native</Text>
     </OnboardingScreenContainer>
   );
 };
@@ -52,10 +52,10 @@ export const AppOnboardingScreenFeatures = () => {
     <OnboardingScreenContainer>
       <View className="gap-4">
         <View>
-          <Text className="text-4xl font-bold text-white">
+          <Text className="text-4xl font-bold text-primary">
             {t('appOnboarding:features.titleOne')}
           </Text>
-          <Text className="text-4xl font-bold text-white">
+          <Text className="text-4xl font-bold text-primary">
             {t('appOnboarding:features.titleTwo')}
           </Text>
         </View>
@@ -66,14 +66,14 @@ export const AppOnboardingScreenFeatures = () => {
                 key={feature}
                 className="flex-row items-center gap-1 bg-white text-neutral-900"
               >
-                <Icon icon={IconCheck} className="text-neutral-900 w-8 h-8" />
+                <Icon icon={IconCheck} className="text-neutral-900" />
                 <Text className="text-neutral-900">
                   {t(`appOnboarding:features.${feature}`)}
                 </Text>
               </Badge>
             ))}
           </View>
-          <Text className="font-medium text-white opacity-80">
+          <Text className="text-accent-foreground">
             {t('appOnboarding:features.more')}
           </Text>
         </View>

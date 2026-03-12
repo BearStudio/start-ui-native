@@ -74,7 +74,7 @@ export const ViewBook = (props: { bookId: string }) => {
               </CardBody>
             </Card>
             <View className="flex-1 items-center justify-center">
-              <BookCover book={data} className="h-[80%] self-center" />
+              <BookCover book={data} />
             </View>
           </View>
         ))

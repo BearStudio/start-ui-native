@@ -8,7 +8,7 @@ import { Uniwind } from 'uniwind';
 import 'react-native-reanimated';
 import '@/lib/i18n';
 
-import '../global.css';
+import '../app.css';
 
 import { Sonner } from '@/components/ui/sonner';
 

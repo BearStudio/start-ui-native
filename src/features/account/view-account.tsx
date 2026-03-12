@@ -136,7 +136,7 @@ export const ViewAccount = () => {
                     className="self-start -mx-3"
                   >
                     {data.user.name}
-                    <Icon icon={IconEdit3} className="text-primary" />
+                    <Icon icon={IconEdit3} />
                   </Button>
                   <BottomSheet
                     isOpen={updateNameSheet.isOpen}

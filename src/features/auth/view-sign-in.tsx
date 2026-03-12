@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { toast } from 'sonner-native';
-import { useCSSVariable } from 'uniwind';
 import { z } from 'zod';
 
 import { Form } from '@/lib/tanstack-form/components';
@@ -60,10 +59,6 @@ export const ViewSignIn = () => {
       toast.error(error.message);
     },
   });
-
-  const primaryColor = useCSSVariable('--color-primary');
-
-  console.log(primaryColor);
 
   return (
     <ViewSafeContent className="justify-center">

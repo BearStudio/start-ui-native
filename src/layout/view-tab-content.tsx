@@ -13,7 +13,7 @@ export const ViewTabContent = ({
   withHeader = isApple && WITH_NATIVE_TABS,
   children,
   contentContainerStyle,
-  gap = 16,
+  gap = 8,
   ...props
 }: ViewTabContentProps) => {
   const insets = useSafeAreaInsets();

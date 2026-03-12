@@ -24,7 +24,7 @@ export const ThemeSwitcher = (props: { minimize?: boolean }) => {
 
   const { theme, hasAdaptiveThemes } = useUniwind();
   const mutedStyle = useResolveClassNames('text-muted-foreground');
-  const iconColor = (mutedStyle as { color?: string }).color;
+  const iconColor = mutedStyle.color;
 
   const sheet = useDisclosure();
 
