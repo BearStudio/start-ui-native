@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
 import { IconCheck } from '@/components/icons/generated';
+import { Icon } from '@/components/icons/icon';
 import { Badge } from '@/components/ui/badge';
 import { Text } from '@/components/ui/text';
 
@@ -65,7 +66,7 @@ export const AppOnboardingScreenFeatures = () => {
                 key={feature}
                 className="flex-row items-center gap-1 bg-white text-neutral-900"
               >
-                <IconCheck className="text-neutral-900 w-8 h-8" />
+                <Icon icon={IconCheck} className="text-neutral-900 w-8 h-8" />
                 <Text className="text-neutral-900">
                   {t(`appOnboarding:features.${feature}`)}
                 </Text>

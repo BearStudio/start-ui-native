@@ -9,7 +9,9 @@ type IconProps = {
 };
 
 export const Icon = ({ icon: IconComponent, className }: IconProps) => {
-  const styles = useResolveClassNames(cn('text-primary size-4', className));
+  const styles = useResolveClassNames(
+    cn('color-primary-foreground w-4 h-4', className)
+  );
 
   return <IconComponent style={styles} />;
 };

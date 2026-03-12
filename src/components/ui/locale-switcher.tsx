@@ -9,6 +9,7 @@ import {
   IconChevronsUpDown,
   IconLanguages,
 } from '@/components/icons/generated';
+import { Icon } from '@/components/icons/icon';
 import { BottomSheet, BottomSheetContent } from '@/components/ui/bottom-sheet';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
@@ -19,10 +20,14 @@ export const LocaleSwitcher = () => {
 
   return (
     <>
-      <Button variant="link" className="gap-2" onPress={sheet.onOpen}>
-        <IconLanguages width={16} height={16} color="#737373" />
+      <Button
+        variant="link"
+        className="self-start -mx-4"
+        onPress={sheet.onOpen}
+      >
+        <Icon icon={IconLanguages} className="text-muted-foreground" />
         <Text>{t(`common:languages.values.${i18n.language}`)}</Text>
-        <IconChevronsUpDown width={16} height={16} color="#737373" />
+        <Icon icon={IconChevronsUpDown} className="text-muted-foreground" />
       </Button>
       <BottomSheet isOpen={sheet.isOpen} onClose={sheet.onClose}>
         <BottomSheetContent>
@@ -37,7 +42,7 @@ export const LocaleSwitcher = () => {
             >
               <View className="w-8">
                 {language.key === i18n.language && (
-                  <IconCheck width={16} height={16} color="#737373" />
+                  <Icon icon={IconCheck} className="text-muted-foreground" />
                 )}
               </View>
               <View>

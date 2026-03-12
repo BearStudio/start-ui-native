@@ -1,12 +1,14 @@
 import { ComponentProps } from 'react';
-import { useColorScheme } from 'react-native';
 import { Toaster } from 'sonner-native';
+import { useUniwind } from 'uniwind';
 
 export const Sonner = ({ ...props }: ComponentProps<typeof Toaster>) => {
-  const scheme = useColorScheme();
+  const { theme, hasAdaptiveThemes } = useUniwind();
+  const toastTheme = hasAdaptiveThemes ? 'system' : (theme as 'light' | 'dark');
+
   return (
     <Toaster
-      theme={scheme ?? 'system'}
+      theme={toastTheme}
       position="top-center"
       visibleToasts={2}
       {...props}

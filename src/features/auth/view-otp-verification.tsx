@@ -7,6 +7,7 @@ import { z } from 'zod';
 import { useAppForm } from '@/lib/tanstack-form/config';
 
 import { IconArrowLeft } from '@/components/icons/generated';
+import { Icon } from '@/components/icons/icon';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 
@@ -54,7 +55,10 @@ export const ViewOtpVerification = () => {
         <form.AppForm>
           <View className="w-full max-w-[400px] gap-6">
             <Button variant="ghost" className="pl-0" onPress={router.back}>
-              <IconArrowLeft width={18} height={18} />
+              <Icon
+                icon={IconArrowLeft}
+                className="text-foreground size-[18px]"
+              />
               {t('auth:verification.back')}
             </Button>
             <View className="gap-2">

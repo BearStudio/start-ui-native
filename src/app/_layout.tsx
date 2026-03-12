@@ -18,7 +18,7 @@ import { SplashScreenManager } from '@/layout/splash-screen-manager';
 
 export const queryClient = new QueryClient();
 
-// SplashScreen hide management in on src/app/index.tsx
+// SplashScreen hide management in splash-screen-manager.tsx
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {

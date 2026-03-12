@@ -10,7 +10,7 @@ import { Icon } from '@/components/icons/icon';
 import { Card, CardBody, CardHeader, CardTitle } from '@/components/ui/card';
 import { Text } from '@/components/ui/text';
 
-const mockedEmail = 'admin@admin.com';
+const mockedEmail = 'user@user.com';
 const mockedOtp = '000000';
 
 const shouldDisplayLoginHints = (configEnv?: ConfigEnvResponse) =>

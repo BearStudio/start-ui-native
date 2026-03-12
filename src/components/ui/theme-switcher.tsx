@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LucideSunMoon } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
-import { Uniwind, useUniwind } from 'uniwind';
+import { Uniwind, useResolveClassNames, useUniwind } from 'uniwind';
 
 import { useDisclosure } from '@/hooks/use-disclosure';
 
@@ -12,6 +12,7 @@ import {
   IconMoon,
   IconSun,
 } from '@/components/icons/generated';
+import { Icon } from '@/components/icons/icon';
 import { BottomSheet, BottomSheetContent } from '@/components/ui/bottom-sheet';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
@@ -22,6 +23,8 @@ export const ThemeSwitcher = (props: { minimize?: boolean }) => {
   const { t } = useTranslation(['common']);
 
   const { theme, hasAdaptiveThemes } = useUniwind();
+  const mutedStyle = useResolveClassNames('text-muted-foreground');
+  const iconColor = (mutedStyle as { color?: string }).color;
 
   const sheet = useDisclosure();
 
@@ -38,14 +41,31 @@ export const ThemeSwitcher = (props: { minimize?: boolean }) => {
     <>
       {props.minimize ? (
         <Button variant="ghost" size="icon" onPress={sheet.onOpen}>
-          <DisplayIcon size={20} color="#737373" />
+          {hasAdaptiveThemes ? (
+            <DisplayIcon size={20} color={iconColor} />
+          ) : (
+            <Icon
+              icon={ColorModeIcon}
+              className="text-muted-foreground size-5"
+            />
+          )}
         </Button>
       ) : (
-        <Button variant="link" className="gap-2" onPress={sheet.onOpen}>
-          <DisplayIcon size={16} color="#737373" />
-          <Text>{t(`common:themes.values.${theme}`)}</Text>
+        <Button
+          variant="link"
+          className="self-start -mx-4"
+          onPress={sheet.onOpen}
+        >
+          {hasAdaptiveThemes ? (
+            <DisplayIcon size={16} color={iconColor} />
+          ) : (
+            <Icon icon={ColorModeIcon} className="text-muted-foreground" />
+          )}
+          <Text>
+            {t(`common:themes.values.${hasAdaptiveThemes ? 'system' : theme}`)}
+          </Text>
           {!!theme && (
-            <IconChevronsUpDown width={16} height={16} color="#737373" />
+            <Icon icon={IconChevronsUpDown} className="text-muted-foreground" />
           )}
         </Button>
       )}
@@ -63,7 +83,7 @@ export const ThemeSwitcher = (props: { minimize?: boolean }) => {
               <View className="w-8">
                 {((hasAdaptiveThemes && mode === 'system') ||
                   (!hasAdaptiveThemes && mode === theme)) && (
-                  <IconCheck width={16} height={16} color="#737373" />
+                  <Icon icon={IconCheck} className="text-muted-foreground" />
                 )}
               </View>
               <View>

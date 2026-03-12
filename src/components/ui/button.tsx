@@ -1,4 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority';
+import * as React from 'react';
 import { Platform, Pressable } from 'react-native';
 
 import { cn } from '@/lib/tailwind/utils';
@@ -32,8 +33,8 @@ const buttonVariants = cva(
           })
         ),
         secondary: cn(
-          'bg-secondary active:bg-secondary/80 shadow-sm shadow-black/5',
-          Platform.select({ web: 'hover:bg-secondary/80' })
+          'border border-border bg-background shadow-xs',
+          Platform.select({ web: 'hover:bg-accent' })
         ),
         ghost: cn(
           'active:bg-accent',
@@ -78,7 +79,10 @@ const buttonTextVariants = cva(
           'group-active:text-accent-foreground',
           Platform.select({ web: 'group-hover:text-accent-foreground' })
         ),
-        secondary: 'text-secondary-foreground',
+        secondary: cn(
+          'text-secondary-foreground',
+          Platform.select({ web: 'hover:text-accent-foreground' })
+        ),
         ghost: 'group-active:text-accent-foreground',
         link: cn(
           'text-primary group-active:underline',
@@ -118,7 +122,15 @@ function Button({ className, variant, size, children, ...props }: ButtonProps) {
         role="button"
         {...props}
       >
-        {typeof children === 'string' ? <Text>{children}</Text> : children}
+        {typeof children === 'function'
+          ? children
+          : React.Children.map(children, (child) =>
+              typeof child === 'string' || typeof child === 'number' ? (
+                <Text>{child}</Text>
+              ) : (
+                child
+              )
+            )}
       </Pressable>
     </TextClassContext>
   );

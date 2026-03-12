@@ -1,8 +1,6 @@
 import { Tabs } from 'expo-router';
-import { Icon, Label, NativeTabs } from 'expo-router/unstable-native-tabs';
-import { ComponentProps } from 'react';
+import { NativeTabs } from 'expo-router/unstable-native-tabs';
 import { useTranslation } from 'react-i18next';
-import { DynamicColorIOS } from 'react-native';
 
 import { HapticTab } from '@/components/haptic-tab';
 import {
@@ -50,7 +48,7 @@ const TABS = [
   icon: typeof IconHouseDuotone;
   iconFocused: typeof IconHouseDuotone;
   headerShown: boolean;
-  iosIconSf: ComponentProps<typeof Icon>['sf'];
+  iosIconSf: string;
 }[];
 
 export default function TabLayout() {
@@ -60,17 +58,13 @@ export default function TabLayout() {
 
   if (WITH_NATIVE_TABS) {
     return (
-      <NativeTabs
-        tintColor={DynamicColorIOS({ dark: 'white', light: 'black' })}
-      >
+      <NativeTabs tintColor={themedStyle.color}>
         {TABS.map((tab) => (
-          <NativeTabs.Trigger
-            key={tab.name}
-            name={tab.name}
-            options={{ backgroundColor: themedStyle.backgroundColor }}
-          >
-            <Label>{t(tab.translationKey)}</Label>
-            <Icon sf={tab.iosIconSf} />
+          <NativeTabs.Trigger key={tab.name} name={tab.name}>
+            <NativeTabs.Trigger.Label>
+              {t(tab.translationKey)}
+            </NativeTabs.Trigger.Label>
+            <NativeTabs.Trigger.Icon sf={tab.iosIconSf} />
           </NativeTabs.Trigger>
         ))}
       </NativeTabs>

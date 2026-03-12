@@ -9,6 +9,7 @@ import { useAppForm } from '@/lib/tanstack-form/config';
 import { useDisclosure } from '@/hooks/use-disclosure';
 
 import { IconEdit3, IconLogOut } from '@/components/icons/generated';
+import { Icon } from '@/components/icons/icon';
 import { AvatarWithFallback } from '@/components/ui/avatar';
 import { BottomSheet, BottomSheetContent } from '@/components/ui/bottom-sheet';
 import { Button } from '@/components/ui/button';
@@ -47,9 +48,14 @@ export const ViewAccount = () => {
           },
         }
       );
-      updateNameSheet.onClose();
+      handleCloseNameSheet();
     },
   });
+
+  const handleCloseNameSheet = () => {
+    updateNameForm.reset();
+    updateNameSheet.onClose();
+  };
 
   const ui = getUiState((set) => {
     if (session.isPending) return set('pending');
@@ -75,13 +81,12 @@ export const ViewAccount = () => {
                 <View className="flex flex-row items-center gap-2">
                   <AvatarWithFallback
                     name={data.user.name}
-                    size="xs"
                     image={data.user.image}
                   />
                   <CardTitle>{data.user.name}</CardTitle>
                 </View>
                 <Button variant="ghost" onPress={() => signoutSheet.onOpen()}>
-                  <IconLogOut width={14} height={14} />
+                  <Icon icon={IconLogOut} />
                   {t('account:user.signOut')}
                 </Button>
                 <BottomSheet
@@ -99,7 +104,6 @@ export const ViewAccount = () => {
                     </View>
                     <Button
                       variant="secondary"
-                      className="w-full"
                       onPress={() => signoutSheet.onClose()}
                     >
                       {t('auth:signOut.confirm.cancel')}
@@ -109,9 +113,11 @@ export const ViewAccount = () => {
                         queryClient.clear();
                         authClient.signOut();
                       }}
-                      className="w-full gap-2"
                     >
-                      <IconLogOut width={20} height={20} />
+                      <Icon
+                        icon={IconLogOut}
+                        className="text-primary-foreground size-5"
+                      />
                       {t('auth:signOut.confirm.signOut')}
                     </Button>
                   </BottomSheetContent>
@@ -126,15 +132,15 @@ export const ViewAccount = () => {
                   <Button
                     variant="link"
                     size="sm"
-                    className="font-medium"
                     onPress={() => updateNameSheet.onOpen()}
+                    className="self-start -mx-3"
                   >
-                    {data.user.name}{' '}
-                    <IconEdit3 width={16} height={16} color="#525252" />
+                    {data.user.name}
+                    <Icon icon={IconEdit3} className="text-primary" />
                   </Button>
                   <BottomSheet
                     isOpen={updateNameSheet.isOpen}
-                    onClose={updateNameSheet.onClose}
+                    onClose={handleCloseNameSheet}
                   >
                     <BottomSheetContent>
                       <Text className="font-bold">
@@ -156,7 +162,7 @@ export const ViewAccount = () => {
                         <Button
                           variant="secondary"
                           className="w-full"
-                          onPress={() => updateNameSheet.onClose()}
+                          onPress={() => handleCloseNameSheet()}
                         >
                           {t('account:user.updateName.cancel')}
                         </Button>

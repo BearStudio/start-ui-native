@@ -78,12 +78,5 @@ export const MarketingBento = () => (
         />
       </View>
     </View>
-    <View>
-      <MarketingTile
-        href="https://ficus-ui.com/"
-        src="https://raw.githubusercontent.com/BearStudio/react-native-ficus-ui/refs/heads/main/apps/docs/static/img/banner.png"
-        aspectRatio={2}
-      />
-    </View>
   </View>
 );

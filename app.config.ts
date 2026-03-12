@@ -37,11 +37,11 @@ export default {
       foregroundImage: './src/assets/images/android-icon-foreground.png',
       monochromeImage: './src/assets/images/android-icon-monochrome.png',
     },
-    edgeToEdgeEnabled: true,
     // playStoreUrl:
     // 'https://play.google.com/store/apps/details?id=com.bearstudio.startuinative',
   },
   plugins: [
+    '@react-native-community/datetimepicker',
     'expo-router',
     [
       'expo-splash-screen',

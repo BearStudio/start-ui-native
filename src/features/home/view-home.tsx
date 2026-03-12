@@ -6,6 +6,7 @@ import { View } from 'react-native';
 import { useShare } from '@/hooks/use-share';
 
 import { IconShare2 } from '@/components/icons/generated';
+import { Icon } from '@/components/icons/icon';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 
@@ -20,8 +21,12 @@ export const ViewHome = () => {
   return (
     <ViewTabContent>
       <View className="gap-2">
-        <Text className="text-xl font-bold">{t('home:welcome.title')}</Text>
-        <Text className="font-medium">{t('home:welcome.description')}</Text>
+        <Text className="text-xl font-bold text-accent-foreground">
+          {t('home:welcome.title')}
+        </Text>
+        <Text className="font-medium text-muted-foreground">
+          {t('home:welcome.description')}
+        </Text>
       </View>
       <View className="mt-4 flex flex-row gap-2">
         <Link href={appConfig.githubUrl} asChild>
@@ -45,7 +50,7 @@ export const ViewHome = () => {
             })
           }
         >
-          <IconShare2 width={16} height={16} />
+          <Icon icon={IconShare2} className="text-secondary-foreground" />
           {t('home:welcome.share')}
         </Button>
       </View>

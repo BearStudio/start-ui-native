@@ -19,8 +19,8 @@ export const FormField = (props: {
   size?: FormFieldSize;
   children?: ReactNode;
 }) => {
-  const _id = useId();
-  const id = props.id ?? _id;
+  const defaultId = useId();
+  const id = props.id ?? defaultId;
 
   const field = useFieldContext();
 

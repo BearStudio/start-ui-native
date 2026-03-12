@@ -36,38 +36,38 @@ export const ViewBook = (props: { bookId: string }) => {
           <View className="flex-1 gap-4">
             <Card>
               <CardBody className="py-1">
-                <View className="flex flex-row gap-2 py-3">
+                <View className="flex flex-row py-3 px-4">
                   <Text className="flex-1 text-sm font-medium" variant="muted">
                     {t('books:common.title')}
                   </Text>
-                  <Text className="flex-[2] text-sm font-medium">
+                  <Text className="flex-2 text-sm font-medium">
                     {data.title}
                   </Text>
                 </View>
                 <Divider />
-                <View className="flex flex-row gap-2 py-3">
+                <View className="flex flex-row py-3 px-4">
                   <Text className="flex-1 text-sm font-medium" variant="muted">
                     {t('books:common.author')}
                   </Text>
-                  <Text className="flex-[2] text-sm font-medium">
+                  <Text className="flex-2 text-sm font-medium">
                     {data.author}
                   </Text>
                 </View>
                 <Divider />
-                <View className="flex flex-row gap-2 py-3">
+                <View className="flex flex-row py-3 px-4">
                   <Text className="flex-1 text-sm font-medium" variant="muted">
                     {t('books:common.genre')}
                   </Text>
-                  <Text className="flex-[2] text-sm font-medium">
+                  <Text className="flex-2 text-sm font-medium">
                     {data.genre?.name ?? 'Unknown'}
                   </Text>
                 </View>
                 <Divider />
-                <View className="flex flex-row gap-2 py-3">
+                <View className="flex flex-row py-3 px-4">
                   <Text className="flex-1 text-sm font-medium" variant="muted">
                     {t('books:common.publisher')}
                   </Text>
-                  <Text className="flex-[2] text-sm font-medium">
+                  <Text className="flex-2 text-sm font-medium">
                     {data.publisher?.toString() ?? 'Unknown'}
                   </Text>
                 </View>

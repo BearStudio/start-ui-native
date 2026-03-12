@@ -20,7 +20,7 @@ export const ViewTabContent = ({
 
   return (
     <ScrollView
-      className="flex-1 p-4"
+      className="flex-1 p-4 bg-background"
       contentContainerStyle={[
         {
           paddingTop: (withHeader ? 0 : insets.top) + 16,
