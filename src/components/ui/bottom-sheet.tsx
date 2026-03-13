@@ -78,7 +78,7 @@ export const BottomSheetContent = ({
   ...props
 }: BottomSheetContentProps) => (
   <SheetView
-    className={cn('flex flex-1 px-8 pt-4 pb-16 gap-4', className)}
+    className={cn('flex flex-1 gap-4 px-8 pt-4 pb-16', className)}
     {...props}
   />
 );

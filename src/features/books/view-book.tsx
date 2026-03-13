@@ -36,7 +36,7 @@ export const ViewBook = (props: { bookId: string }) => {
           <View className="flex-1 gap-4">
             <Card>
               <CardBody className="py-1">
-                <View className="flex flex-row py-3 px-4">
+                <View className="flex flex-row px-4 py-3">
                   <Text className="flex-1 text-sm font-medium" variant="muted">
                     {t('books:common.title')}
                   </Text>
@@ -45,7 +45,7 @@ export const ViewBook = (props: { bookId: string }) => {
                   </Text>
                 </View>
                 <Divider />
-                <View className="flex flex-row py-3 px-4">
+                <View className="flex flex-row px-4 py-3">
                   <Text className="flex-1 text-sm font-medium" variant="muted">
                     {t('books:common.author')}
                   </Text>
@@ -54,7 +54,7 @@ export const ViewBook = (props: { bookId: string }) => {
                   </Text>
                 </View>
                 <Divider />
-                <View className="flex flex-row py-3 px-4">
+                <View className="flex flex-row px-4 py-3">
                   <Text className="flex-1 text-sm font-medium" variant="muted">
                     {t('books:common.genre')}
                   </Text>
@@ -63,7 +63,7 @@ export const ViewBook = (props: { bookId: string }) => {
                   </Text>
                 </View>
                 <Divider />
-                <View className="flex flex-row py-3 px-4">
+                <View className="flex flex-row px-4 py-3">
                   <Text className="flex-1 text-sm font-medium" variant="muted">
                     {t('books:common.publisher')}
                   </Text>

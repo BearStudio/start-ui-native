@@ -61,10 +61,10 @@ const PinInput = ({
           // eslint-disable-next-line @eslint-react/no-array-index-key
           key={`pin-input-cell-${index}`}
           className={cn(
-            'border-input bg-background flex min-w-0 flex-1 items-center justify-center rounded-md border py-2',
+            'flex min-w-0 flex-1 items-center justify-center rounded-md border border-input bg-background py-2',
             hasError && 'border-destructive',
             Platform.select({
-              web: 'focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-[3px]',
+              web: 'focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50',
             })
           )}
           style={

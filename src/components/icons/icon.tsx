@@ -16,7 +16,7 @@ type IconProps = {
 
 export const Icon = ({ icon: IconComponent, className }: IconProps) => {
   const resolved = useResolveClassNames(
-    cn('text-foreground size-4', className)
+    cn('size-4 text-foreground', className)
   ) as ViewStyle;
 
   const { width, height, ...style } = resolved;

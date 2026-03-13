@@ -46,14 +46,14 @@ export const ThemeSwitcher = (props: { minimize?: boolean }) => {
           ) : (
             <Icon
               icon={ColorModeIcon}
-              className="text-muted-foreground size-5"
+              className="size-5 text-muted-foreground"
             />
           )}
         </Button>
       ) : (
         <Button
           variant="link"
-          className="self-start -mx-4"
+          className="-mx-4 self-start"
           onPress={sheet.onOpen}
         >
           {hasAdaptiveThemes ? (

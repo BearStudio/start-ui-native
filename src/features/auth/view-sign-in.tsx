@@ -63,12 +63,12 @@ export const ViewSignIn = () => {
   return (
     <ViewSafeContent className="justify-center">
       <AuthHeader />
-      <View className="p-8 items-center justify-center">
+      <View className="items-center justify-center p-8">
         <Form form={form}>
           <View className="w-full max-w-[400px] gap-6">
             <View className="items-center gap-2">
               <Text variant="h2">{t('auth:signin.title')}</Text>
-              <Text className="font-normal text-sm text-center text-muted-foreground">
+              <Text className="text-center text-sm font-normal text-muted-foreground">
                 {t('auth:signin.subtitle')}
               </Text>
             </View>
@@ -115,7 +115,7 @@ export const ViewSignIn = () => {
         </Form>
       </View>
       <View
-        className="absolute left-0 right-0 flex flex-row items-center justify-center p-6"
+        className="absolute right-0 left-0 flex flex-row items-center justify-center p-6"
         style={{ bottom: insets.bottom }}
       >
         <Version className="text-center" />

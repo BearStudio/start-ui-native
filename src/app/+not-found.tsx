@@ -14,7 +14,7 @@ export default function NotFound() {
 
   return (
     <ViewSafeContent>
-      <View className="flex-1 gap-4 items-center justify-center">
+      <View className="flex-1 items-center justify-center gap-4">
         <Text className="text-xl">{t('layout:notFound.title')}</Text>
         <View>
           <Link href="/(logged)/(tabs)/home" asChild>

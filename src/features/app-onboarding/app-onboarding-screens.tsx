@@ -11,7 +11,7 @@ import { deviceScreen } from '@/constants/device';
 
 const OnboardingScreenContainer = (props: PropsWithChildren) => (
   <View
-    className="w-full p-8 items-center justify-center"
+    className="w-full items-center justify-center p-8"
     style={{ width: deviceScreen.width }}
   >
     <View

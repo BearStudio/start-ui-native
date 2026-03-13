@@ -14,7 +14,7 @@ export const AuthHeader = () => {
 
   return (
     <View
-      className="absolute left-0 right-0 flex flex-row items-center justify-between p-6"
+      className="absolute right-0 left-0 flex flex-row items-center justify-between p-6"
       style={{ top: insets.top }}
     >
       <Logo color={logoColor} width={96} height={22} />

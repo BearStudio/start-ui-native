@@ -51,13 +51,13 @@ export const ViewOtpVerification = () => {
   return (
     <ViewSafeContent>
       <AuthHeader />
-      <View className="flex-1 p-6 items-center justify-center">
+      <View className="flex-1 items-center justify-center p-6">
         <form.AppForm>
           <View className="w-full max-w-[400px] gap-6">
             <Button variant="ghost" className="pl-0" onPress={router.back}>
               <Icon
                 icon={IconArrowLeft}
-                className="text-foreground size-[18px]"
+                className="size-[18px] text-foreground"
               />
               {t('auth:verification.back')}
             </Button>

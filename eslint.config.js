@@ -96,9 +96,7 @@ export default tslint.config(
             // static data
             ['^@/data'],
             // components
-            ['^@/components', '^@/container'],
-            // zustand store
-            ['^@/store'],
+            ['^@/components'],
             // Other imports
             ['^@/'],
             // relative paths up until 3 level

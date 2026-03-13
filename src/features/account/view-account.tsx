@@ -116,7 +116,7 @@ export const ViewAccount = () => {
                     >
                       <Icon
                         icon={IconLogOut}
-                        className="text-primary-foreground size-5"
+                        className="size-5 text-primary-foreground"
                       />
                       {t('auth:signOut.confirm.signOut')}
                     </Button>
@@ -133,7 +133,7 @@ export const ViewAccount = () => {
                     variant="link"
                     size="sm"
                     onPress={() => updateNameSheet.onOpen()}
-                    className="self-start -mx-3"
+                    className="-mx-3 self-start"
                   >
                     {data.user.name}
                     <Icon icon={IconEdit3} />

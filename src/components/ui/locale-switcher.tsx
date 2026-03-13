@@ -22,7 +22,7 @@ export const LocaleSwitcher = () => {
     <>
       <Button
         variant="link"
-        className="self-start -mx-4"
+        className="-mx-4 self-start"
         onPress={sheet.onOpen}
       >
         <Icon icon={IconLanguages} className="text-muted-foreground" />
