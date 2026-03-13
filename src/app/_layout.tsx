@@ -2,9 +2,10 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Slot } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
+import { StatusBar } from 'expo-status-bar';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaListener } from 'react-native-safe-area-context';
-import { Uniwind } from 'uniwind';
+import { Uniwind, useUniwind } from 'uniwind';
 import 'react-native-reanimated';
 import '@/lib/i18n';
 
@@ -21,6 +22,11 @@ export const queryClient = new QueryClient();
 // SplashScreen hide management in splash-screen-manager.tsx
 SplashScreen.preventAutoHideAsync();
 
+function ThemedStatusBar() {
+  const { theme } = useUniwind();
+  return <StatusBar style={theme === 'dark' ? 'light' : 'dark'} />;
+}
+
 export default function RootLayout() {
   useThemeSync();
 
@@ -33,6 +39,7 @@ export default function RootLayout() {
       >
         <GestureHandlerRootView>
           <BottomSheetModalProvider>
+            <ThemedStatusBar />
             <SplashScreenManager>
               <Slot />
             </SplashScreenManager>

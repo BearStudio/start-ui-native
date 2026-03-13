@@ -79,7 +79,7 @@ export const ViewOtpVerification = () => {
                       <field.Label>
                         {t('auth:verification.verificationCode.label')}
                       </field.Label>
-                      <field.FieldOtp codeLength={6} />
+                      <field.FieldOtp codeLength={6} autoFocus />
                       <field.Helper>
                         {t('auth:verification.expireHint')}
                       </field.Helper>

@@ -34,11 +34,11 @@ export const ViewBooks = () => {
     <ViewTabContent withHeader>
       {ui
         .match('pending', () => (
-          <View className="flex-row flex-wrap p-2">
+          <View className="flex-row flex-wrap">
             {Array.from({ length: 4 }, (_, i) => i).map((index) => (
-              <View key={index} className="w-1/2 p-2">
+              <View key={index} style={{ width: '50%', padding: 8 }}>
                 <Skeleton
-                  className="aspect-2/3 w-full rounded-lg"
+                  className="w-full rounded-lg"
                   style={{ height: COVER_HEIGHT }}
                 />
               </View>

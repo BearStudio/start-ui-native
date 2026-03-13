@@ -111,7 +111,14 @@ type ButtonProps = React.ComponentProps<typeof Pressable> &
   React.RefAttributes<typeof Pressable> &
   VariantProps<typeof buttonVariants>;
 
-function Button({ className, variant, size, children, ...props }: ButtonProps) {
+function Button({
+  className,
+  variant,
+  size,
+  children,
+  style,
+  ...props
+}: ButtonProps) {
   const content = getUiState((set) => {
     if (typeof children === 'function') return set('function', { children });
     if (!children) return set('empty');
@@ -138,6 +145,15 @@ function Button({ className, variant, size, children, ...props }: ButtonProps) {
           buttonVariants({ variant, size }),
           className
         )}
+        style={({ pressed }) => [
+          pressed && { opacity: 0.7 },
+          typeof style === 'function'
+            ? style({
+                pressed,
+                hovered: false,
+              })
+            : style,
+        ]}
         role="button"
         {...props}
       >

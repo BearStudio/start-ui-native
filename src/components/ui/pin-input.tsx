@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Platform, TextInput, View } from 'react-native';
+import { Platform, Pressable, TextInput, View } from 'react-native';
+import { useResolveClassNames } from 'uniwind';
 
 import { cn } from '@/lib/tailwind/utils';
 
@@ -19,10 +20,19 @@ const PinInput = ({
   keyboardType = 'number-pad',
   textContentType = 'oneTimeCode',
   editable = true,
+  autoFocus,
   ref,
   ...props
 }: PinInputProps) => {
   const innerRef = React.useRef<TextInput>(null);
+  const [isFocused, setIsFocused] = React.useState(false);
+  const resolvedForeground = useResolveClassNames('text-foreground') as {
+    color?: string;
+  };
+  const resolvedDestructive = useResolveClassNames('text-destructive') as {
+    color?: string;
+  };
+  const hasError = props['aria-invalid'] === true;
 
   React.useImperativeHandle(ref, () => innerRef.current as TextInput, []);
 
@@ -31,10 +41,20 @@ const PinInput = ({
     [value, cellCount]
   );
 
+  const activeIndex = Math.min(value.length, cellCount - 1);
+
+  const getFocusBorderColor = () => {
+    if (hasError) return resolvedDestructive.color;
+    return resolvedForeground.color;
+  };
+
   return (
-    <View
+    <Pressable
       className={cn('relative flex flex-row gap-2', className)}
-      onTouchEnd={() => innerRef.current?.focus()}
+      onPress={() => {
+        innerRef.current?.blur();
+        setTimeout(() => innerRef.current?.focus(), 0);
+      }}
     >
       {digits.map((digit, index) => (
         <View
@@ -42,21 +62,28 @@ const PinInput = ({
           key={`pin-input-cell-${index}`}
           className={cn(
             'border-input bg-background flex min-w-0 flex-1 items-center justify-center rounded-md border py-2',
-            props['aria-invalid'] && 'border-destructive',
+            hasError && 'border-destructive',
             Platform.select({
               web: 'focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-[3px]',
             })
           )}
+          style={
+            Platform.OS !== 'web' && isFocused && index === activeIndex
+              ? { borderColor: getFocusBorderColor() }
+              : undefined
+          }
         >
-          <Text className="text-lg font-medium tabular-nums">
-            {digit === ' ' ? '' : digit}
+          <Text className="text-lg leading-7 font-medium tabular-nums">
+            {digit === ' ' ? '\u200B' : digit}
           </Text>
         </View>
       ))}
-      <Input
+      <TextInput
         ref={innerRef}
-        className="absolute inset-0 opacity-0"
+        autoFocus={autoFocus}
         value={value}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
         onChangeText={(text) => {
           const filtered = text.replace(/\D/g, '').slice(0, cellCount);
           onChangeText?.(filtered);
@@ -65,9 +92,15 @@ const PinInput = ({
         textContentType={textContentType}
         maxLength={cellCount}
         editable={editable}
-        {...props}
+        caretHidden
+        style={{
+          position: 'absolute',
+          opacity: 0,
+          width: 1,
+          height: 1,
+        }}
       />
-    </View>
+    </Pressable>
   );
 };
 
