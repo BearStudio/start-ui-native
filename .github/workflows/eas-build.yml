@@ -6,8 +6,17 @@ env:
   EXPO_PUBLIC_OPENAPI_URL: ${{ vars.OPENAPI_URL }}
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
+    inputs:
+      profile:
+        description: EAS build profile
+        required: true
+        default: production
+        type: choice
+        options:
+          - development
+          - staging
+          - production
 
 jobs:
   build:
@@ -32,4 +41,4 @@ jobs:
         run: pnpm install
 
       - name: 🚀 Build app
-        run: eas build --non-interactive
+        run: eas build --profile ${{ github.event.inputs.profile }} --non-interactive

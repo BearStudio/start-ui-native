@@ -11,7 +11,7 @@ const {
 const config = getDefaultConfig(__dirname);
 
 // withUniwindConfig must be outermost (Uniwind requirement)
-const storybookEnabled = process.env.EXPO_PUBLIC_ENVIRONMENT === 'storybook';
+const storybookEnabled = process.env.APP_ENV === 'storybook';
 
 const storybookConfig = withStorybook(config, {
   enabled: storybookEnabled,

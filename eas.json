@@ -5,20 +5,40 @@
   },
   "build": {
     "development": {
+      "channel": "development",
+      "distribution": "internal",
       "developmentClient": true,
-      "distribution": "internal",
-      "channel": "development"
+      "env": {
+        "APP_ENV": "development"
+      }
     },
-    "preview": {
+    "staging": {
+      "channel": "staging",
       "distribution": "internal",
-      "channel": "preview"
+      "env": {
+        "APP_ENV": "staging"
+      }
     },
     "production": {
+      "channel": "production",
       "autoIncrement": true,
-      "channel": "production"
+      "env": {
+        "APP_ENV": "production"
+      }
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "ascAppId": "YOUR_ASC_APP_ID",
+        "ascApiKeyId": "YOUR_ASC_API_KEY_ID",
+        "ascApiKeyIssuerId": "YOUR_ASC_API_KEY_ISSUER_ID",
+        "ascApiKeyPath": "AuthKey_YOUR_KEY_ID.p8"
+      },
+      "android": {
+        "track": "internal",
+        "releaseStatus": "draft"
+      }
+    }
   }
 }
