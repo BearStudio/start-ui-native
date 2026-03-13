@@ -36,7 +36,7 @@ export const ViewBooks = () => {
         .match('pending', () => (
           <View className="flex-row flex-wrap">
             {Array.from({ length: 4 }, (_, i) => i).map((index) => (
-              <View key={index} style={{ width: '50%', padding: 8 }}>
+              <View key={index} className="w-1/2 p-2">
                 <Skeleton
                   className="w-full rounded-lg"
                   style={{ height: COVER_HEIGHT }}
