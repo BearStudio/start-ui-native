@@ -10,13 +10,6 @@ const APP_NAME = 'Start UI [native]';
 const BUNDLE_IDENTIFIER = 'com.bearstudio.startuinative';
 const PACKAGE_NAME = 'com.bearstudio.startuinative';
 const SCHEME = 'start-ui-native';
-const ICON = './src/assets/images/icon.png';
-const ADAPTIVE_ICON_FOREGROUND =
-  './src/assets/images/android-icon-foreground.png';
-const ADAPTIVE_ICON_MONOCHROME =
-  './src/assets/images/android-icon-monochrome.png';
-const SPLASH_ICON_LIGHT = './src/assets/images/splash-icon-light.png';
-const SPLASH_ICON_DARK = './src/assets/images/splash-icon-dark.png';
 
 // ─── Env-based config ───────────────────────────────────────────────────────
 type AppEnv = 'development' | 'staging' | 'production' | 'storybook';
@@ -32,10 +25,12 @@ const getDynamicAppConfig = (environment?: AppEnv) => {
         displayName: `${APP_NAME} [Dev]`,
         bundleIdentifier: `${BUNDLE_IDENTIFIER}.development`,
         packageName: `${PACKAGE_NAME}.development`,
-        icon: ICON,
+        icon: './src/assets/images/icon-dev.png',
         adaptiveIcon: {
-          foregroundImage: ADAPTIVE_ICON_FOREGROUND,
-          monochromeImage: ADAPTIVE_ICON_MONOCHROME,
+          foregroundImage:
+            './src/assets/images/android-icon-foreground-dev.png',
+          monochromeImage:
+            './src/assets/images/android-icon-monochrome-dev.png',
           backgroundColor: '#FFFFFF',
         },
         scheme: `${SCHEME}-development`,
@@ -46,10 +41,12 @@ const getDynamicAppConfig = (environment?: AppEnv) => {
         displayName: `${APP_NAME} [Staging]`,
         bundleIdentifier: `${BUNDLE_IDENTIFIER}.staging`,
         packageName: `${PACKAGE_NAME}.staging`,
-        icon: ICON,
+        icon: './src/assets/images/icon-staging.png',
         adaptiveIcon: {
-          foregroundImage: ADAPTIVE_ICON_FOREGROUND,
-          monochromeImage: ADAPTIVE_ICON_MONOCHROME,
+          foregroundImage:
+            './src/assets/images/android-icon-foreground-staging.png',
+          monochromeImage:
+            './src/assets/images/android-icon-monochrome-staging.png',
           backgroundColor: '#FFFFFF',
         },
         scheme: `${SCHEME}-staging`,
@@ -60,10 +57,10 @@ const getDynamicAppConfig = (environment?: AppEnv) => {
         displayName: `Storybook • ${APP_NAME}`,
         bundleIdentifier: `${BUNDLE_IDENTIFIER}.development`,
         packageName: `${PACKAGE_NAME}.development`,
-        icon: ICON,
+        icon: './src/assets/images/icon.png',
         adaptiveIcon: {
-          foregroundImage: ADAPTIVE_ICON_FOREGROUND,
-          monochromeImage: ADAPTIVE_ICON_MONOCHROME,
+          foregroundImage: './src/assets/images/android-icon-foreground.png',
+          monochromeImage: './src/assets/images/android-icon-monochrome.png',
           backgroundColor: '#FFFFFF',
         },
         scheme: `${SCHEME}-storybook`,
@@ -75,10 +72,10 @@ const getDynamicAppConfig = (environment?: AppEnv) => {
         displayName: undefined,
         bundleIdentifier: BUNDLE_IDENTIFIER,
         packageName: PACKAGE_NAME,
-        icon: ICON,
+        icon: './src/assets/images/icon.png',
         adaptiveIcon: {
-          foregroundImage: ADAPTIVE_ICON_FOREGROUND,
-          monochromeImage: ADAPTIVE_ICON_MONOCHROME,
+          foregroundImage: './src/assets/images/android-icon-foreground.png',
+          monochromeImage: './src/assets/images/android-icon-monochrome.png',
           backgroundColor: '#FFFFFF',
         },
         scheme: SCHEME,
@@ -119,12 +116,12 @@ export default {
     [
       'expo-splash-screen',
       {
-        image: SPLASH_ICON_LIGHT,
+        image: './src/assets/images/splash-icon-light.png',
         imageWidth: 200,
         resizeMode: 'contain',
         backgroundColor: '#ffffff',
         dark: {
-          image: SPLASH_ICON_DARK,
+          image: './src/assets/images/splash-icon-dark.png',
           backgroundColor: '#000000',
         },
       },

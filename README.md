@@ -94,6 +94,8 @@ pnpm build:production:android
 > [!TIP]
 > If the app name is wrong, the native project was generated with the wrong `APP_ENV`. Re-run the same build script — it includes `--clean` to regenerate the native project.
 
+<h1 align="center"><img src=".github/assets/app-icons.png" alt="App icons render in ios" /></h1>
+
 ### Devtools
 
 You can use @dev-plugins pressing `Shift + m` in your Expo terminal.
