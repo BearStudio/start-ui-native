@@ -2,9 +2,11 @@ import { getUiState } from '@bearstudio/ui-state';
 import { FlashList } from '@shopify/flash-list';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { Link } from 'expo-router';
+import { useCallback } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
 import { api } from '@/lib/hey-api/api';
+import { BookGetByIdResponse } from '@/lib/hey-api/generated';
 
 import { Skeleton } from '@/components/ui/skeleton';
 import { Text } from '@/components/ui/text';
@@ -30,6 +32,24 @@ export const ViewBooks = () => {
     });
   });
 
+  const renderItem = useCallback(
+    ({ item }: { item: BookGetByIdResponse }) => (
+      <Link
+        href={{
+          pathname: '/books/[id]',
+          params: { id: item.id, title: item.title },
+        }}
+        style={{ padding: 8, flex: 1 }}
+      >
+        <Link.Trigger>
+          <BookCover book={item} />
+        </Link.Trigger>
+        <Link.Preview />
+      </Link>
+    ),
+    []
+  );
+
   return (
     <ViewTabContent withHeader>
       {ui
@@ -53,20 +73,7 @@ export const ViewBooks = () => {
             keyExtractor={(item) => item.id}
             numColumns={2}
             horizontal={false}
-            renderItem={({ item }) => (
-              <Link
-                href={{
-                  pathname: '/books/[id]',
-                  params: { id: item.id, title: item.title },
-                }}
-                style={{ padding: 8, flex: 1 }}
-              >
-                <Link.Trigger>
-                  <BookCover book={item} />
-                </Link.Trigger>
-                <Link.Preview />
-              </Link>
-            )}
+            renderItem={renderItem}
             onEndReached={() => {
               if (!books.hasNextPage) {
                 return;

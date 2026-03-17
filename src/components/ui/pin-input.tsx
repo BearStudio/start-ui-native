@@ -36,10 +36,13 @@ const PinInput = ({
 
   React.useImperativeHandle(ref, () => innerRef.current as TextInput, []);
 
-  const digits = React.useMemo(
-    () => value.padEnd(cellCount, ' ').split('').slice(0, cellCount),
-    [value, cellCount]
-  );
+  const cells = React.useMemo(() => {
+    const digits = value.padEnd(cellCount, ' ').split('').slice(0, cellCount);
+    return digits.map((digit, i) => ({
+      id: `pin-cell-${i}` as const,
+      digit,
+    }));
+  }, [value, cellCount]);
 
   const activeIndex = Math.min(value.length, cellCount - 1);
 
@@ -56,10 +59,9 @@ const PinInput = ({
         setTimeout(() => innerRef.current?.focus(), 0);
       }}
     >
-      {digits.map((digit, index) => (
+      {cells.map(({ id, digit }, index) => (
         <View
-          // eslint-disable-next-line @eslint-react/no-array-index-key
-          key={`pin-input-cell-${index}`}
+          key={id}
           className={cn(
             'flex min-w-0 flex-1 items-center justify-center rounded-md border border-input bg-background py-2',
             hasError && 'border-destructive',

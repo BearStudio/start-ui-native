@@ -1,5 +1,4 @@
 import { useStore } from '@tanstack/react-form';
-import { useCallback, useEffect } from 'react';
 import { View, type ViewProps } from 'react-native';
 
 import { FormFieldError } from '@/lib/tanstack-form/components';
@@ -29,21 +28,6 @@ export default function FieldOtp(props: FieldOtpProps) {
     };
   });
 
-  const shouldAutoSubmit =
-    autoSubmit && field.state.value?.length === codeLength;
-
-  const submitForm = useCallback(() => {
-    if (!field.form.state.isSubmitted) {
-      field.form.handleSubmit();
-    }
-  }, [field.form]);
-
-  useEffect(() => {
-    if (shouldAutoSubmit) {
-      submitForm();
-    }
-  }, [shouldAutoSubmit, submitForm]);
-
   return (
     <View className="gap-1" {...containerProps}>
       <PinInput
@@ -59,8 +43,15 @@ export default function FieldOtp(props: FieldOtpProps) {
         textContentType="oneTimeCode"
         {...rest}
         value={field.state.value}
-        onChangeText={(value) => {
-          field.handleChange(value);
+        onChangeText={(text) => {
+          field.handleChange(text);
+          if (
+            autoSubmit &&
+            text.length === codeLength &&
+            !field.form.state.isSubmitted
+          ) {
+            field.form.handleSubmit();
+          }
         }}
         onBlur={(e) => {
           field.handleBlur();

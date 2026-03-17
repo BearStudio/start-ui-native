@@ -1,3 +1,5 @@
+'use no memo';
+
 import { StatusBar } from 'expo-status-bar';
 import { useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -28,6 +30,33 @@ import { useBackgroundAnimatedStyle } from '@/features/app-onboarding/use-backgr
 import { useMascotAnimatedStyle } from '@/features/app-onboarding/use-mascot-animated-style';
 import { ViewSafeContent } from '@/layout/view-safe-content';
 
+function useScrollHandler() {
+  const scrollX = useSharedValue(0);
+
+  const scrollHandler = useAnimatedScrollHandler({
+    onScroll: (event) => {
+      scrollX.value = event.contentOffset.x;
+    },
+  });
+
+  return { scrollX, scrollHandler };
+}
+
+function useExitAnimation(doneOnboarding: () => void) {
+  const exitProgress = useSharedValue(0);
+  const exitAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(exitProgress.value, [0, 1], [1, 0]),
+  }));
+  const handleDone = useCallback(() => {
+    exitProgress.value = withTiming(1, { duration: 400 }, (finished) => {
+      if (finished) {
+        scheduleOnRN(doneOnboarding);
+      }
+    });
+  }, [doneOnboarding, exitProgress]);
+  return { exitAnimatedStyle, handleDone };
+}
+
 export const ViewOnboarding = () => {
   const { t } = useTranslation(['appOnboarding']);
   const insets = useSafeAreaInsets();
@@ -36,30 +65,12 @@ export const ViewOnboarding = () => {
 
   const listRef = useRef<FlatList>(null);
 
-  const scrollX = useSharedValue(0);
-  const scrollHandler = useAnimatedScrollHandler({
-    onScroll: (event) => {
-      scrollX.value = event.contentOffset.x;
-    },
-  });
-
+  const { scrollX, scrollHandler } = useScrollHandler();
   const backgroundAnimatedStyle = useBackgroundAnimatedStyle(scrollX);
   const mascotAnimatedStyle = useMascotAnimatedStyle(scrollX);
 
   const doneOnboarding = useOnboardingStore((state) => state.setDone);
-
-  const exitProgress = useSharedValue(0);
-  const exitAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: interpolate(exitProgress.value, [0, 1], [1, 0]),
-  }));
-
-  const handleDone = useCallback(() => {
-    exitProgress.value = withTiming(1, { duration: 400 }, (finished) => {
-      if (finished) {
-        scheduleOnRN(doneOnboarding);
-      }
-    });
-  }, [doneOnboarding, exitProgress]);
+  const { exitAnimatedStyle, handleDone } = useExitAnimation(doneOnboarding);
 
   const onViewableItemsChanged = useCallback(
     ({ viewableItems }: { viewableItems: { index: number | null }[] }) => {
@@ -71,9 +82,16 @@ export const ViewOnboarding = () => {
     []
   );
 
-  const viewabilityConfig = useRef({
+  const [viewabilityConfig] = useState({
     viewAreaCoveragePercentThreshold: 30,
-  }).current;
+  });
+
+  const renderItem = useCallback(
+    ({ item }: { item: (typeof appOnboardingScreens)[number] }) => (
+      <item.Component />
+    ),
+    []
+  );
 
   return (
     <ScopedTheme theme="dark">
@@ -115,7 +133,7 @@ export const ViewOnboarding = () => {
             ref={listRef}
             horizontal
             data={appOnboardingScreens}
-            renderItem={({ item }) => <item.Component />}
+            renderItem={renderItem}
             showsHorizontalScrollIndicator={false}
             decelerationRate="fast"
             bounces={false}
