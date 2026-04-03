@@ -11,30 +11,30 @@ const buttonVariants = cva(
   cn(
     'group shrink-0 flex-row items-center justify-center gap-2 rounded-md shadow-none',
     Platform.select({
-      web: "focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/30 whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+      web: "whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none aria-invalid:border-destructive aria-invalid:ring-destructive/30 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
     })
   ),
   {
     variants: {
       variant: {
         default: cn(
-          'bg-primary active:bg-primary/90 shadow-sm shadow-black/5',
+          'bg-primary shadow-sm shadow-black/5 active:bg-primary/90',
           Platform.select({ web: 'hover:bg-primary/90' })
         ),
         destructive: cn(
-          'bg-destructive active:bg-destructive/90 shadow-sm shadow-black/5',
+          'bg-destructive shadow-sm shadow-black/5 active:bg-destructive/90',
           Platform.select({
             web: 'hover:bg-destructive/90 focus-visible:ring-destructive/30',
           })
         ),
         outline: cn(
-          'border-border bg-background active:bg-accent border shadow-sm shadow-black/5',
+          'border border-border bg-background shadow-sm shadow-black/5 active:bg-accent',
           Platform.select({
             web: 'hover:bg-accent',
           })
         ),
         secondary: cn(
-          'border-border bg-background border shadow-xs',
+          'border border-border bg-background shadow-xs',
           Platform.select({ web: 'hover:bg-accent' })
         ),
         ghost: cn(
@@ -68,7 +68,7 @@ const buttonVariants = cva(
 
 const buttonTextVariants = cva(
   cn(
-    'text-foreground text-sm font-medium',
+    'text-sm font-medium text-foreground',
     Platform.select({ web: 'pointer-events-none transition-colors' })
   ),
   {
@@ -147,7 +147,9 @@ function Button({
         )}
         style={({ pressed }) => [
           pressed && { opacity: 0.7 },
-          typeof style === 'function' ? style({ pressed }) : style,
+          typeof style === 'function'
+            ? style({ pressed, hovered: false })
+            : style,
         ]}
         role="button"
         {...props}
