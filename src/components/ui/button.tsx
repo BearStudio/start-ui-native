@@ -145,11 +145,9 @@ function Button({
           buttonVariants({ variant, size }),
           className
         )}
-        style={({ pressed }) => [
-          pressed && { opacity: 0.7 },
-          typeof style === 'function'
-            ? style({ pressed, hovered: false })
-            : style,
+        style={(state) => [
+          state.pressed && { opacity: 0.7 },
+          typeof style === 'function' ? style(state) : style,
         ]}
         role="button"
         {...props}
