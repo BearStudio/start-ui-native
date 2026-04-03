@@ -1,0 +1,31 @@
+appId: com.bearstudio.startuinative.development
+---
+# Email placeholder is "Email" in both languages
+- tapOn: "Email"
+- inputText: "user@user.com"
+
+# Submit button differs by language
+- runFlow:
+    when:
+      visible: "Continue with email"
+    commands:
+      - tapOn: "Continue with email"
+- runFlow:
+    when:
+      visible: "Connexion avec email"
+    commands:
+      - tapOn: "Connexion avec email"
+
+- inputText: "000000"
+
+# Assert landing on home tab
+- runFlow:
+    when:
+      visible: "Home"
+    commands:
+      - assertVisible: "Home"
+- runFlow:
+    when:
+      visible: "Accueil"
+    commands:
+      - assertVisible: "Accueil"

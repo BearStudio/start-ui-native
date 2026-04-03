@@ -1,0 +1,17 @@
+# Tests the complete authentication journey from a clean app state.
+# Run: maestro test .maestro/flows/sign-in.yaml
+#
+# appId variants:
+#   dev:        com.bearstudio.startuinative.development
+#   staging:    com.bearstudio.startuinative.staging
+#   production: com.bearstudio.startuinative
+appId: com.bearstudio.startuinative.development
+---
+- launchApp:
+    clearState: true
+
+# Onboarding appears on first launch
+- runFlow: ../utils/handle-onboarding.yaml
+
+# Sign-in + OTP
+- runFlow: ../utils/login.yaml

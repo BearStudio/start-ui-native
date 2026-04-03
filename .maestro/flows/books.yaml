@@ -1,0 +1,30 @@
+# Tests the books tab navigation and book detail screen.
+# Run: maestro test .maestro/flows/books.yaml
+#
+# This flow starts from scratch (clearState) and includes auth.
+appId: com.bearstudio.startuinative.development
+---
+- launchApp:
+    clearState: true
+
+- runFlow: ../utils/handle-onboarding.yaml
+- runFlow: ../utils/login.yaml
+
+- runFlow:
+    when:
+      visible: "Books"
+    commands:
+      - tapOn: "Books"
+- runFlow:
+    when:
+      visible: "Livres"
+    commands:
+      - tapOn: "Livres"
+
+# Wait for the books list to load
+- waitForAnimationToEnd
+
+- runFlow:
+    when:
+      notVisible: "There is no books"
+    file: ../utils/open-first-book.yaml

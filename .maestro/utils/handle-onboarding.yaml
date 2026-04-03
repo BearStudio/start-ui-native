@@ -1,0 +1,22 @@
+appId: com.bearstudio.startuinative.development
+---
+- runFlow:
+    when:
+      visible: "Continue"
+    commands:
+      - tapOn: "Continue"
+- runFlow:
+    when:
+      visible: "Continuer"
+    commands:
+      - tapOn: "Continuer"
+- runFlow:
+    when:
+      visible: "Let's start"
+    commands:
+      - tapOn: "Let's start"
+- runFlow:
+    when:
+      visible: "Commencer"
+    commands:
+      - tapOn: "Commencer"
