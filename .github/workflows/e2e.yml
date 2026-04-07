@@ -57,6 +57,7 @@ jobs:
             -Dorg.gradle.daemon=false
             -Dorg.gradle.parallel=false
             -Dorg.gradle.configureondemand=true
+            -Dorg.gradle.jvmargs="-Xmx4096m -XX:MaxMetaspaceSize=1024m"
 
       - name: 🎭 Install Maestro
         run: curl -Ls "https://get.maestro.mobile.dev" | bash && echo "$HOME/.maestro/bin" >> $GITHUB_PATH
@@ -113,6 +114,7 @@ jobs:
             -Dorg.gradle.daemon=false
             -Dorg.gradle.parallel=false
             -Dorg.gradle.configureondemand=true
+            -Dorg.gradle.jvmargs="-Xmx4096m -XX:MaxMetaspaceSize=1024m"
 
       - name: 🎭 Install Maestro
         run: curl -Ls "https://get.maestro.mobile.dev" | bash && echo "$HOME/.maestro/bin" >> $GITHUB_PATH
