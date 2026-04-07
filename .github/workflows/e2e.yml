@@ -52,6 +52,7 @@ jobs:
         run: eas build --profile e2e --platform android --non-interactive --local --output build.apk
         env:
           APP_ENV: development
+          ORG_GRADLE_PROJECT_reactNativeArchitectures: x86_64
 
       - name: 🎭 Install Maestro
         run: curl -Ls "https://get.maestro.mobile.dev" | bash && echo "$HOME/.maestro/bin" >> $GITHUB_PATH
@@ -103,6 +104,7 @@ jobs:
         run: eas build --profile e2e --platform android --non-interactive --local --output build.apk
         env:
           APP_ENV: development
+          ORG_GRADLE_PROJECT_reactNativeArchitectures: x86_64
 
       - name: 🎭 Install Maestro
         run: curl -Ls "https://get.maestro.mobile.dev" | bash && echo "$HOME/.maestro/bin" >> $GITHUB_PATH
