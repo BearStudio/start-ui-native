@@ -3,7 +3,6 @@ appId: com.bearstudio.startuinative.development
 - scroll
 - tapOn:
     id: "book-item"
-# pressBack is Android only — on iOS use a swipe-back gesture
-- pressBack
+- back
 - assertVisible:
     id: "tab-books"

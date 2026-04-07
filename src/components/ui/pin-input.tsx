@@ -21,6 +21,7 @@ const PinInput = ({
   textContentType = 'oneTimeCode',
   editable = true,
   autoFocus,
+  testID,
   ref,
   ...props
 }: PinInputProps) => {
@@ -53,6 +54,7 @@ const PinInput = ({
 
   return (
     <Pressable
+      testID={testID}
       className={cn('relative flex flex-row gap-2', className)}
       onPress={() => {
         innerRef.current?.blur();
