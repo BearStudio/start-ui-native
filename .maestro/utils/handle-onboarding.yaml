@@ -1,4 +1,4 @@
-appId: com.bearstudio.startuinative.development
+appId: ${APP_ID}
 ---
 - runFlow:
     when:

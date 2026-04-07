@@ -24,8 +24,8 @@
     "gen:icons": "svgr --config-file src/components/icons/svgr.config.cjs src/components/icons/svg-sources && prettier -w src/components/icons/generated",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "test:e2e": "maestro test .maestro/flows",
-    "test:e2e:smoke": "maestro test .maestro/smoke.yaml"
+    "test:e2e": "maestro test .maestro/flows $(grep -v '^#' .env.maestro | grep -v '^$' | sed 's/^/-e /')",
+    "test:e2e:smoke": "maestro test .maestro/flows $(grep -v '^#' .env.maestro | grep -v '^$' | sed 's/^/-e /') --include-tags smoke"
   },
   "dependencies": {
     "@bearstudio/ui-state": "1.1.0",

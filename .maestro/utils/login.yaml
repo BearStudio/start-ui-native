@@ -1,7 +1,7 @@
-appId: com.bearstudio.startuinative.development
+appId: ${APP_ID}
 ---
 - tapOn: 'Email'
-- inputText: 'user@user.com'
+- inputText: ${TEST_EMAIL}
 
 - runFlow:
     when:
@@ -14,7 +14,7 @@ appId: com.bearstudio.startuinative.development
     commands:
       - tapOn: 'Connexion avec email'
 
-- inputText: '000000'
+- inputText: ${TEST_OTP}
 
 - runFlow:
     when:

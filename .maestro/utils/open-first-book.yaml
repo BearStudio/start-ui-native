@@ -1,21 +1,21 @@
-appId: com.bearstudio.startuinative.development
+appId: ${APP_ID}
 ---
 - scroll
 - runFlow:
     when:
-      visible: "Books"
+      visible: 'Books'
     commands:
       - tapOn:
           index: 0
-          below: "Books"
+          below: 'Books'
       - back
-      - assertVisible: "Books"
+      - assertVisible: 'Books'
 - runFlow:
     when:
-      visible: "Livres"
+      visible: 'Livres'
     commands:
       - tapOn:
           index: 0
-          below: "Livres"
+          below: 'Livres'
       - back
-      - assertVisible: "Livres"
+      - assertVisible: 'Livres'
