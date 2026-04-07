@@ -87,6 +87,7 @@ export const ViewSignIn = () => {
                   {(field) => (
                     <field.Field>
                       <field.FieldText
+                        testID="signin-email-input"
                         placeholder={t('auth:signin.email.placeholder')}
                         autoCapitalize="none"
                         placeholderTextColor="neutral.600"
@@ -97,7 +98,7 @@ export const ViewSignIn = () => {
                     </field.Field>
                   )}
                 </form.AppField>
-                <form.Submit full>
+                <form.Submit testID="signin-submit-button" full>
                   {t('auth:signin.loginWithEmail')}
                 </form.Submit>
                 {/* For social sign in integration */}

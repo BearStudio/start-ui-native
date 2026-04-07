@@ -60,7 +60,11 @@ export default function TabLayout() {
     return (
       <NativeTabs tintColor={themedStyle.color}>
         {TABS.map((tab) => (
-          <NativeTabs.Trigger key={tab.name} name={tab.name}>
+          <NativeTabs.Trigger
+            key={tab.name}
+            name={tab.name}
+            testID={`tab-${tab.name}`}
+          >
             <NativeTabs.Trigger.Label>
               {t(tab.translationKey)}
             </NativeTabs.Trigger.Label>
@@ -79,7 +83,6 @@ export default function TabLayout() {
         headerTintColor: themedStyle.color,
         tabBarStyle: { backgroundColor: themedStyle.backgroundColor },
         tabBarActiveTintColor: themedStyle.color,
-        tabBarButton: (props) => <HapticTab {...props} />,
         sceneStyle: { backgroundColor: themedStyle.sceneBackgroundColor },
       }}
     >
@@ -90,6 +93,9 @@ export default function TabLayout() {
           options={{
             title: t(tab.translationKey),
             headerShown: tab.headerShown,
+            tabBarButton: (props) => (
+              <HapticTab {...props} testID={`tab-${tab.name}`} />
+            ),
             tabBarIcon: (props) => {
               const TabIcon = props.focused ? tab.iconFocused : tab.icon;
               return (
