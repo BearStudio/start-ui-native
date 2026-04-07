@@ -8,7 +8,7 @@ env:
 on:
   workflow_dispatch:
   push:
-    branches-ignore: [main]
+    # branches-ignore: [main]
     branches: [test/e2e-*]
   pull_request:
     types: [closed]
