@@ -198,3 +198,60 @@ To be able to use previews on PR, you have to setup your project with EAS
     - `eas init --id {projectid}`
     - `eas update:configure`
 
+# E2E Tests (Maestro)
+
+End-to-end tests are written with [Maestro](https://docs.maestro.dev) and live in the `.maestro/` folder.
+
+## Prerequisites
+
+- **Java 17+** — required by Maestro. Verify with `java -version`, and ensure `JAVA_HOME` points to your installation.
+- **Maestro CLI** — install with:
+
+```bash
+# macOS / Linux
+curl -fsSL "https://get.maestro.mobile.dev" | bash
+
+# macOS (Homebrew)
+brew tap mobile-dev-inc/tap && brew install mobile-dev-inc/tap/maestro
+```
+
+Verify the installation with `maestro --help`.
+
+> [!TIP]
+> On Windows, download `maestro.zip` from the [GitHub releases](https://github.com/mobile-dev-inc/maestro/releases), extract it to `C:\maestro`, then add `C:\maestro\bin` to your `PATH`.
+
+```text
+.maestro/
+├── flows/          # Test flows (one feature per file)
+│   ├── sign-in.yaml
+│   ├── sign-out.yaml
+│   ├── tab-navigation.yaml
+│   └── books.yaml
+└── utils/          # Reusable sub-flows (login, onboarding...)
+    ├── login.yaml
+    ├── handle-onboarding.yaml
+    └── open-first-book.yaml
+```
+
+## Setup
+
+You can change the env variable needed for the test directly in the file .env.maestro. They will be automatically added to the scrpits launching the tests.
+
+| Variable | Description |
+| --- | --- |
+| `APP_ID` | Bundle ID of the app to test (e.g. `com.bearstudio.startuinative.development`) |
+| `TEST_EMAIL` | Email address of the test user (use either user@user.com or admin@admin.com in development) |
+| `TEST_OTP` | OTP code for the test user (use `000000` in development) |
+
+## Scripts
+
+```bash
+# Run all flows
+pnpm test:e2e
+
+# Run only smoke tests
+pnpm test:e2e:smoke
+```
+
+> [!TIP]
+> Make sure the app is build, and is running on a simulator/emulator before launching the tests.
