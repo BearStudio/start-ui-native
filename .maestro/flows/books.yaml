@@ -12,19 +12,19 @@ appId: com.bearstudio.startuinative.development
 
 - runFlow:
     when:
-      visible: "Books"
+      visible: 'Books'
     commands:
-      - tapOn: "Books"
+      - tapOn: 'Books'
 - runFlow:
     when:
-      visible: "Livres"
+      visible: 'Livres'
     commands:
-      - tapOn: "Livres"
+      - tapOn: 'Livres'
 
 # Wait for the books list to load
 - waitForAnimationToEnd
 
 - runFlow:
     when:
-      notVisible: "There is no books"
+      notVisible: 'There is no books'
     file: ../utils/open-first-book.yaml
