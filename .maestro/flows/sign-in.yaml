@@ -10,8 +10,6 @@ appId: com.bearstudio.startuinative.development
 - launchApp:
     clearState: true
 
-# Onboarding appears on first launch
 - runFlow: ../utils/handle-onboarding.yaml
 
-# Sign-in + OTP
 - runFlow: ../utils/login.yaml

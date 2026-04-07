@@ -1,16 +1,15 @@
 appId: com.bearstudio.startuinative.development
 ---
-# Two screens in the onboarding — each button tap is conditional on the text being visible
 - runFlow:
     when:
-      visible: "Continue"
+      visible: 'Continue'
     commands:
-      - tapOn: "Continue"
+      - tapOn: 'Continue'
 - runFlow:
     when:
-      visible: "Continuer"
+      visible: 'Continuer'
     commands:
-      - tapOn: "Continuer"
+      - tapOn: 'Continuer'
 - runFlow:
     when:
       visible: "Let's start"
@@ -18,6 +17,6 @@ appId: com.bearstudio.startuinative.development
       - tapOn: "Let's start"
 - runFlow:
     when:
-      visible: "Commencer"
+      visible: 'Commencer'
     commands:
-      - tapOn: "Commencer"
+      - tapOn: 'Commencer'

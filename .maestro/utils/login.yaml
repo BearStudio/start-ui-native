@@ -1,10 +1,8 @@
 appId: com.bearstudio.startuinative.development
 ---
-# Email placeholder is "Email" in both languages
 - tapOn: 'Email'
 - inputText: 'user@user.com'
 
-# Submit button differs by language
 - runFlow:
     when:
       visible: 'Continue with email'
@@ -16,10 +14,8 @@ appId: com.bearstudio.startuinative.development
     commands:
       - tapOn: 'Connexion avec email'
 
-# OTP field is autofocused and auto-submits after 6 digits
 - inputText: '000000'
 
-# Assert landing on home tab
 - runFlow:
     when:
       visible: 'Home'
