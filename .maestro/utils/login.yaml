@@ -1,33 +1,32 @@
 appId: com.bearstudio.startuinative.development
 ---
 # Email placeholder is "Email" in both languages
-- tapOn:
-    hint: "Email"
-- inputText: "user@user.com"
+- tapOn: 'Email'
+- inputText: 'user@user.com'
 
 # Submit button differs by language
 - runFlow:
     when:
-      visible: "Continue with email"
+      visible: 'Continue with email'
     commands:
-      - tapOn: "Continue with email"
+      - tapOn: 'Continue with email'
 - runFlow:
     when:
-      visible: "Connexion avec email"
+      visible: 'Connexion avec email'
     commands:
-      - tapOn: "Connexion avec email"
+      - tapOn: 'Connexion avec email'
 
 # OTP field is autofocused and auto-submits after 6 digits
-- inputText: "000000"
+- inputText: '000000'
 
 # Assert landing on home tab
 - runFlow:
     when:
-      visible: "Home"
+      visible: 'Home'
     commands:
-      - assertVisible: "Home"
+      - assertVisible: 'Home'
 - runFlow:
     when:
-      visible: "Accueil"
+      visible: 'Accueil'
     commands:
-      - assertVisible: "Accueil"
+      - assertVisible: 'Accueil'
