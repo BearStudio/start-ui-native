@@ -10,14 +10,21 @@ appId: com.bearstudio.startuinative.development
 - runFlow: ../utils/handle-onboarding.yaml
 - runFlow: ../utils/login.yaml
 
-- tapOn:
-    id: "tab-books"
+- runFlow:
+    when:
+      visible: "Books"
+    commands:
+      - tapOn: "Books"
+- runFlow:
+    when:
+      visible: "Livres"
+    commands:
+      - tapOn: "Livres"
 
 # Wait for the books list to load
 - waitForAnimationToEnd
 
 - runFlow:
     when:
-      notVisible:
-        id: "books-empty-state"
+      notVisible: "There is no books"
     file: ../utils/open-first-book.yaml

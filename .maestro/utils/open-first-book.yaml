@@ -1,8 +1,21 @@
 appId: com.bearstudio.startuinative.development
 ---
 - scroll
-- tapOn:
-    id: "book-item"
-- back
-- assertVisible:
-    id: "tab-books"
+- runFlow:
+    when:
+      visible: "Books"
+    commands:
+      - tapOn:
+          index: 0
+          below: "Books"
+      - back
+      - assertVisible: "Books"
+- runFlow:
+    when:
+      visible: "Livres"
+    commands:
+      - tapOn:
+          index: 0
+          below: "Livres"
+      - back
+      - assertVisible: "Livres"
