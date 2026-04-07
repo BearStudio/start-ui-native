@@ -53,6 +53,11 @@ jobs:
         env:
           APP_ENV: development
           ORG_GRADLE_PROJECT_reactNativeArchitectures: x86_64
+          ORG_GRADLE_PROJECT_newArchEnabled: false
+          GRADLE_OPTS: >-
+            -Dorg.gradle.daemon=false
+            -Dorg.gradle.parallel=false
+            -Dorg.gradle.configureondemand=true
 
       - name: 🎭 Install Maestro
         run: curl -Ls "https://get.maestro.mobile.dev" | bash && echo "$HOME/.maestro/bin" >> $GITHUB_PATH
@@ -105,6 +110,11 @@ jobs:
         env:
           APP_ENV: development
           ORG_GRADLE_PROJECT_reactNativeArchitectures: x86_64
+          ORG_GRADLE_PROJECT_newArchEnabled: false
+          GRADLE_OPTS: >-
+            -Dorg.gradle.daemon=false
+            -Dorg.gradle.parallel=false
+            -Dorg.gradle.configureondemand=true
 
       - name: 🎭 Install Maestro
         run: curl -Ls "https://get.maestro.mobile.dev" | bash && echo "$HOME/.maestro/bin" >> $GITHUB_PATH
