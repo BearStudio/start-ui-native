@@ -54,12 +54,7 @@ export const ViewOtpVerification = () => {
       <View className="flex-1 items-center justify-center p-6">
         <form.AppForm>
           <View className="w-full max-w-[400px] gap-6">
-            <Button
-              testID="otp-back-button"
-              variant="ghost"
-              className="pl-0"
-              onPress={router.back}
-            >
+            <Button variant="ghost" className="pl-0" onPress={router.back}>
               <Icon
                 icon={IconArrowLeft}
                 className="size-[18px] text-foreground"
@@ -84,11 +79,7 @@ export const ViewOtpVerification = () => {
                       <field.Label>
                         {t('auth:verification.verificationCode.label')}
                       </field.Label>
-                      <field.FieldOtp
-                        testID="otp-code-input"
-                        codeLength={6}
-                        autoFocus
-                      />
+                      <field.FieldOtp codeLength={6} autoFocus />
                       <field.Helper>
                         {t('auth:verification.expireHint')}
                       </field.Helper>
@@ -96,9 +87,7 @@ export const ViewOtpVerification = () => {
                   )}
                 </form.AppField>
               </View>
-              <form.Submit testID="otp-submit-button">
-                {t('auth:verification.confirm')}
-              </form.Submit>
+              <form.Submit>{t('auth:verification.confirm')}</form.Submit>
             </View>
             <LoginOtpHint />
           </View>

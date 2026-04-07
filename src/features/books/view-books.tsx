@@ -35,7 +35,6 @@ export const ViewBooks = () => {
   const renderItem = useCallback(
     ({ item }: { item: BookGetByIdResponse }) => (
       <Link
-        testID="book-item"
         href={{
           pathname: '/books/[id]',
           params: { id: item.id, title: item.title },
@@ -67,9 +66,7 @@ export const ViewBooks = () => {
           </View>
         ))
         .match('error', () => <></>)
-        .match('empty', () => (
-          <Text testID="books-empty-state">There is no books</Text>
-        ))
+        .match('empty', () => <Text>There is no books</Text>)
         .match('default', ({ data }) => (
           <FlashList
             data={data}

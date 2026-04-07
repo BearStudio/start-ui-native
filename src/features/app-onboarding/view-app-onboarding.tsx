@@ -158,7 +158,6 @@ export const ViewOnboarding = () => {
               ))}
             </View>
             <Button
-              testID="onboarding-next-button"
               size="lg"
               className="w-full"
               onPress={() => {

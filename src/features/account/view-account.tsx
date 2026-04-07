@@ -130,7 +130,6 @@ export const ViewAccount = () => {
                     {t('account:user.name')}
                   </Text>
                   <Button
-                    testID="account-edit-name-button"
                     variant="link"
                     size="sm"
                     onPress={() => updateNameSheet.onOpen()}
@@ -152,7 +151,6 @@ export const ViewAccount = () => {
                           {(field) => (
                             <field.Field>
                               <field.FieldText
-                                testID="account-name-input"
                                 autoFocus
                                 returnKeyType="done"
                                 onSubmitEditing={updateNameForm.handleSubmit}
@@ -168,10 +166,7 @@ export const ViewAccount = () => {
                         >
                           {t('account:user.updateName.cancel')}
                         </Button>
-                        <updateNameForm.Submit
-                          testID="account-save-name-button"
-                          full
-                        >
+                        <updateNameForm.Submit full>
                           {t('account:user.updateName.save')}
                         </updateNameForm.Submit>
                       </updateNameForm.AppForm>
