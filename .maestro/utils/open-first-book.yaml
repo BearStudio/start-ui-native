@@ -1,21 +1,9 @@
 appId: com.bearstudio.startuinative.development
 ---
 - scroll
-- runFlow:
-    when:
-      visible: "Books"
-    commands:
-      - tapOn:
-          index: 0
-          below: "Books"
-      - tapOn: "Back"
-      - assertVisible: "Books"
-- runFlow:
-    when:
-      visible: "Livres"
-    commands:
-      - tapOn:
-          index: 0
-          below: "Livres"
-      - tapOn: "Retour"
-      - assertVisible: "Livres"
+- tapOn:
+    id: "book-item"
+# pressBack is Android only — on iOS use a swipe-back gesture
+- pressBack
+- assertVisible:
+    id: "tab-books"
