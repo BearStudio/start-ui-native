@@ -12,6 +12,13 @@
         "APP_ENV": "development"
       }
     },
+    "e2e": {
+      "channel": "development",
+      "distribution": "internal",
+      "env": {
+        "APP_ENV": "development"
+      }
+    },
     "staging": {
       "channel": "staging",
       "distribution": "internal",
