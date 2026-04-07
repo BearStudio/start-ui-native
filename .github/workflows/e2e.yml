@@ -8,7 +8,6 @@ env:
 on:
   workflow_dispatch:
   push:
-    # branches-ignore: [main]
     branches: [test/e2e-*]
   pull_request:
     types: [closed]
@@ -17,7 +16,7 @@ on:
 jobs:
   e2e-smoke:
     name: 💨 Smoke Tests
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - name: 🏗 Setup repo
@@ -68,7 +67,7 @@ jobs:
 
   e2e-full:
     name: 🎭 Full E2E Tests
-    if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
+    if: (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - name: 🏗 Setup repo
