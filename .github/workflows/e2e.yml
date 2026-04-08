@@ -16,7 +16,7 @@ on:
 jobs:
   e2e-full:
     name: 🎭 Full E2E Tests
-    if: (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch'
+    if: (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: 🏗 Setup repo
