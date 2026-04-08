@@ -1,8 +1,6 @@
 # Tests navigation between the three main tabs.
 # Run: maestro test .maestro/flows/tab-navigation.yaml
-appId: ${APP_ID}
-tags:
-  - smoke
+appId: com.bearstudio.startuinative
 ---
 - launchApp:
     clearState: true
@@ -10,52 +8,13 @@ tags:
 - runFlow: ../utils/handle-onboarding.yaml
 - runFlow: ../utils/login.yaml
 
-- runFlow:
-    when:
-      visible: 'Home'
-    commands:
-      - assertVisible: 'Home'
-- runFlow:
-    when:
-      visible: 'Accueil'
-    commands:
-      - assertVisible: 'Accueil'
+- assertVisible: 'Home'
 
-- runFlow:
-    when:
-      visible: 'Books'
-    commands:
-      - tapOn: 'Books'
-      - assertVisible: 'Books'
-- runFlow:
-    when:
-      visible: 'Livres'
-    commands:
-      - tapOn: 'Livres'
-      - assertVisible: 'Livres'
+- tapOn: 'Books'
+- assertVisible: 'Books'
 
-- runFlow:
-    when:
-      visible: 'Account'
-    commands:
-      - tapOn: 'Account'
-      - assertVisible: 'Account'
-- runFlow:
-    when:
-      visible: 'Compte'
-    commands:
-      - tapOn: 'Compte'
-      - assertVisible: 'Compte'
+- tapOn: 'Account'
+- assertVisible: 'Account'
 
-- runFlow:
-    when:
-      visible: 'Home'
-    commands:
-      - tapOn: 'Home'
-      - assertVisible: 'Home'
-- runFlow:
-    when:
-      visible: 'Accueil'
-    commands:
-      - tapOn: 'Accueil'
-      - assertVisible: 'Accueil'
+- tapOn: 'Home'
+- assertVisible: 'Home'

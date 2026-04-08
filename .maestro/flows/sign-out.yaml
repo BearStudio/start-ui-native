@@ -1,8 +1,6 @@
 # Tests the logout flow from the account tab.
 # Run: maestro test .maestro/flows/sign-out.yaml
-appId: ${APP_ID}
-tags:
-  - smoke
+appId: com.bearstudio.startuinative
 ---
 - launchApp:
     clearState: true
@@ -10,47 +8,18 @@ tags:
 - runFlow: ../utils/handle-onboarding.yaml
 - runFlow: ../utils/login.yaml
 
-- runFlow:
-    when:
-      visible: 'Account'
-    commands:
-      - tapOn: 'Account'
-- runFlow:
-    when:
-      visible: 'Compte'
-    commands:
-      - tapOn: 'Compte'
+- tapOn: 'Account'
+- tapOn: 'Sign out'
+
+- waitForAnimationToEnd
 
 - runFlow:
     when:
-      visible: 'Sign out'
+      visible: 'You are about to end your session'
     commands:
-      - tapOn: 'Sign out'
-- runFlow:
-    when:
-      visible: 'Déconnexion'
-    commands:
-      - tapOn: 'Déconnexion'
+      - tapOn:
+          text: 'Sign out'
+          below: 'You are about to end your session'
 
-- runFlow:
-    when:
-      visible: 'Account Sign Out'
-    commands:
-      - tapOn: 'Sign out'
-- runFlow:
-    when:
-      visible: 'Déconnexion du compte'
-    commands:
-      - tapOn: 'Déconnexion'
-
-# Assert we are back on the sign-in screen
-- runFlow:
-    when:
-      visible: 'Login to your account'
-    commands:
-      - assertVisible: 'Login to your account'
-- runFlow:
-    when:
-      visible: 'Connexion à votre compte'
-    commands:
-      - assertVisible: 'Connexion à votre compte'
+- waitForAnimationToEnd
+- assertVisible: 'Login to your account'

@@ -1,28 +1,10 @@
-appId: ${APP_ID}
+appId: com.bearstudio.startuinative
+env:
+  TEST_EMAIL: 'user@user.com'
+  TEST_OTP: '000000'
 ---
 - tapOn: 'Email'
 - inputText: ${TEST_EMAIL}
-
-- runFlow:
-    when:
-      visible: 'Continue with email'
-    commands:
-      - tapOn: 'Continue with email'
-- runFlow:
-    when:
-      visible: 'Connexion avec email'
-    commands:
-      - tapOn: 'Connexion avec email'
-
+- tapOn: 'Continue with email'
 - inputText: ${TEST_OTP}
-
-- runFlow:
-    when:
-      visible: 'Home'
-    commands:
-      - assertVisible: 'Home'
-- runFlow:
-    when:
-      visible: 'Accueil'
-    commands:
-      - assertVisible: 'Accueil'
+- assertVisible: 'Home'

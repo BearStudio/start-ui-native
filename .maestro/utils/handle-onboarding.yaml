@@ -1,4 +1,4 @@
-appId: ${APP_ID}
+appId: com.bearstudio.startuinative
 ---
 - runFlow:
     when:
@@ -7,16 +7,6 @@ appId: ${APP_ID}
       - tapOn: 'Continue'
 - runFlow:
     when:
-      visible: 'Continuer'
-    commands:
-      - tapOn: 'Continuer'
-- runFlow:
-    when:
       visible: "Let's start"
     commands:
       - tapOn: "Let's start"
-- runFlow:
-    when:
-      visible: 'Commencer'
-    commands:
-      - tapOn: 'Commencer'
