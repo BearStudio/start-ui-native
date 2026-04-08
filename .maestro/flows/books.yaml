@@ -1,11 +1,6 @@
 # Tests the books tab navigation and book detail screen.
 # Run: maestro test .maestro/flows/books.yaml
-#
-# appId variants:
-#   dev:        com.bearstudio.startuinative.development
-#   staging:    com.bearstudio.startuinative.staging
-#   production: com.bearstudio.startuinative
-appId: com.bearstudio.startuinative.development
+appId: com.bearstudio.startuinative
 ---
 - launchApp:
     clearState: true
@@ -13,20 +8,15 @@ appId: com.bearstudio.startuinative.development
 - runFlow: ../utils/handle-onboarding.yaml
 - runFlow: ../utils/login.yaml
 
-- runFlow:
-    when:
-      visible: 'Books'
-    commands:
-      - tapOn: 'Books'
-- runFlow:
-    when:
-      visible: 'Livres'
-    commands:
-      - tapOn: 'Livres'
-
+- tapOn: 'Books'
 - waitForAnimationToEnd
 
 - runFlow:
     when:
       notVisible: 'There is no books'
-    file: ../utils/open-first-book.yaml
+    commands:
+      - tapOn:
+          index: 0
+          below: 'Books'
+      - back
+      - assertVisible: 'Books'
