@@ -1,11 +1,15 @@
-import { ComponentProps } from 'react';
-import { ficus } from 'react-native-ficus-ui';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { withUniwind } from 'uniwind';
 
-const FicusSafeAreaView = ficus(SafeAreaView);
+import { cn } from '@/lib/tailwind/utils';
 
-export const ViewSafeContent = (
-  props: ComponentProps<typeof FicusSafeAreaView>
-) => {
-  return <FicusSafeAreaView flex={1} {...props} />;
+type ViewSafeContentProps = React.ComponentProps<typeof SafeAreaView>;
+
+const UniwindSafeAreaView = withUniwind(SafeAreaView);
+
+export const ViewSafeContent = ({
+  className,
+  ...props
+}: ViewSafeContentProps) => {
+  return <UniwindSafeAreaView className={cn('flex-1', className)} {...props} />;
 };

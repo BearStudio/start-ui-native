@@ -8,13 +8,10 @@ ${comment}
 ${variables.imports};
 
 ${variables.interfaces};
-import { ficus } from 'react-native-ficus-ui';
 
-const _Svg = (${variables.props}) => (
+const ${componentName} = (${variables.props}) => (
   ${variables.jsx}
 );
-
-const ${componentName} = ficus(_Svg)
 
 export default ${componentName};
 `;

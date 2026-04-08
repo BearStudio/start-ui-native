@@ -1,33 +1,36 @@
-import { Box, BoxProps, Text } from 'react-native-ficus-ui';
+import { View, type ViewProps } from 'react-native';
 
 import { BookGetByIdResponse } from '@/lib/hey-api/generated';
+import { cn } from '@/lib/tailwind/utils';
 
-export type BookCoverProps = BoxProps & { book: BookGetByIdResponse };
+import { Text } from '@/components/ui/text';
 
-const COVER_HEIGHT = 240;
+export type BookCoverProps = ViewProps & {
+  book: BookGetByIdResponse;
+};
+
+export const COVER_HEIGHT = 240;
 
 export const BookCover = ({
   book,
-  h = COVER_HEIGHT,
+  className,
+  style,
   ...props
 }: BookCoverProps) => {
   return (
-    <Box
-      justifyContent="space-between"
-      p={16}
-      bg={book.genre?.color}
-      h={h}
-      w="100%"
-      aspectRatio={2 / 3}
-      borderRadius="lg"
+    <View
+      className={cn(
+        'flex aspect-2/3 w-full justify-between rounded-lg p-4',
+        className
+      )}
+      style={[
+        { height: COVER_HEIGHT, backgroundColor: book.genre?.color },
+        style,
+      ]}
       {...props}
     >
-      <Text fontSize="md" fontWeight="bold" color="white">
-        {book.title}
-      </Text>
-      <Text fontSize="xs" fontWeight="medium" color="white">
-        {book.author}
-      </Text>
-    </Box>
+      <Text className="font-bold text-neutral-50">{book.title}</Text>
+      <Text className="text-xs font-medium text-neutral-50">{book.author}</Text>
+    </View>
   );
 };

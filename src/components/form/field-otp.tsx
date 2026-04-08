@@ -1,27 +1,21 @@
 import { useStore } from '@tanstack/react-form';
-import {
-  ComponentProps,
-  ComponentRef,
-  useCallback,
-  useEffect,
-  useRef,
-} from 'react';
-import { Box, BoxProps, PinInput } from 'react-native-ficus-ui';
+import { View, type ViewProps } from 'react-native';
 
 import { FormFieldError } from '@/lib/tanstack-form/components';
 import { FieldContextMeta } from '@/lib/tanstack-form/components/form-field';
 import { useFieldContext } from '@/lib/tanstack-form/context';
 
-export default function FieldOtp(
-  props: Omit<ComponentProps<typeof PinInput>, 'children'> & {
-    autoSubmit?: boolean;
-    containerProps?: BoxProps;
-    codeLength: number;
-  }
-) {
+import { PinInput } from '@/components/ui/pin-input';
+
+type FieldOtpProps = React.ComponentProps<typeof PinInput> & {
+  autoSubmit?: boolean;
+  containerProps?: ViewProps;
+  codeLength: number;
+};
+
+export default function FieldOtp(props: FieldOtpProps) {
   const { containerProps, autoSubmit = true, codeLength, ...rest } = props;
 
-  const containerRef = useRef<ComponentRef<typeof Box>>(null);
   const field = useFieldContext<string>();
 
   const meta = useStore(field.store, (state) => {
@@ -34,23 +28,8 @@ export default function FieldOtp(
     };
   });
 
-  const shouldAutoSubmit =
-    autoSubmit && field.state.value?.length === codeLength;
-
-  const submitForm = useCallback(() => {
-    if (!field.form.state.isSubmitted) {
-      field.form.handleSubmit();
-    }
-  }, [field.form]);
-
-  useEffect(() => {
-    if (shouldAutoSubmit) {
-      submitForm();
-    }
-  }, [shouldAutoSubmit, submitForm]);
-
   return (
-    <Box {...containerProps} ref={containerRef}>
+    <View className="gap-1" {...containerProps}>
       <PinInput
         id={meta.id}
         aria-invalid={meta.error ? true : undefined}
@@ -64,8 +43,15 @@ export default function FieldOtp(
         textContentType="oneTimeCode"
         {...rest}
         value={field.state.value}
-        onChangeText={(value) => {
-          field.handleChange(value);
+        onChangeText={(text) => {
+          field.handleChange(text);
+          if (
+            autoSubmit &&
+            text.length === codeLength &&
+            !field.form.state.isSubmitted
+          ) {
+            field.form.handleSubmit();
+          }
         }}
         onBlur={(e) => {
           field.handleBlur();
@@ -73,6 +59,6 @@ export default function FieldOtp(
         }}
       />
       <FormFieldError />
-    </Box>
+    </View>
   );
 }

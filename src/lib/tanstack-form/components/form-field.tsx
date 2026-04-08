@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useId } from 'react';
-import { Box } from 'react-native-ficus-ui';
+import { View } from 'react-native';
 
 import { useFieldContext } from '@/lib/tanstack-form/context';
 
@@ -19,8 +19,8 @@ export const FormField = (props: {
   size?: FormFieldSize;
   children?: ReactNode;
 }) => {
-  const _id = useId();
-  const id = props.id ?? _id;
+  const defaultId = useId();
+  const id = props.id ?? defaultId;
 
   const field = useFieldContext();
 
@@ -36,5 +36,5 @@ export const FormField = (props: {
     }));
   }, [setFieldMeta, id, props.size]);
 
-  return <Box gap={4}>{props.children}</Box>;
+  return <View className="gap-1">{props.children}</View>;
 };

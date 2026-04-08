@@ -1,12 +1,15 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Button, Center, Stack, Text } from 'react-native-ficus-ui';
+import { View } from 'react-native';
 import { toast } from 'sonner-native';
 import { z } from 'zod';
 
 import { useAppForm } from '@/lib/tanstack-form/config';
 
 import { IconArrowLeft } from '@/components/icons/generated';
+import { Icon } from '@/components/icons/icon';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 import { AuthHeader } from '@/features/auth/auth-header';
 import { authClient } from '@/features/auth/client';
@@ -48,45 +51,48 @@ export const ViewOtpVerification = () => {
   return (
     <ViewSafeContent>
       <AuthHeader />
-      <Center flex={1} p={24}>
+      <View className="flex-1 items-center justify-center p-6">
         <form.AppForm>
-          <Stack spacing={24} w="100%" maxW={400}>
-            <Button variant="@ghost" pl={0} onPress={router.back}>
-              <IconArrowLeft width={18} height={18} />
+          <View className="w-full max-w-[400px] gap-6">
+            <Button variant="ghost" className="pl-0" onPress={router.back}>
+              <Icon
+                icon={IconArrowLeft}
+                className="size-[18px] text-foreground"
+              />
               {t('auth:verification.back')}
             </Button>
-            <Stack spacing={8}>
-              <Text fontWeight="bold" fontSize="lg">
+            <View className="gap-2">
+              <Text className="text-lg font-bold">
                 {t('auth:verification.title')}
               </Text>
-              <Text fontWeight={400} fontSize="sm">
+              <Text className="text-sm font-normal">
                 {t('auth:verification.description')}
-                <Text fontWeight={800}>{email}</Text>.{' '}
+                <Text className="font-extrabold">{email}</Text>.{' '}
                 {t('auth:verification.enterItBelow')}
               </Text>
-            </Stack>
-            <Stack spacing={16}>
-              <Stack spacing={8}>
+            </View>
+            <View className="gap-4">
+              <View className="gap-2">
                 <form.AppField name="code">
                   {(field) => (
                     <field.Field>
                       <field.Label>
                         {t('auth:verification.verificationCode.label')}
                       </field.Label>
-                      <field.FieldOtp codeLength={6} />
+                      <field.FieldOtp codeLength={6} autoFocus />
                       <field.Helper>
                         {t('auth:verification.expireHint')}
                       </field.Helper>
                     </field.Field>
                   )}
                 </form.AppField>
-              </Stack>
+              </View>
               <form.Submit>{t('auth:verification.confirm')}</form.Submit>
-            </Stack>
+            </View>
             <LoginOtpHint />
-          </Stack>
+          </View>
         </form.AppForm>
-      </Center>
+      </View>
     </ViewSafeContent>
   );
 };

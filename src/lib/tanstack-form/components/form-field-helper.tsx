@@ -1,13 +1,7 @@
-import { Text, TextProps } from 'react-native-ficus-ui';
+import { Text } from '@/components/ui/text';
 
-export const FormFieldHelper = (props: TextProps) => {
+export const FormFieldHelper = (props: React.ComponentProps<typeof Text>) => {
   return (
-    <Text
-      color="neutral.600"
-      _dark={{ color: 'neutral.400' }}
-      fontSize="sm"
-      fontWeight="regular"
-      {...props}
-    />
+    <Text className="text-sm font-normal text-muted-foreground" {...props} />
   );
 };

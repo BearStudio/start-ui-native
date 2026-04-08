@@ -1,5 +1,6 @@
-import { HStack } from 'react-native-ficus-ui';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useResolveClassNames } from 'uniwind';
 
 import { Logo } from '@/components/icons/generated';
 import { LocaleSwitcher } from '@/components/ui/locale-switcher';
@@ -8,21 +9,19 @@ import { ThemeSwitcher } from '@/components/ui/theme-switcher';
 export const AuthHeader = () => {
   const insets = useSafeAreaInsets();
 
+  const mutedStyle = useResolveClassNames('text-primary');
+  const logoColor = mutedStyle.color;
+
   return (
-    <HStack
-      justifyContent="space-between"
-      p={24}
-      alignItems="center"
-      position="absolute"
-      top={insets.top}
-      left={0}
-      right={0}
+    <View
+      className="absolute right-0 left-0 flex flex-row items-center justify-between p-6"
+      style={{ top: insets.top }}
     >
-      <Logo color="black" _dark={{ color: 'white' }} width={96} height={22} />
-      <HStack gap={16}>
+      <Logo color={logoColor} width={96} height={22} />
+      <View className="flex flex-row gap-4">
         <ThemeSwitcher minimize />
         <LocaleSwitcher />
-      </HStack>
-    </HStack>
+      </View>
+    </View>
   );
 };

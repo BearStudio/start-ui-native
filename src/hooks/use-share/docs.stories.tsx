@@ -1,6 +1,6 @@
-import { Button } from 'react-native-ficus-ui';
-
 import { useShare } from '@/hooks/use-share';
+
+import { Button } from '@/components/ui/button';
 
 export default {
   title: 'Hooks/useShare',

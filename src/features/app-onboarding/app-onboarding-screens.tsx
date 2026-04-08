@@ -1,25 +1,26 @@
 import { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  Badge,
-  Box,
-  Center,
-  HStack,
-  Stack,
-  Text,
-  WINDOW_HEIGHT,
-  WINDOW_WIDTH,
-} from 'react-native-ficus-ui';
+import { View } from 'react-native';
 
 import { IconCheck } from '@/components/icons/generated';
 import { Icon } from '@/components/icons/icon';
+import { Badge } from '@/components/ui/badge';
+import { Text } from '@/components/ui/text';
+
+import { deviceScreen } from '@/constants/device';
 
 const OnboardingScreenContainer = (props: PropsWithChildren) => (
-  <Center w={WINDOW_WIDTH} p={32}>
-    <Stack maxW={400} w="100%" h={WINDOW_HEIGHT / 2}>
+  <View
+    className="w-full items-center justify-center p-8"
+    style={{ width: deviceScreen.width }}
+  >
+    <View
+      className="h-1/2 w-full max-w-[400px]"
+      style={{ height: deviceScreen.height / 2 }}
+    >
       {props.children}
-    </Stack>
-  </Center>
+    </View>
+  </View>
 );
 
 export const AppOnboardingScreenWelcome = () => {
@@ -27,15 +28,11 @@ export const AppOnboardingScreenWelcome = () => {
 
   return (
     <OnboardingScreenContainer>
-      <Text fontSize="xl" color="white">
+      <Text className="text-xl text-primary">
         {t('appOnboarding:welcome.title')}
       </Text>
-      <Text fontSize="6xl" fontWeight="bold" color="white">
-        Start UI
-      </Text>
-      <Text fontSize="6xl" fontWeight="bold" color="white">
-        Native
-      </Text>
+      <Text className="text-6xl font-bold text-primary">Start UI</Text>
+      <Text className="text-6xl font-bold text-primary">Native</Text>
     </OnboardingScreenContainer>
   );
 };
@@ -53,32 +50,34 @@ export const AppOnboardingScreenFeatures = () => {
   ];
   return (
     <OnboardingScreenContainer>
-      <Stack gap={16}>
-        <Stack>
-          <Text fontSize="4xl" fontWeight="bold" color="white">
+      <View className="gap-4">
+        <View>
+          <Text className="text-4xl font-bold text-primary">
             {t('appOnboarding:features.titleOne')}
           </Text>
-          <Text fontSize="4xl" fontWeight="bold" color="white">
+          <Text className="text-4xl font-bold text-primary">
             {t('appOnboarding:features.titleTwo')}
           </Text>
-        </Stack>
-        <Stack gap={8}>
-          <HStack flexWrap="wrap" gap={8}>
+        </View>
+        <View className="gap-2">
+          <View className="flex flex-row flex-wrap gap-2">
             {features.map((feature) => (
-              <Badge key={feature} bg="white" color="neutral.900">
-                <Box pr={4}>
-                  <Icon top={2} icon={IconCheck} color="brand.900" size={16} />
-                </Box>
-
-                {t(`appOnboarding:features.${feature}`)}
+              <Badge
+                key={feature}
+                className="flex-row items-center gap-1 bg-white text-neutral-900"
+              >
+                <Icon icon={IconCheck} className="text-neutral-900" />
+                <Text className="text-neutral-900">
+                  {t(`appOnboarding:features.${feature}`)}
+                </Text>
               </Badge>
             ))}
-          </HStack>
-          <Text fontWeight="medium" opacity={0.8} color="white">
+          </View>
+          <Text className="text-accent-foreground">
             {t('appOnboarding:features.more')}
           </Text>
-        </Stack>
-      </Stack>
+        </View>
+      </View>
     </OnboardingScreenContainer>
   );
 };

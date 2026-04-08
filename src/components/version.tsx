@@ -1,9 +1,10 @@
 import { nativeApplicationVersion, nativeBuildVersion } from 'expo-application';
-import { Text, TextProps } from 'react-native-ficus-ui';
 
-export const Version = (props: TextProps) => {
+import { Text } from '@/components/ui/text';
+
+export const Version = (props: React.ComponentProps<typeof Text>) => {
   return (
-    <Text fontSize="xs" fontWeight="400" variant="muted" {...props}>
+    <Text variant="muted" className="text-xs font-normal" {...props}>
       Version {nativeApplicationVersion} • {nativeBuildVersion}
     </Text>
   );

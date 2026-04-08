@@ -1,4 +1,4 @@
-import { ScrollBox, Stack } from 'react-native-ficus-ui';
+import { ScrollView, View } from 'react-native';
 
 import { useAppForm } from '@/lib/tanstack-form/config';
 
@@ -10,8 +10,8 @@ export const AllFields = () => {
   const form = useAppForm({ defaultValues: { text: '', otp: '' } });
   return (
     <form.AppForm>
-      <ScrollBox p={16}>
-        <Stack spacing={16}>
+      <ScrollView className="flex-1 p-4" showsVerticalScrollIndicator={false}>
+        <View className="gap-4">
           <form.AppField name="text">
             {(field) => (
               <field.Field>
@@ -28,8 +28,8 @@ export const AllFields = () => {
               </field.Field>
             )}
           </form.AppField>
-        </Stack>
-      </ScrollBox>
+        </View>
+      </ScrollView>
     </form.AppForm>
   );
 };

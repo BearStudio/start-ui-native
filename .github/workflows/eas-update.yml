@@ -6,8 +6,17 @@ env:
   EXPO_PUBLIC_OPENAPI_URL: ${{ vars.OPENAPI_URL }}
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: EAS Update channel (matches build profile)
+        required: true
+        default: production
+        type: choice
+        options:
+          - development
+          - staging
+          - production
 
 jobs:
   update:
@@ -31,5 +40,5 @@ jobs:
       - name: 📦 Install dependencies
         run: pnpm install
 
-      - name: 🚀 Create update
-        run: eas update --auto --non-interactive
+      - name: 🚀 Publish update
+        run: eas update --branch ${{ github.event.inputs.channel }} --non-interactive

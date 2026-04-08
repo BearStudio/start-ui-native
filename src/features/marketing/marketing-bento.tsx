@@ -1,7 +1,16 @@
-import { Linking, TouchableOpacity } from 'react-native';
-import { Box, Stack, Text } from 'react-native-ficus-ui';
+import { Linking, Pressable, StyleSheet, View } from 'react-native';
 
 import { Image } from '@/components/ui/image';
+import { Text } from '@/components/ui/text';
+
+const tileStyles = StyleSheet.create({
+  base: {
+    width: '100%',
+    borderRadius: 8,
+    overflow: 'hidden',
+    backgroundColor: 'rgba(0,0,0,0.2)',
+  },
+});
 
 const MarketingTile = ({
   href,
@@ -21,34 +30,23 @@ const MarketingTile = ({
     }
   };
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={() => handleOpenUrl(href)}
       accessibilityRole="link"
-      style={{
-        aspectRatio,
-        width: '100%',
-        borderRadius: 8,
-        overflow: 'hidden',
-        backgroundColor: 'rgba(0,0,0,0.2)',
-      }}
+      style={[tileStyles.base, { aspectRatio }]}
     >
-      <Image source={src} placeholder={{ blurhash }} />
-    </TouchableOpacity>
+      <Image source={src} placeholder={blurhash ? { blurhash } : undefined} />
+    </Pressable>
   );
 };
 
 export const MarketingBento = () => (
-  <Stack spacing={8} mt={24}>
-    <Text
-      textAlign="center"
-      fontSize="2xs"
-      color="neutral.600"
-      _dark={{ color: 'neutral.300' }}
-    >
+  <View className="mt-6 gap-2">
+    <Text className="text-center text-[0.625rem] text-muted-foreground">
       Shameless plug 😅 Remember that 🚀 Start UI is free and Open Source 😉
     </Text>
-    <Box flexDirection="row" gap={8}>
-      <Box flex={1} gap={8}>
+    <View className="flex flex-1 flex-row gap-2">
+      <View className="flex flex-1 flex-col gap-2">
         <MarketingTile
           href="https://bear.studio/assets-start-ui-bento-01"
           src="https://raw.githubusercontent.com/BearStudio/assets/main/start-ui/marketing-bento-01.jpg"
@@ -62,9 +60,9 @@ export const MarketingBento = () => (
           aspectRatio={1.45}
           blurhash="L36kL=$|4TEQ~UxV4:NL=@oIIoWs"
         />
-      </Box>
+      </View>
 
-      <Box flex={1} gap={8}>
+      <View className="flex flex-1 flex-col gap-2">
         <MarketingTile
           href="https://bear.studio/assets-start-ui-bento-04"
           src="https://raw.githubusercontent.com/BearStudio/assets/main/start-ui/marketing-bento-04.jpg"
@@ -78,14 +76,7 @@ export const MarketingBento = () => (
           aspectRatio={0.7}
           blurhash="SC8zlJs:0nxZ~6s,E2WB"
         />
-      </Box>
-    </Box>
-    <Box>
-      <MarketingTile
-        href="https://ficus-ui.com/"
-        src="https://raw.githubusercontent.com/BearStudio/react-native-ficus-ui/refs/heads/main/apps/docs/static/img/banner.png"
-        aspectRatio={2}
-      />
-    </Box>
-  </Stack>
+      </View>
+    </View>
+  </View>
 );

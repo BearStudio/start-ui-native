@@ -1,0 +1,43 @@
+name: 🚀 Release Production
+
+env:
+  EXPO_PUBLIC_API_URL: ${{ vars.API_URL }}
+  EXPO_PUBLIC_AUTH_URL: ${{ vars.AUTH_URL }}
+  EXPO_PUBLIC_OPENAPI_URL: ${{ vars.OPENAPI_URL }}
+
+on: workflow_dispatch
+
+jobs:
+  prepare-production:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v5
+
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 'lts/*'
+          cache: 'pnpm'
+
+      - name: 🏗 Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: 📦 Install dependencies
+        run: pnpm install
+
+      - name: 🚀 Build production
+        run: eas build --profile production --platform all --non-interactive
+
+      - name: Setup App Store Connect API key
+        run: |
+          echo "$APP_STORE_CONNECT_API_KEY" | base64 -d > "$ASC_API_KEY_PATH"
+        env:
+          APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
+          ASC_API_KEY_PATH: AuthKey_${{ vars.ASC_API_KEY_ID }}.p8
+
+      - name: 🚀 Submit on stores
+        run: eas submit --profile production --platform all --latest --non-interactive

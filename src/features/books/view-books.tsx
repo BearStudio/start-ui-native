@@ -1,14 +1,17 @@
 import { getUiState } from '@bearstudio/ui-state';
+import { FlashList } from '@shopify/flash-list';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { Link } from 'expo-router';
-import { ActivityIndicator } from 'react-native';
-import { FlashList, Text } from 'react-native-ficus-ui';
+import { useCallback } from 'react';
+import { ActivityIndicator, View } from 'react-native';
 
 import { api } from '@/lib/hey-api/api';
+import { BookGetByIdResponse } from '@/lib/hey-api/generated';
 
-import { FullLoader } from '@/components/ui/full-loader';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Text } from '@/components/ui/text';
 
-import { BookCover } from '@/features/books/book-cover';
+import { BookCover, COVER_HEIGHT } from '@/features/books/book-cover';
 import { ViewTabContent } from '@/layout/view-tab-content';
 
 export const ViewBooks = () => {
@@ -29,10 +32,39 @@ export const ViewBooks = () => {
     });
   });
 
+  const renderItem = useCallback(
+    ({ item }: { item: BookGetByIdResponse }) => (
+      <Link
+        href={{
+          pathname: '/books/[id]',
+          params: { id: item.id, title: item.title },
+        }}
+        style={{ padding: 8, flex: 1 }}
+      >
+        <Link.Trigger>
+          <BookCover book={item} />
+        </Link.Trigger>
+        <Link.Preview />
+      </Link>
+    ),
+    []
+  );
+
   return (
     <ViewTabContent withHeader>
       {ui
-        .match('pending', () => <FullLoader />)
+        .match('pending', () => (
+          <View className="flex-row flex-wrap">
+            {Array.from({ length: 4 }, (_, i) => i).map((index) => (
+              <View key={index} className="w-1/2 p-2">
+                <Skeleton
+                  className="w-full rounded-lg"
+                  style={{ height: COVER_HEIGHT }}
+                />
+              </View>
+            ))}
+          </View>
+        ))
         .match('error', () => <></>)
         .match('empty', () => <Text>There is no books</Text>)
         .match('default', ({ data }) => (
@@ -41,20 +73,7 @@ export const ViewBooks = () => {
             keyExtractor={(item) => item.id}
             numColumns={2}
             horizontal={false}
-            renderItem={({ item }) => (
-              <Link
-                href={{
-                  pathname: '/books/[id]',
-                  params: { id: item.id, title: item.title },
-                }}
-                style={{ padding: 8, flex: 1 }}
-              >
-                <Link.Trigger>
-                  <BookCover book={item} />
-                </Link.Trigger>
-                <Link.Preview />
-              </Link>
-            )}
+            renderItem={renderItem}
             onEndReached={() => {
               if (!books.hasNextPage) {
                 return;

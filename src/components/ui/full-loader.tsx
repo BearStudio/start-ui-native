@@ -1,10 +1,10 @@
 import { ActivityIndicator } from 'react-native';
-import { Center } from 'react-native-ficus-ui';
+import { View } from 'react-native';
 
 export const FullLoader = () => {
   return (
-    <Center flex={1}>
+    <View className="flex-1 items-center justify-center">
       <ActivityIndicator />
-    </Center>
+    </View>
   );
 };

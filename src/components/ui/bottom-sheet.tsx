@@ -1,25 +1,26 @@
 import {
   BottomSheetBackdrop,
   BottomSheetBackdropProps,
+  BottomSheetHandle,
   BottomSheetModal,
   BottomSheetModalProps,
   BottomSheetView,
 } from '@gorhom/bottom-sheet';
 import { useEffect, useMemo, useRef } from 'react';
-import { ficus, useColorModeValue, useDisclosure } from 'react-native-ficus-ui';
+import { withUniwind } from 'uniwind';
 
-import theme from '@/lib/ficus-ui/theme';
+import { cn } from '@/lib/tailwind/utils';
 
-const FicusBottomSheet = ficus(BottomSheetModal, {
-  baseStyle: { flex: 1, borderRadius: 'md' },
-});
+const SheetBackdrop = withUniwind(BottomSheetBackdrop);
+const SheetModal = withUniwind(BottomSheetModal);
+const SheetView = withUniwind(BottomSheetView);
+const SheetHandle = withUniwind(BottomSheetHandle);
 
 export const BottomSheet = ({
   isOpen,
   onClose,
   ...props
-}: BottomSheetModalProps &
-  Pick<ReturnType<typeof useDisclosure>, 'isOpen' | 'onClose'>) => {
+}: BottomSheetModalProps & { isOpen?: boolean; onClose?: () => void }) => {
   const ref = useRef<BottomSheetModal>(null);
 
   useEffect(() => {
@@ -40,15 +41,9 @@ export const BottomSheet = ({
     }
   };
 
-  const backgroundColor = useColorModeValue('white', theme.colors.neutral[900]);
-  const handleColor = useColorModeValue(
-    theme.colors.neutral[200],
-    theme.colors.neutral[500]
-  );
-
   const renderBackdrop = useMemo(
     () => (backdropProps: BottomSheetBackdropProps) => (
-      <BottomSheetBackdrop
+      <SheetBackdrop
         {...backdropProps}
         appearsOnIndex={0}
         disappearsOnIndex={-1}
@@ -60,22 +55,30 @@ export const BottomSheet = ({
   );
 
   return (
-    <FicusBottomSheet
+    <SheetModal
       {...props}
       backdropComponent={renderBackdrop}
-      handleIndicatorStyle={{
-        backgroundColor: handleColor,
-        width: 64,
-        height: 5,
-      }}
-      backgroundStyle={{ backgroundColor }}
-      handleStyle={{ backgroundColor: 'transparent' }}
+      handleComponent={SheetHandle}
+      handleClassName="w-full"
+      handleIndicatorClassName="bg-muted-foreground/50 w-36 h-1"
+      backgroundClassName="bg-background flex flex-1 rounded-t-2xl"
       ref={ref}
       onChange={handleChange}
     />
   );
 };
 
-export const BottomSheetBox = ficus(BottomSheetView, {
-  baseStyle: { flex: 1, px: 24, pt: 12, pb: 64, minH: 260 },
-});
+type BottomSheetContentProps = React.ComponentProps<typeof BottomSheetView> & {
+  className?: string;
+};
+
+export const BottomSheetContent = ({
+  className,
+  style,
+  ...props
+}: BottomSheetContentProps) => (
+  <SheetView
+    className={cn('flex flex-1 gap-4 px-8 pt-4 pb-16', className)}
+    {...props}
+  />
+);
