@@ -51,13 +51,7 @@ jobs:
       - name: 🔨 Build APK (local)
         run: eas build --profile e2e --platform android --non-interactive --local --output build.apk
         env:
-          APP_ENV: development
-          ORG_GRADLE_PROJECT_reactNativeArchitectures: x86_64
-          GRADLE_OPTS: >-
-            -Dorg.gradle.daemon=false
-            -Dorg.gradle.parallel=false
-            -Dorg.gradle.configureondemand=true
-            -Dorg.gradle.jvmargs="-Xmx4096m -XX:MaxMetaspaceSize=1024m"
+          APP_ENV: production
 
       - name: 🎭 Install Maestro
         run: curl -Ls "https://get.maestro.mobile.dev" | bash && echo "$HOME/.maestro/bin" >> $GITHUB_PATH
@@ -108,13 +102,7 @@ jobs:
       - name: 🔨 Build APK (local)
         run: eas build --profile e2e --platform android --non-interactive --local --output build.apk
         env:
-          APP_ENV: development
-          ORG_GRADLE_PROJECT_reactNativeArchitectures: x86_64
-          GRADLE_OPTS: >-
-            -Dorg.gradle.daemon=false
-            -Dorg.gradle.parallel=false
-            -Dorg.gradle.configureondemand=true
-            -Dorg.gradle.jvmargs="-Xmx4096m -XX:MaxMetaspaceSize=1024m"
+          APP_ENV: production
 
       - name: 🎭 Install Maestro
         run: curl -Ls "https://get.maestro.mobile.dev" | bash && echo "$HOME/.maestro/bin" >> $GITHUB_PATH
