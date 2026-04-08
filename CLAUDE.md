@@ -71,6 +71,28 @@ src/
 - Exceptions: Icon components (`IconHome.tsx`), Logo components
 - Screen/view components: prefix with `view-`: `view-books.tsx`, `view-home.tsx`
 
+### Feature Module Structure
+
+Each feature folder contains only what is specific to that feature:
+
+```txt
+features/books/
+  view-books.tsx       # List screen (route entry point)
+  view-book.tsx        # Detail screen
+  book-cover.tsx       # Sub-component used only within this feature
+```
+
+### UI Component Conventions
+
+UI primitives in `src/components/ui/` follow these rules:
+
+- Named exports only (no default export): `export { Badge }`, `export type { BadgeProps }`
+- Props type = native RN props extended with variants: `type BadgeProps = ViewProps & VariantProps<typeof badgeVariants>`
+- Variants via `cva()`, class merging via `cn()`
+- Support `asChild` via `@rn-primitives/slot` when the component wraps a pressable
+
+Real example: [src/components/ui/badge.tsx](src/components/ui/badge.tsx)
+
 ### Imports — Path Alias
 
 Always use `@/` alias instead of relative paths for imports outside the current feature:
@@ -89,32 +111,11 @@ import { cn } from '@/lib/tailwind/utils';
 - Platform-specific styles via `Platform.select({ web: '...' })`
 - Dark mode is handled by the UniWind theme system — do NOT use `dark:` Tailwind classes
 
-```tsx
-import { cn } from '@/lib/tailwind/utils';
-<View className={cn('flex-1 bg-background p-4', isActive && 'opacity-50')} />
-```
+Real example: [src/components/ui/badge.tsx](src/components/ui/badge.tsx)
 
 ### UI State Pattern (`@bearstudio/ui-state`)
 
 The project uses `getUiState` for type-safe conditional rendering. Always end the chain with `.exhaustive()` to enforce all states are handled.
-
-```tsx
-import { getUiState } from '@bearstudio/ui-state';
-
-const ui = getUiState((set) => {
-  if (isPending) return set('pending');
-  if (isError) return set('error');
-  if (!data?.length) return set('empty');
-  return set('default', { data });
-});
-
-return ui
-  .match('pending', () => <Skeleton />)
-  .match('error', () => <ErrorView />)
-  .match('empty', () => <EmptyView />)
-  .match('default', ({ data }) => <ListView data={data} />)
-  .exhaustive();
-```
 
 Real example: [src/features/books/view-books.tsx](src/features/books/view-books.tsx)
 
@@ -149,6 +150,8 @@ Setup: [src/lib/tanstack-form/](src/lib/tanstack-form/) — Real example: [src/f
 ### Navigation (Expo Router)
 
 - Typed routes are enabled — use the typed `href` format
+
+Real examples: [src/features/books/view-books.tsx](src/features/books/view-books.tsx) (Link with params), [src/app/(logged)/_layout.tsx](src/app/(logged)/_layout.tsx) (programmatic navigation)
 
 ### Lists
 
