@@ -20,10 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 🏗 Enable KVM
-        run: |
-          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0660", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
-          sudo udevadm control --reload-rules
-          sudo udevadm trigger --name-match=kvm
+        run: sudo chmod 777 /dev/kvm
 
       - name: 🏗 Setup repo
         uses: actions/checkout@v4
