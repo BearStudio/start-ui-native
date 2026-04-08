@@ -149,9 +149,6 @@ Setup: [src/lib/tanstack-form/](src/lib/tanstack-form/) — Real example: [src/f
 ### Navigation (Expo Router)
 
 - Typed routes are enabled — use the typed `href` format
-- Links: `<Link href={{ pathname: '/books/[id]', params: { id } }} />`
-- Imperative: `router.push({ pathname: '/books/[id]', params: { id } })`
-- Do not use string-only hrefs for dynamic routes
 
 ### Lists
 
@@ -161,13 +158,12 @@ Setup: [src/lib/tanstack-form/](src/lib/tanstack-form/) — Real example: [src/f
 
 - Use Lucide icons: `import { BookOpen } from 'lucide-react-native'`
 - Custom SVGs: add to `src/components/icons/svg-sources/` with `icon-` prefix, run `pnpm gen:icons`
-- SVGs must be square and filled with `#000`
 
 ### TypeScript
 
 - Strict mode is on: `noUncheckedIndexAccess`, `noImplicitAny`, `strictNullChecks`
-- Never use `any` — use `unknown` and narrow properly
-- Never use non-null assertions (`!`) unless truly necessary
+- Never use `any`
+- See the file `src/types/utilities.d.ts` for more informations
 
 ## Available Scripts
 
@@ -183,7 +179,6 @@ pnpm gen:api           # Regenerate API client from OpenAPI schema
 pnpm gen:icons         # Regenerate icon components from SVGs
 pnpm dev:storybook     # Start Storybook (port 8083)
 pnpm test:e2e          # Run all Maestro E2E flows
-pnpm test:e2e:smoke    # Run smoke tests only (tagged flows)
 ```
 
 ## Environment Variables
@@ -199,14 +194,6 @@ Copy `.env.example` to `.env` to get started.
 ## E2E Tests (Maestro)
 
 Flows live in `.maestro/flows/`, reusable utilities in `.maestro/utils/`.
-
-Maestro env variables (`.env.maestro`):
-
-- `APP_ID` — App bundle identifier
-- `TEST_EMAIL` — Test account email
-- `TEST_OTP` — OTP code for test account
-
-Tag smoke tests with `tags: [smoke]` in the flow YAML to include them in `test:e2e:smoke`.
 
 ## Code Quality
 
