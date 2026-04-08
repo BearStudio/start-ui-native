@@ -14,57 +14,6 @@ on:
     branches: [main]
 
 jobs:
-  e2e-smoke:
-    name: 💨 Smoke Tests
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
-    steps:
-      - name: 🏗 Setup repo
-        uses: actions/checkout@v4
-
-      - name: 🏗 Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
-
-      - name: 🏗 Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 'lts/*'
-          cache: 'pnpm'
-
-      - name: 🏗 Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: 🏗 Setup EAS
-        uses: expo/expo-github-action@v8
-        with:
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
-
-      - name: 📦 Install dependencies
-        run: pnpm install
-
-      - name: 🔨 Build APK (local)
-        run: eas build --profile production --platform android --non-interactive --local --output build.apk
-        env:
-          APP_ENV: production
-
-      - name: 🎭 Install Maestro
-        run: curl -Ls "https://get.maestro.mobile.dev" | bash && echo "$HOME/.maestro/bin" >> $GITHUB_PATH
-
-      - name: 🤖 Run smoke tests on emulator
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 34
-          arch: x86_64
-          script: |
-            adb install build.apk
-            pnpm test:e2e:smoke
-
   e2e-full:
     name: 🎭 Full E2E Tests
     if: (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch'
@@ -90,19 +39,13 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: 🏗 Setup EAS
-        uses: expo/expo-github-action@v8
-        with:
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
-
       - name: 📦 Install dependencies
         run: pnpm install
 
-      - name: 🔨 Build APK (local)
-        run: eas build --profile production --platform android --non-interactive --local --output build.apk
-        env:
-          APP_ENV: production
+      - name: 🔨 Prebuild & Build APK (debug)
+        run: |
+          APP_ENV=development npx expo prebuild --clean --platform android
+          cd android && ./gradlew assembleDebug -PbundleInDebug=true
 
       - name: 🎭 Install Maestro
         run: curl -Ls "https://get.maestro.mobile.dev" | bash && echo "$HOME/.maestro/bin" >> $GITHUB_PATH
@@ -113,5 +56,5 @@ jobs:
           api-level: 34
           arch: x86_64
           script: |
-            adb install build.apk
+            adb install android/app/build/outputs/apk/debug/app-debug.apk
             pnpm test:e2e
