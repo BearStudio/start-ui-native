@@ -19,6 +19,12 @@ jobs:
     if: (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
+      - name: 🏗 Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0660", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
       - name: 🏗 Setup repo
         uses: actions/checkout@v4
 
@@ -44,7 +50,7 @@ jobs:
 
       - name: 🔨 Prebuild & Build APK (debug)
         run: |
-          APP_ENV=development npx expo prebuild --clean --platform android
+          APP_ENV=production npx expo prebuild --clean --platform android
           cd android && ./gradlew assembleDebug -PbundleInDebug=true
 
       - name: 🎭 Install Maestro
@@ -56,5 +62,6 @@ jobs:
           api-level: 34
           arch: x86_64
           script: |
+            adb shell am start -a com.android.intent.action.SET_LOCALE --es localeName en_US
             adb install android/app/build/outputs/apk/debug/app-debug.apk
             pnpm test:e2e
