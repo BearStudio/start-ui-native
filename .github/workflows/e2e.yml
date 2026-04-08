@@ -58,7 +58,7 @@ jobs:
         with:
           api-level: 34
           arch: x86_64
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -prop persist.sys.locale=en-US -prop persist.sys.language=en -prop persist.sys.country=US
           script: |
-            adb shell am start -a com.android.intent.action.SET_LOCALE --es localeName en_US
             adb install android/app/build/outputs/apk/debug/app-debug.apk
             pnpm test:e2e
