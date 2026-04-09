@@ -13,13 +13,9 @@ appId: com.bearstudio.startuinative
 
 - waitForAnimationToEnd
 
-- runFlow:
-    when:
-      visible: 'You are about to end your session'
-    commands:
-      - tapOn:
-          text: 'Sign out'
-          below: 'You are about to end your session'
+- tapOn:
+    text: 'Sign out'
+    below: 'You are about to end your session'
 
 - waitForAnimationToEnd
 - assertVisible: 'Login to your account'

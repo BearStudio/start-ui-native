@@ -11,12 +11,8 @@ appId: com.bearstudio.startuinative
 - tapOn: 'Books'
 - waitForAnimationToEnd
 
-- runFlow:
-    when:
-      notVisible: 'There is no books'
-    commands:
-      - tapOn:
-          index: 0
-          below: 'Books'
-      - back
-      - assertVisible: 'Books'
+- tapOn:
+    index: 0
+    below: 'Books'
+- back
+- assertVisible: 'Books'
