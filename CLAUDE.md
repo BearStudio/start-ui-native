@@ -86,7 +86,6 @@ features/books/
 
 UI primitives in `src/components/ui/` follow these rules:
 
-- Named exports only (no default export): `export { Badge }`, `export type { BadgeProps }`
 - Props type = native RN props extended with variants: `type BadgeProps = ViewProps & VariantProps<typeof badgeVariants>`
 - Variants via `cva()`, class merging via `cn()`
 - Support `asChild` via `@rn-primitives/slot` when the component wraps a pressable
