@@ -3,9 +3,10 @@ env:
   TEST_EMAIL: 'user@user.com'
   TEST_OTP: '000000'
 ---
-- tapOn:
-    text: 'Email'
+- extendedWaitUntil:
+    visible: 'Email'
     timeout: 60000
+- tapOn: 'Email'
 - inputText: ${TEST_EMAIL}
 - tapOn: 'Continue with email'
 - inputText: ${TEST_OTP}
