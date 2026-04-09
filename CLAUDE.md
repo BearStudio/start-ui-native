@@ -164,7 +164,7 @@ Real examples: [src/features/books/view-books.tsx](src/features/books/view-books
 
 ### TypeScript
 
-- Strict mode is on: `noUncheckedIndexAccess`, `noImplicitAny`, `strictNullChecks`
+- Strict mode is on: `noUncheckedIndexedAccess`, `noImplicitAny`, `strictNullChecks`
 - Never use `any`
 - See the file `src/types/utilities.d.ts` for more informations
 
