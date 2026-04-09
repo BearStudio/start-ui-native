@@ -45,10 +45,14 @@ jobs:
       - name: 📦 Install dependencies
         run: pnpm install
 
-      - name: 🔨 Prebuild & Build APK (debug)
+      - name: 🔨 Prebuild & Build APK (release)
         run: |
           APP_ENV=production npx expo prebuild --clean --platform android
-          cd android && ./gradlew assembleDebug -PbundleInDebug=true
+          cd android && ./gradlew assembleRelease \
+            -Pandroid.injected.signing.store.file=$HOME/.android/debug.keystore \
+            -Pandroid.injected.signing.store.password=android \
+            -Pandroid.injected.signing.key.alias=androiddebugkey \
+            -Pandroid.injected.signing.key.password=android
 
       - name: 🎭 Install Maestro
         run: curl -Ls "https://get.maestro.mobile.dev" | bash && echo "$HOME/.maestro/bin" >> $GITHUB_PATH
@@ -58,7 +62,15 @@ jobs:
         with:
           api-level: 34
           arch: x86_64
-          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -prop persist.sys.locale=en-US -prop persist.sys.language=en -prop persist.sys.country=US
+          pre-emulator-launch-script: |
+            echo "persist.sys.locale=en-US" >> $HOME/.android/avd/test.avd/config.ini
+            echo "persist.sys.language=en" >> $HOME/.android/avd/test.avd/config.ini
+            echo "persist.sys.country=US" >> $HOME/.android/avd/test.avd/config.ini
           script: |
-            adb install android/app/build/outputs/apk/debug/app-debug.apk
+            adb kill-server
+            adb start-server
+            adb wait-for-device
+            sleep 5
+            adb uninstall com.bearstudio.startuinative || true
+            adb install android/app/build/outputs/apk/release/app-release.apk
             pnpm test:e2e
