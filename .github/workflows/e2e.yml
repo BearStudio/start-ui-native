@@ -50,7 +50,7 @@ jobs:
           APP_ENV=production npx expo prebuild --clean --platform android
           sed -i 's/minifyEnabled true/minifyEnabled false/g' android/app/build.gradle
           sed -i 's/shrinkResources true/shrinkResources false/g' android/app/build.gradle
-          cd android && ./gradlew assembleRelease --no-daemon --max-workers 2 \
+          cd android && ./gradlew assembleRelease --no-daemon \
             -Pandroid.injected.signing.store.file=$HOME/.android/debug.keystore \
             -Pandroid.injected.signing.store.password=android \
             -Pandroid.injected.signing.key.alias=androiddebugkey \
