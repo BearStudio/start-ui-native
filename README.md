@@ -198,3 +198,55 @@ To be able to use previews on PR, you have to setup your project with EAS
     - `eas init --id {projectid}`
     - `eas update:configure`
 
+# E2E Tests (Maestro)
+
+End-to-end tests are written with [Maestro](https://docs.maestro.dev) and live in the `.maestro/` folder.
+
+## Prerequisites
+
+- **Java 17+** — required by Maestro. Verify with `java -version`, and ensure `JAVA_HOME` points to your installation.
+- **Maestro CLI** — install with:
+
+```bash
+# macOS / Linux
+curl -fsSL "https://get.maestro.mobile.dev" | bash
+
+# macOS (Homebrew)
+brew tap mobile-dev-inc/tap && brew install mobile-dev-inc/tap/maestro
+```
+
+Verify the installation with `maestro --help`.
+
+> [!TIP]
+> On Windows, download `maestro.zip` from the [GitHub releases](https://github.com/mobile-dev-inc/maestro/releases), extract it to `C:\maestro`, then add `C:\maestro\bin` to your `PATH`.
+
+```text
+.maestro/
+├── flows/          # Test flows (one feature per file)
+│   ├── sign-in.yaml
+│   ├── sign-out.yaml
+│   ├── tab-navigation.yaml
+│   └── books.yaml
+└── utils/          # Reusable sub-flows (login, onboarding...)
+    ├── login.yaml
+    └── handle-onboarding.yaml
+```
+
+## Setup
+
+The `appId` is set directly in each flow file. The environment variables used for authentication have default values defined in `utils/login.yaml`:
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `TEST_EMAIL` | `user@user.com` | Email address of the test user |
+| `TEST_OTP` | `000000` | OTP code for the test user |
+
+## Scripts
+
+```bash
+# Run all flows
+pnpm test:e2e
+```
+
+> [!TIP]
+> Make sure the app is built and running in english on a simulator/emulator before launching the tests.

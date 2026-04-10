@@ -1,0 +1,20 @@
+# Tests navigation between the three main tabs.
+# Run: maestro test .maestro/flows/tab-navigation.yaml
+appId: com.bearstudio.startuinative
+---
+- launchApp:
+    clearState: true
+
+- runFlow: ../utils/handle-onboarding.yaml
+- runFlow: ../utils/login.yaml
+
+- assertVisible: 'Home'
+
+- tapOn: 'Books'
+- assertVisible: 'Books'
+
+- tapOn: 'Account'
+- assertVisible: 'Account'
+
+- tapOn: 'Home'
+- assertVisible: 'Home'

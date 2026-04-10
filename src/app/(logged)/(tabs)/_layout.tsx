@@ -79,7 +79,6 @@ export default function TabLayout() {
         headerTintColor: themedStyle.color,
         tabBarStyle: { backgroundColor: themedStyle.backgroundColor },
         tabBarActiveTintColor: themedStyle.color,
-        tabBarButton: (props) => <HapticTab {...props} />,
         sceneStyle: { backgroundColor: themedStyle.sceneBackgroundColor },
       }}
     >
@@ -90,6 +89,7 @@ export default function TabLayout() {
           options={{
             title: t(tab.translationKey),
             headerShown: tab.headerShown,
+            tabBarButton: (props) => <HapticTab {...props} />,
             tabBarIcon: (props) => {
               const TabIcon = props.focused ? tab.iconFocused : tab.icon;
               return (
