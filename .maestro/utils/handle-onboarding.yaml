@@ -1,12 +1,9 @@
 appId: com.bearstudio.startuinative
 ---
-- runFlow:
-    when:
-      visible: 'Continue'
-    commands:
-      - tapOn: 'Continue'
-- runFlow:
-    when:
-      visible: "Let's start"
-    commands:
-      - tapOn: "Let's start"
+- extendedWaitUntil:
+    visible: 'Continue'
+    timeout: 60000
+
+- tapOn: 'Continue'
+
+- tapOn: "Let's start"
