@@ -51,15 +51,30 @@ jobs:
       - name: 📦 Install dependencies
         run: pnpm install
 
+      - name: 🔑 Generate debug keystore
+        run: |
+          mkdir -p $HOME/.android
+          keytool -genkeypair -v \
+            -keystore $HOME/.android/debug.keystore \
+            -storepass android \
+            -alias androiddebugkey \
+            -keypass android \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -dname "CN=Android Debug,O=Android,C=US"
+
       - name: 🔨 Prebuild & Build APK (release)
         env:
-          GRADLE_OPTS: "-Xmx4096m -XX:MaxMetaspaceSize=1024m"
+          JAVA_TOOL_OPTIONS: "-XX:MaxMetaspaceSize=2048m -Dfile.encoding=UTF-8"
+          GRADLE_OPTS: "-Xmx4096m -XX:MaxMetaspaceSize=2048m -Dfile.encoding=UTF-8"
         run: |
-          APP_ENV=production npx expo prebuild --clean --platform android
+          APP_ENV=staging npx expo prebuild --clean --platform android
           cd android && ./gradlew assembleRelease --no-daemon \
             -PreactNativeArchitectures=x86_64 \
             -x lintVitalRelease \
-            --max-workers=4 \
+            --max-workers=2 \
+            -Pkotlin.compiler.execution.strategy=in-process \
             -Pandroid.injected.signing.store.file=$HOME/.android/debug.keystore \
             -Pandroid.injected.signing.store.password=android \
             -Pandroid.injected.signing.key.alias=androiddebugkey \
@@ -120,6 +135,6 @@ jobs:
             adb start-server
             adb wait-for-device
             sleep 5
-            adb uninstall com.bearstudio.startuinative || true
+            adb uninstall com.bearstudio.startuinative.staging || true
             adb install android/app/build/outputs/apk/release/app-release.apk
             pnpm test:e2e

@@ -1,6 +1,6 @@
 # Tests the logout flow from the account tab.
 # Run: maestro test .maestro/flows/sign-out.yaml
-appId: com.bearstudio.startuinative
+appId: com.bearstudio.startuinative.staging
 ---
 - launchApp:
     clearState: true

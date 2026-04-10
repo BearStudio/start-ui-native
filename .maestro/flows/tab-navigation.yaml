@@ -1,6 +1,6 @@
 # Tests navigation between the three main tabs.
 # Run: maestro test .maestro/flows/tab-navigation.yaml
-appId: com.bearstudio.startuinative
+appId: com.bearstudio.startuinative.staging
 ---
 - launchApp:
     clearState: true

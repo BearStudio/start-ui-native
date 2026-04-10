@@ -1,6 +1,6 @@
 # Tests the complete authentication journey from a clean app state.
 # Run: maestro test .maestro/flows/sign-in.yaml
-appId: com.bearstudio.startuinative
+appId: com.bearstudio.startuinative.staging
 ---
 - launchApp:
     clearState: true
