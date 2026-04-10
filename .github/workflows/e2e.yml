@@ -14,13 +14,19 @@ on:
     branches: [main]
 
 jobs:
-  e2e-full:
-    name: 🎭 Full E2E Tests
+  build-apk:
+    name: 🔨 Build APK
     if: (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
-      - name: 🏗 Enable KVM
-        run: sudo chmod 777 /dev/kvm
+      - name: 🗑 Free disk space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          android: false
+          dotnet: true
+          haskell: true
+          large-packages: true
+          swap-storage: true
 
       - name: 🏗 Setup repo
         uses: actions/checkout@v4
@@ -46,15 +52,54 @@ jobs:
         run: pnpm install
 
       - name: 🔨 Prebuild & Build APK (release)
+        env:
+          GRADLE_OPTS: "-Xmx4096m -XX:MaxMetaspaceSize=1024m"
         run: |
           APP_ENV=production npx expo prebuild --clean --platform android
-          sed -i 's/minifyEnabled true/minifyEnabled false/g' android/app/build.gradle
-          sed -i 's/shrinkResources true/shrinkResources false/g' android/app/build.gradle
           cd android && ./gradlew assembleRelease --no-daemon \
+            -PreactNativeArchitectures=x86_64 \
             -Pandroid.injected.signing.store.file=$HOME/.android/debug.keystore \
             -Pandroid.injected.signing.store.password=android \
             -Pandroid.injected.signing.key.alias=androiddebugkey \
             -Pandroid.injected.signing.key.password=android
+
+      - name: 📤 Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release
+          path: android/app/build/outputs/apk/release/app-release.apk
+          retention-days: 1
+
+  e2e-full:
+    name: 🎭 Full E2E Tests
+    needs: build-apk
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏗 Enable KVM
+        run: sudo chmod 777 /dev/kvm
+
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v4
+
+      - name: 🏗 Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'pnpm'
+
+      - name: 📦 Install dependencies
+        run: pnpm install
+
+      - name: 📥 Download APK artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: app-release
+          path: android/app/build/outputs/apk/release/
 
       - name: 🎭 Install Maestro
         run: curl -Ls "https://get.maestro.mobile.dev" | bash && echo "$HOME/.maestro/bin" >> $GITHUB_PATH
