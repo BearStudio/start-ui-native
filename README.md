@@ -229,29 +229,24 @@ Verify the installation with `maestro --help`.
 │   └── books.yaml
 └── utils/          # Reusable sub-flows (login, onboarding...)
     ├── login.yaml
-    ├── handle-onboarding.yaml
-    └── open-first-book.yaml
+    └── handle-onboarding.yaml
 ```
 
 ## Setup
 
-You can change the env variable needed for the test directly in the file .env.maestro. They will be automatically added to the scrpits launching the tests.
+The `appId` is set directly in each flow file. The environment variables used for authentication have default values defined in `utils/login.yaml`:
 
-| Variable | Description |
-| --- | --- |
-| `APP_ID` | Bundle ID of the app to test (e.g. `com.bearstudio.startuinative.development`) |
-| `TEST_EMAIL` | Email address of the test user (use either user@user.com or admin@admin.com in development) |
-| `TEST_OTP` | OTP code for the test user (use `000000` in development) |
+| Variable | Default | Description |
+| --- | --- | --- |
+| `TEST_EMAIL` | `user@user.com` | Email address of the test user |
+| `TEST_OTP` | `000000` | OTP code for the test user |
 
 ## Scripts
 
 ```bash
 # Run all flows
 pnpm test:e2e
-
-# Run only smoke tests
-pnpm test:e2e:smoke
 ```
 
 > [!TIP]
-> Make sure the app is build, and is running on a simulator/emulator before launching the tests.
+> Make sure the app is built and running in english on a simulator/emulator before launching the tests.
