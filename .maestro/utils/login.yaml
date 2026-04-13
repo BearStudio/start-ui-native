@@ -1,4 +1,4 @@
-appId: com.bearstudio.startuinative
+appId: com.bearstudio.startuinative.staging
 env:
   TEST_EMAIL: 'user@user.com'
   TEST_OTP: '000000'
