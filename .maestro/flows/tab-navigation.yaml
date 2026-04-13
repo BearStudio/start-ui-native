@@ -1,12 +1,9 @@
 # Tests navigation between the three main tabs.
-# Run: maestro test .maestro/flows/tab-navigation.yaml
+# Relies on sign-in.yaml having run first (session state is preserved).
+# Run standalone: maestro test .maestro/flows/sign-in.yaml .maestro/flows/tab-navigation.yaml
 appId: com.bearstudio.startuinative.staging
 ---
-- launchApp:
-    clearState: true
-
-- runFlow: ../utils/handle-onboarding.yaml
-- runFlow: ../utils/login.yaml
+- launchApp
 
 - assertVisible: 'Home'
 
