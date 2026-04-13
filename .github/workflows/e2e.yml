@@ -7,8 +7,6 @@ env:
 
 on:
   workflow_dispatch:
-  push:
-    branches: [test/e2e, test/e2e/**]
   pull_request:
     types: [closed]
     branches: [main]
@@ -16,7 +14,7 @@ on:
 jobs:
   build-apk:
     name: 🔨 Build APK
-    if: (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch' || github.event_name == 'push'
+    if: (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - name: 🗑 Free disk space
