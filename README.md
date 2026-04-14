@@ -165,13 +165,14 @@ For the **Release Production** workflow, also configure `eas.json` submit.produc
 ## Workflows
 
 
-| Workflow                  | Trigger      | Description                                                                             |
-| ------------------------- | ------------ | --------------------------------------------------------------------------------------- |
-| **EAS build**             | Manual       | Build app — select profile (development, staging, production) in the GitHub UI          |
-| **EAS Development build** | Manual       | Build development client (internal)                                                     |
-| **EAS Update**            | Manual       | Publish OTA update — select channel (development, staging, production) in the GitHub UI |
-| **EAS Preview**           | Pull request | Publish preview update on PR branch                                                     |
-| **Release Production**    | Manual       | Build production, then submit to App Store and Play Store                               |
+| Workflow                  | Trigger                  | Description                                                                             |
+| ------------------------- | ------------------------ | --------------------------------------------------------------------------------------- |
+| **EAS build**             | Manual                   | Build app — select profile (development, staging, production) in the GitHub UI          |
+| **EAS Development build** | Manual                   | Build development client (internal)                                                     |
+| **EAS Update**            | Manual                   | Publish OTA update — select channel (development, staging, production) in the GitHub UI |
+| **EAS Preview**           | Pull request             | Publish preview update on PR branch                                                     |
+| **Release Production**    | Manual                   | Build production, then submit to App Store and Play Store                               |
+| **E2E Tests**             | PR merged into main / Manual | Build staging APK and run Maestro flows on an Android emulator (API 34, x86_64)    |
 
 
 ### EAS build profiles
@@ -249,4 +250,4 @@ pnpm test:e2e
 ```
 
 > [!TIP]
-> Make sure the app is built and running in english on a simulator/emulator before launching the tests.
+> Make sure the staging app (`APP_ENV=staging`) is installed and running in English on an emulator or device before launching the tests.
