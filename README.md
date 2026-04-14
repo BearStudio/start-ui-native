@@ -254,3 +254,37 @@ pnpm test:e2e
 
 > [!TIP]
 > Make sure the staging app (`APP_ENV=staging`) is installed and running in English on an emulator or device before launching the tests.
+
+## Adding new tests
+
+### New flow
+
+Create a new file in `.maestro/flows/`. Each flow must declare the `appId` and start with `launchApp`:
+
+```yaml
+# .maestro/flows/my-feature.yaml
+appId: com.bearstudio.startuinative.staging
+---
+- launchApp
+
+- tapOn: 'My feature'
+- assertVisible: 'Expected text'
+```
+
+If the flow requires the user to be authenticated, add `sign-in.yaml` before it in the `pnpm test:e2e` script in `package.json`. Most flows depend on session state preserved from the previous flow.
+
+### New reusable sub-flow
+
+Place reusable sequences in `.maestro/utils/` and include them with `runFlow:`:
+
+```yaml
+- runFlow: ../utils/my-util.yaml
+```
+
+### Register the flow in the test suite
+
+Add the new flow to the `test:e2e` script in `package.json`, respecting the execution order (authentication must come first):
+
+```json
+"test:e2e": "maestro test .maestro/flows/sign-in.yaml ... .maestro/flows/my-feature.yaml .maestro/flows/sign-out.yaml"
+```
