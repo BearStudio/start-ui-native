@@ -1,0 +1,150 @@
+name: 🎭 E2E Tests
+
+env:
+  EXPO_PUBLIC_API_URL: ${{ vars.API_URL }}
+  EXPO_PUBLIC_AUTH_URL: ${{ vars.AUTH_URL }}
+  EXPO_PUBLIC_OPENAPI_URL: ${{ vars.OPENAPI_URL }}
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+jobs:
+  build-apk:
+    name: 🔨 Build APK
+    if: (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🗑 Free disk space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          android: false
+          dotnet: true
+          haskell: true
+          large-packages: true
+          swap-storage: true
+
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v5
+
+      - name: 🏗 Setup pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          version: 10
+
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 'lts/*'
+          cache: 'pnpm'
+
+      - name: 🏗 Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: 📦 Install dependencies
+        run: pnpm install
+
+      - name: 🔑 Generate debug keystore
+        run: |
+          mkdir -p $HOME/.android
+          keytool -genkeypair -v \
+            -keystore $HOME/.android/debug.keystore \
+            -storepass android \
+            -alias androiddebugkey \
+            -keypass android \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -dname "CN=Android Debug,O=Android,C=US"
+
+      - name: 🔨 Prebuild & Build APK (release)
+        env:
+          JAVA_TOOL_OPTIONS: "-XX:MaxMetaspaceSize=2048m -Dfile.encoding=UTF-8"
+          GRADLE_OPTS: "-Xmx4096m -XX:MaxMetaspaceSize=2048m -Dfile.encoding=UTF-8"
+        run: |
+          APP_ENV=staging npx expo prebuild --clean --platform android
+          cd android && ./gradlew assembleRelease --no-daemon \
+            -PreactNativeArchitectures=x86_64 \
+            -x lintVitalRelease \
+            --max-workers=2 \
+            -Pkotlin.compiler.execution.strategy=in-process \
+            -Pandroid.injected.signing.store.file=$HOME/.android/debug.keystore \
+            -Pandroid.injected.signing.store.password=android \
+            -Pandroid.injected.signing.key.alias=androiddebugkey \
+            -Pandroid.injected.signing.key.password=android
+
+      - name: 📤 Upload APK artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: app-release
+          path: android/app/build/outputs/apk/release/app-release.apk
+          retention-days: 1
+
+  e2e-full:
+    name: 🎭 Full E2E Tests
+    needs: build-apk
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏗 Enable KVM
+        run: sudo chmod 777 /dev/kvm
+
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v5
+
+      - name: 🏗 Setup pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          version: 10
+
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 'lts/*'
+          cache: 'pnpm'
+
+      - name: 📦 Install dependencies
+        run: pnpm install
+
+      - name: 📥 Download APK artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: app-release
+          path: android/app/build/outputs/apk/release/
+
+      - name: 📦 Cache Maestro
+        uses: actions/cache@v5
+        with:
+          path: ~/.maestro
+          key: maestro-${{ runner.os }}
+
+      - name: 🎭 Install Maestro
+        run: |
+          if [ ! -f "$HOME/.maestro/bin/maestro" ]; then
+            curl -Ls "https://get.maestro.mobile.dev" | bash
+          fi
+          echo "$HOME/.maestro/bin" >> $GITHUB_PATH
+
+      - name: 🤖 Run full E2E tests on emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          arch: x86_64
+          force-avd-creation: false
+          disable-animations: true
+          pre-emulator-launch-script: |
+            echo "persist.sys.locale=en-US" >> $HOME/.android/avd/test.avd/config.ini
+            echo "persist.sys.language=en" >> $HOME/.android/avd/test.avd/config.ini
+            echo "persist.sys.country=US" >> $HOME/.android/avd/test.avd/config.ini
+          script: |
+            adb kill-server
+            adb start-server
+            adb wait-for-device
+            sleep 5
+            adb uninstall com.bearstudio.startuinative.staging || true
+            adb install android/app/build/outputs/apk/release/app-release.apk
+            pnpm test:e2e

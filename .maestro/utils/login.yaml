@@ -3,7 +3,8 @@ env:
   TEST_EMAIL: 'user@user.com'
   TEST_OTP: '000000'
 ---
-- tapOn: 'Email'
+- tapOn:
+    text: 'Email'
 - inputText: ${TEST_EMAIL}
 - tapOn: 'Continue with email'
 - inputText: ${TEST_OTP}
