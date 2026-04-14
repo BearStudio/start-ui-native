@@ -1,0 +1,15 @@
+# Tests the books tab navigation and book detail screen.
+# Relies on sign-in.yaml having run first (session state is preserved).
+# Run standalone: maestro test .maestro/flows/sign-in.yaml .maestro/flows/books.yaml
+appId: com.bearstudio.startuinative.staging
+---
+- launchApp
+
+- tapOn: 'Books'
+- waitForAnimationToEnd
+
+- tapOn:
+    index: 0
+    below: 'Books'
+- back
+- assertVisible: 'Books'
