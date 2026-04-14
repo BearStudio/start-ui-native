@@ -199,7 +199,7 @@ To be able to use previews on PR, you have to setup your project with EAS
     - `eas init --id {projectid}`
     - `eas update:configure`
 
-# E2E Tests (Maestro)
+# E2E Tests (using Maestro)
 
 End-to-end tests are written with [Maestro](https://docs.maestro.dev) and live in the `.maestro/` folder.
 
@@ -233,6 +233,9 @@ Verify the installation with `maestro --help`.
     └── handle-onboarding.yaml
 ```
 
+> [!TIP]
+> Use the script to run the test to be sure to respect the launching order. 
+
 ## Setup
 
 The `appId` is set directly in each flow file. The environment variables used for authentication have default values defined in `utils/login.yaml`:
@@ -245,7 +248,7 @@ The `appId` is set directly in each flow file. The environment variables used fo
 ## Scripts
 
 ```bash
-# Run all flows
+# Run all flows locally
 pnpm test:e2e
 ```
 
