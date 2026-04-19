@@ -17,7 +17,9 @@ export const ViewAuthOnboarding = () => {
     defaultValues: { name: '' },
     validators: {
       onSubmit: z.object({
-        name: z.string().nonempty({ error: 'Name could not be empty' }),
+        name: z
+          .string()
+          .nonempty({ error: t('auth:onboarding.name.required') }),
       }),
     },
     onSubmit: async (submission) => {

@@ -3,6 +3,7 @@ import { FlashList } from '@shopify/flash-list';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { Link } from 'expo-router';
 import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, View } from 'react-native';
 
 import { api } from '@/lib/hey-api/api';
@@ -15,6 +16,8 @@ import { BookCover, COVER_HEIGHT } from '@/features/books/book-cover';
 import { ViewTabContent } from '@/layout/view-tab-content';
 
 export const ViewBooks = () => {
+  const { t } = useTranslation(['books']);
+
   const books = useInfiniteQuery({
     ...api.bookGetAllInfiniteOptions(),
     getNextPageParam: (lastPage) => lastPage.nextCursor,
@@ -66,7 +69,7 @@ export const ViewBooks = () => {
           </View>
         ))
         .match('error', () => <></>)
-        .match('empty', () => <Text>There is no books</Text>)
+        .match('empty', () => <Text>{t('books:list.empty')}</Text>)
         .match('default', ({ data }) => (
           <FlashList
             data={data}
