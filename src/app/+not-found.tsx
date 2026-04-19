@@ -5,6 +5,7 @@ import { View } from 'react-native';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 
+import { env } from '@/env';
 import { ViewSafeContent } from '@/layout/view-safe-content';
 
 export default function NotFound() {
@@ -21,7 +22,7 @@ export default function NotFound() {
             <Button>{t('layout:notFound.backInSafety')}</Button>
           </Link>
         </View>
-        {process.env.NODE_ENV === 'development' && (
+        {env.NODE_ENV === 'development' && (
           <Text className="text-sm">{path}</Text>
         )}
       </View>
