@@ -10,6 +10,17 @@ const {
 /** @type {import('expo/metro-config').MetroConfig} */
 const config = getDefaultConfig(__dirname);
 
+// Strip console.log / console.info from production bundles. Metro only
+// minifies with --dev=false, so dev builds are unaffected. We keep
+// warn/error so library diagnostics and crash breadcrumbs still surface.
+config.transformer.minifierConfig = {
+  ...config.transformer.minifierConfig,
+  compress: {
+    ...config.transformer.minifierConfig?.compress,
+    drop_console: ['log', 'info'],
+  },
+};
+
 // withUniwindConfig must be outermost (Uniwind requirement)
 const storybookEnabled = process.env.APP_ENV === 'storybook';
 
