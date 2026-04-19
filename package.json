@@ -40,6 +40,7 @@
     "@rn-primitives/avatar": "1.2.0",
     "@rn-primitives/slot": "1.2.0",
     "@shopify/flash-list": "2.0.2",
+    "@t3-oss/env-core": "^0.13.11",
     "@tanstack/eslint-plugin-query": "5.91.4",
     "@tanstack/react-form": "1.28.4",
     "@tanstack/react-query": "5.90.21",
