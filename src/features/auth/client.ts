@@ -7,9 +7,10 @@ import {
 import { createAuthClient } from 'better-auth/react';
 import * as SecureStore from 'expo-secure-store';
 
+import { env } from '@/env';
+
 const authBaseURL: string =
-  process.env.EXPO_PUBLIC_AUTH_URL ??
-  `${process.env.EXPO_PUBLIC_BASE_URL}/api/auth`;
+  env.EXPO_PUBLIC_AUTH_URL ?? `${env.EXPO_PUBLIC_BASE_URL}/api/auth`;
 
 export const authClient = createAuthClient({
   baseURL: authBaseURL,
