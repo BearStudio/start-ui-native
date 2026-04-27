@@ -165,13 +165,14 @@ For the **Release Production** workflow, also configure `eas.json` submit.produc
 ## Workflows
 
 
-| Workflow                  | Trigger      | Description                                                                             |
-| ------------------------- | ------------ | --------------------------------------------------------------------------------------- |
-| **EAS build**             | Manual       | Build app — select profile (development, staging, production) in the GitHub UI          |
-| **EAS Development build** | Manual       | Build development client (internal)                                                     |
-| **EAS Update**            | Manual       | Publish OTA update — select channel (development, staging, production) in the GitHub UI |
-| **EAS Preview**           | Pull request | Publish preview update on PR branch                                                     |
-| **Release Production**    | Manual       | Build production, then submit to App Store and Play Store                               |
+| Workflow                  | Trigger                  | Description                                                                             |
+| ------------------------- | ------------------------ | --------------------------------------------------------------------------------------- |
+| **EAS build**             | Manual                   | Build app — select profile (development, staging, production) in the GitHub UI          |
+| **EAS Development build** | Manual                   | Build development client (internal)                                                     |
+| **EAS Update**            | Manual                   | Publish OTA update — select channel (development, staging, production) in the GitHub UI |
+| **EAS Preview**           | Pull request             | Publish preview update on PR branch                                                     |
+| **Release Production**    | Manual                   | Build production, then submit to App Store and Play Store                               |
+| **E2E Tests**             | PR merged into main / Manual | Build staging APK and run Maestro flows on an Android emulator (API 34, x86_64)    |
 
 
 ### EAS build profiles
@@ -198,3 +199,92 @@ To be able to use previews on PR, you have to setup your project with EAS
     - `eas init --id {projectid}`
     - `eas update:configure`
 
+# E2E Tests (using Maestro)
+
+End-to-end tests are written with [Maestro](https://docs.maestro.dev) and live in the `.maestro/` folder.
+
+## Prerequisites
+
+- **Java 17+** — required by Maestro. Verify with `java -version`, and ensure `JAVA_HOME` points to your installation.
+- **Maestro CLI** — install with:
+
+```bash
+# macOS / Linux
+curl -fsSL "https://get.maestro.mobile.dev" | bash
+
+# macOS (Homebrew)
+brew tap mobile-dev-inc/tap && brew install mobile-dev-inc/tap/maestro
+```
+
+Verify the installation with `maestro --help`.
+
+> [!TIP]
+> On Windows, download `maestro.zip` from the [GitHub releases](https://github.com/mobile-dev-inc/maestro/releases), extract it to `C:\maestro`, then add `C:\maestro\bin` to your `PATH`.
+
+```text
+.maestro/
+├── flows/          # Test flows (one feature per file)
+│   ├── sign-in.yaml
+│   ├── sign-out.yaml
+│   ├── tab-navigation.yaml
+│   └── books.yaml
+└── utils/          # Reusable sub-flows (login, onboarding...)
+    ├── login.yaml
+    └── handle-onboarding.yaml
+```
+
+> [!TIP]
+> Use the script to run the test to be sure to respect the launching order. 
+
+## Setup
+
+The `appId` is set directly in each flow file. The environment variables used for authentication have default values defined in `utils/login.yaml`:
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `TEST_EMAIL` | `user@user.com` | Email address of the test user |
+| `TEST_OTP` | `000000` | OTP code for the test user |
+
+## Scripts
+
+```bash
+# Run all flows locally
+pnpm test:e2e
+```
+
+> [!TIP]
+> Make sure the staging app (`APP_ENV=staging`) is installed and running in English on an emulator or device before launching the tests.
+
+## Adding new tests
+
+### New flow
+
+Create a new file in `.maestro/flows/`. Each flow must declare the `appId` and start with `launchApp`:
+
+```yaml
+# .maestro/flows/my-feature.yaml
+appId: com.bearstudio.startuinative.staging
+---
+- launchApp
+
+- tapOn: 'My feature'
+- assertVisible: 'Expected text'
+```
+
+If the flow requires the user to be authenticated, add `sign-in.yaml` before it in the `pnpm test:e2e` script in `package.json`. Most flows depend on session state preserved from the previous flow.
+
+### New reusable sub-flow
+
+Place reusable sequences in `.maestro/utils/` and include them with `runFlow:`:
+
+```yaml
+- runFlow: ../utils/my-util.yaml
+```
+
+### Register the flow in the test suite
+
+Add the new flow to the `test:e2e` script in `package.json`, respecting the execution order (authentication must come first):
+
+```json
+"test:e2e": "maestro test .maestro/flows/sign-in.yaml ... .maestro/flows/my-feature.yaml .maestro/flows/sign-out.yaml"
+```

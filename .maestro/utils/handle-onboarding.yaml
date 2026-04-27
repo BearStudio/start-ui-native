@@ -1,0 +1,9 @@
+appId: com.bearstudio.startuinative.staging
+---
+- extendedWaitUntil:
+    visible: 'Continue'
+    timeout: 60000
+
+- tapOn: 'Continue'
+
+- tapOn: "Let's start"

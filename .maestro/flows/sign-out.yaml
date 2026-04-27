@@ -1,0 +1,18 @@
+# Tests the logout flow from the account tab.
+# Relies on sign-in.yaml having run first (session state is preserved).
+# Run standalone: maestro test .maestro/flows/sign-in.yaml .maestro/flows/sign-out.yaml
+appId: com.bearstudio.startuinative.staging
+---
+- launchApp
+
+- tapOn: 'Account'
+- tapOn: 'Sign out'
+
+- waitForAnimationToEnd
+
+- tapOn:
+    text: 'Sign out'
+    below: 'You are about to end your session'
+
+- waitForAnimationToEnd
+- assertVisible: 'Login to your account'
