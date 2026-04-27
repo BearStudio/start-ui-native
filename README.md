@@ -37,7 +37,7 @@ pnpm install # Install dependencies
 > Using Expo Go, local development urls should not be `localhost`, use public IP instead
 
 ```bash
-EXPO_PUBLIC_BASE_URL # Base URL of your server, usefull if you are using Start UI [web]
+EXPO_PUBLIC_BASE_URL # Base URL of your server, useful if you are using Start UI [web]
 
 # OPTIONAL TO OVERRIDE
 EXPO_PUBLIC_AUTH_URL # Better-auth url (default `${EXPO_PUBLIC_BASE_URL}/api/auth`)
