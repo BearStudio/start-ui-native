@@ -9,11 +9,8 @@ import * as SecureStore from 'expo-secure-store';
 
 import { env } from '@/env';
 
-const authBaseURL: string =
-  env.EXPO_PUBLIC_AUTH_URL ?? `${env.EXPO_PUBLIC_BASE_URL}/api/auth`;
-
 export const authClient = createAuthClient({
-  baseURL: authBaseURL,
+  baseURL: env.EXPO_PUBLIC_AUTH_URL,
   plugins: [
     expoClient({
       scheme: appConfig.scheme,
