@@ -120,7 +120,9 @@ export const ViewAccount = () => {
                         icon={IconLogOut}
                         className="size-5 text-primary-foreground"
                       />
-                      {t('auth:signOut.confirm.signOut')}
+                      <Button.Text>
+                        {t('auth:signOut.confirm.signOut')}
+                      </Button.Text>
                     </Button>
                   </BottomSheetContent>
                 </BottomSheet>
