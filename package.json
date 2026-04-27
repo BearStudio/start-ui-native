@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "prepare": "pnpm gen:api && lefthook install",
+    "prepare": "lefthook install",
     "prebuild": "expo prebuild",
     "start": "expo start",
     "dev": "expo start --go",
@@ -20,7 +20,7 @@
     "lint:eslint": "eslint ./src --fix",
     "lint:ts": "tsc --noEmit",
     "pretty": "prettier -w .",
-    "gen:api": "dotenv -- npx @hey-api/openapi-ts -f ./src/lib/hey-api/config.ts",
+    "gen:api": "dotenv -- pnpm exec openapi-ts -f ./src/lib/hey-api/config.ts && node --import jiti/register ./scripts/patch-hey-api-generated.ts",
     "gen:icons": "svgr --config-file src/components/icons/svgr.config.cjs src/components/icons/svg-sources && prettier -w src/components/icons/generated",
     "android": "expo run:android",
     "ios": "expo run:ios"
