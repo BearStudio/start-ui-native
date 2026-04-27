@@ -46,7 +46,7 @@ export const ThemeSwitcher = (props: { minimize?: boolean }) => {
           ) : (
             <Icon
               icon={ColorModeIcon}
-              className="size-5 text-muted-foreground"
+              className="text-muted-foreground size-5"
             />
           )}
         </Button>

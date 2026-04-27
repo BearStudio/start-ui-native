@@ -28,11 +28,11 @@ export const AppOnboardingScreenWelcome = () => {
 
   return (
     <OnboardingScreenContainer>
-      <Text className="text-xl text-primary">
+      <Text className="text-primary text-xl">
         {t('appOnboarding:welcome.title')}
       </Text>
-      <Text className="text-6xl font-bold text-primary">Start UI</Text>
-      <Text className="text-6xl font-bold text-primary">Native</Text>
+      <Text className="text-primary text-6xl font-bold">Start UI</Text>
+      <Text className="text-primary text-6xl font-bold">Native</Text>
     </OnboardingScreenContainer>
   );
 };
@@ -52,10 +52,10 @@ export const AppOnboardingScreenFeatures = () => {
     <OnboardingScreenContainer>
       <View className="gap-4">
         <View>
-          <Text className="text-4xl font-bold text-primary">
+          <Text className="text-primary text-4xl font-bold">
             {t('appOnboarding:features.titleOne')}
           </Text>
-          <Text className="text-4xl font-bold text-primary">
+          <Text className="text-primary text-4xl font-bold">
             {t('appOnboarding:features.titleTwo')}
           </Text>
         </View>

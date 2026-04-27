@@ -57,7 +57,7 @@ export const ViewOtpVerification = () => {
             <Button variant="ghost" className="pl-0" onPress={router.back}>
               <Icon
                 icon={IconArrowLeft}
-                className="size-[18px] text-foreground"
+                className="text-foreground size-[18px]"
               />
               {t('auth:verification.back')}
             </Button>

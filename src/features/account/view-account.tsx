@@ -116,7 +116,7 @@ export const ViewAccount = () => {
                     >
                       <Icon
                         icon={IconLogOut}
-                        className="size-5 text-primary-foreground"
+                        className="text-primary-foreground size-5"
                       />
                       {t('auth:signOut.confirm.signOut')}
                     </Button>

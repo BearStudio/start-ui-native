@@ -78,7 +78,7 @@ export const ViewSignIn = () => {
             <View className="w-full max-w-[400px] gap-6">
               <View className="items-center gap-2">
                 <Text variant="h2">{t('auth:signin.title')}</Text>
-                <Text className="text-center text-sm font-normal text-muted-foreground">
+                <Text className="text-muted-foreground text-center text-sm font-normal">
                   {t('auth:signin.subtitle')}
                 </Text>
               </View>

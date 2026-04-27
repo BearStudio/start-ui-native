@@ -8,24 +8,24 @@ import { TextClassContext } from '@/components/ui/text';
 
 const badgeVariants = cva(
   cn(
-    'group shrink-0 flex-row items-center justify-center gap-1 overflow-hidden rounded-full border border-border px-2 py-0.5',
+    'group border-border shrink-0 flex-row items-center justify-center gap-1 overflow-hidden rounded-full border px-2 py-0.5',
     Platform.select({
-      web: 'w-fit whitespace-nowrap transition-colors transition-shadow focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/30 [&>svg]:pointer-events-none [&>svg]:size-3',
+      web: 'focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/30 w-fit whitespace-nowrap transition-colors transition-shadow focus-visible:ring-[3px] [&>svg]:pointer-events-none [&>svg]:size-3',
     })
   ),
   {
     variants: {
       variant: {
         default: cn(
-          'border-transparent bg-primary',
+          'bg-primary border-transparent',
           Platform.select({ web: '[a&]:hover:bg-primary/90' })
         ),
         secondary: cn(
-          'border-transparent bg-secondary',
+          'bg-secondary border-transparent',
           Platform.select({ web: '[a&]:hover:bg-secondary/90' })
         ),
         destructive: cn(
-          'border-transparent bg-destructive',
+          'bg-destructive border-transparent',
           Platform.select({ web: '[a&]:hover:bg-destructive/90' })
         ),
         outline: Platform.select({

@@ -21,10 +21,10 @@ export const ViewHome = () => {
   return (
     <ViewTabContent>
       <View className="gap-2">
-        <Text className="text-xl font-bold text-accent-foreground">
+        <Text className="text-accent-foreground text-xl font-bold">
           {t('home:welcome.title')}
         </Text>
-        <Text className="font-medium text-muted-foreground">
+        <Text className="text-muted-foreground font-medium">
           {t('home:welcome.description')}
         </Text>
       </View>

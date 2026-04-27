@@ -63,10 +63,10 @@ const PinInput = ({
         <View
           key={id}
           className={cn(
-            'flex min-w-0 flex-1 items-center justify-center rounded-md border border-input bg-background py-2',
+            'border-input bg-background flex min-w-0 flex-1 items-center justify-center rounded-md border py-2',
             hasError && 'border-destructive',
             Platform.select({
-              web: 'focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50',
+              web: 'focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-[3px]',
             })
           )}
           style={

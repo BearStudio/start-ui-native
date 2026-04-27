@@ -54,7 +54,7 @@ function AvatarFallback({
   return (
     <AvatarPrimitive.Fallback
       className={cn(
-        'flex size-full flex-row items-center justify-center rounded-full bg-muted',
+        'bg-muted flex size-full flex-row items-center justify-center rounded-full',
         className
       )}
       {...props}
@@ -80,7 +80,7 @@ function AvatarWithFallback({
     <Avatar alt={name} className={cn(sizeClass, className)} {...props}>
       {image ? <AvatarImage source={{ uri: image }} /> : null}
       <AvatarFallback>
-        <Text className="text-xs font-medium text-muted-foreground">
+        <Text className="text-muted-foreground text-xs font-medium">
           {getInitials(name)}
         </Text>
       </AvatarFallback>
