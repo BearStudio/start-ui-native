@@ -149,6 +149,7 @@ function Button({
           state.pressed && { opacity: 0.7 },
           typeof style === 'function' ? style(state) : style,
         ]}
+        accessibilityRole="button"
         role="button"
         {...props}
       >
