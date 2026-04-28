@@ -13,6 +13,7 @@ import '../app.css';
 import { ThemedStatusBar } from '@/components/themed-status-bar';
 import { Sonner } from '@/components/ui/sonner';
 
+import { env } from '@/env';
 import { DevTools } from '@/features/devtools/devtools';
 import { useThemeSync } from '@/features/theme/use-theme-sync';
 import { SplashScreenManager } from '@/layout/splash-screen-manager';
@@ -39,7 +40,7 @@ export default function RootLayout() {
               <Slot />
             </SplashScreenManager>
             <Sonner />
-            {process.env.NODE_ENV === 'development' && (
+            {env.NODE_ENV === 'development' && (
               <DevTools queryClient={queryClient} />
             )}
           </BottomSheetModalProvider>

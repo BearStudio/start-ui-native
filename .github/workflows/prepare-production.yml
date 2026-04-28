@@ -1,7 +1,7 @@
 name: 🚀 Release Production
 
 env:
-  EXPO_PUBLIC_API_URL: ${{ vars.API_URL }}
+  EXPO_PUBLIC_BASE_URL: ${{ vars.API_URL }}
   EXPO_PUBLIC_AUTH_URL: ${{ vars.AUTH_URL }}
   EXPO_PUBLIC_OPENAPI_URL: ${{ vars.OPENAPI_URL }}
 
