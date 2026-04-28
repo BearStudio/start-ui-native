@@ -7,7 +7,8 @@
       "title": "Update name",
       "cancel": "Cancel",
       "save": "Save",
-      "error": "An error occurred during name update"
+      "error": "An error occurred during name update",
+      "required": "Name cannot be empty"
     }
   },
   "displayPreferences": {
