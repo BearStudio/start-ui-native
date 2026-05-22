@@ -112,6 +112,7 @@ export default {
   },
   plugins: [
     '@react-native-community/datetimepicker',
+    'expo-image',
     'expo-router',
     [
       'expo-splash-screen',
