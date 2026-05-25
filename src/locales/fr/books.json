@@ -4,5 +4,8 @@
     "author": "Auteur",
     "genre": "Genre",
     "publisher": "Éditeur"
+  },
+  "list": {
+    "empty": "Aucun livre disponible"
   }
 }

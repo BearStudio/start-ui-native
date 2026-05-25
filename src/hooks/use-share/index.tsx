@@ -1,44 +1,19 @@
-import {
-  MutateOptions,
-  useMutation,
-  UseMutationOptions,
-} from '@tanstack/react-query';
-import { Share, ShareAction, ShareContent, ShareOptions } from 'react-native';
+import { useMutation } from '@tanstack/react-query';
+import { Share, ShareContent, ShareOptions } from 'react-native';
 import { toast } from 'sonner-native';
 
-type UseShareMutationParameters = {
+type ShareVariables = {
   content: ShareContent;
   options?: ShareOptions;
 };
 
-export const useShare = (
-  mutationOptions?: UseMutationOptions<
-    ShareAction,
-    Error,
-    UseShareMutationParameters
-  >
-) => {
-  const mutation = useMutation({
-    ...mutationOptions,
-    mutationFn: async ({ options, content }) => {
-      return Share.share(content, options);
-    },
-    onError: (error, ...params) => {
-      toast.error(error.name);
-      mutationOptions?.onError?.(error, ...params);
+export const useShare = () => {
+  return useMutation({
+    mutationKey: ['share'],
+    mutationFn: ({ content, options }: ShareVariables) =>
+      Share.share(content, options),
+    onError: (error) => {
+      toast.error(error instanceof Error ? error.name : 'Share failed');
     },
   });
-
-  return {
-    ...mutation,
-    open: (
-      content: ShareContent,
-      options?: ShareOptions,
-      mutationOptions?: MutateOptions<
-        ShareAction,
-        Error,
-        UseShareMutationParameters
-      >
-    ) => mutation.mutate({ content, options }, mutationOptions),
-  };
 };

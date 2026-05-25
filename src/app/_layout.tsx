@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { Slot } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -9,14 +9,14 @@ import '@/lib/i18n';
 
 import '../app.css';
 
+import { queryClient } from '@/lib/query-client';
+
 import { ThemedStatusBar } from '@/components/themed-status-bar';
 import { Sonner } from '@/components/ui/sonner';
 
 import { DevTools } from '@/features/devtools/devtools';
 import { useThemeSync } from '@/features/theme/use-theme-sync';
 import { SplashScreenManager } from '@/layout/splash-screen-manager';
-
-export const queryClient = new QueryClient();
 
 // SplashScreen hide management in splash-screen-manager.tsx
 SplashScreen.preventAutoHideAsync();

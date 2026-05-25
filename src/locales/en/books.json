@@ -4,5 +4,8 @@
     "author": "Author",
     "genre": "Genre",
     "publisher": "Publisher"
+  },
+  "list": {
+    "empty": "There are no books"
   }
 }

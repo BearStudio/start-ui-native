@@ -9,7 +9,11 @@ export default {
 export const Default = () => {
   const browser = useBrowser();
   return (
-    <Button onPress={() => browser.open('https://native.start-ui.com')}>
+    <Button
+      onPress={() =>
+        browser.mutateAsync({ url: 'https://native.start-ui.com' })
+      }
+    >
       use browser
     </Button>
   );

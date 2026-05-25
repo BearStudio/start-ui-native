@@ -11,7 +11,7 @@
     "dev": "expo start --go",
     "dev:build:android": "APP_ENV=development expo prebuild --clean && expo run:android",
     "dev:build:ios": "APP_ENV=development expo prebuild --clean && expo run:ios",
-    "storybook": "APP_ENV=storybook expo start --go --port 8083",
+    "dev:storybook": "APP_ENV=storybook expo start --go --port 8083",
     "storybook:generate": "sb-rn-get-stories --config-path .rnstorybook",
     "build:staging:android": "APP_ENV=staging expo prebuild --clean && expo run:android --variant release",
     "build:staging:ios": "APP_ENV=staging expo prebuild --clean && expo run:ios --configuration Release",
@@ -78,12 +78,9 @@
     "react-native-svg": "15.15.4",
     "react-native-web": "0.21.2",
     "react-native-worklets": "0.8.3",
-    "remeda": "2.33.6",
     "sonner-native": "0.23.1",
     "tailwind-merge": "3.5.0",
     "tailwindcss": "4.2.1",
-    "tailwindcss-animate": "1.0.7",
-    "ts-pattern": "5.9.0",
     "uniwind": "1.7.0",
     "zod": "4.3.6",
     "zustand": "5.0.11"
@@ -102,7 +99,6 @@
     "@svgr/cli": "8.1.0",
     "@types/node": "25.4.0",
     "@types/react": "19.2.14",
-    "dotenv": "17.3.1",
     "dotenv-cli": "11.0.0",
     "eslint": "9.39.4",
     "eslint-config-expo": "56.0.4",
@@ -111,7 +107,6 @@
     "eslint-plugin-sonarjs": "4.0.2",
     "eslint-plugin-storybook": "10.4.1",
     "eslint-plugin-unicorn": "63.0.0",
-    "jiti": "2.6.1",
     "lefthook": "2.1.4",
     "npm-run-all": "4.1.5",
     "prettier": "3.8.1",
@@ -154,6 +149,9 @@
   },
   "homepage": "https://github.com/bearstudio/start-ui-native#readme",
   "pnpm": {
+    "overrides": {
+      "expo-constants": "56.0.15"
+    },
     "onlyBuiltDependencies": [
       "lefthook",
       "unrs-resolver"

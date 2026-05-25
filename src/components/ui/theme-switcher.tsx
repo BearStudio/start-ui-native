@@ -40,7 +40,12 @@ export const ThemeSwitcher = (props: { minimize?: boolean }) => {
   return (
     <>
       {props.minimize ? (
-        <Button variant="ghost" size="icon" onPress={sheet.onOpen}>
+        <Button
+          variant="ghost"
+          size="icon"
+          onPress={sheet.onOpen}
+          accessibilityLabel={t('common:themes.label')}
+        >
           {hasAdaptiveThemes ? (
             <DisplayIcon size={20} color={iconColor} />
           ) : (

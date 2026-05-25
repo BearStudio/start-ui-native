@@ -10,11 +10,12 @@ export default function PublicLayout() {
 
   const themedStyle = useThemedStyle();
 
+  const routerReplace = router.replace;
   useEffect(() => {
     if (!session.isPending && session.data?.user) {
-      router.replace('/(logged)/(tabs)/home');
+      routerReplace('/(logged)/(tabs)/home');
     }
-  }, [router, session.data?.user, session.isPending]);
+  }, [routerReplace, session.data?.user, session.isPending]);
 
   return (
     <Stack

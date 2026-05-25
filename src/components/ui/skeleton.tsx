@@ -18,8 +18,7 @@ function useSkeletonPulse() {
 
   React.useEffect(() => {
     sv.value = withRepeat(withTiming(0.5, { duration }), -1, true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [sv]);
   return useAnimatedStyle(() => ({ opacity: sv.value }), [sv]);
 }
 

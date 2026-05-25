@@ -11,11 +11,12 @@ export default function LoggedLayout() {
   const session = authClient.useSession();
   const { t } = useTranslation(['layout']);
 
+  const routerReplace = router.replace;
   useEffect(() => {
     if (!session.isPending && !session.data?.user) {
-      router.replace('/(public)/sign-in');
+      routerReplace('/(public)/sign-in');
     }
-  }, [router, session.data?.user, session.isPending]);
+  }, [routerReplace, session.data?.user, session.isPending]);
 
   const themedStyle = useThemedStyle();
 

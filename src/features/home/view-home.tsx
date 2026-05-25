@@ -44,9 +44,11 @@ export const ViewHome = () => {
           variant="secondary"
           disabled={share.isPending}
           onPress={() =>
-            share.open({
-              title: 'Github • Start UI [native]',
-              message: appConfig.githubUrl,
+            share.mutateAsync({
+              content: {
+                title: 'Github • Start UI [native]',
+                message: appConfig.githubUrl,
+              },
             })
           }
         >

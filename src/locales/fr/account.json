@@ -7,7 +7,8 @@
       "title": "Modifier le nom",
       "cancel": "Annuler",
       "save": "Sauvegarder",
-      "error": "Une erreur est survenue lors de la modification du nom"
+      "error": "Une erreur est survenue lors de la modification du nom",
+      "required": "Le nom ne peut pas être vide"
     }
   },
   "displayPreferences": {

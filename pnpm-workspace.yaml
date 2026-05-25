@@ -1,0 +1,14 @@
+packages:
+  - '.'
+
+minimumReleaseAge: 10080
+minimumReleaseAgeExclude:
+  - '@expo/*'
+  - 'expo'
+  - 'expo-*'
+  - 'react'
+  - 'react-dom'
+  - 'react-native'
+  - 'react-native-*'
+  - '@react-native/*'
+trustPolicy: no-downgrade

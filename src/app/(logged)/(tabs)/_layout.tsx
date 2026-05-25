@@ -96,6 +96,7 @@ export default function TabLayout() {
           options={{
             title: t(tab.translationKey),
             headerShown: tab.headerShown,
+            tabBarAccessibilityLabel: t(tab.translationKey),
             tabBarIcon: (props) => {
               const TabIcon = props.focused ? tab.iconFocused : tab.icon;
               return (

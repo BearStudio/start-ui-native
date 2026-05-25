@@ -36,7 +36,9 @@ export const ViewAccount = () => {
     defaultValues: { name: session.data?.user?.name ?? '' },
     validators: {
       onSubmit: z.object({
-        name: z.string().nonempty({ error: 'Name could not be empty' }),
+        name: z
+          .string()
+          .nonempty({ error: t('account:user.updateName.required') }),
       }),
     },
     onSubmit: async (submission) => {

@@ -3,7 +3,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList } from 'react-native';
+import { FlatList, useWindowDimensions } from 'react-native';
 import { View } from 'react-native';
 import Animated, {
   interpolate,
@@ -19,7 +19,6 @@ import { ScopedTheme } from 'uniwind';
 import { AnimatedStepIndicator } from '@/components/ui/animated-step-indicator';
 import { Button } from '@/components/ui/button';
 
-import { deviceScreen } from '@/constants/device';
 import { appOnboardingScreens } from '@/features/app-onboarding';
 // @ts-expect-error fix image import
 import backgroundImage from '@/features/app-onboarding/layout-login-image.jpg';
@@ -27,7 +26,10 @@ import backgroundImage from '@/features/app-onboarding/layout-login-image.jpg';
 import mascotImage from '@/features/app-onboarding/mascot.png';
 import { useOnboardingStore } from '@/features/app-onboarding/store';
 import { useBackgroundAnimatedStyle } from '@/features/app-onboarding/use-background-animated-style';
-import { useMascotAnimatedStyle } from '@/features/app-onboarding/use-mascot-animated-style';
+import {
+  getMascotLayoutStyle,
+  useMascotAnimatedStyle,
+} from '@/features/app-onboarding/use-mascot-animated-style';
 import { ViewSafeContent } from '@/layout/view-safe-content';
 
 function useScrollHandler() {
@@ -60,6 +62,7 @@ function useExitAnimation(doneOnboarding: () => void) {
 export const ViewOnboarding = () => {
   const { t } = useTranslation(['appOnboarding']);
   const insets = useSafeAreaInsets();
+  const windows = useWindowDimensions();
 
   const [currentScreenIndex, setCurrentScreenIndex] = useState(0);
 
@@ -67,7 +70,7 @@ export const ViewOnboarding = () => {
 
   const { scrollX, scrollHandler } = useScrollHandler();
   const backgroundAnimatedStyle = useBackgroundAnimatedStyle(scrollX);
-  const mascotAnimatedStyle = useMascotAnimatedStyle(scrollX);
+  const mascotAnimatedStyle = useMascotAnimatedStyle(scrollX, windows);
 
   const doneOnboarding = useOnboardingStore((state) => state.setDone);
   const { exitAnimatedStyle, handleDone } = useExitAnimation(doneOnboarding);
@@ -100,10 +103,11 @@ export const ViewOnboarding = () => {
         <Animated.View
           style={[
             {
-              width: deviceScreen.width,
-              height: deviceScreen.height,
-              position: 'absolute',
+              width: windows.width,
+              height: windows.height,
+              position: 'absolute' as const,
               zIndex: -1,
+              right: 650,
             },
             backgroundAnimatedStyle,
           ]}
@@ -111,22 +115,14 @@ export const ViewOnboarding = () => {
           <Animated.Image
             source={backgroundImage}
             style={{
-              minHeight: deviceScreen.height,
-              minWidth: deviceScreen.width,
+              minHeight: windows.height,
+              minWidth: windows.width,
             }}
           />
         </Animated.View>
         <Animated.Image
           source={mascotImage}
-          style={[
-            {
-              objectFit: 'contain',
-              height: deviceScreen.height / 3,
-              aspectRatio: 2 / 3,
-              position: 'absolute',
-            },
-            mascotAnimatedStyle,
-          ]}
+          style={[getMascotLayoutStyle(windows), mascotAnimatedStyle]}
         />
         <ViewSafeContent>
           <Animated.FlatList
@@ -138,9 +134,7 @@ export const ViewOnboarding = () => {
             decelerationRate="fast"
             bounces={false}
             snapToAlignment="center"
-            snapToOffsets={appOnboardingScreens.map(
-              (_, index) => index * deviceScreen.width
-            )}
+            snapToInterval={windows.width}
             viewabilityConfig={viewabilityConfig}
             onViewableItemsChanged={onViewableItemsChanged}
             onScroll={scrollHandler}
