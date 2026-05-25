@@ -12,10 +12,9 @@ import {
   IconUserCircleFill,
 } from '@/components/icons/generated';
 
-import { isApple } from '@/constants/device';
 import { useThemedStyle } from '@/features/theme/use-themed-style';
 
-export const WITH_NATIVE_TABS = isApple;
+export const WITH_NATIVE_TABS = true;
 
 const TABS = [
   {
@@ -25,6 +24,7 @@ const TABS = [
     iconFocused: IconHouseFill,
     headerShown: false,
     iosIconSf: 'house.fill',
+    androidIconMd: 'home',
   },
   {
     name: 'books',
@@ -33,6 +33,7 @@ const TABS = [
     iconFocused: IconBookOpenDuotone,
     headerShown: true,
     iosIconSf: 'book.fill',
+    androidIconMd: 'book',
   },
   {
     name: 'account',
@@ -41,6 +42,7 @@ const TABS = [
     iconFocused: IconUserCircleDuotone,
     headerShown: false,
     iosIconSf: 'person.fill',
+    androidIconMd: 'person',
   },
 ] as const satisfies {
   name: string;
@@ -49,6 +51,7 @@ const TABS = [
   iconFocused: typeof IconHouseDuotone;
   headerShown: boolean;
   iosIconSf: string;
+  androidIconMd: string;
 }[];
 
 export default function TabLayout() {
@@ -64,7 +67,10 @@ export default function TabLayout() {
             <NativeTabs.Trigger.Label>
               {t(tab.translationKey)}
             </NativeTabs.Trigger.Label>
-            <NativeTabs.Trigger.Icon sf={tab.iosIconSf} />
+            <NativeTabs.Trigger.Icon
+              sf={tab.iosIconSf}
+              md={tab.androidIconMd}
+            />
           </NativeTabs.Trigger>
         ))}
       </NativeTabs>
@@ -106,20 +112,3 @@ export default function TabLayout() {
     </Tabs>
   );
 }
-
-/**
-    <NativeTabs>
-      <NativeTabs.Trigger name="index">
-        <Label>Home</Label>
-        <Icon sf="house.fill" drawable="custom_android_drawable" />
-      </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="books">
-        <Label>Books</Label>
-        <Icon sf="book.circle.fill" drawable="custom_android_drawable" />
-      </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="account">
-        <Label>Account</Label>
-        <Icon sf="person.fill" drawable="custom_android_drawable" />
-      </NativeTabs.Trigger>
-    </NativeTabs>
- */
