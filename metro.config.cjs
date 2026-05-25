@@ -21,14 +21,16 @@ config.transformer.minifierConfig = {
   },
 };
 
-// withUniwindConfig must be outermost (Uniwind requirement)
 const storybookEnabled = process.env.APP_ENV === 'storybook';
 
-const storybookConfig = withStorybook(config, {
-  enabled: storybookEnabled,
-  configPath: path.resolve(__dirname, '.rnstorybook'),
-});
-
-module.exports = withUniwindConfig(storybookConfig, {
-  cssEntryFile: './src/app.css',
-});
+/** @type {import('expo/metro-config').MetroConfig} */
+module.exports = withUniwindConfig(
+  withStorybook(config, {
+    enabled: storybookEnabled,
+    configPath: path.resolve(__dirname, '.rnstorybook'),
+  }),
+  {
+    cssEntryFile: './src/app.css',
+    dtsFile: './src/uniwind-types.d.ts',
+  }
+);
