@@ -112,17 +112,6 @@ pnpm storybook   # Run the app in storybook mode (port 8083)
 pnpm storybook:generate  # Regenerate .rnstorybook/storybook.requires.ts after adding stories
 ```
 
-## Styling (Uniwind)
-
-Setup follows the [Uniwind quickstart](https://docs.uniwind.dev/quickstart) (pnpm: `pnpm add uniwind tailwindcss`):
-
-- **CSS entry:** `src/app.css` (`@import 'tailwindcss'` + `@import 'uniwind'`)
-- **Import CSS** in `src/app/_layout.tsx` (not in the Expo entry file)
-- **Metro:** `withUniwindConfig` wraps Storybook; `cssEntryFile` / `dtsFile` use relative paths
-- **Types:** `src/uniwind-types.d.ts` (auto-generated when Metro runs — restart dev after theme changes in `app.css`)
-
-With **pnpm**, `metro/with-pnpm-uniwind-resolver.cjs` avoids a symlink-related resolver loop ([uni-stack/uniwind#353](https://github.com/uni-stack/uniwind/issues/353)).
-
 > [!TIP]
 > You can open Storybook in another tab and switch between the app and Storybook by pressing `i` or `a` in each terminal.
 
