@@ -39,9 +39,6 @@ jobs:
     name: 🟦 TypeScript Checker
     timeout-minutes: 10
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [22, 'lts/*']
     steps:
       - uses: actions/checkout@v4
 
