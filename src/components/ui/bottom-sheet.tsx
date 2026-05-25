@@ -1,84 +1,65 @@
 import {
-  BottomSheetBackdrop,
-  BottomSheetBackdropProps,
-  BottomSheetHandle,
-  BottomSheetModal,
-  BottomSheetModalProps,
-  BottomSheetView,
-} from '@gorhom/bottom-sheet';
-import { useEffect, useMemo, useRef } from 'react';
-import { withUniwind } from 'uniwind';
+  BottomSheet as ExpoBottomSheet,
+  type BottomSheetProps as ExpoBottomSheetProps,
+  RNHostView,
+  RNHostViewProps,
+} from '@expo/ui';
+import { useWindowDimensions, View, type ViewProps } from 'react-native';
 
 import { cn } from '@/lib/tailwind/utils';
 
-const SheetBackdrop = withUniwind(BottomSheetBackdrop);
-const SheetModal = withUniwind(BottomSheetModal);
-const SheetView = withUniwind(BottomSheetView);
-const SheetHandle = withUniwind(BottomSheetHandle);
+const SHEET_HORIZONTAL_PADDING = 40;
 
+export type BottomSheetProps = Omit<
+  ExpoBottomSheetProps,
+  'isPresented' | 'onDismiss' | 'children'
+> & {
+  isOpen?: boolean;
+  onClose?: () => void;
+  children: RNHostViewProps['children'];
+};
+
+/**
+ * Modal bottom sheet backed by Expo UI (SwiftUI / Jetpack Compose / vaul on web).
+ * @see https://docs.expo.dev/versions/latest/sdk/ui/universal/bottomsheet/
+ */
 export const BottomSheet = ({
-  isOpen,
+  isOpen = false,
   onClose,
-  ...props
-}: BottomSheetModalProps & { isOpen?: boolean; onClose?: () => void }) => {
-  const ref = useRef<BottomSheetModal>(null);
-
-  useEffect(() => {
-    if (!ref.current) {
-      return;
-    }
-    if (isOpen) {
-      ref.current.present();
-      ref.current.snapToIndex(0);
-    } else {
-      ref.current.close();
-    }
-  }, [isOpen]);
-
-  const handleChange = (index: number) => {
-    if (index === -1 && onClose) {
-      onClose();
-    }
-  };
-
-  const renderBackdrop = useMemo(
-    () => (backdropProps: BottomSheetBackdropProps) => (
-      <SheetBackdrop
-        {...backdropProps}
-        appearsOnIndex={0}
-        disappearsOnIndex={-1}
-        pressBehavior="close"
-        opacity={0.8}
-      />
-    ),
-    []
-  );
+  children,
+  showDragIndicator = true,
+  snapPoints,
+  testID,
+  modifiers,
+}: BottomSheetProps) => {
+  const fitToContents = !snapPoints?.length;
+  const { width: windowWidth } = useWindowDimensions();
 
   return (
-    <SheetModal
-      {...props}
-      backdropComponent={renderBackdrop}
-      handleComponent={SheetHandle}
-      handleClassName="w-full"
-      handleIndicatorClassName="bg-muted-foreground/50 w-36 h-1"
-      backgroundClassName="bg-background flex flex-1 rounded-t-2xl"
-      ref={ref}
-      onChange={handleChange}
-    />
+    <ExpoBottomSheet
+      isPresented={isOpen}
+      onDismiss={() => onClose?.()}
+      showDragIndicator={showDragIndicator}
+      snapPoints={snapPoints}
+      testID={testID}
+      modifiers={modifiers}
+    >
+      <RNHostView matchContents={fitToContents}>
+        <View style={{ width: windowWidth - SHEET_HORIZONTAL_PADDING }}>
+          {children}
+        </View>
+      </RNHostView>
+    </ExpoBottomSheet>
   );
 };
 
-type BottomSheetContentProps = React.ComponentProps<typeof BottomSheetView> & {
+type BottomSheetContentProps = ViewProps & {
   className?: string;
 };
 
 export const BottomSheetContent = ({
   className,
-  style,
   ...props
 }: BottomSheetContentProps) => (
-  <SheetView
-    className={cn('flex flex-1 gap-4 px-8 pt-4 pb-16', className)}
-    {...props}
-  />
+  <View className={cn('w-full gap-2 px-2 py-4', className)} {...props} />
 );

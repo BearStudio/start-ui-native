@@ -111,7 +111,6 @@ export default {
     adaptiveIcon: appConfig.adaptiveIcon,
   },
   plugins: [
-    '@react-native-community/datetimepicker',
     'expo-image',
     'expo-router',
     [

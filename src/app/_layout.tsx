@@ -1,4 +1,3 @@
-import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Slot } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -33,16 +32,14 @@ export default function RootLayout() {
         }}
       >
         <GestureHandlerRootView>
-          <BottomSheetModalProvider>
-            <ThemedStatusBar />
-            <SplashScreenManager>
-              <Slot />
-            </SplashScreenManager>
-            <Sonner />
-            {process.env.NODE_ENV === 'development' && (
-              <DevTools queryClient={queryClient} />
-            )}
-          </BottomSheetModalProvider>
+          <ThemedStatusBar />
+          <SplashScreenManager>
+            <Slot />
+          </SplashScreenManager>
+          <Sonner />
+          {process.env.NODE_ENV === 'development' && (
+            <DevTools queryClient={queryClient} />
+          )}
         </GestureHandlerRootView>
       </SafeAreaListener>
     </QueryClientProvider>
