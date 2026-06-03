@@ -53,7 +53,7 @@ export const ViewHome = () => {
           }
         >
           <Icon icon={IconShare2} className="text-secondary-foreground" />
-          {t('home:welcome.share')}
+          <Button.Text>{t('home:welcome.share')}</Button.Text>
         </Button>
       </View>
       <MarketingBento />
