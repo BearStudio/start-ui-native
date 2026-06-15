@@ -54,13 +54,12 @@ export const ViewOtpVerification = () => {
       <View className="flex-1 items-center justify-center p-6">
         <form.AppForm>
           <View className="w-full max-w-[400px] gap-6">
-            <Button variant="ghost" className="pl-0" onPress={router.back}>
-              <Icon
-                icon={IconArrowLeft}
-                className="size-[18px] text-foreground"
-              />
-              {t('auth:verification.back')}
-            </Button>
+            <View className="self-start">
+              <Button variant="ghost" className="-ml-4" onPress={router.back}>
+                <Icon icon={IconArrowLeft} className="text-foreground" />
+                {t('auth:verification.back')}
+              </Button>
+            </View>
             <View className="gap-2">
               <Text className="text-lg font-bold">
                 {t('auth:verification.title')}

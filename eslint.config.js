@@ -1,3 +1,6 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from 'eslint-plugin-storybook';
+
 import react from '@eslint-react/eslint-plugin';
 import eslint from '@eslint/js';
 import tanstackQuery from '@tanstack/eslint-plugin-query';
@@ -117,5 +120,6 @@ export default tslint.config(
         },
       ],
     },
-  }
+  },
+  storybook.configs['flat/recommended']
 );

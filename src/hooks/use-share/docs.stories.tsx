@@ -11,8 +11,10 @@ export const Default = () => {
   return (
     <Button
       onPress={() =>
-        share.open({
-          message: 'https://native.start-ui.com',
+        share.mutateAsync({
+          content: {
+            message: 'https://native.start-ui.com',
+          },
         })
       }
     >

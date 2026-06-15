@@ -1,48 +1,23 @@
-import {
-  MutateOptions,
-  useMutation,
-  UseMutationOptions,
-} from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import * as WebBrowser from 'expo-web-browser';
 import { toast } from 'sonner-native';
 
-type UseBrowserMutationParameters = {
+type BrowserVariables = {
   url: string;
   options?: WebBrowser.WebBrowserOpenOptions;
 };
 
-export const useBrowser = (
-  mutationOptions?: UseMutationOptions<
-    WebBrowser.WebBrowserResult,
-    Error,
-    UseBrowserMutationParameters
-  >
-) => {
-  const mutation = useMutation({
-    ...mutationOptions,
-    mutationFn: async ({ options, url }) => {
-      return WebBrowser.openBrowserAsync(url, {
+export const useBrowser = () => {
+  return useMutation({
+    mutationKey: ['browser'],
+    mutationFn: ({ url, options }: BrowserVariables) =>
+      WebBrowser.openBrowserAsync(url, {
         ...options,
         dismissButtonStyle: 'close',
         presentationStyle: WebBrowser.WebBrowserPresentationStyle.FORM_SHEET,
-      });
-    },
-    onError: (error, ...params) => {
-      toast.error(error.name);
-      mutationOptions?.onError?.(error, ...params);
+      }),
+    onError: (error) => {
+      toast.error(error instanceof Error ? error.name : 'Browser failed');
     },
   });
-
-  return {
-    ...mutation,
-    open: (
-      url: string,
-      options?: WebBrowser.WebBrowserOpenOptions,
-      mutationOptions?: MutateOptions<
-        WebBrowser.WebBrowserResult,
-        Error,
-        UseBrowserMutationParameters
-      >
-    ) => mutation.mutate({ url, options }, mutationOptions),
-  };
 };

@@ -83,7 +83,7 @@ export const ThemeSwitcher = (props: { minimize?: boolean }) => {
                 updateColorMode(mode);
                 sheet.onClose();
               }}
-              className="flex flex-row items-center py-1"
+              className="flex flex-row items-center py-2"
             >
               <View className="w-8">
                 {((hasAdaptiveThemes && mode === 'system') ||

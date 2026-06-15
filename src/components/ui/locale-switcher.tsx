@@ -38,7 +38,7 @@ export const LocaleSwitcher = () => {
                 i18n.changeLanguage(language.key);
                 sheet.onClose();
               }}
-              className="flex flex-row items-center py-1"
+              className="flex flex-row items-center py-2"
             >
               <View className="w-8">
                 {language.key === i18n.language && (

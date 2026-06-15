@@ -1,7 +1,3 @@
-import {
-  BottomSheetTextInput,
-  useBottomSheetInternal,
-} from '@gorhom/bottom-sheet';
 import { useStore } from '@tanstack/react-form';
 import { View, type ViewProps } from 'react-native';
 
@@ -30,12 +26,9 @@ export default function FieldText(props: FieldTextProps) {
 
   const { containerProps, ...componentProps } = props;
 
-  const isBottomSheet = useBottomSheetInternal(true);
-
   return (
     <View className="gap-1" {...containerProps}>
       <Input
-        as={isBottomSheet ? BottomSheetTextInput : undefined}
         id={meta.id}
         aria-invalid={meta.error ? true : undefined}
         aria-describedby={

@@ -1,10 +1,7 @@
-import { useMutation } from '@tanstack/react-query';
-import appConfig from 'app.config';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { toast } from 'sonner-native';
 import { z } from 'zod';
 
 import { Form } from '@/lib/tanstack-form/components';
@@ -39,26 +36,6 @@ export const ViewSignIn = () => {
         pathname: '/(public)/otp-verification',
         params: { email: submission.value.email },
       });
-    },
-  });
-
-  // For social sign in integration
-  const _social = useMutation({
-    mutationFn: async (
-      provider: Parameters<typeof authClient.signIn.social>[0]['provider']
-    ) => {
-      const response = await authClient.signIn.social({
-        provider,
-        callbackURL: `${appConfig.scheme}//home`,
-        errorCallbackURL: `${appConfig.scheme}//sign-in`,
-      });
-      if (response.error) {
-        throw new Error(response.error.message);
-      }
-      return response.data;
-    },
-    onError: (error) => {
-      toast.error(error.message);
     },
   });
 

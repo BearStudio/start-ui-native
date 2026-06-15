@@ -5,7 +5,7 @@ const main: StorybookConfig = {
     './stories/**/*.stories.?(ts|tsx|js|jsx)',
     '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
   ],
-  addons: [
+  deviceAddons: [
     '@storybook/addon-ondevice-controls',
     '@storybook/addon-ondevice-actions',
   ],

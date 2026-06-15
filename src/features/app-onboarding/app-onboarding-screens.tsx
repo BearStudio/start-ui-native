@@ -1,27 +1,29 @@
 import { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
+import { useWindowDimensions, View } from 'react-native';
 
 import { IconCheck } from '@/components/icons/generated';
 import { Icon } from '@/components/icons/icon';
 import { Badge } from '@/components/ui/badge';
 import { Text } from '@/components/ui/text';
 
-import { deviceScreen } from '@/constants/device';
+const OnboardingScreenContainer = (props: PropsWithChildren) => {
+  const windows = useWindowDimensions();
 
-const OnboardingScreenContainer = (props: PropsWithChildren) => (
-  <View
-    className="w-full items-center justify-center p-8"
-    style={{ width: deviceScreen.width }}
-  >
+  return (
     <View
-      className="h-1/2 w-full max-w-[400px]"
-      style={{ height: deviceScreen.height / 2 }}
+      className="w-full items-center justify-center p-8"
+      style={{ width: windows.width }}
     >
-      {props.children}
+      <View
+        className="h-1/2 w-full max-w-[400px]"
+        style={{ height: windows.height / 2 }}
+      >
+        {props.children}
+      </View>
     </View>
-  </View>
-);
+  );
+};
 
 export const AppOnboardingScreenWelcome = () => {
   const { t } = useTranslation(['appOnboarding']);

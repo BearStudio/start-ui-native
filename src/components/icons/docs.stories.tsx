@@ -31,7 +31,7 @@ const CustomIcon = ({
   return (
     <Button variant="outline" className="w-full p-4">
       {children}
-      {name}
+      <Button.Text>{name}</Button.Text>
     </Button>
   );
 };

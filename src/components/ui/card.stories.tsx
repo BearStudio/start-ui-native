@@ -26,7 +26,6 @@ export default meta;
 type Story = StoryObj<typeof Card>;
 
 export const Basic: Story = {
-  name: 'Basic',
   render: (args) => (
     <Card {...args}>
       <CardBody>

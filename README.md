@@ -108,7 +108,8 @@ You can use @dev-plugins pressing `Shift + m` in your Expo terminal.
 Storybook is managed as a specific mode of the app that is launch apart in port 8083
 
 ```bash
-pnpm dev:storybook   # To run app in storybook mode
+pnpm dev:storybook   # Run the app in storybook mode (port 8083)
+pnpm storybook:generate  # Regenerate .rnstorybook/storybook.requires.ts after adding stories
 ```
 
 > [!TIP]

@@ -111,7 +111,7 @@ export default {
     adaptiveIcon: appConfig.adaptiveIcon,
   },
   plugins: [
-    '@react-native-community/datetimepicker',
+    'expo-image',
     'expo-router',
     [
       'expo-splash-screen',
@@ -130,6 +130,7 @@ export default {
     'expo-secure-store',
     'expo-localization',
     'expo-font',
+    '@react-native-community/datetimepicker',
   ],
   githubUrl: 'https://github.com/bearstudio/start-ui-native',
   updates: {

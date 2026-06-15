@@ -5,7 +5,6 @@ import { useResolveClassNames } from 'uniwind';
 import { cn } from '@/lib/tailwind/utils';
 
 type InputProps = TextInputProps & {
-  /** Use BottomSheetTextInput when inside a bottom sheet for proper keyboard handling */
   as?: React.ComponentType<TextInputProps>;
   className?: string;
   'aria-invalid'?: boolean;
