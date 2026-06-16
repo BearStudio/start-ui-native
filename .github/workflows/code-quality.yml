@@ -32,8 +32,8 @@ jobs:
       - name: 📦 Install dependencies
         run: pnpm install
 
-      - name: Run eslint
-        run: pnpm run lint:eslint
+      - name: Run oxlint
+        run: pnpm oxlint --deny-warnings .
 
   typescriptChecker:
     name: 🟦 TypeScript Checker

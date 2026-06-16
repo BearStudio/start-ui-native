@@ -1,7 +1,3 @@
-{ 
-  "recommendations": [
-    "expo.vscode-expo-tools",
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
-  ]
+{
+  "recommendations": ["expo.vscode-expo-tools", "oxc.oxc-vscode"]
 }
