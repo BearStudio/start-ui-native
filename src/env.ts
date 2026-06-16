@@ -11,6 +11,8 @@ export const env = createEnv({
   client: {
     /** Root URL of the backend. */
     EXPO_PUBLIC_BASE_URL: z.url(),
+    /** API URL. Defaults to `{BASE_URL}/api/rest` when unset. */
+    EXPO_PUBLIC_API_URL: z.url().optional(),
     /** Better Auth API URL. Defaults to `{BASE_URL}/api/auth` when unset. */
     EXPO_PUBLIC_AUTH_URL: z.url().optional(),
     /** OpenAPI schema URL for API client generation. Defaults to `{BASE_URL}/api/openapi/app/schema` when unset. */
@@ -24,6 +26,9 @@ export const env = createEnv({
   },
   runtimeEnv: {
     EXPO_PUBLIC_BASE_URL: baseUrl,
+    EXPO_PUBLIC_API_URL:
+      process.env.EXPO_PUBLIC_API_URL ??
+      (baseUrl ? `${baseUrl}/api/rest` : undefined),
     EXPO_PUBLIC_AUTH_URL:
       process.env.EXPO_PUBLIC_AUTH_URL ??
       (baseUrl ? `${baseUrl}/api/auth` : undefined),
