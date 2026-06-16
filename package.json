@@ -5,10 +5,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "prepare": "pnpm gen:api && lefthook install",
+    "prepare": "lefthook install",
     "prebuild": "expo prebuild",
     "start": "expo start",
-    "dev": "expo start --go",
+    "dev": "pnpm gen:api && expo start --go",
     "dev:build:android": "APP_ENV=development expo prebuild --clean && expo run:android",
     "dev:build:ios": "APP_ENV=development expo prebuild --clean && expo run:ios",
     "dev:storybook": "APP_ENV=storybook expo start --go --port 8083",

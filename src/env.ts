@@ -9,12 +9,17 @@ const baseUrl = process.env.EXPO_PUBLIC_BASE_URL;
 export const env = createEnv({
   clientPrefix: 'EXPO_PUBLIC_',
   client: {
+    /** Root URL of the backend. */
     EXPO_PUBLIC_BASE_URL: z.url(),
-    EXPO_PUBLIC_AUTH_URL: z.url(),
-    EXPO_PUBLIC_OPENAPI_URL: z.url(),
+    /** Better Auth API URL. Defaults to `{BASE_URL}/api/auth` when unset. */
+    EXPO_PUBLIC_AUTH_URL: z.url().optional(),
+    /** OpenAPI schema URL for API client generation. Defaults to `{BASE_URL}/api/openapi/app/schema` when unset. */
+    EXPO_PUBLIC_OPENAPI_URL: z.url().optional(),
   },
   shared: {
+    /** Node runtime mode. Enables dev-only UI when set to `development`. */
     NODE_ENV: nodeEnvSchema.default('development'),
+    /** Current platform (`ios`, `android`, `web`, etc.). Set automatically by Expo. */
     EXPO_OS: expoOsSchema.optional(),
   },
   runtimeEnv: {
