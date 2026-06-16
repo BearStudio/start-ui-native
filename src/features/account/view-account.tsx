@@ -89,7 +89,7 @@ export const ViewAccount = () => {
                 </View>
                 <Button variant="ghost" onPress={() => signoutSheet.onOpen()}>
                   <Icon icon={IconLogOut} />
-                  {t('account:user.signOut')}
+                  <Button.Text>{t('account:user.signOut')}</Button.Text>
                 </Button>
                 <BottomSheet
                   isOpen={signoutSheet.isOpen}
@@ -137,7 +137,7 @@ export const ViewAccount = () => {
                     onPress={() => updateNameSheet.onOpen()}
                     className="-mx-3 self-start"
                   >
-                    {data.user.name}
+                    <Button.Text>{data.user.name}</Button.Text>
                     <Icon icon={IconEdit3} />
                   </Button>
                   <BottomSheet
@@ -194,7 +194,7 @@ export const ViewAccount = () => {
           </CardHeader>
           <Divider />
           <CardBody className="p-4">
-            <View className="gap-0.5">
+            <View>
               <Text className="text-xs font-medium" variant="muted">
                 {t('account:displayPreferences.theme')}
               </Text>
@@ -203,7 +203,7 @@ export const ViewAccount = () => {
           </CardBody>
           <Divider />
           <CardBody className="p-4">
-            <View className="gap-0.5">
+            <View>
               <Text className="text-xs font-medium" variant="muted">
                 {t('account:displayPreferences.language')}
               </Text>
