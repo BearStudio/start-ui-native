@@ -66,9 +66,9 @@ export const ThemeSwitcher = (props: { minimize?: boolean }) => {
           ) : (
             <Icon icon={ColorModeIcon} className="text-muted-foreground" />
           )}
-          <Text>
+          <Button.Text>
             {t(`common:themes.values.${hasAdaptiveThemes ? 'system' : theme}`)}
-          </Text>
+          </Button.Text>
           {!!theme && (
             <Icon icon={IconChevronsUpDown} className="text-muted-foreground" />
           )}

@@ -57,7 +57,7 @@ export const ViewOtpVerification = () => {
             <View className="self-start">
               <Button variant="ghost" className="-ml-4" onPress={router.back}>
                 <Icon icon={IconArrowLeft} className="text-foreground" />
-                {t('auth:verification.back')}
+                <Button.Text>{t('auth:verification.back')}</Button.Text>
               </Button>
             </View>
             <View className="gap-2">

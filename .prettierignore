@@ -1,5 +1,7 @@
 .expo
 .vscode
+src/lib/hey-api/generated/
+uniwind-types.d.ts
 node_modules
 package.json
 package-lock.json
