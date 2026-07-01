@@ -1,0 +1,114 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "react-hooks", "unicorn", "typescript", "node"],
+  "jsPlugins": [
+    "@tanstack/eslint-plugin-query",
+    "eslint-plugin-simple-import-sort",
+    "eslint-plugin-sonarjs",
+    "eslint-plugin-storybook"
+  ],
+  "categories": {
+    "correctness": "error"
+  },
+  "ignorePatterns": [
+    "src/lib/hey-api/generated/**",
+    ".rnstorybook/storybook.requires.ts",
+    "uniwind-types.d.ts",
+    "src/uniwind-types.d.ts"
+  ],
+  "rules": {
+    "no-unreachable": "error",
+    "react/no-unescaped-entities": "off",
+    "typescript/no-unused-vars": [
+      "error",
+      {
+        "args": "all",
+        "argsIgnorePattern": "^_",
+        "caughtErrors": "all",
+        "caughtErrorsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ],
+    "unicorn/filename-case": [
+      "error",
+      {
+        "case": "kebabCase",
+        "ignore": ["^Icon(.*)\\.tsx", "^Logo.tsx"]
+      }
+    ],
+    "simple-import-sort/exports": "warn",
+    "simple-import-sort/imports": [
+      "warn",
+      {
+        "groups": [
+          ["^@?\\w", "^\\u0000"],
+          ["^.+\\.s?css$"],
+          ["^@/lib", "^@/hooks"],
+          ["^@/data"],
+          ["^@/components"],
+          ["^@/"],
+          [
+            "^\\./?$",
+            "^\\.(?!/?$)",
+            "^\\.\\./?$",
+            "^\\.\\.(?!/?$)",
+            "^\\.\\./\\.\\./?$",
+            "^\\.\\./\\.\\.(?!/?$)",
+            "^\\.\\./\\.\\./\\.\\./?$",
+            "^\\.\\./\\.\\./\\.\\.(?!/?$)"
+          ],
+          ["^@/types"],
+          ["^"]
+        ]
+      }
+    ],
+    "@tanstack/query/exhaustive-deps": "error",
+    "@tanstack/query/no-rest-destructuring": "warn",
+    "@tanstack/query/stable-query-client": "error",
+    "@tanstack/query/no-unstable-deps": "error",
+    "@tanstack/query/infinite-query-property-order": "error",
+    "@tanstack/query/no-void-query-fn": "error",
+    "@tanstack/query/mutation-property-order": "error",
+    "sonarjs/cognitive-complexity": ["warn", 50],
+    "sonarjs/prefer-immediate-return": "warn",
+    "sonarjs/todo-tag": "warn"
+  },
+  "overrides": [
+    {
+      "files": ["src/**/*"],
+      "rules": {
+        "node/no-process-env": "error"
+      }
+    },
+    {
+      "files": ["src/env.ts"],
+      "rules": {
+        "node/no-process-env": "off"
+      }
+    },
+    {
+      "files": ["src/app/**/*.*", "**/generated/**/*.*"],
+      "rules": {
+        "unicorn/filename-case": "off"
+      }
+    },
+    {
+      "files": ["**/*.stories.*"],
+      "rules": {
+        "storybook/await-interactions": "error",
+        "storybook/context-in-play-function": "error",
+        "storybook/default-exports": "error",
+        "storybook/hierarchy-separator": "warn",
+        "storybook/no-redundant-story-name": "warn",
+        "storybook/no-renderer-packages": "error",
+        "storybook/prefer-pascal-case": "warn",
+        "storybook/story-exports": "error",
+        "storybook/use-storybook-expect": "error",
+        "storybook/use-storybook-testing-library": "error",
+        "storybook/no-uninstalled-addons": "error"
+      }
+    }
+  ]
+}

@@ -6,9 +6,25 @@ minimumReleaseAgeExclude:
   - '@expo/*'
   - 'expo'
   - 'expo-*'
+  # Tiré par expo@56.x mais sans préfixe `expo-` : fait partie du SDK Expo,
+  # exclu du délai de maturité au même titre que le reste de l'écosystème Expo.
+  - 'babel-preset-expo'
   - 'react'
   - 'react-dom'
   - 'react-native'
   - 'react-native-*'
   - '@react-native/*'
 trustPolicy: no-downgrade
+overrides:
+  expo-constants: ~56.0.18
+  # 0.7.x / 1.0.x lack npm provenance (TRUST_DOWNGRADE false positive); 2.0.x is API-compatible.
+  ua-parser-js: 2.0.10
+trustPolicyExclude:
+  # Backports du correctif CVE-2022-25883 (ReDoS) sur les lignes 5.x/6.x : signés par
+  # le registry npm mais sans attestation de provenance SLSA, contrairement aux 7.x
+  # publiées avant → faux positif `no-downgrade`. Paquet npm canonique (npm/node-semver),
+  # 5.7.2 et 6.3.1 publiés le même jour (2023-07-10) par l'équipe npm.
+  - 'semver@5.7.2 || 6.3.1'
+allowBuilds:
+  esbuild: true
+  lefthook: true
