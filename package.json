@@ -135,15 +135,6 @@
     "ts-plugin-sort-import-suggestions": "1.0.4",
     "typescript": "5.9.3"
   },
-  "pnpm": {
-    "overrides": {
-      "expo-constants": "~56.0.18"
-    },
-    "onlyBuiltDependencies": [
-      "lefthook",
-      "unrs-resolver"
-    ]
-  },
   "expo": {
     "install": {
       "exclude": [

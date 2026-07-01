@@ -77,9 +77,15 @@
   },
   "overrides": [
     {
-      "files": ["src/app/**/*"],
+      "files": ["src/**/*"],
       "rules": {
         "node/no-process-env": "error"
+      }
+    },
+    {
+      "files": ["src/env.ts"],
+      "rules": {
+        "node/no-process-env": "off"
       }
     },
     {
