@@ -62,11 +62,39 @@ useQuery(api.bookGetByIdOptions({ path: { id: props.bookId } }));
 
 # Run
 
-### Expo Go
+### Expo Go (quickstart)
+
+Use Expo Go to explore the app quickly — no native build required.
 
 ```bash
 pnpm dev
 ```
+
+> [!NOTE]
+> Expo Go does not support all native modules (e.g. `expo-secure-store`, Better Auth flows). For day-to-day development, use the **development client** below.
+
+### Development client (recommended)
+
+The development client is the recommended path for real work: it matches production more closely and supports Better Auth, secure storage, and other native modules.
+
+**1. Build the client** (once per machine, or when native dependencies change):
+
+```bash
+# Local build (requires Xcode / Android SDK)
+pnpm dev:build:ios
+pnpm dev:build:android
+
+# Or via EAS (GitHub Actions → "EAS Development build", or locally):
+eas build --profile development
+```
+
+**2. Start Metro for the dev client:**
+
+```bash
+pnpm dev:client
+```
+
+Open the installed dev client app on your device or simulator — it will connect to the Metro bundler.
 
 ### Local builds
 
@@ -75,7 +103,7 @@ App name and bundle ID come from `app.config.ts`, evaluated at **prebuild** time
 
 | Script                                              | App name                    | Build type | Need                                      |
 | --------------------------------------------------- | --------------------------- | ---------- | ----------------------------------------- |
-| `dev:build:ios` / `dev:build:android`               | Start UI [native] [Dev]     | Dev/Debug  | Local development, replacement of Expo Go |
+| `dev:build:ios` / `dev:build:android`               | Start UI [native] [Dev]     | Dev/Debug  | Build the development client locally      |
 | `build:staging:ios` / `build:staging:android`       | Start UI [native] [Staging] | Release    | Install staging release version locally   |
 | `build:production:ios` / `build:production:android` | Start UI [native]           | Release    | Install production version locally        |
 
