@@ -32,7 +32,7 @@ export default function RootLayout() {
           Uniwind.updateInsets(insets);
         }}
       >
-        <GestureHandlerRootView>
+        <GestureHandlerRootView style={{ flex: 1 }}>
           <ThemedStatusBar />
           <SplashScreenManager>
             <Slot />
