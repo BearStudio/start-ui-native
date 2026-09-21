@@ -45,6 +45,6 @@ export const getMascotLayoutStyle = (deviceScreen: DeviceScreen) => ({
   height: deviceScreen.height / 3,
   aspectRatio: 2 / 3,
   position: 'absolute' as const,
-  right: Math.min(deviceScreen.width * 0.23, 96),
+  left: deviceScreen.width * 0.3,
   top: deviceScreen.height / 2.5,
 });
