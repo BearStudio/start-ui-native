@@ -53,7 +53,7 @@ export const ViewOtpVerification = () => {
       <AuthHeader />
       <View className="flex-1 items-center justify-center p-6">
         <form.AppForm>
-          <View className="w-full max-w-[400px] gap-6">
+          <View className="w-full max-w-100 gap-6">
             <View className="self-start">
               <Button
                 variant="ghost"

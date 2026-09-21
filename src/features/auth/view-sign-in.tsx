@@ -1,7 +1,6 @@
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { z } from 'zod';
 
 import { Form } from '@/lib/tanstack-form/components';
@@ -18,8 +17,6 @@ import { LoginEmailHint } from '@/features/devtools/login-hint';
 import { ViewSafeContent } from '@/layout/view-safe-content';
 
 export const ViewSignIn = () => {
-  const insets = useSafeAreaInsets();
-
   const { t } = useTranslation(['auth']);
 
   const router = useRouter();
@@ -42,7 +39,7 @@ export const ViewSignIn = () => {
   const isOnboarded = useOnboardingStore((state) => state.done);
 
   return (
-    <View className="h-screen w-screen">
+    <View className="flex-1">
       {!isOnboarded && (
         <View className="absolute inset-0 z-100">
           <ViewOnboarding />
@@ -52,7 +49,7 @@ export const ViewSignIn = () => {
         <AuthHeader />
         <View className="items-center justify-center p-8">
           <Form form={form}>
-            <View className="w-full max-w-[400px] gap-6">
+            <View className="w-full max-w-100 gap-6">
               <View className="items-center gap-2">
                 <Text variant="h2">{t('auth:signin.title')}</Text>
                 <Text className="text-center text-sm font-normal text-muted-foreground">
@@ -103,12 +100,9 @@ export const ViewSignIn = () => {
             </View>
           </Form>
         </View>
-        <View
-          className="absolute right-0 left-0 flex flex-row items-center justify-center p-6"
-          style={{ bottom: insets.bottom }}
-        >
-          <Version className="text-center" />
-        </View>
+      </ViewSafeContent>
+      <ViewSafeContent className="absolute right-0 bottom-0 left-0 flex flex-row items-center justify-center">
+        <Version className="text-center" />
       </ViewSafeContent>
     </View>
   );
