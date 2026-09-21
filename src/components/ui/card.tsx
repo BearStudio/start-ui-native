@@ -4,10 +4,7 @@ import { Text } from '@/components/ui/text';
 
 export const Card = (props: ViewProps) => {
   return (
-    <View
-      className="rounded-md border border-border bg-background"
-      {...props}
-    />
+    <View className="rounded-md border border-border bg-card" {...props} />
   );
 };
 

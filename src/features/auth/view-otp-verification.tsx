@@ -53,9 +53,13 @@ export const ViewOtpVerification = () => {
       <AuthHeader />
       <View className="flex-1 items-center justify-center p-6">
         <form.AppForm>
-          <View className="w-full max-w-[400px] gap-6">
+          <View className="w-full max-w-100 gap-6">
             <View className="self-start">
-              <Button variant="ghost" className="-ml-4" onPress={router.back}>
+              <Button
+                variant="ghost"
+                className="-ml-4"
+                onPress={() => router.back()}
+              >
                 <Icon icon={IconArrowLeft} className="text-foreground" />
                 <Button.Text>{t('auth:verification.back')}</Button.Text>
               </Button>

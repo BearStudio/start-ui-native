@@ -13,7 +13,9 @@ export const Divider = ({
   className,
   orientation = 'horizontal',
   ...props
-}: DividerProps & { ref?: React.RefObject<View | null> }) => (
+}: DividerProps & {
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
+}) => (
   <View
     ref={ref}
     className={cn(

@@ -11,7 +11,7 @@ import { useDisclosure } from '@/hooks/use-disclosure';
 import { IconEdit3, IconLogOut } from '@/components/icons/generated';
 import { Icon } from '@/components/icons/icon';
 import { AvatarWithFallback } from '@/components/ui/avatar';
-import { BottomSheet, BottomSheetContent } from '@/components/ui/bottom-sheet';
+import { BottomSheet } from '@/components/ui/bottom-sheet';
 import { Button } from '@/components/ui/button';
 import { Card, CardBody, CardHeader, CardTitle } from '@/components/ui/card';
 import { Divider } from '@/components/ui/divider';
@@ -22,7 +22,8 @@ import { ThemeSwitcher } from '@/components/ui/theme-switcher';
 import { Version } from '@/components/version';
 
 import { authClient } from '@/features/auth/client';
-import { ViewTabContent } from '@/layout/view-tab-content';
+import { ViewSafeContent } from '@/layout/view-safe-content';
+import { ViewSafeScrollContent } from '@/layout/view-safe-scroll-content';
 
 export const ViewAccount = () => {
   const session = authClient.useSession();
@@ -71,150 +72,165 @@ export const ViewAccount = () => {
   });
 
   return (
-    <ViewTabContent>
+    <ViewSafeScrollContent>
       <View className="flex-1 gap-4">
-        {ui
-          .match('pending', () => <FullLoader />)
-          .match('error', () => <></>)
-          .match('not-logged', () => <></>)
-          .match('default', ({ data }) => (
-            <Card>
-              <CardHeader>
-                <View className="flex flex-row items-center gap-2">
-                  <AvatarWithFallback
-                    name={data.user.name}
-                    image={data.user.image}
-                  />
-                  <CardTitle>{data.user.name}</CardTitle>
-                </View>
-                <Button variant="ghost" onPress={() => signoutSheet.onOpen()}>
-                  <Icon icon={IconLogOut} />
-                  <Button.Text>{t('account:user.signOut')}</Button.Text>
-                </Button>
-                <BottomSheet
-                  isOpen={signoutSheet.isOpen}
-                  onClose={signoutSheet.onClose}
-                >
-                  <BottomSheetContent>
-                    <View className="gap-1">
-                      <Text className="font-bold">
-                        {t('auth:signOut.confirm.title')}
-                      </Text>
-                      <Text className="text-sm font-medium" variant="muted">
-                        {t('auth:signOut.confirm.description')}
-                      </Text>
+        <View className="flex flex-1 flex-col gap-4 md:flex-row md:items-start">
+          <View className="flex md:flex-1">
+            {ui
+              .match('pending', () => <FullLoader />)
+              .match('error', () => <></>)
+              .match('not-logged', () => <></>)
+              .match('default', ({ data }) => (
+                <Card>
+                  <CardHeader>
+                    <View className="flex flex-row items-center gap-2">
+                      <AvatarWithFallback
+                        name={data.user.name}
+                        image={data.user.image}
+                      />
+                      <CardTitle>{data.user.name}</CardTitle>
                     </View>
                     <Button
-                      variant="secondary"
-                      onPress={() => signoutSheet.onClose()}
+                      variant="ghost"
+                      onPress={() => signoutSheet.onOpen()}
                     >
-                      {t('auth:signOut.confirm.cancel')}
+                      <Icon icon={IconLogOut} />
+                      <Button.Text>{t('account:user.signOut')}</Button.Text>
                     </Button>
-                    <Button
-                      onPress={() => {
-                        queryClient.clear();
-                        authClient.signOut();
-                      }}
+                    <BottomSheet
+                      isOpen={signoutSheet.isOpen}
+                      onClose={signoutSheet.onClose}
                     >
-                      <Icon
-                        icon={IconLogOut}
-                        className="size-5 text-primary-foreground"
-                      />
-                      <Button.Text>
-                        {t('auth:signOut.confirm.signOut')}
-                      </Button.Text>
-                    </Button>
-                  </BottomSheetContent>
-                </BottomSheet>
-              </CardHeader>
-              <Divider />
-              <CardBody>
-                <View className="gap-0.5">
-                  <Text className="text-xs font-medium" variant="muted">
-                    {t('account:user.name')}
-                  </Text>
-                  <Button
-                    variant="link"
-                    size="sm"
-                    onPress={() => updateNameSheet.onOpen()}
-                    className="-mx-3 self-start"
-                  >
-                    <Button.Text>{data.user.name}</Button.Text>
-                    <Icon icon={IconEdit3} />
-                  </Button>
-                  <BottomSheet
-                    isOpen={updateNameSheet.isOpen}
-                    onClose={handleCloseNameSheet}
-                  >
-                    <BottomSheetContent>
-                      <Text className="font-bold">
-                        {t('account:user.updateName.title')}
-                      </Text>
-                      <updateNameForm.AppForm>
-                        <updateNameForm.AppField name="name">
-                          {(field) => (
-                            <field.Field>
-                              <field.FieldText
-                                autoFocus
-                                returnKeyType="done"
-                                onSubmitEditing={updateNameForm.handleSubmit}
-                              />
-                            </field.Field>
-                          )}
-                        </updateNameForm.AppField>
-
+                      <View className="flex flex-1 gap-1">
+                        <Text className="font-bold">
+                          {t('auth:signOut.confirm.title')}
+                        </Text>
+                        <Text className="text-sm font-medium" variant="muted">
+                          {t('auth:signOut.confirm.description')}
+                        </Text>
+                      </View>
+                      <View className="flex flex-row gap-2">
                         <Button
                           variant="secondary"
-                          className="w-full"
-                          onPress={() => handleCloseNameSheet()}
+                          onPress={() => signoutSheet.onClose()}
                         >
-                          {t('account:user.updateName.cancel')}
+                          {t('auth:signOut.confirm.cancel')}
                         </Button>
-                        <updateNameForm.Submit full>
-                          {t('account:user.updateName.save')}
-                        </updateNameForm.Submit>
-                      </updateNameForm.AppForm>
-                    </BottomSheetContent>
-                  </BottomSheet>
+                        <Button
+                          variant="destructive"
+                          onPress={() => {
+                            queryClient.clear();
+                            authClient.signOut();
+                          }}
+                          className="flex flex-1"
+                        >
+                          <Icon
+                            icon={IconLogOut}
+                            className="size-5 text-primary-foreground"
+                          />
+                          <Button.Text>
+                            {t('auth:signOut.confirm.signOut')}
+                          </Button.Text>
+                        </Button>
+                      </View>
+                    </BottomSheet>
+                  </CardHeader>
+                  <Divider />
+                  <CardBody>
+                    <View className="gap-0.5">
+                      <Text className="text-xs font-medium" variant="muted">
+                        {t('account:user.name')}
+                      </Text>
+                      <Button
+                        variant="link"
+                        size="sm"
+                        onPress={() => updateNameSheet.onOpen()}
+                        className="-mx-3 self-start"
+                      >
+                        <Button.Text>{data.user.name}</Button.Text>
+                        <Icon icon={IconEdit3} />
+                      </Button>
+                      <BottomSheet
+                        isOpen={updateNameSheet.isOpen}
+                        onClose={handleCloseNameSheet}
+                      >
+                        <Text className="font-bold">
+                          {t('account:user.updateName.title')}
+                        </Text>
+                        <updateNameForm.AppForm>
+                          <updateNameForm.AppField name="name">
+                            {(field) => (
+                              <field.Field>
+                                <field.FieldText
+                                  autoFocus
+                                  returnKeyType="done"
+                                  onSubmitEditing={updateNameForm.handleSubmit}
+                                  className="min-w-64"
+                                />
+                              </field.Field>
+                            )}
+                          </updateNameForm.AppField>
+
+                          <View className="flex flex-row gap-2">
+                            <Button
+                              variant="secondary"
+                              onPress={() => handleCloseNameSheet()}
+                            >
+                              {t('account:user.updateName.cancel')}
+                            </Button>
+                            <updateNameForm.Submit full>
+                              {t('account:user.updateName.save')}
+                            </updateNameForm.Submit>
+                          </View>
+                        </updateNameForm.AppForm>
+                      </BottomSheet>
+                    </View>
+                  </CardBody>
+                  <Divider />
+                  <CardBody>
+                    <View className="gap-0.5">
+                      <Text className="text-xs font-medium" variant="muted">
+                        {t('account:user.email')}
+                      </Text>
+                      <Text className="text-sm font-medium">
+                        {data.user.email}
+                      </Text>
+                    </View>
+                  </CardBody>
+                </Card>
+              ))
+              .exhaustive()}
+          </View>
+          <View className="flex md:flex-1">
+            <Card>
+              <CardHeader>
+                <CardTitle>{t('account:displayPreferences.title')}</CardTitle>
+              </CardHeader>
+              <Divider />
+              <CardBody className="p-4">
+                <View>
+                  <Text className="text-xs font-medium" variant="muted">
+                    {t('account:displayPreferences.theme')}
+                  </Text>
+                  <ThemeSwitcher />
                 </View>
               </CardBody>
               <Divider />
-              <CardBody>
-                <View className="gap-0.5">
+              <CardBody className="p-4">
+                <View>
                   <Text className="text-xs font-medium" variant="muted">
-                    {t('account:user.email')}
+                    {t('account:displayPreferences.language')}
                   </Text>
-                  <Text className="text-sm font-medium">{data.user.email}</Text>
+                  <LocaleSwitcher />
                 </View>
               </CardBody>
             </Card>
-          ))
-          .exhaustive()}
-        <Card>
-          <CardHeader>
-            <CardTitle>{t('account:displayPreferences.title')}</CardTitle>
-          </CardHeader>
-          <Divider />
-          <CardBody className="p-4">
-            <View>
-              <Text className="text-xs font-medium" variant="muted">
-                {t('account:displayPreferences.theme')}
-              </Text>
-              <ThemeSwitcher />
-            </View>
-          </CardBody>
-          <Divider />
-          <CardBody className="p-4">
-            <View>
-              <Text className="text-xs font-medium" variant="muted">
-                {t('account:displayPreferences.language')}
-              </Text>
-              <LocaleSwitcher />
-            </View>
-          </CardBody>
-        </Card>
-        <Version className="text-center" />
+          </View>
+        </View>
+        <ViewSafeContent className="absolute right-0 bottom-2 left-0 flex flex-row items-center justify-center">
+          <Version />
+        </ViewSafeContent>
       </View>
-    </ViewTabContent>
+    </ViewSafeScrollContent>
   );
 };
