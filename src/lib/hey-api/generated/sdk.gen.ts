@@ -77,11 +77,7 @@ export const bookDeleteById = <ThrowOnError extends boolean = false>(options: Op
             type: 'apiKey'
         }, { scheme: 'bearer', type: 'http' }],
     url: '/books/{id}',
-    ...options,
-    headers: {
-        'Content-Type': 'application/json',
-        ...options.headers
-    }
+    ...options
 });
 
 export const bookGetById = <ThrowOnError extends boolean = false>(options: Options<BookGetByIdData, ThrowOnError>): RequestResult<BookGetByIdResponses, unknown, ThrowOnError> => (options.client ?? client).get<BookGetByIdResponses, unknown, ThrowOnError>({
@@ -149,11 +145,7 @@ export const userDeleteById = <ThrowOnError extends boolean = false>(options: Op
             type: 'apiKey'
         }, { scheme: 'bearer', type: 'http' }],
     url: '/users/{id}',
-    ...options,
-    headers: {
-        'Content-Type': 'application/json',
-        ...options.headers
-    }
+    ...options
 });
 
 export const userGetById = <ThrowOnError extends boolean = false>(options: Options<UserGetByIdData, ThrowOnError>): RequestResult<UserGetByIdResponses, unknown, ThrowOnError> => (options.client ?? client).get<UserGetByIdResponses, unknown, ThrowOnError>({
@@ -197,11 +189,7 @@ export const userRevokeUserSessions = <ThrowOnError extends boolean = false>(opt
             type: 'apiKey'
         }, { scheme: 'bearer', type: 'http' }],
     url: '/users/{id}/sessions/revoke',
-    ...options,
-    headers: {
-        'Content-Type': 'application/json',
-        ...options.headers
-    }
+    ...options
 });
 
 export const userRevokeUserSession = <ThrowOnError extends boolean = false>(options: Options<UserRevokeUserSessionData, ThrowOnError>): RequestResult<UserRevokeUserSessionResponses, unknown, ThrowOnError> => (options.client ?? client).post<UserRevokeUserSessionResponses, unknown, ThrowOnError>({
@@ -211,11 +199,7 @@ export const userRevokeUserSession = <ThrowOnError extends boolean = false>(opti
             type: 'apiKey'
         }, { scheme: 'bearer', type: 'http' }],
     url: '/users/{id}/sessions/{sessionToken}/revoke',
-    ...options,
-    headers: {
-        'Content-Type': 'application/json',
-        ...options.headers
-    }
+    ...options
 });
 
 export const configEnv = <ThrowOnError extends boolean = false>(options?: Options<ConfigEnvData, ThrowOnError>): RequestResult<ConfigEnvResponses, unknown, ThrowOnError> => (options?.client ?? client).get<ConfigEnvResponses, unknown, ThrowOnError>({

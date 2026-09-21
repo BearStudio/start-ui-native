@@ -113,9 +113,7 @@ export type BookCreateResponses = {
 export type BookCreateResponse = BookCreateResponses[keyof BookCreateResponses];
 
 export type BookDeleteByIdData = {
-    body?: {
-        [key: string]: unknown;
-    };
+    body?: never;
     path: {
         id: string;
     };
@@ -297,9 +295,7 @@ export type UserCreateResponses = {
 export type UserCreateResponse = UserCreateResponses[keyof UserCreateResponses];
 
 export type UserDeleteByIdData = {
-    body?: {
-        [key: string]: unknown;
-    };
+    body?: never;
     path: {
         id: string;
     };
@@ -406,9 +402,7 @@ export type UserGetUserSessionsResponses = {
 export type UserGetUserSessionsResponse = UserGetUserSessionsResponses[keyof UserGetUserSessionsResponses];
 
 export type UserRevokeUserSessionsData = {
-    body?: {
-        [key: string]: unknown;
-    };
+    body?: never;
     path: {
         id: string;
     };
@@ -424,9 +418,7 @@ export type UserRevokeUserSessionsResponses = {
 };
 
 export type UserRevokeUserSessionData = {
-    body?: {
-        [key: string]: unknown;
-    };
+    body?: never;
     path: {
         id: string;
         sessionToken: string;
