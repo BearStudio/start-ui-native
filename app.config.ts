@@ -92,7 +92,7 @@ export default {
   scheme: appConfig.scheme,
   owner: OWNER,
   version: '1.0.0',
-  runtimeVersion: { policy: 'appVersion' },
+  runtimeVersion: { policy: 'fingerprint' },
   platforms: ['android', 'ios'],
   orientation: 'default',
   icon: appConfig.icon,

@@ -3,7 +3,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList, useWindowDimensions } from 'react-native';
+import {
+  FlatList,
+  type FlatListProps,
+  useWindowDimensions,
+} from 'react-native';
 import { View } from 'react-native';
 import Animated, {
   interpolate,
@@ -75,15 +79,18 @@ export const ViewOnboarding = () => {
   const doneOnboarding = useOnboardingStore((state) => state.setDone);
   const { exitAnimatedStyle, handleDone } = useExitAnimation(doneOnboarding);
 
-  const onViewableItemsChanged = useCallback(
-    ({ viewableItems }: { viewableItems: { index: number | null }[] }) => {
-      const lastViewableIndex = viewableItems.at(-1)?.index;
-      if (lastViewableIndex !== undefined && lastViewableIndex !== null) {
-        setCurrentScreenIndex(lastViewableIndex);
-      }
-    },
-    []
-  );
+  const onViewableItemsChanged = useCallback<
+    NonNullable<
+      FlatListProps<
+        (typeof appOnboardingScreens)[number]
+      >['onViewableItemsChanged']
+    >
+  >(({ viewableItems }) => {
+    const lastViewableIndex = viewableItems.at(-1)?.index;
+    if (lastViewableIndex != null) {
+      setCurrentScreenIndex(lastViewableIndex);
+    }
+  }, []);
 
   const [viewabilityConfig] = useState({
     viewAreaCoveragePercentThreshold: 30,

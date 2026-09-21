@@ -19,7 +19,6 @@ export default function PublicLayout() {
 
   return (
     <Stack
-      initialRouteName="sign-in"
       screenOptions={{
         headerShown: false,
         headerTitleAlign: 'left',

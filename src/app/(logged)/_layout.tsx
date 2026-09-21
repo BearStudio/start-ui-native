@@ -26,7 +26,6 @@ export default function LoggedLayout() {
 
   return (
     <Stack
-      initialRouteName="(tabs)"
       screenOptions={{
         headerShown: false,
         headerStyle: { backgroundColor: themedStyle.backgroundColor },

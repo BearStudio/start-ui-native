@@ -6,7 +6,7 @@ minimumReleaseAgeExclude:
   - '@expo/*'
   - 'expo'
   - 'expo-*'
-  # Pulled by expo@57.x but without the `expo-` prefix: part of the Expo SDK,
+  # Pulled by expo@58.x but without the `expo-` prefix: part of the Expo SDK,
   # excluded from the maturity wait like the rest of the Expo ecosystem.
   - 'babel-preset-expo'
   - 'react'
@@ -18,8 +18,8 @@ minimumReleaseAgeExclude:
   - '@bearstudio/ui-state'
 trustPolicy: no-downgrade
 overrides:
-  expo-constants: ~57.0.19
-  '@expo/dom-webview': ~57.0.1
+  expo-constants: ~58.0.3
+  '@expo/dom-webview': ~58.0.0
   # 0.7.x / 1.0.x lack npm provenance (TRUST_DOWNGRADE false positive); 2.0.x is API-compatible.
   ua-parser-js: 2.0.10
 trustPolicyExclude:
@@ -28,6 +28,8 @@ trustPolicyExclude:
   # releases published earlier → `no-downgrade` false positive. Canonical npm package (npm/node-semver),
   # 5.7.2 and 6.3.1 published on the same day (2023-07-10) by the npm team.
   - 'semver@5.7.2 || 6.3.1'
+  # Expo SDK 58 beta/preview: published without SLSA provenance vs stable 57.x → false positive.
+  - 'expo@58.0.0-preview.3'
 allowBuilds:
   esbuild: true
   lefthook: true

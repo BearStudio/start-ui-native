@@ -18,7 +18,9 @@ const Input = ({
   onFocus,
   onBlur,
   ...props
-}: InputProps & { ref?: React.RefObject<TextInput | null> }) => {
+}: InputProps & {
+  ref?: React.Ref<React.ComponentRef<typeof TextInput>>;
+}) => {
   const hasError = ariaInvalid === true;
   const [isFocused, setIsFocused] = React.useState(false);
   const resolvedForeground = useResolveClassNames('text-foreground') as {
@@ -28,7 +30,9 @@ const Input = ({
     color?: string;
   };
   const Comp = Component as React.ComponentType<
-    TextInputProps & React.RefAttributes<TextInput>
+    TextInputProps & {
+      ref?: React.Ref<React.ComponentRef<typeof TextInput>>;
+    }
   >;
 
   const getFocusBorderColor = () => {
@@ -54,7 +58,7 @@ const Input = ({
         onBlur?.(e);
       }}
       className={cn(
-        'flex h-10 w-full min-w-0 flex-row items-center rounded-md border border-input bg-background px-3 py-1 text-base leading-5 text-foreground shadow-sm shadow-black/5 sm:h-9',
+        'border-input bg-background text-foreground flex h-10 w-full min-w-0 flex-row items-center rounded-md border px-3 py-1 text-base leading-5 shadow-sm shadow-black/5 sm:h-9',
         props.editable === false &&
           cn(
             'opacity-50',
@@ -65,8 +69,8 @@ const Input = ({
         hasError && 'border-destructive',
         Platform.select({
           web: cn(
-            'transition-[color,box-shadow] outline-none selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground md:text-sm',
-            'focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50',
+            'selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground transition-[color,box-shadow] outline-none md:text-sm',
+            'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
             'aria-invalid:ring-destructive/30'
           ),
           native: 'placeholder:text-muted-foreground/50',
