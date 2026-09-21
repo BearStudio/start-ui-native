@@ -57,7 +57,7 @@ export const ViewBooks = () => {
                   style={{ width: `${100 / numColumns}%` }}
                 >
                   <Skeleton
-                    className="w-full rounded-lg"
+                    className="w-full rounded-sm"
                     style={{ aspectRatio: BOOK_COVER_ASPECT_RATIO }}
                   />
                 </View>
