@@ -6,7 +6,7 @@ minimumReleaseAgeExclude:
   - '@expo/*'
   - 'expo'
   - 'expo-*'
-  # Pulled by expo@56.x but without the `expo-` prefix: part of the Expo SDK,
+  # Pulled by expo@57.x but without the `expo-` prefix: part of the Expo SDK,
   # excluded from the maturity wait like the rest of the Expo ecosystem.
   - 'babel-preset-expo'
   - 'react'
@@ -18,7 +18,8 @@ minimumReleaseAgeExclude:
   - '@bearstudio/ui-state'
 trustPolicy: no-downgrade
 overrides:
-  expo-constants: ~56.0.18
+  expo-constants: ~57.0.19
+  '@expo/dom-webview': ~57.0.1
   # 0.7.x / 1.0.x lack npm provenance (TRUST_DOWNGRADE false positive); 2.0.x is API-compatible.
   ua-parser-js: 2.0.10
 trustPolicyExclude:

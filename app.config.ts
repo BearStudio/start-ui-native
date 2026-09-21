@@ -130,6 +130,7 @@ export default {
     'expo-secure-store',
     'expo-localization',
     'expo-font',
+    'expo-status-bar',
     '@react-native-community/datetimepicker',
   ],
   githubUrl: 'https://github.com/bearstudio/start-ui-native',
