@@ -10,7 +10,7 @@ import {
   IconLanguages,
 } from '@/components/icons/generated';
 import { Icon } from '@/components/icons/icon';
-import { BottomSheet, BottomSheetContent } from '@/components/ui/bottom-sheet';
+import { BottomSheet } from '@/components/ui/bottom-sheet';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 
@@ -30,36 +30,34 @@ export const LocaleSwitcher = () => {
         <Icon icon={IconChevronsUpDown} className="text-muted-foreground" />
       </Button>
       <BottomSheet isOpen={sheet.isOpen} onClose={sheet.onClose}>
-        <BottomSheetContent>
-          {AVAILABLE_LANGUAGES.map((language) => (
-            <Pressable
-              key={language.key}
-              onPress={() => {
-                i18n.changeLanguage(language.key);
-                sheet.onClose();
-              }}
-              className="flex flex-row items-center py-2"
-            >
-              <View className="w-8">
-                {language.key === i18n.language && (
-                  <Icon icon={IconCheck} className="text-muted-foreground" />
-                )}
-              </View>
-              <View>
-                <Text className="font-bold">
-                  {t(`common:languages.values.${language.key}`)}
+        {AVAILABLE_LANGUAGES.map((language) => (
+          <Pressable
+            key={language.key}
+            onPress={() => {
+              i18n.changeLanguage(language.key);
+              sheet.onClose();
+            }}
+            className="flex flex-row items-center py-2"
+          >
+            <View className="w-8">
+              {language.key === i18n.language && (
+                <Icon icon={IconCheck} className="text-muted-foreground" />
+              )}
+            </View>
+            <View>
+              <Text className="font-bold">
+                {t(`common:languages.values.${language.key}`)}
+              </Text>
+              {language.key !== i18n.language && (
+                <Text className="text-sm" variant="muted">
+                  {t(`common:languages.values.${language.key}`, {
+                    lng: language.key,
+                  })}
                 </Text>
-                {language.key !== i18n.language && (
-                  <Text className="text-sm" variant="muted">
-                    {t(`common:languages.values.${language.key}`, {
-                      lng: language.key,
-                    })}
-                  </Text>
-                )}
-              </View>
-            </Pressable>
-          ))}
-        </BottomSheetContent>
+              )}
+            </View>
+          </Pressable>
+        ))}
       </BottomSheet>
     </>
   );

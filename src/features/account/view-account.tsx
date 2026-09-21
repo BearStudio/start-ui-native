@@ -11,7 +11,7 @@ import { useDisclosure } from '@/hooks/use-disclosure';
 import { IconEdit3, IconLogOut } from '@/components/icons/generated';
 import { Icon } from '@/components/icons/icon';
 import { AvatarWithFallback } from '@/components/ui/avatar';
-import { BottomSheet, BottomSheetContent } from '@/components/ui/bottom-sheet';
+import { BottomSheet } from '@/components/ui/bottom-sheet';
 import { Button } from '@/components/ui/button';
 import { Card, CardBody, CardHeader, CardTitle } from '@/components/ui/card';
 import { Divider } from '@/components/ui/divider';
@@ -22,6 +22,7 @@ import { ThemeSwitcher } from '@/components/ui/theme-switcher';
 import { Version } from '@/components/version';
 
 import { authClient } from '@/features/auth/client';
+import { ViewSafeContent } from '@/layout/view-safe-content';
 import { ViewSafeScrollContent } from '@/layout/view-safe-scroll-content';
 
 export const ViewAccount = () => {
@@ -100,15 +101,15 @@ export const ViewAccount = () => {
                       isOpen={signoutSheet.isOpen}
                       onClose={signoutSheet.onClose}
                     >
-                      <BottomSheetContent>
-                        <View className="gap-1">
-                          <Text className="font-bold">
-                            {t('auth:signOut.confirm.title')}
-                          </Text>
-                          <Text className="text-sm font-medium" variant="muted">
-                            {t('auth:signOut.confirm.description')}
-                          </Text>
-                        </View>
+                      <View className="flex flex-1 gap-1">
+                        <Text className="font-bold">
+                          {t('auth:signOut.confirm.title')}
+                        </Text>
+                        <Text className="text-sm font-medium" variant="muted">
+                          {t('auth:signOut.confirm.description')}
+                        </Text>
+                      </View>
+                      <View className="flex flex-row gap-2">
                         <Button
                           variant="secondary"
                           onPress={() => signoutSheet.onClose()}
@@ -116,10 +117,12 @@ export const ViewAccount = () => {
                           {t('auth:signOut.confirm.cancel')}
                         </Button>
                         <Button
+                          variant="destructive"
                           onPress={() => {
                             queryClient.clear();
                             authClient.signOut();
                           }}
+                          className="flex flex-1"
                         >
                           <Icon
                             icon={IconLogOut}
@@ -129,7 +132,7 @@ export const ViewAccount = () => {
                             {t('auth:signOut.confirm.signOut')}
                           </Button.Text>
                         </Button>
-                      </BottomSheetContent>
+                      </View>
                     </BottomSheet>
                   </CardHeader>
                   <Divider />
@@ -151,28 +154,26 @@ export const ViewAccount = () => {
                         isOpen={updateNameSheet.isOpen}
                         onClose={handleCloseNameSheet}
                       >
-                        <BottomSheetContent>
-                          <Text className="font-bold">
-                            {t('account:user.updateName.title')}
-                          </Text>
-                          <updateNameForm.AppForm>
-                            <updateNameForm.AppField name="name">
-                              {(field) => (
-                                <field.Field>
-                                  <field.FieldText
-                                    autoFocus
-                                    returnKeyType="done"
-                                    onSubmitEditing={
-                                      updateNameForm.handleSubmit
-                                    }
-                                  />
-                                </field.Field>
-                              )}
-                            </updateNameForm.AppField>
+                        <Text className="font-bold">
+                          {t('account:user.updateName.title')}
+                        </Text>
+                        <updateNameForm.AppForm>
+                          <updateNameForm.AppField name="name">
+                            {(field) => (
+                              <field.Field>
+                                <field.FieldText
+                                  autoFocus
+                                  returnKeyType="done"
+                                  onSubmitEditing={updateNameForm.handleSubmit}
+                                  className="min-w-64"
+                                />
+                              </field.Field>
+                            )}
+                          </updateNameForm.AppField>
 
+                          <View className="flex flex-row gap-2">
                             <Button
                               variant="secondary"
-                              className="w-full"
                               onPress={() => handleCloseNameSheet()}
                             >
                               {t('account:user.updateName.cancel')}
@@ -180,8 +181,8 @@ export const ViewAccount = () => {
                             <updateNameForm.Submit full>
                               {t('account:user.updateName.save')}
                             </updateNameForm.Submit>
-                          </updateNameForm.AppForm>
-                        </BottomSheetContent>
+                          </View>
+                        </updateNameForm.AppForm>
                       </BottomSheet>
                     </View>
                   </CardBody>
@@ -226,7 +227,9 @@ export const ViewAccount = () => {
             </Card>
           </View>
         </View>
-        <Version className="text-center" />
+        <ViewSafeContent className="absolute right-0 bottom-2 left-0 flex flex-row items-center justify-center">
+          <Version />
+        </ViewSafeContent>
       </View>
     </ViewSafeScrollContent>
   );

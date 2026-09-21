@@ -13,7 +13,7 @@ import {
   IconSun,
 } from '@/components/icons/generated';
 import { Icon } from '@/components/icons/icon';
-import { BottomSheet, BottomSheetContent } from '@/components/ui/bottom-sheet';
+import { BottomSheet } from '@/components/ui/bottom-sheet';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 
@@ -75,30 +75,28 @@ export const ThemeSwitcher = (props: { minimize?: boolean }) => {
         </Button>
       )}
       <BottomSheet isOpen={sheet.isOpen} onClose={sheet.onClose}>
-        <BottomSheetContent>
-          {(['system', 'light', 'dark'] as const).map((mode) => (
-            <Pressable
-              key={mode}
-              onPress={() => {
-                updateColorMode(mode);
-                sheet.onClose();
-              }}
-              className="flex flex-row items-center py-2"
-            >
-              <View className="w-8">
-                {((hasAdaptiveThemes && mode === 'system') ||
-                  (!hasAdaptiveThemes && mode === theme)) && (
-                  <Icon icon={IconCheck} className="text-muted-foreground" />
-                )}
-              </View>
-              <View>
-                <Text className="font-bold">
-                  {t(`common:themes.values.${mode}`)}
-                </Text>
-              </View>
-            </Pressable>
-          ))}
-        </BottomSheetContent>
+        {(['system', 'light', 'dark'] as const).map((mode) => (
+          <Pressable
+            key={mode}
+            onPress={() => {
+              updateColorMode(mode);
+              sheet.onClose();
+            }}
+            className="flex flex-row items-center py-2"
+          >
+            <View className="w-8">
+              {((hasAdaptiveThemes && mode === 'system') ||
+                (!hasAdaptiveThemes && mode === theme)) && (
+                <Icon icon={IconCheck} className="text-muted-foreground" />
+              )}
+            </View>
+            <View>
+              <Text className="font-bold">
+                {t(`common:themes.values.${mode}`)}
+              </Text>
+            </View>
+          </Pressable>
+        ))}
       </BottomSheet>
     </>
   );

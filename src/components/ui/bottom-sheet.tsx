@@ -2,13 +2,9 @@ import {
   BottomSheet as ExpoBottomSheet,
   type BottomSheetProps as ExpoBottomSheetProps,
   RNHostView,
-  RNHostViewProps,
 } from '@expo/ui';
-import { useWindowDimensions, View, type ViewProps } from 'react-native';
-
-import { cn } from '@/lib/tailwind/utils';
-
-const SHEET_HORIZONTAL_PADDING = 40;
+import type { ReactNode } from 'react';
+import { View } from 'react-native';
 
 export type BottomSheetProps = Omit<
   ExpoBottomSheetProps,
@@ -16,7 +12,7 @@ export type BottomSheetProps = Omit<
 > & {
   isOpen?: boolean;
   onClose?: () => void;
-  children: RNHostViewProps['children'];
+  children?: ReactNode;
 };
 
 /**
@@ -33,7 +29,6 @@ export const BottomSheet = ({
   modifiers,
 }: BottomSheetProps) => {
   const fitToContents = !snapPoints?.length;
-  const { width: windowWidth } = useWindowDimensions();
 
   return (
     <ExpoBottomSheet
@@ -45,21 +40,8 @@ export const BottomSheet = ({
       modifiers={modifiers}
     >
       <RNHostView matchContents={fitToContents}>
-        <View style={{ width: windowWidth - SHEET_HORIZONTAL_PADDING }}>
-          {children}
-        </View>
+        <View className="gap-2 px-2 pt-4">{children}</View>
       </RNHostView>
     </ExpoBottomSheet>
   );
 };
-
-type BottomSheetContentProps = ViewProps & {
-  className?: string;
-};
-
-export const BottomSheetContent = ({
-  className,
-  ...props
-}: BottomSheetContentProps) => (
-  <View className={cn('w-full gap-2 px-2 py-4', className)} {...props} />
-);

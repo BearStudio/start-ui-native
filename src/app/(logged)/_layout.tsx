@@ -30,7 +30,6 @@ export default function LoggedLayout() {
         headerShown: false,
         headerStyle: { backgroundColor: themedStyle.backgroundColor },
         headerTintColor: themedStyle.color,
-        contentStyle: { backgroundColor: themedStyle.sceneBackgroundColor },
       }}
     >
       <Stack.Protected guard={!!session.data?.user?.id}>

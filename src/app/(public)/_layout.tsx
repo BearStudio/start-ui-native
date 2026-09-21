@@ -24,7 +24,6 @@ export default function PublicLayout() {
         headerTitleAlign: 'left',
         headerStyle: { backgroundColor: themedStyle.backgroundColor },
         headerTintColor: themedStyle.color,
-        contentStyle: { backgroundColor: themedStyle.sceneBackgroundColor },
       }}
     >
       <Stack.Protected guard={!session.data?.user?.id}>

@@ -102,7 +102,7 @@ export const ViewSignIn = () => {
         </View>
       </ViewSafeContent>
       <ViewSafeContent className="absolute right-0 bottom-0 left-0 flex flex-row items-center justify-center">
-        <Version className="text-center" />
+        <Version />
       </ViewSafeContent>
     </View>
   );
