@@ -16,7 +16,10 @@ export const useMascotAnimatedStyle = (
   deviceScreen: DeviceScreen
 ) => {
   return useAnimatedStyle(() => {
-    const maxScrollX = deviceScreen.width * (appOnboardingScreens.length - 1);
+    const maxScrollX = Math.max(
+      deviceScreen.width * (appOnboardingScreens.length - 1),
+      1
+    );
 
     const translateX = interpolate(scrollX.value, [0, maxScrollX], [0, -50]);
 
@@ -42,6 +45,6 @@ export const getMascotLayoutStyle = (deviceScreen: DeviceScreen) => ({
   height: deviceScreen.height / 3,
   aspectRatio: 2 / 3,
   position: 'absolute' as const,
-  left: deviceScreen.width / 3.5,
+  right: Math.min(deviceScreen.width * 0.23, 96),
   top: deviceScreen.height / 2.5,
 });
