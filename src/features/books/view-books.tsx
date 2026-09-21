@@ -1,22 +1,31 @@
 import { getUiState } from '@bearstudio/ui-state';
-import { FlashList } from '@shopify/flash-list';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { Link } from 'expo-router';
-import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, Pressable, View } from 'react-native';
 
 import { api } from '@/lib/hey-api/api';
-import { BookGetByIdResponse } from '@/lib/hey-api/generated';
+import { useResponsiveValue } from '@/lib/responsive';
 
+import { List } from '@/components/ui/list';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Text } from '@/components/ui/text';
 
-import { BookCover, COVER_HEIGHT } from '@/features/books/book-cover';
-import { ViewTabContent } from '@/layout/view-tab-content';
+import {
+  BOOK_COVER_ASPECT_RATIO,
+  BookCover,
+} from '@/features/books/book-cover';
+
+const BOOKS_NUM_COLUMNS = {
+  default: 2,
+  sm: 3,
+  md: 4,
+  lg: 5,
+} as const;
 
 export const ViewBooks = () => {
   const { t } = useTranslation(['books']);
+  const numColumns = useResponsiveValue(BOOKS_NUM_COLUMNS);
 
   const books = useInfiniteQuery({
     ...api.bookGetAllInfiniteOptions(),
@@ -35,48 +44,55 @@ export const ViewBooks = () => {
     });
   });
 
-  const renderItem = useCallback(
-    ({ item }: { item: BookGetByIdResponse }) => (
-      <Link
-        href={{
-          pathname: '/books/[id]',
-          params: { id: item.id, title: item.title },
-        }}
-        style={{ padding: 8, flex: 1 }}
-      >
-        <Link.Trigger>
-          <BookCover book={item} />
-        </Link.Trigger>
-        <Link.Preview />
-      </Link>
-    ),
-    []
-  );
-
   return (
-    <ViewTabContent withHeader>
+    <View className="relative flex-1">
       {ui
         .match('pending', () => (
-          <View className="flex-row flex-wrap">
-            {Array.from({ length: 4 }, (_, i) => i).map((index) => (
-              <View key={index} className="w-1/2 p-2">
-                <Skeleton
-                  className="w-full rounded-lg"
-                  style={{ height: COVER_HEIGHT }}
-                />
-              </View>
-            ))}
+          <View className="flex-row flex-wrap p-safe">
+            {Array.from({ length: numColumns * 2 }, (_, i) => i).map(
+              (index) => (
+                <View
+                  key={index}
+                  className="p-2"
+                  style={{ width: `${100 / numColumns}%` }}
+                >
+                  <Skeleton
+                    className="w-full rounded-lg"
+                    style={{ aspectRatio: BOOK_COVER_ASPECT_RATIO }}
+                  />
+                </View>
+              )
+            )}
           </View>
         ))
         .match('error', () => <></>)
-        .match('empty', () => <Text>{t('books:list.empty')}</Text>)
+        .match('empty', () => (
+          <View className="p-safe">
+            <Text>{t('books:list.empty')}</Text>
+          </View>
+        ))
         .match('default', ({ data }) => (
-          <FlashList
+          <List
             data={data}
             keyExtractor={(item) => item.id}
-            numColumns={2}
-            horizontal={false}
-            renderItem={renderItem}
+            numColumns={BOOKS_NUM_COLUMNS}
+            className="p-4"
+            renderItem={({ item }) => (
+              <Link
+                asChild
+                href={{
+                  pathname: '/books/[id]',
+                  params: { id: item.id, title: item.title },
+                }}
+              >
+                <Link.Trigger>
+                  <Pressable style={{ padding: 8, flex: 1 }}>
+                    <BookCover book={item} />
+                  </Pressable>
+                </Link.Trigger>
+                <Link.Preview />
+              </Link>
+            )}
             onEndReached={() => {
               if (!books.hasNextPage) {
                 return;
@@ -89,6 +105,6 @@ export const ViewBooks = () => {
           />
         ))
         .exhaustive()}
-    </ViewTabContent>
+    </View>
   );
 };
