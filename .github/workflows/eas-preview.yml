@@ -19,9 +19,10 @@ jobs:
           version: 10
 
       - name: 🏗 Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 'lts/*'
+          cache: 'pnpm'
 
       - name: 🏗 Setup EAS
         uses: expo/expo-github-action@v8

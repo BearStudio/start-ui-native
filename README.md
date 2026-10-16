@@ -74,6 +74,9 @@ pnpm dev
 ```
 
 > [!NOTE]
+> **SDK 58:** Expo Go for this SDK is rolling out to the App Store and Google Play over the coming weeks. Until your device has an SDK 58–compatible Expo Go build, use the **development client** (`pnpm dev:client`) instead of `pnpm dev` / Expo Go.
+
+> [!NOTE]
 > Expo Go does not support all native modules (e.g. `expo-secure-store`, Better Auth flows). For day-to-day development, use the **development client** below.
 
 ### Development client (recommended)
@@ -142,6 +145,9 @@ Storybook is managed as a specific mode of the app that is launch apart in port 
 pnpm dev:storybook   # Run the app in storybook mode (port 8083)
 pnpm storybook:generate  # Regenerate .rnstorybook/storybook.requires.ts after adding stories
 ```
+
+> [!NOTE]
+> Storybook uses Expo Go (`expo start --go`). Same SDK 58 Expo Go rollout applies — use a dev client build if Expo Go on your device is not on SDK 58 yet.
 
 > [!TIP]
 > You can open Storybook in another tab and switch between the app and Storybook by pressing `i` or `a` in each terminal.

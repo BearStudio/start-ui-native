@@ -2,6 +2,9 @@
   "name": "start-ui-native",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=22.13"
+  },
   "homepage": "https://github.com/bearstudio/start-ui-native#readme",
   "bugs": {
     "url": "https://github.com/bearstudio/start-ui-native/issues"
