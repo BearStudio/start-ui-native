@@ -18,7 +18,9 @@ const Input = ({
   onFocus,
   onBlur,
   ...props
-}: InputProps & { ref?: React.RefObject<TextInput | null> }) => {
+}: InputProps & {
+  ref?: React.Ref<React.ComponentRef<typeof TextInput>>;
+}) => {
   const hasError = ariaInvalid === true;
   const [isFocused, setIsFocused] = React.useState(false);
   const resolvedForeground = useResolveClassNames('text-foreground') as {
@@ -28,7 +30,9 @@ const Input = ({
     color?: string;
   };
   const Comp = Component as React.ComponentType<
-    TextInputProps & React.RefAttributes<TextInput>
+    TextInputProps & {
+      ref?: React.Ref<React.ComponentRef<typeof TextInput>>;
+    }
   >;
 
   const getFocusBorderColor = () => {

@@ -1,15 +1,9 @@
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { withUniwind } from 'uniwind';
+import { View, type ViewProps } from 'react-native';
 
 import { cn } from '@/lib/tailwind/utils';
 
-type ViewSafeContentProps = React.ComponentProps<typeof SafeAreaView>;
-
-const UniwindSafeAreaView = withUniwind(SafeAreaView);
-
-export const ViewSafeContent = ({
-  className,
-  ...props
-}: ViewSafeContentProps) => {
-  return <UniwindSafeAreaView className={cn('flex-1', className)} {...props} />;
+export const ViewSafeContent = ({ className, ...props }: ViewProps) => {
+  return (
+    <View className={cn('relative flex-1 p-safe', className)} {...props} />
+  );
 };

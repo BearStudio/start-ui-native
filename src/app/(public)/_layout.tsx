@@ -19,13 +19,11 @@ export default function PublicLayout() {
 
   return (
     <Stack
-      initialRouteName="sign-in"
       screenOptions={{
         headerShown: false,
         headerTitleAlign: 'left',
         headerStyle: { backgroundColor: themedStyle.backgroundColor },
         headerTintColor: themedStyle.color,
-        contentStyle: { backgroundColor: themedStyle.sceneBackgroundColor },
       }}
     >
       <Stack.Protected guard={!session.data?.user?.id}>

@@ -8,7 +8,10 @@ It represents our team's up-to-date stack that we use when creating native apps 
 
 <div align="center" style="margin: 0 0 16px 0"><img src=".github/assets/tech-logos.png" alt="Technologies logos of the starter" /></div>
 
-[⚙️ Node.js](https://nodejs.org), [🟦 TypeScript](https://www.typescriptlang.org/), [⚛️ React](https://react.dev/), [📱 React Native](https://reactnative.dev/), [🚀 Expo](https://docs.expo.dev/), [🔐 Better Auth](https://www.better-auth.com/), [🖌️ Uniwind](https://uniwind.dev), [🧱 React Native Reusables](https://reactnativereusables.com), [🌴 Tanstack Form](https://tanstack.com/form/), [🌴 Tanstack Query](https://tanstack.com/query/), [👋 Hey API](https://heyapi.dev/)
+[⚙️ Node.js](https://nodejs.org), [🟦 TypeScript](https://www.typescriptlang.org/), [⚛️ React](https://react.dev/), [📱 React Native](https://reactnative.dev/), [🚀 Expo SDK 58](https://docs.expo.dev/), [🔐 Better Auth](https://www.better-auth.com/), [🖌️ Uniwind](https://uniwind.dev), [🧱 React Native Reusables](https://reactnativereusables.com), [🌴 Tanstack Form](https://tanstack.com/form/), [🌴 Tanstack Query](https://tanstack.com/query/), [👋 Hey API](https://heyapi.dev/)
+
+> [!NOTE]
+> OTA updates use `runtimeVersion: { policy: 'fingerprint' }` (balanced preset). New native binaries are required when the fingerprint changes.
 
 # Requirements
 
@@ -69,6 +72,9 @@ Use Expo Go to explore the app quickly — no native build required.
 ```bash
 pnpm dev
 ```
+
+> [!NOTE]
+> **SDK 58:** Expo Go for this SDK is rolling out to the App Store and Google Play over the coming weeks. Until your device has an SDK 58–compatible Expo Go build, use the **development client** (`pnpm dev:client`) instead of `pnpm dev` / Expo Go.
 
 > [!NOTE]
 > Expo Go does not support all native modules (e.g. `expo-secure-store`, Better Auth flows). For day-to-day development, use the **development client** below.
@@ -139,6 +145,9 @@ Storybook is managed as a specific mode of the app that is launch apart in port 
 pnpm dev:storybook   # Run the app in storybook mode (port 8083)
 pnpm storybook:generate  # Regenerate .rnstorybook/storybook.requires.ts after adding stories
 ```
+
+> [!NOTE]
+> Storybook uses Expo Go (`expo start --go`). Same SDK 58 Expo Go rollout applies — use a dev client build if Expo Go on your device is not on SDK 58 yet.
 
 > [!TIP]
 > You can open Storybook in another tab and switch between the app and Storybook by pressing `i` or `a` in each terminal.

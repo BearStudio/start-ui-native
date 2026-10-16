@@ -3,7 +3,8 @@
     "title": "Titre",
     "author": "Auteur",
     "genre": "Genre",
-    "publisher": "Éditeur"
+    "publisher": "Éditeur",
+    "byCapitalized": "Par"
   },
   "list": {
     "empty": "Aucun livre disponible"

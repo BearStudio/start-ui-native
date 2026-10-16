@@ -1,5 +1,7 @@
 import { Linking, Pressable, StyleSheet, View } from 'react-native';
 
+import { cn } from '@/lib/tailwind/utils';
+
 import { Image } from '@/components/ui/image';
 import { Text } from '@/components/ui/text';
 
@@ -40,12 +42,12 @@ const MarketingTile = ({
   );
 };
 
-export const MarketingBento = () => (
-  <View className="mt-6 gap-2">
-    <Text className="text-center text-[0.625rem] text-muted-foreground">
+export const MarketingBento = ({ className }: { className?: string }) => (
+  <View className={cn('gap-2', className)}>
+    <Text className="text-center text-2xs text-muted-foreground">
       Shameless plug 😅 Remember that 🚀 Start UI is free and Open Source 😉
     </Text>
-    <View className="flex flex-1 flex-row gap-2">
+    <View className="flex-row gap-2">
       <View className="flex flex-1 flex-col gap-2">
         <MarketingTile
           href="https://bear.studio/assets-start-ui-bento-01"

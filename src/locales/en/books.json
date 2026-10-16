@@ -3,7 +3,8 @@
     "title": "Title",
     "author": "Author",
     "genre": "Genre",
-    "publisher": "Publisher"
+    "publisher": "Publisher",
+    "byCapitalized": "By"
   },
   "list": {
     "empty": "There are no books"
