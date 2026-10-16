@@ -14,7 +14,9 @@ minimumReleaseAgeExclude:
   - 'react-native'
   - 'react-native-*'
   - '@react-native/*'
-  # Transitive via @expo/metro-config@58.x (Expo SDK 58).
+  # expo@58 → @expo/cli, @expo/metro-config, @expo/metro-file-map → 2g@1.0.1
+  # (github.com/kitten/2g — structured event logs; maintainer philpl, npm OIDC + SLSA).
+  # Excluded only for minimumReleaseAge (7d); not a trust-policy workaround.
   - '2g'
   # Internal Bearstudio package: allows a bump without waiting the 7-day maturity period.
   - '@bearstudio/ui-state'

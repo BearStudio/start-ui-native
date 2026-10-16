@@ -8,6 +8,12 @@
       "channel": "development",
       "distribution": "internal",
       "developmentClient": true,
+      "ios": {
+        "image": "sdk-58"
+      },
+      "android": {
+        "image": "sdk-58"
+      },
       "env": {
         "APP_ENV": "development"
       }
@@ -15,6 +21,12 @@
     "staging": {
       "channel": "staging",
       "distribution": "internal",
+      "ios": {
+        "image": "sdk-58"
+      },
+      "android": {
+        "image": "sdk-58"
+      },
       "env": {
         "APP_ENV": "staging"
       }
@@ -22,6 +34,12 @@
     "production": {
       "channel": "production",
       "autoIncrement": true,
+      "ios": {
+        "image": "sdk-58"
+      },
+      "android": {
+        "image": "sdk-58"
+      },
       "env": {
         "APP_ENV": "production"
       }
