@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  expo-constants: ~58.0.10
+  expo-constants: ~58.0.12
   '@expo/dom-webview': ~58.0.2
   ua-parser-js: 2.0.10
 
@@ -77,7 +77,7 @@ importers:
         specifier: 58.1.1
         version: 58.1.1(expo@58.0.12)
       expo-constants:
-        specifier: ~58.0.10
+        specifier: ~58.0.12
         version: 58.0.12(expo@58.0.12)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(typescript@5.9.3)
       expo-crypto:
         specifier: 58.0.6
@@ -695,7 +695,7 @@ packages:
     peerDependencies:
       '@better-auth/core': 1.5.5
       better-auth: 1.5.5
-      expo-constants: ~58.0.10
+      expo-constants: ~58.0.12
       expo-linking: '>=7.0.0'
       expo-network: '>=8.0.7'
       expo-web-browser: '>=14.0.0'
@@ -1138,7 +1138,7 @@ packages:
     peerDependencies:
       '@expo/metro-runtime': ^58.0.14
       expo: '*'
-      expo-constants: ~58.0.10
+      expo-constants: ~58.0.12
       expo-font: ^58.0.8
       expo-router: '*'
       expo-server: ^58.0.5
@@ -3680,7 +3680,7 @@ packages:
       '@expo/ui': ^58.0.19
       '@testing-library/react-native': '>= 14.0.0'
       expo: '*'
-      expo-constants: ~58.0.10
+      expo-constants: ~58.0.12
       expo-linking: ^58.0.13
       expo-symbols: ^58.0.4
       react: '*'
