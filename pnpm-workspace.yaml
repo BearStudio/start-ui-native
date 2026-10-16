@@ -14,11 +14,13 @@ minimumReleaseAgeExclude:
   - 'react-native'
   - 'react-native-*'
   - '@react-native/*'
+  # Transitive via @expo/metro-config@58.x (Expo SDK 58).
+  - '2g'
   # Internal Bearstudio package: allows a bump without waiting the 7-day maturity period.
   - '@bearstudio/ui-state'
 trustPolicy: no-downgrade
 overrides:
-  expo-constants: ~58.0.10
+  expo-constants: ~58.0.12
   '@expo/dom-webview': ~58.0.2
   # 0.7.x / 1.0.x lack npm provenance (TRUST_DOWNGRADE false positive); 2.0.x is API-compatible.
   ua-parser-js: 2.0.10
