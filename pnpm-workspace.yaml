@@ -18,6 +18,10 @@ minimumReleaseAgeExclude:
   # (github.com/kitten/2g — structured event logs; maintainer philpl, npm OIDC + SLSA).
   # Excluded only for minimumReleaseAge (7d); not a trust-policy workaround.
   - '2g'
+  # expo@58 → @expo/metro-config → noxcturnal (+ platform binaries, oxc types); maturity-only.
+  - 'noxcturnal'
+  - '@noxcturnal/*'
+  - '@oxc-project/*'
   # Internal Bearstudio package: allows a bump without waiting the 7-day maturity period.
   - '@bearstudio/ui-state'
 trustPolicy: no-downgrade
