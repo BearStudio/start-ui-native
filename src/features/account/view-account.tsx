@@ -178,7 +178,7 @@ export const ViewAccount = () => {
                             >
                               {t('account:user.updateName.cancel')}
                             </Button>
-                            <updateNameForm.Submit full>
+                            <updateNameForm.Submit className="w-32">
                               {t('account:user.updateName.save')}
                             </updateNameForm.Submit>
                           </View>

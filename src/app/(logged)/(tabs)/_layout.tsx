@@ -1,5 +1,9 @@
 import { Tabs } from 'expo-router';
-import { NativeTabs } from 'expo-router/native-tabs';
+import {
+  MaterialIcon,
+  NativeTabs,
+  SFSymbolIcon,
+} from 'expo-router/native-tabs';
 import { useTranslation } from 'react-i18next';
 
 import { HapticTab } from '@/components/haptic-tab';
@@ -14,6 +18,8 @@ import {
 
 import { useThemedStyle } from '@/features/theme/use-themed-style';
 
+// Update this constant if you don't want to use the native tabs
+// or specifically want to use the native tabs on a specific platform
 export const WITH_NATIVE_TABS = true;
 
 const TABS = [
@@ -50,8 +56,8 @@ const TABS = [
   icon: typeof IconHouseDuotone;
   iconFocused: typeof IconHouseDuotone;
   headerShown: boolean;
-  iosIconSf: string;
-  androidIconMd: string;
+  iosIconSf: SFSymbolIcon['sf'];
+  androidIconMd: MaterialIcon['md'];
 }[];
 
 export default function TabLayout() {

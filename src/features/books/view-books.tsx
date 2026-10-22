@@ -48,7 +48,7 @@ export const ViewBooks = () => {
     <View className="relative flex-1">
       {ui
         .match('pending', () => (
-          <View className="flex-row flex-wrap p-safe">
+          <View className="flex-row flex-wrap px-safe-offset-2 pb-safe md:px-safe-offset-4">
             {Array.from({ length: numColumns * 2 }, (_, i) => i).map(
               (index) => (
                 <View
@@ -67,7 +67,7 @@ export const ViewBooks = () => {
         ))
         .match('error', () => <></>)
         .match('empty', () => (
-          <View className="p-safe">
+          <View className="px-safe-offset-4 pb-safe md:px-safe-offset-6">
             <Text>{t('books:list.empty')}</Text>
           </View>
         ))
@@ -76,7 +76,6 @@ export const ViewBooks = () => {
             data={data}
             keyExtractor={(item) => item.id}
             numColumns={BOOKS_NUM_COLUMNS}
-            className="p-4"
             renderItem={({ item }) => (
               <Link
                 asChild

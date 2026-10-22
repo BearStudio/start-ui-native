@@ -40,7 +40,7 @@ export const BottomSheet = ({
       modifiers={modifiers}
     >
       <RNHostView matchContents={fitToContents}>
-        <View className="gap-2 px-2 pt-4">{children}</View>
+        <View className="gap-2 px-2 pt-4 pb-safe-offset-2">{children}</View>
       </RNHostView>
     </ExpoBottomSheet>
   );

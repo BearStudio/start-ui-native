@@ -131,6 +131,13 @@ export default {
     'expo-localization',
     'expo-font',
     'expo-status-bar',
+    [
+      'expo-navigation-bar',
+      {
+        // Drop the system scrim so the app tab bar shows through the Android nav bar.
+        enforceContrast: false,
+      },
+    ],
     '@react-native-community/datetimepicker',
   ],
   githubUrl: 'https://github.com/bearstudio/start-ui-native',

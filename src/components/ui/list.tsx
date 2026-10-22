@@ -38,7 +38,10 @@ export const List = <T,>({
       numColumns={resolvedNumColumns}
       className={cn('flex-1', className)}
       style={{ width, ...style } as ViewStyle}
-      contentContainerClassName={cn('p-safe', contentContainerClassName)}
+      contentContainerClassName={cn(
+        'p-safe-offset-2 pb-safe-offset-16 md:p-safe-offset-4',
+        contentContainerClassName
+      )}
       {...props}
     />
   );

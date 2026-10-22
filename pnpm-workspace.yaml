@@ -24,6 +24,10 @@ minimumReleaseAgeExclude:
   - '@oxc-project/*'
   # Internal Bearstudio package: allows a bump without waiting the 7-day maturity period.
   - '@bearstudio/ui-state'
+  # 1.13.0 (2026-10-19) forwards every react-native export, including
+  # AssetRegistry. 1.12.2 does not, and native tabs crash on Android without it.
+  # Matures 2026-10-26; drop this exclude after that.
+  - 'uniwind'
 trustPolicy: no-downgrade
 overrides:
   expo-constants: ~58.0.12

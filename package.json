@@ -2,9 +2,6 @@
   "name": "start-ui-native",
   "version": "1.0.0",
   "private": true,
-  "engines": {
-    "node": ">=22.13"
-  },
   "homepage": "https://github.com/bearstudio/start-ui-native#readme",
   "bugs": {
     "url": "https://github.com/bearstudio/start-ui-native/issues"
@@ -87,6 +84,7 @@
     "expo-keep-awake": "58.0.3",
     "expo-linking": "58.0.13",
     "expo-localization": "58.0.5",
+    "expo-navigation-bar": "58.0.4",
     "expo-network": "58.0.3",
     "expo-router": "58.0.24",
     "expo-secure-store": "58.0.2",
@@ -112,7 +110,7 @@
     "sonner-native": "0.23.1",
     "tailwind-merge": "3.5.0",
     "tailwindcss": "4.2.1",
-    "uniwind": "1.7.0",
+    "uniwind": "1.13.0",
     "zod": "4.3.6",
     "zustand": "5.0.11"
   },
@@ -140,6 +138,9 @@
     "storybook": "10.4.1",
     "ts-plugin-sort-import-suggestions": "1.0.4",
     "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=22.13"
   },
   "expo": {
     "install": {
