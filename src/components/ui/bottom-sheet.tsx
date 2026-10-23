@@ -6,6 +6,8 @@ import {
 import type { ReactNode } from 'react';
 import { View } from 'react-native';
 
+import { cn } from '@/lib/tailwind/utils';
+
 export type BottomSheetProps = Omit<
   ExpoBottomSheetProps,
   'isPresented' | 'onDismiss' | 'children'
@@ -13,6 +15,7 @@ export type BottomSheetProps = Omit<
   isOpen?: boolean;
   onClose?: () => void;
   children?: ReactNode;
+  className?: string;
 };
 
 /**
@@ -27,6 +30,7 @@ export const BottomSheet = ({
   snapPoints,
   testID,
   modifiers,
+  className,
 }: BottomSheetProps) => {
   const fitToContents = !snapPoints?.length;
 
@@ -39,8 +43,12 @@ export const BottomSheet = ({
       testID={testID}
       modifiers={modifiers}
     >
-      <RNHostView matchContents={fitToContents}>
-        <View className="gap-2 px-2 pt-4 pb-safe-offset-2">{children}</View>
+      <RNHostView matchContents={fitToContents ? { vertical: true } : false}>
+        <View
+          className={cn('w-full gap-2 px-2 pt-4 pb-safe-offset-2', className)}
+        >
+          {children}
+        </View>
       </RNHostView>
     </ExpoBottomSheet>
   );

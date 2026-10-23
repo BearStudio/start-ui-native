@@ -109,7 +109,7 @@ export const ViewAccount = () => {
                           {t('auth:signOut.confirm.description')}
                         </Text>
                       </View>
-                      <View className="flex flex-row gap-2">
+                      <View className="flex gap-2">
                         <Button
                           variant="secondary"
                           onPress={() => signoutSheet.onClose()}
@@ -153,14 +153,15 @@ export const ViewAccount = () => {
                       <BottomSheet
                         isOpen={updateNameSheet.isOpen}
                         onClose={handleCloseNameSheet}
+                        className="gap-4"
                       >
-                        <Text className="font-bold">
-                          {t('account:user.updateName.title')}
-                        </Text>
                         <updateNameForm.AppForm>
                           <updateNameForm.AppField name="name">
                             {(field) => (
                               <field.Field>
+                                <Text className="font-bold">
+                                  {t('account:user.updateName.title')}
+                                </Text>
                                 <field.FieldText
                                   autoFocus
                                   returnKeyType="done"
@@ -171,17 +172,15 @@ export const ViewAccount = () => {
                             )}
                           </updateNameForm.AppField>
 
-                          <View className="flex flex-row gap-2">
-                            <Button
-                              variant="secondary"
-                              onPress={() => handleCloseNameSheet()}
-                            >
-                              {t('account:user.updateName.cancel')}
-                            </Button>
-                            <updateNameForm.Submit className="w-32">
-                              {t('account:user.updateName.save')}
-                            </updateNameForm.Submit>
-                          </View>
+                          <updateNameForm.Submit className="flex flex-1">
+                            {t('account:user.updateName.save')}
+                          </updateNameForm.Submit>
+                          <Button
+                            variant="ghost"
+                            onPress={() => handleCloseNameSheet()}
+                          >
+                            {t('account:user.updateName.cancel')}
+                          </Button>
                         </updateNameForm.AppForm>
                       </BottomSheet>
                     </View>
