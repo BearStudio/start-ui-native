@@ -19,8 +19,9 @@ const sizeClasses = {
   lg: 'size-12',
 } as const;
 
-type AvatarRootProps = AvatarPrimitive.RootProps &
-  React.RefAttributes<AvatarPrimitive.RootRef>;
+type AvatarRootProps = React.ComponentPropsWithoutRef<
+  typeof AvatarPrimitive.Root
+>;
 
 function Avatar({ className, ...props }: AvatarRootProps) {
   return (
@@ -37,7 +38,7 @@ function Avatar({ className, ...props }: AvatarRootProps) {
 function AvatarImage({
   className,
   ...props
-}: AvatarPrimitive.ImageProps & React.RefAttributes<AvatarPrimitive.ImageRef>) {
+}: React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>) {
   return (
     <AvatarPrimitive.Image
       className={cn('aspect-square size-full', className)}
@@ -49,12 +50,11 @@ function AvatarImage({
 function AvatarFallback({
   className,
   ...props
-}: AvatarPrimitive.FallbackProps &
-  React.RefAttributes<AvatarPrimitive.FallbackRef>) {
+}: React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>) {
   return (
     <AvatarPrimitive.Fallback
       className={cn(
-        'flex size-full flex-row items-center justify-center rounded-full bg-muted',
+        'bg-muted flex size-full flex-row items-center justify-center rounded-full',
         className
       )}
       {...props}
@@ -80,7 +80,7 @@ function AvatarWithFallback({
     <Avatar alt={name} className={cn(sizeClass, className)} {...props}>
       {image ? <AvatarImage source={{ uri: image }} /> : null}
       <AvatarFallback>
-        <Text className="text-xs font-medium text-muted-foreground">
+        <Text className="text-muted-foreground text-xs font-medium">
           {getInitials(name)}
         </Text>
       </AvatarFallback>

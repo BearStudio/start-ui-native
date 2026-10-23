@@ -25,7 +25,7 @@ jobs:
           version: 10
 
       - name: 🏗 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 'lts/*'
           cache: 'pnpm'
@@ -49,9 +49,9 @@ jobs:
           version: 10
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 'lts/*'
           cache: 'pnpm'
 
       - name: Install deps

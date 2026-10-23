@@ -92,7 +92,7 @@ export default {
   scheme: appConfig.scheme,
   owner: OWNER,
   version: '1.0.0',
-  runtimeVersion: { policy: 'appVersion' },
+  runtimeVersion: { policy: 'fingerprint' },
   platforms: ['android', 'ios'],
   orientation: 'default',
   icon: appConfig.icon,
@@ -130,6 +130,14 @@ export default {
     'expo-secure-store',
     'expo-localization',
     'expo-font',
+    'expo-status-bar',
+    [
+      'expo-navigation-bar',
+      {
+        // Drop the system scrim so the app tab bar shows through the Android nav bar.
+        enforceContrast: false,
+      },
+    ],
     '@react-native-community/datetimepicker',
   ],
   githubUrl: 'https://github.com/bearstudio/start-ui-native',

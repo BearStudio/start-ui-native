@@ -1,9 +1,13 @@
 'use no memo';
 
 import { StatusBar } from 'expo-status-bar';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList, useWindowDimensions } from 'react-native';
+import {
+  FlatList,
+  type FlatListProps,
+  useWindowDimensions,
+} from 'react-native';
 import { View } from 'react-native';
 import Animated, {
   interpolate,
@@ -25,12 +29,14 @@ import backgroundImage from '@/features/app-onboarding/layout-login-image.jpg';
 // @ts-expect-error fix image import
 import mascotImage from '@/features/app-onboarding/mascot.png';
 import { useOnboardingStore } from '@/features/app-onboarding/store';
-import { useBackgroundAnimatedStyle } from '@/features/app-onboarding/use-background-animated-style';
+import {
+  getBackgroundLayout,
+  useBackgroundAnimatedStyle,
+} from '@/features/app-onboarding/use-background-animated-style';
 import {
   getMascotLayoutStyle,
   useMascotAnimatedStyle,
 } from '@/features/app-onboarding/use-mascot-animated-style';
-import { ViewSafeContent } from '@/layout/view-safe-content';
 
 function useScrollHandler() {
   const scrollX = useSharedValue(0);
@@ -63,8 +69,10 @@ export const ViewOnboarding = () => {
   const { t } = useTranslation(['appOnboarding']);
   const insets = useSafeAreaInsets();
   const windows = useWindowDimensions();
+  const backgroundLayout = getBackgroundLayout(windows);
 
   const [currentScreenIndex, setCurrentScreenIndex] = useState(0);
+  const currentScreenIndexRef = useRef(0);
 
   const listRef = useRef<FlatList>(null);
 
@@ -75,15 +83,25 @@ export const ViewOnboarding = () => {
   const doneOnboarding = useOnboardingStore((state) => state.setDone);
   const { exitAnimatedStyle, handleDone } = useExitAnimation(doneOnboarding);
 
-  const onViewableItemsChanged = useCallback(
-    ({ viewableItems }: { viewableItems: { index: number | null }[] }) => {
-      const lastViewableIndex = viewableItems.at(-1)?.index;
-      if (lastViewableIndex !== undefined && lastViewableIndex !== null) {
-        setCurrentScreenIndex(lastViewableIndex);
-      }
-    },
-    []
-  );
+  useEffect(() => {
+    const offset = currentScreenIndexRef.current * windows.width;
+    scrollX.value = offset;
+    listRef.current?.scrollToOffset({ offset, animated: false });
+  }, [scrollX, windows.width]);
+
+  const onViewableItemsChanged = useCallback<
+    NonNullable<
+      FlatListProps<
+        (typeof appOnboardingScreens)[number]
+      >['onViewableItemsChanged']
+    >
+  >(({ viewableItems }) => {
+    const lastViewableIndex = viewableItems.at(-1)?.index;
+    if (lastViewableIndex != null) {
+      currentScreenIndexRef.current = lastViewableIndex;
+      setCurrentScreenIndex(lastViewableIndex);
+    }
+  }, []);
 
   const [viewabilityConfig] = useState({
     viewAreaCoveragePercentThreshold: 30,
@@ -96,52 +114,67 @@ export const ViewOnboarding = () => {
     []
   );
 
+  const getItemLayout = useCallback<
+    NonNullable<
+      FlatListProps<(typeof appOnboardingScreens)[number]>['getItemLayout']
+    >
+  >(
+    (_data, index) => ({
+      length: windows.width,
+      offset: windows.width * index,
+      index,
+    }),
+    [windows.width]
+  );
+
   return (
     <ScopedTheme theme="dark">
-      <Animated.View style={[{ flex: 1 }, exitAnimatedStyle]}>
+      <Animated.View
+        style={[{ flex: 1, overflow: 'hidden' }, exitAnimatedStyle]}
+      >
         <StatusBar style="light" />
-        <Animated.View
+        <Animated.Image
+          source={backgroundImage}
           style={[
             {
-              width: windows.width,
-              height: windows.height,
               position: 'absolute' as const,
               zIndex: -1,
-              right: 650,
+              width: backgroundLayout.width,
+              height: backgroundLayout.height,
+              top: backgroundLayout.top,
+              left: 0,
             },
             backgroundAnimatedStyle,
           ]}
-        >
-          <Animated.Image
-            source={backgroundImage}
-            style={{
-              minHeight: windows.height,
-              minWidth: windows.width,
-            }}
-          />
-        </Animated.View>
+        />
         <Animated.Image
           source={mascotImage}
           style={[getMascotLayoutStyle(windows), mascotAnimatedStyle]}
         />
-        <ViewSafeContent>
+        <View className="flex-1">
           <Animated.FlatList
             ref={listRef}
             horizontal
             data={appOnboardingScreens}
             renderItem={renderItem}
+            keyExtractor={(item) => item.name}
+            getItemLayout={getItemLayout}
             showsHorizontalScrollIndicator={false}
             decelerationRate="fast"
             bounces={false}
-            snapToAlignment="center"
-            snapToInterval={windows.width}
+            pagingEnabled
             viewabilityConfig={viewabilityConfig}
             onViewableItemsChanged={onViewableItemsChanged}
             onScroll={scrollHandler}
           />
           <View
-            className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-4 p-8"
-            style={{ bottom: insets.bottom }}
+            className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-4"
+            style={{
+              bottom: insets.bottom,
+              paddingLeft: 32 + insets.left,
+              paddingRight: 32 + insets.right,
+              paddingBottom: 32,
+            }}
           >
             <View className="flex flex-row gap-2">
               {appOnboardingScreens.map((screen, index) => (
@@ -153,7 +186,7 @@ export const ViewOnboarding = () => {
             </View>
             <Button
               size="lg"
-              className="w-full"
+              className="w-full max-w-100"
               onPress={() => {
                 if (currentScreenIndex === appOnboardingScreens.length - 1) {
                   handleDone();
@@ -169,7 +202,7 @@ export const ViewOnboarding = () => {
               )}
             </Button>
           </View>
-        </ViewSafeContent>
+        </View>
       </Animated.View>
     </ScopedTheme>
   );

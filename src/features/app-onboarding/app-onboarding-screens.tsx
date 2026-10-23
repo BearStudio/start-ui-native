@@ -1,6 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useWindowDimensions, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { IconCheck } from '@/components/icons/generated';
 import { Icon } from '@/components/icons/icon';
@@ -9,16 +10,20 @@ import { Text } from '@/components/ui/text';
 
 const OnboardingScreenContainer = (props: PropsWithChildren) => {
   const windows = useWindowDimensions();
+  const insets = useSafeAreaInsets();
 
   return (
     <View
-      className="w-full items-center justify-center p-8"
-      style={{ width: windows.width }}
+      className="items-center justify-center"
+      style={{
+        width: windows.width,
+        paddingTop: 32,
+        paddingBottom: 32,
+        paddingLeft: 32 + insets.left,
+        paddingRight: 32 + insets.right,
+      }}
     >
-      <View
-        className="h-1/2 w-full max-w-[400px]"
-        style={{ height: windows.height / 2 }}
-      >
+      <View className="w-full max-w-100" style={{ height: windows.height / 2 }}>
         {props.children}
       </View>
     </View>

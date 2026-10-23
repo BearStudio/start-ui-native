@@ -30,8 +30,8 @@ export const ViewAuthOnboarding = () => {
   return (
     <ViewSafeContent>
       <AuthHeader />
-      <View className="w-full max-w-[400px] flex-1 items-center justify-center p-6">
-        <View className="w-full gap-6">
+      <View className="flex-1 items-center justify-center p-6">
+        <View className="w-full max-w-100 gap-6">
           <View className="gap-2">
             <Text className="text-lg font-bold">
               {t('auth:onboarding.title')}

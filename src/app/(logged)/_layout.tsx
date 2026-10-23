@@ -26,12 +26,10 @@ export default function LoggedLayout() {
 
   return (
     <Stack
-      initialRouteName="(tabs)"
       screenOptions={{
         headerShown: false,
         headerStyle: { backgroundColor: themedStyle.backgroundColor },
         headerTintColor: themedStyle.color,
-        contentStyle: { backgroundColor: themedStyle.sceneBackgroundColor },
       }}
     >
       <Stack.Protected guard={!!session.data?.user?.id}>
