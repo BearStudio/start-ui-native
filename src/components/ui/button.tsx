@@ -95,7 +95,7 @@ const buttonTextVariants = cva(
         default: 'text-sm leading-6',
         xs: 'text-xs leading-5',
         sm: 'text-sm leading-6',
-        lg: 'text-md leading-6',
+        lg: 'text-base leading-6',
         icon: 'text-sm leading-6',
       },
     },

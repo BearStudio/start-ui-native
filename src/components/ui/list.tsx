@@ -3,7 +3,11 @@ import {
   type FlashListProps,
   type FlashListRef,
 } from '@shopify/flash-list';
-import { useWindowDimensions, type ViewStyle } from 'react-native';
+import {
+  StyleSheet,
+  useWindowDimensions,
+  type ViewStyle,
+} from 'react-native';
 import { withUniwind } from 'uniwind';
 
 import { type ResponsiveValue, useResponsiveValue } from '@/lib/responsive';
@@ -31,15 +35,16 @@ export const List = <T,>({
   const resolvedNumColumns = useResponsiveValue(numColumns);
   const { width } = useWindowDimensions();
 
+  const listStyle = StyleSheet.flatten([{ width }, style]) as ViewStyle;
+
   return (
     <UniwindFlashList
-      key={resolvedNumColumns}
       extraData={{ extraData, numColumns: resolvedNumColumns, width }}
       numColumns={resolvedNumColumns}
       className={cn('flex-1', className)}
-      style={{ width, ...style } as ViewStyle}
+      style={listStyle}
       contentContainerClassName={cn(
-        'p-safe-offset-2 pb-safe-offset-16 md:p-safe-offset-4',
+        'px-safe-offset-2 pb-safe-offset-16 md:px-safe-offset-4',
         contentContainerClassName
       )}
       {...props}

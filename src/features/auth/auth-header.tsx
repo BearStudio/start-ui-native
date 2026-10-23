@@ -12,7 +12,7 @@ export const AuthHeader = () => {
   const logoColor = mutedStyle.color;
 
   return (
-    <ViewSafeContent className="absolute top-0 right-0 left-0 flex flex-row items-center justify-between p-safe-offset-6">
+    <ViewSafeContent className="absolute top-0 right-0 left-0 flex flex-row items-center justify-between px-safe-offset-6 pt-safe-offset-6">
       <Logo color={logoColor} width={96} height={22} />
       <View className="flex flex-row gap-4">
         <ThemeSwitcher minimize />

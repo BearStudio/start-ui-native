@@ -22,7 +22,6 @@ import { ThemeSwitcher } from '@/components/ui/theme-switcher';
 import { Version } from '@/components/version';
 
 import { authClient } from '@/features/auth/client';
-import { ViewSafeContent } from '@/layout/view-safe-content';
 import { ViewSafeScrollContent } from '@/layout/view-safe-scroll-content';
 
 export const ViewAccount = () => {
@@ -126,7 +125,7 @@ export const ViewAccount = () => {
                         >
                           <Icon
                             icon={IconLogOut}
-                            className="size-5 text-primary-foreground"
+                            className="size-5 text-destructive-foreground"
                           />
                           <Button.Text>
                             {t('auth:signOut.confirm.signOut')}
@@ -226,9 +225,9 @@ export const ViewAccount = () => {
             </Card>
           </View>
         </View>
-        <ViewSafeContent className="absolute right-0 bottom-2 left-0 flex flex-row items-center justify-center">
+        <View className="flex flex-row items-center justify-center pb-safe">
           <Version />
-        </ViewSafeContent>
+        </View>
       </View>
     </ViewSafeScrollContent>
   );

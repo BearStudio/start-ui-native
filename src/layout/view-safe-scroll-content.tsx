@@ -16,7 +16,7 @@ export const ViewSafeScrollContent = ({
     <ScrollView
       className={cn('relative flex-1 p-4 md:px-6 md:py-8', className)}
       contentContainerClassName={cn(
-        withHeader ? 'flex flex-1 px-safe pb-safe' : 'flex flex-1 p-safe',
+        withHeader ? 'flex grow px-safe pb-safe' : 'flex grow p-safe',
         contentContainerClassName
       )}
       {...props}
