@@ -26,6 +26,128 @@ GitHub Actions publish updates per EAS channel:
 | **production** (manual EAS Update workflow) | `production` | `production` | Store / production builds |
 | **PR branch** (EAS Preview workflow) | `preview` | `staging` | Publishes to the PR head branch; uses staging app identifiers |
 
+### Expo / EAS setup
+
+Follow these steps after forking so OTA updates work end to end. Official references: [EAS Update](https://docs.expo.dev/eas-update/getting-started/), [environment variables](https://docs.expo.dev/eas/environment-variables/), [GitHub Actions with Expo](https://github.com/expo/expo-github-action).
+
+1. **Create or link an EAS project**
+
+   ```bash
+   npm install -g eas-cli   # or: pnpm add -g eas-cli
+   eas login
+   eas whoami
+   eas init                 # create a new project, or link an existing one
+   # Link to a project you already created on expo.dev:
+   # eas init --id <your-eas-project-id>
+   ```
+
+   In `app.config.ts`, replace Bear Studio values with your own:
+
+   | Field | Purpose |
+   | ----- | ------- |
+   | `EAS_PROJECT_ID` | UUID from [expo.dev](https://expo.dev) → your project → **Project settings** |
+   | `owner` | Expo account or organization slug |
+   | `PROJECT_SLUG` | Project slug on Expo (must match the linked project) |
+   | `updates.url` | `https://u.expo.dev/<EAS_PROJECT_ID>` (keep in sync with the project ID) |
+   | `extra.eas.projectId` | Same UUID as `EAS_PROJECT_ID` |
+
+2. **Configure EAS Update**
+
+   ```bash
+   eas update:configure
+   ```
+
+   This command adds or updates `updates.url`, `runtimeVersion`, and `extra.eas.projectId` in your app config ([docs](https://docs.expo.dev/eas-update/getting-started/#configure-your-project)).
+
+   This repo already sets `runtimeVersion: { policy: 'fingerprint' }` instead of a fixed string. The fingerprint changes when native dependencies or config change, so users need a **new `eas build`** for those changes; JavaScript-only fixes can ship via `eas update`.
+
+3. **Channels, branches, and build profiles**
+
+   Each `eas.json` build profile pins a **channel** (embedded in the binary at build time):
+
+   | Profile | Channel in `eas.json` |
+   | ------- | --------------------- |
+   | `development` | `development` |
+   | `staging` | `staging` |
+   | `production` | `production` |
+
+   On EAS, a **channel** points at an **update branch** (where `eas update` publishes). By default, channel and branch names often match; verify or fix the mapping:
+
+   ```bash
+   eas channel:list
+   eas branch:list
+   # Point channel "staging" at branch "staging" (example):
+   eas channel:edit staging --branch staging
+   # Create a channel or branch if missing:
+   eas channel:create staging
+   eas branch:create staging
+   ```
+
+   **PR previews:** the [EAS Preview](.github/workflows/eas-preview.yml) workflow runs `eas update` on the **PR head branch** name. A device only receives that update if its installed build’s channel is pointed at that branch (via `eas channel:edit`), or you open the update using the **preview link / QR code** from the GitHub PR comment (development client or compatible preview flow). Production/staging channel builds do not automatically subscribe to arbitrary PR branch names.
+
+4. **EAS environments and variables**
+
+   EAS provides three environments: `development`, `preview`, and `production`. For **SDK 55+**, `eas update` must pass `--environment` so the job uses the matching variables ([docs](https://docs.expo.dev/eas/environment-variables/#quick-start)).
+
+   This starter’s CI maps **update channel → EAS environment** as follows (staging channel uses EAS `preview` because there is no separate `staging` environment on Expo):
+
+   | Update target | `--environment` | `APP_ENV` at publish time |
+   | ------------- | ----------------- | ------------------------- |
+   | `development` channel | `development` | `development` |
+   | `staging` channel | `preview` | `staging` |
+   | `production` channel | `production` | `production` |
+   | PR preview workflow | `preview` | `staging` |
+
+   Set project variables on [expo.dev](https://expo.dev) → your project → **Environment variables**, or with the CLI:
+
+   ```bash
+   # Required for the app bundle (see src/env.ts)
+   eas env:set --name EXPO_PUBLIC_BASE_URL --value https://your-api.example.com --environment production --visibility plaintext
+
+   # Optional overrides (defaults are derived from EXPO_PUBLIC_BASE_URL in src/env.ts)
+   eas env:set --name EXPO_PUBLIC_AUTH_URL --value https://your-api.example.com/api/auth --environment production --visibility plaintext
+   eas env:set --name EXPO_PUBLIC_OPENAPI_URL --value https://your-api.example.com/openapi/app/schema --environment production --visibility plaintext
+   eas env:set --name EXPO_PUBLIC_API_URL --value https://your-api.example.com/api/rest --environment production --visibility plaintext
+
+   # Baked into app.config.ts at update/build time (icons, bundle ID, scheme)
+   eas env:set --name APP_ENV --value production --environment production --visibility plaintext
+   ```
+
+   Repeat for `development` and `preview` with values appropriate to each environment (`APP_ENV` should be `development`, `staging`, or `production` to match the flavor you are publishing).
+
+   GitHub Actions workflows read `EXPO_PUBLIC_*` from repository **Variables** (`API_URL`, `AUTH_URL`, `OPENAPI_URL`); keep those aligned with your EAS variables for CI publishes.
+
+5. **GitHub Actions: `EXPO_TOKEN` and permissions**
+
+   1. Create an [access token](https://docs.expo.dev/accounts/programmatic-access/) on expo.dev (robot or personal token with access to the project).
+   2. Add it as repository secret **`EXPO_TOKEN`** ([Settings → Secrets and variables → Actions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions)).
+   3. Configure [GitHub variables](#variables) (`API_URL`, etc.) as documented below.
+   4. **EAS Preview** needs `permissions: pull-requests: write` and `contents: read` so `expo/expo-github-action/preview` can comment on PRs (already set in `.github/workflows/eas-preview.yml`).
+
+6. **Install a release binary before OTA**
+
+   Updates apply only to builds that include `expo-updates` with your channel and runtime version. Build and install once per channel you use:
+
+   ```bash
+   eas build --profile development --platform ios    # or android, or --platform all
+   eas build --profile staging --platform all
+   eas build --profile production --platform all
+   ```
+
+   OTA does **not** apply in **Expo Go**, in Metro dev mode (`__DEV__`), or when `expo-updates` is disabled; the in-app banner is hidden in those cases.
+
+7. **Test the flow (staging example)**
+
+   1. Install a **staging** build (`eas build --profile staging` + internal distribution).
+   2. Publish an update: GitHub Actions → **EAS Update** → channel `staging`, or locally:
+
+      ```bash
+      APP_ENV=staging eas update --branch staging --environment preview --message "Test staging OTA" --non-interactive
+      ```
+
+   3. Open the staging app, send it to the background, then foreground again (triggers `checkForUpdateAsync`).
+   4. When the banner appears, tap **Update** (or **Reload** if the update was already downloaded) and confirm the app reloads with your change.
+
 # Requirements
 
 - [Node.js](https://nodejs.org) >= 22
