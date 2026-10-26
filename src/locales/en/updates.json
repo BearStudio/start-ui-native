@@ -1,0 +1,8 @@
+{
+  "banner": {
+    "message": "A new version of the app is available.",
+    "update": "Update",
+    "reload": "Reload",
+    "downloading": "Downloading…"
+  }
+}

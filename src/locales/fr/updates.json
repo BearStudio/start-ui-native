@@ -1,0 +1,8 @@
+{
+  "banner": {
+    "message": "Une nouvelle version de l'application est disponible.",
+    "update": "Mettre à jour",
+    "reload": "Recharger",
+    "downloading": "Téléchargement…"
+  }
+}

@@ -19,6 +19,7 @@ import { env } from '@/env';
 import { DevTools } from '@/features/devtools/devtools';
 import { useThemeSync } from '@/features/theme/use-theme-sync';
 import { useThemedStyle } from '@/features/theme/use-themed-style';
+import { UpdateBanner } from '@/features/updates/update-banner';
 import { SplashScreenManager } from '@/layout/splash-screen-manager';
 
 // SplashScreen hide management in splash-screen-manager.tsx
@@ -37,12 +38,13 @@ export default function RootLayout() {
       >
         <ThemeProvider value={themedStyle.navigationTheme}>
           <GestureHandlerRootView style={{ flex: 1 }}>
-            <View className="flex-1 bg-background">
+            <View className="bg-background flex-1">
               <ThemedStatusBar />
               <SplashScreenManager>
                 <Slot />
               </SplashScreenManager>
               <Sonner />
+              <UpdateBanner />
               {env.NODE_ENV === 'development' && (
                 <DevTools queryClient={queryClient} />
               )}

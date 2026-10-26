@@ -7,6 +7,7 @@ import books from './books.json' with { type: 'json' };
 import common from './common.json' with { type: 'json' };
 import home from './home.json' with { type: 'json' };
 import layout from './layout.json' with { type: 'json' };
+import updates from './updates.json' with { type: 'json' };
 
 export default {
   account,
@@ -16,4 +17,5 @@ export default {
   home,
   layout,
   appOnboarding,
+  updates,
 } as const;

@@ -13,6 +13,19 @@ It represents our team's up-to-date stack that we use when creating native apps 
 > [!NOTE]
 > OTA updates use `runtimeVersion: { policy: 'fingerprint' }` (balanced preset). New native binaries are required when the fingerprint changes.
 
+## Over-the-air (OTA) updates
+
+In release builds where `expo-updates` is enabled, the app checks for a newer update when it returns to the foreground (`AppState` → `active`). When an update is available, a small banner at the top of the screen lets users download and reload immediately (or reload if the update was already downloaded). The banner is hidden in development and when updates are disabled (for example Expo Go).
+
+GitHub Actions publish updates per EAS channel:
+
+| Channel / workflow | EAS `--environment` | `APP_ENV` (app.config) | Notes |
+| ------------------ | --------------------- | ---------------------- | ----- |
+| **development** (manual EAS Update workflow) | `development` | `development` | Matches the development build profile |
+| **staging** (manual EAS Update workflow) | `preview` | `staging` | Staging channel uses the EAS preview environment for server-side env vars |
+| **production** (manual EAS Update workflow) | `production` | `production` | Store / production builds |
+| **PR branch** (EAS Preview workflow) | `preview` | `staging` | Publishes to the PR head branch; uses staging app identifiers |
+
 # Requirements
 
 - [Node.js](https://nodejs.org) >= 22
