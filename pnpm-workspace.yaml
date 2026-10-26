@@ -43,3 +43,7 @@ trustPolicyExclude:
 allowBuilds:
   esbuild: true
   lefthook: true
+  # expo-device-hub → serve-emu WebRTC: install runs prebuild-install (prebuilt N-API
+  # download). If blocked, serve-emu can retry at runtime, but install-time fetch is
+  # simpler for local Android streaming; CI only lint/tsc and does not load it.
+  node-datachannel: true
