@@ -21,6 +21,11 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
+    env:
+      # Matches eas.json build profile env and app.config.ts APP_ENV.
+      APP_ENV: ${{ github.event.inputs.channel }}
+      # EAS server environments: development | preview | production (staging channel → preview).
+      EAS_ENVIRONMENT: ${{ github.event.inputs.channel == 'production' && 'production' || (github.event.inputs.channel == 'staging' && 'preview' || 'development') }}
     steps:
       - name: 🏗 Setup repo
         uses: actions/checkout@v5
@@ -46,4 +51,9 @@ jobs:
         run: pnpm install
 
       - name: 🚀 Publish update
-        run: eas update --branch ${{ github.event.inputs.channel }} --non-interactive
+        run: >-
+          eas update
+          --branch "${{ github.event.inputs.channel }}"
+          --environment "$EAS_ENVIRONMENT"
+          --message "Manual update to ${{ github.event.inputs.channel }} (${{ github.sha }})"
+          --non-interactive

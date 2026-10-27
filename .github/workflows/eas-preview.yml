@@ -6,9 +6,17 @@ env:
   EXPO_PUBLIC_OPENAPI_URL: ${{ vars.OPENAPI_URL }}
 
 on: [pull_request]
+
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   preview:
     runs-on: ubuntu-latest
+    env:
+      # Staging bundle identifiers; preview uses the EAS "preview" environment for secrets.
+      APP_ENV: staging
     steps:
       - name: 🏗 Setup repo
         uses: actions/checkout@v4
@@ -38,4 +46,9 @@ jobs:
         with:
           # `github.event.pull_request.head.ref` is only available on `pull_request` triggers.
           # Use your own, or keep the automatically inferred branch name from `--auto`, when using different triggers.
-          command: eas update --auto --branch ${{ github.event.pull_request.head.ref }}
+          command: >-
+            eas update --auto
+            --branch ${{ github.event.pull_request.head.ref }}
+            --environment preview
+            --message "PR #${{ github.event.pull_request.number }} (${{ github.sha }})"
+            --non-interactive
