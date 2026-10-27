@@ -3,11 +3,7 @@ import {
   type FlashListProps,
   type FlashListRef,
 } from '@shopify/flash-list';
-import {
-  StyleSheet,
-  useWindowDimensions,
-  type ViewStyle,
-} from 'react-native';
+import { StyleSheet, useWindowDimensions, type ViewStyle } from 'react-native';
 import { withUniwind } from 'uniwind';
 
 import { type ResponsiveValue, useResponsiveValue } from '@/lib/responsive';
@@ -44,7 +40,7 @@ export const List = <T,>({
       className={cn('flex-1', className)}
       style={listStyle}
       contentContainerClassName={cn(
-        'px-safe-offset-2 pb-safe-offset-16 md:px-safe-offset-4',
+        'pt-safe-offset-0 px-safe-offset-2 pb-safe-offset-16 md:px-safe-offset-4',
         contentContainerClassName
       )}
       {...props}

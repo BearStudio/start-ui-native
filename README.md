@@ -137,6 +137,12 @@ pnpm build:production:android
 
 You can use @dev-plugins pressing `Shift + m` in your Expo terminal.
 
+**[expo-device-hub](https://github.com/expo/expo-device-hub)** streams and controls iOS simulators and Android emulators in the browser. It is installed as a dev dependency and is not bundled into release builds.
+
+- Start the dev server with `pnpm dev:client` or `pnpm start` / `expo start`, then open the **Expo Device Hub** URL printed in the terminal (the host is your dev server address — often a LAN IP, or `127.0.0.1` when using `--localhost` — not necessarily `localhost`).
+- Or run it standalone: `npx expo-device-hub`.
+- iOS simulators require **macOS** with **Xcode**. Android emulators require the **Android SDK**, including the `emulator` and `adb` tools.
+
 ## Storybook
 
 Storybook is managed as a specific mode of the app that is launch apart in port 8083
