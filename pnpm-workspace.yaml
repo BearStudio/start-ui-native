@@ -43,3 +43,4 @@ trustPolicyExclude:
 allowBuilds:
   esbuild: true
   lefthook: true
+  node-datachannel: true
